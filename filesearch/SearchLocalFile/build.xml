@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SearchLocalFile" default="init" basedir=".">
+    <!-- 设置我们Ant任务的初始化工作     -->
+    <target name="init">
+       <!--工程名称为helloworld-->
+       <property name="project_name" value="searchlocal" />
+       <property name="mainclass" value="com.searchlocal.menu.SearchlocalApp"/>
+       <!--java源文件所在路径是当前路径的src-->
+       <property name="srcDir" value="src" />
+       <!--编译生成的class文件在当前路径的classes目录下-->
+       <property name="classDir" value="classes" />
+       <!--jar包名称为本工程的名称加上.jar后缀名-->
+       <property name="jar" value="${project_name}_temp.jar" />
+       <!--jar包名称为本工程的名称加上.jar后缀名-->
+       <property name="obfjar" value="${project_name}.jar" />
+       <!--yguard混淆器工作产生的日志文件-->
+       <property name="obfuscationlog" value="${project_name}_obf_log.xml" />
+       <mkdir dir="${classDir}" />
+    </target>
+    <!-- 编译 -->
+    <target name="compile" depends="init">
+       <javac srcdir="${srcDir}" destdir="${classDir}">
+       </javac>
+    </target>
+    <!-- 打包 -->
+    <target name="jar" depends="compile">
+       <jar jarfile="${jar}" basedir="${classDir}" >
+       </jar>
+    </target>
+	<target name="obfuscate" depends="jar">
+	       <taskdef name="obfuscate" classname="com.yworks.yguard.ObfuscatorTask" classpath="yguard.jar" />
+	       <!-- 不同工程需要修改的地方 -->
+	       <obfuscate mainclass="${mainclass}" logfile="${obfuscationlog}" replaceclassnamestrings="true">
+	           <inoutpair in="${jar}" out="${obfjar}" />
+	       </obfuscate>
+	</target>
+</project>
+<!-- build.xml 文件结束 -->
