@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+	<!-- Log4j Config file location -->
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/xmllog4jconfig.xml</param-value>
+	</context-param>
+
+	<!--
+		To use non XDoclet filters, create a filters.xml file that
+		contains the additional filters (eg Sitemesh) and place it in your
+		project's merge dir.  Don't include filter-mappings in this file,
+		include them in a file called filter-mappings.xml and put that in
+		the same directory.
+	-->
+
+	<!--
+		To use non XDoclet filter-mappings, create a filter-mappings.xml file that
+		contains the additional filter-mappings and place it in your
+		project's merge dir.
+	-->
+	<filter>
+        <filter-name>Set Character Encoding</filter-name>
+        <filter-class>com.searchlocal.util.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping> 
+           <filter-name>Set Character Encoding</filter-name> 
+            <url-pattern>/*</url-pattern> 
+    </filter-mapping>
+    
+	<servlet>
+		<servlet-name>DoSearch</servlet-name>
+		<display-name>Do Search</display-name>
+		<servlet-class>
+			com.searchlocal.servlet.DoSearchServlet
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>DoPageSearch</servlet-name>
+		<display-name>Do Page Search</display-name>
+		<servlet-class>
+			com.searchlocal.servlet.DoSearchPageServlet
+		</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>OpenFile</servlet-name>
+		<display-name>Do Open File</display-name>
+		<servlet-class>
+			com.searchlocal.servlet.DoOpenFileServlet
+		</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>LoadData</servlet-name>
+		<display-name>Do Load Data</display-name>
+		<servlet-class>
+			com.searchlocal.servlet.LoadDataServlet
+		</servlet-class>
+		<load-on-startup>4</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>ChangeSearch</servlet-name>
+		<display-name>Do Change Search</display-name>
+		<servlet-class>
+			com.searchlocal.servlet.DoChangeSearchServlet
+		</servlet-class>
+		<load-on-startup>5</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>TypeChange</servlet-name>
+		<display-name>Do Type Change</display-name>
+		<servlet-class>
+			com.searchlocal.servlet.DoTypeChangeServlet
+		</servlet-class>
+		<load-on-startup>6</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>PageTypeChange</servlet-name>
+		<display-name>Do Page Type Change</display-name>
+		<servlet-class>
+			com.searchlocal.servlet.DoPageTypeChangeServlet
+		</servlet-class>
+		<load-on-startup>7</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>previewDoc</servlet-name>
+		<display-name>PreView the Documents</display-name>
+		<servlet-class>
+			com.searchlocal.servlet.PreViewDocServlet
+		</servlet-class>
+		<load-on-startup>8</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>viewSwf</servlet-name>
+		<display-name>View the Swf</display-name>
+		<servlet-class>
+			com.searchlocal.servlet.ViewSwffileServlet
+		</servlet-class>
+		<load-on-startup>9</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DoSearch</servlet-name>
+		<url-pattern>/slfile</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DoPageSearch</servlet-name>
+		<url-pattern>/page</url-pattern>
+	</servlet-mapping>
+		<servlet-mapping>
+		<servlet-name>OpenFile</servlet-name>
+		<url-pattern>/open</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LoadData</servlet-name>
+		<url-pattern>/load</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ChangeSearch</servlet-name>
+		<url-pattern>/change</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TypeChange</servlet-name>
+		<url-pattern>/type</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PageTypeChange</servlet-name>
+		<url-pattern>/pagetype</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>previewDoc</servlet-name>
+		<url-pattern>/previewDoc</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>viewSwf</servlet-name>
+		<url-pattern>/viewSwf</url-pattern>
+	</servlet-mapping>
+	<session-config>  
+       <session-timeout>60</session-timeout>  
+    </session-config> 
+	
+	<!--
+		To specify mime mappings, create a file named mime-mappings.xml, put it in your project's mergedir.
+		Organize mime-mappings.xml following this DTD slice:
+		
+		<!ELEMENT mime-mapping (extension, mime-type)>
+	-->
+
+	<!--
+		To specify error pages, create a file named error-pages.xml, put it in your project's mergedir.
+		Organize error-pages.xml following this DTD slice:
+		
+		<!ELEMENT error-page ((error-code | exception-type), location)>
+	-->
+
+	<!--
+		To add taglibs by xml, create a file called taglibs.xml and place it
+		in your merge dir.
+	-->
+
+	<!--
+		To set up security settings for your web app, create a file named web-security.xml, put it in your project's mergedir.
+		Organize web-security.xml following this DTD slice:
+		
+		<!ELEMENT security-constraint (display-name?, web-resource-collection+, auth-constraint?, user-data-constraint?)>
+		<!ELEMENT web-resource-collection (web-resource-name, description?, url-pattern*, http-method*)>
+		<!ELEMENT web-resource-name (#PCDATA)>
+		<!ELEMENT url-pattern (#PCDATA)>
+		<!ELEMENT http-method (#PCDATA)>
+		<!ELEMENT user-data-constraint (description?, transport-guarantee)>
+		<!ELEMENT transport-guarantee (#PCDATA)>
+		
+		<!ELEMENT login-config (auth-method?, realm-name?, form-login-config?)>
+		<!ELEMENT auth-method (#PCDATA)>
+		<!ELEMENT realm-name (#PCDATA)>
+		<!ELEMENT form-login-config (form-login-page, form-error-page)>
+		<!ELEMENT form-login-page (#PCDATA)>
+		<!ELEMENT form-error-page (#PCDATA)>
+	-->
+	<welcome-file-list>
+		<welcome-file>/web/index.jsp</welcome-file>
+	</welcome-file-list>
+
+</web-app>
