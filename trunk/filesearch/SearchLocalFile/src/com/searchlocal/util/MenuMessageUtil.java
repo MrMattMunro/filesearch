@@ -68,5 +68,19 @@ public class MenuMessageUtil {
 		}
 		return mes;
 	}
+	
+	public static String getMsgbyId(String messid, Map map) {
+		String mes = "";
+		String temp = (String) prop.get(messid);
+		if (temp != null) {
+			try {
+				mes = new String(temp.getBytes(ENCODE), ENCODE);
+				mes = StringUtils.convertParamStr(mes, map);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+		return mes;
+	}
 
 }

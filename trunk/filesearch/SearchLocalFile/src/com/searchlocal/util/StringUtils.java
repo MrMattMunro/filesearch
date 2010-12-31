@@ -1,5 +1,8 @@
 package com.searchlocal.util;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -186,6 +189,33 @@ public final class StringUtils {
 		return tablename;
 	}
 	
+	
+
+	/**
+	 * 替换有参数的字符串
+	 * 
+	 * @param str 原本的Str
+     * @param Map 参数Map
+	 */
+	public static String convertParamStr(String str, Map map) {
+		if(map.isEmpty()){
+			return  str;
+		} 
+		Iterator<String> inter = map.keySet().iterator();
+	    while(inter.hasNext()){
+	    	String key = (String)inter.next();
+	    	str = str.replaceAll("\\{" + key + "\\}", (String)map.get(key));
+	    }
+		return str;
+	}
+	
 	private StringUtils() {
+	}
+	
+	public static void  main(String[] args){
+		String msg = "我是这一额的 爱一个 {num} ddaod我为 ";
+		Map parmMap = new HashMap();
+		parmMap.put("num", "090");
+		System.out.println(convertParamStr(msg, parmMap));
 	}
 }
