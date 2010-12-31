@@ -29,16 +29,13 @@ public class WordService {
 				wordbean.getLastmodify(), wordbean.getFilename(), namespace);
 	}
 
-	public boolean execBatch(String namespace, int fileClassify) throws DBException,
+	public boolean execBatch(String namespace, String cvspath) throws DBException,
 			LogicException {
 		WordDao wordDao = new WordDao();
-		String wordpath = Constant.datapath + Constant.worddatapath + fileClassify + Constant.suffixname;
-		wordpath = wordpath.substring(1);
-		wordpath = StringUtils.editFilePath(wordpath);
+		cvspath = StringUtils.editFilePath(cvspath);
 
-		wordDao.execbatch(wordpath, namespace);
-		String existedpath = wordpath.substring(1, wordpath.length()-1);
-		File wordfile = new File(existedpath);
+		wordDao.execbatch(cvspath, namespace);
+		File wordfile = new File(cvspath);
 		// 删除batch的数据文件 
 		if (wordfile.exists()) {
 			wordfile.delete();

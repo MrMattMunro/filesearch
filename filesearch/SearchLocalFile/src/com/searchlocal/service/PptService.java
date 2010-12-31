@@ -17,16 +17,13 @@ import com.searchlocal.util.StringUtils;
 
 public class PptService {
 
-	public boolean execBatch(String namespace, int fileClassify) throws DBException,
+	public boolean execBatch(String namespace, String pptpath) throws DBException,
 			LogicException {
 		PptDao pptDao = new PptDao();
-		String pptpath = Constant.datapath + Constant.pptdatapath + fileClassify + Constant.suffixname;
-		pptpath = pptpath.substring(1);
 		pptpath = StringUtils.editFilePath(pptpath);
 
 		pptDao.execbatch(pptpath, namespace);
-		String existedpath = pptpath.substring(1, pptpath.length()-1);
-		File pptfile = new File(existedpath);
+		File pptfile = new File(pptpath);
 		// 删除batch的数据文件
 		if (pptfile.exists()) {
 			pptfile.delete();

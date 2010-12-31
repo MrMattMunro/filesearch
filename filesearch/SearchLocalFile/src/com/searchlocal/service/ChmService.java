@@ -17,16 +17,13 @@ import com.searchlocal.util.StringUtils;
 
 public class ChmService {
 
-	public boolean execBatch(String namespace, int fileClassify) throws DBException,
+	public boolean execBatch(String namespace, String chmpath) throws DBException,
 			LogicException {
 		ChmDao chmDao = new ChmDao();
-		String chmpath = Constant.datapath + Constant.chmdatapath + fileClassify + Constant.suffixname;
-		chmpath = chmpath.substring(1);
 		chmpath = StringUtils.editFilePath(chmpath);
 
 		chmDao.execbatch(chmpath, namespace);
-		String existedpath = chmpath.substring(1, chmpath.length()-1);
-		File chmfile = new File(existedpath);
+		File chmfile = new File(chmpath);
 		// 删除batch的数据文件
 		if (chmfile.exists()) {
 			chmfile.delete();

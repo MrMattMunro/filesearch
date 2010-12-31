@@ -17,16 +17,13 @@ import com.searchlocal.util.StringUtils;
 
 public class PdfService {
 
-	public boolean execBatch(String namespace, int fileClassify) throws DBException,
+	public boolean execBatch(String namespace, String pdfpath) throws DBException,
 			LogicException {
 		PdfDao pdfDao = new PdfDao();
-		String pdfpath = Constant.datapath + Constant.pdfdatapath + fileClassify + Constant.suffixname;
-		pdfpath = pdfpath.substring(1);
 		pdfpath = StringUtils.editFilePath(pdfpath);
 
 		pdfDao.execbatch(pdfpath, namespace);
-		String existedpath = pdfpath.substring(1, pdfpath.length()-1);
-		File pdffile = new File(existedpath);
+		File pdffile = new File(pdfpath);
 		// 删除batch的数据文件
 		if (pdffile.exists()) {
 			pdffile.delete();
