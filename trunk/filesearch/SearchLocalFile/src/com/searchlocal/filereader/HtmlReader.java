@@ -195,17 +195,18 @@ public class HtmlReader {
 
 	public static String getCharset(String filepath) {
 		InputStream inputStream = null;
-		String charset = "UTF-8";
+		String charset = "";
 		try {
 			inputStream = new FileInputStream(filepath);
 			BufferedReader reader = null;
 			reader = new BufferedReader(new InputStreamReader(inputStream));
 			String temp = "";
 
+			String patternEncode = "((charset)\\s*=(\\s*))";
+			Pattern p = Pattern.compile(patternEncode,Pattern.CASE_INSENSITIVE);
+			
 			while ((temp = reader.readLine()) != null) {
 				if (!"".equals(temp)) {
-					String patternEncode = "(charset\\s*=(\\s*))";
-					Pattern p = Pattern.compile(patternEncode);
 					Matcher m = p.matcher(temp);
 					while (m.find()) {
 						int end = temp.indexOf("\"", m.end(0));
@@ -213,7 +214,11 @@ public class HtmlReader {
 							end = temp.indexOf(">", m.end(0));
 						}
 						charset = temp.substring(m.end(0), end).toUpperCase();
-						break;
+						if("".equals(charset)){
+							continue;
+						}else{
+							return charset;
+						}
 					}
 				}
 			}
@@ -221,13 +226,16 @@ public class HtmlReader {
 			// TODO 注意消除资源(关闭I/O等)
 			e.printStackTrace();
 		}
+		if("".equals(charset)){
+			charset =  "UTF-8";
+		}
 		return charset;
 	}
 
 	public static void main(String[] args) {
 		HtmlReader dd = new HtmlReader();
 		try {
-			dd.getHtmlFile("F:\\testdocfile\\demo\\XiangMuZhiDing\\OrgPlanManager\\PlanprjEdit.html");
+			System.out.println(dd.getHtmlFile("F:\\prject_back\\cronos_TONGQIHUA\\target\\war\\web\\HolidayTransfer\\work_and_man_hour_head.html"));
 		} catch (LogicException e) {
 			// TODO 注意消除资源(关闭I/O等)
 			e.printStackTrace();
