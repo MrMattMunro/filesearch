@@ -140,7 +140,8 @@ public class SaveFileToDBTask extends CRunnable {
 			WORD_NUM_OF_SQL = WORD_NUM_OF_SQL + sqlsize;
 			if (WORD_NUM_OF_SQL > MAX_OF_SQL) {
 				try {
-					wordservice.execBatch(param.getSearchname(), fileClassify);
+					String cvspath = Constant.datapath + Constant.worddatapath + fileClassify + Constant.suffixname;
+					wordservice.execBatch(param.getSearchname(), cvspath);
 				} catch (DBException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -172,7 +173,8 @@ public class SaveFileToDBTask extends CRunnable {
 			EXCEL_NUM_OF_SQL = EXCEL_NUM_OF_SQL + sqlsize;
 			if (EXCEL_NUM_OF_SQL > MAX_OF_SQL) {
 				try {
-					excelService.execBatch(param.getSearchname(), fileClassify);
+					String cvspath = Constant.datapath + Constant.exceldatapath + fileClassify + Constant.suffixname;
+					excelService.execBatch(param.getSearchname(), cvspath);
 				} catch (DBException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -203,7 +205,8 @@ public class SaveFileToDBTask extends CRunnable {
 			PDF_NUM_OF_SQL = PDF_NUM_OF_SQL + sqlsize;
 			if (PDF_NUM_OF_SQL > MAX_OF_SQL) {
 				try {
-					pdfService.execBatch(param.getSearchname(), fileClassify);
+					String cvspath = Constant.datapath + Constant.pdfdatapath + fileClassify + Constant.suffixname;
+					pdfService.execBatch(param.getSearchname(), cvspath);
 				} catch (DBException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -234,7 +237,8 @@ public class SaveFileToDBTask extends CRunnable {
 			PPT_NUM_OF_SQL = PPT_NUM_OF_SQL + sqlsize;
 			if (PPT_NUM_OF_SQL > MAX_OF_SQL) {
 				try {
-					pptService.execBatch(param.getSearchname(), fileClassify);
+					String cvspath = Constant.datapath + Constant.pptdatapath + fileClassify + Constant.suffixname;
+					pptService.execBatch(param.getSearchname(), cvspath);
 				} catch (DBException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -265,7 +269,8 @@ public class SaveFileToDBTask extends CRunnable {
 			CHM_NUM_OF_SQL = CHM_NUM_OF_SQL + sqlsize;
 			if (CHM_NUM_OF_SQL > MAX_OF_SQL) {
 				try {
-					chmService.execBatch(param.getSearchname(), fileClassify);
+					String cvspath = Constant.datapath + Constant.chmdatapath + fileClassify + Constant.suffixname;
+					chmService.execBatch(param.getSearchname(), cvspath);
 				} catch (DBException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -284,20 +289,22 @@ public class SaveFileToDBTask extends CRunnable {
 			filebean.setPath(absolutepath);
 			int sqlsize = 0;
 			try {
-				sqlsize = htmlService.createBatchFile(filebean, param.getSearchname(),
-						fileClassify);
+				sqlsize = htmlService.createBatchFile(filebean, param.getSearchname(), fileClassify);
 				filecon.putinsertedfile(absolutepath, lastmodify);
 			} catch (DBException e) {
+				e.printStackTrace();
 				ExceptionHandler.getErrorList().add(e.getMessageKey());
 				filecon.puthaserrorfile(absolutepath, lastmodify);
 			} catch (LogicException e) {
+				e.printStackTrace();
 				ExceptionHandler.getErrorList().add(e.getMessageKey());
 				filecon.puthaserrorfile(absolutepath, lastmodify);
 			}
 			HTML_NUM_OF_SQL = HTML_NUM_OF_SQL + sqlsize;
 			if (HTML_NUM_OF_SQL > MAX_OF_SQL) {
 				try {
-					htmlService.execBatch(param.getSearchname(), fileClassify);
+					String cvspath = Constant.datapath + Constant.htmldatapath + fileClassify + Constant.suffixname;
+					htmlService.execBatch(param.getSearchname(), cvspath);
 				} catch (DBException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -307,26 +314,8 @@ public class SaveFileToDBTask extends CRunnable {
 				}
 				HTML_NUM_OF_SQL = 0;
 			}
-			
-//			HtmlService htmlService = new HtmlService();
-//			HtmlFileBean filebean = new HtmlFileBean();
-//			filebean.setFilename(filename);
-//			filebean.setLastmodify(lastmodify);
-//			filebean.setPath(absolutepath);
-//			try {
-//				boolean insert = false;
-//				insert = htmlService.insertHtmlRecord(filebean, param.getSearchname());
-//				if (insert) {
-//					filecon.putinsertedfile(absolutepath, lastmodify);
-//				}
-//			} catch (DBException e) {
-//				ExceptionHandler.getErrorList().add(e.getMessageKey());
-//				filecon.puthaserrorfile(absolutepath, lastmodify);
-//			} catch (LogicException e) {
-//				ExceptionHandler.getErrorList().add(e.getMessageKey());
-//				filecon.puthaserrorfile(absolutepath, lastmodify);
-//			}
 		}
+		
 		if (Constant.SrcClassify.iscontain(suffixname)) {
 			TxtService txtService = new TxtService();
 			TxtFileBean filebean = new TxtFileBean();
@@ -347,7 +336,8 @@ public class SaveFileToDBTask extends CRunnable {
 			SRC_NUM_OF_SQL = SRC_NUM_OF_SQL + sqlsize;
 			if (SRC_NUM_OF_SQL > SRC_MAX_NUM_OF_SQL) {
 				try {
-					txtService.execBatch(param.getSearchname(), fileClassify);
+					String cvspath = Constant.datapath + Constant.txtdatapath + fileClassify + Constant.suffixname;
+					txtService.execBatch(param.getSearchname(), cvspath);
 				} catch (DBException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

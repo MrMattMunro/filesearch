@@ -83,6 +83,20 @@ public class FileContainer {
 		}
 		return param;
 	}
+	
+	/**
+	 * @return Returns the haserrorfile.
+	 */
+	public synchronized int getInsertedfileNum() {
+		return insertedfile.size();
+	}
+
+	/**
+	 * @return Returns the haserrorfile.
+	 */
+	public synchronized int getHaserrorfileNum() {
+		return haserrorfile.size();
+	}
 
 	/**
 	 * @return Returns the haserrorfile.
