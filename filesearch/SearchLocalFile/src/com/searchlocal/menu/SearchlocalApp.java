@@ -4,9 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Timer;
 import java.util.Vector;
 
@@ -32,6 +34,8 @@ import com.searchlocal.menu.jp.JPCreateNewFrame;
 import com.searchlocal.menu.jp.JPModifyFrame;
 import com.searchlocal.menu.jp.JPOptionSetFrame;
 import com.searchlocal.param.CreateNewParam;
+import com.searchlocal.thread.FileContainer;
+import com.searchlocal.thread.SearchFile;
 import com.searchlocal.thread.concurrent.ConcurrentFileCore;
 import com.searchlocal.util.ConstantExeFileUtil;
 import com.searchlocal.util.CourseUtil;
@@ -39,6 +43,7 @@ import com.searchlocal.util.FileOpenerUtil;
 import com.searchlocal.util.FileUtil;
 import com.searchlocal.util.MenuMessageUtil;
 import com.searchlocal.util.RegistTableUtil;
+import com.searchlocal.util.StringUtils;
 import com.searchlocal.util.XMLConfig;
 
 public class  SearchlocalApp implements ActionListener, SysTrayMenuListener {
@@ -58,7 +63,11 @@ public class  SearchlocalApp implements ActionListener, SysTrayMenuListener {
 	private static SubMenu createdsearch;
 
 	private static int currentIndexIcon;
-
+	
+	private static int stoolTipsIndex;
+	
+	private static Map paramMap = new HashMap();
+	
 	//图标列表，两个图标是为了图标切换（闪烁）
 	// create icons
 	static final SysTrayMenuIcon[] searchicos = {
@@ -68,13 +77,6 @@ public class  SearchlocalApp implements ActionListener, SysTrayMenuListener {
 			new SysTrayMenuIcon("icos/3"),
 			new SysTrayMenuIcon("icos/4")};
 
-	private static final String[] toolTips = {
-			msg.getMsgbyId(Constant.searchapp_localsearch),
-			msg.getMsgbyId(Constant.searchapp_creatingindex),
-			msg.getMsgbyId(Constant.searchapp_updatingindex),
-			msg.getMsgbyId(Constant.searchapp_deletingindex)
-	};
-
     static class ChangeIcoTask extends java.util.TimerTask {
 		public void run() {
 			currentIndexIcon = currentIndexIcon + 1;
@@ -82,6 +84,11 @@ public class  SearchlocalApp implements ActionListener, SysTrayMenuListener {
 				currentIndexIcon = 1;
 			}
 			menu.setIcon(searchicos[currentIndexIcon]);
+			
+			FileContainer filecon = SearchFile.getFilecon();
+			if(null != filecon){
+				changeToolTips(stoolTipsIndex,  filecon.getInsertedfileNum());
+			}
 		}
 	} 
 	   
@@ -92,20 +99,39 @@ public class  SearchlocalApp implements ActionListener, SysTrayMenuListener {
 	}
 	
 	public static void startWork(int toolTipsIndex) {
+		stoolTipsIndex = toolTipsIndex;
 		changeIcos();
-	    changeToolTips(toolTipsIndex);
 	}
 	
 	public static void completeWork() {
 	    if(timer != null){
 	    	timer.cancel();
 	    }
-	    changeToolTips(Constant.ToolTipsClassify.TOOLTIPS_LOCALSEARCH);
+		FileContainer filecon = SearchFile.getFilecon();
+		if(null != filecon){
+			changeToolTips(Constant.ToolTipsClassify.TOOLTIPS_LOCALSEARCH,  SearchFile.getFilecon().getInsertedfileNum());
+		}
 	    menu.setIcon(searchicos[0]);
 	}
 
-	private static void changeToolTips(int toolTipsIndex) {
-		menu.setToolTip(toolTips[toolTipsIndex]);
+	private static void changeToolTips(int toolTipsIndex, int num) {
+		stoolTipsIndex = toolTipsIndex;
+		paramMap.put("num", String.valueOf(num));
+		String toolmsg = "";
+		if(stoolTipsIndex == Constant.ToolTipsClassify.TOOLTIPS_CREATINGINDEX){
+			toolmsg = StringUtils.convertParamStr(msg.getMsgbyId(Constant.searchapp_creatingindex), paramMap);
+		}
+		if(stoolTipsIndex == Constant.ToolTipsClassify.TOOLTIPS_UPDATINGINDEX){
+			toolmsg = StringUtils.convertParamStr(msg.getMsgbyId(Constant.searchapp_updatingindex), paramMap);
+		}
+		if(stoolTipsIndex == Constant.ToolTipsClassify.TOOLTIPS_DELETINGINDEX){
+			toolmsg = StringUtils.convertParamStr(msg.getMsgbyId(Constant.searchapp_deletingindex), paramMap);
+		}
+		if(stoolTipsIndex == Constant.ToolTipsClassify.TOOLTIPS_LOCALSEARCH){
+			toolmsg = msg.getMsgbyId(Constant.searchapp_localsearch);
+		}
+		
+		menu.setToolTip(toolmsg);
 	}
 
 	public SearchlocalApp() {
@@ -115,7 +141,7 @@ public class  SearchlocalApp implements ActionListener, SysTrayMenuListener {
 		frame.setSize(400, 300);
 		icos = searchicos[0];
 
-		menu = new SysTrayMenu(icos, toolTips[0]);
+		menu = new SysTrayMenu(icos, msg.getMsgbyId(Constant.searchapp_localsearch));
 		createMenu();
 
 		new ConstantExeFileUtil();
