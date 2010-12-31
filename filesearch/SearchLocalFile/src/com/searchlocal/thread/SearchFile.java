@@ -16,6 +16,8 @@ import com.searchlocal.util.FileUtil;
  * @version 1.0
  */
 public class SearchFile {
+	
+	private static FileContainer filecon = null;
 
 	/**
 	 * 搜索文件存入文件容器
@@ -29,7 +31,7 @@ public class SearchFile {
 			// 取得适合的并发数
 			int threadnum = FileUtil.getSubFileNums(path);
 			// 新建文件容器
-			FileContainer filecon = new FileContainer();
+			filecon = new FileContainer();
 			// 取得文件对象
 			File file = new File(path);
 
@@ -54,5 +56,23 @@ public class SearchFile {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 取得filecon
+	 * 
+	 * @return FileContainer filecon 
+	 */
+	public static FileContainer getFilecon() {
+		return filecon;
+	}
+
+	/**
+	 * 设定filecon 
+	 * 
+	 * @param FileContainer filecon 
+	 */
+	public static void setFilecon(FileContainer filecon) {
+		SearchFile.filecon = filecon;
 	}
 }
