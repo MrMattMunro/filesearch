@@ -17,16 +17,13 @@ import com.searchlocal.util.StringUtils;
 
 public class TxtService {
 
-	public boolean execBatch(String namespace, int fileClassify) throws DBException,
+	public boolean execBatch(String namespace, String cvspath) throws DBException,
 			LogicException {
 		TxtDao txtDao = new TxtDao();
-		String txtpath = Constant.datapath + Constant.txtdatapath + fileClassify + Constant.suffixname;
-		txtpath = txtpath.substring(1);
-		txtpath = StringUtils.editFilePath(txtpath);
+		cvspath = StringUtils.editFilePath(cvspath);
 
-		txtDao.execbatch(txtpath, namespace);
-		String existedpath = txtpath.substring(1, txtpath.length()-1);
-		File txtfile = new File(existedpath);
+		txtDao.execbatch(cvspath, namespace);
+		File txtfile = new File(cvspath);
 		// 删除batch的数据文件
 		if (txtfile.exists()) {
 			txtfile.delete();

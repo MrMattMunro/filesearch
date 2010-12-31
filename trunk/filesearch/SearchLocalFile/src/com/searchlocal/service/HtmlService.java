@@ -18,16 +18,13 @@ import com.searchlocal.util.StringUtils;
 
 public class HtmlService {
 
-	public boolean execBatch(String namespace, int fileClassify) throws DBException,
+	public boolean execBatch(String namespace, String htmlpath) throws DBException,
 			LogicException {
 		HtmlDao htmlDao = new HtmlDao();
-		String htmlpath = Constant.datapath + Constant.htmldatapath+ fileClassify + Constant.suffixname;
-		htmlpath = htmlpath.substring(1);
 		htmlpath = StringUtils.editFilePath(htmlpath);
 
 		htmlDao.execbatch(htmlpath, namespace);
-		String existedpath = htmlpath.substring(1, htmlpath.length()-1);
-		File htmlfile = new File(existedpath);
+		File htmlfile = new File(htmlpath);
 		// 删除batch的数据文件
 		if (htmlfile.exists()) {
 			htmlfile.delete();

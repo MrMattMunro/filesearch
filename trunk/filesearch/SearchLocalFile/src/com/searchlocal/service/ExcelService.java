@@ -17,16 +17,13 @@ import com.searchlocal.util.StringUtils;
 
 public class ExcelService {
 
-	public boolean execBatch(String namespace, int fileClassify) throws DBException,
+	public boolean execBatch(String namespace, String csvpath) throws DBException,
 			LogicException {
 		ExcelDao excelDao = new ExcelDao();
-		String excelpath = Constant.datapath + Constant.exceldatapath + fileClassify + Constant.suffixname;
-		excelpath = excelpath.substring(1);
-		excelpath = StringUtils.editFilePath(excelpath);
+		csvpath = StringUtils.editFilePath(csvpath);
 
-		excelDao.execbatch(excelpath, namespace);
-		String existedpath = excelpath.substring(1, excelpath.length()-1);
-		File excelfile = new File(existedpath);
+		excelDao.execbatch(csvpath, namespace);
+		File excelfile = new File(csvpath);
 		// 删除batch的数据文件
 		if (excelfile.exists()) {
 			excelfile.delete();
