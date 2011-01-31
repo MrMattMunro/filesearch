@@ -23,12 +23,13 @@ public class PdfReader {
 		super();
 	}
 
-	public List getPdfFile(String pdfFilePath) throws LogicException {
+	public List<PdfFileBean> getPdfFile(PdfFileBean pdfBean) throws LogicException {
 
 		List<PdfFileBean> pdfEntityList = new ArrayList<PdfFileBean>();
 		String result = null;
 		FileInputStream is = null;
 		COSDocument document = null;
+		String pdfFilePath = pdfBean.getPath();
 		try {
 			is = new FileInputStream(pdfFilePath);
 			PDFParser parser = new PDFParser(is);
@@ -42,15 +43,17 @@ public class PdfReader {
 			if (document.isEncrypted()) {
 				// 加密的情况只能得到整个文档,以后可以分解
 				result = stripper.getText(pddoc);
-
 				entity = new PdfFileBean();
+				entity.setFilename(pdfBean.getFilename());
+				entity.setLastmodify(pdfBean.getLastmodify());
+				entity.setPath(pdfFilePath);
 				entity.setContent(result);
 				entity.setPage(0);
 				pdfEntityList.add(entity);
 			} else {
 				int pageCount = 0;
-				synchronized(this){
-					if(pddoc != null){
+				synchronized (this) {
+					if (pddoc != null) {
 						pageCount = pddoc.getNumberOfPages();
 					}
 				}
@@ -61,6 +64,9 @@ public class PdfReader {
 					stripper.setEndPage(i);
 					result = stripper.getText(pddoc);
 					entity = new PdfFileBean();
+					entity.setFilename(pdfBean.getFilename());
+					entity.setLastmodify(pdfBean.getLastmodify());
+					entity.setPath(pdfFilePath);
 					entity.setContent(result);
 					entity.setPage(i);
 					pdfEntityList.add(entity);

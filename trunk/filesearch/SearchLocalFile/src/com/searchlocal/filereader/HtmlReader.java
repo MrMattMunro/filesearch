@@ -34,8 +34,9 @@ public class HtmlReader {
 
 	private static CLogger logger = new CLogger(HtmlReader.class);
 
-	public List getHtmlFile(String filepath) throws LogicException {
+	public List<HtmlFileBean> getHtmlFile(HtmlFileBean htmlBean) throws LogicException {
 
+		String filepath = htmlBean.getPath();
 		HtmlFileBean filebean = new HtmlFileBean();
 		InputStream inputStream = null;
 		StringBuffer sbStr = new StringBuffer();
@@ -52,6 +53,8 @@ public class HtmlReader {
 				}
 			}
 			String result = sbStr.toString();
+			filebean.setLastmodify(htmlBean.getLastmodify());
+			filebean.setFilename(htmlBean.getFilename());
 			filebean.setPath(filepath);
 			filebean.setContent(readTextAndTitle(result, charset));
 			returnList.add(filebean);
@@ -90,50 +93,50 @@ public class HtmlReader {
 	}
 
 	//
-	//	/**
-	//	 * 解析所有的节点
-	//	 * 
-	//	 * @param result
-	//	 * @throws Exception
-	//	 */
-	//	public static String readAll(String result) throws Exception {
-	//		Parser parser;
-	//		parser = Parser.createParser(result, charset);
-	//		NodeFilter filter = new NodeClassFilter(Node.class);
-	//		NodeList list = parser.extractAllNodesThatMatch(filter);
-	//		String line = null;
-	//		// 读取所有的内容节点
-	//		StringBuffer bf = new StringBuffer();
-	//		for (int i = 0; i < list.size(); i++) {
-	//			Node textnode = (Node) list.elementAt(i);
-	//			line = textnode.toPlainTextString().trim();
-	//			if (line.length() == 0)
-	//				continue;
-	//			else {
-	//				bf.append(line);
-	//			}
-	//		}
-	//		return bf.toString();
-	//	}
+	// /**
+	// * 解析所有的节点
+	// *
+	// * @param result
+	// * @throws Exception
+	// */
+	// public static String readAll(String result) throws Exception {
+	// Parser parser;
+	// parser = Parser.createParser(result, charset);
+	// NodeFilter filter = new NodeClassFilter(Node.class);
+	// NodeList list = parser.extractAllNodesThatMatch(filter);
+	// String line = null;
+	// // 读取所有的内容节点
+	// StringBuffer bf = new StringBuffer();
+	// for (int i = 0; i < list.size(); i++) {
+	// Node textnode = (Node) list.elementAt(i);
+	// line = textnode.toPlainTextString().trim();
+	// if (line.length() == 0)
+	// continue;
+	// else {
+	// bf.append(line);
+	// }
+	// }
+	// return bf.toString();
+	// }
 
-	//	/**
-	//	 * 按页面方式处理.解析标准的html页面
-	//	 * 
-	//	 * @param content
-	//	 * @throws Exception
-	//	 */
-	//	public static void readByHtml(String content) throws Exception {
-	//		Parser myParser;
-	//		myParser = Parser.createParser(content, charset);
+	// /**
+	// * 按页面方式处理.解析标准的html页面
+	// *
+	// * @param content
+	// * @throws Exception
+	// */
+	// public static void readByHtml(String content) throws Exception {
+	// Parser myParser;
+	// myParser = Parser.createParser(content, charset);
 	//
-	//		HtmlPage visitor = new HtmlPage(myParser);
+	// HtmlPage visitor = new HtmlPage(myParser);
 	//
-	//		myParser.visitAllNodesWith(visitor);
+	// myParser.visitAllNodesWith(visitor);
 	//
-	//		String textInPage = visitor.getTitle();
-	//		NodeList nodelist;
-	//		nodelist = visitor.getBody();
-	//	}
+	// String textInPage = visitor.getTitle();
+	// NodeList nodelist;
+	// nodelist = visitor.getBody();
+	// }
 
 	// 读取文本内容和标题
 	public static String readTextAndTitle(String result, String charset) throws Exception {
@@ -166,32 +169,32 @@ public class HtmlReader {
 	}
 
 	//
-	//	// 分别读纯文本和链接
+	// // 分别读纯文本和链接
 	//
-	//	public static void readTextAndLink(String result) throws Exception {
-	//		Parser parser;
-	//		NodeList nodelist;
-	//		parser = Parser.createParser(result, charset);
-	//		NodeFilter textFilter = new NodeClassFilter(TextNode.class);
-	//		NodeFilter linkFilter = new NodeClassFilter(LinkTag.class);
-	//		OrFilter lastFilter = new OrFilter();
-	//		lastFilter.setPredicates(new NodeFilter[] { textFilter, linkFilter });
-	//		nodelist = parser.parse(lastFilter);
-	//		Node[] nodes = nodelist.toNodeArray();
-	//		String line = "";
-	//		for (int i = 0; i < nodes.length; i++) {
-	//			Node node = nodes[i];
-	//			if (node instanceof TextNode) {
-	//				TextNode textnode = (TextNode) node;
-	//				line = textnode.getText();
-	//			} else if (node instanceof LinkTag) {
-	//				LinkTag link = (LinkTag) node;
-	//				line = link.getLink();
-	//			}
-	//			if (isTrimEmpty(line))
-	//				continue;
-	//		}
-	//	}
+	// public static void readTextAndLink(String result) throws Exception {
+	// Parser parser;
+	// NodeList nodelist;
+	// parser = Parser.createParser(result, charset);
+	// NodeFilter textFilter = new NodeClassFilter(TextNode.class);
+	// NodeFilter linkFilter = new NodeClassFilter(LinkTag.class);
+	// OrFilter lastFilter = new OrFilter();
+	// lastFilter.setPredicates(new NodeFilter[] { textFilter, linkFilter });
+	// nodelist = parser.parse(lastFilter);
+	// Node[] nodes = nodelist.toNodeArray();
+	// String line = "";
+	// for (int i = 0; i < nodes.length; i++) {
+	// Node node = nodes[i];
+	// if (node instanceof TextNode) {
+	// TextNode textnode = (TextNode) node;
+	// line = textnode.getText();
+	// } else if (node instanceof LinkTag) {
+	// LinkTag link = (LinkTag) node;
+	// line = link.getLink();
+	// }
+	// if (isTrimEmpty(line))
+	// continue;
+	// }
+	// }
 
 	public static String getCharset(String filepath) {
 		InputStream inputStream = null;
@@ -203,8 +206,8 @@ public class HtmlReader {
 			String temp = "";
 
 			String patternEncode = "((charset)\\s*=(\\s*))";
-			Pattern p = Pattern.compile(patternEncode,Pattern.CASE_INSENSITIVE);
-			
+			Pattern p = Pattern.compile(patternEncode, Pattern.CASE_INSENSITIVE);
+
 			while ((temp = reader.readLine()) != null) {
 				if (!"".equals(temp)) {
 					Matcher m = p.matcher(temp);
@@ -214,9 +217,9 @@ public class HtmlReader {
 							end = temp.indexOf(">", m.end(0));
 						}
 						charset = temp.substring(m.end(0), end).toUpperCase();
-						if("".equals(charset)){
+						if ("".equals(charset)) {
 							continue;
-						}else{
+						} else {
 							return charset;
 						}
 					}
@@ -226,20 +229,20 @@ public class HtmlReader {
 			// TODO 注意消除资源(关闭I/O等)
 			e.printStackTrace();
 		}
-		if("".equals(charset)){
-			charset =  "UTF-8";
+		if ("".equals(charset)) {
+			charset = "UTF-8";
 		}
 		return charset;
 	}
 
 	public static void main(String[] args) {
-		HtmlReader dd = new HtmlReader();
-		try {
-			System.out.println(dd.getHtmlFile("F:\\prject_back\\cronos_TONGQIHUA\\target\\war\\web\\HolidayTransfer\\work_and_man_hour_head.html"));
-		} catch (LogicException e) {
-			// TODO 注意消除资源(关闭I/O等)
-			e.printStackTrace();
-		}
+		// HtmlReader dd = new HtmlReader();
+		// try {
+		// System.out.println(dd.getHtmlFile("F:\\prject_back\\cronos_TONGQIHUA\\target\\war\\web\\HolidayTransfer\\work_and_man_hour_head.html"));
+		// } catch (LogicException e) {
+		// // TODO 注意消除资源(关闭I/O等)
+		// e.printStackTrace();
+		// }
 	}
 
 	/**

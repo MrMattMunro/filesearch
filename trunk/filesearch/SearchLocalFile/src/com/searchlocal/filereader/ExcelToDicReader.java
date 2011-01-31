@@ -47,7 +47,7 @@ public class ExcelToDicReader {
 				workbook = new HSSFWorkbook(fileSystem);
 				wordList = getWordList(workbook);
 			}
-	
+
 		} catch (FileNotFoundException e) {
 			logger.error("LG_E001", excelfile.getAbsolutePath(), e);
 		} catch (IOException e) {
@@ -65,13 +65,13 @@ public class ExcelToDicReader {
 		copyFile(dicFile, wordList);
 		return true;
 	}
-	
+
 	public static List getWordList(HSSFWorkbook workbook) {
 		HSSFSheet sheet;
 		HSSFRow row;
 		HSSFCell cell;
 		String value;
-		
+
 		List<String> words = new ArrayList<String>();
 		for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
 			sheet = workbook.getSheetAt(i);
@@ -93,13 +93,13 @@ public class ExcelToDicReader {
 		}
 		return words;
 	}
-	
+
 	public static List getWordList(XSSFWorkbook workbook) {
 		XSSFSheet sheet;
 		XSSFRow row;
 		XSSFCell cell;
 		String value;
-		
+
 		List<String> words = new ArrayList<String>();
 		for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
 			sheet = workbook.getSheetAt(i);
@@ -121,7 +121,7 @@ public class ExcelToDicReader {
 		}
 		return words;
 	}
-	
+
 	public static String getExcelContent(File excelfile) {
 		InputStream inputStream;
 		POIFSFileSystem fileSystem;
@@ -140,7 +140,7 @@ public class ExcelToDicReader {
 		HSSFRow row;
 		HSSFCell cell;
 		String value;
-		
+
 		StringBuffer bf = new StringBuffer();
 		bf.append("\r\n");
 		for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
@@ -154,8 +154,8 @@ public class ExcelToDicReader {
 							int cellType = cell.getCellType();
 							value = getCellValue(cell, cellType);
 							if (value != null && !"".equals(value)) {
-								 bf.append(value);
-								 bf.append("\r\n"); 
+								bf.append(value);
+								bf.append("\r\n");
 							}
 						}
 					}
@@ -188,8 +188,7 @@ public class ExcelToDicReader {
 		}
 		return returnvalue;
 	}
-	
-	
+
 	private static String getCellValue(HSSFCell cell, int cellType) {
 		String returnvalue = "";
 		switch (cellType) {
@@ -213,20 +212,20 @@ public class ExcelToDicReader {
 		}
 		return returnvalue;
 	}
-	
+
 	private static void copyFile(File dicFile, List<String> values) {
-		try{
+		try {
 			FileOutputStream fos = new FileOutputStream(dicFile);
 			for (String b : values) {
-				 fos.write(b.getBytes());
-				 fos.write("\r\n".getBytes());
+				fos.write(b.getBytes());
+				fos.write("\r\n".getBytes());
 			}
 			fos.close();
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		try {
 			ExcelToDicReader reader = new ExcelToDicReader();

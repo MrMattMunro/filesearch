@@ -11,13 +11,13 @@ import java.util.List;
  * @version 1.0
  */
 public class Constant {
-	
+
 	public static String datapath = "";
 	static {
-		 try {
+		try {
 			datapath = Constant.class.getResource("/").toURI().getPath();
-			
-			//发布的时候注释掉
+
+			// 发布的时候注释掉
 			datapath = datapath.substring(1);
 			datapath = datapath.replaceAll("classes/", "");
 		} catch (URISyntaxException e) {
@@ -25,20 +25,17 @@ public class Constant {
 			e.printStackTrace();
 		}
 	}
-	
-
-
 
 	// #------------------------------------------------------------------
 	// #------------------------------------------------------------------
 	public static String label_dicfilename = "label.dicfilename";
-	
+
 	public static String label_dic_note_r1 = "label.labeldicnote_r1";
-	
+
 	public static String label_dic_note_r2 = "label.labeldicnote_r2";
-	
+
 	public static String label_dic_note_r3 = "label.labeldicnote_r3";
-	
+
 	public static String label_searchname = "label.searchname";
 
 	public static String label_searchdir = "label.searchdir";
@@ -64,7 +61,7 @@ public class Constant {
 	public static String label_pdf = "label.pdf";
 
 	public static String label_txt = "label.txt";
-	
+
 	public static String label_keyword = "label.keyword";
 
 	// #------------------------------------------------------------------
@@ -79,9 +76,9 @@ public class Constant {
 	public static String button_delete = "button.delete";
 
 	public static String button_close = "button.close";
-	
+
 	public static String button_search = "button.search";
-	
+
 	public static String button_viedic = "button.viewdic";
 
 	// #------------------------------------------------------------------
@@ -96,11 +93,11 @@ public class Constant {
 	public static String title_setopenersoft = "title.setopenersoft";
 
 	public static String title_adddic = "title.adddic";
-	
+
 	public static String title_viewdic = "title.viewdic";
-	
+
 	public static String file_chooser_selectdicpath = "file.chooser.selectdicpath";
-	
+
 	public static String dialog_title_setopenersoft = "dialog.title.setopenersoft";
 
 	public static String file_filter_description = "file.filter.description";
@@ -119,11 +116,11 @@ public class Constant {
 	public static String searchapp_title = "searchapp.title";
 
 	public static String searchapp_localsearch = "searchapp.localsearch";
-	
+
 	public static String searchapp_creatingindex = "searchapp.creatingindex";
-	
+
 	public static String searchapp_updatingindex = "searchapp.updatingindex";
-	
+
 	public static String searchapp_deletingindex = "searchapp.deletingindex";
 
 	public static String menu_createdsearch = "menu.createdsearch";
@@ -131,11 +128,11 @@ public class Constant {
 	public static String menu_createsearch = "menu.createsearch";
 
 	public static String menu_customdic = "menu.customdic";
-	
+
 	public static String menu_option = "menu.option";
 
 	public static String menu_about = "menu.about";
-	
+
 	public static String menu_help = "menu.help";
 
 	public static String menu_exit = "menu.exit";
@@ -144,7 +141,7 @@ public class Constant {
 	// #-----------------------checkobx-----------------------------
 	// #------------------------------------------------------------------
 	public static String checkbox_iscoverdic = "checkbox.iscoverdic";
-	
+
 	// #------------------------------------------------------------------
 	// #-----------------------messagessearch-----------------------------
 	// #------------------------------------------------------------------
@@ -166,24 +163,24 @@ public class Constant {
 	public static String errors_hascharacter = "errors.hascharacter";
 
 	public static String errors_isallnums = "errors.isallnums";
-	
+
 	public static String errors_isnotdicfile = "errors.isnotdicfile";
-	
+
 	public static String errors_dicnotexisted = "errors.dicnotexisted";
-	
+
 	public static String errors_lincese = "errors.lincese";
-	
+
 	// #------------------------------------------------------------------
 	// #--- frame info --------------------------------------------------
 	// #------------------------------------------------------------------
 	public static String info_nodic = "info.nodic";
-	
+
 	public static String info_completeindex = "info.completeindex";
-	
+
 	public static String info_updatedindex = "info.updatedindex";
-	
+
 	public static String info_deletedindex = "info.deletedindex";
-	
+
 	public static String info_currentedindex = "info.currentedindex";
 
 	// #------------------------------------------------------------------
@@ -204,50 +201,53 @@ public class Constant {
 	public static String about_frame_r7 = "about.frame.r7";
 
 	public static String about_frame_r8 = "about.frame.r8";
-	
+
 	// #------------------------------------------------------------------
 	// #--- 配置路径-------------------------------------------------------
 	// #------------------------------------------------------------------
-    // public static String path = "tomcat\\webapps\\slfile\\WEB-INF\\classes\\";
-    
-    public static String lib_path = "tomcat\\webapps\\slfile\\WEB-INF\\lib\\";
+//	 public static String path =
+//	 "tomcat\\webapps\\slfile\\WEB-INF\\classes\\";
+
+	public static String lib_path = "tomcat\\webapps\\slfile\\WEB-INF\\lib\\";
 
 	public static String suffixname = ".csv";
-	
+
 	public static String jcomdll = "jcom.dll";
 
-    public static String path = "src\\";
+	public static String libmysqldll = "libmysql.dll";
 
-    public static String dicpath = "dic\\";
-    
-    public static String filedatapath = "data/file";
-    
-    public static String worddatapath = "data/word";
-    
-    public static String exceldatapath = "data/excel";
-    
-    public static String pptdatapath = "data/ppt";
-    
-    public static String pdfdatapath = "data/pdf";
-    
-    public static String txtdatapath = "data/txt";
-    
-    public static String htmldatapath = "data/html";
-    
-    public static String chmdatapath = "data/chm";
-    
-    public static String diccompilepath = "dic\\.compiled";
+	public static String path = "src\\";
+
+	public static String dicpath = "dic\\";
+
+	public static String filedatapath = "data/file";
+
+	public static String worddatapath = "data/word";
+
+	public static String exceldatapath = "data/excel";
+
+	public static String pptdatapath = "data/ppt";
+
+	public static String pdfdatapath = "data/pdf";
+
+	public static String txtdatapath = "data/txt";
+
+	public static String htmldatapath = "data/html";
+
+	public static String chmdatapath = "data/chm";
+
+	public static String diccompilepath = "dic\\.compiled";
 
 	public static String confpath = "tomcat\\webapps\\slfile\\WEB-INF\\conf\\";
 
 	// public static String confpath = "conf\\";
 
 	public static String icospath = "icos/search";
-	
+
 	public static String titleicopath = "icos//titleico.jpg";
-	
+
 	public static String licencepath = "licence.dat";
-	
+
 	// #------------------------------------------------------------------
 	// #--- 语言相关配置----------------------------------------------------
 	// #------------------------------------------------------------------
@@ -263,7 +263,7 @@ public class Constant {
 
 	public static String JPANESE_RS = path
 			+ "com\\searchlocal\\properties\\ApplicationResources_jp.properties";
-	
+
 	public static final String HAS_ERROR = "1";
 
 	public static final String NO_ERROR = "0";
@@ -295,17 +295,17 @@ public class Constant {
 	public static class FileClassify {
 
 		public static final String XLS = ".xls";
-		
+
 		public static final String XLS2007 = ".xlsx";
 
 		public static final String DOC = ".doc";
-		
+
 		public static final String DOC2007 = ".docx";
 
 		public static final String PDF = ".pdf";
 
 		public static final String PPT = ".ppt";
-		
+
 		public static final String PPT2007 = ".pptx";
 
 		public static final String TXT = ".txt";
@@ -327,7 +327,7 @@ public class Constant {
 			allType.add(HTM.toLowerCase());
 			return allType.contains(suffixName);
 		}
-		
+
 		public static boolean is2007Doccontain(String suffixName) {
 			List<String> allType = new ArrayList<String>();
 			allType.add(XLS2007);
@@ -404,6 +404,9 @@ public class Constant {
 		}
 	}
 
+	/*
+	 * 图标消息区分
+	 */
 	public static class ToolTipsClassify {
 
 		public static final int TOOLTIPS_LOCALSEARCH = 0;
@@ -417,8 +420,10 @@ public class Constant {
 		protected ToolTipsClassify() {
 		}
 	}
-	
 
+	/*
+	 * 异常代码区分
+	 */
 	public static class LogicErrClassify {
 
 		public static final String LG_E001 = "LG_E001";
@@ -437,6 +442,9 @@ public class Constant {
 		}
 	}
 
+	/*
+	 * 语言区分
+	 */
 	public static class LanguageClassify {
 
 		public static final String ENGLISH = "english";
@@ -449,6 +457,9 @@ public class Constant {
 		}
 	}
 
+	/*
+	 * 文件后缀名区分
+	 */
 	public static class FileNameClassify {
 
 		public static final String EXCEL = "excel";
@@ -468,22 +479,122 @@ public class Constant {
 		protected FileNameClassify() {
 		}
 	}
-
+	
+	/*
+	 * 菜单名
+	 */
 	public static class MenuName {
 
+		// 新建搜索
 		public static final String CREATESEARCH = "createsearch";
 
+		// 设定
 		public static final String OPTION = "option";
-		
+
+		// 自定义词典
 		public static final String ADDDIC = "adddic";
 
+		// 关于
 		public static final String ABOUT = "about";
 		
+		// 帮助
 		public static final String HELP = "help";
 
+		// 退出
 		public static final String EXIT = "exit";
 
 		protected MenuName() {
+		}
+	}
+
+	/*
+	 * 是否完成操作
+	 */
+	public static class HasOperFlg {
+		
+		// 1：操作完毕
+		public static final String HAS_OPER = "1";
+
+		// 0： 待操作
+		public static final String HAS_NOT_OPER = "0";
+
+		protected HasOperFlg() {
+		}
+	}
+	
+	/*
+	 * 是否已建索引
+	 */
+	public static class HasCreateIndexFlg {
+		
+		// 1：已建立索引
+		public static final String HAS_CREAT_INDEX = "1";
+
+		// 0： 待建立索引
+		public static final String HAS_NO_CREAT_INDEX = "0";
+
+		protected HasCreateIndexFlg() {
+		}
+	}
+
+	/*
+	 * 是否已更新
+	 */
+	public static class HasUpdateFlg {
+		
+		// 1：已更新
+		public static final String HAS_UPATE = "1";
+
+		// 0：待更新
+		public static final String HAS_NOT_UPATE = "0";
+
+		protected HasUpdateFlg() {
+		}
+	}
+	
+	/*
+	 * 是否已删除
+	 */
+	public static class HasDelFlg {
+		
+		// 1：已删除
+		public static final String HAS_DEL = "1";
+
+		// 0：未删除
+		public static final String HAS_NOT_DEL = "0";
+
+		protected HasDelFlg() {
+		}
+	}
+	
+	/*
+	 * 文件区分标志位
+	 */
+	public static class OperFlag {
+
+		// 1： 新增
+		public static final String NEED_ADD = "1";
+
+		// 2：修改
+		public static final String NEED_UPDATE = "2";
+
+		// 3：删除
+		public static final String NEED_DEL = "3";
+
+		protected OperFlag() {
+		}
+	}
+
+	/*
+	 * 高于各个搜索对象的共同信息
+	 */
+	public static class CommonInfo {
+
+		// 数据库名
+		public static final String DATABASE = "COMMONINFO";
+
+
+		protected CommonInfo() {
 		}
 	}
 }

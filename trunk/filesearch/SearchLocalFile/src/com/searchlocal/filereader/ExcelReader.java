@@ -28,17 +28,18 @@ public class ExcelReader {
 
 	private static CLogger logger = new CLogger(ExcelReader.class);
 
-	public List getExcelFile(String filepath) throws LogicException {
+	public List<ExcelFileBean> getExcelFile(ExcelFileBean bean) throws LogicException {
 
 		InputStream inputStream = null;
+		String filepath = bean.getPath();
 		try {
 			inputStream = new FileInputStream(filepath);
 			if (StringUtils.is2007Doc(filepath)) {
 				XSSFWorkbook book = new XSSFWorkbook(inputStream);
-				return getBeanList(book);
+				return getBeanList(book, bean);
 			} else {
 				HSSFWorkbook book = new HSSFWorkbook(inputStream);
-				return getBeanList(book);
+				return getBeanList(book, bean);
 			}
 		} catch (FileNotFoundException e) {
 			logger.error("LG_E001", filepath);
@@ -57,7 +58,7 @@ public class ExcelReader {
 		}
 	}
 
-	private static List getBeanList(HSSFWorkbook workbook) {
+	private static List<ExcelFileBean> getBeanList(HSSFWorkbook workbook, ExcelFileBean bean) {
 		HSSFSheet sheet;
 		HSSFRow row;
 		HSSFCell cell;
@@ -84,9 +85,12 @@ public class ExcelReader {
 					if (rowvalue != null && !"".equals(rowvalue)) {
 						filebean = new ExcelFileBean();
 						rowvalue = rowvalue.substring(1);
+						filebean.setFilename(bean.getFilename());
+						filebean.setPath(bean.getPath());
 						filebean.setContent(rowvalue);
 						filebean.setRownb(j + 1);
 						filebean.setSheetname(sheetName);
+						filebean.setLastmodify(bean.getLastmodify());
 						beanList.add(filebean);
 					}
 				}
@@ -95,13 +99,14 @@ public class ExcelReader {
 		return beanList;
 	}
 
-	private static List getBeanList(XSSFWorkbook workbook) {
+	private static List<ExcelFileBean> getBeanList(XSSFWorkbook workbook, ExcelFileBean bean) {
 		XSSFSheet sheet;
 		XSSFRow row;
 		XSSFCell cell;
 		String value;
 		List<ExcelFileBean> beanList = new ArrayList<ExcelFileBean>();
 		ExcelFileBean filebean;
+		// 取得Excel的所有字段
 		for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
 			workbook.getSheetAt(i);
 			sheet = workbook.getSheetAt(i);
@@ -123,9 +128,12 @@ public class ExcelReader {
 					if (rowvalue != null && !"".equals(rowvalue)) {
 						filebean = new ExcelFileBean();
 						rowvalue = rowvalue.substring(1);
+						filebean.setFilename(bean.getFilename());
+						filebean.setPath(bean.getPath());
 						filebean.setContent(rowvalue);
 						filebean.setRownb(j + 1);
 						filebean.setSheetname(sheetName);
+						filebean.setLastmodify(bean.getLastmodify());
 						beanList.add(filebean);
 					}
 				}
@@ -182,14 +190,14 @@ public class ExcelReader {
 		return returnvalue;
 	}
 
-	public static void main(String[] args) {
-		try {
-			ExcelReader reader = new ExcelReader();
-			String excelFile = "E:\\test2007doc\\tasklist.xlsx";
-			List excelFilet2007 = reader.getExcelFile(excelFile);
-			System.out.println("ExcelText2007=======" + excelFilet2007.size());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	// public static void main(String[] args) {
+	// try {
+	// ExcelReader reader = new ExcelReader();
+	// String excelFile = "E:\\test2007doc\\tasklist.xlsx";
+	// List excelFilet2007 = reader.getExcelFile(excelFile);
+	// System.out.println("ExcelText2007=======" + excelFilet2007.size());
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// }
 }
