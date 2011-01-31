@@ -33,8 +33,8 @@ public class ExcelDao extends BaseDao {
 	 * @throws DBException
 	 * @throws DBException
 	 */
-	public static void executeExcelUpdateSQL(Connection conn, String sql,
-			List elementList) throws DBException {
+	public static void executeExcelUpdateSQL(Connection conn, String sql, List elementList)
+			throws DBException {
 		ExcelFileBean element = null;
 		PreparedStatement stmt;
 		try {
@@ -70,8 +70,7 @@ public class ExcelDao extends BaseDao {
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public boolean createExceltable(String namesapce) throws LogicException,
-			DBException {
+	public boolean createExceltable(String namesapce) throws LogicException, DBException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		boolean success = false;
@@ -101,9 +100,8 @@ public class ExcelDao extends BaseDao {
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public boolean insertExcelRecord(List beanList, String filepath,
-			long lastmodify, String filename, String namespace)
-			throws LogicException, DBException {
+	public boolean insertExcelRecord(List beanList, String filepath, long lastmodify,
+			String filename, String namespace) throws LogicException, DBException {
 		Connection conn = BaseDao.getConn(namespace);
 		openTransaction(conn);
 		// SQL语句
@@ -133,8 +131,7 @@ public class ExcelDao extends BaseDao {
 		return true;
 	}
 
-	public boolean execbatch(String datapath, String namesapce)
-			throws DBException, LogicException {
+	public boolean execbatch(String datapath, String namesapce) throws DBException, LogicException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		Statement st = null;

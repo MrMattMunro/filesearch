@@ -33,8 +33,8 @@ public class TxtDao extends BaseDao {
 	 * @throws DBException
 	 * @throws DBException
 	 */
-	public synchronized static void executeTxtUpdateSQL(Connection conn,
-			String sql, List elementList) throws DBException {
+	public synchronized static void executeTxtUpdateSQL(Connection conn, String sql,
+			List elementList) throws DBException {
 		TxtFileBean element = null;
 		PreparedStatement stmt;
 		try {
@@ -44,8 +44,7 @@ public class TxtDao extends BaseDao {
 				if (null != element) {
 					stmt.setString(1, element.getFilename());
 					stmt.setString(2, element.getPath());
-					stmt.setTimestamp(3, new Timestamp(element
-									.getLastmodify()));
+					stmt.setTimestamp(3, new Timestamp(element.getLastmodify()));
 					stmt.setString(4, element.getContent());
 					stmt.setInt(5, new Integer(element.getRownb()));
 				}
@@ -71,8 +70,7 @@ public class TxtDao extends BaseDao {
 	 * @throws LogicException
 	 * @throws LogicException
 	 */
-	public synchronized boolean createTxttable(String namesapce)
-			throws DBException, LogicException {
+	public synchronized boolean createTxttable(String namesapce) throws DBException, LogicException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		boolean success = false;
@@ -102,9 +100,8 @@ public class TxtDao extends BaseDao {
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public synchronized boolean insertTxtRecord(List beanList, String filepath,
-			long lastmodify, String filename, String namespace)
-			throws LogicException, DBException {
+	public synchronized boolean insertTxtRecord(List beanList, String filepath, long lastmodify,
+			String filename, String namespace) throws LogicException, DBException {
 		Connection conn = BaseDao.getConn(namespace);
 		openTransaction(conn);
 		// SQL语句
@@ -134,8 +131,7 @@ public class TxtDao extends BaseDao {
 		return true;
 	}
 
-	public boolean execbatch(String datapath, String namesapce)
-			throws DBException, LogicException {
+	public boolean execbatch(String datapath, String namesapce) throws DBException, LogicException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		Statement st = null;

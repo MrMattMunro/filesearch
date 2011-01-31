@@ -33,8 +33,8 @@ public class ChmDao extends BaseDao {
 	 * @return ResultSet
 	 * @throws DBException
 	 */
-	public static void executeChmUpdateSQL(Connection conn, String sql,
-			List elementList) throws DBException {
+	public static void executeChmUpdateSQL(Connection conn, String sql, List elementList)
+			throws DBException {
 		ChmFileBean element = null;
 		PreparedStatement stmt;
 		try {
@@ -59,8 +59,7 @@ public class ChmDao extends BaseDao {
 		closeConnection(null, stmt, null);
 	}
 
-	public boolean createChmtable(String namesapce) throws LogicException,
-			DBException {
+	public boolean createChmtable(String namesapce) throws LogicException, DBException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		boolean success = false;
@@ -80,9 +79,8 @@ public class ChmDao extends BaseDao {
 		return success;
 	}
 
-	public boolean insertChmRecord(List beanList, String filepath,
-			long lastmodify, String filename, String namesapce)
-			throws LogicException, DBException {
+	public boolean insertChmRecord(List beanList, String filepath, long lastmodify,
+			String filename, String namesapce) throws LogicException, DBException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		// 
@@ -110,8 +108,7 @@ public class ChmDao extends BaseDao {
 		return true;
 	}
 
-	public boolean execbatch(String datapath, String namesapce)
-			throws DBException, LogicException {
+	public boolean execbatch(String datapath, String namesapce) throws DBException, LogicException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		Statement st = null;

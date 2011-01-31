@@ -33,8 +33,8 @@ public class PdfDao extends BaseDao {
 	 * @return ResultSet
 	 * @throws DBException
 	 */
-	public static void executePdfUpdateSQL(Connection conn, String sql,
-			List elementList) throws DBException {
+	public static void executePdfUpdateSQL(Connection conn, String sql, List elementList)
+			throws DBException {
 		PdfFileBean element = null;
 		PreparedStatement stmt;
 		try {
@@ -59,8 +59,7 @@ public class PdfDao extends BaseDao {
 		closeConnection(null, stmt, null);
 	}
 
-	public boolean createPdftable(String namesapce) throws LogicException,
-			DBException {
+	public boolean createPdftable(String namesapce) throws LogicException, DBException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		boolean success = false;
@@ -80,9 +79,8 @@ public class PdfDao extends BaseDao {
 		return success;
 	}
 
-	public boolean insertPdfRecord(List beanList, String filepath,
-			long lastmodify, String filename, String namesapce)
-			throws LogicException, DBException {
+	public boolean insertPdfRecord(List beanList, String filepath, long lastmodify,
+			String filename, String namesapce) throws LogicException, DBException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		// 
@@ -109,10 +107,8 @@ public class PdfDao extends BaseDao {
 		closeConnection(null, null, conn);
 		return true;
 	}
-	
 
-	public boolean execbatch(String datapath, String namesapce)
-			throws DBException, LogicException {
+	public boolean execbatch(String datapath, String namesapce) throws DBException, LogicException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		Statement st = null;

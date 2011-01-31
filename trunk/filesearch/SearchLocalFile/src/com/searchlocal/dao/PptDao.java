@@ -32,8 +32,8 @@ public class PptDao extends BaseDao {
 	 * @return ResultSet
 	 * @throws DBException
 	 */
-	public synchronized void executePptUpdateSQL(Connection conn, String sql,
-			List elementList) throws DBException {
+	public synchronized void executePptUpdateSQL(Connection conn, String sql, List elementList)
+			throws DBException {
 		PptFileBean element = null;
 		PreparedStatement stmt;
 		try {
@@ -58,8 +58,7 @@ public class PptDao extends BaseDao {
 		closeConnection(null, stmt, null);
 	}
 
-	public synchronized boolean createPpttable(String namesapce)
-			throws LogicException, DBException {
+	public synchronized boolean createPpttable(String namesapce) throws LogicException, DBException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		boolean success = false;
@@ -79,9 +78,8 @@ public class PptDao extends BaseDao {
 		return success;
 	}
 
-	public synchronized boolean insertPptRecord(List beanList, String filepath,
-			long lastmodify, String filename, String namesapce)
-			throws LogicException, DBException {
+	public synchronized boolean insertPptRecord(List beanList, String filepath, long lastmodify,
+			String filename, String namesapce) throws LogicException, DBException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		// 
@@ -110,8 +108,7 @@ public class PptDao extends BaseDao {
 		return true;
 	}
 
-	public boolean execbatch(String datapath, String namesapce)
-			throws DBException, LogicException {
+	public boolean execbatch(String datapath, String namesapce) throws DBException, LogicException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		Statement st = null;
