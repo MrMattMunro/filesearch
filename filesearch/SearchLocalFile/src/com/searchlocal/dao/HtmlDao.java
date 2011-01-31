@@ -32,8 +32,8 @@ public class HtmlDao extends BaseDao {
 	 * @return ResultSet
 	 * @throws DBException
 	 */
-	public static void executeHtmlUpdateSQL(Connection conn, String sql,
-			List elementList) throws DBException {
+	public static void executeHtmlUpdateSQL(Connection conn, String sql, List elementList)
+			throws DBException {
 		HtmlFileBean element = null;
 		PreparedStatement stmt;
 		try {
@@ -57,8 +57,7 @@ public class HtmlDao extends BaseDao {
 		closeConnection(null, stmt, null);
 	}
 
-	public boolean createHtmltable(String namesapce) throws LogicException,
-			DBException {
+	public boolean createHtmltable(String namesapce) throws LogicException, DBException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		boolean success = false;
@@ -78,9 +77,8 @@ public class HtmlDao extends BaseDao {
 		return success;
 	}
 
-	public boolean insertHtmlRecord(List beanList, String filepath,
-			long lastmodify, String filename, String namesapce)
-			throws LogicException, DBException {
+	public boolean insertHtmlRecord(List beanList, String filepath, long lastmodify,
+			String filename, String namesapce) throws LogicException, DBException {
 		Connection conn = BaseDao.getConn(namesapce);
 
 		HtmlFileBean element = null;
@@ -108,8 +106,7 @@ public class HtmlDao extends BaseDao {
 		return true;
 	}
 
-	public boolean execbatch(String datapath, String namesapce)
-			throws DBException, LogicException {
+	public boolean execbatch(String datapath, String namesapce) throws DBException, LogicException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		Statement st = null;

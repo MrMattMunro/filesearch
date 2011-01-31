@@ -1,3 +1,13 @@
+/**
+ * $RCSfile: BaseDao.java
+ * $Revision: 1.0
+ * $Date: Jan 30, 2011
+ *
+ * Copyright (C) 2010 SlFile, Inc. All rights reserved.
+ *
+ * This software is the proprietary information of SlFile, Inc.
+ * Use is subject to license terms.
+ */
 package com.searchlocal.dao;
 
 import java.io.FileInputStream;
@@ -50,8 +60,7 @@ public class BaseDao {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	public static boolean createDataBase(String namespace) throws DBException,
-			LogicException {
+	public static boolean createDataBase(String namespace) throws DBException, LogicException {
 		ConnectionParam connparam = getConnParam(BASE_DB_SOURCCE);
 
 		String sql = "";
@@ -89,8 +98,7 @@ public class BaseDao {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	public static boolean dropDataBase(String namespace) throws DBException,
-			LogicException {
+	public static boolean dropDataBase(String namespace) throws DBException, LogicException {
 		ConnectionParam connparam = getConnParam(BASE_DB_SOURCCE);
 		String sql = "";
 		try {
@@ -124,16 +132,14 @@ public class BaseDao {
 	 * @throws SQLException
 	 * @throws IOException
 	 */
-	public static Connection getConn(String namespace) throws LogicException,
-			DBException {
+	public static Connection getConn(String namespace) throws LogicException, DBException {
 		ConnectionParam connparam = getConnParam(DB_SOURCCE);
 
 		Connection conn;
 		if (commdbcp == null) {
 			Map<String, String> paramMap = new HashMap<String, String>();
 			paramMap.put("namespace", namespace);
-			String url = SQLParameterUtil.convertSQL(connparam.getUrl(),
-					paramMap);
+			String url = SQLParameterUtil.convertSQL(connparam.getUrl(), paramMap);
 			connparam.setUrl(url);
 			commdbcp = new CommonsDBCP(connparam);
 		}
@@ -147,8 +153,7 @@ public class BaseDao {
 		return conn;
 	}
 
-	private static ConnectionParam getConnParam(String propfilepath)
-			throws LogicException {
+	private static ConnectionParam getConnParam(String propfilepath) throws LogicException {
 
 		Properties prop = new Properties();
 		FileInputStream in;
@@ -163,12 +168,9 @@ public class BaseDao {
 			throw new LogicException("LG_E003", e);
 		}
 
-		String user = prop.get(Constant.DBConstansInfo.DATABASE_USER)
-				.toString();
-		String password = prop.get(Constant.DBConstansInfo.DATABASE_PASSWORD)
-				.toString();
-		String driver = prop.get(
-				Constant.DBConstansInfo.DATABASE_CLASS_FOR_NAME).toString();
+		String user = prop.get(Constant.DBConstansInfo.DATABASE_USER).toString();
+		String password = prop.get(Constant.DBConstansInfo.DATABASE_PASSWORD).toString();
+		String driver = prop.get(Constant.DBConstansInfo.DATABASE_CLASS_FOR_NAME).toString();
 		String url = prop.get(Constant.DBConstansInfo.DATABASE_URL).toString();
 		url = url + "&user=" + user + "&password=" + password;
 
@@ -177,6 +179,45 @@ public class BaseDao {
 		return param;
 	}
 
+	/**
+	 * 删除对应数据库，表里，对应文件路径纪录
+	 * 
+	 * @return ResultSet
+	 * @throws DBException
+	 * @throws DBException
+	 * @throws DBException
+	 * @throws LogicException
+	 * @throws LogicException
+	 */
+	public synchronized boolean deleteRecordByPath(String namespace, String table, String path)
+			throws DBException, LogicException {
+		Connection conn = BaseDao.getConn(namespace);
+		openTransaction(conn);
+		boolean success = false;
+		// 生成SQL
+		String presql = SqlUtil.getSqlbyId("deleteRecordByPath");
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("namespace", namespace);
+		paramMap.put("table", table);
+
+		String sql = SQLParameterUtil.convertSQL(presql, paramMap);
+		logger.debug("sql:" + sql);
+
+		PreparedStatement stmt;
+		try {
+			conn.setReadOnly(false);
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, path);
+			success = stmt.execute();
+		} catch (SQLException e) {
+			logger.error("DB_E023", sql, e);
+			throw new DBException("DB_E023", e);
+		}
+		commit(conn);
+		closeConnection(null, null, conn);
+		return success;
+	}
+	
 	/**
 	 * 取得执行查询sql的结果集
 	 * 
@@ -204,8 +245,7 @@ public class BaseDao {
 	 * @return ResultSet
 	 * @throws DBException
 	 */
-	public static boolean execute(String sql, Connection conn)
-			throws DBException {
+	public static boolean execute(String sql, Connection conn) throws DBException {
 		boolean sucess = false;
 		try {
 			Statement stmt = conn.prepareStatement(sql);
@@ -245,8 +285,8 @@ public class BaseDao {
 	 *            ResultSet
 	 * @throws DBException
 	 */
-	public static void closeConnection(ResultSet rs, Statement stmt,
-			Connection conn) throws DBException {
+	public static void closeConnection(ResultSet rs, Statement stmt, Connection conn)
+			throws DBException {
 		if (rs != null) {
 			try {
 				rs.close();

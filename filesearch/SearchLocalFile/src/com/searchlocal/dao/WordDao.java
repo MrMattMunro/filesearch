@@ -33,8 +33,8 @@ public class WordDao extends BaseDao {
 	 * @return ResultSet
 	 * @throws DBException
 	 */
-	public static void executeWordUpdateSQL(Connection conn, String sql,
-			List elementList) throws DBException {
+	public static void executeWordUpdateSQL(Connection conn, String sql, List elementList)
+			throws DBException {
 		WordFileBean element = null;
 		PreparedStatement stmt;
 		try {
@@ -59,8 +59,7 @@ public class WordDao extends BaseDao {
 		closeConnection(null, stmt, null);
 	}
 
-	public boolean createWordtable(String namesapce) throws LogicException,
-			DBException {
+	public boolean createWordtable(String namesapce) throws LogicException, DBException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		boolean success = false;
@@ -80,11 +79,10 @@ public class WordDao extends BaseDao {
 		return success;
 	}
 
-	public boolean insertWordRecord(List beanList, String filepath,
-			long lastmodify, String filename, String namesapce)
-			throws DBException, LogicException {
+	public boolean insertWordRecord(List beanList, String filepath, long lastmodify,
+			String filename, String namesapce) throws DBException, LogicException {
 		Connection conn = BaseDao.getConn(namesapce);
-	
+
 		String presql = SqlUtil.getSqlbyId("insertWordRecord");
 		Map<String, String> paramMap = new HashMap<String, String>();
 		paramMap.put("namespace", namesapce);
@@ -110,15 +108,15 @@ public class WordDao extends BaseDao {
 		closeConnection(null, null, conn);
 		return true;
 	}
-	
-	public boolean execbatch(String datapath, String namesapce)
-			throws DBException, LogicException {
+
+	public boolean execbatch(String datapath, String namesapce) throws DBException, LogicException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		Statement st = null;
 		try {
 			st = conn.createStatement();
-			String sql = "Load Data InFile " + datapath + " Into Table t_word FIELDS TERMINATED BY ','";
+			String sql = "Load Data InFile " + datapath
+					+ " Into Table t_word FIELDS TERMINATED BY ','";
 			sql = StringUtils.editSQL(sql);
 			st.execute(sql);
 		} catch (SQLException e) {

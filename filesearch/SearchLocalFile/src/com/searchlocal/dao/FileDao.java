@@ -35,8 +35,8 @@ public class FileDao extends BaseDao {
 	 * @throws DBException
 	 * @throws DBException
 	 */
-	public synchronized static void executeFileUpdateSQL(Connection conn,
-			String sql, List elementList) throws DBException {
+	public synchronized static void executeFileUpdateSQL(Connection conn, String sql,
+			List elementList) throws DBException {
 		FileParam element = null;
 		PreparedStatement stmt;
 		try {
@@ -71,8 +71,8 @@ public class FileDao extends BaseDao {
 	 * @throws LogicException
 	 * @throws LogicException
 	 */
-	public synchronized boolean deleteFileRecord(String namespace, String path)
-			throws DBException, LogicException {
+	public synchronized boolean deleteFileRecord(String namespace, String path) throws DBException,
+			LogicException {
 		Connection conn = BaseDao.getConn(namespace);
 		openTransaction(conn);
 		boolean success = false;
@@ -102,8 +102,8 @@ public class FileDao extends BaseDao {
 	 * @throws LogicException
 	 * @throws LogicException
 	 */
-	public synchronized boolean deleteRecordByPath(String namespace,
-			String table, String path) throws DBException, LogicException {
+	public synchronized boolean deleteRecordByPath(String namespace, String table, String path)
+			throws DBException, LogicException {
 		Connection conn = BaseDao.getConn(namespace);
 		openTransaction(conn);
 		boolean success = false;
@@ -115,7 +115,7 @@ public class FileDao extends BaseDao {
 
 		String sql = SQLParameterUtil.convertSQL(presql, paramMap);
 		logger.debug("sql:" + sql);
-		
+
 		PreparedStatement stmt;
 		try {
 			conn.setReadOnly(false);
@@ -141,8 +141,8 @@ public class FileDao extends BaseDao {
 	 * @throws LogicException
 	 * @throws LogicException
 	 */
-	public synchronized boolean createFiletable(String namesapce)
-			throws DBException, LogicException {
+	public synchronized boolean createFiletable(String namesapce) throws DBException,
+			LogicException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		boolean success = false;
@@ -172,8 +172,8 @@ public class FileDao extends BaseDao {
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public synchronized List<FileParam> getFileRecord(String namespace)
-			throws LogicException, DBException {
+	public synchronized List<FileParam> getFileRecord(String namespace) throws LogicException,
+			DBException {
 		Connection conn = BaseDao.getConn(namespace);
 		// SQL语句
 		String presql = SqlUtil.getSqlbyId("selectFileRecord");
@@ -186,7 +186,7 @@ public class FileDao extends BaseDao {
 			setReadOnly(conn);
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-			
+
 			while (rs.next()) {
 				FileParam param = new FileParam();
 				param.setPath(rs.getString("path"));
@@ -267,14 +267,14 @@ public class FileDao extends BaseDao {
 				paramMap.put("namespace", namespace);
 
 				String sql = SQLParameterUtil.convertSQL(presql, paramMap);
-				
+
 				stmt = conn.prepareStatement(sql);
 
 				if (null != element) {
 					stmt.setTimestamp(1, new Timestamp(element.getLastModify()));
 					stmt.setString(2, element.getError());
 					stmt.setString(3, element.getPath());
-			
+
 				}
 				int row = 0;
 				if (stmt != null) {
@@ -291,8 +291,7 @@ public class FileDao extends BaseDao {
 		return true;
 	}
 
-	public boolean execbatch(String datapath, String namesapce)
-			throws DBException, LogicException {
+	public boolean execbatch(String datapath, String namesapce) throws DBException, LogicException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
 		Statement st = null;
