@@ -36,11 +36,15 @@ import com.searchlocal.util.XMLConfig;
 public class IndexWriterFactory {
 
 	private static Log logger = LogFactory.getLog(IndexWriterFactory.class);
+
 	private static Map writerLookup = new ConcurrentHashMap();
-	private static final int LUCENE_MAX_BUFFER_SIZE = 200;
-	private static final int OPTIMIZE_INTERVAL = 100;
+
+	private static final int LUCENE_MAX_BUFFER_SIZE = 2000;
+
+	private static final int OPTIMIZE_INTERVAL = 200;
+
 	private static List searches = new ArrayList<CreateNewParam>();
-	
+
 	/**
 	 * 初始化
 	 * 
@@ -73,7 +77,8 @@ public class IndexWriterFactory {
 									IndexWriter.unlock(directory);
 								}
 							}
-							writer = new IndexWriter(directory, analyzer, bcreate, IndexWriter.MaxFieldLength.LIMITED);
+							writer = new IndexWriter(directory, analyzer, bcreate,
+									IndexWriter.MaxFieldLength.LIMITED);
 							writer.setMaxBufferedDocs(LUCENE_MAX_BUFFER_SIZE);
 							writerData = new IndexWriterData(writer, 0);
 							writerLookup.put(createNewParm.getSearchname(), writerData);
@@ -98,10 +103,10 @@ public class IndexWriterFactory {
 	 * @return
 	 * @throws IOException
 	 */
-	public synchronized IndexWriter getWriter(String module) {
+	public static synchronized IndexWriter getWriter(String module) {
 		IndexWriter writer = null;
+		IndexWriterData writerData = null;
 		try {
-			IndexWriterData writerData = null;
 			for (int i = 0; i < searches.size(); i++) {
 				CreateNewParam createNewParm = (CreateNewParam) searches.get(i);
 				if (module.equals(createNewParm.getSearchname())) {
@@ -113,13 +118,14 @@ public class IndexWriterFactory {
 						boolean bcreate = !segments.exists();
 						FSDirectory directory = FSDirectory.open(new File(indexpath));
 						Analyzer analyzer = new PaodingAnalyzer();
-						// 如果文件锁住，则主动打开
+						// // 如果文件锁住，则主动打开
 						if (IndexReader.indexExists(directory)) {
 							if (IndexWriter.isLocked(directory)) {
 								IndexWriter.unlock(directory);
 							}
 						}
-						writer = new IndexWriter(directory, analyzer, bcreate, IndexWriter.MaxFieldLength.LIMITED);
+						writer = new IndexWriter(directory, analyzer, bcreate,
+								IndexWriter.MaxFieldLength.LIMITED);
 						writer.setMaxBufferedDocs(LUCENE_MAX_BUFFER_SIZE);
 						writerData = new IndexWriterData(writer, 0);
 						writerLookup.put(createNewParm.getSearchname(), writerData);
@@ -139,8 +145,7 @@ public class IndexWriterFactory {
 	 * @throws InterruptedException
 	 * @throws IOException
 	 */
-	public void optimize(IndexWriter writer) throws InterruptedException,
-			IOException {
+	public static void optimize(IndexWriter writer) throws InterruptedException, IOException {
 		Collection writers = writerLookup.values();
 		for (Iterator iter = writers.iterator(); iter.hasNext();) {
 			IndexWriterData writerdata = (IndexWriterData) iter.next();
@@ -156,26 +161,24 @@ public class IndexWriterFactory {
 			}
 		}
 	}
-	
+
 	/**
 	 * @param module
 	 * @param term
 	 * @throws InterruptedException
 	 * @throws IOException
 	 */
-	public void removeIndexWriter(String namespace) throws InterruptedException,
-			IOException {
+	public static void removeIndexWriter(String namespace) throws InterruptedException, IOException {
 		writerLookup.remove(namespace);
 	}
-	
+
 	/**
 	 * @param module
 	 * @param term
 	 * @throws InterruptedException
 	 * @throws IOException
 	 */
-	public void clear() throws InterruptedException,
-			IOException {
+	public void clear() throws InterruptedException, IOException {
 		Collection writers = writerLookup.values();
 		for (Iterator iter = writers.iterator(); iter.hasNext();) {
 			IndexWriterData writerdata = (IndexWriterData) iter.next();

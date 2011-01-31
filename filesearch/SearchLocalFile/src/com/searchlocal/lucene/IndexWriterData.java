@@ -7,12 +7,12 @@ public class IndexWriterData {
 	private int count;
 
 	private IndexWriter writer;
-	
-	public IndexWriterData(IndexWriter writer, int count){
+
+	public IndexWriterData(IndexWriter writer, int count) {
 		this.writer = writer;
 		this.count = count;
 	}
-	
+
 	/**
 	 * @return Returns the count.
 	 */

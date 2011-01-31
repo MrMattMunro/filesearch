@@ -43,25 +43,23 @@ public class IndexMaker {
 	 * 
 	 * @return Returns the pool.
 	 */
-	public static void makeindex(List doctypes, String indexpath, String namespace, Set<String> paths)
-			throws Exception {
+	public static void makeindex(List doctypes, String indexpath, String namespace, Set<String> paths) throws Exception {
 
-		IndexWriterFactory indexWriterFactory = new IndexWriterFactory();
-		IndexWriter indexWriter = indexWriterFactory.getWriter(namespace);
-		
+		IndexWriter indexWriter = IndexWriterFactory.getWriter(namespace);
+
 		for (Iterator iter = doctypes.iterator(); iter.hasNext();) {
 			String element = (String) iter.next();
 			if ("excel".equals(element)) {
 				// 取得连接
 				Connection conn = dao.getConn(namespace);
 				List<String> removeList = new ArrayList<String>();
-				for (Iterator itera= paths.iterator(); itera.hasNext();) {
+				for (Iterator itera = paths.iterator(); itera.hasNext();) {
 					String path = (String) itera.next();
 					String type = StringUtils.getTypebyName(path);
-					if(type.equals(Constant.FileNameClassify.EXCEL)){
+					if (type.equals(Constant.FileNameClassify.EXCEL)) {
 						String sql = SqlUtil.getsql(namespace, "selectExcelRecord");
 						makeExcelindex(indexWriter, sql, path, conn);
-						indexWriterFactory.optimize(indexWriter);
+						IndexWriterFactory.optimize(indexWriter);
 						removeList.add(path);
 					}
 				}
@@ -72,13 +70,13 @@ public class IndexMaker {
 				// 取得连接
 				Connection conn = dao.getConn(namespace);
 				List<String> removeList = new ArrayList<String>();
-				for (Iterator itera= paths.iterator(); itera.hasNext();) {
+				for (Iterator itera = paths.iterator(); itera.hasNext();) {
 					String path = (String) itera.next();
 					String type = StringUtils.getTypebyName(path);
-					if(type.equals(Constant.FileNameClassify.WORD)){
+					if (type.equals(Constant.FileNameClassify.WORD)) {
 						String sql = SqlUtil.getsql(namespace, "selectWordRecord");
 						makeWordindex(indexWriter, sql, path, conn);
-						indexWriterFactory.optimize(indexWriter);
+						IndexWriterFactory.optimize(indexWriter);
 						removeList.add(path);
 					}
 				}
@@ -89,13 +87,13 @@ public class IndexMaker {
 				// 取得连接
 				Connection conn = dao.getConn(namespace);
 				List<String> removeList = new ArrayList<String>();
-				for (Iterator itera= paths.iterator(); itera.hasNext();) {
+				for (Iterator itera = paths.iterator(); itera.hasNext();) {
 					String path = (String) itera.next();
 					String type = StringUtils.getTypebyName(path);
-					if(type.equals(Constant.FileNameClassify.PDF)){
+					if (type.equals(Constant.FileNameClassify.PDF)) {
 						String sql = SqlUtil.getsql(namespace, "selectPdfRecord");
 						makePdfindex(indexWriter, sql, path, conn);
-						indexWriterFactory.optimize(indexWriter);
+						IndexWriterFactory.optimize(indexWriter);
 						removeList.add(path);
 					}
 				}
@@ -106,13 +104,13 @@ public class IndexMaker {
 				// 取得连接
 				Connection conn = dao.getConn(namespace);
 				List<String> removeList = new ArrayList<String>();
-				for (Iterator itera= paths.iterator(); itera.hasNext();) {
+				for (Iterator itera = paths.iterator(); itera.hasNext();) {
 					String path = (String) itera.next();
 					String type = StringUtils.getTypebyName(path);
-					if(type.equals(Constant.FileNameClassify.PPT)){
+					if (type.equals(Constant.FileNameClassify.PPT)) {
 						String sql = SqlUtil.getsql(namespace, "selectPptRecord");
 						makePptindex(indexWriter, sql, path, conn);
-						indexWriterFactory.optimize(indexWriter);
+						IndexWriterFactory.optimize(indexWriter);
 						removeList.add(path);
 					}
 				}
@@ -123,13 +121,13 @@ public class IndexMaker {
 				// 取得连接
 				Connection conn = dao.getConn(namespace);
 				List<String> removeList = new ArrayList<String>();
-				for (Iterator itera= paths.iterator(); itera.hasNext();) {
+				for (Iterator itera = paths.iterator(); itera.hasNext();) {
 					String path = (String) itera.next();
 					String type = StringUtils.getTypebyName(path);
-					if(type.equals(Constant.FileNameClassify.CHM)){
+					if (type.equals(Constant.FileNameClassify.CHM)) {
 						String sql = SqlUtil.getsql(namespace, "selectChmRecord");
 						makeChmindex(indexWriter, sql, path, conn);
-						indexWriterFactory.optimize(indexWriter);
+						IndexWriterFactory.optimize(indexWriter);
 						removeList.add(path);
 					}
 				}
@@ -140,13 +138,13 @@ public class IndexMaker {
 				// 取得连接
 				Connection conn = dao.getConn(namespace);
 				List<String> removeList = new ArrayList<String>();
-				for (Iterator itera= paths.iterator(); itera.hasNext();) {
+				for (Iterator itera = paths.iterator(); itera.hasNext();) {
 					String path = (String) itera.next();
 					String type = StringUtils.getTypebyName(path);
-					if(type.equals(Constant.FileNameClassify.HTML)){
+					if (type.equals(Constant.FileNameClassify.HTML)) {
 						String sql = SqlUtil.getsql(namespace, "selectHtmlRecord");
 						makeHtmlindex(indexWriter, sql, path, conn);
-						indexWriterFactory.optimize(indexWriter);
+						IndexWriterFactory.optimize(indexWriter);
 						removeList.add(path);
 					}
 				}
@@ -157,13 +155,13 @@ public class IndexMaker {
 				// 取得连接
 				Connection conn = dao.getConn(namespace);
 				List<String> removeList = new ArrayList<String>();
-				for (Iterator itera= paths.iterator(); itera.hasNext();) {
+				for (Iterator itera = paths.iterator(); itera.hasNext();) {
 					String path = (String) itera.next();
 					String type = StringUtils.getTypebyName(path);
-					if(type.equals(Constant.FileNameClassify.TXT)){
+					if (type.equals(Constant.FileNameClassify.TXT)) {
 						String sql = SqlUtil.getsql(namespace, "selectTxtRecord");
 						makeTxtindex(indexWriter, sql, path, conn);
-						indexWriterFactory.optimize(indexWriter);
+						IndexWriterFactory.optimize(indexWriter);
 						removeList.add(path);
 					}
 				}
@@ -171,75 +169,79 @@ public class IndexMaker {
 				dao.closeConnection(null, null, conn);
 			}
 		}
-		
-        // 关闭IndexWriter
-		if(indexWriter != null){
+
+		// 关闭IndexWriter
+		if (indexWriter != null) {
 			indexWriter.commit();
 			indexWriter.close();
-			indexWriterFactory.removeIndexWriter(namespace);
+			IndexWriterFactory.removeIndexWriter(namespace);
 		}
 	}
 
-	public static void makeWordindex(IndexWriter indexWriter, String sql, String path, Connection conn) throws Exception {
+	public static void makeWordindex(IndexWriter indexWriter, String sql, String path,
+			Connection conn) throws Exception {
 		ResultSet rs = dao.executeQuerySQL(sql, path, conn);
 		while (rs.next()) {
 			Document document = new Document();
-			document.add(new Field("paragraphNo", rs.getString("paragraphNo"),
-					Field.Store.YES, Field.Index.NO));
+			document.add(new Field("paragraphNo", rs.getString("paragraphNo"), Field.Store.YES,
+					Field.Index.NO));
 
 			addDcoument(document, rs, indexWriter);
 		}
 		rs.close();
 	}
 
-	public static void  makeExcelindex(IndexWriter indexWriter, String sql, String path, Connection conn) throws Exception {
+	public static void makeExcelindex(IndexWriter indexWriter, String sql, String path,
+			Connection conn) throws Exception {
 		ResultSet rs = dao.executeQuerySQL(sql, path, conn);
 		while (rs.next()) {
 			Document document = new Document();
-			document.add(new Field("sheetname", rs.getString("sheetname"),
-					Field.Store.YES, Field.Index.NO));
-			document.add(new Field("rownb", rs.getString("rownb"),
-					Field.Store.YES, Field.Index.NO));
+			document.add(new Field("sheetname", rs.getString("sheetname"), Field.Store.YES,
+					Field.Index.NO));
+			document
+					.add(new Field("rownb", rs.getString("rownb"), Field.Store.YES, Field.Index.NO));
 
 			addDcoument(document, rs, indexWriter);
 		}
 		rs.close();
 	}
 
-	public static void  makePdfindex(IndexWriter indexWriter, String sql, String path, Connection conn) throws Exception {
+	public static void makePdfindex(IndexWriter indexWriter, String sql, String path,
+			Connection conn) throws Exception {
 		ResultSet rs = dao.executeQuerySQL(sql, path, conn);
 		while (rs.next()) {
 			Document document = new Document();
-			document.add(new Field("page", rs.getString("page"),
-					Field.Store.YES, Field.Index.NO));
+			document.add(new Field("page", rs.getString("page"), Field.Store.YES, Field.Index.NO));
 			addDcoument(document, rs, indexWriter);
 		}
 		rs.close();
 	}
 
-	public static void  makePptindex(IndexWriter indexWriter, String sql, String path, Connection conn) throws Exception {
+	public static void makePptindex(IndexWriter indexWriter, String sql, String path,
+			Connection conn) throws Exception {
 		ResultSet rs = dao.executeQuerySQL(sql, path, conn);
 		while (rs.next()) {
 			Document document = new Document();
-			document.add(new Field("page", rs.getString("page"),
-					Field.Store.YES, Field.Index.NO));
+			document.add(new Field("page", rs.getString("page"), Field.Store.YES, Field.Index.NO));
 			addDcoument(document, rs, indexWriter);
 		}
 		rs.close();
 	}
 
-	public static void makeChmindex(IndexWriter indexWriter, String sql, String path, Connection conn) throws Exception {
+	public static void makeChmindex(IndexWriter indexWriter, String sql, String path,
+			Connection conn) throws Exception {
 		ResultSet rs = dao.executeQuerySQL(sql, path, conn);
 		while (rs.next()) {
 			Document document = new Document();
-			document.add(new Field("catalogname", rs.getString("catalogname"),
-					Field.Store.YES, Field.Index.NO));
+			document.add(new Field("catalogname", rs.getString("catalogname"), Field.Store.YES,
+					Field.Index.NO));
 			addDcoument(document, rs, indexWriter);
 		}
 		rs.close();
 	}
 
-	public static void  makeHtmlindex(IndexWriter indexWriter, String sql, String path, Connection conn) throws Exception {
+	public static void makeHtmlindex(IndexWriter indexWriter, String sql, String path,
+			Connection conn) throws Exception {
 		ResultSet rs = dao.executeQuerySQL(sql, path, conn);
 		while (rs.next()) {
 			Document document = new Document();
@@ -248,7 +250,8 @@ public class IndexMaker {
 		rs.close();
 	}
 
-	public static void makeTxtindex(IndexWriter indexWriter, String sql, String path, Connection conn) throws Exception {
+	public static void makeTxtindex(IndexWriter indexWriter, String sql, String path,
+			Connection conn) throws Exception {
 		ResultSet rs = dao.executeQuerySQL(sql, path, conn);
 		while (rs.next()) {
 			Document document = new Document();
@@ -258,23 +261,23 @@ public class IndexMaker {
 		}
 		rs.close();
 	}
-	
+
 	/**
 	 * @param args
 	 */
 	public static void addDcoument(Document doc, ResultSet rs, IndexWriter indexWriter) {
 		try {
-			doc.add(new Field("filename", rs.getString("filename"), Field.Store.YES, Field.Index.NO));
-			doc.add(new Field("path", rs.getString("path"), Field.Store.YES, Field.Index.NOT_ANALYZED));
-			doc.add(new Field("content", rs.getString("content"),
-					Field.Store.YES, Field.Index.ANALYZED,
-					Field.TermVector.WITH_POSITIONS_OFFSETS));
-			
-			doc.add(new Field("lastmodify", DateTools.timeToString(rs
-					.getTimestamp("lastmodify").getTime(),
-					DateTools.Resolution.MINUTE), Field.Store.YES,
-					Field.Index.NO));
-		
+			doc
+					.add(new Field("filename", rs.getString("filename"), Field.Store.YES,
+							Field.Index.NO));
+			doc.add(new Field("path", rs.getString("path"), Field.Store.YES,
+					Field.Index.NOT_ANALYZED));
+			doc.add(new Field("content", rs.getString("content"), Field.Store.YES,
+					Field.Index.ANALYZED, Field.TermVector.WITH_POSITIONS_OFFSETS));
+
+			doc.add(new Field("lastmodify", DateTools.timeToString(rs.getTimestamp("lastmodify")
+					.getTime(), DateTools.Resolution.MINUTE), Field.Store.YES, Field.Index.NO));
+
 			indexWriter.addDocument(doc);
 		} catch (CorruptIndexException e) {
 			// TODO Auto-generated catch block
