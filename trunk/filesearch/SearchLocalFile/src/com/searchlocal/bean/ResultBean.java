@@ -19,7 +19,7 @@ package com.searchlocal.bean;
  * @author changsong:qianjinfu@gmail.com
  * @version 1.0
  */
-public class ResultBean extends BaseFileBean {
+public class ResultBean {
 
 	/** Id */
 	private String id;

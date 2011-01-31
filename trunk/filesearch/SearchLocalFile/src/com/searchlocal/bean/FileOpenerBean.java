@@ -19,7 +19,7 @@ package com.searchlocal.bean;
  * @author changsong:qianjinfu@gmail.com
  * @version 1.0
  */
-public class FileOpenerBean extends BaseFileBean {
+public class FileOpenerBean {
 
 	/** Id */
 	private String id;
