@@ -4,6 +4,7 @@
  ********************************************************/
 
 package com.searchlocal.menu;
+
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -13,48 +14,46 @@ import javax.swing.JFrame;
 public class CFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	
-    protected CFrame parentFrame = null;
 
-    public CFrame() {
-    }
+	protected CFrame parentFrame = null;
 
-    public CFrame(String title) {
-        super(title);
-    }
+	public CFrame() {
+	}
 
-    public void centerWindow() {
-        Dimension screenSize = getToolkit().getScreenSize();
-        Dimension frameSize = getSize();
+	public CFrame(String title) {
+		super(title);
+	}
 
-        int x = (int) ( (screenSize.width - frameSize.width) / 2);
-        int y = (int) ( (screenSize.height - frameSize.height) / 2);
+	public void centerWindow() {
+		Dimension screenSize = getToolkit().getScreenSize();
+		Dimension frameSize = getSize();
 
-        x = (x > 0 ? x : 0);
-        y = (y > 0 ? y : 0);
+		int x = (int) ((screenSize.width - frameSize.width) / 2);
+		int y = (int) ((screenSize.height - frameSize.height) / 2);
 
-        setLocation(x, y);
-    }
+		x = (x > 0 ? x : 0);
+		y = (y > 0 ? y : 0);
 
-    public void printMsg(String msg) {
-    }
+		setLocation(x, y);
+	}
 
-    public void DisplayMsgList(String msg)
-    {
-    	
-    }
+	public void printMsg(String msg) {
+	}
 
-    public void unlockElements() {
-    }
+	public void DisplayMsgList(String msg) {
 
-    protected void onExit() {
-    }
+	}
 
-    public class CWindowListener
-        extends WindowAdapter {
-        public void windowClosing(WindowEvent e) {
-            onExit();
-        }
-    }
+	public void unlockElements() {
+	}
+
+	protected void onExit() {
+	}
+
+	public class CWindowListener extends WindowAdapter {
+		public void windowClosing(WindowEvent e) {
+			onExit();
+		}
+	}
 
 }

@@ -58,10 +58,9 @@ public class AboutFrame extends CFrame implements ActionListener {
 		panel.makeLabel(msg.getMsgbyId(Constant.about_frame_r6), 60, 110, 460, 25);
 		panel.makeLabel(msg.getMsgbyId(Constant.about_frame_r7), 60, 130, 300, 25);
 		panel.makeLabel(msg.getMsgbyId(Constant.about_frame_r8), 60, 150, 300, 25);
-		
+
 		panel.makeLabel(msg.getMsgbyId(Constant.label_homepage), 60, 180, 120, 25);
-		String website = "<html><a href=\"" + websiteurl + "\">"
-		+ websiteurl + "</a></html>";
+		String website = "<html><a href=\"" + websiteurl + "\">" + websiteurl + "</a></html>";
 		JLabel jwebsite = panel.makeLabel(website, 120, 180, 120, 25);
 		jwebsite.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -78,9 +77,9 @@ public class AboutFrame extends CFrame implements ActionListener {
 		panel.makeLabel(msg.getMsgbyId(Constant.label_contact), 60, 200, 120, 25);
 		String group = "<html><a href=mailto:" + mail + ">" + mail + "</a></html>";
 		panel.makeLabel(group, 120, 200, 300, 25);
-		
-		
-		JButton cancelbutton = panel.makeButton(msg.getMsgbyId(Constant.button_close), 220, 260, 70, 20,"");
+
+		JButton cancelbutton = panel.makeButton(msg.getMsgbyId(Constant.button_close), 220, 260,
+				70, 20, "");
 		cancelbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				c.setVisible(false);
@@ -88,14 +87,13 @@ public class AboutFrame extends CFrame implements ActionListener {
 		});
 
 		container.add(panel);
-        this.setSize(510, 350);
+		this.setSize(510, 350);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 	}
 
-	public static void showframe() throws UnsupportedLookAndFeelException,
-			ClassNotFoundException, InstantiationException,
-			IllegalAccessException {
+	public static void showframe() throws UnsupportedLookAndFeelException, ClassNotFoundException,
+			InstantiationException, IllegalAccessException {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
