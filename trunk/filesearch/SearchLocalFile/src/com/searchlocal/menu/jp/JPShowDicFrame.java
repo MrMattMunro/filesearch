@@ -45,18 +45,20 @@ public class JPShowDicFrame extends CFrame implements ActionListener {
 	private static MenuMessageUtil msg = new MenuMessageUtil();
 
 	public static String title_viewDic = msg.getMsgbyId(Constant.title_viewdic);
-	
+
 	public static String checkbox_iscoverdic = msg.getMsgbyId(Constant.checkbox_iscoverdic);
-	
+
 	private static CList dicList;
-	//关键字
+
+	// 关键字
 	private static String keyword = msg.getMsgbyId(Constant.label_keyword);
-	
+
 	// 检索关键字
 	JTextField inputKey = null;
-	//词典列表
-	private Vector words = new Vector();   
-	
+
+	// 词典列表
+	private Vector words = new Vector();
+
 	public JPShowDicFrame() {
 
 		Container container = getContentPane();
@@ -69,28 +71,29 @@ public class JPShowDicFrame extends CFrame implements ActionListener {
 		TitledBorder border = new TitledBorder("");
 		border.setBorder(BorderFactory.createEtchedBorder(Color.orange, Color.BLUE));
 		panel.setBorder(border);
-		
+
 		// 检索关键字
 		panel.makeLabel(keyword, 20, 25, 70, 20);
 		inputKey = panel.makeTextField(90, 25, 140, 22);
-		
+
 		inputKey.getDocument().addDocumentListener(new DocumentListener() {
 			public void changedUpdate(DocumentEvent e) {
 				showSelectedWord();
 			}
+
 			public void insertUpdate(DocumentEvent e) {
 				showSelectedWord();
 			}
+
 			public void removeUpdate(DocumentEvent e) {
 				showSelectedWord();
 			}
 		});
-			
-		
+
 		dicList = panel.makeList(20, 53, 250, 400);
 		String dicfilepath = Constant.dicpath + "custom.dic";
 		File file = new File(dicfilepath);
-		
+
 		try {
 			BufferedReader br = new BufferedReader(new java.io.FileReader(file));
 			String line = br.readLine();
@@ -104,23 +107,23 @@ public class JPShowDicFrame extends CFrame implements ActionListener {
 		}
 
 		dicList.setListData(words);
-		
-		JButton confirmbutton = panel.makeButton(msg.getMsgbyId(Constant.button_close), 110, 470, 70, 20, "");
+
+		JButton confirmbutton = panel.makeButton(msg.getMsgbyId(Constant.button_close), 110, 470,
+				70, 20, "");
 		confirmbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				c.setVisible(false);
 			}
 		});
-	
+
 		container.add(panel);
-        this.setSize(300, 560);
+		this.setSize(300, 560);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 	}
 
-	public static void showframe() throws UnsupportedLookAndFeelException,
-			ClassNotFoundException, InstantiationException,
-			IllegalAccessException {
+	public static void showframe() throws UnsupportedLookAndFeelException, ClassNotFoundException,
+			InstantiationException, IllegalAccessException {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -140,8 +143,8 @@ public class JPShowDicFrame extends CFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 	}
-	
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		try {
 			JPShowDicFrame frame = new JPShowDicFrame();
 			frame.showframe();
@@ -159,24 +162,21 @@ public class JPShowDicFrame extends CFrame implements ActionListener {
 			e.printStackTrace();
 		}
 	}
-	
-	public void showSelectedWord()
-	{
+
+	public void showSelectedWord() {
 		Vector selectwords = new Vector();
 		for (Iterator iterator = words.iterator(); iterator.hasNext();) {
 			String word = (String) iterator.next();
 			String keyword = inputKey.getText();
-			if(word.indexOf(keyword) != -1){
+			if (word.indexOf(keyword) != -1) {
 				selectwords.add(word);
 			}
 		}
 		dicList.setListData(selectwords);
 	}
-	
-	public void displayMsgList(String msg)
-	{
-		if (msg == null)
-		{
+
+	public void displayMsgList(String msg) {
+		if (msg == null) {
 			return;
 		}
 

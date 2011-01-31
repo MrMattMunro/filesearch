@@ -51,7 +51,6 @@ public class JPOptionSetFrame extends CFrame implements ActionListener {
 
 	JTextField iedir = new JTextField(60);
 
-
 	// select word dir
 	JFileChooser worddirchooser = new JFileChooser();
 
@@ -97,8 +96,9 @@ public class JPOptionSetFrame extends CFrame implements ActionListener {
 		panel.makeLabel("IE:   ", 60, 40, 40, 25);
 		iedir = panel.makeTextField(110, 40, 270, 20);
 		iedir.setEditable(false);
-		JButton selectiedirbotton = panel.makeButton(select, 390, 40, 60, 20,"");
-		selectiedirbotton.putClientProperty(SubstanceLookAndFeel.BUTTON_NO_MIN_SIZE_PROPERTY, Boolean.TRUE);
+		JButton selectiedirbotton = panel.makeButton(select, 390, 40, 60, 20, "");
+		selectiedirbotton.putClientProperty(SubstanceLookAndFeel.BUTTON_NO_MIN_SIZE_PROPERTY,
+				Boolean.TRUE);
 		iedirchooser.addChoosableFileFilter(new ExeFilter());
 		selectiedirbotton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -116,8 +116,9 @@ public class JPOptionSetFrame extends CFrame implements ActionListener {
 		panel.makeLabel("WORD: ", 60, 70, 45, 25);
 		worddir = panel.makeTextField(110, 70, 270, 20);
 		worddir.setEditable(false);
-		JButton selectworddirbotton = panel.makeButton(select, 390, 70, 60, 20,"");
-		selectworddirbotton.putClientProperty(SubstanceLookAndFeel.BUTTON_NO_MIN_SIZE_PROPERTY, Boolean.TRUE);
+		JButton selectworddirbotton = panel.makeButton(select, 390, 70, 60, 20, "");
+		selectworddirbotton.putClientProperty(SubstanceLookAndFeel.BUTTON_NO_MIN_SIZE_PROPERTY,
+				Boolean.TRUE);
 		worddirchooser.addChoosableFileFilter(new ExeFilter());
 		selectworddirbotton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -135,10 +136,10 @@ public class JPOptionSetFrame extends CFrame implements ActionListener {
 		panel.makeLabel("EXCEL:", 60, 100, 45, 25);
 		exceldir = panel.makeTextField(110, 100, 270, 20);
 		exceldir.setEditable(false);
-		JButton selectexceldirbotton = panel.makeButton(select, 390, 100, 60, 20,"");
+		JButton selectexceldirbotton = panel.makeButton(select, 390, 100, 60, 20, "");
 		exceldirchooser.addChoosableFileFilter(new ExeFilter());
-		selectexceldirbotton.putClientProperty(
-				SubstanceLookAndFeel.BUTTON_NO_MIN_SIZE_PROPERTY, Boolean.TRUE);
+		selectexceldirbotton.putClientProperty(SubstanceLookAndFeel.BUTTON_NO_MIN_SIZE_PROPERTY,
+				Boolean.TRUE);
 		selectexceldirbotton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO �Զ���ɷ�����?
@@ -155,10 +156,10 @@ public class JPOptionSetFrame extends CFrame implements ActionListener {
 		panel.makeLabel("PPT:  ", 60, 130, 40, 25);
 		pptdir = panel.makeTextField(110, 130, 270, 20);
 		pptdir.setEditable(false);
-		JButton selectpptdirbotton = panel.makeButton(select, 390, 130, 60, 20,"");
+		JButton selectpptdirbotton = panel.makeButton(select, 390, 130, 60, 20, "");
 		pptdirchooser.addChoosableFileFilter(new ExeFilter());
-		selectpptdirbotton.putClientProperty(
-				SubstanceLookAndFeel.BUTTON_NO_MIN_SIZE_PROPERTY, Boolean.TRUE);
+		selectpptdirbotton.putClientProperty(SubstanceLookAndFeel.BUTTON_NO_MIN_SIZE_PROPERTY,
+				Boolean.TRUE);
 		selectpptdirbotton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO �Զ���ɷ�����?
@@ -175,10 +176,10 @@ public class JPOptionSetFrame extends CFrame implements ActionListener {
 		panel.makeLabel("PDF:  ", 60, 160, 40, 25);
 		pdfdir = panel.makeTextField(110, 160, 270, 20);
 		pdfdir.setEditable(false);
-		JButton selectpdfdirbotton = panel.makeButton(select, 390, 160, 60, 20,"");
+		JButton selectpdfdirbotton = panel.makeButton(select, 390, 160, 60, 20, "");
 		pdfdirchooser.addChoosableFileFilter(new ExeFilter());
-		selectpdfdirbotton.putClientProperty(
-				SubstanceLookAndFeel.BUTTON_NO_MIN_SIZE_PROPERTY, Boolean.TRUE);
+		selectpdfdirbotton.putClientProperty(SubstanceLookAndFeel.BUTTON_NO_MIN_SIZE_PROPERTY,
+				Boolean.TRUE);
 		selectpdfdirbotton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO �Զ���ɷ�����?
@@ -190,15 +191,15 @@ public class JPOptionSetFrame extends CFrame implements ActionListener {
 				}
 			}
 		});
-		
+
 		// TXT DIR
 		panel.makeLabel("TXT:  ", 60, 190, 40, 25);
 		txtdir = panel.makeTextField(110, 190, 270, 20);
 		txtdir.setEditable(false);
-		JButton selecttxtdirbotton = panel.makeButton(select, 390, 190, 60, 20,"");
+		JButton selecttxtdirbotton = panel.makeButton(select, 390, 190, 60, 20, "");
 		txtchooser.addChoosableFileFilter(new ExeFilter());
-		selecttxtdirbotton.putClientProperty(
-				SubstanceLookAndFeel.BUTTON_NO_MIN_SIZE_PROPERTY, Boolean.TRUE);
+		selecttxtdirbotton.putClientProperty(SubstanceLookAndFeel.BUTTON_NO_MIN_SIZE_PROPERTY,
+				Boolean.TRUE);
 		selecttxtdirbotton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtchooser.setDialogTitle(filefilterds);
@@ -210,7 +211,8 @@ public class JPOptionSetFrame extends CFrame implements ActionListener {
 			}
 		});
 
-		JButton confirmbutton = panel.makeButton(msg.getMsgbyId(Constant.button_confirm), 150, 230, 80, 20, "");
+		JButton confirmbutton = panel.makeButton(msg.getMsgbyId(Constant.button_confirm), 150, 230,
+				80, 20, "");
 		confirmbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO �Զ���ɷ�����?
@@ -226,7 +228,8 @@ public class JPOptionSetFrame extends CFrame implements ActionListener {
 			}
 		});
 
-		JButton cancelbutton = panel.makeButton(msg.getMsgbyId(Constant.button_cancel), 250, 230, 80, 20,"");
+		JButton cancelbutton = panel.makeButton(msg.getMsgbyId(Constant.button_cancel), 250, 230,
+				80, 20, "");
 		cancelbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				c.setVisible(false);
@@ -255,7 +258,7 @@ public class JPOptionSetFrame extends CFrame implements ActionListener {
 		// ppt path
 		String pptfilepath = officepath + pptexe;
 		setChooser(pptfilepath, pptdirchooser, pptdir);
-		
+
 		// pdf path
 		String pdffilepath = pdfpath + File.separator + pdfexe;
 		setChooser(pdffilepath, pdfdirchooser, pdfdir);
@@ -265,7 +268,7 @@ public class JPOptionSetFrame extends CFrame implements ActionListener {
 				// ie path
 				String iefilepath = driver[i] + iepath;
 				setChooser(iefilepath, iedirchooser, iedir);
-				
+
 				// txt path
 				String txtfilepath = driver[i] + txtpath;
 				setChooser(txtfilepath, txtchooser, txtdir);
@@ -283,34 +286,33 @@ public class JPOptionSetFrame extends CFrame implements ActionListener {
 		String txt = openerUtil.getOpenerbyId("txt");
 		String ie = openerUtil.getOpenerbyId("ie");
 		// 从配置文件里得到
-		if( !StringUtils.isNull(word)){
+		if (!StringUtils.isNull(word)) {
 			setChooser(word, worddirchooser, worddir);
 		}
-		if( !StringUtils.isNull(excel)){
+		if (!StringUtils.isNull(excel)) {
 			setChooser(excel, exceldirchooser, exceldir);
 		}
-		if( !StringUtils.isNull(ppt)){
+		if (!StringUtils.isNull(ppt)) {
 			setChooser(ppt, pptdirchooser, pptdir);
 		}
-		if( !StringUtils.isNull(pdf)){
+		if (!StringUtils.isNull(pdf)) {
 			setChooser(pdf, pdfdirchooser, pdfdir);
 		}
-		if( !StringUtils.isNull(txt)){
+		if (!StringUtils.isNull(txt)) {
 			setChooser(txt, txtchooser, txtdir);
 		}
-		if( !StringUtils.isNull(ie)){
+		if (!StringUtils.isNull(ie)) {
 			setChooser(ie, iedirchooser, iedir);
 		}
-		
+
 		container.add(panel);
 		this.setSize(500, 320);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 	}
 
-	public static void showframe() throws UnsupportedLookAndFeelException,
-			ClassNotFoundException, InstantiationException,
-			IllegalAccessException {
+	public static void showframe() throws UnsupportedLookAndFeelException, ClassNotFoundException,
+			InstantiationException, IllegalAccessException {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -340,7 +342,7 @@ public class JPOptionSetFrame extends CFrame implements ActionListener {
 		}
 	}
 
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		try {
 			JPOptionSetFrame frame = new JPOptionSetFrame();
 			frame.showframe();
@@ -358,10 +360,8 @@ public class JPOptionSetFrame extends CFrame implements ActionListener {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	private void setChooser(String path, JFileChooser fileChooser,
-			JTextField field) {
+
+	private void setChooser(String path, JFileChooser fileChooser, JTextField field) {
 		if (!path.equals("")) {
 			File file = new File(path);
 			if (file.exists()) {

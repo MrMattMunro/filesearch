@@ -61,9 +61,11 @@ public class ENCreateNewFrame extends CFrame implements ActionListener {
 
 	private static MenuMessageUtil msg = new MenuMessageUtil();
 
-	public static String file_chooser_setsearchpath = msg.getMsgbyId(Constant.file_chooser_setsearchpath);
+	public static String file_chooser_setsearchpath = msg
+			.getMsgbyId(Constant.file_chooser_setsearchpath);
 
-	public static String file_chooser_setindexpath = msg.getMsgbyId(Constant.file_chooser_setindexpath);
+	public static String file_chooser_setindexpath = msg
+			.getMsgbyId(Constant.file_chooser_setindexpath);
 
 	public static String search_name = msg.getMsgbyId(Constant.label_searchname);
 
@@ -73,33 +75,42 @@ public class ENCreateNewFrame extends CFrame implements ActionListener {
 
 	// select dir
 	JFileChooser filechooser = new JFileChooser();
+
 	JTextField selectdir = null;
+
 	JTextField selectindexdir = null;
 
 	// selectindex dir
 	JFileChooser fileindexdirchooser = new JFileChooser();
+
 	JButton selectindexdirbotton = new JButton(msg.getMsgbyId(Constant.button_select));
+
 	// checkbox
 	JCheckBox excelcheckbox = null;
+
 	JCheckBox wordcheckbox = null;
+
 	JCheckBox pdfcheckbox = null;
+
 	JCheckBox pptcheckbox = null;
+
 	JCheckBox htmlcheckbox = null;
+
 	JCheckBox txtcheckbox = null;
 
 	public ENCreateNewFrame() {
 		Container container = getContentPane();
 		container.setLayout(null);
 		setTitle(msg.getMsgbyId(Constant.title_createnew));
-		
+
 		CPanel panel = new CPanel();
 		panel.setLayout(null);
 		// panel.setBounds(5, 5, 452, 274);
-	    panel.setBounds(5, 5, 480, 274);
+		panel.setBounds(5, 5, 480, 274);
 		TitledBorder border = new TitledBorder("");
 		border.setBorder(BorderFactory.createEtchedBorder(Color.orange, Color.BLUE));
 		panel.setBorder(border);
-		
+
 		panel.makeLabel(msg.getMsgbyId(Constant.label_searchname), 60, 20, 130, 25);
 		searchnamefield = panel.makeTextField(170, 20, 120, 20);
 		searchnamefield.setEditable(true);
@@ -107,9 +118,11 @@ public class ENCreateNewFrame extends CFrame implements ActionListener {
 		panel.makeLabel(msg.getMsgbyId(Constant.label_searchdir), 60, 55, 120, 25);
 		selectdir = panel.makeTextField(170, 55, 230, 20);
 		selectdir.setEditable(false);
-		JButton selectdirbotton = panel.makeButton(msg.getMsgbyId(Constant.button_select),400, 55, 55, 20,"");
-		selectdirbotton.putClientProperty(SubstanceLookAndFeel.BUTTON_NO_MIN_SIZE_PROPERTY, Boolean.TRUE);
-        selectdirbotton.addActionListener(new ActionListener() {
+		JButton selectdirbotton = panel.makeButton(msg.getMsgbyId(Constant.button_select), 400, 55,
+				55, 20, "");
+		selectdirbotton.putClientProperty(SubstanceLookAndFeel.BUTTON_NO_MIN_SIZE_PROPERTY,
+				Boolean.TRUE);
+		selectdirbotton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				filechooser.setDialogTitle(file_chooser_setsearchpath);
 				filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -124,13 +137,14 @@ public class ENCreateNewFrame extends CFrame implements ActionListener {
 		panel.makeLabel(msg.getMsgbyId(Constant.label_indexdir), 50, 90, 120, 25);
 		selectindexdir = panel.makeTextField(170, 90, 230, 20);
 		selectindexdir.setEditable(false);
-		selectindexdirbotton = panel.makeButton(msg.getMsgbyId(Constant.button_select),400, 90, 55, 20,"");
-		selectindexdirbotton.putClientProperty(SubstanceLookAndFeel.BUTTON_NO_MIN_SIZE_PROPERTY, Boolean.TRUE);
+		selectindexdirbotton = panel.makeButton(msg.getMsgbyId(Constant.button_select), 400, 90,
+				55, 20, "");
+		selectindexdirbotton.putClientProperty(SubstanceLookAndFeel.BUTTON_NO_MIN_SIZE_PROPERTY,
+				Boolean.TRUE);
 		selectindexdirbotton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				fileindexdirchooser.setDialogTitle(file_chooser_setindexpath);
-				fileindexdirchooser
-						.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				fileindexdirchooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				int state = fileindexdirchooser.showOpenDialog(null);
 				File file = fileindexdirchooser.getSelectedFile();
 				if (file != null && state == JFileChooser.APPROVE_OPTION) {
@@ -140,15 +154,16 @@ public class ENCreateNewFrame extends CFrame implements ActionListener {
 		});
 
 		panel.makeLabel(msg.getMsgbyId(Constant.label_doc), 50, 125, 120, 25);
-		
+
 		excelcheckbox = panel.makeCheckbox("excel", 130, 125, 60, 20, "");
 		wordcheckbox = panel.makeCheckbox("word", 185, 125, 60, 20, "");
 		pdfcheckbox = panel.makeCheckbox("pdf", 240, 125, 50, 20, "");
-	    pptcheckbox = panel.makeCheckbox("ppt", 290, 125, 50, 20, "");
-	    htmlcheckbox = panel.makeCheckbox("html", 340, 125, 55, 20, "");
-	    txtcheckbox = panel.makeCheckbox("txt", 390, 125, 50, 20, "");
+		pptcheckbox = panel.makeCheckbox("ppt", 290, 125, 50, 20, "");
+		htmlcheckbox = panel.makeCheckbox("html", 340, 125, 55, 20, "");
+		txtcheckbox = panel.makeCheckbox("txt", 390, 125, 50, 20, "");
 
-		JButton confirmbutton = panel.makeButton(msg.getMsgbyId(Constant.button_confirm), 150, 170, 70, 20, "");
+		JButton confirmbutton = panel.makeButton(msg.getMsgbyId(Constant.button_confirm), 150, 170,
+				70, 20, "");
 		confirmbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SearchlocalApp.startWork(Constant.ToolTipsClassify.TOOLTIPS_CREATINGINDEX);
@@ -162,8 +177,7 @@ public class ENCreateNewFrame extends CFrame implements ActionListener {
 
 				MessageParam mparam = new MessageParam(searchname, search_name);
 				MessageParam dirparam = new MessageParam(dir, search_dir);
-				MessageParam indexpathparam = new MessageParam(indexpath,
-						index_path);
+				MessageParam indexpathparam = new MessageParam(indexpath, index_path);
 
 				paramList.add(mparam);
 				paramList.add(dirparam);
@@ -174,8 +188,7 @@ public class ENCreateNewFrame extends CFrame implements ActionListener {
 				List enetityList = xmler.getEntityList();
 
 				if (MessageFrame.checkListNull(paramList)
-						&& MessageFrame.checkSearcherList(paramList,
-								enetityList)
+						&& MessageFrame.checkSearcherList(paramList, enetityList)
 						&& MessageFrame.checkIsCharatter(mparam)
 						&& MessageFrame.checkIsallNums(mparam)) {
 					if (excelcheckbox.isSelected()) {
@@ -248,23 +261,23 @@ public class ENCreateNewFrame extends CFrame implements ActionListener {
 				}
 			}
 		});
-		
-		JButton cancelbutton = panel.makeButton(msg.getMsgbyId(Constant.button_cancel), 230, 170, 70, 20,"");
+
+		JButton cancelbutton = panel.makeButton(msg.getMsgbyId(Constant.button_cancel), 230, 170,
+				70, 20, "");
 		cancelbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				c.setVisible(false);
 			}
 		});
-	
+
 		container.add(panel);
 		this.setSize(500, 284);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 	}
 
-	public static void showframe() throws UnsupportedLookAndFeelException,
-			ClassNotFoundException, InstantiationException,
-			IllegalAccessException {
+	public static void showframe() throws UnsupportedLookAndFeelException, ClassNotFoundException,
+			InstantiationException, IllegalAccessException {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
