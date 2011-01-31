@@ -38,8 +38,9 @@ public class ChmReader {
 
 	private static List<ChmFileBean> returnList = new ArrayList<ChmFileBean>();
 
-	public List getChmFile(String filepath) throws LogicException {
+	public List<ChmFileBean> getChmFile(ChmFileBean bean) throws LogicException {
 
+		String filepath = bean.getPath();
 		ConstantExeFileUtil.readFile();
 		String exepath = ConstantExeFileUtil.getOpenerbyId("chm");
 		try {
@@ -49,7 +50,7 @@ public class ChmReader {
 		}
 
 		ChmReader reader = new ChmReader();
-		reader.getContent(new File(".\\chmtemp"));
+		reader.getContent(new File(".\\chmtemp"), bean);
 
 		// 删除临时下的文件
 		FileUtil.delFolder(".\\chmtemp\\", false);
@@ -57,13 +58,13 @@ public class ChmReader {
 		return returnList;
 	}
 
-	public static void getContent(File file) throws LogicException {
+	public static void getContent(File file, ChmFileBean bean) throws LogicException {
 
 		if (file.isDirectory()) {
 			File[] files = file.listFiles();
 			if (files != null) {
 				for (int i = 0; i < files.length; i++) {
-					getContent(files[i]);
+					getContent(files[i], bean);
 				}
 			}
 		} else {
@@ -78,8 +79,7 @@ public class ChmReader {
 				BufferedReader reader;
 				try {
 					inputStream = new FileInputStream(filepath);
-					reader = new BufferedReader(new InputStreamReader(
-							inputStream, "UTF-8"));
+					reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
 					String temp = "";
 					while ((temp = reader.readLine()) != null) {
 						sbStr.append(temp);
@@ -87,6 +87,9 @@ public class ChmReader {
 					}
 					reader.close();
 					String result = sbStr.toString();
+					filebean.setFilename(bean.getFilename());
+					filebean.setPath(bean.getPath());
+					filebean.setLastmodify(bean.getLastmodify());
 					filebean.setContent(readTextAndTitle(result));
 					filebean.setCatalogname(filename);
 					returnList.add(filebean);

@@ -36,21 +36,22 @@ public class PptReader {
 		super();
 	}
 
-	public List getPptFile(String pptFilePath) throws LogicException {
+	public List<PptFileBean> getPptFile(PptFileBean pptBean) throws LogicException {
 		List<PptFileBean> pptEntityList = new ArrayList<PptFileBean>();
 		FileInputStream is = null;
+		String pptFilePath = pptBean.getPath();
 		try {
 			is = new FileInputStream(pptFilePath);
 			SlideShow ss;
 			Slide[] slides = null;
 			if (StringUtils.is2007Doc(pptFilePath)) {
-				//将源文件转换成xml格式
+				// 将源文件转换成xml格式
 				XMLSlideShow xmlslideshow = null;
 				try {
 					xmlslideshow = new XMLSlideShow(new XSLFSlideShow(pptFilePath));
-					//根据xml格式的文件得到一个ppt对象
+					// 根据xml格式的文件得到一个ppt对象
 					XSLFPowerPointExtractor ppt = new XSLFPowerPointExtractor(xmlslideshow);
-					return  getBeanList(xmlslideshow.getSlides());
+					return getBeanList(pptBean, xmlslideshow.getSlides());
 				} catch (XmlException e) {
 					// TODO 注意消除资源(关闭I/O等)
 					e.printStackTrace();
@@ -77,6 +78,9 @@ public class PptReader {
 				entity = new PptFileBean();
 				entity.setContent(content.toString());
 				entity.setPage(i);
+				entity.setLastmodify(pptBean.getLastmodify());
+				entity.setPath(pptBean.getPath());
+				entity.setFilename(pptBean.getFilename());
 				pptEntityList.add(entity);
 			}
 		} catch (FileNotFoundException e) {
@@ -98,7 +102,7 @@ public class PptReader {
 		return pptEntityList;
 	}
 
-	public List getBeanList(XSLFSlide[] slides) {
+	public List getBeanList(PptFileBean pptBean, XSLFSlide[] slides) {
 		PptFileBean entity = null;
 		StringBuffer content = null;
 		List beanList = new ArrayList();
@@ -121,6 +125,9 @@ public class PptReader {
 					}
 				}
 			}
+			entity.setLastmodify(pptBean.getLastmodify());
+			entity.setPath(pptBean.getPath());
+			entity.setFilename(pptBean.getFilename());
 			entity.setContent(content.toString());
 			entity.setPage(i);
 			beanList.add(entity);

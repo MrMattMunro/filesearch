@@ -17,8 +17,7 @@ public class ConnectionParam implements Serializable {
 
 	private String password; // ?
 
-	public ConnectionParam(String driver, String url, String user,
-			String password) {
+	public ConnectionParam(String driver, String url, String user, String password) {
 		this.driver = driver;
 		this.url = url;
 		this.user = user;
