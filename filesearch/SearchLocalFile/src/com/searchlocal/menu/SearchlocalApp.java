@@ -23,6 +23,8 @@ import snoozesoft.systray4j.SysTrayMenuItem;
 import snoozesoft.systray4j.SysTrayMenuListener;
 
 import com.searchlocal.constants.Constant;
+import com.searchlocal.exception.DBException;
+import com.searchlocal.exception.LogicException;
 import com.searchlocal.menu.en.ENAboutFrame;
 import com.searchlocal.menu.en.ENAddDicFrame;
 import com.searchlocal.menu.en.ENCreateNewFrame;
@@ -34,6 +36,7 @@ import com.searchlocal.menu.jp.JPCreateNewFrame;
 import com.searchlocal.menu.jp.JPModifyFrame;
 import com.searchlocal.menu.jp.JPOptionSetFrame;
 import com.searchlocal.param.CreateNewParam;
+import com.searchlocal.service.BaseService;
 import com.searchlocal.thread.FileContainer;
 import com.searchlocal.thread.SearchFile;
 import com.searchlocal.thread.concurrent.ConcurrentFileCore;
@@ -46,7 +49,7 @@ import com.searchlocal.util.RegistTableUtil;
 import com.searchlocal.util.StringUtils;
 import com.searchlocal.util.XMLConfig;
 
-public class  SearchlocalApp implements ActionListener, SysTrayMenuListener {
+public class SearchlocalApp implements ActionListener, SysTrayMenuListener {
 
 	private static String url = "http://localhost:6666/slfile/load";
 
@@ -56,127 +59,151 @@ public class  SearchlocalApp implements ActionListener, SysTrayMenuListener {
 
 	private static MenuMessageUtil msg = new MenuMessageUtil();
 
-	private static List searches;
+	private static List<CreateNewParam> searches;
 
 	private static SysTrayMenuIcon icos;
 
 	private static SubMenu createdsearch;
 
 	private static int currentIndexIcon;
-	
-	private static int stoolTipsIndex;
-	
-	private static Map paramMap = new HashMap();
-	
-	//图标列表，两个图标是为了图标切换（闪烁）
-	// create icons
-	static final SysTrayMenuIcon[] searchicos = {
-			new SysTrayMenuIcon("icos/search"),
-			new SysTrayMenuIcon("icos/1"),
-			new SysTrayMenuIcon("icos/2"),
-			new SysTrayMenuIcon("icos/3"),
-			new SysTrayMenuIcon("icos/4")};
 
-    static class ChangeIcoTask extends java.util.TimerTask {
+	private static int stoolTipsIndex;
+
+	private static Map<String, String> paramMap = new HashMap<String, String>();
+
+	// 图标列表，两个图标是为了图标切换（闪烁）
+	// create icons
+	static final SysTrayMenuIcon[] searchicos = { new SysTrayMenuIcon("icos/search"),
+			new SysTrayMenuIcon("icos/1"), new SysTrayMenuIcon("icos/2"),
+			new SysTrayMenuIcon("icos/3"), new SysTrayMenuIcon("icos/4") };
+
+	static class ChangeIcoTask extends java.util.TimerTask {
 		public void run() {
 			currentIndexIcon = currentIndexIcon + 1;
 			if (currentIndexIcon == 5) {
 				currentIndexIcon = 1;
 			}
 			menu.setIcon(searchicos[currentIndexIcon]);
-			
+
 			FileContainer filecon = SearchFile.getFilecon();
-			if(null != filecon){
-				changeToolTips(stoolTipsIndex,  filecon.getInsertedfileNum());
+			if (null != filecon) {
+				changeToolTips(stoolTipsIndex, filecon.getInsertedfileNum());
 			}
 		}
-	} 
-	   
-    private static Timer timer = null;
+	}
+
+	private static Timer timer = null;
+
 	private static void changeIcos() {
 		timer = new Timer();
 		timer.schedule(new ChangeIcoTask(), 100, 500);
 	}
-	
+
 	public static void startWork(int toolTipsIndex) {
 		stoolTipsIndex = toolTipsIndex;
 		changeIcos();
 	}
-	
+
 	public static void completeWork() {
-	    if(timer != null){
-	    	timer.cancel();
-	    }
-		FileContainer filecon = SearchFile.getFilecon();
-		if(null != filecon){
-			changeToolTips(Constant.ToolTipsClassify.TOOLTIPS_LOCALSEARCH,  SearchFile.getFilecon().getInsertedfileNum());
+		if (timer != null) {
+			timer.cancel();
 		}
-	    menu.setIcon(searchicos[0]);
+		FileContainer filecon = SearchFile.getFilecon();
+		if (null != filecon) {
+			changeToolTips(Constant.ToolTipsClassify.TOOLTIPS_LOCALSEARCH, SearchFile.getFilecon()
+					.getInsertedfileNum());
+		}
+		menu.setIcon(searchicos[0]);
 	}
 
 	private static void changeToolTips(int toolTipsIndex, int num) {
 		stoolTipsIndex = toolTipsIndex;
 		paramMap.put("num", String.valueOf(num));
 		String toolmsg = "";
-		if(stoolTipsIndex == Constant.ToolTipsClassify.TOOLTIPS_CREATINGINDEX){
-			toolmsg = StringUtils.convertParamStr(msg.getMsgbyId(Constant.searchapp_creatingindex), paramMap);
+		if (stoolTipsIndex == Constant.ToolTipsClassify.TOOLTIPS_CREATINGINDEX) {
+			toolmsg = StringUtils.convertParamStr(msg.getMsgbyId(Constant.searchapp_creatingindex),
+					paramMap);
 		}
-		if(stoolTipsIndex == Constant.ToolTipsClassify.TOOLTIPS_UPDATINGINDEX){
-			toolmsg = StringUtils.convertParamStr(msg.getMsgbyId(Constant.searchapp_updatingindex), paramMap);
+		if (stoolTipsIndex == Constant.ToolTipsClassify.TOOLTIPS_UPDATINGINDEX) {
+			toolmsg = StringUtils.convertParamStr(msg.getMsgbyId(Constant.searchapp_updatingindex),
+					paramMap);
 		}
-		if(stoolTipsIndex == Constant.ToolTipsClassify.TOOLTIPS_DELETINGINDEX){
-			toolmsg = StringUtils.convertParamStr(msg.getMsgbyId(Constant.searchapp_deletingindex), paramMap);
+		if (stoolTipsIndex == Constant.ToolTipsClassify.TOOLTIPS_DELETINGINDEX) {
+			toolmsg = StringUtils.convertParamStr(msg.getMsgbyId(Constant.searchapp_deletingindex),
+					paramMap);
 		}
-		if(stoolTipsIndex == Constant.ToolTipsClassify.TOOLTIPS_LOCALSEARCH){
+		if (stoolTipsIndex == Constant.ToolTipsClassify.TOOLTIPS_LOCALSEARCH) {
 			toolmsg = msg.getMsgbyId(Constant.searchapp_localsearch);
 		}
-		
+
 		menu.setToolTip(toolmsg);
 	}
 
 	public SearchlocalApp() {
-
 		frame = new JFrame(msg.getMsgbyId(Constant.searchapp_title));
-
 		frame.setSize(400, 300);
 		icos = searchicos[0];
-
 		menu = new SysTrayMenu(icos, msg.getMsgbyId(Constant.searchapp_localsearch));
 		createMenu();
-
+		
 		new ConstantExeFileUtil();
-
 		icos.addSysTrayMenuListener(this);
-		//把图标加入监听，这样就可以有左键监听了
+		// 把图标加入监听，这样就可以有左键监听了
 		searchicos[0].addSysTrayMenuListener(this);
 		searchicos[1].addSysTrayMenuListener(this);
-		
+
 		// 开始复制jcom.dll到JDK目录
 		copydll();
-
+		// 建立共同信息数据库
+		createCommonDb();
 		ConcurrentFileCore.listen();
+	}
+
+	/**
+	 * 建立共同信息数据库
+	 */
+	static void createCommonDb() {
+		BaseService baseService = new BaseService();
+		boolean isDbExisted = false;
+		try {
+			isDbExisted = baseService.createDataBase(Constant.CommonInfo.DATABASE);
+		} catch (DBException e) {
+			// TODO 注意消除资源(关闭I/O等)
+			e.printStackTrace();
+		} catch (LogicException e) {
+			// TODO 注意消除资源(关闭I/O等)
+			e.printStackTrace();
+		}
+		// 如果已经存在COMMONINFO数据库，则返回
+		if(!isDbExisted){
+			return;
+		}
+		
+		// 创建 T_SEARCHER表, T_FILEOPENER表，T_RESULT表
+		
+		
 	}
 
 	/**
 	 * 将jcom.dll复制到Jre的Bin目录下
 	 */
 	static void copydll() {
+
 		// 取得目的文件
 		String jdkpath = RegistTableUtil.getJavaInstallRoot();
-		jdkpath = jdkpath + File.separator+ "bin";
-		String jcomfile = jdkpath + File.separator+ Constant.jcomdll;
-	
+		jdkpath = jdkpath + File.separator + "bin";
+		String jcomfile = jdkpath + File.separator + Constant.jcomdll;
+
 		File file = new File(jcomfile);
+		// 预览功能用DLL
 		// 文件不存在的情况下
-		if(!file.exists()){
+		if (!file.exists()) {
 			// 取得原文件
-			String orgjcomfile =  Constant.lib_path + Constant.jcomdll;
-			System.out.println("file:::" + file.getAbsolutePath());
-		    System.out.println("orgjcomfile:::" + orgjcomfile);
+			String orgjcomfile = Constant.lib_path + Constant.jcomdll;
 			FileUtil.copyFile(new File(orgjcomfile), file);
 		}
 	}
-	
+
 	/**
 	 * 生成菜单
 	 */
@@ -186,43 +213,41 @@ public class  SearchlocalApp implements ActionListener, SysTrayMenuListener {
 
 		XMLConfig xmlconfig = new XMLConfig();
 		searches = xmlconfig.getEntityList();
-		for (Iterator iter = searches.iterator(); iter.hasNext();) {
+		for (Iterator<CreateNewParam> iter = searches.iterator(); iter.hasNext();) {
 			CreateNewParam element = (CreateNewParam) iter.next();
-			SysTrayMenuItem item = new SysTrayMenuItem(element.getSearchname(),
-					element.getSearchname());
+			SysTrayMenuItem item = new SysTrayMenuItem(element.getSearchname(), element
+					.getSearchname());
 			item.addSysTrayMenuListener(this);
 			items.add(item);
 		}
 
 		// 新建
-		createdsearch = new SubMenu(
-				msg.getMsgbyId(Constant.menu_createdsearch), items);
+		createdsearch = new SubMenu(msg.getMsgbyId(Constant.menu_createdsearch), items);
 		SysTrayMenuItem creatsearch = new SysTrayMenuItem(msg
-				.getMsgbyId(Constant.menu_createsearch),
-				Constant.MenuName.CREATESEARCH);
+				.getMsgbyId(Constant.menu_createsearch), Constant.MenuName.CREATESEARCH);
 		creatsearch.addSysTrayMenuListener(this);
-		SysTrayMenuItem option = new SysTrayMenuItem(msg
-				.getMsgbyId(Constant.menu_option), Constant.MenuName.OPTION);
+		SysTrayMenuItem option = new SysTrayMenuItem(msg.getMsgbyId(Constant.menu_option),
+				Constant.MenuName.OPTION);
 		option.addSysTrayMenuListener(this);
 
 		// 自定义词典
-		SysTrayMenuItem adddic = new SysTrayMenuItem(msg
-				.getMsgbyId(Constant.menu_customdic), Constant.MenuName.ADDDIC);
+		SysTrayMenuItem adddic = new SysTrayMenuItem(msg.getMsgbyId(Constant.menu_customdic),
+				Constant.MenuName.ADDDIC);
 		adddic.addSysTrayMenuListener(this);
 
 		// 关于
-		SysTrayMenuItem about = new SysTrayMenuItem(msg
-				.getMsgbyId(Constant.menu_about), Constant.MenuName.ABOUT);
+		SysTrayMenuItem about = new SysTrayMenuItem(msg.getMsgbyId(Constant.menu_about),
+				Constant.MenuName.ABOUT);
 		about.addSysTrayMenuListener(this);
-		
+
 		// 帮助
-		SysTrayMenuItem help = new SysTrayMenuItem(msg
-				.getMsgbyId(Constant.menu_help), Constant.MenuName.HELP);
+		SysTrayMenuItem help = new SysTrayMenuItem(msg.getMsgbyId(Constant.menu_help),
+				Constant.MenuName.HELP);
 		help.addSysTrayMenuListener(this);
 
 		// 退出
-		SysTrayMenuItem exit = new SysTrayMenuItem(msg
-				.getMsgbyId(Constant.menu_exit), Constant.MenuName.EXIT);
+		SysTrayMenuItem exit = new SysTrayMenuItem(msg.getMsgbyId(Constant.menu_exit),
+				Constant.MenuName.EXIT);
 		exit.addSysTrayMenuListener(this);
 
 		// 加入Menu
@@ -267,11 +292,12 @@ public class  SearchlocalApp implements ActionListener, SysTrayMenuListener {
 	 */
 	public void menuItemSelected(SysTrayMenuEvent sme) {
 		try {
-//			if (!CheckLincese.checkLincese() && !sme.getActionCommand().equals(Constant.MenuName.EXIT)) {
-//				String errormsg = msg.getMsgbyId(Constant.errors_lincese);
-//				MessageFrame.showmessage(errormsg);
-//				return;
-//			}
+			// if (!CheckLincese.checkLincese() &&
+			// !sme.getActionCommand().equals(Constant.MenuName.EXIT)) {
+			// String errormsg = msg.getMsgbyId(Constant.errors_lincese);
+			// MessageFrame.showmessage(errormsg);
+			// return;
+			// }
 			// 取得当前电脑的区域
 			Locale local = Locale.getDefault();
 			String languagep = local.getLanguage();
@@ -286,15 +312,15 @@ public class  SearchlocalApp implements ActionListener, SysTrayMenuListener {
 			for (Iterator iter = searches.iterator(); iter.hasNext();) {
 				CreateNewParam element = (CreateNewParam) iter.next();
 				if (sme.getActionCommand().equals(element.getSearchname())) {
-					if(language.equals(Constant.LanguageClassify.JAPANESE)){
+					if (language.equals(Constant.LanguageClassify.JAPANESE)) {
 						JPModifyFrame jpmodifyframe = new JPModifyFrame(element);
 						jpmodifyframe.showfame();
 					}
-					if(language.equals(Constant.LanguageClassify.ENGLISH)){
+					if (language.equals(Constant.LanguageClassify.ENGLISH)) {
 						ENModifyFrame enmodifyframe = new ENModifyFrame(element);
 						enmodifyframe.showfame();
 					}
-					if(language.equals(Constant.LanguageClassify.CHINESE)){
+					if (language.equals(Constant.LanguageClassify.CHINESE)) {
 						ModifyFrame modifyframe = new ModifyFrame(element);
 						modifyframe.showfame();
 					}
@@ -304,60 +330,60 @@ public class  SearchlocalApp implements ActionListener, SysTrayMenuListener {
 				CourseUtil.shutdown();
 				System.exit(0);
 			} else if (sme.getActionCommand().equals(Constant.MenuName.CREATESEARCH)) {
-				if(language.equals(Constant.LanguageClassify.JAPANESE)){
+				if (language.equals(Constant.LanguageClassify.JAPANESE)) {
 					JPCreateNewFrame.showframe();
 				}
-				if(language.equals(Constant.LanguageClassify.ENGLISH)){
+				if (language.equals(Constant.LanguageClassify.ENGLISH)) {
 					ENCreateNewFrame.showframe();
 				}
-				if(language.equals(Constant.LanguageClassify.CHINESE)){
+				if (language.equals(Constant.LanguageClassify.CHINESE)) {
 					CreateNewFrame.showframe();
 				}
 			} else if (sme.getActionCommand().equals(Constant.MenuName.OPTION)) {
-				if(language.equals(Constant.LanguageClassify.JAPANESE)){
+				if (language.equals(Constant.LanguageClassify.JAPANESE)) {
 					JPOptionSetFrame.showframe();
 				}
-				if(language.equals(Constant.LanguageClassify.ENGLISH)){
+				if (language.equals(Constant.LanguageClassify.ENGLISH)) {
 					ENOptionSetFrame.showframe();
 				}
-				if(language.equals(Constant.LanguageClassify.CHINESE)){
+				if (language.equals(Constant.LanguageClassify.CHINESE)) {
 					OptionSetFrame.showframe();
 				}
 			} else if (sme.getActionCommand().equals(Constant.MenuName.ADDDIC)) {
-				if(language.equals(Constant.LanguageClassify.JAPANESE)){
+				if (language.equals(Constant.LanguageClassify.JAPANESE)) {
 					JPAddDicFrame.showframe();
 				}
-				if(language.equals(Constant.LanguageClassify.ENGLISH)){
+				if (language.equals(Constant.LanguageClassify.ENGLISH)) {
 					ENAddDicFrame.showframe();
 				}
-				if(language.equals(Constant.LanguageClassify.CHINESE)){
+				if (language.equals(Constant.LanguageClassify.CHINESE)) {
 					AddDicFrame.showframe();
 				}
 			} else if (sme.getActionCommand().equals(Constant.MenuName.ABOUT)) {
-				if(language.equals(Constant.LanguageClassify.JAPANESE)){
+				if (language.equals(Constant.LanguageClassify.JAPANESE)) {
 					JPAboutFrame.showframe();
 				}
-				if(language.equals(Constant.LanguageClassify.ENGLISH)){
+				if (language.equals(Constant.LanguageClassify.ENGLISH)) {
 					ENAboutFrame.showframe();
 				}
-				if(language.equals(Constant.LanguageClassify.CHINESE)){
+				if (language.equals(Constant.LanguageClassify.CHINESE)) {
 					AboutFrame.showframe();
 				}
 			} else if (sme.getActionCommand().equals(Constant.MenuName.HELP)) {
 				try {
 					ConstantExeFileUtil.readFile();
 					String exepath = ConstantExeFileUtil.getOpenerbyId("chm");
-					if(language.equals(Constant.LanguageClassify.JAPANESE)){
+					if (language.equals(Constant.LanguageClassify.JAPANESE)) {
 						String filepath = Constant.datapath + "help//Help_jp.chm";
-						//filepath = filepath.substring(1);
+						// filepath = filepath.substring(1);
 						Runtime.getRuntime().exec(exepath + " " + filepath);
 					}
-					if(language.equals(Constant.LanguageClassify.ENGLISH)){
+					if (language.equals(Constant.LanguageClassify.ENGLISH)) {
 						String filepath = Constant.datapath + "help//Help_en.chm";
 						filepath = filepath.substring(1);
 						Runtime.getRuntime().exec(exepath + " " + filepath);
 					}
-					if(language.equals(Constant.LanguageClassify.CHINESE)){
+					if (language.equals(Constant.LanguageClassify.CHINESE)) {
 						String filepath = Constant.datapath + "help//Help_cn.chm";
 						filepath = filepath.substring(1);
 						Runtime.getRuntime().exec(exepath + " " + filepath);
@@ -380,7 +406,6 @@ public class  SearchlocalApp implements ActionListener, SysTrayMenuListener {
 	}
 
 	public static void main(String args[]) {
-		 new SearchlocalApp();
-		// copydll();
+		new SearchlocalApp();
 	}
 }

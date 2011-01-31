@@ -42,30 +42,34 @@ public class AddDicFrame extends CFrame implements ActionListener {
 
 	public static String title_adddic = msg.getMsgbyId(Constant.title_adddic);
 
-	public static String file_chooser_selectdicpath = msg.getMsgbyId(Constant.file_chooser_selectdicpath);
+	public static String file_chooser_selectdicpath = msg
+			.getMsgbyId(Constant.file_chooser_selectdicpath);
 
 	public static String label_dic_file = msg.getMsgbyId(Constant.label_dicfilename);
 
 	public static String label_dic_note_r1 = msg.getMsgbyId(Constant.label_dic_note_r1);
-	
+
 	public static String label_dic_note_r2 = msg.getMsgbyId(Constant.label_dic_note_r2);
-	
+
 	public static String checkbox_iscoverdic = msg.getMsgbyId(Constant.checkbox_iscoverdic);
-	
+
 	public static String infonodic = msg.getMsgbyId(Constant.info_nodic);
-	
+
 	// select dir
 	JFileChooser filechooser = new JFileChooser();
+
 	JTextField selectdir = null;
+
 	JTextField selectindexdir = null;
 
 	// selectindex dir
 	JFileChooser dicfilechooser = new JFileChooser();
+
 	JButton selectdicfilebotton = null;
-	
+
 	// selectindex dir
 	JButton viewdicbotton = null;
-	
+
 	// checkbox
 	JCheckBox coverdiccheckbox = null;
 
@@ -81,18 +85,20 @@ public class AddDicFrame extends CFrame implements ActionListener {
 		TitledBorder border = new TitledBorder("");
 		border.setBorder(BorderFactory.createEtchedBorder(Color.orange, Color.BLUE));
 		panel.setBorder(border);
-		
+
 		panel.makeLabel(label_dic_note_r1, 29, 10, 350, 50);
 		panel.makeLabel(label_dic_note_r2, 29, 30, 350, 50);
-		
+
 		panel.makeLabel(label_dic_file, 32, 80, 120, 25);
 		selectdir = panel.makeTextField(150, 80, 240, 20);
 		selectdir.setEditable(false);
 
-		JButton selectdirbotton = panel.makeButton(msg.getMsgbyId(Constant.button_select),400, 80, 42, 20,"");
-		selectdirbotton.putClientProperty(SubstanceLookAndFeel.BUTTON_NO_MIN_SIZE_PROPERTY, Boolean.TRUE);
+		JButton selectdirbotton = panel.makeButton(msg.getMsgbyId(Constant.button_select), 400, 80,
+				42, 20, "");
+		selectdirbotton.putClientProperty(SubstanceLookAndFeel.BUTTON_NO_MIN_SIZE_PROPERTY,
+				Boolean.TRUE);
 
-        selectdirbotton.addActionListener(new ActionListener() {
+		selectdirbotton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				filechooser.setDialogTitle(file_chooser_selectdicpath);
 				filechooser.addChoosableFileFilter(new DicFilter());
@@ -105,39 +111,41 @@ public class AddDicFrame extends CFrame implements ActionListener {
 			}
 		});
 
-        coverdiccheckbox = panel.makeCheckbox(checkbox_iscoverdic, 29, 115, 180, 20, "");
+		coverdiccheckbox = panel.makeCheckbox(checkbox_iscoverdic, 29, 115, 180, 20, "");
 		// 查看字典按钮
-		viewdicbotton = panel.makeButton(msg.getMsgbyId(Constant.button_viedic), 210, 115, 100, 20,"");
+		viewdicbotton = panel.makeButton(msg.getMsgbyId(Constant.button_viedic), 210, 115, 100, 20,
+				"");
 		viewdicbotton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				   String dicfilepath = Constant.dicpath + "custom.dic";
-				   File file = new File(dicfilepath);
-				   if(!file.exists()){
-					    String errormsg = msg.getMsgbyId(Constant.errors_dicnotexisted);
-					    MessageFrame.showmessage(errormsg);
-					    return;
-				   }
-					ShowDicFrame viewDic = new ShowDicFrame();
-					try {
-						viewDic.showframe();
-					} catch (UnsupportedLookAndFeelException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (ClassNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (InstantiationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (IllegalAccessException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+				String dicfilepath = Constant.dicpath + "custom.dic";
+				File file = new File(dicfilepath);
+				if (!file.exists()) {
+					String errormsg = msg.getMsgbyId(Constant.errors_dicnotexisted);
+					MessageFrame.showmessage(errormsg);
+					return;
+				}
+				ShowDicFrame viewDic = new ShowDicFrame();
+				try {
+					viewDic.showframe();
+				} catch (UnsupportedLookAndFeelException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (InstantiationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IllegalAccessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
-		
-        // 确认
-		JButton confirmbutton = panel.makeButton(msg.getMsgbyId(Constant.button_confirm), 170, 160, 50, 20, "");
+
+		// 确认
+		JButton confirmbutton = panel.makeButton(msg.getMsgbyId(Constant.button_confirm), 170, 160,
+				50, 20, "");
 		confirmbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SearchlocalApp.startWork(Constant.ToolTipsClassify.TOOLTIPS_UPDATINGINDEX);
@@ -160,67 +168,67 @@ public class AddDicFrame extends CFrame implements ActionListener {
 						}
 						appendDic(suffixname, filepath, dicfilepath);
 					}
-					
-					//删除字典文件里空行
+
+					// 删除字典文件里空行
 					FileUtil.deleteNullLine(dicfilepath);
 
 					// 删除已经编译后的词典
 					FileUtil.delFolder(Constant.diccompilepath, false);
 
 					c.setVisible(false);
-					//增加了词库需要所有都需要重新建索引
-					if(ReCreateIndex.listen()){
-						SearchlocalApp.completeWork();	
+					// 增加了词库需要所有都需要重新建索引
+					if (ReCreateIndex.listen()) {
+						SearchlocalApp.completeWork();
 					}
-			
+
 					String completeemsg = msg.getMsgbyId(Constant.info_updatedindex);
 					MessageFrame.showmessage(completeemsg);
 				}
 			}
 		});
-		
+
 		// 取消按钮
-		JButton cancelbutton = panel.makeButton(msg.getMsgbyId(Constant.button_cancel), 230, 160, 50, 20,"");
+		JButton cancelbutton = panel.makeButton(msg.getMsgbyId(Constant.button_cancel), 230, 160,
+				50, 20, "");
 		cancelbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				c.setVisible(false);
 			}
 		});
-	
+
 		container.add(panel);
-        this.setSize(462, 284);
+		this.setSize(462, 284);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 	}
 
-	public static void showframe() throws UnsupportedLookAndFeelException,
-			ClassNotFoundException, InstantiationException{
-		
+	public static void showframe() throws UnsupportedLookAndFeelException, ClassNotFoundException,
+			InstantiationException {
 
-		    JFrame.setDefaultLookAndFeelDecorated(true);
-			SwingUtilities.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						UIManager.setLookAndFeel(new SubstanceBusinessBlackSteelLookAndFeel());
-					} catch (UnsupportedLookAndFeelException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					c = new AddDicFrame();
-					c.setIconImage(Toolkit.getDefaultToolkit().getImage(Constant.titleicopath));
-					c.setVisible(true);
+		JFrame.setDefaultLookAndFeelDecorated(true);
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					UIManager.setLookAndFeel(new SubstanceBusinessBlackSteelLookAndFeel());
+				} catch (UnsupportedLookAndFeelException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			});
-			
+				c = new AddDicFrame();
+				c.setIconImage(Toolkit.getDefaultToolkit().getImage(Constant.titleicopath));
+				c.setVisible(true);
+			}
+		});
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
 
 	}
-	
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		try {
-			
+
 			AddDicFrame frame = new AddDicFrame();
 			frame.showframe();
 		} catch (UnsupportedLookAndFeelException e) {
@@ -232,7 +240,7 @@ public class AddDicFrame extends CFrame implements ActionListener {
 		} catch (InstantiationException e) {
 			// TODO 自动生成 catch 部分
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	private void createDic(String suffixname, String filepath, String dicfilepath) {
@@ -242,12 +250,13 @@ public class AddDicFrame extends CFrame implements ActionListener {
 			FileUtil.copyFile(txtfile, new File(dicfilepath));
 		}
 		// 当是xls文件时
-		if (suffixname.endsWith(Constant.FileClassify.XLS) || suffixname.endsWith(Constant.FileClassify.XLS2007)) {
+		if (suffixname.endsWith(Constant.FileClassify.XLS)
+				|| suffixname.endsWith(Constant.FileClassify.XLS2007)) {
 			File excelfile = new File(filepath);
 			ExcelToDicReader.getExcelFile(excelfile, new File(dicfilepath));
 		}
 	}
-	
+
 	private void appendDic(String suffixname, String filepath, String dicfilepath) {
 		String temp = "";
 		// 当是文本文件时
@@ -255,7 +264,8 @@ public class AddDicFrame extends CFrame implements ActionListener {
 			temp = FileUtil.readText(filepath);
 		}
 		// 当是xls文件时
-		if (suffixname.endsWith(Constant.FileClassify.XLS) || suffixname.endsWith(Constant.FileClassify.XLS2007)) {
+		if (suffixname.endsWith(Constant.FileClassify.XLS)
+				|| suffixname.endsWith(Constant.FileClassify.XLS2007)) {
 			temp = ExcelToDicReader.getExcelContent(new File(filepath));
 		}
 		FileUtil.appendText(dicfilepath, temp);
@@ -264,7 +274,8 @@ public class AddDicFrame extends CFrame implements ActionListener {
 	class DicFilter extends FileFilter {
 		public boolean accept(File file) {
 			String filename = file.getName().toLowerCase();
-			return filename.endsWith(".xlsx") || filename.endsWith(".xls") ||filename.endsWith(".txt") || file.isDirectory();
+			return filename.endsWith(".xlsx") || filename.endsWith(".xls")
+					|| filename.endsWith(".txt") || file.isDirectory();
 		}
 
 		public String getDescription() {

@@ -33,6 +33,7 @@ import com.searchlocal.util.ConstantExeFileUtil;
 import com.searchlocal.util.CourseUtil;
 import com.searchlocal.util.FileUtil;
 import com.searchlocal.util.MenuMessageUtil;
+import com.searchlocal.util.WinMsgUtil;
 import com.searchlocal.util.XMLConfig;
 
 public class ModifyFrame extends CFrame implements ActionListener {
@@ -79,13 +80,13 @@ public class ModifyFrame extends CFrame implements ActionListener {
 		TitledBorder border = new TitledBorder("");
 		border.setBorder(BorderFactory.createEtchedBorder(Color.orange, Color.BLUE));
 		panel.setBorder(border);
-		
+
 		panel.makeLabel(msg.getMsgbyId(Constant.label_searchname), 60, 10, 120, 25);
 		panel.makeLabel(element.getSearchname(), 130, 10, 120, 25);
 
 		panel.makeLabel(msg.getMsgbyId(Constant.label_searchdir), 60, 50, 120, 25);
 		panel.makeLabel(element.getPath(), 130, 50, 120, 25);
-		
+
 		panel.makeLabel(msg.getMsgbyId(Constant.label_indexdir), 60, 90, 120, 25);
 		panel.makeLabel(element.getIdexpath(), 140, 90, 120, 25);
 
@@ -93,11 +94,11 @@ public class ModifyFrame extends CFrame implements ActionListener {
 		excelcheckbox = panel.makeCheckbox("excel", 140, 130, 60, 20, "");
 		wordcheckbox = panel.makeCheckbox("word", 200, 130, 60, 20, "");
 		pdfcheckbox = panel.makeCheckbox("pdf", 260, 130, 50, 20, "");
-	    pptcheckbox = panel.makeCheckbox("ppt", 310, 130, 50, 20, "");
-	    htmlcheckbox = panel.makeCheckbox("html", 360, 130, 55, 20, "");
-	    
-	    txtcheckbox = panel.makeCheckbox("txt", 140, 150, 50, 20, "");
-	    chmcheckbox = panel.makeCheckbox("chm", 190, 150, 60, 20, "");
+		pptcheckbox = panel.makeCheckbox("ppt", 310, 130, 50, 20, "");
+		htmlcheckbox = panel.makeCheckbox("html", 360, 130, 55, 20, "");
+
+		txtcheckbox = panel.makeCheckbox("txt", 140, 150, 50, 20, "");
+		chmcheckbox = panel.makeCheckbox("chm", 190, 150, 60, 20, "");
 
 		List selectList = this.element.getSelectfiletype();
 		for (Object object : selectList) {
@@ -137,18 +138,19 @@ public class ModifyFrame extends CFrame implements ActionListener {
 				chmcheckbox.setEnabled(false);
 			}
 		}
-		
-		JButton confirmbutton = panel.makeButton(msg.getMsgbyId(Constant.button_confirm), 120, 190, 70, 20, "");
+
+		JButton confirmbutton = panel.makeButton(msg.getMsgbyId(Constant.button_confirm), 120, 190,
+				70, 20, "");
 		confirmbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SearchlocalApp.startWork(Constant.ToolTipsClassify.TOOLTIPS_UPDATINGINDEX);
-				
+
 				CreateNewParam param = new CreateNewParam();
 				String indexpath = element.getIdexpath();
 				List<String> selectfiletype = new ArrayList<String>();
 
 				MessageParam indexpathparam = new MessageParam(indexpath, indexpaxth);
-				
+
 				List existedsearchTypeList = new ArrayList(element.getSelectfiletype());
 
 				if (MessageFrame.checkNull(indexpathparam)) {
@@ -184,9 +186,9 @@ public class ModifyFrame extends CFrame implements ActionListener {
 
 					SearchFile searchFile = new SearchFile();
 					searchFile.listen(param);
-					
+
 					c.setVisible(false);
-					
+
 					while (true) {
 						ThreadUtil.sleep(2000);
 						if (CheckThreadPoolTask.isIsdone()) {
@@ -199,6 +201,8 @@ public class ModifyFrame extends CFrame implements ActionListener {
 							existedsearchTypeList.addAll(param.getSelectfiletype());
 							param.setSelectfiletype(existedsearchTypeList);
 							xmler.writeXML(param);
+							// 通知slFileSearch服务重新加载Searcher.xml文件
+							WinMsgUtil.notifyMsg();
 							
 							SearchlocalApp.completeWork();
 							String slfile = ConstantExeFileUtil.getOpenerbyId("slfile");
@@ -209,10 +213,10 @@ public class ModifyFrame extends CFrame implements ActionListener {
 				}
 			}
 		});
-		
 
-		JButton deletebutton = panel.makeButton(msg.getMsgbyId(Constant.button_delete), 200, 190, 70, 20, "");
-		
+		JButton deletebutton = panel.makeButton(msg.getMsgbyId(Constant.button_delete), 200, 190,
+				70, 20, "");
+
 		deletebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SearchlocalApp.startWork(Constant.ToolTipsClassify.TOOLTIPS_DELETINGINDEX);
@@ -243,7 +247,7 @@ public class ModifyFrame extends CFrame implements ActionListener {
 					c.setVisible(false);
 					String errormsg = msg.getMsgbyId(Constant.info_deletedindex);
 					MessageFrame.showmessage(errormsg);
-					
+
 					SearchlocalApp.completeWork();
 					String slfilepath = ConstantExeFileUtil.getOpenerbyId("slfile");
 					CourseUtil.restart(slfilepath);
@@ -251,22 +255,22 @@ public class ModifyFrame extends CFrame implements ActionListener {
 			}
 		});
 
-		JButton cancelbutton = panel.makeButton(msg.getMsgbyId(Constant.button_cancel), 280, 190, 70, 20, "");
+		JButton cancelbutton = panel.makeButton(msg.getMsgbyId(Constant.button_cancel), 280, 190,
+				70, 20, "");
 		cancelbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				c.setVisible(false);
 			}
 		});
 
-        container.add(panel);
+		container.add(panel);
 		this.setSize(472, 284);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 	}
 
-	public void showfame() throws UnsupportedLookAndFeelException,
-			ClassNotFoundException, InstantiationException,
-			IllegalAccessException {
+	public void showfame() throws UnsupportedLookAndFeelException, ClassNotFoundException,
+			InstantiationException, IllegalAccessException {
 
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		SwingUtilities.invokeLater(new Runnable() {

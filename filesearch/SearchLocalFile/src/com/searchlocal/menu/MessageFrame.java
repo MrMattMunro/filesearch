@@ -24,7 +24,7 @@ public class MessageFrame {
 		}
 		return true;
 	}
-	
+
 	public static boolean checkIsallNums(MessageParam mparam) {
 		if (StringUtils.checkIsAllNums(mparam.getParam())) {
 			JOptionPane.showMessageDialog(null, mparam.getLabel()
@@ -66,8 +66,7 @@ public class MessageFrame {
 		}
 		if (temp.length() > 0) {
 			String show = temp.toString().substring(0, temp.length() - 1);
-			JOptionPane.showMessageDialog(null, show
-					+ msg.getMsgbyId(Constant.errors_notnull));
+			JOptionPane.showMessageDialog(null, show + msg.getMsgbyId(Constant.errors_notnull));
 			return false;
 		}
 		return true;
@@ -102,8 +101,7 @@ public class MessageFrame {
 		}
 		if (temp.length() > 0) {
 			String show = temp.toString().substring(0, temp.length() - 1);
-			JOptionPane.showMessageDialog(null, show
-					+ msg.getMsgbyId(Constant.errors_hasrepeat));
+			JOptionPane.showMessageDialog(null, show + msg.getMsgbyId(Constant.errors_hasrepeat));
 			return false;
 		}
 		return true;
@@ -114,9 +112,9 @@ public class MessageFrame {
 		int userconfirm = JOptionPane.showConfirmDialog(null, indexpath + msgs);
 		return userconfirm == 0;
 	}
-	
+
 	public static boolean checkISnotDicString(String filepath) {
-		if (! StringUtils.checkisDicfile(filepath)) {
+		if (!StringUtils.checkisDicfile(filepath)) {
 			JOptionPane.showMessageDialog(null, msg.getMsgbyId(Constant.errors_isnotdicfile));
 			return false;
 		}
