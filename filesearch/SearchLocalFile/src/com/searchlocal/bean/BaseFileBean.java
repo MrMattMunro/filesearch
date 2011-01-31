@@ -1,3 +1,13 @@
+/**
+ * $RCSfile: BaseFileBean.java
+ * $Revision: 1.0
+ * $Date: Jan 19, 2011
+ *
+ * Copyright (C) 2010 SlFile, Inc. All rights reserved.
+ *
+ * This software is the proprietary information of SlFile, Inc.
+ * Use is subject to license terms.
+ */
 package com.searchlocal.bean;
 
 /**
@@ -5,12 +15,12 @@ package com.searchlocal.bean;
  * 
  * <p>Title: 文件类基类</p>
  * <p>Description: </p>
- * <p>site: www.slfile.com</p>
+ * <p>site: www.slfile.net</p>
  * @author changsong:qianjinfu@gmail.com
  * @version 1.0
  */
 public class BaseFileBean {
-	
+
 	/** 文件名 */
 	private String filename;
 
@@ -78,6 +88,5 @@ public class BaseFileBean {
 	public void setPath(String path) {
 		this.path = path;
 	}
-
 
 }
