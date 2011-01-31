@@ -33,7 +33,9 @@ import com.searchlocal.util.XMLConfig;
 public class IndexReaderFactory {
 
 	private static Log logger = LogFactory.getLog(IndexReaderFactory.class);
+
 	private static Map readerLookup = new ConcurrentHashMap();
+
 	private static List searches = new ArrayList<CreateNewParam>();
 
 	/**
@@ -83,8 +85,7 @@ public class IndexReaderFactory {
 					String indexpath = createNewParm.getIdexpath();
 					reader = (IndexReader) readerLookup.get(module);
 					if (reader == null) {
-						FSDirectory directory = FSDirectory.open(new File(
-								indexpath));
+						FSDirectory directory = FSDirectory.open(new File(indexpath));
 						reader = IndexReader.open(directory, false);
 						readerLookup.put(module, reader);
 					}
@@ -118,8 +119,7 @@ public class IndexReaderFactory {
 	 * @throws InterruptedException
 	 * @throws IOException
 	 */
-	public void deleteDocuments(String module, Term term)
-			throws InterruptedException, IOException {
+	public void deleteDocuments(String module, Term term) throws InterruptedException, IOException {
 		for (int i = 0; i < searches.size(); i++) {
 			CreateNewParam createNewParm = (CreateNewParam) searches.get(i);
 			if (module.equals(createNewParm.getSearchname())) {
