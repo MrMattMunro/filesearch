@@ -1,0 +1,10 @@
+; DirMonitor.def : Declares the module parameters for the DLL.
+
+LIBRARY      "DirMonitor"
+DESCRIPTION  'DirMonitor Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here
+	Monitor_Start_Dir					@1
+	Monitor_Start_AllDisk				@2
+	Monitor_Stop						@3
