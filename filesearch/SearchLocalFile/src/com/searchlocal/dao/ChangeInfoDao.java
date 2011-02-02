@@ -1,4 +1,13 @@
-
+/**
+ * $RCSfile: ChangeInfoDao.java
+ * $Revision: 1.0
+ * $Date: Jan 30, 2011
+ *
+ * Copyright (C) 2010 SlFile, Inc. All rights reserved.
+ *
+ * This software is the proprietary information of SlFile, Inc.
+ * Use is subject to license terms.
+ */
 package com.searchlocal.dao;
 
 import java.sql.Connection;
@@ -20,10 +29,23 @@ import com.searchlocal.util.CLogger;
 import com.searchlocal.util.SQLParameterUtil;
 import com.searchlocal.util.SqlUtil;
 
+/**
+ * 目录变化的文件Dao
+ * 
+ * <p>Title: 目录变化的文件Dao</p>
+ * <p>Description: </p>
+ * <p>site: www.slfile.net</p>
+ * @author changsong:qianjinfu@gmail.com
+ * @version 1.0
+ */
 public class ChangeInfoDao extends BaseDao {
-
+	
+	/** 日志 */
 	private static CLogger logger = new CLogger(ChangeInfoDao.class);
 
+	/** 
+	 * 构造器
+	 */
 	public ChangeInfoDao() {
 
 	}
@@ -99,10 +121,8 @@ public class ChangeInfoDao extends BaseDao {
 	/**
 	 * 更新File纪录
 	 * 
-	 * @return ResultSet
-	 * @throws DBException
-	 * @throws LogicException
-	 * @throws DBException
+	 * @param beanList 变化文件记录列表
+	 * @param namespace 数据库名
 	 * @throws DBException
 	 * @throws LogicException
 	 */
@@ -117,24 +137,21 @@ public class ChangeInfoDao extends BaseDao {
 		PreparedStatement stmt;
 		ChangInfoBean element;
 		try {
-			for (Iterator iter = beanList.iterator(); iter.hasNext();) {
+			for (Iterator<ChangInfoBean> iter = beanList.iterator(); iter.hasNext();) {
 				element = (ChangInfoBean) iter.next();
-				
 				Map<String, String> paramMap = new HashMap<String, String>();
 				paramMap.put("namespace", namespace);
 
 				String sql = SQLParameterUtil.convertSQL(presql, paramMap);
 
 				stmt = conn.prepareStatement(sql);
-
 				if (null != element) {
 					stmt.setTimestamp(1, new Timestamp(element.getLastmodify()));
 					stmt.setString(2, element.getHasoper());
 					stmt.setString(3, element.getPath());
 				}
-				int row = 0;
 				if (stmt != null) {
-					row = stmt.executeUpdate();
+					stmt.executeUpdate();
 				}
 			}
 		} catch (SQLException e) {
