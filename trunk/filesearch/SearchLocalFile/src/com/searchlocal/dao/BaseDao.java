@@ -35,11 +35,14 @@ import com.searchlocal.util.SqlUtil;
 /**
  * DB连接操作基类
  * 
- * @author changsong qianjinfu@gmail.com
- * @version $Revision 1.0$
+ * <p>Title: Chm文件操作Dao</p>
+ * <p>Description: DB的共通操作</p>
+ * <p>site: www.slfile.net</p>
+ * @author changsong:qianjinfu@gmail.com
+ * @version 1.0
  */
 public class BaseDao {
-
+	/** 日志 */
 	private static CLogger logger = new CLogger(BaseDao.class);
 
 	private static CommonsDBCP commdbcp = null;
@@ -53,12 +56,9 @@ public class BaseDao {
 	/**
 	 * 创建DB
 	 * 
-	 * @return Connection
-	 * @throws DBException
+	 * @param namespace 数据库名称
 	 * @throws LogicException
 	 * @throws SQLException
-	 * @throws IOException
-	 * @throws ClassNotFoundException
 	 */
 	public static boolean createDataBase(String namespace) throws DBException, LogicException {
 		ConnectionParam connparam = getConnParam(BASE_DB_SOURCCE);
@@ -91,12 +91,9 @@ public class BaseDao {
 	/**
 	 * 销毁DB
 	 * 
-	 * @return Connection
+	 * @param namespace 数据库名称
 	 * @throws DBException
 	 * @throws LogicException
-	 * @throws SQLException
-	 * @throws IOException
-	 * @throws ClassNotFoundException
 	 */
 	public static boolean dropDataBase(String namespace) throws DBException, LogicException {
 		ConnectionParam connparam = getConnParam(BASE_DB_SOURCCE);
@@ -125,12 +122,9 @@ public class BaseDao {
 	/**
 	 * 取得与DB的连接。
 	 * 
-	 * @return Connection
+	 * @param namespace 数据库名称
+	 * @throws DBException
 	 * @throws LogicException
-	 * @throws DBException
-	 * @throws DBException
-	 * @throws SQLException
-	 * @throws IOException
 	 */
 	public static Connection getConn(String namespace) throws LogicException, DBException {
 		ConnectionParam connparam = getConnParam(DB_SOURCCE);
@@ -153,8 +147,14 @@ public class BaseDao {
 		return conn;
 	}
 
+	/**
+	 * 取得与DB的连接的参数
+	 * 
+	 * @param propfilepath 配置文件位置
+	 * @return ConnectionParam 配置对象
+	 * @throws LogicException
+	 */
 	private static ConnectionParam getConnParam(String propfilepath) throws LogicException {
-
 		Properties prop = new Properties();
 		FileInputStream in;
 		try {
@@ -175,18 +175,16 @@ public class BaseDao {
 		url = url + "&user=" + user + "&password=" + password;
 
 		ConnectionParam param = new ConnectionParam(driver, url, user, password);
-
 		return param;
 	}
 
 	/**
 	 * 删除对应数据库，表里，对应文件路径纪录
 	 * 
-	 * @return ResultSet
+	 * @param namespace 数据库名称
+	 * @param table 表名
+	 * @param path 文件路径
 	 * @throws DBException
-	 * @throws DBException
-	 * @throws DBException
-	 * @throws LogicException
 	 * @throws LogicException
 	 */
 	public synchronized boolean deleteRecordByPath(String namespace, String table, String path)
@@ -221,7 +219,10 @@ public class BaseDao {
 	/**
 	 * 取得执行查询sql的结果集
 	 * 
-	 * @return ResultSet
+	 * @param sql 执行SQL
+	 * @param path 文件路径
+	 * @param conn DB连接
+	 * @return ResultSet 结果集
 	 * @throws DBException
 	 */
 	public static ResultSet executeQuerySQL(String sql, String path, Connection conn)
@@ -242,7 +243,9 @@ public class BaseDao {
 	/**
 	 * 执行sql
 	 * 
-	 * @return ResultSet
+	 * @param sql 执行SQL
+	 * @param conn DB连接
+	 * @return boolean 是否更新成功
 	 * @throws DBException
 	 */
 	public static boolean execute(String sql, Connection conn) throws DBException {
@@ -258,8 +261,9 @@ public class BaseDao {
 	}
 
 	/**
-	 * 打开事务出错
+	 * 打开事务
 	 * 
+	 * @param conn DB连接
 	 */
 	public static void openTransaction(Connection conn) throws DBException {
 		if (conn != null) {
@@ -277,12 +281,9 @@ public class BaseDao {
 	/**
 	 * 关闭与DB的连接
 	 * 
-	 * @param conn
-	 *            Connection
-	 * @param stmt
-	 *            Statement
-	 * @param rs
-	 *            ResultSet
+	 * @param conn Connection 数据库连接
+	 * @param stmt Statement 上下文
+	 * @param rs ResultSet 结果集
 	 * @throws DBException
 	 */
 	public static void closeConnection(ResultSet rs, Statement stmt, Connection conn)
@@ -370,7 +371,9 @@ public class BaseDao {
 	}
 
 	/**
-	 * @return Returns the commdbcp.
+	 * 返回DB连接对象
+	 * 
+	 * @return commdbcp DB连接对象
 	 */
 	public static CommonsDBCP getCommdbcp() {
 		return commdbcp;
