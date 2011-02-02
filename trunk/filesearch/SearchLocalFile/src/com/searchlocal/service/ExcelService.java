@@ -1,10 +1,15 @@
+/**
+ * $RCSfile: ExcelService.java
+ * $Revision: 1.0
+ * $Date: Jan 30, 2011
+ *
+ * Copyright (C) 2010 SlFile, Inc. All rights reserved.
+ *
+ * This software is the proprietary information of SlFile, Inc.
+ * Use is subject to license terms.
+ */
 package com.searchlocal.service;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Iterator;
 import java.util.List;
 
 import com.searchlocal.bean.ExcelFileBean;
@@ -13,83 +18,45 @@ import com.searchlocal.dao.ExcelDao;
 import com.searchlocal.exception.DBException;
 import com.searchlocal.exception.LogicException;
 import com.searchlocal.filereader.ExcelReader;
-import com.searchlocal.util.StringUtils;
+import com.searchlocal.lucene.IndexBeanList;
 
+/**
+ * Excel文件服务类
+ * 
+ * <p>Title: Excel文件服务类</p>
+ * <p>Description: </p>
+ * <p>site: www.slfile.net</p>
+ * @author changsong:qianjinfu@gmail.com
+ * @version 1.0
+ */
 public class ExcelService {
 
-	public boolean execBatch(String namespace, String csvpath) throws DBException,
+	/**
+	 * 对Excel文件进行建立索引
+	 * 
+	 * @param excelbean excel文件Bean
+	 * @param namespace 数据库名
+	 * @throws DBException
+	 * @throws LogicException
+	 */
+	public int createIndex(ExcelFileBean excelbean, String namespace) throws DBException,
 			LogicException {
-		ExcelDao excelDao = new ExcelDao();
-		csvpath = StringUtils.editFilePath(csvpath);
-
-		excelDao.execbatch(csvpath, namespace);
-		File excelfile = new File(csvpath);
-		// 删除batch的数据文件
-		if (excelfile.exists()) {
-			excelfile.delete();
-		}
-		return true;
-	}
-
-	public int createBatchFile(ExcelFileBean excelbean, String namespace,
-			int fileClassify) throws DBException, LogicException {
-		List fileBeanList;
+		List<ExcelFileBean> fileBeanList;
 		ExcelReader reader = new ExcelReader();
-		fileBeanList = reader.getExcelFile(excelbean.getPath());
-		File excelfile = new File(Constant.datapath + Constant.exceldatapath + fileClassify + Constant.suffixname);
-		FileOutputStream out = null;
-		try {
-			if (!excelfile.exists()) {
-				excelfile.createNewFile();
-			}
-			out = new FileOutputStream(excelfile, true);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		fileBeanList = reader.getExcelFile(excelbean);
 
-		for (Iterator iter = fileBeanList.iterator(); iter.hasNext();) {
-			ExcelFileBean element = (ExcelFileBean) iter.next();
-			String temp = "";
-			temp = excelbean.getFilename();
-			String path = excelbean.getPath();
-			path = StringUtils.editFilePathForBatch(path);
-			temp = temp + "," + path;
-			temp = temp + "," + new Timestamp(excelbean.getLastmodify());
-			String content = element.getContent();
-			content = StringUtils.replaceRN(content);
-			temp = temp + "," + content;
-			temp = temp + "," + String.valueOf(element.getSheetname());
-			temp = temp + "," + String.valueOf(element.getRownb());
-			temp = temp + "\r\n";
-			try {
-				out.write(temp.getBytes("utf-8"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		try {
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		IndexBeanList.makeindex(namespace, Constant.FileNameClassify.EXCEL, fileBeanList);
 		return fileBeanList.size();
 	}
 
-	public boolean insertExcelRecord(ExcelFileBean element, String namespace)
-			throws LogicException, DBException {
-		List fileBeanList;
-		ExcelDao excelDao;
-		ExcelReader reader = new ExcelReader();
-		fileBeanList = reader.getExcelFile(element.getPath());
-		excelDao = new ExcelDao();
-		return excelDao.insertExcelRecord(fileBeanList, element.getPath(),
-				element.getLastmodify(), element.getFilename(), namespace);
-	}
-
-	public boolean createExcelTable(String namespace) throws DBException,
-			LogicException {
+	/**
+	 * 创建Excel文件表
+	 * 
+	 * @param namespace 数据库名
+	 * @throws DBException
+	 * @throws LogicException
+	 */
+	public boolean createExcelTable(String namespace) throws DBException, LogicException {
 		ExcelDao excelDao;
 		excelDao = new ExcelDao();
 		return excelDao.createExceltable(namespace);

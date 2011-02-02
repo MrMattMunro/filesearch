@@ -1,10 +1,15 @@
+/**
+ * $RCSfile: HtmlService.java
+ * $Revision: 1.0
+ * $Date: Jan 30, 2011
+ *
+ * Copyright (C) 2010 SlFile, Inc. All rights reserved.
+ *
+ * This software is the proprietary information of SlFile, Inc.
+ * Use is subject to license terms.
+ */
 package com.searchlocal.service;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Iterator;
 import java.util.List;
 
 import com.searchlocal.bean.HtmlFileBean;
@@ -13,73 +18,43 @@ import com.searchlocal.dao.HtmlDao;
 import com.searchlocal.exception.DBException;
 import com.searchlocal.exception.LogicException;
 import com.searchlocal.filereader.HtmlReader;
-import com.searchlocal.util.FileUtil;
-import com.searchlocal.util.StringUtils;
+import com.searchlocal.lucene.IndexBeanList;
 
+/**
+ * Html文件服务类
+ * 
+ * <p>Title: html文件服务类</p>
+ * <p>Description: </p>
+ * <p>site: www.slfile.net</p>
+ * @author changsong:qianjinfu@gmail.com
+ * @version 1.0
+ */
 public class HtmlService {
 
-	public boolean execBatch(String namespace, String htmlpath) throws DBException,
-			LogicException {
-		HtmlDao htmlDao = new HtmlDao();
-		htmlpath = StringUtils.editFilePath(htmlpath);
-
-		htmlDao.execbatch(htmlpath, namespace);
-		File htmlfile = new File(htmlpath);
-		// 删除batch的数据文件
-		if (htmlfile.exists()) {
-			htmlfile.delete();
-		}
-		return true;
-	}
-
-	public int createBatchFile(HtmlFileBean htmlBean, String namespace,
-			int fileClassify) throws DBException, LogicException {
-		List fileBeanList;
+	/**
+	 * 对html文件建立索引
+	 * 
+	 * @param namespace 数据库名
+	 * @throws DBException
+	 * @throws LogicException
+	 */
+	public int createIndex(HtmlFileBean htmlBean, String namespace)
+			throws DBException, LogicException {
+		List<HtmlFileBean> fileBeanList;
 		HtmlReader reader = new HtmlReader();
-		fileBeanList = reader.getHtmlFile(htmlBean.getPath());
-		FileOutputStream out = FileUtil.getFileStreamOut(Constant.htmldatapath, fileClassify);
-		for (Iterator iter = fileBeanList.iterator(); iter.hasNext();) {
-			HtmlFileBean element = (HtmlFileBean) iter.next();
-			String temp = "";
-			temp = htmlBean.getFilename();
-			String path = htmlBean.getPath();
-			path = StringUtils.editFilePathForBatch(path);
-			temp = temp + "," + path;
-			temp = temp + "," + new Timestamp(htmlBean.getLastmodify());
-			String content = element.getContent();
-			content = StringUtils.replaceRN(content);
-			temp = temp + "," + content;
-			temp = temp + "\r\n";
-			try {
-				out.write(temp.getBytes("utf-8"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		try {
-			if (out != null) {
-				out.close();
-				out = null;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		fileBeanList = reader.getHtmlFile(htmlBean);
+		IndexBeanList.makeindex(namespace, Constant.FileNameClassify.HTML, fileBeanList);
 		return fileBeanList.size();
 	}
 
-	public boolean insertHtmlRecord(HtmlFileBean element, String namespace)
-			throws LogicException, DBException {
-		List fileBeanList;
-		HtmlDao HtmlDao;
-		HtmlReader reader = new HtmlReader();
-		fileBeanList = reader.getHtmlFile(element.getPath());
-		HtmlDao = new HtmlDao();
-		return HtmlDao.insertHtmlRecord(fileBeanList, element.getPath(),
-				element.getLastmodify(), element.getFilename(), namespace);
-	}
-
-	public boolean createHtmlTable(String namespace) throws LogicException,
-			DBException {
+	/**
+	 * 创建Html表
+	 * 
+	 * @param namespace 数据库名
+	 * @throws DBException
+	 * @throws LogicException
+	 */
+	public boolean createHtmlTable(String namespace) throws LogicException, DBException {
 		HtmlDao HtmlDao;
 		HtmlDao = new HtmlDao();
 		return HtmlDao.createHtmltable(namespace);
