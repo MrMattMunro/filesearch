@@ -1,10 +1,15 @@
+/**
+ * $RCSfile: PptService.java
+ * $Revision: 1.0
+ * $Date: Jan 30, 2011
+ *
+ * Copyright (C) 2010 SlFile, Inc. All rights reserved.
+ *
+ * This software is the proprietary information of SlFile, Inc.
+ * Use is subject to license terms.
+ */
 package com.searchlocal.service;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Iterator;
 import java.util.List;
 
 import com.searchlocal.bean.PptFileBean;
@@ -13,82 +18,44 @@ import com.searchlocal.dao.PptDao;
 import com.searchlocal.exception.DBException;
 import com.searchlocal.exception.LogicException;
 import com.searchlocal.filereader.PptReader;
-import com.searchlocal.util.StringUtils;
+import com.searchlocal.lucene.IndexBeanList;
 
+/**
+ * Ppt文件服务类
+ * 
+ * <p>Title: Pdf文件服务类</p>
+ * <p>Description: </p>
+ * <p>site: www.slfile.net</p>
+ * @author changsong:qianjinfu@gmail.com
+ * @version 1.0
+ */
 public class PptService {
 
-	public boolean execBatch(String namespace, String pptpath) throws DBException,
-			LogicException {
-		PptDao pptDao = new PptDao();
-		pptpath = StringUtils.editFilePath(pptpath);
-
-		pptDao.execbatch(pptpath, namespace);
-		File pptfile = new File(pptpath);
-		// 删除batch的数据文件
-		if (pptfile.exists()) {
-			pptfile.delete();
-		}
-		return true;
-	}
-
-	public int createBatchFile(PptFileBean pptbean, String namespace,
-			int fileClassify) throws DBException, LogicException {
-		List fileBeanList;
+	/**
+	 * 对Pdf文件建立索引
+	 * 
+	 * @param pptbean Ppt文件Bean
+	 * @param namespace 数据库名
+	 * @throws DBException
+	 * @throws LogicException
+	 */
+	public int createIndex(PptFileBean pptbean, String namespace)
+			throws DBException, LogicException {
+		List<PptFileBean> fileBeanList;
 		PptReader reader = new PptReader();
-		fileBeanList = reader.getPptFile(pptbean.getPath());
-		File pptfile = new File(Constant.datapath + Constant.pptdatapath + fileClassify + Constant.suffixname);
-		FileOutputStream out = null;
-		try {
-			if (!pptfile.exists()) {
-				pptfile.createNewFile();
-			}
-			out = new FileOutputStream(pptfile, true);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		for (Iterator iter = fileBeanList.iterator(); iter.hasNext();) {
-			PptFileBean element = (PptFileBean) iter.next();
-			String temp = "";
-			temp = pptbean.getFilename();
-			String path = pptbean.getPath();
-			path = StringUtils.editFilePathForBatch(path);
-			temp = temp + "," + path;
-			temp = temp + "," + new Timestamp(pptbean.getLastmodify());
-			String content = element.getContent();
-			content = StringUtils.replaceRN(content);
-			temp = temp + "," + content;
-			temp = temp + "," + String.valueOf(element.getPage());
-			temp = temp + "\r\n";
-			try {
-				out.write(temp.getBytes("utf-8"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		try {
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		fileBeanList = reader.getPptFile(pptbean);
+		IndexBeanList.makeindex(namespace, Constant.FileNameClassify.PPT, fileBeanList);
 		return fileBeanList.size();
 	}
 
-	public boolean insertPptRecord(PptFileBean Pptbean, String namespace)
-			throws LogicException, DBException {
-		List fileBeanList;
-		PptDao PptDao;
-		PptDao = new PptDao();
-		PptReader reader = new PptReader();
-		fileBeanList = reader.getPptFile(Pptbean.getPath());
-		return PptDao.insertPptRecord(fileBeanList, Pptbean.getPath(), Pptbean
-				.getLastmodify(), Pptbean.getFilename(), namespace);
-	}
-
-	public boolean createPptTable(String namespace) throws LogicException,
-			DBException {
+	/**
+	 * 创建Ppt表
+	 * 
+	 * @param namespace 数据库名
+	 * @throws DBException
+	 * @throws LogicException
+	 */
+	public boolean createPptTable(String namespace) throws LogicException, DBException {
 		PptDao PptDao;
 		PptDao = new PptDao();
 		return PptDao.createPpttable(namespace);

@@ -1,10 +1,15 @@
+/**
+ * $RCSfile: TxtService.java
+ * $Revision: 1.0
+ * $Date: Jan 30, 2011
+ *
+ * Copyright (C) 2010 SlFile, Inc. All rights reserved.
+ *
+ * This software is the proprietary information of SlFile, Inc.
+ * Use is subject to license terms.
+ */
 package com.searchlocal.service;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Iterator;
 import java.util.List;
 
 import com.searchlocal.bean.TxtFileBean;
@@ -13,82 +18,44 @@ import com.searchlocal.dao.TxtDao;
 import com.searchlocal.exception.DBException;
 import com.searchlocal.exception.LogicException;
 import com.searchlocal.filereader.TxtReader;
-import com.searchlocal.util.StringUtils;
+import com.searchlocal.lucene.IndexBeanList;
 
+/**
+ * Txt及代码文件服务类
+ * 
+ * <p>Title: Txt及代码文件服务类</p>
+ * <p>Description: </p>
+ * <p>site: www.slfile.net</p>
+ * @author changsong:qianjinfu@gmail.com
+ * @version 1.0
+ */
 public class TxtService {
 
-	public boolean execBatch(String namespace, String cvspath) throws DBException,
-			LogicException {
-		TxtDao txtDao = new TxtDao();
-		cvspath = StringUtils.editFilePath(cvspath);
-
-		txtDao.execbatch(cvspath, namespace);
-		File txtfile = new File(cvspath);
-		// 删除batch的数据文件
-		if (txtfile.exists()) {
-			txtfile.delete();
-		}
-		return true;
-	}
-
-	public int createBatchFile(TxtFileBean txtbean, String namespace,
-			int fileClassify) throws DBException, LogicException {
-		List fileBeanList;
+	/**
+	 * 对Txt代码文件建立索引
+	 * 
+	 * @param txtbean 代码文件
+	 * @param namespace 数据库名
+	 * @throws DBException
+	 * @throws LogicException
+	 */
+	public int createIndex(TxtFileBean txtbean, String namespace)
+			throws DBException, LogicException {
+		List<TxtFileBean> fileBeanList;
 		TxtReader txtReader = new TxtReader();
-		fileBeanList = txtReader.getTxtFile(txtbean.getPath());
-		File txtfile = new File(Constant.datapath + Constant.txtdatapath + fileClassify + Constant.suffixname);
-		FileOutputStream out = null;
-		try {
-			if (!txtfile.exists()) {
-				txtfile.createNewFile();
-			}
-			out = new FileOutputStream(txtfile, true);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		for (Iterator iter = fileBeanList.iterator(); iter.hasNext();) {
-			TxtFileBean element = (TxtFileBean) iter.next();
-			String temp = "";
-			temp = txtbean.getFilename();
-			String path = txtbean.getPath();
-			path = StringUtils.editFilePathForBatch(path);
-			temp = temp + "," + path;
-			temp = temp + "," + new Timestamp(txtbean.getLastmodify());
-			String content = element.getContent();
-			content = StringUtils.replaceRN(content);
-			temp = temp + "," + content;
-			temp = temp + "," + String.valueOf(element.getRownb());
-			temp = temp + "\r\n";
-			try {
-				out.write(temp.getBytes("utf-8"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		try {
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		fileBeanList = txtReader.getTxtFile(txtbean);
+		IndexBeanList.makeindex(namespace, Constant.FileNameClassify.TXT, fileBeanList);
 		return fileBeanList.size();
 	}
 
-	public boolean insertTxtRecord(TxtFileBean element, String namespace)
-			throws LogicException, DBException {
-		List fileBeanList;
-		TxtDao TxtDao;
-		TxtReader txtReader = new TxtReader();
-		fileBeanList = txtReader.getTxtFile(element.getPath());
-		TxtDao = new TxtDao();
-		return TxtDao.insertTxtRecord(fileBeanList, element.getPath(), element
-				.getLastmodify(), element.getFilename(), namespace);
-	}
-
-	public boolean createTxtTable(String namespace) throws DBException,
-			LogicException {
+	/**
+	 * 创建Txt表
+	 * 
+	 * @param namespace 数据库名
+	 * @throws DBException
+	 * @throws LogicException
+	 */
+	public boolean createTxtTable(String namespace) throws DBException, LogicException {
 		TxtDao TxtDao;
 		TxtDao = new TxtDao();
 		return TxtDao.createTxttable(namespace);
