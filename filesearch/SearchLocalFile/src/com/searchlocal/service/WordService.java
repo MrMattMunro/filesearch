@@ -1,10 +1,6 @@
 package com.searchlocal.service;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Iterator;
 import java.util.List;
 
 import com.searchlocal.bean.WordFileBean;
@@ -13,77 +9,66 @@ import com.searchlocal.dao.WordDao;
 import com.searchlocal.exception.DBException;
 import com.searchlocal.exception.LogicException;
 import com.searchlocal.filereader.WordReader;
-import com.searchlocal.util.FileUtil;
+import com.searchlocal.lucene.IndexBeanList;
 import com.searchlocal.util.StringUtils;
 
+/**
+ * Word文件服务类
+ * 
+ * <p>Title: Txt及代码文件服务类</p>
+ * <p>Description: </p>
+ * <p>site: www.slfile.net</p>
+ * @author changsong:qianjinfu@gmail.com
+ * @version 1.0
+ */
 public class WordService {
 
-	public boolean insertWordRecord(WordFileBean wordbean, String namespace)
-			throws DBException, LogicException {
-		List fileBeanList;
-		WordDao wordDao;
-		wordDao = new WordDao();
+	/**
+	 * 对Word文件建立索引
+	 * 
+	 * @param pptbean Word文件Bean
+	 * @param namespace 数据库名
+	 * @throws DBException
+	 * @throws LogicException
+	 */
+	public int createIndex(WordFileBean wordbean, String namespace) throws DBException,
+			LogicException {
 		WordReader reader = new WordReader();
-		fileBeanList = reader.getWordFile(wordbean.getPath());
-		return wordDao.insertWordRecord(fileBeanList, wordbean.getPath(),
-				wordbean.getLastmodify(), wordbean.getFilename(), namespace);
+		List<WordFileBean> fileBeanList = reader.getWordFile(wordbean);
+		IndexBeanList.makeindex(namespace, Constant.FileNameClassify.WORD, fileBeanList);
+		return fileBeanList.size();
 	}
 
-	public boolean execBatch(String namespace, String cvspath) throws DBException,
-			LogicException {
+	/**
+	 * 创建Word表
+	 * 
+	 * @param namespace 数据库名
+	 * @throws DBException
+	 * @throws LogicException
+	 */
+	public boolean createWordTable(String namespace) throws LogicException, DBException {
+		WordDao wordDao;
+		wordDao = new WordDao();
+		return wordDao.createWordtable(namespace);
+	}
+
+	/**
+	 * 执行Batch文件
+	 * 
+	 * @param namespace 数据库名
+	 * @param cvspath csv文件
+	 * @throws DBException
+	 * @throws LogicException
+	 */
+	public boolean execBatch(String namespace, String cvspath) throws DBException, LogicException {
 		WordDao wordDao = new WordDao();
 		cvspath = StringUtils.editFilePath(cvspath);
-
 		wordDao.execbatch(cvspath, namespace);
 		File wordfile = new File(cvspath);
-		// 删除batch的数据文件 
+		// 删除batch的数据文件
 		if (wordfile.exists()) {
 			wordfile.delete();
 		}
 		return true;
-	}
-
-	public int createBatchFile(WordFileBean wordbean, String namespace,
-			int fileClassify) throws DBException, LogicException {
-		List fileBeanList;
-		WordReader reader = new WordReader();
-		fileBeanList = reader.getWordFile(wordbean.getPath());
-		FileOutputStream out = FileUtil.getFileStreamOut(Constant.worddatapath, fileClassify);
-
-		for (Iterator iter = fileBeanList.iterator(); iter.hasNext();) {
-			WordFileBean element = (WordFileBean) iter.next();
-			String temp = "";
-			temp = wordbean.getFilename();
-			String path = wordbean.getPath();
-			path = StringUtils.editFilePathForBatch(path);
-			temp = temp + "," + path;
-			temp = temp + "," + new Timestamp(wordbean.getLastmodify());
-			String content = element.getContent();
-			content = StringUtils.replaceRN(content);
-			temp = temp + "," + content;
-			temp = temp + "," + String.valueOf(element.getParagraphNo());
-			temp = temp + "\r\n";
-			try {
-				out.write(temp.getBytes("utf-8"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		try {
-			if (out != null) {
-				out.close();
-				out = null;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return fileBeanList.size();
-	}
-
-	public boolean createWordTable(String namespace) throws LogicException,
-			DBException {
-		WordDao wordDao;
-		wordDao = new WordDao();
-		return wordDao.createWordtable(namespace);
 	}
 }

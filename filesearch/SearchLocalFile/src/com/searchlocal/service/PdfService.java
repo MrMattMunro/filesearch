@@ -1,10 +1,15 @@
+/**
+ * $RCSfile: PdfService.java
+ * $Revision: 1.0
+ * $Date: Jan 30, 2011
+ *
+ * Copyright (C) 2010 SlFile, Inc. All rights reserved.
+ *
+ * This software is the proprietary information of SlFile, Inc.
+ * Use is subject to license terms.
+ */
 package com.searchlocal.service;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Iterator;
 import java.util.List;
 
 import com.searchlocal.bean.PdfFileBean;
@@ -13,82 +18,44 @@ import com.searchlocal.dao.PdfDao;
 import com.searchlocal.exception.DBException;
 import com.searchlocal.exception.LogicException;
 import com.searchlocal.filereader.PdfReader;
-import com.searchlocal.util.StringUtils;
+import com.searchlocal.lucene.IndexBeanList;
 
+/**
+ * Pdf文件服务类
+ * 
+ * <p>Title: Pdf文件服务类</p>
+ * <p>Description: </p>
+ * <p>site: www.slfile.net</p>
+ * @author changsong:qianjinfu@gmail.com
+ * @version 1.0
+ */
 public class PdfService {
 
-	public boolean execBatch(String namespace, String pdfpath) throws DBException,
-			LogicException {
-		PdfDao pdfDao = new PdfDao();
-		pdfpath = StringUtils.editFilePath(pdfpath);
-
-		pdfDao.execbatch(pdfpath, namespace);
-		File pdffile = new File(pdfpath);
-		// 删除batch的数据文件
-		if (pdffile.exists()) {
-			pdffile.delete();
-		}
-		return true;
-	}
-
-	public int createBatchFile(PdfFileBean pdfbean, String namespace,
-			int fileClassify) throws DBException, LogicException {
-		List fileBeanList;
+	/**
+	 * 对Pdf文件建立索引
+	 * 
+	 * @param pdfbean Pdf文件Bean
+	 * @param namespace 数据库名
+	 * @throws DBException
+	 * @throws LogicException
+	 */
+	public int createIndex(PdfFileBean pdfbean, String namespace)
+			throws DBException, LogicException {
+		List<PdfFileBean> fileBeanList;
 		PdfReader reader = new PdfReader();
-		fileBeanList = reader.getPdfFile(pdfbean.getPath());
-		File pdffile = new File(Constant.datapath + Constant.pdfdatapath + fileClassify + Constant.suffixname);
-		FileOutputStream out = null;
-		try {
-			if (!pdffile.exists()) {
-				pdffile.createNewFile();
-			}
-			out = new FileOutputStream(pdffile, true);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		for (Iterator iter = fileBeanList.iterator(); iter.hasNext();) {
-			PdfFileBean element = (PdfFileBean) iter.next();
-			String temp = "";
-			temp = pdfbean.getFilename();
-			String path = pdfbean.getPath();
-			path = StringUtils.editFilePathForBatch(path);
-			temp = temp + "," + path;
-			temp = temp + "," + new Timestamp(pdfbean.getLastmodify());
-			String content = element.getContent();
-			content = StringUtils.replaceRN(content);
-			temp = temp + "," + content;
-			temp = temp + "," + String.valueOf(element.getPage());
-			temp = temp + "\r\n";
-			try {
-				out.write(temp.getBytes("utf-8"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		try {
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		fileBeanList = reader.getPdfFile(pdfbean);
+		IndexBeanList.makeindex(namespace, Constant.FileNameClassify.PDF, fileBeanList);
 		return fileBeanList.size();
 	}
 
-	public boolean insertPdfRecord(PdfFileBean Pdfbean, String namespace)
-			throws LogicException, DBException {
-		List fileBeanList;
-		PdfDao PdfDao;
-		PdfDao = new PdfDao();
-		PdfReader reader = new PdfReader();
-		fileBeanList = reader.getPdfFile(Pdfbean.getPath());
-		return PdfDao.insertPdfRecord(fileBeanList, Pdfbean.getPath(), Pdfbean
-				.getLastmodify(), Pdfbean.getFilename(), namespace);
-	}
-
-	public boolean createPdfTable(String namespace) throws LogicException,
-			DBException {
+	/**
+	 * 创建Pdf表
+	 * 
+	 * @param namespace 数据库名
+	 * @throws DBException
+	 * @throws LogicException
+	 */
+	public boolean createPdfTable(String namespace) throws LogicException, DBException {
 		PdfDao PdfDao;
 		PdfDao = new PdfDao();
 		return PdfDao.createPdftable(namespace);
