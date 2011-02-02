@@ -1,3 +1,13 @@
+/**
+ * $RCSfile: FileDao.java
+ * $Revision: 1.0
+ * $Date: Jan 30, 2011
+ *
+ * Copyright (C) 2010 SlFile, Inc. All rights reserved.
+ *
+ * This software is the proprietary information of SlFile, Inc.
+ * Use is subject to license terms.
+ */
 package com.searchlocal.dao;
 
 import java.sql.Connection;
@@ -20,29 +30,42 @@ import com.searchlocal.util.SQLParameterUtil;
 import com.searchlocal.util.SqlUtil;
 import com.searchlocal.util.StringUtils;
 
+/**
+ * 文件操作Dao
+ * 
+ * <p>Title: 文件操作Dao</p>
+ * <p>Description: </p>
+ * <p>site: www.slfile.net</p>
+ * @author changsong:qianjinfu@gmail.com
+ * @version 1.0
+ */
 public class FileDao extends BaseDao {
 
+	/** 日志 */
 	private static CLogger logger = new CLogger(FileDao.class);
 
+	/** 
+	 * 构造器
+	 */
 	public FileDao() {
-
 	}
 
 	/**
 	 * 插入文件的更新操作
 	 * 
-	 * @return ResultSet
-	 * @throws DBException
+	 * @param conn db连接
+	 * @param sql db连接
+	 * @param elementList 文件对象列表
 	 * @throws DBException
 	 */
-	public synchronized static void executeFileUpdateSQL(Connection conn, String sql,
-			List elementList) throws DBException {
+	public static void executeFileUpdateSQL(Connection conn, String sql,
+			List<FileParam> elementList) throws DBException {
 		FileParam element = null;
 		PreparedStatement stmt;
 		try {
 			stmt = conn.prepareStatement(sql);
 			conn.setReadOnly(false);
-			for (Iterator iter = elementList.iterator(); iter.hasNext();) {
+			for (Iterator<FileParam> iter = elementList.iterator(); iter.hasNext();) {
 				element = (FileParam) iter.next();
 				if (null != element) {
 					stmt.setString(1, element.getPath());
@@ -64,14 +87,12 @@ public class FileDao extends BaseDao {
 	/**
 	 * 删除File纪录
 	 * 
-	 * @return ResultSet
+	 * @param namespace 数据库
+     * @param path 文件路径
 	 * @throws DBException
-	 * @throws DBException
-	 * @throws DBException
-	 * @throws LogicException
 	 * @throws LogicException
 	 */
-	public synchronized boolean deleteFileRecord(String namespace, String path) throws DBException,
+	public boolean deleteFileRecord(String namespace, String path) throws DBException,
 			LogicException {
 		Connection conn = BaseDao.getConn(namespace);
 		openTransaction(conn);
@@ -95,14 +116,13 @@ public class FileDao extends BaseDao {
 	/**
 	 * 删除对应数据库，表里，对应文件路径纪录
 	 * 
-	 * @return ResultSet
+	 * @param namespace 数据库
+	 * @param table 表
+	 * @param path 文件
 	 * @throws DBException
-	 * @throws DBException
-	 * @throws DBException
-	 * @throws LogicException
 	 * @throws LogicException
 	 */
-	public synchronized boolean deleteRecordByPath(String namespace, String table, String path)
+	public boolean deleteRecordByPath(String namespace, String table, String path)
 			throws DBException, LogicException {
 		Connection conn = BaseDao.getConn(namespace);
 		openTransaction(conn);
@@ -134,14 +154,11 @@ public class FileDao extends BaseDao {
 	/**
 	 * 创建File表
 	 * 
-	 * @return ResultSet
+	 * @param namespace 数据库
 	 * @throws DBException
-	 * @throws DBException
-	 * @throws DBException
-	 * @throws LogicException
 	 * @throws LogicException
 	 */
-	public synchronized boolean createFiletable(String namesapce) throws DBException,
+	public boolean createFiletable(String namesapce) throws DBException,
 			LogicException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
@@ -165,14 +182,11 @@ public class FileDao extends BaseDao {
 	/**
 	 * 取出File纪录
 	 * 
-	 * @return ResultSet
-	 * @throws DBException
-	 * @throws LogicException
-	 * @throws DBException
+	 * @param namespace 数据库
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public synchronized List<FileParam> getFileRecord(String namespace) throws LogicException,
+	public List<FileParam> getFileRecord(String namespace) throws LogicException,
 			DBException {
 		Connection conn = BaseDao.getConn(namespace);
 		// SQL语句
@@ -204,14 +218,12 @@ public class FileDao extends BaseDao {
 	/**
 	 * 插入File纪录
 	 * 
-	 * @return ResultSet
-	 * @throws DBException
-	 * @throws LogicException
-	 * @throws DBException
+	 * @param filebeanList 文件对象列表
+	 * @param namespace 数据库名
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public synchronized boolean insertFileRecord(List beanList, String namespace)
+	public boolean insertFileRecord(List<FileParam> beanList, String namespace)
 			throws LogicException, DBException {
 		Connection conn = BaseDao.getConn(namespace);
 		openTransaction(conn);
@@ -241,44 +253,35 @@ public class FileDao extends BaseDao {
 	/**
 	 * 更新File纪录
 	 * 
-	 * @return ResultSet
-	 * @throws DBException
-	 * @throws LogicException
-	 * @throws DBException
+	 * @param filebeanList 数据库名
+	 * @param namespace 数据库名
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public synchronized boolean updateFileRecord(List beanList, String namespace)
+	public  boolean updateFileRecord(List<FileParam> beanList, String namespace)
 			throws LogicException, DBException {
 
 		Connection conn = BaseDao.getConn(namespace);
 		openTransaction(conn);
 		// SQL语句
 		String presql = SqlUtil.getSqlbyId("updateFileRecord");
-
 		PreparedStatement stmt;
 		FileParam element;
-
 		try {
-			for (Iterator iter = beanList.iterator(); iter.hasNext();) {
+			for (Iterator<FileParam> iter = beanList.iterator(); iter.hasNext();) {
 				element = (FileParam) iter.next();
-
 				Map<String, String> paramMap = new HashMap<String, String>();
 				paramMap.put("namespace", namespace);
-
 				String sql = SQLParameterUtil.convertSQL(presql, paramMap);
-
 				stmt = conn.prepareStatement(sql);
 
 				if (null != element) {
 					stmt.setTimestamp(1, new Timestamp(element.getLastModify()));
 					stmt.setString(2, element.getError());
 					stmt.setString(3, element.getPath());
-
 				}
-				int row = 0;
 				if (stmt != null) {
-					row = stmt.executeUpdate();
+				   stmt.executeUpdate();
 				}
 			}
 		} catch (SQLException e) {
@@ -291,6 +294,14 @@ public class FileDao extends BaseDao {
 		return true;
 	}
 
+	/**
+	 * 执行Batch文件
+	 * 
+	 * @param datapath csv文件路径
+	 * @param namespace 数据库名
+	 * @throws DBException
+	 * @throws LogicException
+	 */
 	public boolean execbatch(String datapath, String namesapce) throws DBException, LogicException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
