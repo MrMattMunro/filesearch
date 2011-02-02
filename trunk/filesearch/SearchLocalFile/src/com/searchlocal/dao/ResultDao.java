@@ -102,9 +102,8 @@ public class ResultDao extends BaseDao {
 					stmt.setString(2, element.getFilePath());
 					stmt.setString(3, element.getDesp());
 				}
-				int row;
 				if (stmt != null) {
-					row = stmt.executeUpdate();
+					stmt.executeUpdate();
 				}
 			}
 		} catch (SQLException e) {

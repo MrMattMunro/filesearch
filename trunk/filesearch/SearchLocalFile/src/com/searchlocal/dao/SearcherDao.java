@@ -40,6 +40,12 @@ public class SearcherDao extends BaseDao {
 
 	/** 日志 */
 	private static CLogger logger = new CLogger(SearcherDao.class);
+	
+	/**
+	 * 构造器
+	 */
+	public SearcherDao() {
+	}
 
 	/**
 	 * 创建FileOpener表

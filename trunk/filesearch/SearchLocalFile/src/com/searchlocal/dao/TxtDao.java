@@ -1,3 +1,13 @@
+/**
+ * $RCSfile: TxtDao.java
+ * $Revision: 1.0
+ * $Date: Jan 30, 2011
+ *
+ * Copyright (C) 2010 SlFile, Inc. All rights reserved.
+ *
+ * This software is the proprietary information of SlFile, Inc.
+ * Use is subject to license terms.
+ */
 package com.searchlocal.dao;
 
 import java.sql.Connection;
@@ -18,28 +28,42 @@ import com.searchlocal.util.SQLParameterUtil;
 import com.searchlocal.util.SqlUtil;
 import com.searchlocal.util.StringUtils;
 
+/**
+ * Txt文件以及代码Dao
+ * 
+ * <p>Title: Txt文件以及代码Dao</p>
+ * <p>Description: </p>
+ * <p>site: www.slfile.net</p>
+ * @author changsong:qianjinfu@gmail.com
+ * @version 1.0
+ */
 public class TxtDao extends BaseDao {
 
+	/** 日志 */
 	private static CLogger logger = new CLogger(TxtDao.class);
 
+	/**
+	 * 构造器
+	 */
 	public TxtDao() {
-
+		
 	}
 
 	/**
 	 * 执行Txt的更新操作
 	 * 
-	 * @return ResultSet
-	 * @throws DBException
+	 * @param conn 数据库连接
+	 * @param sql SQL语句
+	 * @param elementList 文件对象列表
 	 * @throws DBException
 	 */
-	public synchronized static void executeTxtUpdateSQL(Connection conn, String sql,
-			List elementList) throws DBException {
+	public static void executeTxtUpdateSQL(Connection conn, String sql,
+			List<TxtFileBean> elementList) throws DBException {
 		TxtFileBean element = null;
 		PreparedStatement stmt;
 		try {
 			stmt = conn.prepareStatement(sql);
-			for (Iterator iter = elementList.iterator(); iter.hasNext();) {
+			for (Iterator<TxtFileBean> iter = elementList.iterator(); iter.hasNext();) {
 				element = (TxtFileBean) iter.next();
 				if (null != element) {
 					stmt.setString(1, element.getFilename());
@@ -63,21 +87,18 @@ public class TxtDao extends BaseDao {
 	/**
 	 * 创建Txt表
 	 * 
-	 * @return ResultSet
+	 * @param namespace 数据库名称
 	 * @throws DBException
-	 * @throws DBException
-	 * @throws DBException
-	 * @throws LogicException
 	 * @throws LogicException
 	 */
-	public synchronized boolean createTxttable(String namesapce) throws DBException, LogicException {
-		Connection conn = BaseDao.getConn(namesapce);
+	public boolean createTxttable(String namespace) throws DBException, LogicException {
+		Connection conn = BaseDao.getConn(namespace);
 		openTransaction(conn);
 		boolean success = false;
 		// 生成SQL
 		String presql = SqlUtil.getSqlbyId("createTxtRecord");
 		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("namespace", namesapce);
+		paramMap.put("namespace", namespace);
 		String sql = SQLParameterUtil.convertSQL(presql, paramMap);
 		try {
 			success = execute(sql, conn);
@@ -93,14 +114,15 @@ public class TxtDao extends BaseDao {
 	/**
 	 * 插入Txt纪录
 	 * 
-	 * @return ResultSet
-	 * @throws DBException
-	 * @throws LogicException
-	 * @throws DBException
+	 * @param beanList Ppt文件数据
+	 * @param filepath 文件路径
+	 * @param lastmodify 最后修改时间
+	 * @param filename 文件名称
+	 * @param namespace 数据库 
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public synchronized boolean insertTxtRecord(List beanList, String filepath, long lastmodify,
+	public boolean insertTxtRecord(List<TxtFileBean> beanList, String filepath, long lastmodify,
 			String filename, String namespace) throws LogicException, DBException {
 		Connection conn = BaseDao.getConn(namespace);
 		openTransaction(conn);
@@ -113,7 +135,7 @@ public class TxtDao extends BaseDao {
 		String sql = SQLParameterUtil.convertSQL(presql, paramMap);
 		try {
 			conn.setReadOnly(false);
-			for (Iterator iter = beanList.iterator(); iter.hasNext();) {
+			for (Iterator<TxtFileBean> iter = beanList.iterator(); iter.hasNext();) {
 				element = (TxtFileBean) iter.next();
 				element.setFilename(filename);
 				element.setLastmodify(lastmodify);
@@ -131,6 +153,14 @@ public class TxtDao extends BaseDao {
 		return true;
 	}
 
+	/**
+	 * 执行Batch文件
+	 * 
+	 * @param datapath csv文件路径
+     * @param namesapce 数据库
+	 * @throws DBException
+	 * @throws LogicException
+	 */
 	public boolean execbatch(String datapath, String namesapce) throws DBException, LogicException {
 		Connection conn = BaseDao.getConn(namesapce);
 		openTransaction(conn);
