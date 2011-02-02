@@ -47,11 +47,11 @@ public class FileOpenerDao extends BaseDao{
 	/**
 	 * 创建FileOpener表
 	 * 
-	 * @param namespace db名称
+	 * @param namespace 数据库名称
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public synchronized boolean createFileOpenertable(String namespace) throws DBException,
+	public boolean createFileOpenertable(String namespace) throws DBException,
 			LogicException {
 		Connection conn = BaseDao.getConn(namespace);
 		openTransaction(conn);
@@ -75,11 +75,11 @@ public class FileOpenerDao extends BaseDao{
 	/**
 	 * 取出FileOpener纪录
 	 * 
-	 * @return ResultSet
+	 * @param namespace 数据库名称
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public synchronized List<FileOpenerBean> getFileOpener(String namespace) throws LogicException,
+	public List<FileOpenerBean> getFileOpener(String namespace) throws LogicException,
 			DBException {
 		Connection conn = BaseDao.getConn(namespace);
 		// SQL语句
@@ -116,7 +116,7 @@ public class FileOpenerDao extends BaseDao{
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public synchronized boolean insertFileOpenRecord(List<FileOpenerBean> beanList, String namespace)
+	public boolean insertFileOpenRecord(List<FileOpenerBean> beanList, String namespace)
 			throws LogicException, DBException {
 		Connection conn = BaseDao.getConn(namespace);
 		openTransaction(conn);
@@ -137,9 +137,8 @@ public class FileOpenerDao extends BaseDao{
 					stmt.setString(2, element.getExePath());
 					stmt.setTimestamp(3, new Timestamp(new Date().getTime()));
 				}
-				int row;
 				if (stmt != null) {
-					row = stmt.executeUpdate();
+				    stmt.executeUpdate();
 				}
 			}
 		} catch (SQLException e) {
