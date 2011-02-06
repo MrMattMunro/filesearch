@@ -32,7 +32,7 @@ public class UpdateParam {
 	/** 需要删除的文档类型  */
 	private List<String> needDelfiletypes;
 
-	/**  需要添加的文档类型 */
+	/** 需要添加的文档类型 */
 	private List<String> needAddfiletypes;
 
 	/**  索引保存目录 */
