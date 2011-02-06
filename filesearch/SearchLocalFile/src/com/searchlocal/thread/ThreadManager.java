@@ -35,7 +35,7 @@ public class ThreadManager {
 		// pool.setRejectedExecutionHandler(new
 		// ThreadPoolExecutor.DiscardOldestPolicy());
 	}
-	
+
 	/**
 	 * 取得线程池
 	 * 

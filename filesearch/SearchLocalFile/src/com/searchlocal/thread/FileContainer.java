@@ -13,7 +13,7 @@ public class FileContainer {
 	private static ConcurrentHashMap<String, Long> haserrorfile = new ConcurrentHashMap<String, Long>();
 
 	private static ConcurrentLinkedQueue<FileParam> allfile = new ConcurrentLinkedQueue<FileParam>();
-	
+
 	private static boolean isdone = false;
 
 	/**
@@ -47,8 +47,8 @@ public class FileContainer {
 	 */
 	public synchronized FileParam getfile() {
 		FileParam param = null;
-		if(!allfile.isEmpty()){
-		  param = allfile.poll();
+		if (!allfile.isEmpty()) {
+			param = allfile.poll();
 		}
 		notifyAll();
 		return param;
@@ -83,7 +83,7 @@ public class FileContainer {
 		}
 		return param;
 	}
-	
+
 	/**
 	 * @return Returns the haserrorfile.
 	 */
@@ -148,13 +148,13 @@ public class FileContainer {
 	public synchronized ConcurrentHashMap<String, Long> getInsertedfile() {
 		return insertedfile;
 	}
-	
+
 	/**
 	 * @return Returns the insertedfile.
 	 */
 	public synchronized void clearAll() {
-        haserrorfile.clear();
-        allfile.clear();
+		haserrorfile.clear();
+		allfile.clear();
 	}
 
 }
