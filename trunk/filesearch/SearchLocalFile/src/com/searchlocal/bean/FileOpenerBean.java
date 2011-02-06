@@ -21,9 +21,9 @@ package com.searchlocal.bean;
  */
 public class FileOpenerBean {
 
-	/** Id */
+	/** id */
 	private String id;
-	
+
 	/** 对象文档类型 */
 	private String fileType;
 
@@ -32,24 +32,6 @@ public class FileOpenerBean {
 	
 	/** 最后修改时间 */
 	private long lastmodify;
-
-	/**
-	 * 取得id
-	 * 
-	 * @return String id 
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * 设定id 
-	 * 
-	 * @param String id 
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	/**
 	 * 取得fileType
@@ -103,5 +85,23 @@ public class FileOpenerBean {
 	 */
 	public void setLastmodify(long lastmodify) {
 		this.lastmodify = lastmodify;
+	}
+
+	/**
+	 * 取得id
+	 * 
+	 * @return String id 
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * 设定id 
+	 * 
+	 * @param String id 
+	 */
+	public void setId(String id) {
+		this.id = id;
 	}
 }

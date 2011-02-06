@@ -23,7 +23,7 @@ public class SearcherBean {
 
 	/** Id */
 	private String id;
-
+	
 	/** 文件路径 */
 	private String path;
 
