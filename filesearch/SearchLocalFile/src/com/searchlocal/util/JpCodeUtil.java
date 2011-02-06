@@ -107,13 +107,13 @@ public class JpCodeUtil {
 			while (m.find()) {
 				switch (i) {
 				case 0:
-					laguage= Constant.LanguageClassify.JAPANESE;
+					laguage = Constant.LanguageClassify.JAPANESE;
 					break;
 				case 1:
-					laguage=  Constant.LanguageClassify.CHINESE;
+					laguage = Constant.LanguageClassify.CHINESE;
 					break;
 				default:
-					laguage=  Constant.LanguageClassify.CHINESE;
+					laguage = Constant.LanguageClassify.CHINESE;
 					break;
 				}
 			}

@@ -9,37 +9,37 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 
 public class TimeProtocol {
-	
-	private static String ip ="www.google.com";
-	
+
+	private static String ip = "www.google.com";
+
 	public TimeProtocol() {
 	}
 
 	public static String traditionalClient() {
-		
+
 		boolean isnetwork = false;
 		String date = "";
 		BufferedReader in = null;
 		try {
-			Process p = Runtime.getRuntime().exec("cmd /c ping -n 1 " + ip);  //此处1变大可以增加精确度，但影响测试速度
+			Process p = Runtime.getRuntime().exec("cmd /c ping -n 1 " + ip); // 此处1变大可以增加精确度，但影响测试速度
 			in = new BufferedReader(new InputStreamReader(p.getInputStream()));
 			String temp = null;
 			StringBuffer strBuffer = new StringBuffer();
-			while ((temp = (in.readLine())) != null){
+			while ((temp = (in.readLine())) != null) {
 				strBuffer.append(temp);
 			}
-		
+
 			if (strBuffer.toString().matches(".*\\(\\d?\\d% loss\\).*")) {
 				isnetwork = true;
-			} 
+			}
 			if (isnetwork) {
 				date = getInternetDate();
 			}
 		} catch (IOException e) {
 			// TODO 注意消除资源(关闭I/O等)
 			e.printStackTrace();
-		}finally{
-			if(in != null){
+		} finally {
+			if (in != null) {
 				try {
 					in.close();
 				} catch (IOException e) {

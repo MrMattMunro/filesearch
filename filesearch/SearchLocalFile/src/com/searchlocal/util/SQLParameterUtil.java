@@ -45,13 +45,10 @@ public class SQLParameterUtil {
 
 		for (String string : parameterList) {
 			Object object = map.get(string);
-			if (object instanceof Integer || object instanceof Long
-					|| object instanceof Float) {
-				sql = sql.replaceFirst("#" + string + "#", String.valueOf(map
-						.get(string)));
+			if (object instanceof Integer || object instanceof Long || object instanceof Float) {
+				sql = sql.replaceFirst("#" + string + "#", String.valueOf(map.get(string)));
 			} else {
-				sql = sql.replaceFirst("#" + string + "#", String.valueOf(map
-						.get(string)));
+				sql = sql.replaceFirst("#" + string + "#", String.valueOf(map.get(string)));
 			}
 		}
 		return sql;

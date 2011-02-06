@@ -40,7 +40,7 @@ public class SqlUtil {
 		}
 		return sql;
 	}
-	
+
 	public static String getsql(String namespace, String sqlId) {
 		String presql = SqlUtil.getSqlbyId(sqlId);
 		Map<String, String> paramMap = new HashMap<String, String>();
@@ -48,7 +48,7 @@ public class SqlUtil {
 		String sql = SQLParameterUtil.convertSQL(presql, paramMap);
 		return sql;
 	}
-	
+
 	public static String getsql(String namespace, String table, String sqlId) {
 		String presql = SqlUtil.getSqlbyId(sqlId);
 		Map<String, String> paramMap = new HashMap<String, String>();

@@ -3,9 +3,9 @@
  * $Revision: 1.0
  * $Date: Jun 28, 2010
  *
- * Copyright (C) 2010 ICSS, Inc. All rights reserved.
+ * Copyright (C) 2010 SlFile, Inc. All rights reserved.
  *
- * This software is the proprietary information of ICSS, Inc.
+ * This software is the proprietary information of SlFile, Inc.
  * Use is subject to license terms.
  */
 package com.searchlocal.util;
@@ -17,30 +17,30 @@ import com.searchlocal.constants.Constant;
 public class MakeShortCut {
 
 	public static String osName = System.getProperty("os.name");
-	
+
 	private static MenuMessageUtil msg = new MenuMessageUtil();
-	
+
 	private static String slfilejs = "slfile.js";
-	
+
 	private static String updatejs = "update.js";
 
 	public static void create() {
 		MakeShortCut sc = new MakeShortCut();
 		File installDir = new File(Constant.datapath);
 		String shorcutname = msg.getMsgbyId(Constant.searchapp_localsearch);
-		sc.createSlfileShortcut(installDir , "slfile.exe", shorcutname);
+		sc.createSlfileShortcut(installDir, "slfile.exe", shorcutname);
 		File file = new File(installDir + File.separator + slfilejs);
-		if(file.exists()){
+		if (file.exists()) {
 			file.delete();
 		}
-		
-		sc.createUpdateShortcut(installDir , "update.exe", "update");
+
+		sc.createUpdateShortcut(installDir, "update.exe", "update");
 		file = new File(installDir + File.separator + updatejs);
-		if(file.exists()){
+		if (file.exists()) {
 			file.delete();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param installDir
@@ -68,7 +68,8 @@ public class MakeShortCut {
 				out.println("ProgramsPath   =   Shell.SpecialFolders(\"AllUsersStartMenu\");");
 				/** 创建菜单快捷方式 */
 				out.println("fso   =   new   ActiveXObject(\"Scripting.FileSystemObject\");");
-				out.println("link   =   Shell.CreateShortcut(ProgramsPath   +   \"\\\\"  + name + ".lnk\");");
+				out.println("link   =   Shell.CreateShortcut(ProgramsPath   +   \"\\\\" + name
+						+ ".lnk\");");
 				out.println("link.Arguments   =   \"\";");
 				out.println("link.Description   =   \"" + name + "\";");
 				out.println("link.HotKey   =   \"\";");
@@ -115,8 +116,7 @@ public class MakeShortCut {
 				out.println("WScript.Echo(\"Shortcuts   created.\");");
 				/** ********* */
 				out.close();
-				Process p = Runtime.getRuntime().exec(command + "  " + slfilejs, null,
-						installDir);
+				Process p = Runtime.getRuntime().exec(command + "  " + slfilejs, null, installDir);
 				p.waitFor();
 				int rv = p.exitValue();
 				if (rv == 0) {
@@ -130,7 +130,7 @@ public class MakeShortCut {
 		else
 			return false;
 	}
-	
+
 	/**
 	 * 
 	 * @param installDir
@@ -158,7 +158,8 @@ public class MakeShortCut {
 				out.println("ProgramsPath   =   Shell.SpecialFolders(\"AllUsersStartMenu\");");
 				/** 创建菜单快捷方式 */
 				out.println("fso   =   new   ActiveXObject(\"Scripting.FileSystemObject\");");
-				out.println("link   =   Shell.CreateShortcut(ProgramsPath   +   \"\\\\"  + name + ".lnk\");");
+				out.println("link   =   Shell.CreateShortcut(ProgramsPath   +   \"\\\\" + name
+						+ ".lnk\");");
 				out.println("link.Arguments   =   \"\";");
 				out.println("link.Description   =   \"" + name + "\";");
 				out.println("link.HotKey   =   \"\";");
@@ -189,8 +190,7 @@ public class MakeShortCut {
 				out.println("WScript.Echo(\"Shortcuts   created.\");");
 				/** ********* */
 				out.close();
-				Process p = Runtime.getRuntime().exec(command + "  " + updatejs, null,
-						installDir);
+				Process p = Runtime.getRuntime().exec(command + "  " + updatejs, null, installDir);
 				p.waitFor();
 				int rv = p.exitValue();
 				if (rv == 0) {

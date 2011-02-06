@@ -63,5 +63,4 @@ public class Encrypt {
 		return astring.equals(b);
 	}
 
-	
 }

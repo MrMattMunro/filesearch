@@ -23,7 +23,7 @@ public class LanguageUtil {
 				OutputStream out = new FileOutputStream(Constant.path
 						+ "com\\searchlocal\\properties\\language.properties");
 				prop.store(out, "fileopener");
-				
+
 				out.close();
 			} else {
 				FileInputStream in = new FileInputStream(Constant.path
@@ -47,5 +47,3 @@ public class LanguageUtil {
 		return lagugage;
 	}
 }
-
-

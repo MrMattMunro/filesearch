@@ -19,8 +19,8 @@ public class ConstantExeFileUtil {
 	 */
 	public ConstantExeFileUtil() {
 		readFile();
-		if(prop.isEmpty()){
-			String[] driver = new String[] { "C", "D", "E"};
+		if (prop.isEmpty()) {
+			String[] driver = new String[] { "C", "D", "E" };
 
 			String chmpath = ":\\WINDOWS\\hh.exe";
 			for (int i = 0; i < driver.length; i++) {
@@ -37,13 +37,14 @@ public class ConstantExeFileUtil {
 			String updatepath = Constant.datapath + "update.exe";
 			prop.put("update", updatepath);
 			try {
-				OutputStream out = new FileOutputStream(Constant.path + "com\\searchlocal\\properties\\exefile.properties");
+				OutputStream out = new FileOutputStream(Constant.path
+						+ "com\\searchlocal\\properties\\exefile.properties");
 				prop.store(out, "exefile");
 				out.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}	
+			}
 		}
 	}
 

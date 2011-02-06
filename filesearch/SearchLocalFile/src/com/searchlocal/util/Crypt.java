@@ -37,19 +37,19 @@ public class Crypt {
 	 * @return SecretKey 秘密（对称）密钥  
 	 */
 	public SecretKey createSecretKey(String algorithm) {
-		// 声明KeyGenerator对象   
+		// 声明KeyGenerator对象
 		KeyGenerator keygen;
-		// 声明 密钥对象   
+		// 声明 密钥对象
 		SecretKey deskey = null;
 		try {
-			// 返回生成指定算法的秘密密钥的 KeyGenerator 对象   
+			// 返回生成指定算法的秘密密钥的 KeyGenerator 对象
 			keygen = KeyGenerator.getInstance(algorithm);
-			// 生成一个密钥   
+			// 生成一个密钥
 			deskey = keygen.generateKey();
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
-		// 返回密匙   
+		// 返回密匙
 		return deskey;
 	}
 
@@ -63,24 +63,24 @@ public class Crypt {
 	 * @return String 加密后的信息  
 	 */
 	public String encryptToDES(SecretKey key, String info) {
-		// 定义 加密算法,可用 DES,DESede,Blowfish   
+		// 定义 加密算法,可用 DES,DESede,Blowfish
 		String Algorithm = "DES";
-		// 加密随机数生成器 (RNG),(可以不写)   
+		// 加密随机数生成器 (RNG),(可以不写)
 		SecureRandom sr = new SecureRandom();
-		// 定义要生成的密文   
+		// 定义要生成的密文
 		byte[] cipherByte = null;
 		try {
-			// 得到加密/解密器   
+			// 得到加密/解密器
 			Cipher c1 = Cipher.getInstance(Algorithm);
-			// 用指定的密钥和模式初始化Cipher对象   
-			// 参数:(ENCRYPT_MODE, DECRYPT_MODE, WRAP_MODE,UNWRAP_MODE)   
+			// 用指定的密钥和模式初始化Cipher对象
+			// 参数:(ENCRYPT_MODE, DECRYPT_MODE, WRAP_MODE,UNWRAP_MODE)
 			c1.init(Cipher.ENCRYPT_MODE, key, sr);
-			// 对要加密的内容进行编码处理,   
+			// 对要加密的内容进行编码处理,
 			cipherByte = c1.doFinal(info.getBytes());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// 返回密文的十六进制形式   
+		// 返回密文的十六进制形式
 		return byte2hex(cipherByte);
 	}
 
@@ -94,26 +94,26 @@ public class Crypt {
 	 * @return String 返回解密后信息  
 	 */
 	public String decryptByDES(SecretKey key, String sInfo) {
-		// 定义 加密算法,   
+		// 定义 加密算法,
 		String Algorithm = "DES";
-		// 加密随机数生成器 (RNG)   
+		// 加密随机数生成器 (RNG)
 		SecureRandom sr = new SecureRandom();
 		byte[] cipherByte = null;
 		try {
-			// 得到加密/解密器   
+			// 得到加密/解密器
 			Cipher c1 = Cipher.getInstance(Algorithm);
-			// 用指定的密钥和模式初始化Cipher对象   
+			// 用指定的密钥和模式初始化Cipher对象
 			c1.init(Cipher.DECRYPT_MODE, key, sr);
-			// 对要解密的内容进行编码处理   
+			// 对要解密的内容进行编码处理
 			cipherByte = c1.doFinal(hex2byte(sInfo));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// return byte2hex(cipherByte);   
+		// return byte2hex(cipherByte);
 		return new String(cipherByte);
 	}
 
-	// /////////////////////////////////////////////////////////////////////////////   
+	// /////////////////////////////////////////////////////////////////////////////
 	/**  
 	 * 创建密匙组，并将公匙，私匙放入到指定文件中  
 	 *   
@@ -121,21 +121,21 @@ public class Crypt {
 	 */
 	public void createPairKey() {
 		try {
-			// 根据特定的算法一个密钥对生成器   
+			// 根据特定的算法一个密钥对生成器
 			KeyPairGenerator keygen = KeyPairGenerator.getInstance("DSA");
-			// 加密随机数生成器 (RNG)   
+			// 加密随机数生成器 (RNG)
 			SecureRandom random = new SecureRandom();
-			// 重新设置此随机对象的种子   
+			// 重新设置此随机对象的种子
 			random.setSeed(1000);
-			// 使用给定的随机源（和默认的参数集合）初始化确定密钥大小的密钥对生成器   
-			keygen.initialize(512, random);// keygen.initialize(512);   
-			// 生成密钥组   
+			// 使用给定的随机源（和默认的参数集合）初始化确定密钥大小的密钥对生成器
+			keygen.initialize(512, random);// keygen.initialize(512);
+			// 生成密钥组
 			KeyPair keys = keygen.generateKeyPair();
-			// 得到公匙   
+			// 得到公匙
 			PublicKey pubkey = keys.getPublic();
-			// 得到私匙   
+			// 得到私匙
 			PrivateKey prikey = keys.getPrivate();
-			// 将公匙私匙写入到文件当中   
+			// 将公匙私匙写入到文件当中
 			doObjToFile("license.dat", new Object[] { prikey, pubkey });
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
@@ -151,20 +151,20 @@ public class Crypt {
 	 *            存入的文件  
 	 */
 	public void signToInfo(String info, String signfile) {
-		// 从文件当中读取私匙   
+		// 从文件当中读取私匙
 		PrivateKey myprikey = (PrivateKey) getObjFromFile("mykeys.dat", 1);
-		// 从文件中读取公匙   
+		// 从文件中读取公匙
 		PublicKey mypubkey = (PublicKey) getObjFromFile("mykeys.dat", 2);
 		try {
-			// Signature 对象可用来生成和验证数字签名   
+			// Signature 对象可用来生成和验证数字签名
 			Signature signet = Signature.getInstance("DSA");
-			// 初始化签署签名的私钥   
+			// 初始化签署签名的私钥
 			signet.initSign(myprikey);
-			// 更新要由字节签名或验证的数据   
+			// 更新要由字节签名或验证的数据
 			signet.update(info.getBytes());
-			// 签署或验证所有更新字节的签名，返回签名   
+			// 签署或验证所有更新字节的签名，返回签名
 			byte[] signed = signet.sign();
-			// 将数字签名,公匙,信息放入文件中   
+			// 将数字签名,公匙,信息放入文件中
 			doObjToFile(signfile, new Object[] { signed, mypubkey, info });
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -177,20 +177,20 @@ public class Crypt {
 	 * @return true 验证成功 false 验证失败  
 	 */
 	public boolean validateSign(String signfile) {
-		// 读取公匙   
+		// 读取公匙
 		PublicKey mypubkey = (PublicKey) getObjFromFile(signfile, 2);
-		// 读取签名   
+		// 读取签名
 		byte[] signed = (byte[]) getObjFromFile(signfile, 1);
-		// 读取信息   
+		// 读取信息
 		String info = (String) getObjFromFile(signfile, 3);
 		try {
-			// 初始一个Signature对象,并用公钥和签名进行验证   
+			// 初始一个Signature对象,并用公钥和签名进行验证
 			Signature signetcheck = Signature.getInstance("DSA");
-			// 初始化验证签名的公钥   
+			// 初始化验证签名的公钥
 			signetcheck.initVerify(mypubkey);
-			// 使用指定的 byte 数组更新要签名或验证的数据   
+			// 使用指定的 byte 数组更新要签名或验证的数据
 			signetcheck.update(info.getBytes());
-			// 验证传入的签名   
+			// 验证传入的签名
 			return signetcheck.verify(signed);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -227,13 +227,12 @@ public class Crypt {
 	 */
 	public static byte[] hex2byte(String str) {
 		byte[] b = str.getBytes();
-		if ((b.length % 2) != 0){
+		if ((b.length % 2) != 0) {
 			throw new IllegalArgumentException("des conver error!");
 		}
 
 		byte[] b2 = new byte[b.length / 2];
-		for (int n = 0; n < b.length; n += 2)
-		{
+		for (int n = 0; n < b.length; n += 2) {
 			String item = new String(b, n, 2);
 			b2[n / 2] = (byte) Integer.parseInt(item, 16);
 		}
@@ -250,11 +249,9 @@ public class Crypt {
 	 * @return byte  
 	 */
 	public static byte uniteBytes(byte src0, byte src1) {
-		byte _b0 = Byte.decode("0x" + new String(new byte[] { src0 }))
-				.byteValue();
+		byte _b0 = Byte.decode("0x" + new String(new byte[] { src0 })).byteValue();
 		_b0 = (byte) (_b0 << 4);
-		byte _b1 = Byte.decode("0x" + new String(new byte[] { src1 }))
-				.byteValue();
+		byte _b1 = Byte.decode("0x" + new String(new byte[] { src1 })).byteValue();
 		byte ret = (byte) (_b0 ^ _b1);
 		return ret;
 	}
@@ -315,7 +312,7 @@ public class Crypt {
 		}
 		return obj;
 	}
-	
+
 	/**  
 	 * 创建  
 	 *   
@@ -323,9 +320,9 @@ public class Crypt {
 	 */
 	public static void createLincese() {
 		Crypt crypt = new Crypt();
-        String eneryString  = ComputerInfoUtil.getEncryPtString();
+		String eneryString = ComputerInfoUtil.getEncryPtString();
 		int time = eneryString.length() / 7;
-		// 生成一个DES算法的密匙                      
+		// 生成一个DES算法的密匙
 		SecretKey key = crypt.createSecretKey("DES");
 
 		StringBuffer desString = new StringBuffer();
@@ -336,13 +333,14 @@ public class Crypt {
 				endindex = eneryString.length();
 			}
 			String temp = eneryString.substring(startindex, endindex);
-			// 用密匙加密信息  
+			// 用密匙加密信息
 			String str1 = crypt.encryptToDES(key, temp);
 			desString.append(str1);
 		}
-		doObjToFile(Constant.datapath + Constant.licencepath, new Object[] { key, desString.toString() });
+		doObjToFile(Constant.datapath + Constant.licencepath, new Object[] { key,
+				desString.toString() });
 	}
-	
+
 	/**  
 	 * 取得linecese  
 	 *   
@@ -363,13 +361,12 @@ public class Crypt {
 				endindex = sdesString.length();
 			}
 			String temp = sdesString.substring(startindex, endindex);
-			// 使用这个密匙解密   
+			// 使用这个密匙解密
 			String decrypt = crypt.decryptByDES(key, temp);
 			outString.append(decrypt);
 		}
 		return outString.toString();
 	}
-	
 
 	/**  
 	 * 测试  
@@ -388,7 +385,7 @@ public class Crypt {
 		// System.out.println("Success!");
 		// } else {
 		// System.out.println("Fail!");
-		//        }   
+		// }
 	}
-	
+
 }

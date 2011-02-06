@@ -83,13 +83,13 @@ public class FileUtil {
 
 	public static void copyFile(File in, File out) {
 		try {
-		
-			if(!out.exists()){
+
+			if (!out.exists()) {
 				out.createNewFile();
 			}
 			FileInputStream fis = new FileInputStream(in);
 			FileOutputStream fos = new FileOutputStream(out);
-			
+
 			byte[] buf = new byte[1024];
 			int i = 0;
 			while ((i = fis.read(buf)) != -1) {
@@ -120,10 +120,10 @@ public class FileUtil {
 				line = br.readLine();
 			}
 			br.close();
-			
+
 			File dicfile = new File(filepath);
-			if(dicfile.exists()){
-			   dicfile.delete();
+			if (dicfile.exists()) {
+				dicfile.delete();
 			}
 			FileUtil.appendText(filepath, sb.toString());
 		} catch (IOException e) {
@@ -131,7 +131,7 @@ public class FileUtil {
 		}
 		return "";
 	}
-	
+
 	/**  
 	 * 读取文本内容  
 	 * @param textname 文本名称  
@@ -197,7 +197,7 @@ public class FileUtil {
 			FileWriter fw = new FileWriter(filepath, true);
 			fw.append(content);
 			flag = true;
-			if (fw != null){
+			if (fw != null) {
 				fw.close();
 			}
 		} catch (IOException e) {
@@ -205,7 +205,6 @@ public class FileUtil {
 		}
 		return flag;
 	}
-	
 
 	/**
 	 * @return Returns the param.
@@ -224,12 +223,12 @@ public class FileUtil {
 		}
 		return out;
 	}
-	
+
 	public static boolean is2007Doc(String path) {
-		
+
 		return true;
 	}
-	
+
 	public static boolean showALlFile(String path) {
 		boolean flag = false;
 		File file = new File(path);
@@ -250,8 +249,10 @@ public class FileUtil {
 			if (temp.isFile()) {
 				String apath = temp.getAbsolutePath();
 				int index = apath.indexOf("slfile");
-				//System.out.println(temp.getAbsolutePath().substring(index).replaceAll("\\", "."));
-				String s = Pattern.compile("\\\\").matcher(temp.getAbsolutePath().substring(index)).replaceAll(".");
+				// System.out.println(temp.getAbsolutePath().substring(index).replaceAll("\\",
+				// "."));
+				String s = Pattern.compile("\\\\").matcher(temp.getAbsolutePath().substring(index))
+						.replaceAll(".");
 				System.out.println(s + "=1.2.0");
 			}
 			if (temp.isDirectory()) {
@@ -260,22 +261,22 @@ public class FileUtil {
 		}
 		return flag;
 	}
-	
-	public static void main(String[] args){
-		
-//		C:\Program Files\slfile\icos\1.ico
-//		C:\Program Files\slfile\icos\2.ico
-//		C:\Program Files\slfile\icos\3.ico
-//		C:\Program Files\slfile\icos\4.ico
-//		C:\Program Files\slfile\icos\search.ico
-//		C:\Program Files\slfile\icos\titleico.jpg
-//		C:\Program Files\slfile\jre-6u11-windows-i586-p.exe
-//		C:\Program Files\slfile\licence.dat
-//		C:\Program Files\slfile\slfile.exe
-//		C:\Program Files\slfile\\unist.exe
-		showALlFile("C:\\Program Files\\slfile\\tomcat\\webapps\\slfile");
+
+	public static void main(String[] args) {
+
+		// C:\Program Files\slfile\icos\1.ico
+		// C:\Program Files\slfile\icos\2.ico
+		// C:\Program Files\slfile\icos\3.ico
+		// C:\Program Files\slfile\icos\4.ico
+		// C:\Program Files\slfile\icos\search.ico
+		// C:\Program Files\slfile\icos\titleico.jpg
+		// C:\Program Files\slfile\jre-6u11-windows-i586-p.exe
+		// C:\Program Files\slfile\licence.dat
+		// C:\Program Files\slfile\slfile.exe
+		// C:\Program Files\slfile\\unist.exe
+showALlFile("C:\\Program Files\\slfile\\tomcat\\webapps\\slfile");
 		showALlFile("C:\\Program Files\\slfile\\dic");
-		
+
 	}
 
 }

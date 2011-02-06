@@ -49,7 +49,7 @@ public class UpdaterUtil {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static String getNewVerbyId(String messid) {
 		String mes = "";
 		Object temp = newprop.get(messid);
