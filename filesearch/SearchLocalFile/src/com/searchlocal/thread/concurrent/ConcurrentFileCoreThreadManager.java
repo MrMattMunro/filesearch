@@ -29,7 +29,7 @@ public class ConcurrentFileCoreThreadManager {
 	public ConcurrentFileCoreThreadManager() {
 
 		ArrayBlockingQueue<Runnable> abq = new ArrayBlockingQueue<Runnable>(1);
-		pool = new CThreadPoolExecutor(2, 2, 1200, TimeUnit.SECONDS, abq);
+		pool = new CThreadPoolExecutor(5, 5, 1200, TimeUnit.SECONDS, abq);
 	}
 
 	/**
