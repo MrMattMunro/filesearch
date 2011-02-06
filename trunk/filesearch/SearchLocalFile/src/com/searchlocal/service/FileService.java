@@ -45,12 +45,10 @@ public class FileService {
 	public boolean execBatch(String namespace) throws DBException, LogicException {
 		FileDao fileDao = new FileDao();
 		String filepath = Constant.datapath + Constant.filedatapath + Constant.suffixname;
-		filepath = filepath.substring(1);
 		filepath = StringUtils.editFilePath(filepath);
 
 		fileDao.execbatch(filepath, namespace);
-		String existedpath = filepath.substring(1, filepath.length() - 1);
-		File file = new File(existedpath);
+		File file = new File(filepath);
 		// 删除batch的数据文件
 		if (file.exists()) {
 			file.delete();
@@ -67,11 +65,10 @@ public class FileService {
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public int createBatchFile(List<FileParam> filebeanList, String namespace, int fileClassify)
+	public int createBatchFile(List<FileParam> filebeanList, String namespace)
 			throws DBException, LogicException {
 		// 生成csv文件
-		File wordfile = new File(Constant.datapath + Constant.filedatapath + fileClassify
-				+ Constant.suffixname);
+		File wordfile = new File(Constant.datapath + Constant.filedatapath + Constant.suffixname);
 		FileOutputStream out = null;
 		try {
 			if (!wordfile.exists()) {
@@ -89,7 +86,7 @@ public class FileService {
 			String temp = "";
 			String path = element.getPath();
 			path = StringUtils.editFilePathForBatch(path);
-			temp = temp + "," + path;
+			temp = path;
 			temp = temp + "," + new Timestamp(element.getLastModify());
 			temp = temp + "," + element.getError();
 			temp = temp + "\r\n";
@@ -166,6 +163,21 @@ public class FileService {
 		FileDao fileDao;
 		fileDao = new FileDao();
 		return fileDao.deleteFileRecord(namespace, path);
+	}
+	
+	/**
+	 * 根据文件路径来删除文件记录
+	 * 
+	 * @param namespace 数据库名
+	 * @param path 文件路径列表
+	 * @throws DBException
+	 * @throws LogicException
+	 */
+	public boolean deleteFileRecords(String namespace, List<String> paths) throws DBException,
+			LogicException {
+		FileDao fileDao;
+		fileDao = new FileDao();
+		return fileDao.deleteFileRecords(namespace, paths);
 	}
 
 	/**

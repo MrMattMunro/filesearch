@@ -10,6 +10,7 @@
  */
 package com.searchlocal.service;
 
+import java.sql.Connection;
 import java.util.List;
 
 import com.searchlocal.bean.SearcherBean;
@@ -35,47 +36,75 @@ public class SeacherService {
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public boolean createResulttable(String namespace) throws DBException, LogicException {
+	public boolean createSearchertable(String namespace) throws DBException, LogicException {
 		SearcherDao searcherDao = new SearcherDao();
 		return searcherDao.createSearchertable(namespace);
 	}
-
+	
 	/**
 	 * 取出待删除索引的搜索对象
 	 * 
-	 * @param namespace 数据库名
+	 * @param conn 数据库连接
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public List<SearcherBean> getNeedDelSeacher(String namespace)
+	public List<SearcherBean> getNeedDelSeacher(Connection conn)
 			throws DBException, LogicException {
 		SearcherDao searcherDao = new SearcherDao();
-		return searcherDao.getNeedDelSeacher(namespace);
+		return searcherDao.getNeedDelSeacher(conn);
 	}
 
 	/**
 	 * 取出待建立索引的搜索对象
 	 * 
-	 * @param namespace 数据库名
+	 * @param conn 数据库连接
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public List<SearcherBean> getNeedIndexSeacher(String namespace)
+	public List<SearcherBean> getNeedIndexSeacher(Connection conn)
 			throws DBException, LogicException {
 		SearcherDao searcherDao = new SearcherDao();
-		return searcherDao.getNeedIndexSeacher(namespace);
+		return searcherDao.getNeedIndexSeacher(conn);
 	}
 	
 	/**
 	 * 取出需要更新的搜索对象
 	 * 
-	 * @param namespace 数据库名
+	 * @param conn 数据库连接
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public List<SearcherBean> getNeedUpdateSeacher(String namespace)
+	public List<SearcherBean> getNeedUpdateSeacher(Connection conn)
 			throws DBException, LogicException {
 		SearcherDao searcherDao = new SearcherDao();
-		return searcherDao.getNeedUpdateSeacher(namespace);
+		return searcherDao.getNeedUpdateSeacher(conn);
 	}
+
+	/**
+	 * 删除搜索对象
+	 * 
+	 * @param id 搜索对象Id
+	 * @throws DBException
+	 * @throws LogicException
+	 */
+	public boolean deleteSeacherById(String id)
+			throws DBException, LogicException {
+		SearcherDao searcherDao = new SearcherDao();
+		return searcherDao.deleteSearcher(id);
+	}
+	
+	/**
+	 * 更新搜索对象
+	 * 
+	 * @param conn 数据库连接
+	 * @param bean 搜索对象
+	 * @throws DBException
+	 * @throws LogicException
+	 */
+	public boolean updateSearcher(Connection conn,SearcherBean bean)
+			throws DBException, LogicException {
+		SearcherDao searcherDao = new SearcherDao();
+		return searcherDao.updateSearcherById(conn, bean);
+	}
+	
 }
