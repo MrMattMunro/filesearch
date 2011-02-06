@@ -91,7 +91,7 @@ public class JPModifyFrame extends CFrame implements ActionListener {
 		panel.makeLabel(element.getPath(), 190, 50, 120, 25);
 
 		panel.makeLabel(msg.getMsgbyId(Constant.label_indexdir), 60, 90, 120, 25);
-		panel.makeLabel(element.getIdexpath(), 190, 90, 120, 25);
+		panel.makeLabel(element.getIndexpath(), 190, 90, 120, 25);
 
 		panel.makeLabel(msg.getMsgbyId(Constant.label_doc), 60, 130, 120, 25);
 		excelcheckbox = panel.makeCheckbox("excel", 140, 130, 60, 20, "");
@@ -149,7 +149,7 @@ public class JPModifyFrame extends CFrame implements ActionListener {
 				SearchlocalApp.startWork(Constant.ToolTipsClassify.TOOLTIPS_UPDATINGINDEX);
 
 				CreateNewParam param = new CreateNewParam();
-				String indexpath = element.getIdexpath();
+				String indexpath = element.getIndexpath();
 				List<String> selectfiletype = new ArrayList<String>();
 
 				MessageParam indexpathparam = new MessageParam(indexpath, indexpaxth);
@@ -184,7 +184,7 @@ public class JPModifyFrame extends CFrame implements ActionListener {
 					param.setSearchname(searchname);
 					param.setPath(element.getPath());
 
-					param.setIdexpath(indexpath);
+					param.setIndexpath(indexpath);
 					param.setSelectfiletype(selectfiletype);
 
 					SearchFile searchFile = new SearchFile();
@@ -199,7 +199,7 @@ public class JPModifyFrame extends CFrame implements ActionListener {
 							MessageFrame.showmessage(errormsg);
 							// 更新XML搜索信息
 							XMLConfig xmler = new XMLConfig();
-							xmler.removeXML(param);
+							xmler.removeXML(searchname);
 							// 加入新追加的搜索类型
 							existedsearchTypeList.addAll(param.getSelectfiletype());
 							param.setSelectfiletype(existedsearchTypeList);
@@ -225,7 +225,7 @@ public class JPModifyFrame extends CFrame implements ActionListener {
 				CreateNewParam param = new CreateNewParam();
 				param.setSearchname(searchname);
 
-				if (MessageFrame.confirmDeletAction(element.getIdexpath())) {
+				if (MessageFrame.confirmDeletAction(element.getIndexpath())) {
 					// ɾ�?B
 					BaseService baseService = new BaseService();
 					try {
@@ -238,12 +238,12 @@ public class JPModifyFrame extends CFrame implements ActionListener {
 						MessageFrame.showmessage(errmsg);
 					}
 
-					// ɾ�?��?ļ?
-					FileUtil.delFolder(element.getIdexpath(), true);
+					// 删除索引文件保存目录
+					FileUtil.delFolder(element.getIndexpath(), true);
 
-					// ɾ�?ML��?
+					// 删除XML节点
 					XMLConfig xmler = new XMLConfig();
-					xmler.removeXML(param);
+					xmler.removeXML(searchname);
 
 					c.setVisible(false);
 					String errormsg = msg.getMsgbyId(Constant.info_deletedindex);

@@ -22,24 +22,25 @@ import snoozesoft.systray4j.SysTrayMenuIcon;
 import snoozesoft.systray4j.SysTrayMenuItem;
 import snoozesoft.systray4j.SysTrayMenuListener;
 
+import com.searchlocal.bean.FileOpenerBean;
 import com.searchlocal.constants.Constant;
-import com.searchlocal.exception.DBException;
-import com.searchlocal.exception.LogicException;
 import com.searchlocal.menu.en.ENAboutFrame;
 import com.searchlocal.menu.en.ENAddDicFrame;
-import com.searchlocal.menu.en.ENCreateNewFrame;
 import com.searchlocal.menu.en.ENModifyFrame;
 import com.searchlocal.menu.en.ENOptionSetFrame;
 import com.searchlocal.menu.jp.JPAboutFrame;
 import com.searchlocal.menu.jp.JPAddDicFrame;
-import com.searchlocal.menu.jp.JPCreateNewFrame;
 import com.searchlocal.menu.jp.JPModifyFrame;
 import com.searchlocal.menu.jp.JPOptionSetFrame;
 import com.searchlocal.param.CreateNewParam;
 import com.searchlocal.service.BaseService;
+import com.searchlocal.service.FileOpenerService;
+import com.searchlocal.service.ResultService;
+import com.searchlocal.service.SeacherService;
 import com.searchlocal.thread.FileContainer;
 import com.searchlocal.thread.SearchFile;
 import com.searchlocal.thread.concurrent.ConcurrentFileCore;
+import com.searchlocal.thread.searcher.CheckSearcherCore;
 import com.searchlocal.util.ConstantExeFileUtil;
 import com.searchlocal.util.CourseUtil;
 import com.searchlocal.util.FileOpenerUtil;
@@ -47,6 +48,7 @@ import com.searchlocal.util.FileUtil;
 import com.searchlocal.util.MenuMessageUtil;
 import com.searchlocal.util.RegistTableUtil;
 import com.searchlocal.util.StringUtils;
+import com.searchlocal.util.WinMsgUtil;
 import com.searchlocal.util.XMLConfig;
 
 public class SearchlocalApp implements ActionListener, SysTrayMenuListener {
@@ -140,6 +142,7 @@ public class SearchlocalApp implements ActionListener, SysTrayMenuListener {
 	}
 
 	public SearchlocalApp() {
+		
 		frame = new JFrame(msg.getMsgbyId(Constant.searchapp_title));
 		frame.setSize(400, 300);
 		icos = searchicos[0];
@@ -156,32 +159,57 @@ public class SearchlocalApp implements ActionListener, SysTrayMenuListener {
 		copydll();
 		// 建立共同信息数据库
 		createCommonDb();
+		// 设置打开软件
+		setFileOpener();
+		// 启动同步线程
 		ConcurrentFileCore.listen();
+		// 启动搜索对象线程
+		CheckSearcherCore.listen();
 	}
 
+	/**
+	 * 插入打开文件列表
+	 */
+	static void setFileOpener() {
+		// 插入打开文件列表
+		FileOpenerService fileOpenerService = new FileOpenerService();
+		try {
+			List<FileOpenerBean> fileOpenerList = fileOpenerService.getFileOpenerByFileType(
+					Constant.CommonInfo.DATABASE, Constant.FileNameClassify.TXT);
+			// 当查出打开文件列表有时,说明已插入数据库
+			if(fileOpenerList.size() > 0){
+				return;
+			}
+			// 插入打开文件列表
+			fileOpenerList = FileOpenerUtil.getFileOpenerList();
+			fileOpenerService.insertFileOpenRecord(fileOpenerList, Constant.CommonInfo.DATABASE);
+		} catch (Exception e) {
+			return;
+		}
+	}
+	
 	/**
 	 * 建立共同信息数据库
 	 */
 	static void createCommonDb() {
+		// 创建COMMONIFO数据库
 		BaseService baseService = new BaseService();
-		boolean isDbExisted = false;
 		try {
-			isDbExisted = baseService.createDataBase(Constant.CommonInfo.DATABASE);
-		} catch (DBException e) {
-			// TODO 注意消除资源(关闭I/O等)
-			e.printStackTrace();
-		} catch (LogicException e) {
-			// TODO 注意消除资源(关闭I/O等)
-			e.printStackTrace();
-		}
-		// 如果已经存在COMMONINFO数据库，则返回
-		if(!isDbExisted){
+			baseService.createDataBase(Constant.CommonInfo.DATABASE);
+		} catch (Exception e) {
 			return;
 		}
-		
 		// 创建 T_SEARCHER表, T_FILEOPENER表，T_RESULT表
-		
-		
+		SeacherService searcherService = new SeacherService();
+		FileOpenerService fileOpenerService = new FileOpenerService();
+		ResultService resultService = new ResultService();
+		try {
+			searcherService.createSearchertable(Constant.CommonInfo.DATABASE);
+			fileOpenerService.createFileOpenertable(Constant.CommonInfo.DATABASE);
+			resultService.createResulttable(Constant.CommonInfo.DATABASE);
+		} catch (Exception e) {
+			return;
+		}
 	}
 
 	/**
@@ -330,15 +358,16 @@ public class SearchlocalApp implements ActionListener, SysTrayMenuListener {
 				CourseUtil.shutdown();
 				System.exit(0);
 			} else if (sme.getActionCommand().equals(Constant.MenuName.CREATESEARCH)) {
-				if (language.equals(Constant.LanguageClassify.JAPANESE)) {
-					JPCreateNewFrame.showframe();
-				}
-				if (language.equals(Constant.LanguageClassify.ENGLISH)) {
-					ENCreateNewFrame.showframe();
-				}
-				if (language.equals(Constant.LanguageClassify.CHINESE)) {
-					CreateNewFrame.showframe();
-				}
+				WinMsgUtil.showCreateNew();
+//				if (language.equals(Constant.LanguageClassify.JAPANESE)) {
+//					JPCreateNewFrame.showframe();
+//				}
+//				if (language.equals(Constant.LanguageClassify.ENGLISH)) {
+//					ENCreateNewFrame.showframe();
+//				}
+//				if (language.equals(Constant.LanguageClassify.CHINESE)) {
+//					CreateNewFrame.showframe();
+//				}
 			} else if (sme.getActionCommand().equals(Constant.MenuName.OPTION)) {
 				if (language.equals(Constant.LanguageClassify.JAPANESE)) {
 					JPOptionSetFrame.showframe();

@@ -93,7 +93,7 @@ public class MessageFrame {
 					}
 				}
 				if (label.equals(msg.getMsgbyId(Constant.label_indexdir))) {
-					if (value.equals(element.getIdexpath())) {
+					if (value.equals(element.getIndexpath())) {
 						temp.append(label + ":" + value + ",");
 					}
 				}

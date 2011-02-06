@@ -45,7 +45,6 @@ import com.searchlocal.thread.util.ThreadUtil;
 import com.searchlocal.util.ConstantExeFileUtil;
 import com.searchlocal.util.CourseUtil;
 import com.searchlocal.util.MenuMessageUtil;
-import com.searchlocal.util.WinMsgUtil;
 import com.searchlocal.util.XMLConfig;
 
 public class CreateNewFrame extends CFrame implements ActionListener {
@@ -183,7 +182,7 @@ public class CreateNewFrame extends CFrame implements ActionListener {
 
 				XMLConfig xmler = new XMLConfig();
 
-				List enetityList = xmler.getEntityList();
+				List<CreateNewParam> enetityList = xmler.getEntityList();
 
 				if (MessageFrame.checkListNull(paramList)
 						&& MessageFrame.checkSearcherList(paramList, enetityList)
@@ -210,7 +209,7 @@ public class CreateNewFrame extends CFrame implements ActionListener {
 					
 					param.setSearchname(searchname);
 					param.setPath(dir);
-					param.setIdexpath(indexpath);
+					param.setIndexpath(indexpath);
 					param.setSelectfiletype(selectfiletype);
 
 					BaseService baseService = new BaseService();
@@ -244,7 +243,7 @@ public class CreateNewFrame extends CFrame implements ActionListener {
 
 					xmler.writeXML(param);
 					// 通知slFileSearch服务重新加载Searcher.xml文件
-					WinMsgUtil.notifyMsg();
+					// WinMsgUtil.notifyMsg();
 					SearchFile searchFile = new SearchFile();
 					searchFile.listen(param);
 
