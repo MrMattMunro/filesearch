@@ -7,7 +7,7 @@ public abstract class CRunnable extends Thread implements Runnable, Cloneable {
 
 	public void init(CreateNewParam param, FileContainer filecon) {
 	}
-	
+
 	public void run() {
 	}
 
