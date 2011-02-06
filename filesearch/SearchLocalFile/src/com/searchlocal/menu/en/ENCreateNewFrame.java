@@ -212,7 +212,7 @@ public class ENCreateNewFrame extends CFrame implements ActionListener {
 
 					param.setSearchname(searchname);
 					param.setPath(dir);
-					param.setIdexpath(indexpath);
+					param.setIndexpath(indexpath);
 					param.setSelectfiletype(selectfiletype);
 
 					BaseService baseService = new BaseService();
