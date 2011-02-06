@@ -9,12 +9,12 @@ import org.apache.commons.dbcp.DataSourceConnectionFactory;
 
 public class CommonsDBCP {
 
-	private static BasicDataSource bds = new BasicDataSource();
-
 	private static ConnectionFactory fac = null;
 
 	public CommonsDBCP(ConnectionParam param) {
-		bds.setDriverClassName(param.getDriver()); // ?
+		
+		BasicDataSource bds = new BasicDataSource();
+		bds.setDriverClassName(param.getDriver()); // 
 		bds.setUrl(param.getUrl()); // 
 		bds.setUsername(param.getUser()); //
 		bds.setPassword(param.getPassword()); //
