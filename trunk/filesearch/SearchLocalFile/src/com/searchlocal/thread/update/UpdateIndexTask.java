@@ -64,13 +64,23 @@ public class UpdateIndexTask extends CRunnable {
 	 * 执行
 	 */
 	public void run() {
-		updateIndex();
+		while(true){
+			try {
+				Thread.sleep(10000);
+				synchronized(this){
+					updateIndex();
+				}
+			} catch (InterruptedException e) {
+				// TODO 注意消除资源(关闭I/O等)
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/** 
 	 * 更新索引文件
 	 */
-	public boolean updateIndex() {
+	public  boolean updateIndex() {
 
 		// 需要删除的文档
 		ConcurrentHashMap<String, Long> needDelfiles = filecon.getDelfile();
@@ -80,19 +90,25 @@ public class UpdateIndexTask extends CRunnable {
 		String search = param.getSearchname();
 		// 文件服务类
 		FileService fileService = new FileService();
+		// 文件列表
+		List<String> paths = new ArrayList<String>();
 		// 处理需要删除的文档
 		for (Iterator<String> iter = needDelfiles.keySet().iterator(); iter.hasNext();) {
 			String path = (String)iter.next();
+			// 删除索引
 			CurrentIndexUtil.deleteDcoumentByPath(search, path);
-			// 删除t_File记录
-			try {
-				fileService.deleteFileRecord(search, path);
-			} catch (Exception e) {
-			    e.printStackTrace();
-			}
+			// 需要删除的路径
+			paths.add(path);
 			// 从容器删除
 			filecon.removeDelfile(path);
 		}
+		// 删除t_File记录
+		try {
+			fileService.deleteFileRecords(search, paths);
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+		
 		// 文件列表
 		List<FileParam> filebeanList = new ArrayList<FileParam>();
 		// 需要添加的文档
@@ -128,10 +144,7 @@ public class UpdateIndexTask extends CRunnable {
 		}
 		// 插入T_file记录
 		try {
-			// 生成csv文件
-			fileService.createBatchFile(filebeanList, search);
-			// 执行csv文件
-			fileService.execBatch(search);
+			fileService.insertFileRecord(filebeanList, search);
 		} catch (DBException e) {
 			// TODO 注意消除资源(关闭I/O等)
 			e.printStackTrace();

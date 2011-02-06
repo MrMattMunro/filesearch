@@ -8,8 +8,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import com.searchlocal.constants.Constant;
-import com.searchlocal.lucene.IndexMaker;
-import com.searchlocal.lucene.IndexWriterFactory;
 import com.searchlocal.param.CreateNewParam;
 import com.searchlocal.param.FileParam;
 import com.searchlocal.service.FileService;
@@ -21,9 +19,9 @@ public class CheckThreadPoolTask extends CRunnable {
 	private CreateNewParam param;
 
 	private FileContainer filecon;
-	
+
 	private static boolean isdone = false;
-	
+
 	private static MenuMessageUtil msg = new MenuMessageUtil();
 
 	public void init(CreateNewParam param, FileContainer filecon) {
@@ -35,11 +33,11 @@ public class CheckThreadPoolTask extends CRunnable {
 		while (true) {
 			try {
 				Thread.sleep(10000);
-				if(this.filecon.isIsdone() || isdone){
+				if (this.filecon.isIsdone() || isdone) {
 					continue;
 				}
 				ThreadPoolExecutor pool = ThreadCheckThreadManager.getThreadManager().getPool();
-				
+
 				synchronized (this) {
 					int allfilenum = filecon.getAllfile().size();
 					int haserrfilenum = filecon.getHaserrorfile().size();
@@ -65,30 +63,21 @@ public class CheckThreadPoolTask extends CRunnable {
 						// inserted file
 						ConcurrentHashMap<String, Long> insertfile = filecon.getInsertedfile();
 						Set<String> insertkeyset = insertfile.keySet();
-						for (Iterator iter = insertkeyset.iterator(); iter
-								.hasNext();) {
+						for (Iterator iter = insertkeyset.iterator(); iter.hasNext();) {
 							String path = (String) iter.next();
 							FileParam param = filecon.getinsertedfile(path);
 							param.setError(Constant.NO_ERROR);
 							filebeanList.add(param);
 						}
-						String datapath = Constant.datapath + "\\data";
-						ClearCsvFile.saveCsvToDB(datapath, param.getSearchname());
-
+						
 						// insert File Bean
 						FileService fileService = new FileService();
 						fileService.insertFileRecord(filebeanList, param.getSearchname());
-						
-						
+
 						// 清空資源
 						filebeanList.clear();
 						filecon.clearAll();
 
-						IndexMaker indexmaker = new IndexMaker();
-						indexmaker.makeindex(param.getSelectfiletype(), param.getIdexpath(), param.getSearchname(), insertkeyset);
-						IndexWriterFactory indexWriterFactory = new IndexWriterFactory();
-						indexWriterFactory.clear();
-						
 						this.filecon.setIsdone(true);
 						isdone = true;
 						break;
