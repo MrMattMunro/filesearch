@@ -29,21 +29,21 @@ import com.searchlocal.exception.LogicException;
 public class FileOpenerService {
 
 	/**
-	 * 创建变化文件表
+	 * 创建文件打开表
 	 * 
 	 * @param namespace 数据库名
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public boolean createChangeInfoTable(String namespace) throws DBException, LogicException {
+	public boolean createFileOpenertable(String namespace) throws DBException, LogicException {
 		FileOpenerDao fileOpenerDao = new FileOpenerDao();
 		return fileOpenerDao.createFileOpenertable(namespace);
 	}
 
 	/**
-	 * 取出FileOpener纪录
+	 * 取出文件打开软件记录
 	 * 
-	 * @return list FileOpener纪录列表
+	 * @return list FileOpener记录列表
 	 * @throws LogicException
 	 * @throws DBException 
 	 */
@@ -64,5 +64,19 @@ public class FileOpenerService {
 			throws LogicException, DBException {
 		FileOpenerDao fileOpenerDao = new FileOpenerDao();
 		return fileOpenerDao.insertFileOpenRecord(beanList, namespace);
+	}
+	
+	/**
+	 * 根据文件类型来取得打开文件
+	 * 
+	 * @param namespace 数据库 
+	 * @param fileType 文件类型
+	 * @throws DBException 
+	 * @throws LogicException 
+	 */
+	public  List<FileOpenerBean> getFileOpenerByFileType(String namespace, String fileType)
+			throws LogicException, DBException {
+		FileOpenerDao fileOpenerDao = new FileOpenerDao();
+		return fileOpenerDao.getFileOpenerByFileType(namespace, fileType);
 	}
 }
