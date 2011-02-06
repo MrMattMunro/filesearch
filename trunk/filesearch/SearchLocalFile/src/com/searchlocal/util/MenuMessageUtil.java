@@ -56,7 +56,7 @@ public class MenuMessageUtil {
 		}
 	}
 
-	public static String getMsgbyId(String messid) {
+	public String getMsgbyId(String messid) {
 		String mes = "";
 		String temp = (String) prop.get(messid);
 		if (temp != null) {
@@ -68,7 +68,7 @@ public class MenuMessageUtil {
 		}
 		return mes;
 	}
-	
+
 	public static String getMsgbyId(String messid, Map map) {
 		String mes = "";
 		String temp = (String) prop.get(messid);

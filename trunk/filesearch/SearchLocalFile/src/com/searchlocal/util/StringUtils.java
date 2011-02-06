@@ -23,12 +23,16 @@ public final class StringUtils {
 		bf.append('\'');
 		return bf.toString();
 	}
-	
+
 	public static boolean is2007Doc(String path) {
 		String suffixName = suffixName(path);
-		return Constant.FileClassify.is2007Doccontain(suffixName);
+		return Constant.FileClassify.is2007Doccontain(suffixName)&& isNotTempDoc(path);
 	}
 	
+	public static boolean isNotTempDoc(String path) {
+		return path.indexOf("~$") == -1;
+	}
+
 	public static String editFilePathForBatch(String path) {
 		char[] aa = path.toCharArray();
 		StringBuffer bf = new StringBuffer();
@@ -42,20 +46,20 @@ public final class StringUtils {
 	}
 
 	public static boolean isNull(String string) {
-		return string == null || "".equals(string.trim()) ;
+		return string == null || "".equals(string.trim());
 	}
-	
+
 	public static String replaceNull(String string) {
 		return string == null ? "" : string;
 	}
-	
+
 	public static String replaceRN(String temp) {
 		temp = temp.replaceAll(",", "");
 		temp = temp.replaceAll("\r", "");
 		temp = temp.replaceAll("\n", "");
 		return temp;
 	}
-	
+
 	public static String editSQL(String sql) {
 		char[] sqlarr = sql.toCharArray();
 		StringBuffer bf = new StringBuffer();
@@ -92,6 +96,13 @@ public final class StringUtils {
 		return suffixName;
 	}
 	
+	public static String getFileNameByPath(String path) {
+		String filename = "";
+		int idex = path.lastIndexOf("\\") + 1;
+		filename = path.substring(idex, path.length());
+		return filename;
+	}
+
 	public static String getTypebyName(String name) {
 		String suffixName = suffixName(name);
 		return getTypebySuffix(suffixName);
@@ -100,9 +111,10 @@ public final class StringUtils {
 	public static boolean checkisDicfile(String filename) {
 		String suffixName = suffixName(filename);
 		return suffixName.endsWith(Constant.FileClassify.TXT)
-				|| suffixName.endsWith(Constant.FileClassify.XLS) || suffixName.endsWith(Constant.FileClassify.XLS2007);
+				|| suffixName.endsWith(Constant.FileClassify.XLS)
+				|| suffixName.endsWith(Constant.FileClassify.XLS2007);
 	}
-	
+
 	public static boolean replaceNULL(String str) {
 		int strLen;
 		if (str == null || (strLen = str.length()) == 0) {
@@ -128,25 +140,29 @@ public final class StringUtils {
 
 	public static boolean checkIsAllNums(String str) {
 		String upperstr = str.toUpperCase();
-		if(upperstr.equals(str)){
+		if (upperstr.equals(str)) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public static String getTypebySuffix(String suffixname) {
 		String type = "";
 		suffixname = suffixname.toLowerCase();
-		if (suffixname.equals(Constant.FileClassify.DOC) || suffixname.equals(Constant.FileClassify.DOC2007)) {
+		if (suffixname.equals(Constant.FileClassify.DOC)
+				|| suffixname.equals(Constant.FileClassify.DOC2007)) {
 			type = Constant.FileNameClassify.WORD;
 		}
-		if (suffixname.equals(Constant.FileClassify.XLS) || suffixname.endsWith(Constant.FileClassify.XLS2007)) {
-			type =Constant.FileNameClassify.EXCEL;
+		if (suffixname.equals(Constant.FileClassify.XLS)
+				|| suffixname.endsWith(Constant.FileClassify.XLS2007)) {
+			type = Constant.FileNameClassify.EXCEL;
 		}
 		if (suffixname.equals(Constant.FileClassify.PDF)) {
-			type = Constant.FileNameClassify.PDF;;
+			type = Constant.FileNameClassify.PDF;
+			;
 		}
-		if (suffixname.equals(Constant.FileClassify.PPT) || suffixname.equals(Constant.FileClassify.PPT2007)) {
+		if (suffixname.equals(Constant.FileClassify.PPT)
+				|| suffixname.equals(Constant.FileClassify.PPT2007)) {
 			type = Constant.FileNameClassify.PPT;
 		}
 		if (suffixname.equals(Constant.FileClassify.CHM)) {
@@ -160,21 +176,24 @@ public final class StringUtils {
 		}
 		return type;
 	}
-	
+
 	public static String getTableName(String suffixname) {
 
 		String tablename = "";
 		suffixname = suffixname.toLowerCase();
-		if (suffixname.equals(Constant.FileClassify.DOC) || suffixname.equals(Constant.FileClassify.DOC2007)) {
+		if (suffixname.equals(Constant.FileClassify.DOC)
+				|| suffixname.equals(Constant.FileClassify.DOC2007)) {
 			tablename = "t_word";
 		}
-		if (suffixname.equals(Constant.FileClassify.XLS) || suffixname.endsWith(Constant.FileClassify.XLS2007)) {
+		if (suffixname.equals(Constant.FileClassify.XLS)
+				|| suffixname.endsWith(Constant.FileClassify.XLS2007)) {
 			tablename = "t_excel";
 		}
 		if (suffixname.equals(Constant.FileClassify.PDF)) {
 			tablename = "t_pdf";
 		}
-		if (suffixname.equals(Constant.FileClassify.PPT) || suffixname.equals(Constant.FileClassify.PPT2007)) {
+		if (suffixname.equals(Constant.FileClassify.PPT)
+				|| suffixname.equals(Constant.FileClassify.PPT2007)) {
 			tablename = "t_ppt";
 		}
 		if (suffixname.equals(Constant.FileClassify.CHM)) {
@@ -188,34 +207,36 @@ public final class StringUtils {
 		}
 		return tablename;
 	}
-	
-	
 
 	/**
 	 * 替换有参数的字符串
 	 * 
 	 * @param str 原本的Str
-     * @param Map 参数Map
+	 * @param Map 参数Map
 	 */
 	public static String convertParamStr(String str, Map map) {
-		if(map.isEmpty()){
-			return  str;
-		} 
+		if (map.isEmpty()) {
+			return str;
+		}
 		Iterator<String> inter = map.keySet().iterator();
-	    while(inter.hasNext()){
-	    	String key = (String)inter.next();
-	    	str = str.replaceAll("\\{" + key + "\\}", (String)map.get(key));
-	    }
+		while (inter.hasNext()) {
+			String key = (String) inter.next();
+			str = str.replaceAll("\\{" + key + "\\}", (String) map.get(key));
+		}
 		return str;
 	}
-	
+
 	private StringUtils() {
 	}
-	
-	public static void  main(String[] args){
-		String msg = "我是这一额的 爱一个 {num} ddaod我为 ";
-		Map parmMap = new HashMap();
-		parmMap.put("num", "090");
-		System.out.println(convertParamStr(msg, parmMap));
+
+	public static void main(String[] args) {
+//		String msg = "我是这一额的 爱一个 {num} ddaod我为 ";
+//		Map parmMap = new HashMap();
+//		parmMap.put("num", "090");
+//		System.out.println(convertParamStr(msg, parmMap));
+		
+		String msg = "C:\\TDDOWNLOAD\\Setup.rar";
+		System.out.println(getFileNameByPath(msg));
 	}
+	
 }

@@ -15,17 +15,17 @@ public class CourseUtil {
 	}
 
 	public static void restart(String installpath) {
-//		try {
-//			// 重启程序
-//			List pids = getShutDownPids();
-//			installpath = installpath.substring(1);
-//			installpath = URLDecoder.decode(installpath, "UTF-8");
-//			Runtime.getRuntime().exec(installpath);
-//		    // 启动
-//			shutdown(pids);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		 try {
+		 // 重启程序
+		 List pids = getShutDownPids();
+		 installpath = installpath.substring(1);
+		 installpath = URLDecoder.decode(installpath, "UTF-8");
+		 Runtime.getRuntime().exec(installpath);
+		 // 启动
+		 shutdown(pids);
+		 } catch (IOException e) {
+		 e.printStackTrace();
+		 }
 	}
 
 	public static void shutdown() {
@@ -55,36 +55,30 @@ public class CourseUtil {
 		List tokillPids = new ArrayList();
 		try {
 			Process p = Runtime.getRuntime().exec("tasklist");
-			BufferedReader bw = new BufferedReader(new InputStreamReader(p
-					.getInputStream()));
+			BufferedReader bw = new BufferedReader(new InputStreamReader(p.getInputStream()));
 			String process = "";
 
 			while ((process = bw.readLine()) != null) {
-				if (process.indexOf(".exe") != -1
-						&& process.indexOf("Console") != -1) {
+				if (process.indexOf(".exe") != -1 && process.indexOf("Console") != -1) {
 					int startindex = process.indexOf(".exe") + 4;
 					int endindex = process.indexOf("Console");
 					if (process.indexOf("javaw") == -1 && process.indexOf("java") != -1) {
 						tokillPids.add(process.substring(startindex, endindex).trim());
 					}
 					if (process.indexOf("slfile") != -1) {
-						tokillPids.add(process.substring(startindex, endindex)
-								.trim());
+						tokillPids.add(process.substring(startindex, endindex).trim());
 					}
 
-					if (process.indexOf("mysql") != -1) {
-						tokillPids.add(process.substring(startindex, endindex)
-								.trim());
-					}
+//					if (process.indexOf("mysql") != -1) {
+//						tokillPids.add(process.substring(startindex, endindex).trim());
+//					}
 
 					if (process.indexOf("cmd") != -1) {
-						tokillPids.add(process.substring(startindex, endindex)
-								.trim());
+						tokillPids.add(process.substring(startindex, endindex).trim());
 					}
-					
+
 					if (process.indexOf("update") != -1) {
-						tokillPids.add(process.substring(startindex, endindex)
-								.trim());
+						tokillPids.add(process.substring(startindex, endindex).trim());
 					}
 				}
 			}

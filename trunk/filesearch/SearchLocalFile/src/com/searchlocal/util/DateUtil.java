@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtil {
-	
+
 	/**
 	 *
 	 * @return int
@@ -16,7 +16,7 @@ public class DateUtil {
 	 * @param sDate2 java.lang.String
 	 */
 	public static int compareDate(String sDate1, String sDate2) {
-		
+
 		Date date1 = null;
 		Date date2 = null;
 		try {
@@ -25,18 +25,18 @@ public class DateUtil {
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException(e.getMessage());
 		}
-		
+
 		long dif = 0;
 		if (date2.after(date1))
 			dif = (date2.getTime() - date1.getTime()) / 1000 / 60 / 60 / 24;
 		else
 			dif = (date1.getTime() - date2.getTime()) / 1000 / 60 / 60 / 24;
-		
+
 		return (int) dif;
 	}
-	
-	private final static String[] dateFormats = { "yyyy-MM-dd", "yyyy-M-d", "yyyy-M-d", "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss" };
-	
+
+	private final static String[] dateFormats = { "yyyy-MM-dd", "yyyy-M-d", "yyyy-M-d",
+			"yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss" };
 
 	public static String getDateTime(long time) {
 		Date date = new Date(time);
@@ -71,16 +71,16 @@ public class DateUtil {
 			throw new IllegalArgumentException(szErrorMsg + "\r\n"
 					+ "Illegal Argument,can not parse input Date String");
 		}
-		
+
 		return date;
 	}
-	
+
 	public static String getNowDate() {
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
 		String s = df.format(new Date());
 		return s;
 	}
-	
+
 	public static String getNextDate() {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
@@ -91,7 +91,6 @@ public class DateUtil {
 		String s = df.format(date);
 		return s;
 	}
-	
 
 	public static String getComputerCurrentDate() {
 		Date date = new Date();
@@ -99,26 +98,25 @@ public class DateUtil {
 		String s = df.format(date);
 		return s;
 	}
-	
 
 	public static String getCurrentDateTime() {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String s = df.format(new Date());
 		return s;
 	}
-	
+
 	public static String getCurrentTime() {
 		SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
 		return df.format(new Date());
 	}
-	
+
 	public static String getCurrentDay() {
 		String day;
 		SimpleDateFormat df = new SimpleDateFormat("d");
 		day = df.format(new Date());
 		return day;
 	}
-	
+
 	public static String getCurrentMonth() {
 		String month;
 		SimpleDateFormat df = new SimpleDateFormat("MM");
@@ -136,38 +134,38 @@ public class DateUtil {
 		Long lDate = new Long(date.getTime());
 		return (lDate);
 	}
-	
+
 	public static Long getLongDate(String strDate, int iType) {
 		Long retDate = null;
 		switch (iType) {
-			case 0:
-				retDate = getLongDate(strDate);
-				break;
-			case 1:
-				retDate = new Long(java.sql.Timestamp.valueOf(strDate).getTime());
-				break;
+		case 0:
+			retDate = getLongDate(strDate);
+			break;
+		case 1:
+			retDate = new Long(java.sql.Timestamp.valueOf(strDate).getTime());
+			break;
 		}
 		return retDate;
 	}
-	
+
 	public static String getStrDate(java.lang.Long lDate, int iType) {
 		Date date = new Date(lDate.longValue());
 		SimpleDateFormat simpleDateFormat = null;
 		switch (iType) {
-			case 0:
-				simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				break;
-			case 1:
-				simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH");
-				break;
-			case 2:
-				simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-				break;
-			case 3:
-				simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				break;
+		case 0:
+			simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			break;
+		case 1:
+			simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH");
+			break;
+		case 2:
+			simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			break;
+		case 3:
+			simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			break;
 		}
-		
+
 		String strDate = simpleDateFormat.format(date);
 		return (strDate);
 	}
@@ -179,7 +177,7 @@ public class DateUtil {
 		}
 		return timeStr;
 	}
-	
+
 	public static String getDate(String aDate, int dif) {
 		java.sql.Date date = null;
 		try {
@@ -198,7 +196,7 @@ public class DateUtil {
 		String s = df.format(calendar.getTime());
 		return s;
 	}
-	
+
 	public static String getDateAfterMonth(String aDate) {
 		java.sql.Date date1 = null;
 		try {
@@ -216,11 +214,10 @@ public class DateUtil {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String s = df.format(calendar.getTime());
 		return s;
-	} //eof getDateAfterMonth(aDate)
-	
+	} // eof getDateAfterMonth(aDate)
 
 	public static String getDateAfterMonth(String aDate, int n) {
-		
+
 		Date date1 = null;
 		try {
 			date1 = parse(aDate);
@@ -243,7 +240,7 @@ public class DateUtil {
 	public static int getLastDate(String selectDate) {
 		int dates = 0;
 		Calendar calendar = Calendar.getInstance();
-		
+
 		try {
 			calendar.setTime(parse(selectDate));
 		} catch (Exception e) {
@@ -251,63 +248,63 @@ public class DateUtil {
 		}
 		int year = calendar.get(1);
 		switch (calendar.get(2) + 1) {
-			default:
-				break;
-			
-			case 1: // '\001'
-				dates = 31;
-				break;
-			
-			case 2: // '\002'
-				if (year % 400 == 0 || year % 4 == 0 && year % 100 != 0)
-					dates = 29;
-				else
-					dates = 28;
-				break;
-			
-			case 3: // '\003'
-				dates = 31;
-				break;
-			
-			case 4: // '\004'
-				dates = 30;
-				break;
-			
-			case 5: // '\005'
-				dates = 31;
-				break;
-			
-			case 6: // '\006'
-				dates = 30;
-				break;
-			
-			case 7: // '\007'
-				dates = 31;
-				break;
-			
-			case 8: // '\b'
-				dates = 31;
-				break;
-			
-			case 9: // '\t'
-				dates = 30;
-				break;
-			
-			case 10: // '\n'
-				dates = 31;
-				break;
-			
-			case 11: // '\013'
-				dates = 30;
-				break;
-			
-			case 12: // '\f'
-				dates = 31;
-				break;
+		default:
+			break;
+
+		case 1: // '\001'
+			dates = 31;
+			break;
+
+		case 2: // '\002'
+			if (year % 400 == 0 || year % 4 == 0 && year % 100 != 0)
+				dates = 29;
+			else
+				dates = 28;
+			break;
+
+		case 3: // '\003'
+			dates = 31;
+			break;
+
+		case 4: // '\004'
+			dates = 30;
+			break;
+
+		case 5: // '\005'
+			dates = 31;
+			break;
+
+		case 6: // '\006'
+			dates = 30;
+			break;
+
+		case 7: // '\007'
+			dates = 31;
+			break;
+
+		case 8: // '\b'
+			dates = 31;
+			break;
+
+		case 9: // '\t'
+			dates = 30;
+			break;
+
+		case 10: // '\n'
+			dates = 31;
+			break;
+
+		case 11: // '\013'
+			dates = 30;
+			break;
+
+		case 12: // '\f'
+			dates = 31;
+			break;
 		}
 		return dates;
-	} 
-	
+	}
+
 	public static Timestamp toTimestamp(String dateString) {
 		if ((dateString == null) || (dateString.trim().length() == 0)) {
 			return null;
@@ -320,7 +317,7 @@ public class DateUtil {
 		}
 		return null;
 	}
-	
+
 	public static void main(String[] args) {
 	}
 }

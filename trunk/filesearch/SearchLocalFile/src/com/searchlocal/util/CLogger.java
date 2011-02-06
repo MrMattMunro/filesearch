@@ -1,3 +1,6 @@
+/*
+ * Copyright(C) 2010 Slfile Company, Ltd. All Rights Reserved.
+ */
 package com.searchlocal.util;
 
 import java.io.File;
@@ -57,8 +60,7 @@ public class CLogger {
 		error(strMsgID, strParams, e);
 	}
 
-	public void error(String strMsgID, String strParam1, String strParam2,
-			Exception e) {
+	public void error(String strMsgID, String strParam1, String strParam2, Exception e) {
 		String[] strParams = new String[2];
 		strParams[0] = strParam1;
 		strParams[1] = strParam2;
@@ -107,8 +109,7 @@ public class CLogger {
 		warn(strMsgID, strParams, e);
 	}
 
-	public void warn(String strMsgID, String strParam1, String strParam2,
-			Exception e) {
+	public void warn(String strMsgID, String strParam1, String strParam2, Exception e) {
 		String[] strParams = new String[2];
 		strParams[0] = strParam1;
 		strParams[1] = strParam2;

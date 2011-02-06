@@ -1,4 +1,5 @@
 package com.searchlocal.util;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,8 +42,7 @@ public class XMLConfig {
 	public void readXML(String configPath) {
 		try {
 
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
-					.newInstance();
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = dbFactory.newDocumentBuilder();
 			this.doc = builder.parse(new File(configPath));
 		} catch (ParserConfigurationException e) {
@@ -66,7 +66,7 @@ public class XMLConfig {
 			for (int j = 0; j < cnodeList.getLength(); j++) {
 				Node cnode = cnodeList.item(j);
 				if (cnode.getNodeName().indexOf("indexpath") != -1) {
-					newparam.setIdexpath(cnode.getTextContent().trim());
+					newparam.setIndexpath(cnode.getTextContent().trim());
 				}
 				if (cnode.getNodeName().indexOf("searchpath") != -1) {
 					newparam.setPath(cnode.getTextContent().trim());
@@ -84,18 +84,14 @@ public class XMLConfig {
 		return entityList;
 	}
 
-	public void removeXML(CreateNewParam newparam) {
-
+	public void removeXML(String searchname) {
 		this.readXML(Constant.path + "com\\searchlocal\\properties\\searchers.xml");
-
 		NodeList nodelist = this.doc.getElementsByTagName("searchname");
-
 		for (int i = 0; i < nodelist.getLength(); i++) {
 			Node node = nodelist.item(i);
 			String nodevalue = node.getFirstChild().getNodeValue();
-			if (nodevalue.equals(newparam.getSearchname())) {
-				node.getParentNode().getParentNode().removeChild(
-						node.getParentNode());
+			if (nodevalue.equals(searchname)) {
+				node.getParentNode().getParentNode().removeChild(node.getParentNode());
 			}
 		}
 		this.writeFile();
@@ -108,9 +104,9 @@ public class XMLConfig {
 		Element searcher = doc.createElement("searcher");
 		String searchname = newparam.getSearchname();
 		String searchpath = newparam.getPath();
-		String indexpath = newparam.getIdexpath();
+		String indexpath = newparam.getIndexpath();
 
-		List selectfiletype = newparam.getSelectfiletype();
+		List<String> selectfiletype = newparam.getSelectfiletype();
 		StringBuffer temp = new StringBuffer();
 		for (Object object : selectfiletype) {
 			temp.append(object.toString() + ",");
@@ -140,8 +136,7 @@ public class XMLConfig {
 
 		DOMSource source = new DOMSource(doc);
 
-		File file = new java.io.File(Constant.path
-				+ "com\\searchlocal\\properties\\searchers.xml");
+		File file = new java.io.File(Constant.path + "com\\searchlocal\\properties\\searchers.xml");
 		StreamResult result = new StreamResult(file);
 
 		try {
@@ -159,7 +154,6 @@ public class XMLConfig {
 		} catch (TransformerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 	}
 }
-
