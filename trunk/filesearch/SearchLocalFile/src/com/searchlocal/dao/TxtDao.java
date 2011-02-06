@@ -124,7 +124,7 @@ public class TxtDao extends BaseDao {
 	 */
 	public boolean insertTxtRecord(List<TxtFileBean> beanList, String filepath, long lastmodify,
 			String filename, String namespace) throws LogicException, DBException {
-		Connection conn = BaseDao.getConn(namespace);
+		Connection conn = BaseDao.getBaseConn(namespace);
 		openTransaction(conn);
 		// SQL语句
 		String presql = SqlUtil.getSqlbyId("insertTxtRecord");
@@ -162,7 +162,7 @@ public class TxtDao extends BaseDao {
 	 * @throws LogicException
 	 */
 	public boolean execbatch(String datapath, String namesapce) throws DBException, LogicException {
-		Connection conn = BaseDao.getConn(namesapce);
+		Connection conn = BaseDao.getBaseConn(namesapce);
 		openTransaction(conn);
 		Statement st = null;
 		try {

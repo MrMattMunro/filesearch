@@ -123,7 +123,7 @@ public class WordDao extends BaseDao {
 	 */
 	public boolean insertWordRecord(List<WordFileBean> beanList, String filepath, long lastmodify,
 			String filename, String namesapce) throws DBException, LogicException {
-		Connection conn = BaseDao.getConn(namesapce);
+		Connection conn = BaseDao.getBaseConn(namesapce);
 
 		String presql = SqlUtil.getSqlbyId("insertWordRecord");
 		Map<String, String> paramMap = new HashMap<String, String>();
@@ -160,7 +160,7 @@ public class WordDao extends BaseDao {
 	 * @throws LogicException
 	 */
 	public boolean execbatch(String datapath, String namesapce) throws DBException, LogicException {
-		Connection conn = BaseDao.getConn(namesapce);
+		Connection conn = BaseDao.getBaseConn(namesapce);
 		openTransaction(conn);
 		Statement st = null;
 		try {

@@ -88,7 +88,7 @@ public class ChangeInfoDao extends BaseDao {
 	public synchronized List<ChangInfoBean> getChangeInfoByHasoper(String namespace, 
 			 String hasoper) throws LogicException,
 			DBException {
-		Connection conn = BaseDao.getConn(namespace);
+		Connection conn = BaseDao.getBaseConn(namespace);
 		// SQL语句
 		String presql = SqlUtil.getSqlbyId("selectChangeInfoByHasoper");
 		Map<String, String> paramMap = new HashMap<String, String>();
@@ -129,7 +129,7 @@ public class ChangeInfoDao extends BaseDao {
 	public synchronized boolean updateChangeInfo(List<ChangInfoBean> beanList, String namespace)
 			throws LogicException, DBException {
 
-		Connection conn = BaseDao.getConn(namespace);
+		Connection conn = BaseDao.getBaseConn(namespace);
 		openTransaction(conn);
 		// SQL语句
 		String presql = SqlUtil.getSqlbyId("updateChangeInfo");

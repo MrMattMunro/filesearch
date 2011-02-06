@@ -122,7 +122,7 @@ public class ChmDao extends BaseDao {
 	 */
 	public boolean insertChmRecord(List<ChmFileBean> beanList, String filepath, long lastmodify,
 			String filename, String namesapce) throws LogicException, DBException {
-		Connection conn = BaseDao.getConn(namesapce);
+		Connection conn = BaseDao.getBaseConn(namesapce);
 		openTransaction(conn);
 		// 取出Sql
 		String presql = SqlUtil.getSqlbyId("insertChmRecord");
@@ -158,7 +158,7 @@ public class ChmDao extends BaseDao {
 	 * @throws LogicException
 	 */
 	public boolean execbatch(String datapath, String namesapce) throws DBException, LogicException {
-		Connection conn = BaseDao.getConn(namesapce);
+		Connection conn = BaseDao.getBaseConn(namesapce);
 		openTransaction(conn);
 		Statement st = null;
 		try {

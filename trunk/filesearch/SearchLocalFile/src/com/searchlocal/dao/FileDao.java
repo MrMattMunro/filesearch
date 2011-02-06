@@ -94,7 +94,7 @@ public class FileDao extends BaseDao {
 	 */
 	public boolean deleteFileRecord(String namespace, String path) throws DBException,
 			LogicException {
-		Connection conn = BaseDao.getConn(namespace);
+		Connection conn = BaseDao.getBaseConn(namespace);
 		openTransaction(conn);
 		boolean success = false;
 		// 生成SQL
@@ -112,6 +112,42 @@ public class FileDao extends BaseDao {
 		closeConnection(null, null, conn);
 		return success;
 	}
+	
+	/**
+	 * 删除File纪录
+	 * 
+	 * @param namespace 数据库
+     * @param paths 文件路径列表
+	 * @throws DBException
+	 * @throws LogicException
+	 */
+	public boolean deleteFileRecords(String namespace, List<String> paths) throws DBException,
+			LogicException {
+		Connection conn = BaseDao.getBaseConn(namespace);
+		openTransaction(conn);
+		boolean success = false;
+		// 生成SQL
+		String sql = SqlUtil.getsql(namespace, "deleteFileRecord");
+		logger.debug("sql:" + sql);
+		String path;
+		try {
+			for (Iterator<String> iter = paths.iterator(); iter.hasNext();) {
+				path = (String) iter.next();
+				if (null != path) {
+					PreparedStatement stmt = conn.prepareStatement(sql);
+					stmt.setString(1, path);
+					success = stmt.execute();
+				}
+			}
+		} catch (Exception e) {
+			logger.error("DB_E023", sql, e);
+			throw new DBException("DB_E023", e);
+		}
+		commit(conn);
+		closeConnection(null, null, conn);
+		return success;
+	}
+
 
 	/**
 	 * 删除对应数据库，表里，对应文件路径纪录
@@ -124,7 +160,7 @@ public class FileDao extends BaseDao {
 	 */
 	public boolean deleteRecordByPath(String namespace, String table, String path)
 			throws DBException, LogicException {
-		Connection conn = BaseDao.getConn(namespace);
+		Connection conn = BaseDao.getBaseConn(namespace);
 		openTransaction(conn);
 		boolean success = false;
 		// 生成SQL
@@ -188,7 +224,7 @@ public class FileDao extends BaseDao {
 	 */
 	public List<FileParam> getFileRecord(String namespace) throws LogicException,
 			DBException {
-		Connection conn = BaseDao.getConn(namespace);
+		Connection conn = BaseDao.getBaseConn(namespace);
 		// SQL语句
 		String presql = SqlUtil.getSqlbyId("selectFileRecord");
 		Map<String, String> paramMap = new HashMap<String, String>();
@@ -225,7 +261,7 @@ public class FileDao extends BaseDao {
 	 */
 	public boolean insertFileRecord(List<FileParam> beanList, String namespace)
 			throws LogicException, DBException {
-		Connection conn = BaseDao.getConn(namespace);
+		Connection conn = BaseDao.getBaseConn(namespace);
 		openTransaction(conn);
 
 		// SQL语句
@@ -261,7 +297,7 @@ public class FileDao extends BaseDao {
 	public  boolean updateFileRecord(List<FileParam> beanList, String namespace)
 			throws LogicException, DBException {
 
-		Connection conn = BaseDao.getConn(namespace);
+		Connection conn = BaseDao.getBaseConn(namespace);
 		openTransaction(conn);
 		// SQL语句
 		String presql = SqlUtil.getSqlbyId("updateFileRecord");

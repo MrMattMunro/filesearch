@@ -45,7 +45,9 @@ public class BaseDao {
 	/** 日志 */
 	private static CLogger logger = new CLogger(BaseDao.class);
 
-	private static CommonsDBCP commdbcp = null;
+	private static CommonsDBCP basedbcp = null;
+	
+	private static CommonsDBCP dbcp = null;
 
 	final private static String BASE_DB_SOURCCE = Constant.path
 			+ "com\\searchlocal\\properties\\basedataSource.properties";
@@ -126,20 +128,36 @@ public class BaseDao {
 	 * @throws DBException
 	 * @throws LogicException
 	 */
+	public static Connection getBaseConn(String namespace) throws LogicException, DBException {
+		ConnectionParam connparam = getConnParam(BASE_DB_SOURCCE);
+		Connection conn;
+		basedbcp = new CommonsDBCP(connparam);
+		try {
+			conn = basedbcp.getConn();
+		} catch (SQLException e) {
+			logger.error("DB_E028", e);
+			throw new DBException("DB_E028", e);
+		}
+		return conn;
+	}
+	
+	/**
+	 * 取得与DB的连接。
+	 * 
+	 * @param namespace 数据库名称
+	 * @throws DBException
+	 * @throws LogicException
+	 */
 	public static Connection getConn(String namespace) throws LogicException, DBException {
 		ConnectionParam connparam = getConnParam(DB_SOURCCE);
-
 		Connection conn;
-		if (commdbcp == null) {
-			Map<String, String> paramMap = new HashMap<String, String>();
-			paramMap.put("namespace", namespace);
-			String url = SQLParameterUtil.convertSQL(connparam.getUrl(), paramMap);
-			connparam.setUrl(url);
-			commdbcp = new CommonsDBCP(connparam);
-		}
-
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("namespace", namespace);
+		String url = SQLParameterUtil.convertSQL(connparam.getUrl(), paramMap);
+		connparam.setUrl(url);
+		dbcp = new CommonsDBCP(connparam);
 		try {
-			conn = commdbcp.getConn();
+			conn = dbcp.getConn();
 		} catch (SQLException e) {
 			logger.error("DB_E028", e);
 			throw new DBException("DB_E028", e);
@@ -189,7 +207,7 @@ public class BaseDao {
 	 */
 	public synchronized boolean deleteRecordByPath(String namespace, String table, String path)
 			throws DBException, LogicException {
-		Connection conn = BaseDao.getConn(namespace);
+		Connection conn = BaseDao.getBaseConn(namespace);
 		openTransaction(conn);
 		boolean success = false;
 		// 生成SQL
@@ -370,12 +388,4 @@ public class BaseDao {
 		}
 	}
 
-	/**
-	 * 返回DB连接对象
-	 * 
-	 * @return commdbcp DB连接对象
-	 */
-	public static CommonsDBCP getCommdbcp() {
-		return commdbcp;
-	}
 }

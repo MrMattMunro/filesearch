@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.searchlocal.bean.FileOpenerBean;
+import com.searchlocal.bean.WordFileBean;
 import com.searchlocal.exception.DBException;
 import com.searchlocal.exception.LogicException;
 import com.searchlocal.util.CLogger;
@@ -57,10 +58,7 @@ public class FileOpenerDao extends BaseDao{
 		openTransaction(conn);
 		boolean success = false;
 		// 生成SQL
-		String presql = SqlUtil.getSqlbyId("createFileOpener");
-		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("namespace", namespace);
-		String sql = SQLParameterUtil.convertSQL(presql, paramMap);
+		String sql = SqlUtil.getSqlbyId("createFileOpener");
 		try {
 			success = execute(sql, conn);
 		} catch (DBException e) {
@@ -81,13 +79,10 @@ public class FileOpenerDao extends BaseDao{
 	 */
 	public List<FileOpenerBean> getFileOpener(String namespace) throws LogicException,
 			DBException {
-		Connection conn = BaseDao.getConn(namespace);
+		Connection conn = BaseDao.getBaseConn(namespace);
 		// SQL语句
-		String presql = SqlUtil.getSqlbyId("selectFileOpener");
-		Map<String, String> paramMap = new HashMap<String, String>();
-
+		String sql = SqlUtil.getSqlbyId("selectFileOpener");
 		List<FileOpenerBean> returnList = new ArrayList<FileOpenerBean>();
-		String sql = SQLParameterUtil.convertSQL(presql, paramMap);
 		try {
 			setReadOnly(conn);
 			Statement stmt = conn.createStatement();
@@ -99,6 +94,39 @@ public class FileOpenerDao extends BaseDao{
 				bean.setFileType(rs.getString("filetype"));
 				bean.setExePath(rs.getString("exepath"));
 				bean.setLastmodify(rs.getTimestamp("lastmodify").getTime());
+				returnList.add(bean);
+			}
+		} catch (SQLException e) {
+			throw new DBException("DB_E024", e);
+		}
+		closeConnection(null, null, conn);
+		return returnList;
+	}
+	
+	/**
+	 * 取出FileOpener纪录
+	 * 
+	 * @param namespace 数据库名称
+     * @param fileType 文件类型
+	 * @throws DBException
+	 * @throws LogicException
+	 */
+	public List<FileOpenerBean> getFileOpenerByFileType(String namespace, String filetype) throws LogicException,
+			DBException {
+		Connection conn = BaseDao.getConn(namespace);
+		// SQL语句
+        String sql = SqlUtil.getSqlbyId("selectFileOpenerByType");
+		List<FileOpenerBean> returnList = new ArrayList<FileOpenerBean>();
+		try {
+			setReadOnly(conn);
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, filetype);
+			// 结果集
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				FileOpenerBean bean = new FileOpenerBean();
+				bean.setFileType(rs.getString("filetype"));
+				bean.setExePath(rs.getString("exepath"));
 				returnList.add(bean);
 			}
 		} catch (SQLException e) {
@@ -121,16 +149,12 @@ public class FileOpenerDao extends BaseDao{
 		Connection conn = BaseDao.getConn(namespace);
 		openTransaction(conn);
 		// SQL语句
-		String presql = SqlUtil.getSqlbyId("insertFileOpenRecord");
+		String sql = SqlUtil.getSqlbyId("insertFileOpenRecord");
 		PreparedStatement stmt;
 		FileOpenerBean element;
 		try {
 			for (Iterator<FileOpenerBean> iter = beanList.iterator(); iter.hasNext();) {
 				element = (FileOpenerBean) iter.next();
-				Map<String, String> paramMap = new HashMap<String, String>();
-				paramMap.put("namespace", namespace);
-
-				String sql = SQLParameterUtil.convertSQL(presql, paramMap);
 				stmt = conn.prepareStatement(sql);
 				if (null != element) {
 					stmt.setString(1, element.getFileType());

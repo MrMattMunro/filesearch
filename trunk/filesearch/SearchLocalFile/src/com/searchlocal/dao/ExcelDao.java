@@ -95,13 +95,14 @@ public class ExcelDao extends BaseDao {
 		openTransaction(conn);
 		boolean success = false;
 		// 生成SQL
-		String presql = SqlUtil.getSqlbyId("createExcelRecord");
-		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("namespace", namespace);
-		String sql = SQLParameterUtil.convertSQL(presql, paramMap);
+		String sql = SqlUtil.getSqlbyId("createExcelRecord");
 		try {
+			conn.setReadOnly(false);
 			success = execute(sql, conn);
 		} catch (DBException e) {
+			logger.error("DB_E011", sql, e);
+			throw new DBException("DB_E011", e);
+		}catch (SQLException e) {
 			logger.error("DB_E011", sql, e);
 			throw new DBException("DB_E011", e);
 		}
@@ -123,7 +124,7 @@ public class ExcelDao extends BaseDao {
 	 */
 	public boolean insertExcelRecord(List<ExcelFileBean> beanList, String filepath, long lastmodify,
 			String filename, String namespace) throws LogicException, DBException {
-		Connection conn = BaseDao.getConn(namespace);
+		Connection conn = BaseDao.getBaseConn(namespace);
 		openTransaction(conn);
 		// SQL语句
 		String presql = SqlUtil.getSqlbyId("insertExcelRecord");
@@ -161,7 +162,7 @@ public class ExcelDao extends BaseDao {
 	 * @throws LogicException
 	 */
 	public boolean execbatch(String datapath, String namesapce) throws DBException, LogicException {
-		Connection conn = BaseDao.getConn(namesapce);
+		Connection conn = BaseDao.getBaseConn(namesapce);
 		openTransaction(conn);
 		Statement st = null;
 		try {
