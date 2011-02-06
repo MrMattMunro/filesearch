@@ -37,13 +37,13 @@ public class IndexWriterFactory {
 
 	private static Log logger = LogFactory.getLog(IndexWriterFactory.class);
 
-	private static Map writerLookup = new ConcurrentHashMap();
+	private static Map<String, IndexWriterData> writerLookup = new ConcurrentHashMap<String, IndexWriterData> ();
 
 	private static final int LUCENE_MAX_BUFFER_SIZE = 2000;
 
 	private static final int OPTIMIZE_INTERVAL = 200;
 
-	private static List searches = new ArrayList<CreateNewParam>();
+	private static List<CreateNewParam> searches = new ArrayList<CreateNewParam>();
 
 	/**
 	 * 初始化
@@ -63,7 +63,7 @@ public class IndexWriterFactory {
 					FSDirectory directory = null;
 					for (int i = 0; i < searches.size(); i++) {
 						CreateNewParam createNewParm = (CreateNewParam) searches.get(i);
-						String indexpath = createNewParm.getIdexpath();
+						String indexpath = createNewParm.getIndexpath();
 						File indexDir = new File(indexpath);
 						File segments = new File(indexDir + File.separator + "segments.gen");
 						boolean bcreate = !segments.exists();
@@ -112,7 +112,7 @@ public class IndexWriterFactory {
 				if (module.equals(createNewParm.getSearchname())) {
 					writerData = (IndexWriterData) writerLookup.get(module);
 					if (writerData == null) {
-						String indexpath = createNewParm.getIdexpath();
+						String indexpath = createNewParm.getIndexpath();
 						File indexDir = new File(indexpath);
 						File segments = new File(indexDir + File.separator + "segments.gen");
 						boolean bcreate = !segments.exists();
@@ -146,7 +146,7 @@ public class IndexWriterFactory {
 	 * @throws IOException
 	 */
 	public static void optimize(IndexWriter writer) throws InterruptedException, IOException {
-		Collection writers = writerLookup.values();
+		Collection<IndexWriterData> writers = writerLookup.values();
 		for (Iterator iter = writers.iterator(); iter.hasNext();) {
 			IndexWriterData writerdata = (IndexWriterData) iter.next();
 			IndexWriter temp = writerdata.getWriter();
@@ -179,7 +179,7 @@ public class IndexWriterFactory {
 	 * @throws IOException
 	 */
 	public void clear() throws InterruptedException, IOException {
-		Collection writers = writerLookup.values();
+		Collection<IndexWriterData> writers = writerLookup.values();
 		for (Iterator iter = writers.iterator(); iter.hasNext();) {
 			IndexWriterData writerdata = (IndexWriterData) iter.next();
 			IndexWriter temp = writerdata.getWriter();

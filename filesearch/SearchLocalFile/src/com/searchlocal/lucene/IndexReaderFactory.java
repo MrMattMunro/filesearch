@@ -34,9 +34,9 @@ public class IndexReaderFactory {
 
 	private static Log logger = LogFactory.getLog(IndexReaderFactory.class);
 
-	private static Map readerLookup = new ConcurrentHashMap();
+	private static Map<String, IndexReader> readerLookup = new ConcurrentHashMap<String, IndexReader>();
 
-	private static List searches = new ArrayList<CreateNewParam>();
+	private static List<CreateNewParam> searches = new ArrayList<CreateNewParam>();
 
 	/**
 	 * 初始化
@@ -54,7 +54,7 @@ public class IndexReaderFactory {
 					FSDirectory directory = null;
 					for (int i = 0; i < searches.size(); i++) {
 						CreateNewParam createNewParm = (CreateNewParam) searches.get(i);
-						String indexpath = createNewParm.getIdexpath();
+						String indexpath = createNewParm.getIndexpath();
 						directory = FSDirectory.open(new File(indexpath));
 						IndexReader reader = IndexReader.open(directory, false);
 						readerLookup.put(createNewParm.getSearchname(), reader);
@@ -82,7 +82,7 @@ public class IndexReaderFactory {
 			for (int i = 0; i < searches.size(); i++) {
 				CreateNewParam createNewParm = (CreateNewParam) searches.get(i);
 				if (module.equals(createNewParm.getSearchname())) {
-					String indexpath = createNewParm.getIdexpath();
+					String indexpath = createNewParm.getIndexpath();
 					reader = (IndexReader) readerLookup.get(module);
 					if (reader == null) {
 						FSDirectory directory = FSDirectory.open(new File(indexpath));

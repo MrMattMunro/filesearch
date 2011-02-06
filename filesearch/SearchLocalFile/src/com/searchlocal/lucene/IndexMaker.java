@@ -51,7 +51,7 @@ public class IndexMaker {
 			String element = (String) iter.next();
 			if ("excel".equals(element)) {
 				// 取得连接
-				Connection conn = dao.getConn(namespace);
+				Connection conn = dao.getBaseConn(namespace);
 				List<String> removeList = new ArrayList<String>();
 				for (Iterator itera = paths.iterator(); itera.hasNext();) {
 					String path = (String) itera.next();
@@ -68,7 +68,7 @@ public class IndexMaker {
 			}
 			if ("word".equals(element)) {
 				// 取得连接
-				Connection conn = dao.getConn(namespace);
+				Connection conn = dao.getBaseConn(namespace);
 				List<String> removeList = new ArrayList<String>();
 				for (Iterator itera = paths.iterator(); itera.hasNext();) {
 					String path = (String) itera.next();
@@ -85,7 +85,7 @@ public class IndexMaker {
 			}
 			if ("pdf".equals(element)) {
 				// 取得连接
-				Connection conn = dao.getConn(namespace);
+				Connection conn = dao.getBaseConn(namespace);
 				List<String> removeList = new ArrayList<String>();
 				for (Iterator itera = paths.iterator(); itera.hasNext();) {
 					String path = (String) itera.next();
@@ -102,7 +102,7 @@ public class IndexMaker {
 			}
 			if ("ppt".equals(element)) {
 				// 取得连接
-				Connection conn = dao.getConn(namespace);
+				Connection conn = dao.getBaseConn(namespace);
 				List<String> removeList = new ArrayList<String>();
 				for (Iterator itera = paths.iterator(); itera.hasNext();) {
 					String path = (String) itera.next();
@@ -119,7 +119,7 @@ public class IndexMaker {
 			}
 			if ("chm".equals(element)) {
 				// 取得连接
-				Connection conn = dao.getConn(namespace);
+				Connection conn = dao.getBaseConn(namespace);
 				List<String> removeList = new ArrayList<String>();
 				for (Iterator itera = paths.iterator(); itera.hasNext();) {
 					String path = (String) itera.next();
@@ -136,7 +136,7 @@ public class IndexMaker {
 			}
 			if ("html".equals(element)) {
 				// 取得连接
-				Connection conn = dao.getConn(namespace);
+				Connection conn = dao.getBaseConn(namespace);
 				List<String> removeList = new ArrayList<String>();
 				for (Iterator itera = paths.iterator(); itera.hasNext();) {
 					String path = (String) itera.next();
@@ -153,7 +153,7 @@ public class IndexMaker {
 			}
 			if ("txt".equals(element)) {
 				// 取得连接
-				Connection conn = dao.getConn(namespace);
+				Connection conn = dao.getBaseConn(namespace);
 				List<String> removeList = new ArrayList<String>();
 				for (Iterator itera = paths.iterator(); itera.hasNext();) {
 					String path = (String) itera.next();
@@ -267,8 +267,7 @@ public class IndexMaker {
 	 */
 	public static void addDcoument(Document doc, ResultSet rs, IndexWriter indexWriter) {
 		try {
-			doc
-					.add(new Field("filename", rs.getString("filename"), Field.Store.YES,
+			doc.add(new Field("filename", rs.getString("filename"), Field.Store.YES,
 							Field.Index.NO));
 			doc.add(new Field("path", rs.getString("path"), Field.Store.YES,
 					Field.Index.NOT_ANALYZED));
