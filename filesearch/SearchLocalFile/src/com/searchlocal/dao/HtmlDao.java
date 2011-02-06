@@ -120,7 +120,7 @@ public class HtmlDao extends BaseDao {
 	 */
 	public boolean insertHtmlRecord(List<HtmlFileBean> beanList, String filepath, long lastmodify,
 			String filename, String namesapce) throws LogicException, DBException {
-		Connection conn = BaseDao.getConn(namesapce);
+		Connection conn = BaseDao.getBaseConn(namesapce);
 
 		HtmlFileBean element = null;
 		String presql = SqlUtil.getSqlbyId("insertHtmlRecord");
@@ -156,7 +156,7 @@ public class HtmlDao extends BaseDao {
 	 * @throws LogicException
 	 */
 	public boolean execbatch(String datapath, String namesapce) throws DBException, LogicException {
-		Connection conn = BaseDao.getConn(namesapce);
+		Connection conn = BaseDao.getBaseConn(namesapce);
 		openTransaction(conn);
 		Statement st = null;
 		try {

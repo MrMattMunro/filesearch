@@ -58,10 +58,7 @@ public class ResultDao extends BaseDao {
 		openTransaction(conn);
 		boolean success = false;
 		// 生成SQL
-		String presql = SqlUtil.getSqlbyId("createResult");
-		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("namespace", namesapce);
-		String sql = SQLParameterUtil.convertSQL(presql, paramMap);
+		String sql = SqlUtil.getSqlbyId("createResult");
 		try {
 			success = execute(sql, conn);
 		} catch (DBException e) {
@@ -83,7 +80,7 @@ public class ResultDao extends BaseDao {
 	 */
 	public synchronized boolean insertResultRecord(List<ResultBean> beanList, String namespace)
 			throws LogicException, DBException {
-		Connection conn = BaseDao.getConn(namespace);
+		Connection conn = BaseDao.getBaseConn(namespace);
 		openTransaction(conn);
 		// SQL语句
 		String presql = SqlUtil.getSqlbyId("insertResultRecord");
@@ -126,7 +123,7 @@ public class ResultDao extends BaseDao {
 	public synchronized boolean deleteResultRecord(String namespace) throws LogicException,
 			DBException {
 		// 取得连接
-		Connection conn = BaseDao.getConn(namespace);
+		Connection conn = BaseDao.getBaseConn(namespace);
 		openTransaction(conn);
 		// SQL语句
 		String presql = SqlUtil.getSqlbyId("deleteResultRecord");

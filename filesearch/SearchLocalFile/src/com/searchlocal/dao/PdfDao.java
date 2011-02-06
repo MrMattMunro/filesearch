@@ -121,7 +121,7 @@ public class PdfDao extends BaseDao {
 	 */
 	public boolean insertPdfRecord(List<PdfFileBean> beanList, String filepath, long lastmodify,
 			String filename, String namesapce) throws LogicException, DBException {
-		Connection conn = BaseDao.getConn(namesapce);
+		Connection conn = BaseDao.getBaseConn(namesapce);
 		openTransaction(conn);
 		// 
 		String presql = SqlUtil.getSqlbyId("insertPdfRecord");
@@ -157,7 +157,7 @@ public class PdfDao extends BaseDao {
 	 * @throws LogicException
 	 */
 	public boolean execbatch(String datapath, String namesapce) throws DBException, LogicException {
-		Connection conn = BaseDao.getConn(namesapce);
+		Connection conn = BaseDao.getBaseConn(namesapce);
 		openTransaction(conn);
 		Statement st = null;
 		try {
