@@ -1,3 +1,13 @@
+/**
+ * $RCSfile: Constant.java
+ * $Revision: 1.0
+ * $Date: Jan 30, 2011
+ *
+ * Copyright (C) 2010 SlFile, Inc. All rights reserved.
+ *
+ * This software is the proprietary information of SlFile, Inc.
+ * Use is subject to license terms.
+ */
 package com.searchlocal.constants;
 
 import java.net.URISyntaxException;
@@ -8,6 +18,9 @@ import java.util.List;
  * 常量类
  * 
  * <p>Title: 常量类</p>
+ * <p>Description: </p>
+ * <p>site: www.slfile.net</p>
+ * @author changsong:qianjinfu@gmail.com
  * @version 1.0
  */
 public class Constant {
@@ -18,8 +31,8 @@ public class Constant {
 			datapath = Constant.class.getResource("/").toURI().getPath();
 
 			// 发布的时候注释掉
-			datapath = datapath.substring(1);
-			datapath = datapath.replaceAll("classes/", "");
+            datapath = datapath.substring(1);
+            datapath = datapath.replaceAll("classes/", "");
 		} catch (URISyntaxException e) {
 			// TODO 注意消除资源(关闭I/O等)
 			e.printStackTrace();
@@ -237,10 +250,12 @@ public class Constant {
 	public static String chmdatapath = "data/chm";
 
 	public static String diccompilepath = "dic\\.compiled";
+	
+	public static String clientPath = "client";
 
 	public static String confpath = "tomcat\\webapps\\slfile\\WEB-INF\\conf\\";
 
-	// public static String confpath = "conf\\";
+    // public static String confpath = "conf\\";
 
 	public static String icospath = "icos/search";
 
@@ -592,6 +607,9 @@ public class Constant {
 
 		// 数据库名
 		public static final String DATABASE = "COMMONINFO";
+		
+		// 表名
+		public static final String SEARCHER = "searcher";
 
 
 		protected CommonInfo() {
