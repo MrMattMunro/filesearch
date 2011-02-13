@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "FsUi.h"
 #include "CreateIndexDlg.h"
+#include "sloCreateIndexAgent.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -128,9 +129,27 @@ char  *GetPath(HWND   hWnd,char   *pBuffer)
 void CCreateIndexDlg::OnOK() 
 {
 	// TODO: Add extra validation here
-	UpdateData(FALSE);
-	m_bExcel ;
+	UpdateData(TRUE);
 
+	char szPath[MAX_PATH];
+	GetDlgItemText(IDC_EDIT_SEARCH_PATH,szPath, MAX_PATH );
+
+	CString strTypes;
+	if (m_bWord)
+		strTypes += "word";
+	if (m_bExcel)
+		strTypes += ",excel";
+	if (m_bPpt)
+		strTypes += ",ppt";
+	if (m_bPdf)
+		strTypes += ",pdf";	
+	if (m_bTxt)
+		strTypes += ",txt";
+	if (m_bHtml)
+		strTypes += ",html";	
+
+	sloCreateIndexAgent create;
+	create.EventCreateIndex(szPath, strTypes.GetBuffer(0));
 	CDialog::OnOK();
 }
 
