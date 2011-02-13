@@ -36,6 +36,12 @@
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
 
+#include <WinSock2.h>
+#pragma  warning(disable : 4284)
+#pragma comment(lib, "ws2_32.lib")
+
+#include <string>
+using namespace std;
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 

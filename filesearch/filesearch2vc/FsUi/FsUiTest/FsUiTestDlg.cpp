@@ -198,14 +198,14 @@ void CFsUiTestDlg::OnButton1()
 
 	g_fnFsCreateIndex();
 
-	g_fnFsImportCustomCiHui = (fnFsImportCustomCiHui)GetProcAddress(hins, "FsImportCustomCiHui");
-	if (!g_fnFsImportCustomCiHui)
-	{
-		MessageBox("Not Find Func fnFsImportCustomCiHui");
-		return ;
-	}
-	
-	g_fnFsImportCustomCiHui();
+// 	g_fnFsImportCustomCiHui = (fnFsImportCustomCiHui)GetProcAddress(hins, "FsImportCustomCiHui");
+// 	if (!g_fnFsImportCustomCiHui)
+// 	{
+// 		MessageBox("Not Find Func fnFsImportCustomCiHui");
+// 		return ;
+// 	}
+// 	
+// 	g_fnFsImportCustomCiHui();
 
 	FreeLibrary(hins);
 }
@@ -271,8 +271,7 @@ void CFsUiTestDlg::OnButton2()
 	// TODO: Add your control notification handler code here
 	//FindAllDrivers();
 	sloCreateIndexAgent slinfo;
-	slinfo.FindAllDrivers();
-	slinfo.BuildIndexPath();
+	slinfo.EventCreateIndex("c:\\1","*.txt,*.xls");
 }
 
 void CFsUiTestDlg::OnButton3() 
