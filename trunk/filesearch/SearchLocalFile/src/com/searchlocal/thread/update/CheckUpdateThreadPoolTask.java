@@ -1,4 +1,3 @@
-
 /**
  * $RCSfile: CheckUpdateThreadPoolTask.java
  * $Revision: 1.0

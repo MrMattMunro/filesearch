@@ -1,3 +1,13 @@
+/**
+ * $RCSfile: DateUtil.java
+ * $Revision: 1.0
+ * $Date: Jan 30, 2011
+ *
+ * Copyright (C) 2010 SlFile, Inc. All rights reserved.
+ *
+ * This software is the proprietary information of SlFile, Inc.
+ * Use is subject to license terms.
+ */
 package com.searchlocal.util;
 
 import java.sql.Timestamp;
@@ -7,9 +17,19 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * 日期操作类
+ * 
+ * <p>Title: 日期操作类</p>
+ * <p>Description: </p>
+ * <p>site: www.slfile.net</p>
+ * @author changsong:qianjinfu@gmail.com
+ * @version 1.0
+ */
 public class DateUtil {
 
 	/**
+	 * 比较两个日期
 	 *
 	 * @return int
 	 * @param sDate1 java.lang.String
@@ -35,9 +55,15 @@ public class DateUtil {
 		return (int) dif;
 	}
 
+	/** 日期类别 */
 	private final static String[] dateFormats = { "yyyy-MM-dd", "yyyy-M-d", "yyyy-M-d",
 			"yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss" };
 
+	/**
+	 * 格式化日期{yyyy-MM-dd}
+	 *
+     *@param time 日期
+	 */
 	public static String getDateTime(long time) {
 		Date date = new Date(time);
 		SimpleDateFormat df = new SimpleDateFormat(dateFormats[4]);
@@ -45,6 +71,11 @@ public class DateUtil {
 		return s;
 	}
 
+	/**
+	 * 格式化日期{yyyy-MM-dd}
+	 *
+     *@param sDate 日期
+	 */
 	public static Date parse(String sDate) {
 		Date date = null;
 		boolean bParsed = false;
@@ -71,7 +102,6 @@ public class DateUtil {
 			throw new IllegalArgumentException(szErrorMsg + "\r\n"
 					+ "Illegal Argument,can not parse input Date String");
 		}
-
 		return date;
 	}
 
@@ -85,7 +115,7 @@ public class DateUtil {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		cal.add(Calendar.MONTH, 3);
+		cal.add(Calendar.MONTH, 1);
 		date = cal.getTime();
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
 		String s = df.format(date);

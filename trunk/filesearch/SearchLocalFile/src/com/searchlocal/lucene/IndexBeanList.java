@@ -29,12 +29,23 @@ import com.searchlocal.bean.TxtFileBean;
 import com.searchlocal.bean.WordFileBean;
 import com.searchlocal.constants.Constant;
 
+/**
+ * 生成索引文件
+ * 
+ * <p>Title:  生成索引文件</p>
+ * <p>Description: </p>
+ * <p>site: www.slfile.net</p>
+ * @author changsong:qianjinfu@gmail.com
+ * @version 1.0
+ */
 public class IndexBeanList {
 
 	/**
 	 * 生成索引文件
 	 * 
-	 * @return Returns the pool.
+	 * @param namespace 数据库
+	 * @param doctype 文件类型
+	 * @param beanList 文件列表
 	 */
 	public static void makeindex(String namespace, String doctype, List beanList) {
 

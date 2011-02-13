@@ -41,7 +41,6 @@ public class XMLConfig {
 
 	public void readXML(String configPath) {
 		try {
-
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = dbFactory.newDocumentBuilder();
 			this.doc = builder.parse(new File(configPath));

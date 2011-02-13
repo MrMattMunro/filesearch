@@ -13,16 +13,13 @@ package com.searchlocal.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import com.searchlocal.bean.ResultBean;
 import com.searchlocal.exception.DBException;
 import com.searchlocal.exception.LogicException;
 import com.searchlocal.util.CLogger;
-import com.searchlocal.util.SQLParameterUtil;
 import com.searchlocal.util.SqlUtil;
 
 /**
@@ -73,21 +70,17 @@ public class ResultDao extends BaseDao {
 	/**
 	 * 插入Result记录
 	 * 
+     * @param conn 数据库连接
 	 * @param beanList FileOpener数据
 	 * @param namespace 数据库 
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public synchronized boolean insertResultRecord(List<ResultBean> beanList, String namespace)
+	public synchronized boolean insertResultRecord(Connection conn, List<ResultBean> beanList, String namespace)
 			throws LogicException, DBException {
-		Connection conn = BaseDao.getBaseConn(namespace);
 		openTransaction(conn);
 		// SQL语句
-		String presql = SqlUtil.getSqlbyId("insertResultRecord");
-
-		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("namespace", namespace);
-		String sql = SQLParameterUtil.convertSQL(presql, paramMap);
+		String sql = SqlUtil.getSqlbyId("insertResultRecord");
 		PreparedStatement stmt;
 		ResultBean element;
 		try {
@@ -96,8 +89,10 @@ public class ResultDao extends BaseDao {
 				stmt = conn.prepareStatement(sql);
 				if (null != element) {
 					stmt.setString(1, element.getFileType());
-					stmt.setString(2, element.getFilePath());
-					stmt.setString(3, element.getDesp());
+					stmt.setString(2, element.getFileName());
+					stmt.setString(3, element.getFilePath());
+					stmt.setString(4, element.getDesp());
+					stmt.setString(5, element.getContent());
 				}
 				if (stmt != null) {
 					stmt.executeUpdate();
@@ -109,32 +104,26 @@ public class ResultDao extends BaseDao {
 			throw new DBException("DB_E024", e);
 		}
 		commit(conn);
-		closeConnection(null, null, conn);
 		return true;
 	}
 
 	/**
 	 * 删除搜索结果记录
 	 * 
+     * @param conn 数据库连接
 	 * @param namespace 数据库 
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public synchronized boolean deleteResultRecord(String namespace) throws LogicException,
+	public synchronized boolean deleteResultRecord(Connection conn, String namespace) throws LogicException,
 			DBException {
 		// 取得连接
-		Connection conn = BaseDao.getBaseConn(namespace);
 		openTransaction(conn);
 		// SQL语句
-		String presql = SqlUtil.getSqlbyId("deleteResultRecord");
-		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("namespace", namespace);
-		String sql = SQLParameterUtil.convertSQL(presql, paramMap);
+		String sql = SqlUtil.getSqlbyId("deleteResultRecord");
 		// 删除结果记录
 		execute(sql, conn);
-
 		commit(conn);
-		closeConnection(null, null, conn);
 		return true;
 	}
 

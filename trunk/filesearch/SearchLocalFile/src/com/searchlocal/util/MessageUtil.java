@@ -15,7 +15,7 @@ public class MessageUtil {
 	 * @param args
 	 */
 	public MessageUtil() {
-		FileInputStream in;
+		FileInputStream in = null;
 		try {
 			if (prop.isEmpty()) {
 				in = new FileInputStream(Constant.path
@@ -26,6 +26,15 @@ public class MessageUtil {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}finally{
+			try {
+				if(in != null){
+					in.close();	
+				}
+			} catch (IOException e) {
+				// TODO 注意消除资源(关闭I/O等)
+				e.printStackTrace();
+			}
 		}
 	}
 

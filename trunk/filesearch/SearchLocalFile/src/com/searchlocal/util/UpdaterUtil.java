@@ -37,7 +37,7 @@ public class UpdaterUtil {
 	 * @param filePath 文件路径
 	 */
 	public UpdaterUtil(String filePath) {
-		FileInputStream in;
+		FileInputStream in = null;
 		try {
 			if (newprop.isEmpty()) {
 				in = new FileInputStream(filePath);
@@ -47,6 +47,15 @@ public class UpdaterUtil {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}finally{
+			try {
+				if(in != null){
+					in.close();	
+				}
+			} catch (IOException e) {
+				// TODO 注意消除资源(关闭I/O等)
+				e.printStackTrace();
+			}
 		}
 	}
 

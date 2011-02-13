@@ -10,6 +10,7 @@
  */
 package com.searchlocal.service;
 
+import java.sql.Connection;
 import java.util.List;
 
 import com.searchlocal.bean.ResultBean;
@@ -43,26 +44,28 @@ public class ResultService {
 	/**
 	 * 插入结果集
 	 * 
+     * @param conn 数据库连接
 	 * @param beanList 结果集
 	 * @param namespace 数据库名
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public boolean insertResultRecord(List<ResultBean> beanList, String namespace)
+	public boolean insertResultRecord(Connection conn, List<ResultBean> beanList, String namespace)
 			throws DBException, LogicException {
 		ResultDao resultDao = new ResultDao();
-		return resultDao.insertResultRecord(beanList, namespace);
+		return resultDao.insertResultRecord(conn, beanList, namespace);
 	}
 
 	/**
 	 * 删除搜索结果记录
 	 * 
+     * @param conn 数据库连接
 	 * @param namespace 数据库 
 	 * @throws DBException
 	 * @throws LogicException
 	 */
-	public boolean deleteResultRecord(String namespace) throws DBException, LogicException {
+	public boolean deleteResultRecord(Connection conn, String namespace) throws DBException, LogicException {
 		ResultDao resultDao = new ResultDao();
-		return resultDao.deleteResultRecord(namespace);
+		return resultDao.deleteResultRecord(conn, namespace);
 	}
 }

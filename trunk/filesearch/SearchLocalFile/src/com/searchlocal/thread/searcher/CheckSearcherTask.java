@@ -11,7 +11,6 @@
 package com.searchlocal.thread.searcher;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -29,15 +28,8 @@ import com.searchlocal.param.CreateNewParam;
 import com.searchlocal.param.UpdateParam;
 import com.searchlocal.service.BaseService;
 import com.searchlocal.service.ChangeInfoService;
-import com.searchlocal.service.ChmService;
-import com.searchlocal.service.ExcelService;
 import com.searchlocal.service.FileService;
-import com.searchlocal.service.HtmlService;
-import com.searchlocal.service.PdfService;
-import com.searchlocal.service.PptService;
 import com.searchlocal.service.SeacherService;
-import com.searchlocal.service.TxtService;
-import com.searchlocal.service.WordService;
 import com.searchlocal.thread.CheckThreadPoolTask;
 import com.searchlocal.thread.SearchFile;
 import com.searchlocal.thread.base.CRunnable;
@@ -48,7 +40,6 @@ import com.searchlocal.util.ConstantExeFileUtil;
 import com.searchlocal.util.CourseUtil;
 import com.searchlocal.util.FileUtil;
 import com.searchlocal.util.MenuMessageUtil;
-import com.searchlocal.util.WinMsgUtil;
 import com.searchlocal.util.XMLConfig;
 
 /**
@@ -61,7 +52,7 @@ import com.searchlocal.util.XMLConfig;
  * @version 1.0
  */
 public class CheckSearcherTask extends CRunnable {
-	
+
 	/** DB连接 */
 	private static Connection conn = null;
 
@@ -71,8 +62,8 @@ public class CheckSearcherTask extends CRunnable {
 	public void excute() {
 		// 取得连接
 		try {
-			if(null == conn){
-				conn = BaseDao.getConn(Constant.CommonInfo.DATABASE);	
+			if (null == conn) {
+				conn = BaseDao.getConn(Constant.CommonInfo.DATABASE);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,10 +102,9 @@ public class CheckSearcherTask extends CRunnable {
 					xmler.removeXML(database);
 					// 删除Id
 					searcherService.deleteSeacherById(id);
-					// 改变图标显示信息：结束
-					SearchlocalApp.completeWork();
-
 				}
+				// 改变图标显示信息：结束
+				SearchlocalApp.completeWork();
 				// 显示删除索引完成
 				String message = msg.getMsgbyId(Constant.info_deletedindex);
 				MessageFrame.showmessage(message);
@@ -173,7 +163,8 @@ public class CheckSearcherTask extends CRunnable {
 							SearchlocalApp.completeWork();
 							// 改变T_Searcher表的状态
 							// 更新成已建成索引
-							searcherBean.setHasCreateIndex(Constant.HasCreateIndexFlg.HAS_CREAT_INDEX);
+							searcherBean
+									.setHasCreateIndex(Constant.HasCreateIndexFlg.HAS_CREAT_INDEX);
 							searcherBean.setHasUpdate(Constant.HasUpdateFlg.HAS_UPATE);
 							searcherBean.setHasDel(Constant.HasDelFlg.HAS_NOT_DEL);
 							searcherService.updateSearcher(conn, searcherBean);
@@ -284,7 +275,8 @@ public class CheckSearcherTask extends CRunnable {
 					}
 				}
 			}
-
+			// 资源收集
+			System.gc();
 		} catch (DBException e) {
 			// TODO 注意消除资源(关闭I/O等)
 			e.printStackTrace();
@@ -292,13 +284,13 @@ public class CheckSearcherTask extends CRunnable {
 			// TODO 注意消除资源(关闭I/O等)
 			e.printStackTrace();
 		} finally {
-//			if (conn != null) {
-//				try {
-//					//conn.close();
-//				} catch (SQLException e) {
-//					e.printStackTrace();
-//				}
-//			}
+			// if (conn != null) {
+			// try {
+			// //conn.close();
+			// } catch (SQLException e) {
+			// e.printStackTrace();
+			// }
+			// }
 		}
 	}
 
