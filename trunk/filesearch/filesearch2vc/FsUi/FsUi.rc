@@ -152,6 +152,33 @@ BEGIN
     PUSHBUTTON      "查看已有词汇",IDC_BUTTON_CHECK_EXISTCIHUI,137,53,56,15
 END
 
+IDD_DIALOG_MODIFY_INDEX DIALOG DISCARDABLE  0, 0, 279, 78
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "修改文件内容搜索"
+FONT 10, "System"
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,64,53,34,14
+    PUSHBUTTON      "取消",IDCANCEL,175,53,31,14
+    LTEXT           "搜索目录：",IDC_STATIC,24,12,41,8
+    LTEXT           "对象文档类型：",IDC_STATIC,8,32,57,8
+    LTEXT           "path",IDC_STATIC_SEARCHPATH,67,11,113,12
+    CONTROL         "excel",IDC_CHECK_EXCEL,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,65,32,28,10
+    CONTROL         "word",IDC_CHECK_WORD,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,100,32,26,10
+    CONTROL         "pdf",IDC_CHECK_PDF,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,133,32,21,10
+    CONTROL         "ppt",IDC_CHECK_PPT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,161,32,21,10
+    CONTROL         "html",IDC_CHECK_HTML,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,189,32,25,10
+    CONTROL         "txt",IDC_CHECK_TXT_MODIFY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,221,32,20,10
+    CONTROL         "chm",IDC_CHECK_CHM,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,248,32,24,10
+    PUSHBUTTON      "删除",IDC_BUTTON_DEL_INDEX,121,53,31,14
+END
+
 #endif    // Chinese (P.R.C.) resources
 /////////////////////////////////////////////////////////////////////////////
 

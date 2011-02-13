@@ -111,6 +111,10 @@ SOURCE=..\comm\sloCreateIndexAgent.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\sloModifyIndexAgent.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\StdAfx.cpp
 # ADD CPP /Yc"stdafx.h"
 # End Source File
@@ -137,6 +141,10 @@ SOURCE=.\Resource.h
 # Begin Source File
 
 SOURCE=..\comm\sloCreateIndexAgent.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\sloModifyIndexAgent.h
 # End Source File
 # Begin Source File
 

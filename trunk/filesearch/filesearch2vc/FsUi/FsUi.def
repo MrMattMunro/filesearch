@@ -6,4 +6,5 @@ DESCRIPTION  'FsUi Windows Dynamic Link Library'
 EXPORTS
     ; Explicit exports can go here
 	FsCreateIndex		@1
-	FsImportCustomCiHui	@2
+	FsModifyIndex		@2
+	FsImportCustomCiHui	@3
