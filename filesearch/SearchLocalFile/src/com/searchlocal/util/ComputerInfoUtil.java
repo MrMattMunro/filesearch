@@ -21,6 +21,9 @@ public class ComputerInfoUtil {
 		return date + sn;
 	}
 
+	/**  
+	 * 取得C盘的序列号和过期的日期
+	 */
 	public static String getEncryPtString() {
 		String sn = getSerialNumber("C");
 		String date = DateUtil.getNextDate();

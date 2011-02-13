@@ -22,8 +22,8 @@ public class LanguageUtil {
 				prop.put("language", lagugage);
 				OutputStream out = new FileOutputStream(Constant.path
 						+ "com\\searchlocal\\properties\\language.properties");
+				
 				prop.store(out, "fileopener");
-
 				out.close();
 			} else {
 				FileInputStream in = new FileInputStream(Constant.path

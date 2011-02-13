@@ -1,5 +1,15 @@
 package com.searchlocal.util;
 
+/**
+ * $RCSfile: Crypt.java
+ * $Revision: 1.0
+ * $Date: Jan 30, 2011
+ *
+ * Copyright (C) 2010 SlFile, Inc. All rights reserved.
+ *
+ * This software is the proprietary information of SlFile, Inc.
+ * Use is subject to license terms.
+ */
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,13 +29,14 @@ import javax.crypto.SecretKey;
 
 import com.searchlocal.constants.Constant;
 
-/**  
+/**
+ * 加密解密产生key
  * 
- * 加密解密  
- * 
- * 产生key
- *   
- * @author 昌松
+ * <p>Title: 加密解密产生key</p>
+ * <p>Description: </p>
+ * <p>site: www.slfile.net</p>
+ * @author changsong:qianjinfu@gmail.com
+ * @version 1.0
  */
 public class Crypt {
 
@@ -286,10 +297,8 @@ public class Crypt {
 	/**  
 	 * 返回在文件中指定位置的对象  
 	 *   
-	 * @param file  
-	 *            指定的文件  
-	 * @param i  
-	 *            从1开始  
+	 * @param file  指定的文件  
+	 * @param i  从1开始  
 	 * @return  
 	 */
 	public static Object getObjFromFile(String file, int i) {
@@ -314,9 +323,7 @@ public class Crypt {
 	}
 
 	/**  
-	 * 创建  
-	 *   
-	 * @param args  
+	 * 创建Lincese文件  
 	 */
 	public static void createLincese() {
 		Crypt crypt = new Crypt();
@@ -343,8 +350,6 @@ public class Crypt {
 
 	/**  
 	 * 取得linecese  
-	 *   
-	 * @param args  
 	 */
 	public static String getLinecese() {
 		Crypt crypt = new Crypt();

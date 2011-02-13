@@ -31,13 +31,62 @@ public class Constant {
 			datapath = Constant.class.getResource("/").toURI().getPath();
 
 			// 发布的时候注释掉
-            datapath = datapath.substring(1);
-            datapath = datapath.replaceAll("classes/", "");
+//            datapath = datapath.substring(1);
+//            datapath = datapath.replaceAll("classes/", "");
 		} catch (URISyntaxException e) {
 			// TODO 注意消除资源(关闭I/O等)
 			e.printStackTrace();
 		}
 	}
+	
+	// #------------------------------------------------------------------
+	// #--- web ----------------------------------------------------------
+	// #------------------------------------------------------------------
+	public static String web_searchname = "web.searchname";
+
+	public static String web_searchpath = "web.searchpath";
+
+	public static String web_changesearch = "web.changesearch";
+
+	public static String web_allsearchtype = "web.allsearchtype";
+
+	public static String web_webpage = "web.webpage";
+
+	public static String web_source = "web.source";
+
+	public static String web_button = "web.button";
+
+	public static String web_returnhome = "web.returnhome";
+
+	public static String web_at = "web.at";
+
+	public static String web_findfile = "web.findfile";
+
+	public static String web_rows = "web.rows";
+
+	public static String web_the = "web.the";
+
+	public static String web_photogragh = "web.photogragh";
+
+	public static String web_excel_the = "web.excel.the";
+
+	public static String web_excel_page = "web.excel.page";
+
+	public static String web_row = "web.row";
+
+	public static String web_page = "web.page";
+
+	public static String web_chapter = "web.chapter";
+
+	public static String web_previouspage = "web.previouspage";
+
+	public static String web_nextpage = "web.nextpage";
+
+	public static String web_preview = "web.preview";
+	
+	public static String web_view = "web.view";
+	
+	public static String web_innewwin = "web.innewwin";
 
 	// #------------------------------------------------------------------
 	// #------------------------------------------------------------------
@@ -218,8 +267,8 @@ public class Constant {
 	// #------------------------------------------------------------------
 	// #--- 配置路径-------------------------------------------------------
 	// #------------------------------------------------------------------
-//	 public static String path =
-//	 "tomcat\\webapps\\slfile\\WEB-INF\\classes\\";
+	 public static String path =
+	 "tomcat\\webapps\\slfile\\WEB-INF\\classes\\";
 
 	public static String lib_path = "tomcat\\webapps\\slfile\\WEB-INF\\lib\\";
 
@@ -229,7 +278,7 @@ public class Constant {
 
 	public static String libmysqldll = "libmysql.dll";
 
-	public static String path = "src\\";
+	// public static String path = "src\\";
 
 	public static String dicpath = "dic\\";
 
@@ -282,6 +331,7 @@ public class Constant {
 	public static final String HAS_ERROR = "1";
 
 	public static final String NO_ERROR = "0";
+	
 
 	// #------------------------------------------------------------------
 	// #--- 数据库相关配置参数-----------------------------------------------
@@ -615,4 +665,12 @@ public class Constant {
 		protected CommonInfo() {
 		}
 	}
+	
+	/* 字典文件 */
+	public static final String DICFILE = "dicfile";
+	
+	/* 是否覆盖 */
+	public static final String ISOVERWRITER="isoverwrite";
+	
+	
 }

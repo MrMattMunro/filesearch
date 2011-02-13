@@ -85,17 +85,13 @@ public class SearcherDao extends BaseDao {
 	public synchronized List<SearcherBean> getNeedIndexSeacher(Connection conn)
 			throws LogicException, DBException {
 		// SQL语句
-		String presql = SqlUtil.getSqlbyId("selectNeedIndexSeacher");
-		Map<String, String> paramMap = new HashMap<String, String>();
-		// 待建立索引
-		paramMap.put("hascreateindex", Constant.HasCreateIndexFlg.HAS_NO_CREAT_INDEX);
-
+		String sql = SqlUtil.getSqlbyId("selectNeedIndexSeacher");
 		List<SearcherBean> returnList = new ArrayList<SearcherBean>();
-		String sql = SQLParameterUtil.convertSQL(presql, paramMap);
+		Statement stmt = null;
+		ResultSet rs = null;
 		try {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
-
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				SearcherBean bean = new SearcherBean();
 				bean.setId(rs.getString("id"));
@@ -108,6 +104,7 @@ public class SearcherDao extends BaseDao {
 		} catch (SQLException e) {
 			throw new DBException("DB_E024", e);
 		}
+		closeConnection(rs, stmt, null);
 		return returnList;
 	}
 	
@@ -135,51 +132,10 @@ public class SearcherDao extends BaseDao {
 			// logger.error("DB_E022", sql, param, e);
 			throw new DBException("DB_E024", e);
 		}
+		closeConnection(null, stmt, conn);
 		return true;
 	}
 	
-
-	/**
-	 * 删除搜索对象
-	 * 
-	 * @param namespace 数据库名
-	 * @throws DBException
-	 * @throws LogicException
-	 */
-	public synchronized List<SearcherBean> deleteSearch(String namespace)
-			throws LogicException, DBException {
-		// 取得连接
-		Connection conn = BaseDao.getBaseConn(namespace);
-		// SQL语句
-		String presql = SqlUtil.getSqlbyId("selectNeedIndexSeacher");
-		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("namespace", namespace);
-		// 待建立索引
-		paramMap.put("hascreateindex", Constant.HasCreateIndexFlg.HAS_NO_CREAT_INDEX);
-
-		List<SearcherBean> returnList = new ArrayList<SearcherBean>();
-		String sql = SQLParameterUtil.convertSQL(presql, paramMap);
-		try {
-			setReadOnly(conn);
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
-
-			while (rs.next()) {
-				SearcherBean bean = new SearcherBean();
-				bean.setId(rs.getString("id"));
-				bean.setPath(rs.getString("path"));
-				bean.setIndexPath(rs.getString("indexpath"));
-				bean.setFileType(rs.getString("filetype"));
-				bean.setLastmodify(rs.getTimestamp("lastmodify").getTime());
-				returnList.add(bean);
-			}
-		} catch (SQLException e) {
-			throw new DBException("DB_E024", e);
-		}
-		closeConnection(null, null, conn);
-		return returnList;
-	}
-
 	/**
 	 * 取出待删除索引的搜索对象
 	 * 
@@ -190,16 +146,13 @@ public class SearcherDao extends BaseDao {
 	public List<SearcherBean> getNeedDelSeacher(Connection conn)
 			throws LogicException, DBException {
 		// SQL语句
-		String presql = SqlUtil.getSqlbyId("selectNeedDelSeacher");
-		Map<String, String> paramMap = new HashMap<String, String>();
-		// 待删除索引
-		paramMap.put("hasdel", Constant.HasDelFlg.HAS_DEL);
-
+		String sql = SqlUtil.getSqlbyId("selectNeedDelSeacher");
 		List<SearcherBean> returnList = new ArrayList<SearcherBean>();
-		String sql = SQLParameterUtil.convertSQL(presql, paramMap);
+		Statement stmt = null;
+		ResultSet rs = null;
 		try {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				SearcherBean bean = new SearcherBean();
 				bean.setId(rs.getString("id"));
@@ -212,6 +165,7 @@ public class SearcherDao extends BaseDao {
 		} catch (SQLException e) {
 			throw new DBException("DB_E024", e);
 		}
+		closeConnection(rs, stmt, null);
 		return returnList;
 	}
 
@@ -225,16 +179,13 @@ public class SearcherDao extends BaseDao {
 	public synchronized List<SearcherBean> getNeedUpdateSeacher(Connection conn)
 			throws LogicException, DBException {
 		// SQL语句
-		String presql = SqlUtil.getSqlbyId("selectNeedUpdateSeacher");
-		Map<String, String> paramMap = new HashMap<String, String>();
-		// 待更新索引
-		paramMap.put("hasupdate", Constant.HasUpdateFlg.HAS_NOT_UPATE);
-
+		String sql = SqlUtil.getSqlbyId("selectNeedUpdateSeacher");
 		List<SearcherBean> returnList = new ArrayList<SearcherBean>();
-		String sql = SQLParameterUtil.convertSQL(presql, paramMap);
+		Statement stmt = null;
+		ResultSet rs = null;
 		try {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
+			stmt = conn.createStatement();
+		    rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				SearcherBean bean = new SearcherBean();
 				bean.setId(rs.getString("id"));
@@ -247,6 +198,7 @@ public class SearcherDao extends BaseDao {
 		} catch (SQLException e) {
 			throw new DBException("DB_E024", e);
 		}
+		closeConnection(rs, stmt, null);
 		return returnList;
 	}
 	
@@ -262,22 +214,6 @@ public class SearcherDao extends BaseDao {
 			throws LogicException, DBException {
 		// SQL语句
 		String sql = SqlUtil.getSqlbyId("updateSearcherById");
-		
-//		# update ChangeInfo Record
-//		updateSearcherById=update t_searcher set hascreateindex =?, hasupdate=? , hasdel=?, lastmodify=? where id= ?
-		
-//	    select
-//        `id`,
-//        `path`,
-//        `indexpath`,
-//        `filetype`,
-//        `hascreateindex`,
-//        `hasupdate`,
-//        `hasdel`,
-//        `lastmodify` 
-//    from
-//        `commoninfo`.`t_searcher`
-//				
 		PreparedStatement stmt;
 		try {
 				stmt = conn.prepareStatement(sql);
@@ -296,6 +232,7 @@ public class SearcherDao extends BaseDao {
 			// logger.error("DB_E022", sql, param, e);
 			throw new DBException("DB_E024", e);
 		}
+		closeConnection(null, stmt, null);
 		return true;
 	}
 

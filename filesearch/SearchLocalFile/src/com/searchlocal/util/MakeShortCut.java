@@ -14,10 +14,21 @@ import java.io.*;
 
 import com.searchlocal.constants.Constant;
 
+/**
+ * 设置快键方式
+ * 
+ * <p>Title: 生成快捷方式</p>
+ * <p>Description: </p>
+ * <p>site: www.slfile.net</p>
+ * @author changsong:qianjinfu@gmail.com
+ * @version 1.0
+ */
 public class MakeShortCut {
 
+	/** 系统名称 */
 	public static String osName = System.getProperty("os.name");
 
+	/** 消息体 */
 	private static MenuMessageUtil msg = new MenuMessageUtil();
 
 	private static String slfilejs = "slfile.js";
@@ -25,15 +36,17 @@ public class MakeShortCut {
 	private static String updatejs = "update.js";
 
 	public static void create() {
+		
 		MakeShortCut sc = new MakeShortCut();
 		File installDir = new File(Constant.datapath);
+		// slFile快捷方式
 		String shorcutname = msg.getMsgbyId(Constant.searchapp_localsearch);
 		sc.createSlfileShortcut(installDir, "slfile.exe", shorcutname);
 		File file = new File(installDir + File.separator + slfilejs);
 		if (file.exists()) {
 			file.delete();
 		}
-
+		// 生成自动更新
 		sc.createUpdateShortcut(installDir, "update.exe", "update");
 		file = new File(installDir + File.separator + updatejs);
 		if (file.exists()) {
@@ -42,15 +55,12 @@ public class MakeShortCut {
 	}
 
 	/**
+	 * 本地搜索快捷方式
 	 * 
-	 * @param installDir
-	 *            文件路径
-	 * @param runnable
-	 *            可执行性文件(***.exe)
-	 * @param folder
-	 *            文件夹名称(本级文件夹名称)
-	 * @param name
-	 *            快捷方式名称
+	 * @param installDir 文件路径
+	 * @param runnable 可执行性文件(***.exe)
+	 * @param folder 文件夹名称(本级文件夹名称)
+	 * @param name 快捷方式名称
 	 * @return
 	 */
 	public boolean createSlfileShortcut(File installDir, String runnable, String name) {
@@ -132,15 +142,12 @@ public class MakeShortCut {
 	}
 
 	/**
+	 * 本地搜索自动更新快捷方式
 	 * 
-	 * @param installDir
-	 *            文件路径
-	 * @param runnable
-	 *            可执行性文件(***.exe)
-	 * @param folder
-	 *            文件夹名称(本级文件夹名称)
-	 * @param name
-	 *            快捷方式名称
+	 * @param installDir 文件路径
+	 * @param runnable 可执行性文件(***.exe)
+	 * @param folder 文件夹名称(本级文件夹名称)
+	 * @param name 快捷方式名称
 	 * @return
 	 */
 	public boolean createUpdateShortcut(File installDir, String runnable, String name) {
@@ -212,7 +219,6 @@ public class MakeShortCut {
 				r = r + '\\';
 			r = r + s.charAt(i);
 		}
-
 		return r;
 	}
 }

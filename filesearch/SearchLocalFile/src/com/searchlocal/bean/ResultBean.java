@@ -27,11 +27,38 @@ public class ResultBean {
 	/** 对象文档类型 */
 	private String fileType;
 
+	/** 文件名 */
+	private String fileName;
+	
 	/** 文件路径 */
 	private String filePath;
 	
+	/** 内容 */
+	private String content;
+	
 	/** 描述 */
 	private String desp;
+	
+	/** 最后更新时间 */
+	private String lastmodify;
+
+	/**
+	 * 取得lastmodify
+	 * 
+	 * @return String lastmodify 
+	 */
+	public String getLastmodify() {
+		return lastmodify;
+	}
+
+	/**
+	 * 设定lastmodify 
+	 * 
+	 * @param String lastmodify 
+	 */
+	public void setLastmodify(String lastmodify) {
+		this.lastmodify = lastmodify;
+	}
 
 	/**
 	 * 取得id
@@ -103,6 +130,42 @@ public class ResultBean {
 	 */
 	public void setDesp(String desp) {
 		this.desp = desp;
+	}
+
+	/**
+	 * 取得content
+	 * 
+	 * @return String content 
+	 */
+	public String getContent() {
+		return content;
+	}
+
+	/**
+	 * 设定content 
+	 * 
+	 * @param String content 
+	 */
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	/**
+	 * 取得fileName
+	 * 
+	 * @return String fileName 
+	 */
+	public String getFileName() {
+		return fileName;
+	}
+
+	/**
+	 * 设定fileName 
+	 * 
+	 * @param String fileName 
+	 */
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	
 }

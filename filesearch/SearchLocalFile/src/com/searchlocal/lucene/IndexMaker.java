@@ -1,24 +1,28 @@
 package com.searchlocal.lucene;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.io.File;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
-import org.apache.lucene.document.DateTools;
-import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
-import org.apache.lucene.index.CorruptIndexException;
-import org.apache.lucene.index.IndexWriter;
-
+import com.searchlocal.bean.ChmFileBean;
+import com.searchlocal.bean.ExcelFileBean;
+import com.searchlocal.bean.HtmlFileBean;
+import com.searchlocal.bean.PdfFileBean;
+import com.searchlocal.bean.PptFileBean;
+import com.searchlocal.bean.TxtFileBean;
+import com.searchlocal.bean.WordFileBean;
 import com.searchlocal.constants.Constant;
-import com.searchlocal.dao.BaseDao;
+import com.searchlocal.exception.DBException;
+import com.searchlocal.exception.LogicException;
+import com.searchlocal.exhander.ExceptionHandler;
+import com.searchlocal.service.ChmService;
+import com.searchlocal.service.ExcelService;
+import com.searchlocal.service.HtmlService;
+import com.searchlocal.service.PdfService;
+import com.searchlocal.service.PptService;
+import com.searchlocal.service.TxtService;
+import com.searchlocal.service.WordService;
 import com.searchlocal.util.CLogger;
-import com.searchlocal.util.SqlUtil;
 import com.searchlocal.util.StringUtils;
 
 /**
@@ -35,259 +39,134 @@ public class IndexMaker {
 	/** 日志 */
 	private static CLogger logger = new CLogger(IndexMaker.class);
 
-	/** Dao基类 */
-	private static BaseDao dao = new BaseDao();
-
 	/**
 	 * 生成索引文件
 	 * 
-	 * @return Returns the pool.
+	 * @param namespace 数据库名称
+	 * @param paths 文件列表
+	 * @return 是否成功
 	 */
-	public static void makeindex(List doctypes, String indexpath, String namespace, Set<String> paths) throws Exception {
-
-		IndexWriter indexWriter = IndexWriterFactory.getWriter(namespace);
-
-		for (Iterator iter = doctypes.iterator(); iter.hasNext();) {
-			String element = (String) iter.next();
-			if ("excel".equals(element)) {
-				// 取得连接
-				Connection conn = dao.getBaseConn(namespace);
-				List<String> removeList = new ArrayList<String>();
-				for (Iterator itera = paths.iterator(); itera.hasNext();) {
-					String path = (String) itera.next();
-					String type = StringUtils.getTypebyName(path);
-					if (type.equals(Constant.FileNameClassify.EXCEL)) {
-						String sql = SqlUtil.getsql(namespace, "selectExcelRecord");
-						makeExcelindex(indexWriter, sql, path, conn);
-						IndexWriterFactory.optimize(indexWriter);
-						removeList.add(path);
-					}
+	public static boolean makeindex(String namespace, Set<String> paths) throws Exception {
+		// 新建服务类
+		WordService wordservice = new WordService();
+		ExcelService excelService = new ExcelService();
+		PdfService pdfService = new PdfService();
+		PptService pptService = new PptService();
+		ChmService chmService = new ChmService();
+		HtmlService htmlService = new HtmlService();
+		TxtService txtService = new TxtService();
+		for (Iterator<String> iter = paths.iterator(); iter.hasNext();) {
+			String path = (String)iter.next();
+			File file = new File(path);
+			String filename = file.getName();
+			String filepath = file.getAbsolutePath();
+			String suffixname = StringUtils.suffixName(filepath);
+			long lastmodify = file.lastModified();
+			String absolutepath = file.getAbsolutePath();
+			// 文件是Word的场合
+			if ((suffixname.equals(Constant.FileClassify.DOC)
+					|| suffixname.equals(Constant.FileClassify.DOC2007))&& StringUtils.isNotTempDoc(filename)) {
+				WordFileBean filebean = new WordFileBean();
+				filebean.setFilename(filename);
+				filebean.setLastmodify(lastmodify);
+				filebean.setPath(absolutepath);
+				try {
+					wordservice.createIndex(filebean, namespace);
+				} catch (DBException e) {
+					ExceptionHandler.getErrorList().add(e.getMessageKey());
+				} catch (LogicException e) {
+					ExceptionHandler.getErrorList().add(e.getMessageKey());
 				}
-				paths.removeAll(removeList);
-				dao.closeConnection(null, null, conn);
 			}
-			if ("word".equals(element)) {
-				// 取得连接
-				Connection conn = dao.getBaseConn(namespace);
-				List<String> removeList = new ArrayList<String>();
-				for (Iterator itera = paths.iterator(); itera.hasNext();) {
-					String path = (String) itera.next();
-					String type = StringUtils.getTypebyName(path);
-					if (type.equals(Constant.FileNameClassify.WORD)) {
-						String sql = SqlUtil.getsql(namespace, "selectWordRecord");
-						makeWordindex(indexWriter, sql, path, conn);
-						IndexWriterFactory.optimize(indexWriter);
-						removeList.add(path);
-					}
+			// 文件是Excel的场合
+			if ((suffixname.equals(Constant.FileClassify.XLS)
+					|| suffixname.endsWith(Constant.FileClassify.XLS2007))&& StringUtils.isNotTempDoc(filename)) {
+				ExcelFileBean filebean = new ExcelFileBean();
+				filebean.setFilename(filename);
+				filebean.setLastmodify(lastmodify);
+				filebean.setPath(absolutepath);
+				try {
+					excelService.createIndex(filebean, namespace);
+				} catch (DBException e) {
+					ExceptionHandler.getErrorList().add(e.getMessageKey());
+				} catch (LogicException e) {
+					ExceptionHandler.getErrorList().add(e.getMessageKey());
 				}
-				paths.removeAll(removeList);
-				dao.closeConnection(null, null, conn);
 			}
-			if ("pdf".equals(element)) {
-				// 取得连接
-				Connection conn = dao.getBaseConn(namespace);
-				List<String> removeList = new ArrayList<String>();
-				for (Iterator itera = paths.iterator(); itera.hasNext();) {
-					String path = (String) itera.next();
-					String type = StringUtils.getTypebyName(path);
-					if (type.equals(Constant.FileNameClassify.PDF)) {
-						String sql = SqlUtil.getsql(namespace, "selectPdfRecord");
-						makePdfindex(indexWriter, sql, path, conn);
-						IndexWriterFactory.optimize(indexWriter);
-						removeList.add(path);
-					}
+			// 文件是Pdf的场合
+			if (suffixname.equals(Constant.FileClassify.PDF)) {
+				PdfFileBean filebean = new PdfFileBean();
+				filebean.setFilename(filename);
+				filebean.setLastmodify(lastmodify);
+				filebean.setPath(absolutepath);
+				try {
+					pdfService.createIndex(filebean, namespace);
+				} catch (DBException e) {
+					ExceptionHandler.getErrorList().add(e.getMessageKey());
+				} catch (LogicException e) {
+					ExceptionHandler.getErrorList().add(e.getMessageKey());
 				}
-				paths.removeAll(removeList);
-				dao.closeConnection(null, null, conn);
 			}
-			if ("ppt".equals(element)) {
-				// 取得连接
-				Connection conn = dao.getBaseConn(namespace);
-				List<String> removeList = new ArrayList<String>();
-				for (Iterator itera = paths.iterator(); itera.hasNext();) {
-					String path = (String) itera.next();
-					String type = StringUtils.getTypebyName(path);
-					if (type.equals(Constant.FileNameClassify.PPT)) {
-						String sql = SqlUtil.getsql(namespace, "selectPptRecord");
-						makePptindex(indexWriter, sql, path, conn);
-						IndexWriterFactory.optimize(indexWriter);
-						removeList.add(path);
-					}
+			// 文件是Ppt的场合
+			if ((suffixname.equals(Constant.FileClassify.PPT)
+					|| suffixname.endsWith(Constant.FileClassify.PPT2007))&& StringUtils.isNotTempDoc(filename))  {
+				PptFileBean filebean = new PptFileBean();
+				filebean.setFilename(filename);
+				filebean.setLastmodify(lastmodify);
+				filebean.setPath(absolutepath);
+				try {
+					pptService.createIndex(filebean, namespace);
+				} catch (DBException e) {
+					ExceptionHandler.getErrorList().add(e.getMessageKey());
+				} catch (LogicException e) {
+					ExceptionHandler.getErrorList().add(e.getMessageKey());
 				}
-				paths.removeAll(removeList);
-				dao.closeConnection(null, null, conn);
 			}
-			if ("chm".equals(element)) {
-				// 取得连接
-				Connection conn = dao.getBaseConn(namespace);
-				List<String> removeList = new ArrayList<String>();
-				for (Iterator itera = paths.iterator(); itera.hasNext();) {
-					String path = (String) itera.next();
-					String type = StringUtils.getTypebyName(path);
-					if (type.equals(Constant.FileNameClassify.CHM)) {
-						String sql = SqlUtil.getsql(namespace, "selectChmRecord");
-						makeChmindex(indexWriter, sql, path, conn);
-						IndexWriterFactory.optimize(indexWriter);
-						removeList.add(path);
-					}
+			// 文件是Chm的场合
+			if (suffixname.equals(Constant.FileClassify.CHM)) {
+				ChmFileBean filebean = new ChmFileBean();
+				filebean.setFilename(filename);
+				filebean.setLastmodify(lastmodify);
+				filebean.setPath(absolutepath);
+				try {
+					chmService.createIndex(filebean, namespace);
+				} catch (DBException e) {
+					ExceptionHandler.getErrorList().add(e.getMessageKey());
+				} catch (LogicException e) {
+					ExceptionHandler.getErrorList().add(e.getMessageKey());
 				}
-				paths.removeAll(removeList);
-				dao.closeConnection(null, null, conn);
 			}
-			if ("html".equals(element)) {
-				// 取得连接
-				Connection conn = dao.getBaseConn(namespace);
-				List<String> removeList = new ArrayList<String>();
-				for (Iterator itera = paths.iterator(); itera.hasNext();) {
-					String path = (String) itera.next();
-					String type = StringUtils.getTypebyName(path);
-					if (type.equals(Constant.FileNameClassify.HTML)) {
-						String sql = SqlUtil.getsql(namespace, "selectHtmlRecord");
-						makeHtmlindex(indexWriter, sql, path, conn);
-						IndexWriterFactory.optimize(indexWriter);
-						removeList.add(path);
-					}
+			// 文件是Html的场合
+			if (Constant.FileClassify.isHtmlcontain(suffixname)) {
+				HtmlFileBean filebean = new HtmlFileBean();
+				filebean.setFilename(filename);
+				filebean.setLastmodify(lastmodify);
+				filebean.setPath(absolutepath);
+				try {
+					 htmlService.createIndex(filebean, namespace);
+				} catch (DBException e) {
+					e.printStackTrace();
+					ExceptionHandler.getErrorList().add(e.getMessageKey());
+				} catch (LogicException e) {
+					e.printStackTrace();
+					ExceptionHandler.getErrorList().add(e.getMessageKey());
 				}
-				paths.removeAll(removeList);
-				dao.closeConnection(null, null, conn);
 			}
-			if ("txt".equals(element)) {
-				// 取得连接
-				Connection conn = dao.getBaseConn(namespace);
-				List<String> removeList = new ArrayList<String>();
-				for (Iterator itera = paths.iterator(); itera.hasNext();) {
-					String path = (String) itera.next();
-					String type = StringUtils.getTypebyName(path);
-					if (type.equals(Constant.FileNameClassify.TXT)) {
-						String sql = SqlUtil.getsql(namespace, "selectTxtRecord");
-						makeTxtindex(indexWriter, sql, path, conn);
-						IndexWriterFactory.optimize(indexWriter);
-						removeList.add(path);
-					}
+			// 文件是Src的场合
+			if (Constant.SrcClassify.iscontain(suffixname)) {
+				TxtFileBean filebean = new TxtFileBean();
+				filebean.setFilename(filename);
+				filebean.setLastmodify(lastmodify);
+				filebean.setPath(absolutepath);
+				try {
+					txtService.createIndex(filebean, namespace);
+				} catch (DBException e) {
+					ExceptionHandler.getErrorList().add(e.getMessageKey());
+				} catch (LogicException e) {
+					ExceptionHandler.getErrorList().add(e.getMessageKey());
 				}
-				paths.removeAll(removeList);
-				dao.closeConnection(null, null, conn);
 			}
 		}
-
-		// 关闭IndexWriter
-		if (indexWriter != null) {
-			indexWriter.commit();
-			indexWriter.close();
-			IndexWriterFactory.removeIndexWriter(namespace);
-		}
+		return true;
 	}
-
-	public static void makeWordindex(IndexWriter indexWriter, String sql, String path,
-			Connection conn) throws Exception {
-		ResultSet rs = dao.executeQuerySQL(sql, path, conn);
-		while (rs.next()) {
-			Document document = new Document();
-			document.add(new Field("paragraphNo", rs.getString("paragraphNo"), Field.Store.YES,
-					Field.Index.NO));
-
-			addDcoument(document, rs, indexWriter);
-		}
-		rs.close();
-	}
-
-	public static void makeExcelindex(IndexWriter indexWriter, String sql, String path,
-			Connection conn) throws Exception {
-		ResultSet rs = dao.executeQuerySQL(sql, path, conn);
-		while (rs.next()) {
-			Document document = new Document();
-			document.add(new Field("sheetname", rs.getString("sheetname"), Field.Store.YES,
-					Field.Index.NO));
-			document
-					.add(new Field("rownb", rs.getString("rownb"), Field.Store.YES, Field.Index.NO));
-
-			addDcoument(document, rs, indexWriter);
-		}
-		rs.close();
-	}
-
-	public static void makePdfindex(IndexWriter indexWriter, String sql, String path,
-			Connection conn) throws Exception {
-		ResultSet rs = dao.executeQuerySQL(sql, path, conn);
-		while (rs.next()) {
-			Document document = new Document();
-			document.add(new Field("page", rs.getString("page"), Field.Store.YES, Field.Index.NO));
-			addDcoument(document, rs, indexWriter);
-		}
-		rs.close();
-	}
-
-	public static void makePptindex(IndexWriter indexWriter, String sql, String path,
-			Connection conn) throws Exception {
-		ResultSet rs = dao.executeQuerySQL(sql, path, conn);
-		while (rs.next()) {
-			Document document = new Document();
-			document.add(new Field("page", rs.getString("page"), Field.Store.YES, Field.Index.NO));
-			addDcoument(document, rs, indexWriter);
-		}
-		rs.close();
-	}
-
-	public static void makeChmindex(IndexWriter indexWriter, String sql, String path,
-			Connection conn) throws Exception {
-		ResultSet rs = dao.executeQuerySQL(sql, path, conn);
-		while (rs.next()) {
-			Document document = new Document();
-			document.add(new Field("catalogname", rs.getString("catalogname"), Field.Store.YES,
-					Field.Index.NO));
-			addDcoument(document, rs, indexWriter);
-		}
-		rs.close();
-	}
-
-	public static void makeHtmlindex(IndexWriter indexWriter, String sql, String path,
-			Connection conn) throws Exception {
-		ResultSet rs = dao.executeQuerySQL(sql, path, conn);
-		while (rs.next()) {
-			Document document = new Document();
-			addDcoument(document, rs, indexWriter);
-		}
-		rs.close();
-	}
-
-	public static void makeTxtindex(IndexWriter indexWriter, String sql, String path,
-			Connection conn) throws Exception {
-		ResultSet rs = dao.executeQuerySQL(sql, path, conn);
-		while (rs.next()) {
-			Document document = new Document();
-			document.add(new Field("rownb", StringUtils.replaceNull(rs.getString("rownb")),
-					Field.Store.YES, Field.Index.NO));
-			addDcoument(document, rs, indexWriter);
-		}
-		rs.close();
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void addDcoument(Document doc, ResultSet rs, IndexWriter indexWriter) {
-		try {
-			doc.add(new Field("filename", rs.getString("filename"), Field.Store.YES,
-							Field.Index.NO));
-			doc.add(new Field("path", rs.getString("path"), Field.Store.YES,
-					Field.Index.NOT_ANALYZED));
-			doc.add(new Field("content", rs.getString("content"), Field.Store.YES,
-					Field.Index.ANALYZED, Field.TermVector.WITH_POSITIONS_OFFSETS));
-
-			doc.add(new Field("lastmodify", DateTools.timeToString(rs.getTimestamp("lastmodify")
-					.getTime(), DateTools.Resolution.MINUTE), Field.Store.YES, Field.Index.NO));
-
-			indexWriter.addDocument(doc);
-		} catch (CorruptIndexException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 }

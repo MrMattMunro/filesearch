@@ -94,7 +94,7 @@ public class FileDao extends BaseDao {
 	 */
 	public boolean deleteFileRecord(String namespace, String path) throws DBException,
 			LogicException {
-		Connection conn = BaseDao.getBaseConn(namespace);
+		Connection conn = BaseDao.getConn(namespace);
 		openTransaction(conn);
 		boolean success = false;
 		// 生成SQL
@@ -123,7 +123,7 @@ public class FileDao extends BaseDao {
 	 */
 	public boolean deleteFileRecords(String namespace, List<String> paths) throws DBException,
 			LogicException {
-		Connection conn = BaseDao.getBaseConn(namespace);
+		Connection conn = BaseDao.getConn(namespace);
 		openTransaction(conn);
 		boolean success = false;
 		// 生成SQL
@@ -160,7 +160,7 @@ public class FileDao extends BaseDao {
 	 */
 	public boolean deleteRecordByPath(String namespace, String table, String path)
 			throws DBException, LogicException {
-		Connection conn = BaseDao.getBaseConn(namespace);
+		Connection conn = BaseDao.getConn(namespace);
 		openTransaction(conn);
 		boolean success = false;
 		// 生成SQL
@@ -224,7 +224,7 @@ public class FileDao extends BaseDao {
 	 */
 	public List<FileParam> getFileRecord(String namespace) throws LogicException,
 			DBException {
-		Connection conn = BaseDao.getBaseConn(namespace);
+		Connection conn = BaseDao.getConn(namespace);
 		// SQL语句
 		String presql = SqlUtil.getSqlbyId("selectFileRecord");
 		Map<String, String> paramMap = new HashMap<String, String>();
@@ -261,7 +261,7 @@ public class FileDao extends BaseDao {
 	 */
 	public boolean insertFileRecord(List<FileParam> beanList, String namespace)
 			throws LogicException, DBException {
-		Connection conn = BaseDao.getBaseConn(namespace);
+		Connection conn = BaseDao.getConn(namespace);
 		openTransaction(conn);
 
 		// SQL语句
@@ -297,7 +297,7 @@ public class FileDao extends BaseDao {
 	public  boolean updateFileRecord(List<FileParam> beanList, String namespace)
 			throws LogicException, DBException {
 
-		Connection conn = BaseDao.getBaseConn(namespace);
+		Connection conn = BaseDao.getConn(namespace);
 		openTransaction(conn);
 		// SQL语句
 		String presql = SqlUtil.getSqlbyId("updateFileRecord");

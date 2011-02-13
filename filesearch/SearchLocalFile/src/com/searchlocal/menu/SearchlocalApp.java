@@ -22,6 +22,7 @@ import snoozesoft.systray4j.SysTrayMenuIcon;
 import snoozesoft.systray4j.SysTrayMenuItem;
 import snoozesoft.systray4j.SysTrayMenuListener;
 
+import com.searcherlocal.thread.result.CheckResultCore;
 import com.searchlocal.bean.FileOpenerBean;
 import com.searchlocal.constants.Constant;
 import com.searchlocal.menu.en.ENAboutFrame;
@@ -40,6 +41,7 @@ import com.searchlocal.service.SeacherService;
 import com.searchlocal.thread.FileContainer;
 import com.searchlocal.thread.SearchFile;
 import com.searchlocal.thread.concurrent.ConcurrentFileCore;
+import com.searchlocal.thread.customdic.CheckCustomDicCore;
 import com.searchlocal.thread.searcher.CheckSearcherCore;
 import com.searchlocal.util.ConstantExeFileUtil;
 import com.searchlocal.util.CourseUtil;
@@ -165,6 +167,10 @@ public class SearchlocalApp implements ActionListener, SysTrayMenuListener {
 		ConcurrentFileCore.listen();
 		// 启动搜索对象线程
 		CheckSearcherCore.listen();
+		// 监控检索开始
+		CheckResultCore.listen();
+		// 监控自定义词典
+		CheckCustomDicCore.listen();
 	}
 
 	/**

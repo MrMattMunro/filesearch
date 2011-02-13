@@ -1,5 +1,12 @@
-/*
- * Copyright(C) 2010 Slfile Company, Ltd. All Rights Reserved.
+/**
+ * $RCSfile: Constant.java
+ * $Revision: 1.0
+ * $Date: Jan 30, 2011
+ *
+ * Copyright (C) 2010 SlFile, Inc. All rights reserved.
+ *
+ * This software is the proprietary information of SlFile, Inc.
+ * Use is subject to license terms.
  */
 package com.searchlocal.util;
 
@@ -7,19 +14,28 @@ import java.io.File;
 
 import com.searchlocal.constants.Constant;
 
+/**
+ * 检查Lincese
+ * 
+ * <p>Title: 检查Lincese</p>
+ * <p>Description: </p>
+ * <p>site: www.slfile.net</p>
+ * @author changsong:qianjinfu@gmail.com
+ * @version 1.0
+ */
 public class CheckLincese {
 
 	/**
-	 * @param args
+	 * 检查Lincese
 	 */
 	public static boolean checkLincese() {
-
 		// lincese不存在
 		File linceseFile = new File(Constant.datapath + Constant.licencepath);
 		if (!linceseFile.exists()) {
 			return false;
 		}
 
+		// 是否第一次运行
 		boolean isfirststart = false;
 		String eneryString = ComputerInfoUtil.getCurrentEncryPtString();
 		String lincuece = Crypt.getLinecese();
@@ -52,7 +68,6 @@ public class CheckLincese {
 				return false;
 			}
 		}
-
 		return true;
 	}
 }
