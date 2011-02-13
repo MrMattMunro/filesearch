@@ -5,6 +5,7 @@
 #include "FsUi.h"
 #include "CreateIndexDlg.h"
 #include "CustomCiHuiDlg.h"
+#include "ModifyIndexDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -76,6 +77,21 @@ DWORD __stdcall FsCreateIndex()
 
 	return 0;
 }
+
+DWORD __stdcall FsModifyIndex()
+{
+	AFX_MANAGE_STATE(AfxGetStaticModuleState());
+	CModifyIndexDlg modifyindexdlg;
+	modifyindexdlg.SetIndexID(1);
+	if(IDOK == modifyindexdlg.DoModal())
+	{
+		
+		return 0;
+	}
+	
+	return 0;
+}
+
 
 DWORD __stdcall FsImportCustomCiHui()
 {

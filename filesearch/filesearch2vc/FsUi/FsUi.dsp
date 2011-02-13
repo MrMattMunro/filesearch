@@ -111,6 +111,10 @@ SOURCE=.\FsUi.rc
 # End Source File
 # Begin Source File
 
+SOURCE=.\ModifyIndexDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\mysql\MySQLDB.cpp
 # End Source File
 # Begin Source File
@@ -137,6 +141,10 @@ SOURCE=.\CustomCiHuiDlg.h
 # Begin Source File
 
 SOURCE=.\FsUi.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ModifyIndexDlg.h
 # End Source File
 # Begin Source File
 
