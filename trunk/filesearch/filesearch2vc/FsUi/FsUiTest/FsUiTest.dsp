@@ -111,7 +111,7 @@ SOURCE=..\comm\sloCreateIndexAgent.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\sloModifyIndexAgent.cpp
+SOURCE=..\comm\sloModifyIndexAgent.cpp
 # End Source File
 # Begin Source File
 
@@ -144,7 +144,7 @@ SOURCE=..\comm\sloCreateIndexAgent.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\sloModifyIndexAgent.h
+SOURCE=..\comm\sloModifyIndexAgent.h
 # End Source File
 # Begin Source File
 
