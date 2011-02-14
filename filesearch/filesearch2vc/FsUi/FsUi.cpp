@@ -78,11 +78,11 @@ DWORD __stdcall FsCreateIndex()
 	return 0;
 }
 
-DWORD __stdcall FsModifyIndex()
+DWORD __stdcall FsModifyIndex(int nID)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
 	CModifyIndexDlg modifyindexdlg;
-	modifyindexdlg.SetIndexID(1);
+	modifyindexdlg.SetIndexID(nID);
 	if(IDOK == modifyindexdlg.DoModal())
 	{
 		

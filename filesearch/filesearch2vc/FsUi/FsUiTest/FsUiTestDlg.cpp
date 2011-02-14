@@ -5,6 +5,7 @@
 #include "FsUiTest.h"
 #include "FsUiTestDlg.h"
 #include "sloCreateIndexAgent.h"
+#include "sloModifyIndexAgent.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -87,6 +88,7 @@ BEGIN_MESSAGE_MAP(CFsUiTestDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON2, OnButton2)
 	ON_BN_CLICKED(IDC_BUTTON3, OnButton3)
 	ON_BN_CLICKED(IDC_BUTTON4, OnButton4)
+	ON_BN_CLICKED(IDC_BUTTON5, OnButton5)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -211,7 +213,7 @@ void CFsUiTestDlg::OnButton1()
 	FreeLibrary(hins);
 }
 
-typedef DWORD (__stdcall *fnFsModifyIndex)();
+typedef DWORD (__stdcall *fnFsModifyIndex)(int nID);
 fnFsModifyIndex g_fnFsModifyIndex;
 void CFsUiTestDlg::OnButton4() 
 {
@@ -231,7 +233,7 @@ void CFsUiTestDlg::OnButton4()
 		return ;
 	}
 	
-	g_fnFsModifyIndex();
+	g_fnFsModifyIndex(2);
 
 	FreeLibrary(hins);	
 }
@@ -317,3 +319,11 @@ void CFsUiTestDlg::OnButton3()
 	
 }
 
+
+void CFsUiTestDlg::OnButton5() 
+{
+	// TODO: Add your control notification handler code here
+	sloModifyIndexAgent modifyAgent;
+	modifyAgent.SetIndexID(3);
+	modifyAgent.GetSearchInfo();
+}
