@@ -77,6 +77,32 @@ int sloModifyIndexAgent::GetSearchInfo()
 	return 0;
 }
 
+
+//update t_searcher set filetype='%s',hasupdate='0',lastmodify='%s' where id=%d
+BOOL sloModifyIndexAgent::EventModifyIndex(char* pszFileTypes)
+{
+	BOOL bRet = TRUE;
+	std::string strQuerySQL = "update t_searcher set filetype='%s',hasupdate='0',lastmodify='%s' where id=%d";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(),pszFileTypes, sloCommAgent::GetCurTime(),m_nIndexID);
+	if (FAILED(hr))
+		bRet = FALSE;
+	
+	return bRet;	
+}
+
+//update t_searcher set filetype='%s',hasupdate='0',lastmodify='%s' where id=%d
+BOOL sloModifyIndexAgent::EventDelIndex()
+{
+	BOOL bRet = TRUE;
+	std::string strQuerySQL = "update t_searcher set hasdel='1',lastmodify='%s' where id=%d";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), sloCommAgent::GetCurTime(),m_nIndexID);
+	if (FAILED(hr))
+		bRet = FALSE;
+	
+	return bRet;	
+}
+
+
 //////////////////////////////////////////////////////////////////////////
 bool sloModifyIndexAgent::ConnectDB()
 {

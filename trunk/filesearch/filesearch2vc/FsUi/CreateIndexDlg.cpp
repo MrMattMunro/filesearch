@@ -146,10 +146,16 @@ void CCreateIndexDlg::OnOK()
 	if (m_bTxt)
 		strTypes += ",txt";
 	if (m_bHtml)
-		strTypes += ",html";	
+		strTypes += ",html";
+	
+	std::string szTypes = strTypes.GetBuffer(0);
+	if (szTypes.substr(0,1) == ",")
+	{
+		szTypes.erase(0,1);
+	}
 
 	sloCreateIndexAgent create;
-	create.EventCreateIndex(szPath, strTypes.GetBuffer(0));
+	create.EventCreateIndex(szPath,(char*)szTypes.c_str());
 	CDialog::OnOK();
 }
 
