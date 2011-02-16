@@ -10,6 +10,16 @@
 #endif // _MSC_VER > 1000
 #include "MySQLDB.h"
 
+typedef enum Search_Type{
+	TYPE_WORD = 0,
+	TYPE_EXCEL,
+	TYPE_PPT,
+	TYPE_PDF,
+	TYPE_HTML,
+	TYPE_TXT,
+	TYPE_CHM
+};
+
 class sloModifyIndexAgent  
 {
 public:
@@ -18,6 +28,9 @@ public:
 
 	void SetIndexID(int nID);
 	int GetSearchInfo();
+
+	BOOL EventModifyIndex(char* pszFileTypes);
+	BOOL EventDelIndex();
 private:
 	bool ConnectDB();
 	BOOL doSqlExe(BOOL bCombin,const char* szSQL,...);

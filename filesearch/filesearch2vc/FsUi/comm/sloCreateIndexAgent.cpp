@@ -221,17 +221,6 @@ string sloCreateIndexAgent::ConverSqlPath(string strPath)
 	return strData;
 }
 
-char* GetCurTime()
-{
-	char *pszTime = new char[30];
-	memset(pszTime, NULL, 30);
-	SYSTEMTIME stTime;
-	GetLocalTime(&stTime);
-	sprintf(pszTime,"%04d-%02d-%02d %02d:%02d:%02d",
-		stTime.wYear, stTime.wMonth, stTime.wDay, stTime.wHour, stTime.wMinute, stTime.wSecond);
-	return pszTime;
-}
-
 BOOL sloCreateIndexAgent::EventCreateIndex(char* pszSearchPath, char* pszFileTypes)
 {
 	//¹¹½¨
@@ -239,7 +228,7 @@ BOOL sloCreateIndexAgent::EventCreateIndex(char* pszSearchPath, char* pszFileTyp
 
 	BOOL bRet = TRUE;
 	std::string strQuerySQL = "insert into t_searcher(path,indexpath,filetype,hascreateindex,hasupdate,hasdel,lastmodify) values('%s','%s','%s','0','0','0','%s')";
-	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(),ConverSqlPath(pszSearchPath).c_str(), ConverSqlPath(m_szIndexPath).c_str(), pszFileTypes, GetCurTime());
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(),ConverSqlPath(pszSearchPath).c_str(), ConverSqlPath(m_szIndexPath).c_str(), pszFileTypes, sloCommAgent::GetCurTime());
 	if (FAILED(hr))
 		bRet = FALSE;
 	
