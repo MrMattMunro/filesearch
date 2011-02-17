@@ -107,6 +107,10 @@ SOURCE=..\..\mysql\MySQLDB.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\comm\sloCommAgent.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\comm\sloCreateIndexAgent.cpp
 # End Source File
 # Begin Source File

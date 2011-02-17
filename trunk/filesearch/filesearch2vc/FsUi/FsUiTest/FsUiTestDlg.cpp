@@ -233,7 +233,10 @@ void CFsUiTestDlg::OnButton4()
 		return ;
 	}
 	
-	g_fnFsModifyIndex(2);
+	char szID[MAX_PATH] = {0};
+	GetDlgItemText(IDC_EDIT_MODIFY_ID, szID, MAX_PATH);
+	int nId = atoi(szID);
+	g_fnFsModifyIndex(nId);
 
 	FreeLibrary(hins);	
 }
