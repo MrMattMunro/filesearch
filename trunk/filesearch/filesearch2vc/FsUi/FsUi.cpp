@@ -84,8 +84,7 @@ DWORD __stdcall FsModifyIndex(int nID)
 	CModifyIndexDlg modifyindexdlg;
 	modifyindexdlg.SetIndexID(nID);
 	if(IDOK == modifyindexdlg.DoModal())
-	{
-		
+	{	
 		return 0;
 	}
 	
