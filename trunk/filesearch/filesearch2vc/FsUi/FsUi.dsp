@@ -119,6 +119,10 @@ SOURCE=..\mysql\MySQLDB.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ShowAllCiHuiDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\comm\sloCommAgent.cpp
 # End Source File
 # Begin Source File
@@ -157,6 +161,10 @@ SOURCE=.\ModifyIndexDlg.h
 # Begin Source File
 
 SOURCE=.\Resource.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ShowAllCiHuiDlg.h
 # End Source File
 # Begin Source File
 

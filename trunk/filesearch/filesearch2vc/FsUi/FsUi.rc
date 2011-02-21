@@ -179,6 +179,34 @@ BEGIN
     PUSHBUTTON      "删除",IDC_BUTTON_DEL_INDEX,119,53,39,14
 END
 
+IDD_DIALOG_ALL_CIHUI DIALOG DISCARDABLE  0, 0, 163, 280
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "查看已导入词汇"
+FONT 9, "宋体"
+BEGIN
+    PUSHBUTTON      "关闭",IDCANCEL,58,257,42,17
+    LISTBOX         IDC_LIST_ALL_CIHUI,14,34,135,214,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "关键词：",IDC_STATIC,15,12,33,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DIALOG_ALL_CIHUI, DIALOG
+    BEGIN
+        TOPMARGIN, 1
+        BOTTOMMARGIN, 278
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
 #endif    // Chinese (P.R.C.) resources
 /////////////////////////////////////////////////////////////////////////////
 
