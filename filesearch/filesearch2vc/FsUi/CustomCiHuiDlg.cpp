@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "FsUi.h"
 #include "CustomCiHuiDlg.h"
+#include "ShowAllCiHuiDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -62,7 +63,8 @@ void CCustomCiHuiDlg::OnCancel()
 void CCustomCiHuiDlg::OnButtonCheckExistcihui() 
 {
 	// TODO: Add your control notification handler code here
-	
+	CShowAllCiHuiDlg AllCihui;
+	AllCihui.DoModal();
 }
 
 void CCustomCiHuiDlg::OnButtonBrowseCihui() 

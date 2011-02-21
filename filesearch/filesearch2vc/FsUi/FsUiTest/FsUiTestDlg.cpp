@@ -89,6 +89,7 @@ BEGIN_MESSAGE_MAP(CFsUiTestDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON3, OnButton3)
 	ON_BN_CLICKED(IDC_BUTTON4, OnButton4)
 	ON_BN_CLICKED(IDC_BUTTON5, OnButton5)
+	ON_BN_CLICKED(IDC_BUTTON6, OnButton6)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -178,8 +179,6 @@ HCURSOR CFsUiTestDlg::OnQueryDragIcon()
 
 typedef DWORD (__stdcall *fnFsCreateIndex)();
 fnFsCreateIndex g_fnFsCreateIndex;
-typedef DWORD (__stdcall *fnFsImportCustomCiHui)();
-fnFsImportCustomCiHui g_fnFsImportCustomCiHui;
 
 void CFsUiTestDlg::OnButton1() 
 {
@@ -200,15 +199,6 @@ void CFsUiTestDlg::OnButton1()
 	}
 
 	g_fnFsCreateIndex();
-
-// 	g_fnFsImportCustomCiHui = (fnFsImportCustomCiHui)GetProcAddress(hins, "FsImportCustomCiHui");
-// 	if (!g_fnFsImportCustomCiHui)
-// 	{
-// 		MessageBox("Not Find Func fnFsImportCustomCiHui");
-// 		return ;
-// 	}
-// 	
-// 	g_fnFsImportCustomCiHui();
 
 	FreeLibrary(hins);
 }
@@ -240,6 +230,32 @@ void CFsUiTestDlg::OnButton4()
 
 	FreeLibrary(hins);	
 }
+
+typedef DWORD (__stdcall *fnFsImportCustomCiHui)();
+fnFsImportCustomCiHui g_fnFsImportCustomCiHui;
+void CFsUiTestDlg::OnButton6() 
+{
+	// TODO: Add your control notification handler code here
+	HINSTANCE hins = LoadLibrary("FsUi.dll");
+	if (!hins)
+	{
+		DWORD dwErr = GetLastError();
+		MessageBox("Not Find FsUi.dll");
+		return ;
+	}
+	
+	g_fnFsImportCustomCiHui = (fnFsImportCustomCiHui)GetProcAddress(hins, "FsImportCustomCiHui");
+	if (!g_fnFsImportCustomCiHui)
+	{
+		MessageBox("Not Find Func fnFsImportCustomCiHui");
+		return ;
+	}
+	
+	g_fnFsImportCustomCiHui();
+	
+	FreeLibrary(hins);		
+}
+
 
 void GetDrvSpaceInfo(char* pDisk) 
 {

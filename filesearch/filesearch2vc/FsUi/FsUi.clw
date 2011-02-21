@@ -2,19 +2,21 @@
 
 [General Info]
 Version=1
-ClassCount=4
+ClassCount=5
 Class1=CFsUiApp
-LastClass=CModifyIndexDlg
+LastClass=CShowAllCiHuiDlg
 NewFileInclude2=#include "FsUi.h"
-ResourceCount=3
+ResourceCount=4
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
 LastTemplate=CDialog
 Resource1=IDD_DIALOG_CREATE_INDEX
 Class3=CCustomCiHuiDlg
-Resource2=IDD_DIALOG_CUSTOM_DICT
+Resource2=IDD_DIALOG_MODIFY_INDEX
 Class4=CModifyIndexDlg
-Resource3=IDD_DIALOG_MODIFY_INDEX
+Resource3=IDD_DIALOG_CUSTOM_DICT
+Class5=CShowAllCiHuiDlg
+Resource4=IDD_DIALOG_ALL_CIHUI
 
 [CLS:CFsUiApp]
 Type=0
@@ -96,5 +98,22 @@ ImplementationFile=ModifyIndexDlg.cpp
 BaseClass=CDialog
 Filter=D
 LastObject=CModifyIndexDlg
+VirtualFilter=dWC
+
+[DLG:IDD_DIALOG_ALL_CIHUI]
+Type=1
+Class=CShowAllCiHuiDlg
+ControlCount=3
+Control1=IDCANCEL,button,1342242816
+Control2=IDC_LIST_ALL_CIHUI,listbox,1352728835
+Control3=IDC_STATIC,static,1342308352
+
+[CLS:CShowAllCiHuiDlg]
+Type=0
+HeaderFile=ShowAllCiHuiDlg.h
+ImplementationFile=ShowAllCiHuiDlg.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=CShowAllCiHuiDlg
 VirtualFilter=dWC
 
