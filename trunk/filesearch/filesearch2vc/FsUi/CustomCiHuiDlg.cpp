@@ -5,6 +5,7 @@
 #include "FsUi.h"
 #include "CustomCiHuiDlg.h"
 #include "ShowAllCiHuiDlg.h"
+#include "sloCustomCiHuiAgent.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -46,10 +47,15 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CCustomCiHuiDlg message handlers
 
+
 void CCustomCiHuiDlg::OnOK() 
 {
 	// TODO: Add extra validation here
+	UpdateData(TRUE);
 	
+	sloCustomCiHuiAgent cihui;
+	cihui.EventCustomCiHui(m_bIsOverCiHui, m_strBrowsePath.GetBuffer(0));
+
 	CDialog::OnOK();
 }
 

@@ -131,7 +131,15 @@ SOURCE=.\comm\sloCreateIndexAgent.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\sloCustomCiHuiAgent.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\comm\sloModifyIndexAgent.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\sloRegAgent.cpp
 # End Source File
 # Begin Source File
 
@@ -176,7 +184,15 @@ SOURCE=.\comm\sloCreateIndexAgent.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\sloCustomCiHuiAgent.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\comm\sloModifyIndexAgent.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\sloRegAgent.h
 # End Source File
 # Begin Source File
 

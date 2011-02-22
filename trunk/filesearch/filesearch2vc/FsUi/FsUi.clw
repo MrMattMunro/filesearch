@@ -4,17 +4,17 @@
 Version=1
 ClassCount=5
 Class1=CFsUiApp
-LastClass=CShowAllCiHuiDlg
+LastClass=CCustomCiHuiDlg
 NewFileInclude2=#include "FsUi.h"
 ResourceCount=4
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
 LastTemplate=CDialog
-Resource1=IDD_DIALOG_CREATE_INDEX
+Resource1=IDD_DIALOG_CUSTOM_DICT
 Class3=CCustomCiHuiDlg
-Resource2=IDD_DIALOG_MODIFY_INDEX
+Resource2=IDD_DIALOG_CREATE_INDEX
 Class4=CModifyIndexDlg
-Resource3=IDD_DIALOG_CUSTOM_DICT
+Resource3=IDD_DIALOG_MODIFY_INDEX
 Class5=CShowAllCiHuiDlg
 Resource4=IDD_DIALOG_ALL_CIHUI
 
@@ -114,6 +114,6 @@ HeaderFile=ShowAllCiHuiDlg.h
 ImplementationFile=ShowAllCiHuiDlg.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=CShowAllCiHuiDlg
+LastObject=IDC_LIST_ALL_CIHUI
 VirtualFilter=dWC
 
