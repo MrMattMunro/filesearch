@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "FsUi.h"
 #include "ShowAllCiHuiDlg.h"
+#include "sloCustomCiHuiAgent.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -46,9 +47,6 @@ BOOL CShowAllCiHuiDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
-	m_AllCiHuiListBox.AddString("11");
-	m_AllCiHuiListBox.AddString("22");
-
 	ReadAllCiHui();
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -60,9 +58,11 @@ int CShowAllCiHuiDlg::ReadAllCiHui()
     FILE *fp;   
     char *content;   
 	
+	sloCustomCiHuiAgent cus;
+	cus.GetProFilePath();
     // 以只读方式打开文件   
-    if((fp = fopen("C:\\custom.txt", "r")) == NULL) {   
-        printf("\r读取文件D:\\test.txt时发生异常");   
+    if((fp = fopen(cus.m_szcustomtxtPath, "r")) == NULL) {   
+        printf("\r读取文件%s时发生异常");   
         return -1;   
     }   
 	
