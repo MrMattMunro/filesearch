@@ -19,7 +19,8 @@ static char THIS_FILE[]=__FILE__;
 
 sloCustomCiHuiAgent::sloCustomCiHuiAgent()
 {
-	memset(m_szProFilePath, NULL, MAX_PATH);
+	memset(m_szpropertiesPath, NULL, MAX_PATH);
+	memset(m_szcustomtxtPath, NULL, MAX_PATH);
 }
 
 sloCustomCiHuiAgent::~sloCustomCiHuiAgent()
@@ -41,9 +42,9 @@ BOOL sloCustomCiHuiAgent::EventCustomCiHui(BOOL bOver, char* pszFilePath)
 
 	GetProFilePath();
 	
-	bSucc = WritePropertyfileString(DICFILE_NAME, pszFilePath, m_szProFilePath);
+	bSucc = WritePropertyfileString(DICFILE_NAME, pszFilePath, m_szpropertiesPath);
 	
-	bSucc = WritePropertyfileString(OVERFLAG_NAME, strOver.GetBuffer(0), m_szProFilePath);
+	bSucc = WritePropertyfileString(OVERFLAG_NAME, strOver.GetBuffer(0), m_szpropertiesPath);
 
 	return bSucc;
 }
@@ -194,8 +195,23 @@ BOOL sloCustomCiHuiAgent::GetPropertyfileString(LPCTSTR lpKeyName, LPCTSTR lpDef
 	return bResult;
 }
 
+#define  CUS_PRO_NAME "custumdic.properties"
+#define  CUS_TXT_NAME "dic\\custom.txt"
 BOOL sloCustomCiHuiAgent::GetProFilePath()
 {
+	char szFileExePath[MAX_PATH] = {0};
 	sloRegAgent reg;
-	return reg.ReadInstallPath(m_szProFilePath);
+	if(reg.ReadInstallPath(szFileExePath))
+	{  
+		char drive[_MAX_DRIVE];
+		char dir[_MAX_DIR];
+		char fname[_MAX_FNAME];
+		char ext[_MAX_EXT];
+		
+		_splitpath( szFileExePath, drive, dir, fname, ext );
+		sprintf(m_szpropertiesPath,"%s%s%s",drive, dir,CUS_PRO_NAME);
+		sprintf(m_szcustomtxtPath,"%s%s%s",drive, dir,CUS_TXT_NAME);
+	}
+	
+	return FALSE;
 }
