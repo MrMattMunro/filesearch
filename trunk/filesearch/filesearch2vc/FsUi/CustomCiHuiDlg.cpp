@@ -72,18 +72,15 @@ void CCustomCiHuiDlg::OnButtonCheckExistcihui()
 	CShowAllCiHuiDlg AllCihui;
 	AllCihui.DoModal();
 }
-
+#define FITER_TXT_XLS TEXT("Text Files (.txt)|*.txt|Excel Files (.xls)|*.xls")
 void CCustomCiHuiDlg::OnButtonBrowseCihui() 
 {
 	// TODO: Add your control notification handler code here
-	CFileDialog hFileDlg(true,NULL ,
-		NULL,
-		OFN_FILEMUSTEXIST | OFN_READONLY | OFN_PATHMUSTEXIST,	
-		TEXT("Text Files (.txt)|*.txt|Excel Files (.xls)|*.xls"),
-		NULL);
-	if(hFileDlg.DoModal() == IDOK)
+	char szPath[MAX_PATH] = {0};
+
+	if( sloCommAgent::DoFileDialog(szPath, FITER_TXT_XLS) )
 	{
-		m_strBrowsePath = hFileDlg.GetPathName();
+		m_strBrowsePath = szPath;
 		UpdateData(FALSE);
-	}	
+	}
 }

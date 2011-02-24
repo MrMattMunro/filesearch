@@ -53,6 +53,8 @@ BOOL CFsUiTestApp::InitInstance()
 #else
 	Enable3dControlsStatic();	// Call this when linking to MFC statically
 #endif
+	
+	SetDialogBkColor(RGB(230,235,235),RGB(0,0,0));
 
 	CFsUiTestDlg dlg;
 	m_pMainWnd = &dlg;

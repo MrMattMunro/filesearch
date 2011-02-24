@@ -103,6 +103,10 @@ SOURCE=.\FsUiTestDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\comm\mysqlcomm.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\mysql\MySQLDB.cpp
 # End Source File
 # Begin Source File

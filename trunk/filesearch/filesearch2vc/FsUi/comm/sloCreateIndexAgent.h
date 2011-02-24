@@ -8,8 +8,8 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-#include "MySQLDB.h"
-class sloCreateIndexAgent  
+ 
+class sloCreateIndexAgent  : public mysqlcomm
 {
 public:
 	sloCreateIndexAgent();
@@ -24,10 +24,7 @@ private:
 
 	int GetMaxIndexID();
 	string ConverSqlPath(string strPath);
-
-	bool ConnectDB();
-	BOOL doSqlExe(BOOL bCombin,const char* szSQL,...);
-
+ 
 	//disk
 	void GetDrvSpaceInfo(char* pDisk);
 	void FindAllDrivers();
@@ -37,9 +34,7 @@ public:
 	ULARGE_INTEGER m_uMaxFreeSpace;
 	char m_szSearchName[MAX_PATH];	
 	char m_szIndexPath[MAX_PATH];
-
-	CMySQLDB* m_pMySqlDB;
-
+ 
 };
 
 #endif // !defined(AFX_SLOCREATEINDEXAGENT_H__15940A96_1924_4B1D_9BE0_4C4496E39144__INCLUDED_)
