@@ -26,18 +26,11 @@ sloCreateIndexAgent::sloCreateIndexAgent()
 	memset(m_szSearchName, NULL, MAX_PATH);
 	memset(m_szIndexPath, NULL, MAX_PATH);
 	m_uMaxFreeSpace.QuadPart = 0;
-
-	m_pMySqlDB = NULL;
 }
 
 sloCreateIndexAgent::~sloCreateIndexAgent()
 {
-	if (m_pMySqlDB)
-	{
-		delete m_pMySqlDB;
-		m_pMySqlDB = NULL;
-	}
-
+ 
 }
 
 void sloCreateIndexAgent::GetDrvSpaceInfo(char* pDisk) 
@@ -132,44 +125,6 @@ void sloCreateIndexAgent::BuildIndexPath()
 }
 
 //////////////////////////////////////////////////////////////////////////
-BOOL sloCreateIndexAgent::doSqlExe(BOOL bCombin,const char* szSQL,...)
-{
-	BOOL bSucc = FALSE; 	
-	try
-	{	
-		if(bCombin)
-		{
-			int pos = 0;
-			char buffer[DEFAULT_SQL_CMD_SIZE] = {0 };
-			va_list args;
-			va_start(args, szSQL);
-			pos += _vsnprintf(buffer+pos,DEFAULT_SQL_CMD_SIZE,szSQL, args);
-			va_end(args);
-			bSucc = m_pMySqlDB->Query(buffer,pos);
-		}else
-		{
-			bSucc = m_pMySqlDB->Query(szSQL,strlen(szSQL));	
-		}
-	}
-	catch (...)
-	{
-		OutputDebugStringA("exception in doSqlExe");
-	}
-	
-	return bSucc;
-	
-}
-
-
-bool sloCreateIndexAgent::ConnectDB()
-{
-	//
-	m_pMySqlDB = new CMySQLDB();
-	
-	//connect db
-	return m_pMySqlDB->Connect("127.0.0.1", 3306, "root","changsong","COMMONINFO");
-}
-
 //不能获取索引个数，因为索引被删除以后，在根据获取索引个数，会出现重复的索引名称
 //-1 从数据库中读取失败
 int sloCreateIndexAgent::GetMaxIndexID()

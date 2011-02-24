@@ -37,3 +37,21 @@ char* sloCommAgent::GetCurTime()
 	return pszTime;
 }
 
+BOOL sloCommAgent::DoFileDialog(char *szPath, LPCTSTR lpszFilter )
+{
+	CFileDialog hFileDlg(true,NULL ,
+		NULL,
+		OFN_FILEMUSTEXIST | OFN_READONLY | OFN_PATHMUSTEXIST,	
+		//TEXT("Text Files (.txt)|*.txt|Excel Files (.xls)|*.xls"),
+		lpszFilter,
+		NULL);
+	if(hFileDlg.DoModal() == IDOK)
+	{
+		CString strPath;
+		strPath = hFileDlg.GetPathName();
+		strcpy(szPath, strPath.GetBuffer(0));
+		return TRUE;
+	}	
+
+	return FALSE;
+}

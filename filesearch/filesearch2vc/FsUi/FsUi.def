@@ -8,3 +8,4 @@ EXPORTS
 	FsCreateIndex		@1
 	FsModifyIndex		@2
 	FsImportCustomCiHui	@3
+	FsSetAttribute		@4

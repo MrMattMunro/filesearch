@@ -115,7 +115,15 @@ SOURCE=.\ModifyIndexDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\comm\mysqlcomm.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\mysql\MySQLDB.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\SetAttributeDlg.cpp
 # End Source File
 # Begin Source File
 
@@ -131,7 +139,7 @@ SOURCE=.\comm\sloCreateIndexAgent.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\sloCustomCiHuiAgent.cpp
+SOURCE=.\comm\sloCustomCiHuiAgent.cpp
 # End Source File
 # Begin Source File
 
@@ -139,7 +147,11 @@ SOURCE=.\comm\sloModifyIndexAgent.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\sloRegAgent.cpp
+SOURCE=.\comm\sloRegAgent.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\sloSetAttrAgent.cpp
 # End Source File
 # Begin Source File
 
@@ -168,7 +180,15 @@ SOURCE=.\ModifyIndexDlg.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\comm\mysqlcomm.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\Resource.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\SetAttributeDlg.h
 # End Source File
 # Begin Source File
 
@@ -184,7 +204,7 @@ SOURCE=.\comm\sloCreateIndexAgent.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\sloCustomCiHuiAgent.h
+SOURCE=.\comm\sloCustomCiHuiAgent.h
 # End Source File
 # Begin Source File
 
@@ -192,7 +212,11 @@ SOURCE=.\comm\sloModifyIndexAgent.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\sloRegAgent.h
+SOURCE=.\comm\sloRegAgent.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\sloSetAttrAgent.h
 # End Source File
 # Begin Source File
 

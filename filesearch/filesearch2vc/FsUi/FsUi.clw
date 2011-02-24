@@ -2,21 +2,23 @@
 
 [General Info]
 Version=1
-ClassCount=5
+ClassCount=6
 Class1=CFsUiApp
-LastClass=CShowAllCiHuiDlg
+LastClass=CSetAttributeDlg
 NewFileInclude2=#include "FsUi.h"
-ResourceCount=4
+ResourceCount=5
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
 LastTemplate=CDialog
-Resource1=IDD_DIALOG_CUSTOM_DICT
+Resource1=IDD_DIALOG_CREATE_INDEX
 Class3=CCustomCiHuiDlg
 Resource2=IDD_DIALOG_MODIFY_INDEX
 Class4=CModifyIndexDlg
-Resource3=IDD_DIALOG_CREATE_INDEX
+Resource3=IDD_DIALOG_CUSTOM_DICT
 Class5=CShowAllCiHuiDlg
 Resource4=IDD_DIALOG_ALL_CIHUI
+Class6=CSetAttributeDlg
+Resource5=IDD_DIALOG_SET_ATTR
 
 [CLS:CFsUiApp]
 Type=0
@@ -24,6 +26,8 @@ HeaderFile=FsUi.h
 ImplementationFile=FsUi.cpp
 Filter=N
 LastObject=CFsUiApp
+BaseClass=CWinApp
+VirtualFilter=AC
 
 [DLG:IDD_DIALOG_CREATE_INDEX]
 Type=1
@@ -115,6 +119,41 @@ HeaderFile=ShowAllCiHuiDlg.h
 ImplementationFile=ShowAllCiHuiDlg.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDC_EDIT_KEY_WORD
+LastObject=CShowAllCiHuiDlg
+VirtualFilter=dWC
+
+[DLG:IDD_DIALOG_SET_ATTR]
+Type=1
+Class=CSetAttributeDlg
+ControlCount=21
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_STATIC,static,1342308352
+Control4=IDC_STATIC,static,1342308352
+Control5=IDC_STATIC,static,1342308352
+Control6=IDC_STATIC,static,1342308352
+Control7=IDC_STATIC,static,1342308352
+Control8=IDC_STATIC,static,1342308352
+Control9=IDC_EDIT_IE_PATH,edit,1350633600
+Control10=IDC_STATIC,static,1342308352
+Control11=IDC_EDIT_WORD_PATH,edit,1350633600
+Control12=IDC_EDIT_EXCEL_PATH,edit,1350633600
+Control13=IDC_EDIT_PPT_PATH,edit,1350633600
+Control14=IDC_EDIT_PDF_PATH,edit,1350633600
+Control15=IDC_EDIT_TXT_PATH,edit,1350633600
+Control16=IDC_BUTTON_BROWSER_IE,button,1342242816
+Control17=IDC_BUTTON_BROWSER_WORD,button,1342242816
+Control18=IDC_BUTTON_BROWSER_EXCEL,button,1342242816
+Control19=IDC_BUTTON_BROWSER_PPT,button,1342242816
+Control20=IDC_BUTTON_BROWSER_PDF,button,1342242816
+Control21=IDC_BUTTON_BROWSER_TXT,button,1342242816
+
+[CLS:CSetAttributeDlg]
+Type=0
+HeaderFile=SetAttributeDlg.h
+ImplementationFile=SetAttributeDlg.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=CSetAttributeDlg
 VirtualFilter=dWC
 

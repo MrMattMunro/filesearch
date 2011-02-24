@@ -27,6 +27,8 @@ public:
 // Overrides
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CFsUiApp)
+	public:
+	virtual BOOL InitInstance();
 	//}}AFX_VIRTUAL
 
 	//{{AFX_MSG(CFsUiApp)

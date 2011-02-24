@@ -49,6 +49,7 @@ BOOL CShowAllCiHuiDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
+
 	ReadAllCiHui();
 
 	return TRUE;  // return TRUE unless you set the focus to a control

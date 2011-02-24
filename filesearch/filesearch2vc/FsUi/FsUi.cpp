@@ -6,6 +6,7 @@
 #include "CreateIndexDlg.h"
 #include "CustomCiHuiDlg.h"
 #include "ModifyIndexDlg.h"
+#include "SetAttributeDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -64,20 +65,37 @@ CFsUiApp::CFsUiApp()
 
 CFsUiApp theApp;
 
+BOOL CFsUiApp::InitInstance() 
+{
+	// TODO: Add your specialized code here and/or call the base class
+//	SetDialogBkColor(RGB(243,243,243),RGB(0,0,0));
+	SetDialogBkColor(RGB(230,235,235),RGB(0,0,0));
 
+	return CWinApp::InitInstance();
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+/*
+  功能：创建索引
+*/
 DWORD __stdcall FsCreateIndex()
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
 	CCreateIndexDlg createindexdlg;
 	if(IDOK == createindexdlg.DoModal())
 	{
-
+		
 		return 0;
 	}
-
+	
 	return 0;
 }
 
+
+/*
+  功能：修改索引
+*/
 DWORD __stdcall FsModifyIndex(int nID)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
@@ -91,7 +109,9 @@ DWORD __stdcall FsModifyIndex(int nID)
 	return 0;
 }
 
-
+/*
+  功能：自定义词汇
+*/
 DWORD __stdcall FsImportCustomCiHui()
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
@@ -99,6 +119,21 @@ DWORD __stdcall FsImportCustomCiHui()
 	if(IDOK == cihuidlg.DoModal())
 	{
 		
+		return 0;
+	}
+	
+	return 0;
+}
+
+/*
+  功能：自定义词汇
+*/
+DWORD __stdcall FsSetAttribute()
+{
+	AFX_MANAGE_STATE(AfxGetStaticModuleState());
+	CSetAttributeDlg set;
+	if(IDOK == set.DoModal())
+	{	
 		return 0;
 	}
 	

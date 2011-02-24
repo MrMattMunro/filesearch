@@ -21,16 +21,12 @@ sloModifyIndexAgent::sloModifyIndexAgent()
 	m_nIndexID = 0;
 	memset(m_szSearchPath, NULL, MAX_PATH);
 	memset(m_szSearchType, NULL, MAX_PATH*4);
-	m_pMySqlDB = NULL;
+ 
 }
 
 sloModifyIndexAgent::~sloModifyIndexAgent()
 {
-	if (m_pMySqlDB)
-	{
-		delete m_pMySqlDB;
-		m_pMySqlDB = NULL;
-	}
+
 }
 
 void sloModifyIndexAgent::SetIndexID(int nID)
@@ -100,44 +96,4 @@ BOOL sloModifyIndexAgent::EventDelIndex()
 		bRet = FALSE;
 	
 	return bRet;	
-}
-
-
-//////////////////////////////////////////////////////////////////////////
-bool sloModifyIndexAgent::ConnectDB()
-{
-	//
-	m_pMySqlDB = new CMySQLDB();
-	
-	//connect db
-	return m_pMySqlDB->Connect("127.0.0.1", 3306, "root","changsong","COMMONINFO");
-}
-
-
-BOOL sloModifyIndexAgent::doSqlExe(BOOL bCombin,const char* szSQL,...)
-{
-	BOOL bSucc = FALSE; 	
-	try
-	{	
-		if(bCombin)
-		{
-			int pos = 0;
-			char buffer[DEFAULT_SQL_CMD_SIZE] = {0 };
-			va_list args;
-			va_start(args, szSQL);
-			pos += _vsnprintf(buffer+pos,DEFAULT_SQL_CMD_SIZE,szSQL, args);
-			va_end(args);
-			bSucc = m_pMySqlDB->Query(buffer,pos);
-		}else
-		{
-			bSucc = m_pMySqlDB->Query(szSQL,strlen(szSQL));	
-		}
-	}
-	catch (...)
-	{
-		OutputDebugStringA("exception in doSqlExe");
-	}
-	
-	return bSucc;
-	
 }
