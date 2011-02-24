@@ -4,7 +4,7 @@
 Version=1
 ClassCount=5
 Class1=CFsUiApp
-LastClass=CCustomCiHuiDlg
+LastClass=CShowAllCiHuiDlg
 NewFileInclude2=#include "FsUi.h"
 ResourceCount=4
 NewFileInclude1=#include "stdafx.h"
@@ -103,10 +103,11 @@ VirtualFilter=dWC
 [DLG:IDD_DIALOG_ALL_CIHUI]
 Type=1
 Class=CShowAllCiHuiDlg
-ControlCount=3
+ControlCount=4
 Control1=IDCANCEL,button,1342242816
 Control2=IDC_LIST_ALL_CIHUI,listbox,1352728835
 Control3=IDC_STATIC,static,1342308352
+Control4=IDC_EDIT_KEY_WORD,edit,1350631552
 
 [CLS:CShowAllCiHuiDlg]
 Type=0
@@ -114,6 +115,6 @@ HeaderFile=ShowAllCiHuiDlg.h
 ImplementationFile=ShowAllCiHuiDlg.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDC_LIST_ALL_CIHUI
+LastObject=IDC_EDIT_KEY_WORD
 VirtualFilter=dWC
 
