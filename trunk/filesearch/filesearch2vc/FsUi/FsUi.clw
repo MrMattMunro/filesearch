@@ -12,9 +12,9 @@ Class2=CCreateIndexDlg
 LastTemplate=CDialog
 Resource1=IDD_DIALOG_CUSTOM_DICT
 Class3=CCustomCiHuiDlg
-Resource2=IDD_DIALOG_CREATE_INDEX
+Resource2=IDD_DIALOG_MODIFY_INDEX
 Class4=CModifyIndexDlg
-Resource3=IDD_DIALOG_MODIFY_INDEX
+Resource3=IDD_DIALOG_CREATE_INDEX
 Class5=CShowAllCiHuiDlg
 Resource4=IDD_DIALOG_ALL_CIHUI
 
