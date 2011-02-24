@@ -20,7 +20,7 @@ CShowAllCiHuiDlg::CShowAllCiHuiDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CShowAllCiHuiDlg::IDD, pParent)
 {
 	//{{AFX_DATA_INIT(CShowAllCiHuiDlg)
-		// NOTE: the ClassWizard will add member initialization here
+	m_strKeyWord = _T("");
 	//}}AFX_DATA_INIT
 }
 
@@ -30,12 +30,14 @@ void CShowAllCiHuiDlg::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CShowAllCiHuiDlg)
 	DDX_Control(pDX, IDC_LIST_ALL_CIHUI, m_AllCiHuiListBox);
+	DDX_Text(pDX, IDC_EDIT_KEY_WORD, m_strKeyWord);
 	//}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CShowAllCiHuiDlg, CDialog)
 	//{{AFX_MSG_MAP(CShowAllCiHuiDlg)
+	ON_EN_CHANGE(IDC_EDIT_KEY_WORD, OnChangeEditKeyWord)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -90,12 +92,13 @@ int CShowAllCiHuiDlg::ReadAllCiHui()
 	char* pCur = pBegin;
 	for (int i = 0; i < len; i++)
 	{
-		if (*pCur == '\n' || *pCur == 0x00)
+		if (*pCur == '\n')
 		{
 			int nLen = pCur-pBegin;
 			char* szItem = new char[nLen+1];
 			memset(szItem, NULL, nLen+1);
 			strncpy(szItem, pBegin, nLen);
+			m_AllCiHuiList.push_back(szItem);
 			m_AllCiHuiListBox.AddString(szItem);
 			if (szItem)
 			{
@@ -105,6 +108,10 @@ int CShowAllCiHuiDlg::ReadAllCiHui()
 
 			pBegin = pCur+1;
 		}
+
+		if (*pCur == 0x00)
+			break ;
+
 		pCur++;
 	}
 
@@ -113,4 +120,42 @@ int CShowAllCiHuiDlg::ReadAllCiHui()
     free(content); 
 	
 	return 0;
+}
+
+void CShowAllCiHuiDlg::OnChangeEditKeyWord() 
+{
+	// TODO: If this is a RICHEDIT control, the control will not
+	// send this notification unless you override the CDialog::OnInitDialog()
+	// function and call CRichEditCtrl().SetEventMask()
+	// with the ENM_CHANGE flag ORed into the mask.
+	
+	// TODO: Add your control notification handler code here
+	UpdateData(TRUE);
+
+	//Çå¿ÕlistboxÁÐ±í
+	ClearListBox();
+ 
+	int nCount = m_AllCiHuiList.size();
+
+	for (int i = 0; i < nCount; i++)
+	{
+		std::string strItem = m_AllCiHuiList[i];
+		if (strstr(strItem.c_str(), m_strKeyWord.GetBuffer(0)))
+		{
+			m_AllCiHuiListBox.AddString(strItem.c_str());
+		}
+	}
+
+	UpdateData(FALSE);
+}
+
+
+void CShowAllCiHuiDlg::ClearListBox()
+{
+	// Delete every other item from the list box.
+	int nCount = m_AllCiHuiListBox.GetCount();
+	for (int i=0;i < nCount; i++)
+	{
+		m_AllCiHuiListBox.DeleteString( 0 );
+	}
 }

@@ -17,10 +17,14 @@ public:
 	CShowAllCiHuiDlg(CWnd* pParent = NULL);   // standard constructor
 	
 	int ReadAllCiHui();
+	void ClearListBox();
+
+	std::vector<string> m_AllCiHuiList;
 // Dialog Data
 	//{{AFX_DATA(CShowAllCiHuiDlg)
 	enum { IDD = IDD_DIALOG_ALL_CIHUI };
 	CListBox	m_AllCiHuiListBox;
+	CString	m_strKeyWord;
 	//}}AFX_DATA
 
 
@@ -37,6 +41,7 @@ protected:
 	// Generated message map functions
 	//{{AFX_MSG(CShowAllCiHuiDlg)
 	virtual BOOL OnInitDialog();
+	afx_msg void OnChangeEditKeyWord();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

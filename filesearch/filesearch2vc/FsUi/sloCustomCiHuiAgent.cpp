@@ -195,8 +195,8 @@ BOOL sloCustomCiHuiAgent::GetPropertyfileString(LPCTSTR lpKeyName, LPCTSTR lpDef
 	return bResult;
 }
 
-#define  CUS_PRO_NAME "custumdic.properties"
-#define  CUS_TXT_NAME "dic\\custom.txt"
+#define  CUS_PRO_NAME "dic\\custumdic.properties"
+#define  CUS_TXT_NAME "dic\\custom.dic"
 BOOL sloCustomCiHuiAgent::GetProFilePath()
 {
 	char szFileExePath[MAX_PATH] = {0};

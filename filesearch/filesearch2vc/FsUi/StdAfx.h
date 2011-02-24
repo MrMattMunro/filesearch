@@ -40,6 +40,7 @@
 #pragma  warning(disable : 4284)
 #pragma comment(lib, "ws2_32.lib")
 
+#include <vector>
 #include <string>
 using namespace std;
 
