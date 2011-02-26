@@ -17,6 +17,11 @@ public:
 	
 	static char* GetCurTime();
 	static BOOL DoFileDialog(char *szPath, LPCTSTR lpszFilter );
+	
+	static BOOL IsFileExists(LPCTSTR lpszFileName) ;
+	static BOOL GetPropertyfileString(LPCTSTR lpKeyName, LPCTSTR lpDefault, LPTSTR lpReturnedString, DWORD nSize, LPCTSTR lpFileName);
+	static BOOL WritePropertyfileString(LPCTSTR lpKeyName, LPCTSTR lpString, LPCTSTR lpFileName);
+
 };
 
 #endif // !defined(AFX_SLOCOMMAGENT_H__DC6A156B_963F_4AAB_9116_E934A742DE58__INCLUDED_)

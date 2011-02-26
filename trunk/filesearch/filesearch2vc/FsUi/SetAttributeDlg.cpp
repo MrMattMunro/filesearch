@@ -69,30 +69,29 @@ BOOL CSetAttributeDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
-	sloSetAttrAgent set;
 	char szPath[MAX_PATH] = {0};
 	
-	if(set.GetSoftPath(IE_NAME,szPath) == 0 )
+	if(m_setAgent.GetSoftPath(IE_NAME,szPath) == 0 )
 		m_strIE = szPath;
 
 	memset(szPath, NULL, MAX_PATH);
-	if(set.GetSoftPath(WORD_NAME,szPath) == 0 )
+	if(m_setAgent.GetSoftPath(WORD_NAME,szPath) == 0 )
 		m_strWord = szPath;
 
 	memset(szPath, NULL, MAX_PATH);
-	if(set.GetSoftPath(EXCEL_NAME,szPath) == 0 )
+	if(m_setAgent.GetSoftPath(EXCEL_NAME,szPath) == 0 )
 		m_strExcel = szPath;
 
 	memset(szPath, NULL, MAX_PATH);
-	if(set.GetSoftPath(PPT_NAME,szPath) == 0 )
+	if(m_setAgent.GetSoftPath(PPT_NAME,szPath) == 0 )
 		m_strPPT = szPath;
 
 	memset(szPath, NULL, MAX_PATH);
-	if(set.GetSoftPath(PDF_NAME,szPath) == 0 )
+	if(m_setAgent.GetSoftPath(PDF_NAME,szPath) == 0 )
 		m_strPdf = szPath;
 
 	memset(szPath, NULL, MAX_PATH);
-	if(set.GetSoftPath(TXT_NAME,szPath) == 0 )
+	if(m_setAgent.GetSoftPath(TXT_NAME,szPath) == 0 )
 		m_strTxt = szPath;
 
 	UpdateData(FALSE);
@@ -171,7 +170,17 @@ void CSetAttributeDlg::OnButtonBrowserTxt()
 void CSetAttributeDlg::OnOK() 
 {
 	// TODO: Add extra validation here
-	
+	UpdateData(TRUE);
+	m_setAgent.GetProFilePath();
+
+	sloCommAgent::WritePropertyfileString(IE_NAME,m_strIE.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+	sloCommAgent::WritePropertyfileString(WORD_NAME,m_strWord.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+
+	sloCommAgent::WritePropertyfileString(EXCEL_NAME,m_strExcel.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+	sloCommAgent::WritePropertyfileString(PPT_NAME,m_strPPT.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+	sloCommAgent::WritePropertyfileString(PDF_NAME,m_strPdf.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+	sloCommAgent::WritePropertyfileString(TXT_NAME,m_strTxt.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+
 	CDialog::OnOK();
 }
 

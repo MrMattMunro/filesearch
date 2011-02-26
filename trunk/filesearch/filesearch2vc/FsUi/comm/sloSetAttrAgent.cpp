@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "FsUi.h"
 #include "sloSetAttrAgent.h"
+#include "sloRegAgent.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -57,4 +58,23 @@ int sloSetAttrAgent::GetSoftPath(char* szFileType, char* szPath)
 	}
 	
 	return 0;
+}
+
+#define  FILEOPENER_PRO_NAME "tomcat\\webapps\\slfile\\WEB-INF\\classes\\com\\searchlocal\\properties\\fileopener.properties"
+BOOL sloSetAttrAgent::GetProFilePath()
+{
+	char szFileExePath[MAX_PATH] = {0};
+	sloRegAgent reg;
+	if(reg.ReadInstallPath(szFileExePath))
+	{  
+		char drive[_MAX_DRIVE];
+		char dir[_MAX_DIR];
+		char fname[_MAX_FNAME];
+		char ext[_MAX_EXT];
+		
+		_splitpath( szFileExePath, drive, dir, fname, ext );
+		sprintf(m_szpropertiesPath,"%s%s%s",drive, dir,FILEOPENER_PRO_NAME);
+	}
+	
+	return FALSE;
 }
