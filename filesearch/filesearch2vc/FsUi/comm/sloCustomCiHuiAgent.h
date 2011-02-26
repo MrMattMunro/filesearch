@@ -16,12 +16,6 @@ public:
 	virtual ~sloCustomCiHuiAgent();
 
 	BOOL EventCustomCiHui(BOOL bOver, char* pszFilePath);
-
-private:
-	BOOL WritePropertyfileString(LPCTSTR lpKeyName, LPCTSTR lpString, LPCTSTR lpFileName);
-	BOOL GetPropertyfileString(LPCTSTR lpKeyName, LPCTSTR lpDefault, LPTSTR lpReturnedString, DWORD nSize, LPCTSTR lpFileName);
-
-	BOOL IsFileExists(LPCTSTR lpszFileName);
 public:
 	BOOL GetProFilePath();
 

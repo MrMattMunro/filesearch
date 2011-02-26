@@ -9,6 +9,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CSetAttributeDlg dialog
+#include "sloSetAttrAgent.h"
 
 class CSetAttributeDlg : public CDialog
 {
@@ -16,6 +17,7 @@ class CSetAttributeDlg : public CDialog
 public:
 	CSetAttributeDlg(CWnd* pParent = NULL);   // standard constructor
 
+	sloSetAttrAgent m_setAgent;
 // Dialog Data
 	//{{AFX_DATA(CSetAttributeDlg)
 	enum { IDD = IDD_DIALOG_SET_ATTR };

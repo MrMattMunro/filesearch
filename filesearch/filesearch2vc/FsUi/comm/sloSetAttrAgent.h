@@ -16,7 +16,10 @@ public:
 	virtual ~sloSetAttrAgent();
 
 	int GetSoftPath(char* szFileType, char* szPath);
+public:
+	BOOL GetProFilePath();
 
+	char m_szpropertiesPath[MAX_PATH];
 };
 
 #endif // !defined(AFX_SLOSETATTRAGENT_H__6BF5F4B1_F5C3_4341_A9AD_7A0A9145B2CE__INCLUDED_)
