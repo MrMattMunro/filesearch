@@ -10,13 +10,13 @@ ResourceCount=5
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
 LastTemplate=CDialog
-Resource1=IDD_DIALOG_ALL_CIHUI
+Resource1=IDD_DIALOG_CREATE_INDEX
 Class3=CCustomCiHuiDlg
-Resource2=IDD_DIALOG_CUSTOM_DICT
+Resource2=IDD_DIALOG_MODIFY_INDEX
 Class4=CModifyIndexDlg
-Resource3=IDD_DIALOG_CREATE_INDEX
+Resource3=IDD_DIALOG_CUSTOM_DICT
 Class5=CShowAllCiHuiDlg
-Resource4=IDD_DIALOG_MODIFY_INDEX
+Resource4=IDD_DIALOG_ALL_CIHUI
 Class6=CSetAttributeDlg
 Resource5=IDD_DIALOG_SET_ATTR
 

@@ -105,7 +105,7 @@ void CSetAttributeDlg::OnButtonBrowserIe()
 {
 	// TODO: Add your control notification handler code here
 	char szPath[MAX_PATH] = {0};
-	if( sloCommAgent::DoFileDialog(szPath, FILTER_EXE) )
+	if( sloCommAgent::DoFileDialog(szPath, FILTER_EXE, m_strIE.GetBuffer(0)) )
 	{
 		m_strIE = szPath;
 		UpdateData(FALSE);
@@ -116,7 +116,7 @@ void CSetAttributeDlg::OnButtonBrowserWord()
 {
 	// TODO: Add your control notification handler code here
 	char szPath[MAX_PATH] = {0};
-	if( sloCommAgent::DoFileDialog(szPath, FILTER_EXE) )
+	if( sloCommAgent::DoFileDialog(szPath, FILTER_EXE, m_strWord.GetBuffer(0)) )
 	{
 		m_strWord = szPath;
 		UpdateData(FALSE);
@@ -127,7 +127,7 @@ void CSetAttributeDlg::OnButtonBrowserExcel()
 {
 	// TODO: Add your control notification handler code here
 	char szPath[MAX_PATH] = {0};
-	if( sloCommAgent::DoFileDialog(szPath, FILTER_EXE) )
+	if( sloCommAgent::DoFileDialog(szPath, FILTER_EXE, m_strExcel.GetBuffer(0)) )
 	{
 		m_strExcel = szPath;
 		UpdateData(FALSE);
@@ -138,7 +138,7 @@ void CSetAttributeDlg::OnButtonBrowserPpt()
 {
 	// TODO: Add your control notification handler code here
 	char szPath[MAX_PATH] = {0};
-	if( sloCommAgent::DoFileDialog(szPath, FILTER_EXE) )
+	if( sloCommAgent::DoFileDialog(szPath, FILTER_EXE, m_strPPT.GetBuffer(0)) )
 	{
 		m_strPPT = szPath;
 		UpdateData(FALSE);
@@ -149,7 +149,7 @@ void CSetAttributeDlg::OnButtonBrowserPdf()
 {
 	// TODO: Add your control notification handler code here
 	char szPath[MAX_PATH] = {0};
-	if( sloCommAgent::DoFileDialog(szPath, FILTER_EXE) )
+	if( sloCommAgent::DoFileDialog(szPath, FILTER_EXE, m_strPdf.GetBuffer(0)) )
 	{
 		m_strPdf = szPath;
 		UpdateData(FALSE);
@@ -160,7 +160,7 @@ void CSetAttributeDlg::OnButtonBrowserTxt()
 {
 	// TODO: Add your control notification handler code here
 	char szPath[MAX_PATH] = {0};
-	if( sloCommAgent::DoFileDialog(szPath, FILTER_EXE) )
+	if( sloCommAgent::DoFileDialog(szPath, FILTER_EXE,m_strTxt.GetBuffer(0)) )
 	{
 		m_strTxt = szPath;
 		UpdateData(FALSE);
