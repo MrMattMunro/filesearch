@@ -37,7 +37,7 @@ char* sloCommAgent::GetCurTime()
 	return pszTime;
 }
 
-BOOL sloCommAgent::DoFileDialog(char *szPath, LPCTSTR lpszFilter )
+BOOL sloCommAgent::DoFileDialog(char *szPath, LPCTSTR lpszFilter,LPCTSTR lpszDefExt  )
 {
 	CFileDialog hFileDlg(true,NULL ,
 		NULL,
@@ -45,6 +45,9 @@ BOOL sloCommAgent::DoFileDialog(char *szPath, LPCTSTR lpszFilter )
 		//TEXT("Text Files (.txt)|*.txt|Excel Files (.xls)|*.xls"),
 		lpszFilter,
 		NULL);
+	if (lpszDefExt)
+		hFileDlg.m_ofn.lpstrInitialDir=lpszDefExt;
+
 	if(hFileDlg.DoModal() == IDOK)
 	{
 		CString strPath;
