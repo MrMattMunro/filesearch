@@ -7,6 +7,7 @@
 #include "CustomCiHuiDlg.h"
 #include "ModifyIndexDlg.h"
 #include "SetAttributeDlg.h"
+#include "FastSearchDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -126,13 +127,28 @@ DWORD __stdcall FsImportCustomCiHui()
 }
 
 /*
-  功能：自定义词汇
+  功能：设置界面
 */
 DWORD __stdcall FsSetAttribute()
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
 	CSetAttributeDlg set;
 	if(IDOK == set.DoModal())
+	{	
+		return 0;
+	}
+	
+	return 0;
+}
+
+/*
+  功能：快速查找页面
+*/
+DWORD __stdcall FsFastSearch()
+{
+	AFX_MANAGE_STATE(AfxGetStaticModuleState());
+	CFastSearchDlg dlg;
+	if(IDOK == dlg.DoModal())
 	{	
 		return 0;
 	}

@@ -99,6 +99,10 @@ SOURCE=.\CustomCiHuiDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\FastSearchDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\FsUi.cpp
 # End Source File
 # Begin Source File
@@ -143,6 +147,10 @@ SOURCE=.\comm\sloCustomCiHuiAgent.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\comm\sloFastSearchAgent.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\comm\sloModifyIndexAgent.cpp
 # End Source File
 # Begin Source File
@@ -169,6 +177,10 @@ SOURCE=.\CreateIndexDlg.h
 # Begin Source File
 
 SOURCE=.\CustomCiHuiDlg.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\FastSearchDlg.h
 # End Source File
 # Begin Source File
 
@@ -205,6 +217,10 @@ SOURCE=.\comm\sloCreateIndexAgent.h
 # Begin Source File
 
 SOURCE=.\comm\sloCustomCiHuiAgent.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\sloFastSearchAgent.h
 # End Source File
 # Begin Source File
 
