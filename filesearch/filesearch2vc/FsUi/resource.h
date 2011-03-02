@@ -18,6 +18,7 @@
 #define IDD_DIALOG_SET_ATTR             2005
 #define IDC_CHECK_HTML                  2006
 #define IDC_BUTTON_CHECK_EXISTCIHUI     2006
+#define IDD_DIALOG_FAST_SEARCH          2006
 #define IDC_CHECK_TXT                   2007
 #define IDC_STATIC_SEARCHPATH           2007
 #define IDC_CHECK_TXT_MODIFY            2008
@@ -33,7 +34,9 @@
 #define IDC_EDIT_TXT_PATH               2018
 #define IDC_BUTTON_BROWSER_IE           2019
 #define IDC_BUTTON_BROWSER_WORD         2020
+#define IDC_EDIT_SEARCH_KEY             2020
 #define IDC_BUTTON_BROWSER_EXCEL        2021
+#define IDC_COMBO_PATH                  2021
 #define IDC_BUTTON_BROWSER_PPT          2022
 #define IDC_BUTTON_BROWSER_PDF          2023
 #define IDC_BUTTON_BROWSER_TXT          2024
@@ -42,9 +45,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        2006
+#define _APS_NEXT_RESOURCE_VALUE        2007
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         2020
+#define _APS_NEXT_CONTROL_VALUE         2022
 #define _APS_NEXT_SYMED_VALUE           2000
 #endif
 #endif

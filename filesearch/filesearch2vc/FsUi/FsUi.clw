@@ -2,23 +2,25 @@
 
 [General Info]
 Version=1
-ClassCount=6
+ClassCount=7
 Class1=CFsUiApp
-LastClass=CSetAttributeDlg
+LastClass=CFastSearchDlg
 NewFileInclude2=#include "FsUi.h"
-ResourceCount=5
+ResourceCount=6
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
 LastTemplate=CDialog
 Resource1=IDD_DIALOG_CREATE_INDEX
 Class3=CCustomCiHuiDlg
-Resource2=IDD_DIALOG_MODIFY_INDEX
+Resource2=IDD_DIALOG_ALL_CIHUI
 Class4=CModifyIndexDlg
-Resource3=IDD_DIALOG_CUSTOM_DICT
+Resource3=IDD_DIALOG_MODIFY_INDEX
 Class5=CShowAllCiHuiDlg
-Resource4=IDD_DIALOG_ALL_CIHUI
+Resource4=IDD_DIALOG_SET_ATTR
 Class6=CSetAttributeDlg
-Resource5=IDD_DIALOG_SET_ATTR
+Resource5=IDD_DIALOG_CUSTOM_DICT
+Class7=CFastSearchDlg
+Resource6=IDD_DIALOG_FAST_SEARCH
 
 [CLS:CFsUiApp]
 Type=0
@@ -156,4 +158,20 @@ BaseClass=CDialog
 Filter=D
 LastObject=CSetAttributeDlg
 VirtualFilter=dWC
+
+[DLG:IDD_DIALOG_FAST_SEARCH]
+Type=1
+Class=CFastSearchDlg
+ControlCount=2
+Control1=IDC_EDIT_SEARCH_KEY,edit,1350631552
+Control2=IDC_COMBO_PATH,combobox,1344340226
+
+[CLS:CFastSearchDlg]
+Type=0
+HeaderFile=FastSearchDlg.h
+ImplementationFile=FastSearchDlg.cpp
+BaseClass=CDialog
+Filter=D
+VirtualFilter=dWC
+LastObject=IDC_COMBO_PATH
 
