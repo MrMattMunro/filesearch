@@ -69,7 +69,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_WINDLL" /D "_AFXDLL" /Yu"stdafx.h" /FD /GZ /c
-# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "." /I "comm" /I "../mysql" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_WINDLL" /D "_AFXDLL" /D "_MBCS" /D "_USRDLL" /Yu"stdafx.h" /FD /GZ /Zm1000 /c
+# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "." /I "comm" /I "../mysql" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_WINDLL" /D "_AFXDLL" /D "_MBCS" /D "_USRDLL" /D "D_STLP_DEBUG" /D "__STL_DEBUG" /Yu"stdafx.h" /FD /GZ /Zm1000 /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804 /d "_DEBUG" /d "_AFXDLL"
@@ -125,6 +125,10 @@ SOURCE=.\comm\mysqlcomm.cpp
 # Begin Source File
 
 SOURCE=..\mysql\MySQLDB.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\SearchThread.cpp
 # End Source File
 # Begin Source File
 
@@ -198,6 +202,10 @@ SOURCE=.\comm\mysqlcomm.h
 # Begin Source File
 
 SOURCE=.\Resource.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\SearchThread.h
 # End Source File
 # Begin Source File
 

@@ -35,7 +35,6 @@
 #include <afxcmn.h>			// MFC support for Windows Common Controls
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
-
 #include <WinSock2.h>
 #pragma  warning(disable : 4284)
 #pragma comment(lib, "ws2_32.lib")
@@ -46,8 +45,9 @@ using namespace std;
 
 #include "sloCommAgent.h"
 #include "mysqlcomm.h"
-
 #include <XTToolkitPro.h>   // Codejock Software Components
+
+#define WM_PROGRESS_MSG   WM_USER + 100
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 
