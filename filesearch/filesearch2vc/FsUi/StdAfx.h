@@ -46,6 +46,8 @@ using namespace std;
 
 #include "sloCommAgent.h"
 #include "mysqlcomm.h"
+
+#include <XTToolkitPro.h>   // Codejock Software Components
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 

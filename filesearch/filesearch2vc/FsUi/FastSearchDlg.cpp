@@ -71,6 +71,10 @@ BOOL CFastSearchDlg::OnInitDialog()
 	m_BoxList.InsertString(0,"全部");
 	m_BoxList.SelectString(0,"全部");
 
+	CreateTaskPanel();
+	
+	ResetToolboxItems();
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -138,4 +142,82 @@ void CFastSearchDlg::OnSelchangeComboPath()
 	CString m_strtemp;						//存放得到的编辑框内容
 	m_BoxList.GetLBText(nIndex,m_strtemp);	//得到被选中内容的名字
 
+}
+
+
+BOOL CFastSearchDlg::CreateTaskPanel()
+{
+	
+	if (!m_wndTaskPanel.Create(WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|WS_TABSTOP, CRect(5, 5, 358, 480), this, 1))
+		return FALSE;
+	
+	m_wndTaskPanel.SetOwner(this);
+	
+	//	m_wndTaskPanel.GetImageManager()->SetIcons(IDB_TOOLBOXICONS, 0, 0, CSize(16, 16));
+	m_wndTaskPanel.SetIconSize(CSize(25, 25));
+	m_wndTaskPanel.SetBehaviour(xtpTaskPanelBehaviourExplorer/*xtpTaskPanelBehaviourToolbox*/);
+	m_wndTaskPanel.SetTheme(xtpTaskPanelThemeOfficeXPPlain/*xtpTaskPanelThemeToolbox*/);
+	m_wndTaskPanel.SetSelectItemOnFocus(TRUE);
+	m_wndTaskPanel.AllowDrag(TRUE);
+ 
+	return TRUE;
+}
+
+ 
+CXTPTaskPanelGroup* CFastSearchDlg::CreateToolboxGroup(UINT nID)
+{
+	CXTPTaskPanelGroup* pFolder = m_wndTaskPanel.AddGroup(nID);
+	
+	CXTPTaskPanelGroupItem* pPointer = pFolder->AddLinkItem(1, 0);
+	pPointer->SetItemSelected(TRUE);
+	pPointer->AllowDrag(FALSE);
+	pPointer->AllowDrop(FALSE);
+	pFolder->SetIconIndex(0);
+	
+	return pFolder;
+}
+
+void CFastSearchDlg::AddToolboxGroup(UINT nID, LPCTSTR lpszCaption)
+{
+	CXTPTaskPanelGroup* pFolder = m_wndTaskPanel.AddGroup(nID);	
+	pFolder->SetCaption(lpszCaption);
+	m_listMap[nID] = pFolder;
+}
+
+void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption)
+{
+
+	CXTPTaskPanelGroup* pFolder = m_listMap[nFolderID];
+	if (!pFolder)
+	{
+		return ;
+	}
+
+	CXTPTaskPanelGroupItem* pPointer = pFolder->AddLinkItem(1, 0);
+	pPointer->SetItemSelected(TRUE);
+	pPointer->AllowDrag(FALSE);
+	pPointer->AllowDrop(FALSE);
+	pFolder->SetIconIndex(nIconIndex);
+}
+
+
+CXTPTaskPanelGroup* pFolderData = NULL;
+void CFastSearchDlg::ResetToolboxItems()
+{
+	m_wndTaskPanel.GetGroups()->Clear(FALSE);
+	
+	CXTPTaskPanelGroup* pFolderPropertyPanes = CreateToolboxGroup(0);
+	
+	/*	CXTPTaskPanelGroup**/ pFolderData = CreateToolboxGroup(1);
+	pFolderData->AddLinkItem(1,-1);
+	
+	
+	CXTPTaskPanelGroup* pFolderComponents = CreateToolboxGroup(2);
+	//pFolderComponents->AddLinkItem(ID_TOOLBOXITEM_BUTTON,-1);
+	
+	//	CreateToolboxGroup(3);
+	//	CreateToolboxGroup(4);
+	
+	pFolderPropertyPanes->SetExpanded(TRUE);
+	
 }
