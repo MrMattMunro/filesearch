@@ -7,16 +7,19 @@
 // FastSearchDlg.h : header file
 //
 
+
 /////////////////////////////////////////////////////////////////////////////
 // CFastSearchDlg dialog
 #include "sloFastSearchAgent.h"
 #include <map>
+#include "SearchThread.h"
 
 class CFastSearchDlg : public CDialog
 {
 // Construction
 public:
 	CFastSearchDlg(CWnd* pParent = NULL);   // standard constructor
+	void SetWinPos();
 
 	void ResetToolboxItems();
 	BOOL CreateTaskPanel();
@@ -28,6 +31,8 @@ public:
 	CXTPTaskPanel m_wndTaskPanel;
 	sloFastSearchAgent m_agent;
 	std::map<int, CXTPTaskPanelGroup*> m_listMap;
+
+	CSearchThread* m_pSearchThread;
 // Dialog Data
 	//{{AFX_DATA(CFastSearchDlg)
 	enum { IDD = IDD_DIALOG_FAST_SEARCH };
@@ -52,8 +57,10 @@ protected:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnChangeEditSearchKey();
 	afx_msg void OnSelchangeComboPath();
+	afx_msg void OnDestroy();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+	afx_msg void OnProgressChange(WPARAM wParam, LPARAM lParam);
 };
 
 //{{AFX_INSERT_LOCATION}}

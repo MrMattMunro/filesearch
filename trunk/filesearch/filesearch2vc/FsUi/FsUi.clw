@@ -2,24 +2,25 @@
 
 [General Info]
 Version=1
-ClassCount=7
+ClassCount=8
 Class1=CFsUiApp
-LastClass=CFastSearchDlg
+LastClass=CSearchThread
 NewFileInclude2=#include "FsUi.h"
 ResourceCount=6
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
-LastTemplate=CDialog
-Resource1=IDD_DIALOG_MODIFY_INDEX
+LastTemplate=CWinThread
+Resource1=IDD_DIALOG_SET_ATTR
 Class3=CCustomCiHuiDlg
-Resource2=IDD_DIALOG_CREATE_INDEX
+Resource2=IDD_DIALOG_MODIFY_INDEX
 Class4=CModifyIndexDlg
-Resource3=IDD_DIALOG_SET_ATTR
+Resource3=IDD_DIALOG_CUSTOM_DICT
 Class5=CShowAllCiHuiDlg
-Resource4=IDD_DIALOG_CUSTOM_DICT
+Resource4=IDD_DIALOG_ALL_CIHUI
 Class6=CSetAttributeDlg
-Resource5=IDD_DIALOG_ALL_CIHUI
+Resource5=IDD_DIALOG_CREATE_INDEX
 Class7=CFastSearchDlg
+Class8=CSearchThread
 Resource6=IDD_DIALOG_FAST_SEARCH
 
 [CLS:CFsUiApp]
@@ -174,4 +175,11 @@ BaseClass=CDialog
 Filter=D
 VirtualFilter=dWC
 LastObject=IDC_COMBO_PATH
+
+[CLS:CSearchThread]
+Type=0
+HeaderFile=SearchThread.h
+ImplementationFile=SearchThread.cpp
+BaseClass=CWinThread
+Filter=N
 

@@ -35,6 +35,8 @@ DWORD sloFastSearchAgent::GetAllPath()
 	{
 		return -1;
 	}
+
+	ClearList();
 	
 	std::string strQuerySQL = "select * from t_searcher order by id asc";
 	HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str() );
@@ -63,7 +65,7 @@ DWORD sloFastSearchAgent::GetAllPath()
 	return 0;	
 }
 
-BOOL sloFastSearchAgent::GetSearchRecords()
+DWORD sloFastSearchAgent::GetSearchRecords()
 {
 	//从数据库中获取最大的索引id
 	if (!m_pMySqlDB && !ConnectDB())
@@ -74,7 +76,7 @@ BOOL sloFastSearchAgent::GetSearchRecords()
 	std::string strQuerySQL = "select * from t_result";
 	HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str() );
 	if (FAILED(hr))
-		return -1;
+		return -2;
 	
 	int nCount = m_pMySqlDB->GetRowCount();
 	int nFieldCount = m_pMySqlDB->GetFieldCount();
@@ -150,4 +152,9 @@ BOOL sloFastSearchAgent::GetKeyFilePath()
 	}
 	
 	return FALSE;
+}
+
+void sloFastSearchAgent::ClearList()
+{
+	m_RecList.clear();
 }

@@ -21,6 +21,7 @@ CFastSearchDlg::CFastSearchDlg(CWnd* pParent /*=NULL*/)
 {
 	//{{AFX_DATA_INIT(CFastSearchDlg)
 	m_strKey = _T("");
+	m_pSearchThread = NULL;
 	//}}AFX_DATA_INIT
 }
 
@@ -40,7 +41,9 @@ BEGIN_MESSAGE_MAP(CFastSearchDlg, CDialog)
 	ON_CBN_EDITCHANGE(IDC_COMBO_PATH, OnEditchangeComboPath)
 	ON_EN_CHANGE(IDC_EDIT_SEARCH_KEY, OnChangeEditSearchKey)
 	ON_CBN_SELCHANGE(IDC_COMBO_PATH, OnSelchangeComboPath)
+	ON_WM_DESTROY()
 	//}}AFX_MSG_MAP
+	ON_MESSAGE(WM_PROGRESS_MSG, OnProgressChange)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -54,11 +57,29 @@ void CFastSearchDlg::OnEditchangeComboPath()
 	m_BoxList.GetLBText(nIndex,m_strtemp);	//得到被选中内容的名字
 }
 
+void CFastSearchDlg::SetWinPos()
+{
+	CRect rcDlgs;
+	GetWindowRect(rcDlgs);   //得到对话框的Rect 对话框的大小
+	ScreenToClient(rcDlgs);             //把屏幕的值转成相应的实际的值 
+	
+	int   cx   =   GetSystemMetrics(   SM_CXSCREEN   );  //获得屏幕的分辨率
+	int   cy   =   GetSystemMetrics(   SM_CYSCREEN   );   
+
+	//cx cy,就是屏幕最右下角的x,y的值 
+	MoveWindow(cx-rcDlgs.Width(),cy-rcDlgs.Height(),rcDlgs.Width(),rcDlgs.Height(),TRUE);   // 
+
+	//MoveWindow的参数前两个是对话框的x,y位置  
+	//三四个是对话框的大小 ，最后以个不用管！ 
+	SetWindowPos(&wndTopMost,cx-rcDlgs.Width(),cy-rcDlgs.Height()-30,rcDlgs.Width(),rcDlgs.Height(),SWP_NOSIZE); 
+}
+
 BOOL CFastSearchDlg::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
+	SetWinPos();
 
 	if (m_agent.GetAllPath() == 0)
 	{
@@ -72,8 +93,11 @@ BOOL CFastSearchDlg::OnInitDialog()
 	m_BoxList.SelectString(0,"全部");
 
 	CreateTaskPanel();
-	
-	ResetToolboxItems();
+
+	//循环显示group
+	AddToolboxGroup(1,"控制面板");
+	AddToolboxGroup(2,"文档");
+	AddToolboxGroup(3,"图片");
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
@@ -104,22 +128,35 @@ void CFastSearchDlg::OnChangeEditSearchKey()
 	m_BoxList.GetLBText(nIndex,strtemp);	//得到被选中内容的名字
 	sloCommAgent::WritePropertyfileString("keyword", strKey.GetBuffer(0), m_agent.m_szKeyPath);
 	sloCommAgent::WritePropertyfileString("path", strtemp.GetBuffer(0), m_agent.m_szKeyPath);
-
-	//等待keyWord.properties文件不存在时,从T_Result中取出数据,显示在界面上
-	Sleep(200);
-	int icount = 0;
-	while(1 && icount < 10)
+	if (NULL == m_pSearchThread)
 	{
-		if (!m_agent.IsKeyFileExist())
-		{
-			break;
-		}
-		Sleep(200);
-		icount++;
+		OutputDebugString("AfxBeginThread ");
+		m_pSearchThread = (CSearchThread*)AfxBeginThread(RUNTIME_CLASS(CSearchThread), THREAD_PRIORITY_NORMAL, 0, CREATE_SUSPENDED , 0);		
+		m_pSearchThread->m_hParentWnd = this->GetSafeHwnd();
+		m_pSearchThread->ResumeThread();
+	}	
+
+	OutputDebugString("post WM_SEARCH_MSG ");
+	if( m_pSearchThread->PostThreadMessage(WM_SEARCH_MSG, 0, 0) )
+	{
+		OutputDebugString("PostThreadMessage succ");
+	}else
+	{	
+		OutputDebugString("PostThreadMessage failed");
+		m_pSearchThread->PostThreadMessage(WM_SEARCH_MSG, 0, 0);
 	}
 
+}
+
+void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
+{
+	OutputDebugString("OnProgressChange");
+
+	//清空LinkItem
+	m_wndTaskPanel.GetGroups()->Clear(FALSE);
+
 	//从T_Result中取出数据
-	if( m_agent.GetSearchRecords())
+	if( m_agent.GetSearchRecords() == 0)
 	{
 		//显示在界面上
 		int nCount = m_agent.m_RecList.size();
@@ -127,12 +164,12 @@ void CFastSearchDlg::OnChangeEditSearchKey()
 		{
 			SearchRectord sr;
 			memcpy(&sr, &m_agent.m_RecList[i],sizeof(SearchRectord));
-
+						
 			//////////////////////////////////////////////////////////////////////////
 			//显示到树中
+			AddLinkItem(1, 1,1,sr.szFileName);
 		}
 	}
-
 }
 
 void CFastSearchDlg::OnSelchangeComboPath() 
@@ -193,7 +230,8 @@ void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, L
 		return ;
 	}
 
-	CXTPTaskPanelGroupItem* pPointer = pFolder->AddLinkItem(1, 0);
+	CXTPTaskPanelGroupItem* pPointer = pFolder->AddLinkItem(nItemID, 0);
+	pPointer->SetCaption(lpszCaption);
 	pPointer->SetItemSelected(TRUE);
 	pPointer->AllowDrag(FALSE);
 	pPointer->AllowDrop(FALSE);
@@ -220,4 +258,16 @@ void CFastSearchDlg::ResetToolboxItems()
 	
 	pFolderPropertyPanes->SetExpanded(TRUE);
 	
+}
+
+void CFastSearchDlg::OnDestroy() 
+{
+	CDialog::OnDestroy();
+	
+	// TODO: Add your message handler code here
+	if (NULL != m_pSearchThread)
+	{
+		m_pSearchThread->PostThreadMessage(WM_QUIT, 0, 0);
+		Sleep(100);
+	}
 }

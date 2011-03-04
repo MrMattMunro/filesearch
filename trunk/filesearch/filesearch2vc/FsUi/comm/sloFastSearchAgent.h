@@ -27,9 +27,11 @@ public:
 	DWORD GetAllPath();
 	BOOL IsKeyFileExist();
 
-	BOOL GetSearchRecords();
+	DWORD GetSearchRecords();
 private:
 	BOOL GetKeyFilePath();
+
+	void ClearList();
 
 public:
 	std::vector<string> m_PathList;
