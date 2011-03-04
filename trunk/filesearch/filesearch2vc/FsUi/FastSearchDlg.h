@@ -10,6 +10,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // CFastSearchDlg dialog
 #include "sloFastSearchAgent.h"
+#include <map>
 
 class CFastSearchDlg : public CDialog
 {
@@ -17,7 +18,16 @@ class CFastSearchDlg : public CDialog
 public:
 	CFastSearchDlg(CWnd* pParent = NULL);   // standard constructor
 
+	void ResetToolboxItems();
+	BOOL CreateTaskPanel();
+	CXTPTaskPanelGroup* CreateToolboxGroup(UINT nID);
+
+	void AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption);
+	void AddToolboxGroup(UINT nID, LPCTSTR lpszCaption);
+
+	CXTPTaskPanel m_wndTaskPanel;
 	sloFastSearchAgent m_agent;
+	std::map<int, CXTPTaskPanelGroup*> m_listMap;
 // Dialog Data
 	//{{AFX_DATA(CFastSearchDlg)
 	enum { IDD = IDD_DIALOG_FAST_SEARCH };
