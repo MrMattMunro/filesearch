@@ -21,9 +21,8 @@ public:
 	CFastSearchDlg(CWnd* pParent = NULL);   // standard constructor
 	void SetWinPos();
 
-	void ResetToolboxItems();
+	void OnEventNotify();
 	BOOL CreateTaskPanel();
-	CXTPTaskPanelGroup* CreateToolboxGroup(UINT nID);
 
 	void AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption);
 	void AddToolboxGroup(UINT nID, LPCTSTR lpszCaption);

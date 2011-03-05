@@ -99,26 +99,23 @@ BOOL CFastSearchDlg::OnInitDialog()
 	AddToolboxGroup(2,"文档");
 	AddToolboxGroup(3,"图片");
 
+	AddLinkItem(1, 1,1,"test1");
+	AddLinkItem(2, 1,1,"test2");
+	AddLinkItem(3, 1,1,"test3");
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
 
-void CFastSearchDlg::OnChangeEditSearchKey() 
+void CFastSearchDlg::OnEventNotify()
 {
-	// TODO: If this is a RICHEDIT control, the control will not
-	// send this notification unless you override the CDialog::OnInitDialog()
-	// function and call CRichEditCtrl().SetEventMask()
-	// with the ENM_CHANGE flag ORed into the mask.
-	
-	// TODO: Add your control notification handler code here
 	CString strKey;
 	GetDlgItemText(IDC_EDIT_SEARCH_KEY, strKey);
-
+	
 	if (m_agent.IsKeyFileExist())
 	{
 		return ;
 	}
-
+	
 	//不存在的场合将用户输入的关键字写入
 	//keyWord.properties文件,格式如下:
 	//keyword=
@@ -135,25 +132,49 @@ void CFastSearchDlg::OnChangeEditSearchKey()
 		m_pSearchThread->m_hParentWnd = this->GetSafeHwnd();
 		m_pSearchThread->ResumeThread();
 	}	
-
-	OutputDebugString("post WM_SEARCH_MSG ");
-	if( m_pSearchThread->PostThreadMessage(WM_SEARCH_MSG, 0, 0) )
+	
+	int nPostCount = 0;
+	while(nPostCount < 10)
 	{
-		OutputDebugString("PostThreadMessage succ");
-	}else
-	{	
-		OutputDebugString("PostThreadMessage failed");
-		m_pSearchThread->PostThreadMessage(WM_SEARCH_MSG, 0, 0);
+		OutputDebugString("post WM_SEARCH_MSG ");
+		if( m_pSearchThread->PostThreadMessage(WM_SEARCH_MSG, 0, 0) )
+		{
+			OutputDebugString("PostThreadMessage succ");
+			break ;
+		}else
+		{	
+			OutputDebugString("PostThreadMessage failed");
+			nPostCount++;
+		}
 	}
+}
+
+void CFastSearchDlg::OnChangeEditSearchKey() 
+{
+	// TODO: If this is a RICHEDIT control, the control will not
+	// send this notification unless you override the CDialog::OnInitDialog()
+	// function and call CRichEditCtrl().SetEventMask()
+	// with the ENM_CHANGE flag ORed into the mask.
+	
+	// TODO: Add your control notification handler code here
+	OnEventNotify();
 
 }
 
+//却换目录事件
+void CFastSearchDlg::OnSelchangeComboPath() 
+{
+	// TODO: Add your control notification handler code here
+	OnEventNotify();
+}
+
+//处理文件检测事件
 void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
 {
 	OutputDebugString("OnProgressChange");
 
 	//清空LinkItem
-	m_wndTaskPanel.GetGroups()->Clear(FALSE);
+//	m_wndTaskPanel.GetGroups()->Clear(FALSE);
 
 	//从T_Result中取出数据
 	if( m_agent.GetSearchRecords() == 0)
@@ -172,46 +193,26 @@ void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
 	}
 }
 
-void CFastSearchDlg::OnSelchangeComboPath() 
-{
-	// TODO: Add your control notification handler code here
-	int nIndex = m_BoxList.GetCurSel();		//得到被选中内容索引
-	CString m_strtemp;						//存放得到的编辑框内容
-	m_BoxList.GetLBText(nIndex,m_strtemp);	//得到被选中内容的名字
-
-}
-
-
 BOOL CFastSearchDlg::CreateTaskPanel()
 {
 	
-	if (!m_wndTaskPanel.Create(WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|WS_TABSTOP, CRect(5, 5, 358, 480), this, 1))
+	if (!m_wndTaskPanel.Create(WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|WS_TABSTOP, CRect(5, 0, 358, 482), this, 1))
 		return FALSE;
 	
 	m_wndTaskPanel.SetOwner(this);
-	
+
 	//	m_wndTaskPanel.GetImageManager()->SetIcons(IDB_TOOLBOXICONS, 0, 0, CSize(16, 16));
 	m_wndTaskPanel.SetIconSize(CSize(25, 25));
 	m_wndTaskPanel.SetBehaviour(xtpTaskPanelBehaviourExplorer/*xtpTaskPanelBehaviourToolbox*/);
 	m_wndTaskPanel.SetTheme(xtpTaskPanelThemeOfficeXPPlain/*xtpTaskPanelThemeToolbox*/);
 	m_wndTaskPanel.SetSelectItemOnFocus(TRUE);
 	m_wndTaskPanel.AllowDrag(TRUE);
+
+	int nMargin = 0;
+	m_wndTaskPanel.GetPaintManager()->m_rcGroupInnerMargins.SetRect(nMargin, nMargin, nMargin, nMargin);
+	m_wndTaskPanel.Reposition();
  
 	return TRUE;
-}
-
- 
-CXTPTaskPanelGroup* CFastSearchDlg::CreateToolboxGroup(UINT nID)
-{
-	CXTPTaskPanelGroup* pFolder = m_wndTaskPanel.AddGroup(nID);
-	
-	CXTPTaskPanelGroupItem* pPointer = pFolder->AddLinkItem(1, 0);
-	pPointer->SetItemSelected(TRUE);
-	pPointer->AllowDrag(FALSE);
-	pPointer->AllowDrop(FALSE);
-	pFolder->SetIconIndex(0);
-	
-	return pFolder;
 }
 
 void CFastSearchDlg::AddToolboxGroup(UINT nID, LPCTSTR lpszCaption)
@@ -238,27 +239,6 @@ void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, L
 	pFolder->SetIconIndex(nIconIndex);
 }
 
-
-CXTPTaskPanelGroup* pFolderData = NULL;
-void CFastSearchDlg::ResetToolboxItems()
-{
-	m_wndTaskPanel.GetGroups()->Clear(FALSE);
-	
-	CXTPTaskPanelGroup* pFolderPropertyPanes = CreateToolboxGroup(0);
-	
-	/*	CXTPTaskPanelGroup**/ pFolderData = CreateToolboxGroup(1);
-	pFolderData->AddLinkItem(1,-1);
-	
-	
-	CXTPTaskPanelGroup* pFolderComponents = CreateToolboxGroup(2);
-	//pFolderComponents->AddLinkItem(ID_TOOLBOXITEM_BUTTON,-1);
-	
-	//	CreateToolboxGroup(3);
-	//	CreateToolboxGroup(4);
-	
-	pFolderPropertyPanes->SetExpanded(TRUE);
-	
-}
 
 void CFastSearchDlg::OnDestroy() 
 {
