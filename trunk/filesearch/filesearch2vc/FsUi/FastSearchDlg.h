@@ -19,6 +19,9 @@ class CFastSearchDlg : public CDialog
 // Construction
 public:
 	CFastSearchDlg(CWnd* pParent = NULL);   // standard constructor
+
+	int GetFileID(char* szFileType);
+
 	void SetWinPos();
 
 	void OnEventNotify();

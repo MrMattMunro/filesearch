@@ -86,7 +86,7 @@ BOOL CFastSearchDlg::OnInitDialog()
 		int nSize = m_agent.m_PathList.size();
 		for (int i =0 ; i < nSize; i++)
 		{
-			m_BoxList.AddString(m_agent.m_PathList[i].c_str());
+			m_BoxList.AddString(m_agent.m_PathList[i].szPath);
 		}
 	}
 	m_BoxList.InsertString(0,"全部");
@@ -94,10 +94,13 @@ BOOL CFastSearchDlg::OnInitDialog()
 
 	CreateTaskPanel();
 
+	//excel, word,pdf,txt,ppt
 	//循环显示group
-	AddToolboxGroup(1,"控制面板");
-	AddToolboxGroup(2,"文档");
-	AddToolboxGroup(3,"图片");
+	AddToolboxGroup(1,"word");
+	AddToolboxGroup(2,"excel");
+	AddToolboxGroup(3,"ppt");
+	AddToolboxGroup(4,"pdf");
+	AddToolboxGroup(5,"txt");
 
 	AddLinkItem(1, 1,1,"test1");
 	AddLinkItem(2, 1,1,"test2");
@@ -123,8 +126,16 @@ void CFastSearchDlg::OnEventNotify()
 	int nIndex = m_BoxList.GetCurSel();		//得到被选中内容索引
 	CString strtemp;						//存放得到的编辑框内容
 	m_BoxList.GetLBText(nIndex,strtemp);	//得到被选中内容的名字
+
+	//根据路径,查找id
+	int nId = m_agent.GetPathIndex(strtemp.GetBuffer(0));
+	char szID[MAX_PATH] = {0};
+	itoa(nId, szID, 10);
+
+	//写入keyword和id字段
 	sloCommAgent::WritePropertyfileString("keyword", strKey.GetBuffer(0), m_agent.m_szKeyPath);
-	sloCommAgent::WritePropertyfileString("path", strtemp.GetBuffer(0), m_agent.m_szKeyPath);
+	sloCommAgent::WritePropertyfileString("id", szID, m_agent.m_szKeyPath);
+
 	if (NULL == m_pSearchThread)
 	{
 		OutputDebugString("AfxBeginThread ");
@@ -185,12 +196,38 @@ void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
 		{
 			SearchRectord sr;
 			memcpy(&sr, &m_agent.m_RecList[i],sizeof(SearchRectord));
-						
+			
+			int nID = GetFileID(sr.szFileType);
 			//////////////////////////////////////////////////////////////////////////
 			//显示到树中
-			AddLinkItem(1, 1,1,sr.szFileName);
+			AddLinkItem(nID, i,1,sr.szFileName);
 		}
 	}
+}
+
+#define WORD_NAME	"word"
+#define EXCEL_NAME	"excel"
+#define PPT_NAME	"ppt"
+#define PDF_NAME	"pdf"
+#define TXT_NAME	"txt"
+int CFastSearchDlg::GetFileID(char* szFileType)
+{
+	if (strlen(szFileType) == 0)
+		return -1;
+
+	if (!strcmp(szFileType, WORD_NAME))
+		return 1;
+	if (!strcmp(szFileType, EXCEL_NAME))
+		return 2;
+	if (!strcmp(szFileType, PPT_NAME))
+		return 3;
+	if (!strcmp(szFileType, PDF_NAME))
+		return 4;
+	if (!strcmp(szFileType, TXT_NAME))
+		return 5;
+	
+	return -1;
+
 }
 
 BOOL CFastSearchDlg::CreateTaskPanel()
@@ -227,9 +264,7 @@ void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, L
 
 	CXTPTaskPanelGroup* pFolder = m_listMap[nFolderID];
 	if (!pFolder)
-	{
 		return ;
-	}
 
 	CXTPTaskPanelGroupItem* pPointer = pFolder->AddLinkItem(nItemID, 0);
 	pPointer->SetCaption(lpszCaption);

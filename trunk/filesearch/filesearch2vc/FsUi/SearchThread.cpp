@@ -62,5 +62,19 @@ void CSearchThread::OnSearch(WPARAM wParam, LPARAM lParam)
 	}
 
 	OutputDebugString("OnSearch end");
-	PostMessage(m_hParentWnd, WM_PROGRESS_MSG, 0, 0);
+
+	int nPostCount = 0;
+	while(nPostCount < 10)
+	{
+		OutputDebugString("post WM_PROGRESS_MSG ");
+		if(PostMessage(m_hParentWnd, WM_PROGRESS_MSG, 0, 0))
+		{
+			OutputDebugString("PostThreadMessage  WM_PROGRESS_MSG succ");
+			break ;
+		}else
+		{	
+			OutputDebugString("PostThreadMessage WM_PROGRESS_MSG failed");
+			nPostCount++;
+		}
+	}
 }
