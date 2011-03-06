@@ -57,8 +57,18 @@ DWORD sloFastSearchAgent::GetAllPath()
 			char* pPath = m_pMySqlDB->GetField("path",&nPathLen);
 			if(pPath != NULL && nPathLen >= 1)
 			{	
-				m_PathList.push_back(pPath);
-			}
+				int nIDLen = 0;
+				char* pID = m_pMySqlDB->GetField("id",&nIDLen);
+				if(pID != NULL && nIDLen >= 1)
+				{	
+					PathIndex path;
+					memset(&path, NULL, sizeof(PathIndex));
+					path.nID = atoi(pID);
+					strcpy(path.szPath, pPath);
+
+					m_PathList.push_back(path);
+				}
+			}			
 		}
 	}
 	
@@ -157,4 +167,24 @@ BOOL sloFastSearchAgent::GetKeyFilePath()
 void sloFastSearchAgent::ClearList()
 {
 	m_RecList.clear();
+}
+
+int sloFastSearchAgent::GetPathIndex(char* szPath)
+{
+	if (strcmp(szPath, "È«²¿") == 0)
+	{
+		return 0;
+	}
+
+	int nCount = m_PathList.size();
+	for (int i = 0; i < nCount; i++)
+	{
+		PathIndex index = m_PathList[i];
+		if (strcmp(szPath, index.szPath) == 0)
+		{
+			return index.nID;
+		}
+	}
+
+	return -1;
 }

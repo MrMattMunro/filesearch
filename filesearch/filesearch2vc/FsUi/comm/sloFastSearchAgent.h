@@ -18,6 +18,12 @@ typedef struct _SearchRectord
 	char szContent[1000];
 }SearchRectord, *pSearchRectord;
 
+typedef struct _PathIndex
+{
+	int nID;
+	char szPath[MAX_PATH];
+}PathIndex,*pPathIndex;
+
 class sloFastSearchAgent  :public mysqlcomm
 {
 public:
@@ -28,13 +34,15 @@ public:
 	BOOL IsKeyFileExist();
 
 	DWORD GetSearchRecords();
+
+	int GetPathIndex(char* szPath);
 private:
 	BOOL GetKeyFilePath();
 
 	void ClearList();
 
 public:
-	std::vector<string> m_PathList;
+	std::vector<PathIndex> m_PathList;
 	std::vector<SearchRectord> m_RecList; 
 
 	char m_szKeyPath[MAX_PATH];
