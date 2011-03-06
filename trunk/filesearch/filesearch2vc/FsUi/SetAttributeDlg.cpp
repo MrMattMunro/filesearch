@@ -17,7 +17,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CSetAttributeDlg::CSetAttributeDlg(CWnd* pParent /*=NULL*/)
-	: CDialog(CSetAttributeDlg::IDD, pParent)
+	: CXTPPropertyPage(CSetAttributeDlg::IDD)/*CDialog(CSetAttributeDlg::IDD, pParent)*/
 {
 	//{{AFX_DATA_INIT(CSetAttributeDlg)
 	m_strExcel = _T("");

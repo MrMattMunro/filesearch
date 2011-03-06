@@ -11,7 +11,7 @@
 // CSetAttributeDlg dialog
 #include "sloSetAttrAgent.h"
 
-class CSetAttributeDlg : public CDialog
+class CSetAttributeDlg : public  CXTPPropertyPage/*CDialog*/
 {
 // Construction
 public:

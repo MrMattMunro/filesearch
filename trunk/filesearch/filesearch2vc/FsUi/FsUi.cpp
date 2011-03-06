@@ -8,6 +8,7 @@
 #include "ModifyIndexDlg.h"
 #include "SetAttributeDlg.h"
 #include "FastSearchDlg.h"
+#include "PropertyPageTaskPanelNavigator.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -153,5 +154,30 @@ DWORD __stdcall FsFastSearch()
 		return 0;
 	}
 	
+	return 0;
+}
+
+/*
+  功能：快速查找页面
+*/
+DWORD __stdcall FsSetSheet()
+{
+	AFX_MANAGE_STATE(AfxGetStaticModuleState());
+	CXTPPropertySheet ps(_T("系统设置"));
+	
+	CPropertyPageTaskPanelNavigator* pList = new CPropertyPageTaskPanelNavigator();
+	
+	ps.SetNavigator(pList);
+	ps.m_psh.dwFlags &= (~PSH_HASHELP);
+
+	CCustomCiHuiDlg cihuidlg;
+	CSetAttributeDlg attrdlg;
+	ps.AddPage(&attrdlg);
+	ps.AddPage(&cihuidlg);
+
+	ps.SetResizable();
+
+	ps.DoModal();
+
 	return 0;
 }

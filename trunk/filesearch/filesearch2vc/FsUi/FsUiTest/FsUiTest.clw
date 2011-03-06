@@ -50,7 +50,7 @@ Control4=IDOK,button,1342373889
 [DLG:IDD_FSUITEST_DIALOG]
 Type=1
 Class=CFsUiTestDlg
-ControlCount=13
+ControlCount=14
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_BUTTON1,button,1342242816
@@ -64,4 +64,5 @@ Control10=IDC_STATIC,button,1342177287
 Control11=IDC_BUTTON6,button,1342242816
 Control12=IDC_BUTTON7,button,1342242816
 Control13=IDC_BUTTON8,button,1342242816
+Control14=IDC_BUTTON9,button,1342242816
 

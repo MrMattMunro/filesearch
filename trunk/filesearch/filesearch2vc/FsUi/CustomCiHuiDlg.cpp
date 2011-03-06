@@ -18,7 +18,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CCustomCiHuiDlg::CCustomCiHuiDlg(CWnd* pParent /*=NULL*/)
-	: CDialog(CCustomCiHuiDlg::IDD, pParent)
+	: CXTPPropertyPage(CCustomCiHuiDlg::IDD)/*CDialog(CCustomCiHuiDlg::IDD, pParent)*/
 {
 	//{{AFX_DATA_INIT(CCustomCiHuiDlg)
 	m_strBrowsePath = _T("");

@@ -128,6 +128,10 @@ SOURCE=..\mysql\MySQLDB.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\comm\PropertyPageTaskPanelNavigator.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\SearchThread.cpp
 # End Source File
 # Begin Source File
@@ -198,6 +202,10 @@ SOURCE=.\ModifyIndexDlg.h
 # Begin Source File
 
 SOURCE=.\comm\mysqlcomm.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\PropertyPageTaskPanelNavigator.h
 # End Source File
 # Begin Source File
 
