@@ -10,3 +10,4 @@ EXPORTS
 	FsImportCustomCiHui	@3
 	FsSetAttribute		@4
 	FsFastSearch		@5
+	FsSetSheet			@6

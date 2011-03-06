@@ -92,6 +92,7 @@ BEGIN_MESSAGE_MAP(CFsUiTestDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON6, OnButton6)
 	ON_BN_CLICKED(IDC_BUTTON7, OnButton7)
 	ON_BN_CLICKED(IDC_BUTTON8, OnButton8)
+	ON_BN_CLICKED(IDC_BUTTON9, OnButton9)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -308,6 +309,30 @@ void CFsUiTestDlg::OnButton8()
 	FreeLibrary(hins);		
 }
 
+typedef DWORD (__stdcall *fnFsSetSheet)();
+fnFsSetSheet g_fnFsSetSheet;
+void CFsUiTestDlg::OnButton9() 
+{
+	// TODO: Add your control notification handler code here
+	HINSTANCE hins = LoadLibrary("FsUi.dll");
+	if (!hins)
+	{
+		DWORD dwErr = GetLastError();
+		MessageBox("Not Find FsUi.dll");
+		return ;
+	}
+	
+	g_fnFsSetSheet = (fnFsSetSheet)GetProcAddress(hins, "FsSetSheet");
+	if (!g_fnFsSetSheet)
+	{
+		MessageBox("Not Find Func fnFsSetSheet");
+		return ;
+	}
+	
+	g_fnFsSetSheet();
+	
+	FreeLibrary(hins);	
+}
 
 void GetDrvSpaceInfo(char* pDisk) 
 {
@@ -398,4 +423,5 @@ void CFsUiTestDlg::OnButton5()
 	modifyAgent.SetIndexID(3);
 	modifyAgent.GetSearchInfo();
 }
+
 

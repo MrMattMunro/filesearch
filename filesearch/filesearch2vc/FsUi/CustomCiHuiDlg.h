@@ -10,7 +10,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // CCustomCiHuiDlg dialog
 
-class CCustomCiHuiDlg : public CDialog
+class CCustomCiHuiDlg :public  CXTPPropertyPage/*CDialog*/
 {
 // Construction
 public:
