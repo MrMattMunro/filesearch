@@ -38,7 +38,8 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 	SetSelectItemOnFocus(TRUE);
 	
 	SetIconSize(CSize(25, 25));
-	
+	SetGroupIconSize(CSize(55, 55));
+
 	SetFont(pFont);
 	
 	CXTPTaskPanelGroup* pGroup = AddGroup(0);
@@ -62,10 +63,15 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 	pPage->m_dwData = (DWORD_PTR)pItem;
 
 	pGroup = AddGroup(1);
+	pGroup->SetCaption(_T("license管理"));
+
+	pGroup = AddGroup(2);
 	pGroup->SetCaption(_T("状态和提醒"));
+
 
 	int nMargin = 2;
 	GetPaintManager()->m_rcItemOuterMargins.SetRect(nMargin, nMargin, nMargin, nMargin);
+
 	Reposition();
 
 //	m_pSheet->SetPageBorderStyle(xtpPageBorderFrame);

@@ -30,7 +30,10 @@ public:
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	//}}AFX_VIRTUAL
-
+	virtual BOOL OnApply();
+	virtual BOOL OnSetActive();
+	virtual BOOL OnKillActive();
+	DWORD m_dwApply;
 // Implementation
 protected:
 
@@ -40,6 +43,7 @@ protected:
 	virtual void OnCancel();
 	afx_msg void OnButtonCheckExistcihui();
 	afx_msg void OnButtonBrowseCihui();
+	afx_msg void OnCheckOvercihui();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

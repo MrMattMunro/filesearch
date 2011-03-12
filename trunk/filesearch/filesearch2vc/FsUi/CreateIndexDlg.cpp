@@ -155,7 +155,13 @@ void CCreateIndexDlg::OnOK()
 	}
 
 	sloCreateIndexAgent create;
-	create.EventCreateIndex(szPath,(char*)szTypes.c_str());
+	if (!create.EventCreateIndex(szPath,(char*)szTypes.c_str()))
+	{
+		MessageBox("该目录索引已经存在，不能重复建立！","新建索引",MB_OK | MB_ICONWARNING);
+		SetDlgItemText(IDC_EDIT_SEARCH_PATH,"");
+		return ;
+	}
+
 	CDialog::OnOK();
 }
 

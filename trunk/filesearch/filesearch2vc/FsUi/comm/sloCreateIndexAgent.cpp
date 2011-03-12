@@ -176,9 +176,45 @@ string sloCreateIndexAgent::ConverSqlPath(string strPath)
 	return strData;
 }
 
+BOOL sloCreateIndexAgent::IsSearchPathExist(char* pszSearchPath)
+{
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	int dwMaxID = 0;
+	std::string strQuerySQL = "select * from t_searcher where path='%s'";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), ConverSqlPath(pszSearchPath).c_str());
+	if (FAILED(hr))
+		return -1;
+	
+	int nCount = m_pMySqlDB->GetRowCount();
+	int nFieldCount = m_pMySqlDB->GetFieldCount();
+	if(nCount >= 1 && nFieldCount >= 1)
+	{	
+		bool bSucc = m_pMySqlDB->GetRow();
+		if(bSucc==false)
+			return FALSE;
+		
+		int nPathLen = 0;
+		char* pPath = m_pMySqlDB->GetField("path",&nPathLen);
+		if(pPath != NULL && nPathLen >= 1)
+			return TRUE;
+	}
+	
+	return FALSE;
+
+}
+
 BOOL sloCreateIndexAgent::EventCreateIndex(char* pszSearchPath, char* pszFileTypes)
 {
-	//构建
+	//判断该目录是否已经建立过索引
+	if (IsSearchPathExist(pszSearchPath))
+		return FALSE;
+
+	//构建索引目录
 	BuildIndexPath();
 
 	BOOL bRet = TRUE;
