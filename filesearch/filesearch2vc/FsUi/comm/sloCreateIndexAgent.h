@@ -28,6 +28,8 @@ private:
 	//disk
 	void GetDrvSpaceInfo(char* pDisk);
 	void FindAllDrivers();
+
+	BOOL IsSearchPathExist(char* pszSearchPath);
 	
 public:
 	char m_cMaxDriver;

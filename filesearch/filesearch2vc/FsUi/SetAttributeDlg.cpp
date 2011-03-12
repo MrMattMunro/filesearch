@@ -26,6 +26,7 @@ CSetAttributeDlg::CSetAttributeDlg(CWnd* pParent /*=NULL*/)
 	m_strPPT = _T("");
 	m_strTxt = _T("");
 	m_strWord = _T("");
+
 	//}}AFX_DATA_INIT
 }
 
@@ -109,6 +110,8 @@ void CSetAttributeDlg::OnButtonBrowserIe()
 	{
 		m_strIE = szPath;
 		UpdateData(FALSE);
+
+		SetModified();
 	}
 }
 
@@ -120,6 +123,7 @@ void CSetAttributeDlg::OnButtonBrowserWord()
 	{
 		m_strWord = szPath;
 		UpdateData(FALSE);
+		SetModified();
 	}	
 }
 
@@ -131,6 +135,7 @@ void CSetAttributeDlg::OnButtonBrowserExcel()
 	{
 		m_strExcel = szPath;
 		UpdateData(FALSE);
+		SetModified();
 	}	
 }
 
@@ -142,6 +147,7 @@ void CSetAttributeDlg::OnButtonBrowserPpt()
 	{
 		m_strPPT = szPath;
 		UpdateData(FALSE);
+		SetModified();
 	}	
 }
 
@@ -153,6 +159,7 @@ void CSetAttributeDlg::OnButtonBrowserPdf()
 	{
 		m_strPdf = szPath;
 		UpdateData(FALSE);
+		SetModified();
 	}	
 }
 
@@ -164,7 +171,44 @@ void CSetAttributeDlg::OnButtonBrowserTxt()
 	{
 		m_strTxt = szPath;
 		UpdateData(FALSE);
+		SetModified();
 	}	
+}
+extern DWORD g_dwApplyID;
+BOOL CSetAttributeDlg::OnApply()
+{
+//	ASSERT_VALID(this);	
+	if (g_dwApplyID == 1)
+	{
+		MessageBox("CSetAttributeDlg OnApply");
+		
+		UpdateData(TRUE);
+		m_setAgent.GetProFilePath();
+		
+		sloCommAgent::WritePropertyfileString(IE_NAME,m_strIE.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+		sloCommAgent::WritePropertyfileString(WORD_NAME,m_strWord.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+		
+		sloCommAgent::WritePropertyfileString(EXCEL_NAME,m_strExcel.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+		sloCommAgent::WritePropertyfileString(PPT_NAME,m_strPPT.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+		sloCommAgent::WritePropertyfileString(PDF_NAME,m_strPdf.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+		sloCommAgent::WritePropertyfileString(TXT_NAME,m_strTxt.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+		
+		return TRUE;
+	}
+
+	return TRUE;
+}
+
+BOOL CSetAttributeDlg::OnSetActive()
+{
+	g_dwApplyID = 1;
+
+	return CXTPPropertyPage::OnSetActive();
+}
+
+BOOL CSetAttributeDlg::OnKillActive()
+{
+	return CXTPPropertyPage::OnKillActive();
 }
 
 void CSetAttributeDlg::OnOK() 

@@ -157,6 +157,8 @@ DWORD __stdcall FsFastSearch()
 	return 0;
 }
 
+
+DWORD g_dwApplyID = 0;
 /*
   功能：快速查找页面
 */
