@@ -14,6 +14,12 @@
 #include <map>
 #include "SearchThread.h"
 
+typedef struct _GroupInfo
+{
+	CXTPTaskPanelGroup* pGroup;
+	int nItemSize;
+}GroupInfo, *LPGroupInfo;
+
 class CFastSearchDlg : public CDialog
 {
 // Construction
@@ -27,12 +33,16 @@ public:
 	void OnEventNotify();
 	BOOL CreateTaskPanel();
 
-	void AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption);
+	void AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, LPCTSTR lpszDesp);
 	void AddToolboxGroup(UINT nID, LPCTSTR lpszCaption);
+
+	void ClearGroupsItems(); 
+
+	void UpdateGroupsCaption(); 
 
 	CXTPTaskPanel m_wndTaskPanel;
 	sloFastSearchAgent m_agent;
-	std::map<int, CXTPTaskPanelGroup*> m_listMap;
+	std::map<int, GroupInfo> m_listMap;
 
 	CSearchThread* m_pSearchThread;
 // Dialog Data
