@@ -102,9 +102,12 @@ BOOL CFastSearchDlg::OnInitDialog()
 	AddToolboxGroup(4,"pdf");
 	AddToolboxGroup(5,"txt");
 
-	AddLinkItem(1, 1,1,"test1");
-	AddLinkItem(2, 1,1,"test2");
-	AddLinkItem(3, 1,1,"test3");
+	AddLinkItem(1, 1,1,"test11", "desp11");
+	AddLinkItem(1, 2,1,"test12", "desp12");
+	AddLinkItem(2, 1,1,"test2", "desp2");
+	AddLinkItem(3, 1,1,"test3", "desp3");
+
+	UpdateGroupsCaption();
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -179,13 +182,14 @@ void CFastSearchDlg::OnSelchangeComboPath()
 	OnEventNotify();
 }
 
+
 //处理文件检测事件
 void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
 {
 	OutputDebugString("OnProgressChange");
 
 	//清空LinkItem
-//	m_wndTaskPanel.GetGroups()->Clear(FALSE);
+	ClearGroupsItems();
 
 	//从T_Result中取出数据
 	if( m_agent.GetSearchRecords() == 0)
@@ -200,9 +204,12 @@ void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
 			int nID = GetFileID(sr.szFileType);
 			//////////////////////////////////////////////////////////////////////////
 			//显示到树中
-			AddLinkItem(nID, i,1,sr.szFileName);
+			AddLinkItem(nID, i,1,sr.szFileName, sr.szContent);
 		}
 	}
+
+	//重新设置group（包含个数）
+
 }
 
 #define WORD_NAME	"word"
@@ -256,17 +263,20 @@ void CFastSearchDlg::AddToolboxGroup(UINT nID, LPCTSTR lpszCaption)
 {
 	CXTPTaskPanelGroup* pFolder = m_wndTaskPanel.AddGroup(nID);	
 	pFolder->SetCaption(lpszCaption);
-	m_listMap[nID] = pFolder;
+	m_listMap[nID].pGroup = pFolder;
+	m_listMap[nID].nItemSize = 0;
 }
 
-void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption)
+void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, LPCTSTR lpszDesp)
 {
 
-	CXTPTaskPanelGroup* pFolder = m_listMap[nFolderID];
+	CXTPTaskPanelGroup* pFolder = m_listMap[nFolderID].pGroup;
 	if (!pFolder)
 		return ;
 
+	m_listMap[nFolderID].nItemSize++;
 	CXTPTaskPanelGroupItem* pPointer = pFolder->AddLinkItem(nItemID, 0);
+	pFolder->AddTextItem(lpszDesp);
 	pPointer->SetCaption(lpszCaption);
 	pPointer->SetItemSelected(TRUE);
 	pPointer->AllowDrag(FALSE);
@@ -274,6 +284,61 @@ void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, L
 	pFolder->SetIconIndex(nIconIndex);
 }
 
+//清空LinkItem
+void CFastSearchDlg::ClearGroupsItems() 
+{
+	// TODO: Add your control notification handler code here
+	int nSize = m_listMap.size();
+	for (int i = 1; i <= nSize; i++)
+	{
+		CXTPTaskPanelGroup* pFolder = m_listMap[i].pGroup;
+		if (!pFolder)
+			continue;
+		
+		pFolder->GetItems()->Clear(TRUE);
+		m_listMap[i].nItemSize = 0;
+
+	}
+}
+
+//重新设置group的caption
+void CFastSearchDlg::UpdateGroupsCaption() 
+{
+	// TODO: Add your control notification handler code here
+	int nSize = m_listMap.size();
+	for (int i = 1; i <= nSize; i++)
+	{
+		CXTPTaskPanelGroup* pFolder = m_listMap[i].pGroup;
+		if (!pFolder)
+			continue;
+
+		std::string strCaption;
+		switch(i)
+		{
+		case 1:
+			strCaption = "word";
+			break;
+		case 2:
+			strCaption = "excel";
+			break;
+		case 3:
+			strCaption = "ppt";
+			break;
+		case 4:
+			strCaption = "pdf";
+			break;
+		case 5:
+			strCaption = "txt";
+			break;
+		default:
+			break ;
+		}
+		
+		TCHAR szCaption[MAX_PATH] = {0};
+		sprintf(szCaption, "%s(%d)",strCaption.c_str(), m_listMap[i].nItemSize);
+		pFolder->SetCaption(szCaption);		
+	}
+}
 
 void CFastSearchDlg::OnDestroy() 
 {
