@@ -261,7 +261,27 @@ SOURCE=.\StdAfx.h
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 # Begin Source File
 
+SOURCE=.\res\excel.ico
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\FsUi.rc2
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\notepad.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\pdf.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\ppt.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\word.ico
 # End Source File
 # End Group
 # Begin Source File

@@ -21,10 +21,15 @@
 #define IDD_DIALOG_FAST_SEARCH          2006
 #define IDC_CHECK_TXT                   2007
 #define IDC_STATIC_SEARCHPATH           2007
+#define IDI_ICON_WORD                   2007
 #define IDC_CHECK_TXT_MODIFY            2008
+#define IDI_ICON_EXCEL                  2008
 #define IDC_CHECK_CHM                   2009
+#define IDI_ICON_PPT                    2009
 #define IDC_BUTTON_DEL_INDEX            2010
+#define IDI_ICON_PDF                    2010
 #define IDC_LIST_ALL_CIHUI              2011
+#define IDI_ICON_TXT                    2011
 #define IDC_EDIT_KEY_WORD               2012
 #define IDC_EDIT_IE_PATH                2013
 #define IDC_EDIT_WORD_PATH              2014
@@ -45,7 +50,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        2007
+#define _APS_NEXT_RESOURCE_VALUE        2012
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         2022
 #define _APS_NEXT_SYMED_VALUE           2000

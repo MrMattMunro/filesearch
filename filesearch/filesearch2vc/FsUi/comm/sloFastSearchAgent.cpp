@@ -36,7 +36,7 @@ DWORD sloFastSearchAgent::GetAllPath()
 		return -1;
 	}
 
-	ClearList();
+	ClearPathList();
 	
 	std::string strQuerySQL = "select * from t_searcher order by id asc";
 	HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str() );
@@ -82,11 +82,15 @@ DWORD sloFastSearchAgent::GetSearchRecords()
 	{
 		return -1;
 	}
-	
+
+	ClearRecList();	
+
 	std::string strQuerySQL = "select * from t_result";
 	HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str() );
 	if (FAILED(hr))
 		return -2;
+
+
 	
 	int nCount = m_pMySqlDB->GetRowCount();
 	int nFieldCount = m_pMySqlDB->GetFieldCount();
@@ -164,7 +168,13 @@ BOOL sloFastSearchAgent::GetKeyFilePath()
 	return FALSE;
 }
 
-void sloFastSearchAgent::ClearList()
+void sloFastSearchAgent::ClearPathList()
+{
+	m_PathList.clear();
+}
+
+
+void sloFastSearchAgent::ClearRecList()
 {
 	m_RecList.clear();
 }

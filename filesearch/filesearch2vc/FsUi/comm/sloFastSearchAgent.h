@@ -39,8 +39,8 @@ public:
 private:
 	BOOL GetKeyFilePath();
 
-	void ClearList();
-
+	void ClearPathList();
+	void ClearRecList();
 public:
 	std::vector<PathIndex> m_PathList;
 	std::vector<SearchRectord> m_RecList; 
