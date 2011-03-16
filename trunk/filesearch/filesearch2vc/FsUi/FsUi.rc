@@ -66,8 +66,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2011,3,13,1
- PRODUCTVERSION 1,0,0,3
+ FILEVERSION 2011,3,17,1
+ PRODUCTVERSION 1,0,0,4
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -85,14 +85,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "\0"
             VALUE "FileDescription", "FsUi DLL\0"
-            VALUE "FileVersion", "2011, 3, 13, 1\0"
+            VALUE "FileVersion", "2011, 3, 17, 1\0"
             VALUE "InternalName", "FsUi\0"
             VALUE "LegalCopyright", "版权所有 (C) 2011\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "FsUi.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "FsUi Dynamic Link Library\0"
-            VALUE "ProductVersion", "1, 0, 0, 3\0"
+            VALUE "ProductVersion", "1, 0, 0, 4\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -141,8 +141,8 @@ STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "导入自定义词汇"
 FONT 10, "宋体"
 BEGIN
-    DEFPUSHBUTTON   "确定",IDOK,67,159,40,14
-    PUSHBUTTON      "取消",IDCANCEL,153,160,40,14
+    DEFPUSHBUTTON   "确定",IDOK,67,159,40,14,NOT WS_VISIBLE
+    PUSHBUTTON      "取消",IDCANCEL,153,160,40,14,NOT WS_VISIBLE
     LTEXT           "选择自定义词汇的（支持txt、excel格式）文件:",IDC_STATIC,
                     22,78,163,8
     EDITTEXT        IDC_EDIT_CIHUI_PATH,22,93,197,14,ES_AUTOHSCROLL | 
@@ -206,8 +206,8 @@ STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "指定打开文件的软件"
 FONT 10, "宋体"
 BEGIN
-    DEFPUSHBUTTON   "确定",IDOK,81,168,38,14
-    PUSHBUTTON      "取消",IDCANCEL,154,167,38,14
+    DEFPUSHBUTTON   "确定",IDOK,81,176,38,14,NOT WS_VISIBLE
+    PUSHBUTTON      "取消",IDCANCEL,154,175,38,14,NOT WS_VISIBLE
     LTEXT           "IE:",IDC_STATIC,23,50,13,8
     LTEXT           "WORD:",IDC_STATIC,23,71,21,8
     LTEXT           "EXCEL:",IDC_STATIC,23,92,25,8
@@ -263,12 +263,6 @@ BEGIN
         TOPMARGIN, 1
     END
 
-    IDD_DIALOG_SET_ATTR, DIALOG
-    BEGIN
-        RIGHTMARGIN, 239
-        BOTTOMMARGIN, 183
-    END
-
     IDD_DIALOG_FAST_SEARCH, DIALOG
     BEGIN
         BOTTOMMARGIN, 349
@@ -283,6 +277,19 @@ END
 //
 
 1                       24      DISCARDABLE     "res\\app.manifest"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON_WORD           ICON    DISCARDABLE     "res\\word.ico"
+IDI_ICON_EXCEL          ICON    DISCARDABLE     "res\\excel.ico"
+IDI_ICON_PPT            ICON    DISCARDABLE     "res\\ppt.ico"
+IDI_ICON_PDF            ICON    DISCARDABLE     "res\\pdf.ico"
+IDI_ICON_TXT            ICON    DISCARDABLE     "res\\notepad.ico"
 #endif    // Chinese (P.R.C.) resources
 /////////////////////////////////////////////////////////////////////////////
 

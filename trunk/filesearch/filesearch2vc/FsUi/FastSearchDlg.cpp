@@ -96,16 +96,23 @@ BOOL CFastSearchDlg::OnInitDialog()
 
 	//excel, word,pdf,txt,ppt
 	//循环显示group
-	AddToolboxGroup(1,"word");
-	AddToolboxGroup(2,"excel");
-	AddToolboxGroup(3,"ppt");
-	AddToolboxGroup(4,"pdf");
-	AddToolboxGroup(5,"txt");
+	AddToolboxGroup(1, "word", IDI_ICON_WORD);
+	AddToolboxGroup(2, "excel", IDI_ICON_EXCEL);
+	AddToolboxGroup(3, "ppt", IDI_ICON_PPT);
+	AddToolboxGroup(4, "pdf", IDI_ICON_PDF);
+	AddToolboxGroup(5, "txt", IDI_ICON_TXT);
 
 	AddLinkItem(1, 1,1,"test11", "desp11");
 	AddLinkItem(1, 2,1,"test12", "desp12");
 	AddLinkItem(2, 1,1,"test2", "desp2");
 	AddLinkItem(3, 1,1,"test3", "desp3");
+
+	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_WORD, IDI_ICON_WORD);
+	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_EXCEL, IDI_ICON_EXCEL);
+	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_PPT, IDI_ICON_PPT);
+	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_PDF, IDI_ICON_PDF);
+	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_TXT, IDI_ICON_TXT);
+	m_wndTaskPanel.SetGroupIconSize( CSize(16, 24));
 
 	UpdateGroupsCaption();
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -204,11 +211,12 @@ void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
 			int nID = GetFileID(sr.szFileType);
 			//////////////////////////////////////////////////////////////////////////
 			//显示到树中
-			AddLinkItem(nID, i,1,sr.szFileName, sr.szContent);
+			AddLinkItem(nID, i,1,sr.szFileName, sr.szDesp);
 		}
 	}
 
 	//重新设置group（包含个数）
+	UpdateGroupsCaption();
 
 }
 
@@ -259,9 +267,9 @@ BOOL CFastSearchDlg::CreateTaskPanel()
 	return TRUE;
 }
 
-void CFastSearchDlg::AddToolboxGroup(UINT nID, LPCTSTR lpszCaption)
+void CFastSearchDlg::AddToolboxGroup(UINT nID, LPCTSTR lpszCaption, int nIconIndex)
 {
-	CXTPTaskPanelGroup* pFolder = m_wndTaskPanel.AddGroup(nID);	
+	CXTPTaskPanelGroup* pFolder = m_wndTaskPanel.AddGroup(nID, nIconIndex);	
 	pFolder->SetCaption(lpszCaption);
 	m_listMap[nID].pGroup = pFolder;
 	m_listMap[nID].nItemSize = 0;
@@ -281,7 +289,6 @@ void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, L
 	pPointer->SetItemSelected(TRUE);
 	pPointer->AllowDrag(FALSE);
 	pPointer->AllowDrop(FALSE);
-	pFolder->SetIconIndex(nIconIndex);
 }
 
 //清空LinkItem
@@ -316,26 +323,26 @@ void CFastSearchDlg::UpdateGroupsCaption()
 		switch(i)
 		{
 		case 1:
-			strCaption = "word";
+			strCaption = "word (";
 			break;
 		case 2:
-			strCaption = "excel";
+			strCaption = "excel(";
 			break;
 		case 3:
-			strCaption = "ppt";
+			strCaption = "ppt  (";
 			break;
 		case 4:
-			strCaption = "pdf";
+			strCaption = "pdf  (";
 			break;
 		case 5:
-			strCaption = "txt";
+			strCaption = "txt  (";
 			break;
 		default:
 			break ;
 		}
 		
 		TCHAR szCaption[MAX_PATH] = {0};
-		sprintf(szCaption, "%s(%d)",strCaption.c_str(), m_listMap[i].nItemSize);
+		sprintf(szCaption, "%s%d)",strCaption.c_str(), m_listMap[i].nItemSize);
 		pFolder->SetCaption(szCaption);		
 	}
 }

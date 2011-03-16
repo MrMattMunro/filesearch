@@ -34,7 +34,7 @@ public:
 	BOOL CreateTaskPanel();
 
 	void AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, LPCTSTR lpszDesp);
-	void AddToolboxGroup(UINT nID, LPCTSTR lpszCaption);
+	void AddToolboxGroup(UINT nID, LPCTSTR lpszCaption, int nIconIndex);
 
 	void ClearGroupsItems(); 
 
