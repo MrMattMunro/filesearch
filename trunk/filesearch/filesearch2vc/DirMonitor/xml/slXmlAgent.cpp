@@ -57,6 +57,7 @@ void slXmlAgent::LoadXML()
 	hr = pDoc.CreateInstance(_uuidof(DOMDocument30));
 	if(!SUCCEEDED(hr))
 	{
+		log.Print(LL_DEBUG_INFO,"Error in slXmlAgent::LoadXML!DOMDocument CreateInstance Failed!hr=0x%x,GetLastError=%d",hr, GetLastError());
 		OutputDebugStringA("创建DOMDocument对象失败!");
 		return;
 	}
@@ -64,7 +65,7 @@ void slXmlAgent::LoadXML()
 	//导入XML文件
 	if(!pDoc->load(GetXmlPath().c_str()))
 	{
-		OutputDebugStringA("未找到XML文件!");
+		log.Print(LL_DEBUG_INFO,"Error in slXmlAgent::LoadXML!load Failed,File Not Exist!XmlFilePath=%s",GetXmlPath().c_str());
 		return;
 	}
 
