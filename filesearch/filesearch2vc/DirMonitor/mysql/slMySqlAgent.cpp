@@ -29,19 +29,29 @@ slMySqlAgent::~slMySqlAgent()
 
 bool slMySqlAgent::LogRecord(File_Action_Log FileLog)
 {
-	std::string strDbName = g_xmlFilterAgent.GetDbNameFromPath(FileLog.szSrcName);
-	memcpy(FileLog.szDbName, strDbName.c_str(), strDbName.size());
+	bool bRet = true;
+	do 
+	{
+		std::string strDbName = g_xmlFilterAgent.GetDbNameFromPath(FileLog.szSrcName);
+		memcpy(FileLog.szDbName, strDbName.c_str(), strDbName.size());
+		
+		//
+		m_pMySqlDB = new CMySQLDB();
+		
+		//connect db
+		bool bRet = m_pMySqlDB->Connect("127.0.0.1", 3306, "root","changsong",strDbName.c_str());
+		if (bRet == false)
+		{
+			log.Print(LL_DEBUG_INFO,"Connect Sql Failed!IP=127.0.0.1, Port=3306,DbName=%s", strDbName.c_str());
+			break;
+		}
+		//add db
+		AddRec(FileLog);
 
-	//
-	m_pMySqlDB = new CMySQLDB();
-	
-	//connect db
-	m_pMySqlDB->Connect("127.0.0.1", 3306, "root","changsong",strDbName.c_str());
+	} while (0);
 
-	//add db
-	AddRec(FileLog);
 
-	return true;
+	return bRet;
 }
 
 string slMySqlAgent::GetOperFlag(File_Action_Log FileLog)
@@ -88,45 +98,57 @@ string slMySqlAgent::ConverSqlPath(string strPath)
 
 bool slMySqlAgent::AddRec(File_Action_Log FileLog)
 {
-//	std::string strQuerySQL = "insert into t_word(filename,path,lastmodify,content,paragraphNo) values('%s','2','3','5', 7)";
-//	std::string strQuerySQL = "insert into t_changeinfo(path,operflg,hasoper,lastmodify) values('%s','1','1','2010-12-31')";
-
-	//修改的记录首先检查最近有没有此记录
-	//
-	if (FileLog.FileActon == FILE_MODIFYED)
+	bool bRet = true;
+	do 
 	{
-		std::string strQuerySQL = "select max(lastmodify) as maxtime from t_changeinfo where path='%s' and operflg=1 or operflg=2";
-		HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), ConverSqlPath(FileLog.szSrcName).c_str());
-		if (FAILED(hr))
+		//修改的记录首先检查最近有没有此记录
+		//
+		if (FileLog.FileActon == FILE_MODIFYED)
 		{
-			return false;
-		}
-		int nCount = m_pMySqlDB->GetRowCount();
-		if(nCount >= 1)
-		{	
-			bool bSucc = m_pMySqlDB->GetRow();
-			if(bSucc==false)
-				return false;
-			
-			int nTimeLen = 0;
-			char* pTime = m_pMySqlDB->GetField("maxtime",&nTimeLen);
-			if(pTime!=NULL && nTimeLen > 1)
+			std::string strQuerySQL = "select max(lastmodify) as maxtime from t_changeinfo where path='%s' and operflg=1 or operflg=2";
+			HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), ConverSqlPath(FileLog.szSrcName).c_str());
+			if (FAILED(hr))
+			{
+				log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,doSqlExe Failed!Sql=%s",strQuerySQL.c_str());
+				bRet = false;
+				break;
+			}
+			int nCount = m_pMySqlDB->GetRowCount();
+			if(nCount >= 1)
 			{	
-				std::string strTime(pTime,nTimeLen);
-				if (strcmp(pTime, FileLog.szLogTime) == 0)
+				bRet = m_pMySqlDB->GetRow();
+				if(bRet==false)
 				{
-					return false;
+					log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,GetRow Failed!Sql=%s",strQuerySQL.c_str());
+					break;
+				}
+				
+				int nTimeLen = 0;
+				char* pTime = m_pMySqlDB->GetField("maxtime",&nTimeLen);
+				if(pTime!=NULL && nTimeLen > 1)
+				{	
+					std::string strTime(pTime,nTimeLen);
+					if (strcmp(pTime, FileLog.szLogTime) == 0)
+					{
+						bRet = false;
+						break;
+					}
 				}
 			}
 		}
-	}
+		
+		std::string strInsertSQL = "insert into t_changeinfo(path,operflg,hasoper,lastmodify) values('%s','%s','0','%s')";
+		HRESULT hr = doSqlExe(TRUE, strInsertSQL.c_str(),ConverSqlPath(FileLog.szSrcName).c_str(), GetOperFlag(FileLog).c_str(),FileLog.szLogTime);
+		if (FAILED(hr))
+		{
+			log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,doSqlExe Failed!Sql=%s",strInsertSQL.c_str());
+			bRet = false;
+			break;
+		}
 
-	std::string strQuerySQL = "insert into t_changeinfo(path,operflg,hasoper,lastmodify) values('%s','%s','0','%s')";
-	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(),ConverSqlPath(FileLog.szSrcName).c_str(), GetOperFlag(FileLog).c_str(),FileLog.szLogTime);
-	if (FAILED(hr))
-		return false;
+	} while (0);
 
-	return true;
+	return bRet;
 }
 
 
@@ -151,7 +173,8 @@ BOOL slMySqlAgent::doSqlExe(BOOL bCombin,const char* szSQL,...)
 	}
 	catch (...)
 	{
-		OutputDebugStringA("exception in doSqlExe");
+		log.Print(LL_DEBUG_INFO,"Exception in slMySqlAgent::doSqlExe!");	
+		bSucc = FALSE;
 	}
 	
 	return bSucc;

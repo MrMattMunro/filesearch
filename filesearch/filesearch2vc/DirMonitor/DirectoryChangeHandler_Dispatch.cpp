@@ -68,7 +68,7 @@ void CDirectoryChangeHandler_Dispatch::On_FileAdded(const CString & strFileName)
 
 	m_lplogSendAgent->AddLog(filelog);
 
-	OutputDebugStringA("File Added:");
+	log.Print(LL_DEBUG_INFO, "File Added!FileName=%s",m_strFileAddName.GetBuffer(0));
 }
 
 void CDirectoryChangeHandler_Dispatch::On_FileRemoved(const CString & strFileName)
@@ -80,8 +80,7 @@ void CDirectoryChangeHandler_Dispatch::On_FileRemoved(const CString & strFileNam
 	AddFileLogTime(filelog);
 	m_lplogSendAgent->AddLog(filelog);
 
-	OutputDebugStringA("File Removed: ");
-//	m_listBox.AddString(_T("File Removed: ") + strFileName);
+	log.Print(LL_DEBUG_INFO, "File Removed!FileName=%s",strTmpName.GetBuffer(0));
 }
 
 void CDirectoryChangeHandler_Dispatch::On_FileModified(const CString & strFileName)
@@ -103,7 +102,6 @@ void CDirectoryChangeHandler_Dispatch::On_FileModified(const CString & strFileNa
 		memcpy(filelog.szSrcName, strTmpName.GetBuffer(0),strTmpName.GetLength());
 		AddFileLogTime(filelog);
 		m_lplogSendAgent->AddLog(filelog);
-		OutputDebugStringA("File Modified: ");
 
 // 		m_lastmodify.Empty();
 // 		m_lastmodify.Format(strFileName); 
@@ -111,7 +109,7 @@ void CDirectoryChangeHandler_Dispatch::On_FileModified(const CString & strFileNa
 // 	
 //	m_dwModifyCurTick = dwCurTick;	
 
-//	m_listBox.AddString(_T("File Modified: ") + strFileName);
+	log.Print(LL_DEBUG_INFO, "File Modified!FileName=%s",strTmpName.GetBuffer(0));
 }
 
 void CDirectoryChangeHandler_Dispatch::On_FileNameChanged(const CString & strOldFileName, const CString & strNewFileName)
@@ -127,7 +125,7 @@ void CDirectoryChangeHandler_Dispatch::On_FileNameChanged(const CString & strOld
 	m_lplogSendAgent->AddLog(filelog);
 
 	OutputDebugStringA("File name changed from");
-//	m_listBox.AddString(_T("File name changed from: ") + strOldFileName + _T(" to: ") + strNewFileName);
+	log.Print(LL_DEBUG_INFO, "File Name Changed!SrcName=%s, DesName",strTmpOldName.GetBuffer(0),strTmpNewName.GetBuffer(0));
 }
 
 void CDirectoryChangeHandler_Dispatch::On_WatchStarted(DWORD dwError, const CString & strDirectoryName)

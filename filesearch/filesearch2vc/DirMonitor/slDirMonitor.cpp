@@ -13,7 +13,46 @@ CDirectoryChangeWatcher			m_DirWatcher;
 slLogSendThread* g_lpLogSendAgent = NULL;
 slXmlAgent g_xmlFilterAgent;
 
+CString	m_strExcludeFilter1;
+CString	m_strIncludeFilter1;
+
 BOOL g_iniInit = FALSE;
+
+BOOL APIENTRY DllMain( HANDLE hModule, 
+                       DWORD  ul_reason_for_call, 
+                       LPVOID lpReserved
+					 )
+{
+	BOOL    bret = FALSE;
+	HRESULT hr = E_FAIL;
+
+    switch (ul_reason_for_call)
+	{
+		case DLL_PROCESS_ATTACH: 
+			{
+				char szLogPath[MAX_PATH] = {0};
+				char szProcName[MAX_PATH] = {0};
+				GetSystemDirectory(szProcName, MAX_PATH);
+				sprintf(szLogPath,"%s\\slfile.log", szProcName);
+				log.SetMode(2);				
+				log.SetFile(szLogPath);
+
+			}
+			break;
+		case DLL_PROCESS_DETACH:
+			{				
+
+			}
+			break;
+		case DLL_THREAD_ATTACH:
+
+			break;
+		case DLL_THREAD_DETACH:
+
+			break;
+    }
+    return TRUE;
+}
 
 DWORD __stdcall Monitor_Start_AllDisk(BOOL bRemovableDisk)
 {
@@ -46,12 +85,9 @@ DWORD __stdcall Monitor_Start_AllDisk(BOOL bRemovableDisk)
 	return dwRet;
 }
 
-CString	m_strExcludeFilter1;
-CString	m_strIncludeFilter1;
 DWORD __stdcall Monitor_Start_Dir(char* pszDirPath, DWORD dwLen)
 {
-	OutputDebugString("begin to monitor ");
-	OutputDebugString(pszDirPath);
+	log.Print(LL_DEBUG_INFO,"Begin To Monitor %s",pszDirPath);
 	DWORD dwRet = 0;
 	DWORD dwWatch = 0;
 	CString	m_strDirectoryToMonitor(pszDirPath);
