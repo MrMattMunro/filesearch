@@ -5,9 +5,9 @@
 
 
 /* File created by MIDL compiler version 5.01.0164 */
-/* at Mon Jan 17 23:59:02 2011
+/* at Sun Mar 20 19:06:02 2011
  */
-/* Compiler settings for F:\rw\slsearch\workdir\file monitor\slFileSearch\slFileSearch.idl:
+/* Compiler settings for F:\rw\slsearch\workdir\filesearch\filesearch2vc\slFileSearch\slFileSearch.idl:
     Oicf (OptLev=i2), W1, Zp8, env=Win32, ms_ext, c_ext
     error checks: allocation ref bounds_check enum stub_data 
 */
