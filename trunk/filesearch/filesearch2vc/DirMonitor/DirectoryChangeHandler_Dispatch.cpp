@@ -68,7 +68,7 @@ void CDirectoryChangeHandler_Dispatch::On_FileAdded(const CString & strFileName)
 
 	m_lplogSendAgent->AddLog(filelog);
 
-	log.Print(LL_DEBUG_INFO, "File Added!FileName=%s",m_strFileAddName.GetBuffer(0));
+	log.Print(LL_DEBUG_INFO, "File Added!FileName=%s\r\n",m_strFileAddName.GetBuffer(0));
 }
 
 void CDirectoryChangeHandler_Dispatch::On_FileRemoved(const CString & strFileName)
@@ -80,7 +80,7 @@ void CDirectoryChangeHandler_Dispatch::On_FileRemoved(const CString & strFileNam
 	AddFileLogTime(filelog);
 	m_lplogSendAgent->AddLog(filelog);
 
-	log.Print(LL_DEBUG_INFO, "File Removed!FileName=%s",strTmpName.GetBuffer(0));
+	log.Print(LL_DEBUG_INFO, "File Removed!FileName=%s\r\n",strTmpName.GetBuffer(0));
 }
 
 void CDirectoryChangeHandler_Dispatch::On_FileModified(const CString & strFileName)
@@ -109,7 +109,7 @@ void CDirectoryChangeHandler_Dispatch::On_FileModified(const CString & strFileNa
 // 	
 //	m_dwModifyCurTick = dwCurTick;	
 
-	log.Print(LL_DEBUG_INFO, "File Modified!FileName=%s",strTmpName.GetBuffer(0));
+	log.Print(LL_DEBUG_INFO, "File Modified!FileName=%s\r\n",strTmpName.GetBuffer(0));
 }
 
 void CDirectoryChangeHandler_Dispatch::On_FileNameChanged(const CString & strOldFileName, const CString & strNewFileName)
@@ -125,7 +125,7 @@ void CDirectoryChangeHandler_Dispatch::On_FileNameChanged(const CString & strOld
 	m_lplogSendAgent->AddLog(filelog);
 
 	OutputDebugStringA("File name changed from");
-	log.Print(LL_DEBUG_INFO, "File Name Changed!SrcName=%s, DesName",strTmpOldName.GetBuffer(0),strTmpNewName.GetBuffer(0));
+	log.Print(LL_DEBUG_INFO, "File Name Changed!SrcName=%s, DesName=%s\r\n",strTmpOldName.GetBuffer(0),strTmpNewName.GetBuffer(0));
 }
 
 void CDirectoryChangeHandler_Dispatch::On_WatchStarted(DWORD dwError, const CString & strDirectoryName)
