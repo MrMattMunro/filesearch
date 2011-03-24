@@ -34,8 +34,10 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 				char szProcName[MAX_PATH] = {0};
 				GetSystemDirectory(szProcName, MAX_PATH);
 				sprintf(szLogPath,"%s\\slfile.log", szProcName);
-				log.SetMode(2);				
+						
 				log.SetFile(szLogPath);
+				log.SetLevel(100);
+				log.SetMode(Log::ToFile );	
 
 			}
 			break;
