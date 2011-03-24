@@ -38,7 +38,7 @@ BOOL slRegAgent::ReadXmlPath(TCHAR *szXmlPath)
 	ret = ShowContent_S(RootKey, Key, NULL, (LPBYTE)szXmlPath);
 	if(ret != 0)
 	{
-		log.Print(LL_DEBUG_INFO,"Read xml Path Reg Failed!Key=HKEY_LOCAL_MACHINE %s", Key);
+		log.Print(LL_DEBUG_INFO,"Read xml Path Reg Failed!Key=HKEY_LOCAL_MACHINE %s\r\n", Key);
 		return FALSE;
 	}
 

@@ -89,7 +89,7 @@ DWORD __stdcall Monitor_Start_AllDisk(BOOL bRemovableDisk)
 
 DWORD __stdcall Monitor_Start_Dir(char* pszDirPath, DWORD dwLen)
 {
-	log.Print(LL_DEBUG_INFO,"Begin To Monitor %s",pszDirPath);
+	log.Print(LL_DEBUG_INFO,"Begin To Monitor %s\r\n",pszDirPath);
 	DWORD dwRet = 0;
 	DWORD dwWatch = 0;
 	CString	m_strDirectoryToMonitor(pszDirPath);

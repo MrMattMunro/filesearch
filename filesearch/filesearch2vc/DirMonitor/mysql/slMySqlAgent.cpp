@@ -42,7 +42,7 @@ bool slMySqlAgent::LogRecord(File_Action_Log FileLog)
 		bool bRet = m_pMySqlDB->Connect("127.0.0.1", 3306, "root","changsong",strDbName.c_str());
 		if (bRet == false)
 		{
-			log.Print(LL_DEBUG_INFO,"Connect Sql Failed!IP=127.0.0.1, Port=3306,DbName=%s", strDbName.c_str());
+			log.Print(LL_DEBUG_INFO,"Connect Sql Failed!IP=127.0.0.1, Port=3306,DbName=%s\r\n", strDbName.c_str());
 			break;
 		}
 		//add db
@@ -109,7 +109,7 @@ bool slMySqlAgent::AddRec(File_Action_Log FileLog)
 			HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), ConverSqlPath(FileLog.szSrcName).c_str());
 			if (FAILED(hr))
 			{
-				log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,doSqlExe Failed!Sql=%s",strQuerySQL.c_str());
+				log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,doSqlExe Failed!Sql=%s\r\n",strQuerySQL.c_str());
 				bRet = false;
 				break;
 			}
@@ -119,7 +119,7 @@ bool slMySqlAgent::AddRec(File_Action_Log FileLog)
 				bRet = m_pMySqlDB->GetRow();
 				if(bRet==false)
 				{
-					log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,GetRow Failed!Sql=%s",strQuerySQL.c_str());
+					log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,GetRow Failed!Sql=%s\r\n",strQuerySQL.c_str());
 					break;
 				}
 				
@@ -141,7 +141,7 @@ bool slMySqlAgent::AddRec(File_Action_Log FileLog)
 		HRESULT hr = doSqlExe(TRUE, strInsertSQL.c_str(),ConverSqlPath(FileLog.szSrcName).c_str(), GetOperFlag(FileLog).c_str(),FileLog.szLogTime);
 		if (FAILED(hr))
 		{
-			log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,doSqlExe Failed!Sql=%s",strInsertSQL.c_str());
+			log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,doSqlExe Failed!Sql=%s\r\n",strInsertSQL.c_str());
 			bRet = false;
 			break;
 		}
@@ -173,7 +173,7 @@ BOOL slMySqlAgent::doSqlExe(BOOL bCombin,const char* szSQL,...)
 	}
 	catch (...)
 	{
-		log.Print(LL_DEBUG_INFO,"Exception in slMySqlAgent::doSqlExe!");	
+		log.Print(LL_DEBUG_INFO,"Exception in slMySqlAgent::doSqlExe!\r\n");	
 		bSucc = FALSE;
 	}
 	

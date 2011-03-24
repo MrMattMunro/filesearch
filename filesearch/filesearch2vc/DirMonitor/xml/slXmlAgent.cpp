@@ -57,14 +57,15 @@ void slXmlAgent::LoadXML()
 	hr = pDoc.CreateInstance(_uuidof(DOMDocument30));
 	if(!SUCCEEDED(hr))
 	{
-		log.Print(LL_DEBUG_INFO,"Error in slXmlAgent::LoadXML!DOMDocument CreateInstance Failed!hr=0x%x,GetLastError=%d",hr, GetLastError());
+		log.Print(LL_DEBUG_INFO,"Error in slXmlAgent::LoadXML!DOMDocument CreateInstance Failed!hr=0x%x,GetLastError=%d\r\n",
+			hr, GetLastError());
 		return;
 	}
 	
 	//导入XML文件
 	if(!pDoc->load(GetXmlPath().c_str()))
 	{
-		log.Print(LL_DEBUG_INFO,"Error in slXmlAgent::LoadXML!load Failed,File Not Exist!XmlFilePath=%s",GetXmlPath().c_str());
+		log.Print(LL_DEBUG_INFO,"Error in slXmlAgent::LoadXML!load Failed,File Not Exist!XmlFilePath=%s\r\n",GetXmlPath().c_str());
 		return;
 	}
 
@@ -100,7 +101,7 @@ void slXmlAgent::LoadXML()
 		memcpy(FilterItem.szSearchPath, strSearchPath.GetBuffer(0), strSearchPath.GetLength());
 		memcpy(FilterItem.szSearchType, strTypes.GetBuffer(0), strTypes.GetLength());
 		memcpy(&m_pxmlfilter[i], &FilterItem, sizeof(XmlFilter));
-		log.Print(LL_DEBUG_INFO,"XmlItem(%d),SearchName=%s,SearchPath=%s,,SearchType=%s",
+		log.Print(LL_DEBUG_INFO,"XmlItem(%d),SearchName=%s,SearchPath=%s,,SearchType=%s\r\n",
 			i+1,FilterItem.szSearceName,FilterItem.szSearchPath,FilterItem.szSearchType);
 	}
 
@@ -179,7 +180,7 @@ std::string slXmlAgent::GetXmlPath()
 	BOOL bRet = reg.ReadXmlPath(szRegPath);
 	if (bRet == FALSE)
 	{
-		log.Print(LL_DEBUG_INFO,"ReadXmlPath Fialed!");
+		log.Print(LL_DEBUG_INFO,"ReadXmlPath Fialed!\r\n");
 	}
 	
 	char szXmlPath[MAX_PATH] = {0};
@@ -191,7 +192,7 @@ std::string slXmlAgent::GetXmlPath()
 	_splitpath( szRegPath, drive, dir, fname, ext );
 	sprintf(szXmlPath,"%s%s%s",drive, dir,XML_PATH);
 
-	log.Print(LL_DEBUG_INFO,"Xml Path %s",szXmlPath);
+	log.Print(LL_DEBUG_INFO,"Xml Path %s\r\n",szXmlPath);
 
 	return szXmlPath;
 }
