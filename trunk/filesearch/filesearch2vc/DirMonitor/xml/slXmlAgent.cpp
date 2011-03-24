@@ -58,7 +58,6 @@ void slXmlAgent::LoadXML()
 	if(!SUCCEEDED(hr))
 	{
 		log.Print(LL_DEBUG_INFO,"Error in slXmlAgent::LoadXML!DOMDocument CreateInstance Failed!hr=0x%x,GetLastError=%d",hr, GetLastError());
-		OutputDebugStringA("创建DOMDocument对象失败!");
 		return;
 	}
 	
@@ -101,6 +100,8 @@ void slXmlAgent::LoadXML()
 		memcpy(FilterItem.szSearchPath, strSearchPath.GetBuffer(0), strSearchPath.GetLength());
 		memcpy(FilterItem.szSearchType, strTypes.GetBuffer(0), strTypes.GetLength());
 		memcpy(&m_pxmlfilter[i], &FilterItem, sizeof(XmlFilter));
+		log.Print(LL_DEBUG_INFO,"XmlItem(%d),SearchName=%s,SearchPath=%s,,SearchType=%s",
+			i+1,FilterItem.szSearceName,FilterItem.szSearchPath,FilterItem.szSearchType);
 	}
 
 	return;
@@ -175,7 +176,11 @@ std::string slXmlAgent::GetXmlPath()
 {
 	slRegAgent reg;
 	char szRegPath[MAX_PATH] = {0};
-	reg.ReadXmlPath(szRegPath);
+	BOOL bRet = reg.ReadXmlPath(szRegPath);
+	if (bRet == FALSE)
+	{
+		log.Print(LL_DEBUG_INFO,"ReadXmlPath Fialed!");
+	}
 	
 	char szXmlPath[MAX_PATH] = {0};
 	char drive[_MAX_DRIVE];
@@ -185,6 +190,8 @@ std::string slXmlAgent::GetXmlPath()
 	
 	_splitpath( szRegPath, drive, dir, fname, ext );
 	sprintf(szXmlPath,"%s%s%s",drive, dir,XML_PATH);
+
+	log.Print(LL_DEBUG_INFO,"Xml Path %s",szXmlPath);
 
 	return szXmlPath;
 }
