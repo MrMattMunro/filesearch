@@ -2,7 +2,7 @@
 
 
 /* File created by MIDL compiler version 5.01.0164 */
-/* at Sun Mar 20 19:06:02 2011
+/* at Thu Mar 24 19:58:47 2011
  */
 /* Compiler settings for F:\rw\slsearch\workdir\filesearch\filesearch2vc\slFileSearch\slFileSearch.idl:
     Oicf (OptLev=i2), W1, Zp8, env=Win32, ms_ext, c_ext
