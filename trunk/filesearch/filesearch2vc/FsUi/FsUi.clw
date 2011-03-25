@@ -6,22 +6,23 @@ ClassCount=8
 Class1=CFsUiApp
 LastClass=CSearchThread
 NewFileInclude2=#include "FsUi.h"
-ResourceCount=6
+ResourceCount=7
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
 LastTemplate=CWinThread
-Resource1=IDD_DIALOG_SET_ATTR
+Resource1=IDD_DIALOG_CREATE_INDEX
 Class3=CCustomCiHuiDlg
-Resource2=IDD_DIALOG_MODIFY_INDEX
+Resource2=IDD_DIALOG_SET_ATTR
 Class4=CModifyIndexDlg
-Resource3=IDD_DIALOG_CREATE_INDEX
+Resource3=IDD_DIALOG_MODIFY_INDEX
 Class5=CShowAllCiHuiDlg
-Resource4=IDD_DIALOG_CUSTOM_DICT
+Resource4=IDD_DIALOG_ALL_CIHUI
 Class6=CSetAttributeDlg
-Resource5=IDD_DIALOG_ALL_CIHUI
+Resource5=IDD_DIALOG_FAST_SEARCH
 Class7=CFastSearchDlg
 Class8=CSearchThread
-Resource6=IDD_DIALOG_FAST_SEARCH
+Resource6=IDD_DIALOG_CUSTOM_DICT
+Resource7=IDD_DIALOG_LICENSE
 
 [CLS:CFsUiApp]
 Type=0
@@ -189,4 +190,15 @@ HeaderFile=SearchThread.h
 ImplementationFile=SearchThread.cpp
 BaseClass=CWinThread
 Filter=N
+
+[DLG:IDD_DIALOG_LICENSE]
+Type=1
+Class=?
+ControlCount=6
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_STATIC,static,1342308352
+Control4=IDC_STATIC,static,1342308352
+Control5=IDC_STATIC,static,1342308352
+Control6=IDC_STATIC,static,1342308352
 

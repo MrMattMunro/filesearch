@@ -249,6 +249,21 @@ BEGIN
                     WS_VSCROLL | WS_TABSTOP
 END
 
+IDD_DIALOG_LICENSE DIALOG DISCARDABLE  0, 0, 249, 190
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "License"
+FONT 10, "宋体"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,83,158,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,178,158,50,14
+    LTEXT           "注册基本信息",IDC_STATIC,8,11,46,8
+    LTEXT           "......................................",IDC_STATIC,60,9,
+                    155,8
+    LTEXT           "用户填写注册基本信息，包括订单号，电子邮箱",IDC_STATIC,
+                    22,25,157,8
+    LTEXT           "订单号:",IDC_STATIC,24,46,27,8
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
