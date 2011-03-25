@@ -160,7 +160,7 @@ DWORD __stdcall FsFastSearch()
 
 DWORD g_dwApplyID = 0;
 /*
-  功能：快速查找页面
+  功能：系统设置界面
 */
 DWORD __stdcall FsSetSheet()
 {
