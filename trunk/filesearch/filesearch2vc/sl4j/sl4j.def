@@ -1,0 +1,9 @@
+; sl4j.def : Declares the module parameters for the DLL.
+
+LIBRARY      "sl4j"
+DESCRIPTION  'sl4j Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here
+	MsgBox	@1
+	DoExe	@2
