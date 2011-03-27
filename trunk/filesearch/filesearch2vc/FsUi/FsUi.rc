@@ -254,14 +254,20 @@ STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "License"
 FONT 10, "宋体"
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,83,158,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,178,158,50,14
-    LTEXT           "注册基本信息",IDC_STATIC,8,11,46,8
+    DEFPUSHBUTTON   "确定",IDOK,87,157,50,14,NOT WS_VISIBLE
+    PUSHBUTTON      "取消",IDCANCEL,178,158,50,14,NOT WS_VISIBLE
+    LTEXT           "注册基本信息",IDC_STATIC,11,13,46,8
     LTEXT           "......................................",IDC_STATIC,60,9,
                     155,8
     LTEXT           "用户填写注册基本信息，包括订单号，电子邮箱",IDC_STATIC,
-                    22,25,157,8
-    LTEXT           "订单号:",IDC_STATIC,24,46,27,8
+                    22,28,157,8
+    LTEXT           "订单号:",IDC_STATIC,23,46,27,8
+    LTEXT           "电子邮箱:",IDC_STATIC,23,65,35,8
+    EDITTEXT        IDC_EDIT_NO,60,43,122,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_EMAIL,60,64,122,13,ES_AUTOHSCROLL
+    LTEXT           "注册时间:",IDC_STATIC,23,95,35,8
+    LTEXT           "到期时间:",IDC_STATIC,23,111,35,8
+    PUSHBUTTON      "注册",IDC_BUTTON_REG,191,60,38,18
 END
 
 

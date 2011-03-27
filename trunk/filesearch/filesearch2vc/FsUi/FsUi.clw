@@ -2,14 +2,14 @@
 
 [General Info]
 Version=1
-ClassCount=8
+ClassCount=9
 Class1=CFsUiApp
-LastClass=CSearchThread
+LastClass=CLicenseDlg
 NewFileInclude2=#include "FsUi.h"
 ResourceCount=7
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
-LastTemplate=CWinThread
+LastTemplate=CDialog
 Resource1=IDD_DIALOG_CREATE_INDEX
 Class3=CCustomCiHuiDlg
 Resource2=IDD_DIALOG_SET_ATTR
@@ -22,6 +22,7 @@ Resource5=IDD_DIALOG_FAST_SEARCH
 Class7=CFastSearchDlg
 Class8=CSearchThread
 Resource6=IDD_DIALOG_CUSTOM_DICT
+Class9=CLicenseDlg
 Resource7=IDD_DIALOG_LICENSE
 
 [CLS:CFsUiApp]
@@ -190,15 +191,31 @@ HeaderFile=SearchThread.h
 ImplementationFile=SearchThread.cpp
 BaseClass=CWinThread
 Filter=N
+LastObject=CSearchThread
 
 [DLG:IDD_DIALOG_LICENSE]
 Type=1
-Class=?
-ControlCount=6
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
+Class=CLicenseDlg
+ControlCount=12
+Control1=IDOK,button,1073807361
+Control2=IDCANCEL,button,1073807360
 Control3=IDC_STATIC,static,1342308352
 Control4=IDC_STATIC,static,1342308352
 Control5=IDC_STATIC,static,1342308352
 Control6=IDC_STATIC,static,1342308352
+Control7=IDC_STATIC,static,1342308352
+Control8=IDC_EDIT_NO,edit,1350631552
+Control9=IDC_EDIT_EMAIL,edit,1350631552
+Control10=IDC_STATIC,static,1342308352
+Control11=IDC_STATIC,static,1342308352
+Control12=IDC_BUTTON_REG,button,1342242816
+
+[CLS:CLicenseDlg]
+Type=0
+HeaderFile=LicenseDlg.h
+ImplementationFile=LicenseDlg.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=CLicenseDlg
+VirtualFilter=dWC
 

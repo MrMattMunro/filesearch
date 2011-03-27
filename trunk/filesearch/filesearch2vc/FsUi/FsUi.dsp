@@ -116,6 +116,10 @@ SOURCE=.\FsUi.rc
 # End Source File
 # Begin Source File
 
+SOURCE=.\LicenseDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ModifyIndexDlg.cpp
 # End Source File
 # Begin Source File
@@ -194,6 +198,10 @@ SOURCE=.\FastSearchDlg.h
 # Begin Source File
 
 SOURCE=.\FsUi.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\LicenseDlg.h
 # End Source File
 # Begin Source File
 
