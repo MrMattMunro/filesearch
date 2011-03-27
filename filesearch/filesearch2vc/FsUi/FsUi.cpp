@@ -8,6 +8,7 @@
 #include "ModifyIndexDlg.h"
 #include "SetAttributeDlg.h"
 #include "FastSearchDlg.h"
+#include "LicenseDlg.h"
 #include "PropertyPageTaskPanelNavigator.h"
 
 #ifdef _DEBUG
@@ -172,10 +173,12 @@ DWORD __stdcall FsSetSheet()
 	ps.SetNavigator(pList);
 	ps.m_psh.dwFlags &= (~PSH_HASHELP);
 
-	CCustomCiHuiDlg cihuidlg;
-	CSetAttributeDlg attrdlg;
+	CCustomCiHuiDlg		cihuidlg;
+	CSetAttributeDlg	attrdlg;
+	CLicenseDlg			licdlg;
 	ps.AddPage(&attrdlg);
 	ps.AddPage(&cihuidlg);
+	ps.AddPage(&licdlg);
 
 	ps.SetResizable();
 

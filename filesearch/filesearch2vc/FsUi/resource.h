@@ -44,8 +44,11 @@
 #define IDC_BUTTON_BROWSER_EXCEL        2021
 #define IDC_COMBO_PATH                  2021
 #define IDC_BUTTON_BROWSER_PPT          2022
+#define IDC_EDIT_NO                     2022
 #define IDC_BUTTON_BROWSER_PDF          2023
+#define IDC_EDIT_EMAIL                  2023
 #define IDC_BUTTON_BROWSER_TXT          2024
+#define IDC_BUTTON_REG                  2024
 
 // Next default values for new objects
 // 
@@ -53,7 +56,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        2013
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         2022
+#define _APS_NEXT_CONTROL_VALUE         2025
 #define _APS_NEXT_SYMED_VALUE           2000
 #endif
 #endif

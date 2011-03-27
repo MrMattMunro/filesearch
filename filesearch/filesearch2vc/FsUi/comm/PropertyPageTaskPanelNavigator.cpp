@@ -45,12 +45,11 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 	CXTPTaskPanelGroup* pGroup = AddGroup(0);
 	pGroup->SetCaption(_T("基本设置"));
 
-
 	int i = 0;
 	CXTPTaskPanelGroupItem* pItem = pGroup->AddLinkItem(0, i);
 	pItem->SetCaption(_T("常规"));
 
-	CXTPPropertyPage* pPage = m_pSheet->GetPage(i);
+	CXTPPropertyPage* pPage = m_pSheet->GetPage(0);
 	pItem->SetItemData((DWORD_PTR)pPage);
 	pPage->m_dwData = (DWORD_PTR)pItem;
 
@@ -58,12 +57,22 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 	pItem = pGroup->AddLinkItem(1, i);
 	pItem->SetCaption(_T("词汇"));
 	
-	pPage = m_pSheet->GetPage(i);
+	pPage = m_pSheet->GetPage(1);
 	pItem->SetItemData((DWORD_PTR)pPage);
 	pPage->m_dwData = (DWORD_PTR)pItem;
 
 	pGroup = AddGroup(1);
-	pGroup->SetCaption(_T("license管理"));
+	pGroup->SetCaption(_T("License管理"));
+
+	i = 2;
+	pItem = pGroup->AddLinkItem(0, i);
+	pItem->SetCaption(_T("License信息"));
+	
+	pPage = m_pSheet->GetPage(2);
+	pItem->SetItemData((DWORD_PTR)pPage);
+	pPage->m_dwData = (DWORD_PTR)pItem;
+
+
 
 	pGroup = AddGroup(2);
 	pGroup->SetCaption(_T("状态和提醒"));
