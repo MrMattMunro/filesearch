@@ -45,10 +45,16 @@
 #define IDC_COMBO_PATH                  2021
 #define IDC_BUTTON_BROWSER_PPT          2022
 #define IDC_EDIT_NO                     2022
+#define IDC_EDIT_NUM                    2022
 #define IDC_BUTTON_BROWSER_PDF          2023
 #define IDC_EDIT_EMAIL                  2023
 #define IDC_BUTTON_BROWSER_TXT          2024
 #define IDC_BUTTON_REG                  2024
+#define IDC_STATIC_BEGINTIME            2025
+#define IDC_STATIC_ENDTIME              2026
+#define IDC_STATIC_BEGINTIME_CONTENT    2027
+#define IDC_STATIC_ENTTIME_CONTENT      2028
+#define IDC_STATIC_ERROR_INFO           2029
 
 // Next default values for new objects
 // 
@@ -56,7 +62,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        2013
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         2025
+#define _APS_NEXT_CONTROL_VALUE         2029
 #define _APS_NEXT_SYMED_VALUE           2000
 #endif
 #endif

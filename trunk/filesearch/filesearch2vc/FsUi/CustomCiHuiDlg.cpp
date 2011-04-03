@@ -56,8 +56,7 @@ BOOL CCustomCiHuiDlg::OnApply()
 
 	if (g_dwApplyID == 2)
 	{
-		MessageBox("CCustomCiHuiDlg OnApply	1111111111111111");
-		
+
 		UpdateData(TRUE);
 		
 		if (!m_strBrowsePath.GetLength())
