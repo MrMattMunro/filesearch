@@ -15,7 +15,7 @@ public:
 	sloCommAgent();
 	virtual ~sloCommAgent();
 	
-	static char* GetCurTime();
+	static char* GetCurTime(int nAddYear = 0);
 	static BOOL DoFileDialog(char *szPath, LPCTSTR lpszFilter,LPCTSTR lpszDefExt = NULL );
 	
 	static BOOL IsFileExists(LPCTSTR lpszFileName) ;

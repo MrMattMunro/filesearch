@@ -66,7 +66,7 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2011,3,17,1
+ FILEVERSION 2011,3,31,1
  PRODUCTVERSION 1,0,0,4
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
@@ -85,7 +85,7 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "\0"
             VALUE "FileDescription", "FsUi DLL\0"
-            VALUE "FileVersion", "2011, 3, 17, 1\0"
+            VALUE "FileVersion", "2011, 3, 31, 1\0"
             VALUE "InternalName", "FsUi\0"
             VALUE "LegalCopyright", "版权所有 (C) 2011\0"
             VALUE "LegalTrademarks", "\0"
@@ -254,8 +254,6 @@ STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "License"
 FONT 10, "宋体"
 BEGIN
-    DEFPUSHBUTTON   "确定",IDOK,87,157,50,14,NOT WS_VISIBLE
-    PUSHBUTTON      "取消",IDCANCEL,178,158,50,14,NOT WS_VISIBLE
     LTEXT           "注册基本信息",IDC_STATIC,11,13,46,8
     LTEXT           "......................................",IDC_STATIC,60,9,
                     155,8
@@ -263,11 +261,14 @@ BEGIN
                     22,28,157,8
     LTEXT           "订单号:",IDC_STATIC,23,46,27,8
     LTEXT           "电子邮箱:",IDC_STATIC,23,65,35,8
-    EDITTEXT        IDC_EDIT_NO,60,43,122,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_NUM,60,43,122,13,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDIT_EMAIL,60,64,122,13,ES_AUTOHSCROLL
-    LTEXT           "注册时间:",IDC_STATIC,23,95,35,8
-    LTEXT           "到期时间:",IDC_STATIC,23,111,35,8
-    PUSHBUTTON      "注册",IDC_BUTTON_REG,191,60,38,18
+    LTEXT           "到期时间:",IDC_STATIC_ENDTIME,23,111,35,8
+    PUSHBUTTON      "注册",IDC_BUTTON_REG,93,89,47,21
+    LTEXT           "starttime",IDC_STATIC_BEGINTIME_CONTENT,64,93,120,8
+    LTEXT           "endtime",IDC_STATIC_ENTTIME_CONTENT,64,111,120,8
+    LTEXT           "注册时间:",IDC_STATIC_BEGINTIME,23,93,35,8
+    LTEXT           "errorinfo",IDC_STATIC_ERROR_INFO,22,127,203,24
 END
 
 

@@ -6,7 +6,7 @@
 #endif // _MSC_VER > 1000
 // LicenseDlg.h : header file
 //
-
+#include "sloLicenseAgent.h"
 /////////////////////////////////////////////////////////////////////////////
 // CLicenseDlg dialog
 
@@ -15,7 +15,9 @@ class CLicenseDlg :public  CXTPPropertyPage/*CDialog*/
 // Construction
 public:
 	CLicenseDlg(CWnd* pParent = NULL);   // standard constructor
-
+	
+	BOOL UpdateDialog();
+	sloLicenseAgent m_licAgent;
 // Dialog Data
 	//{{AFX_DATA(CLicenseDlg)
 	enum { IDD = IDD_DIALOG_LICENSE };
@@ -39,6 +41,7 @@ protected:
 	virtual void OnCancel();
 	virtual BOOL OnInitDialog();
 	afx_msg void OnButtonReg();
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

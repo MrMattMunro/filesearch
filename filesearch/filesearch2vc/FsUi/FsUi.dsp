@@ -124,6 +124,10 @@ SOURCE=.\ModifyIndexDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\comm\myftpcomm.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\comm\mysqlcomm.cpp
 # End Source File
 # Begin Source File
@@ -161,6 +165,10 @@ SOURCE=.\comm\sloCustomCiHuiAgent.cpp
 # Begin Source File
 
 SOURCE=.\comm\sloFastSearchAgent.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\sloLicenseAgent.cpp
 # End Source File
 # Begin Source File
 
@@ -209,6 +217,10 @@ SOURCE=.\ModifyIndexDlg.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\comm\myftpcomm.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\comm\mysqlcomm.h
 # End Source File
 # Begin Source File
@@ -246,6 +258,10 @@ SOURCE=.\comm\sloCustomCiHuiAgent.h
 # Begin Source File
 
 SOURCE=.\comm\sloFastSearchAgent.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\sloLicenseAgent.h
 # End Source File
 # Begin Source File
 

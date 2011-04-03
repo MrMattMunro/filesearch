@@ -26,14 +26,14 @@ sloCommAgent::~sloCommAgent()
 
 }
 
-char* sloCommAgent::GetCurTime()
+char* sloCommAgent::GetCurTime(int nAddYear)
 {
 	char *pszTime = new char[30];
 	memset(pszTime, NULL, 30);
 	SYSTEMTIME stTime;
 	GetLocalTime(&stTime);
-	sprintf(pszTime,"%04d-%02d-%02d %02d:%02d:%02d",
-		stTime.wYear, stTime.wMonth, stTime.wDay, stTime.wHour, stTime.wMinute, stTime.wSecond);
+	sprintf(pszTime,"%04d%02d%02d",
+		stTime.wYear + nAddYear, stTime.wMonth, stTime.wDay);
 	return pszTime;
 }
 
