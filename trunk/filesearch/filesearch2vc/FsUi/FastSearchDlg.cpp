@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "FsUi.h"
 #include "FastSearchDlg.h"
+#include "sltFastSearchThread.h"
 
 
 #ifdef _DEBUG
@@ -21,7 +22,7 @@ CFastSearchDlg::CFastSearchDlg(CWnd* pParent /*=NULL*/)
 {
 	//{{AFX_DATA_INIT(CFastSearchDlg)
 	m_strKey = _T("");
-	m_pSearchThread = NULL;
+//	m_pSearchThread = NULL;
 	//}}AFX_DATA_INIT
 }
 
@@ -79,6 +80,19 @@ BOOL CFastSearchDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
+
+// 	if (NULL == m_pSearchThread)
+// 	{
+// 		OutputDebugString("AfxBeginThread ");
+// 		m_pSearchThread = (CSearchThread*)AfxBeginThread(RUNTIME_CLASS(CSearchThread), THREAD_PRIORITY_NORMAL, 0, CREATE_SUSPENDED , 0);		
+// 		m_pSearchThread->m_hParentWnd = this->GetSafeHwnd();
+// 		m_pSearchThread->ResumeThread();
+// 	}	
+
+	sltFastSearchThread::newInstance();
+	sltFastSearchThread::getInstance()->Init(this->GetSafeHwnd());
+	sltFastSearchThread::getInstance()->startup();
+
 	SetWinPos();
 
 	if (m_agent.GetAllPath() == 0)
@@ -121,53 +135,33 @@ BOOL CFastSearchDlg::OnInitDialog()
 
 void CFastSearchDlg::OnEventNotify()
 {
+	//获取界面的Key和SelBox
 	CString strKey;
-	GetDlgItemText(IDC_EDIT_SEARCH_KEY, strKey);
-	
-	if (m_agent.IsKeyFileExist())
-	{
-		return ;
-	}
-	
-	//不存在的场合将用户输入的关键字写入
-	//keyWord.properties文件,格式如下:
-	//keyword=
-	//id=
+ 	GetDlgItemText(IDC_EDIT_SEARCH_KEY, strKey);
+
 	int nIndex = m_BoxList.GetCurSel();		//得到被选中内容索引
 	CString strtemp;						//存放得到的编辑框内容
 	m_BoxList.GetLBText(nIndex,strtemp);	//得到被选中内容的名字
 
-	//根据路径,查找id
+	//根据路径,匹配查找id
 	int nId = m_agent.GetPathIndex(strtemp.GetBuffer(0));
 	char szID[MAX_PATH] = {0};
 	itoa(nId, szID, 10);
 
-	//写入keyword和id字段
-	sloCommAgent::WritePropertyfileString("keyword", strKey.GetBuffer(0), m_agent.m_szKeyPath);
-	sloCommAgent::WritePropertyfileString("id", szID, m_agent.m_szKeyPath);
+	FastItem fast;
+	memset(&fast, NULL, sizeof(FastItem));
+	strcpy(fast.szKey, strKey.GetBuffer(0));
+	strcpy(fast.szID, szID);
 
-	if (NULL == m_pSearchThread)
+	//如果文件存在，则记录下当前key
+	if (m_agent.IsKeyFileExist())
 	{
-		OutputDebugString("AfxBeginThread ");
-		m_pSearchThread = (CSearchThread*)AfxBeginThread(RUNTIME_CLASS(CSearchThread), THREAD_PRIORITY_NORMAL, 0, CREATE_SUSPENDED , 0);		
-		m_pSearchThread->m_hParentWnd = this->GetSafeHwnd();
-		m_pSearchThread->ResumeThread();
-	}	
-	
-	int nPostCount = 0;
-	while(nPostCount < 10)
-	{
-		OutputDebugString("post WM_SEARCH_MSG ");
-		if( m_pSearchThread->PostThreadMessage(WM_SEARCH_MSG, 0, 0) )
-		{
-			OutputDebugString("PostThreadMessage succ");
-			break ;
-		}else
-		{	
-			OutputDebugString("PostThreadMessage failed");
-			nPostCount++;
-		}
+		sltFastSearchThread::getInstance()->PostMsg(fast);
+		return ;
 	}
+
+	sltFastSearchThread::getInstance()->DoLog(fast);
+
 }
 
 void CFastSearchDlg::OnChangeEditSearchKey() 
@@ -352,9 +346,5 @@ void CFastSearchDlg::OnDestroy()
 	CDialog::OnDestroy();
 	
 	// TODO: Add your message handler code here
-	if (NULL != m_pSearchThread)
-	{
-		m_pSearchThread->PostThreadMessage(WM_QUIT, 0, 0);
-		Sleep(100);
-	}
+	sltFastSearchThread::getInstance()->shutdownflag();
 }

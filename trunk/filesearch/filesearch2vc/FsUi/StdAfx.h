@@ -40,13 +40,25 @@
 #pragma  warning(disable : 4284)
 #pragma comment(lib, "ws2_32.lib")
 
+#define dcdebug if (false) printf
+#define dcassert(exp) 
+#define dcdrun(exp)
+
 #include <vector>
 #include <string>
 using namespace std;
 
+#include "omnithread.h"
+#include "tyu_common_interface.h"
+
+#include "Singleton.h"
+
+//////////////////////////////////////////////////////////////////////////
+#include "comm.h"
 #include "sloCommAgent.h"
 #include "mysqlcomm.h"
 #include <XTToolkitPro.h>   // Codejock Software Components
+//////////////////////////////////////////////////////////////////////////
 
 #define WM_PROGRESS_MSG   WM_USER + 100
 //{{AFX_INSERT_LOCATION}}
