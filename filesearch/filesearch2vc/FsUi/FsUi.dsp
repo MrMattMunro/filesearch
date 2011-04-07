@@ -184,7 +184,7 @@ SOURCE=.\comm\sloSetAttrAgent.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\sltFastSearchThread.cpp
+SOURCE=.\comm\sltFastSearchThread.cpp
 # End Source File
 # Begin Source File
 
@@ -281,7 +281,7 @@ SOURCE=.\comm\sloSetAttrAgent.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\sltFastSearchThread.h
+SOURCE=.\comm\sltFastSearchThread.h
 # End Source File
 # Begin Source File
 
