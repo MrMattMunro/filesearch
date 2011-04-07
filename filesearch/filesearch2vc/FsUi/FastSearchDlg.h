@@ -12,7 +12,6 @@
 // CFastSearchDlg dialog
 #include "sloFastSearchAgent.h"
 #include <map>
-#include "SearchThread.h"
 
 typedef struct _GroupInfo
 {
@@ -44,7 +43,7 @@ public:
 	sloFastSearchAgent m_agent;
 	std::map<int, GroupInfo> m_listMap;
 
-	CSearchThread* m_pSearchThread;
+//	CSearchThread* m_pSearchThread;
 // Dialog Data
 	//{{AFX_DATA(CFastSearchDlg)
 	enum { IDD = IDD_DIALOG_FAST_SEARCH };

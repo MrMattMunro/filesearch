@@ -9,21 +9,6 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-typedef struct _SearchRectord
-{
-	char szFileType[20];
-	char szFileName[MAX_PATH];
-	char szFilePath[MAX_PATH];
-	char szDesp[1000];
-	char szContent[1000];
-}SearchRectord, *pSearchRectord;
-
-typedef struct _PathIndex
-{
-	int nID;
-	char szPath[MAX_PATH];
-}PathIndex,*pPathIndex;
-
 class sloFastSearchAgent  :public mysqlcomm
 {
 public:

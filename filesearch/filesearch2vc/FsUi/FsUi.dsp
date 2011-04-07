@@ -69,7 +69,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_WINDLL" /D "_AFXDLL" /Yu"stdafx.h" /FD /GZ /c
-# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "." /I "comm" /I "../mysql" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_WINDLL" /D "_AFXDLL" /D "_MBCS" /D "_USRDLL" /D "D_STLP_DEBUG" /D "__STL_DEBUG" /Yu"stdafx.h" /FD /GZ /Zm200 /c
+# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "." /I "comm" /I "../mysql" /I "../utils" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_WINDLL" /D "_AFXDLL" /D "_MBCS" /D "_USRDLL" /D "D_STLP_DEBUG" /D "__STL_DEBUG" /Yu"stdafx.h" /FD /GZ /Zm200 /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804 /d "_DEBUG" /d "_AFXDLL"
@@ -184,6 +184,10 @@ SOURCE=.\comm\sloSetAttrAgent.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\sltFastSearchThread.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\StdAfx.cpp
 # ADD CPP /Yc"stdafx.h"
 # End Source File
@@ -277,6 +281,10 @@ SOURCE=.\comm\sloSetAttrAgent.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\sltFastSearchThread.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\StdAfx.h
 # End Source File
 # End Group
@@ -306,6 +314,14 @@ SOURCE=.\res\ppt.ico
 # Begin Source File
 
 SOURCE=.\res\word.ico
+# End Source File
+# End Group
+# Begin Group "utils"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\Utils\Thread.cpp
 # End Source File
 # End Group
 # Begin Source File

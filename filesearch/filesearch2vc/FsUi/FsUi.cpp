@@ -85,6 +85,7 @@ BOOL CFsUiApp::InitInstance()
 DWORD __stdcall FsCreateIndex()
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
+	OutputDebugString("===========Enter in FsCreateIndex!");
 	CCreateIndexDlg createindexdlg;
 	if(IDOK == createindexdlg.DoModal())
 	{
@@ -134,6 +135,7 @@ DWORD __stdcall FsImportCustomCiHui()
 DWORD __stdcall FsSetAttribute()
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
+	OutputDebugString("===========Enter in FsSetAttribute!");
 	CSetAttributeDlg set;
 	if(IDOK == set.DoModal())
 	{	
@@ -143,29 +145,36 @@ DWORD __stdcall FsSetAttribute()
 	return 0;
 }
 
+
+DWORD dwFastDlgExist = 0;
 /*
   功能：快速查找页面
 */
 DWORD __stdcall FsFastSearch()
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	CFastSearchDlg dlg;
-	if(IDOK == dlg.DoModal())
-	{	
-		return 0;
+	if (dwFastDlgExist == 0)
+	{
+		dwFastDlgExist = 1;
+		CFastSearchDlg dlg;
+		dlg.DoModal();
+
+		dwFastDlgExist = 0;
 	}
-	
+
 	return 0;
 }
 
 
 DWORD g_dwApplyID = 0;
+
 /*
   功能：系统设置界面
 */
 DWORD __stdcall FsSetSheet()
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
+	OutputDebugString("===========Enter in FsSetSheet!");
 	CXTPPropertySheet ps(_T("系统设置"));
 	
 	CPropertyPageTaskPanelNavigator* pList = new CPropertyPageTaskPanelNavigator();

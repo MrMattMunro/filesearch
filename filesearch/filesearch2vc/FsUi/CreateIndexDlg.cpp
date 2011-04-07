@@ -134,6 +134,12 @@ void CCreateIndexDlg::OnOK()
 	char szPath[MAX_PATH];
 	GetDlgItemText(IDC_EDIT_SEARCH_PATH,szPath, MAX_PATH );
 
+	if (strlen(szPath) == 0)
+	{
+		MessageBox("请选择搜索目录！","新建索引",MB_OK | MB_ICONWARNING);
+		return ;
+	}
+
 	CString strTypes;
 	if (m_bWord)
 		strTypes += "word";
@@ -147,6 +153,12 @@ void CCreateIndexDlg::OnOK()
 		strTypes += ",txt";
 	if (m_bHtml)
 		strTypes += ",html";
+
+	if (strTypes.GetLength() == 0)
+	{
+		MessageBox("请选择对象文档！","新建索引",MB_OK | MB_ICONWARNING);
+		return ;
+	}
 	
 	std::string szTypes = strTypes.GetBuffer(0);
 	if (szTypes.substr(0,1) == ",")
