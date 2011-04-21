@@ -190,7 +190,7 @@ void CSl4jTestDlg::OnButton1()
 		return ;
 	}
 
-	g_fnMsgBox("test", "caption", MB_OK | MB_ICONQUESTION);
+	g_fnMsgBox("\u5bf9\u8c61\u6587\u6863\u7c7b\u578b\uff1a", "caption", MB_OK | MB_ICONQUESTION);
 
 	FreeLibrary(hr);
 }
