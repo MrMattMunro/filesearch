@@ -90,8 +90,6 @@ DWORD sloFastSearchAgent::GetSearchRecords()
 	if (FAILED(hr))
 		return -2;
 
-
-	
 	int nCount = m_pMySqlDB->GetRowCount();
 	int nFieldCount = m_pMySqlDB->GetFieldCount();
 	if(nCount >= 1 && nFieldCount >= 1)
@@ -119,6 +117,7 @@ DWORD sloFastSearchAgent::GetSearchRecords()
 			int nContentLen = 0;
 			char* pContent = m_pMySqlDB->GetField("content",&nContentLen);
 
+			//先查找是否有该项
 			SearchRectord sr;
 			memset(&sr, NULL, sizeof(SearchRectord));
 			if (nFileTypeLen)
@@ -129,17 +128,38 @@ DWORD sloFastSearchAgent::GetSearchRecords()
 				memcpy(sr.szFilePath, pFilePath, nFilePathLen);
 
 			if (nDespLen)
-				memcpy(sr.szDesp, pDesp, nDespLen);
+				sr.DespList.push_back(pDesp);
+
 			if (nContentLen)
 				memcpy(sr.szContent, pContent, nContentLen);
 
-			m_RecList.push_back(sr);
+			//m_RecList.push_back(sr);
+			AddList(sr);
 
 		}
 	}
 	
 	return 0;	
 }
+
+void sloFastSearchAgent::AddList(SearchRectord sr)
+{
+	int nCount = m_RecList.size();
+	for (int i = 0; i < nCount; i++)
+	{
+		if (strcmp(sr.szFileName, m_RecList[i].szFileName) == 0)
+		{
+			break ;
+		}
+	}	
+
+	if (i >= nCount)
+	{
+		m_RecList.push_back(sr);
+	}else
+		m_RecList[i].DespList.push_back(sr.DespList[0]);
+}
+
 
 BOOL sloFastSearchAgent::IsKeyFileExist()
 {

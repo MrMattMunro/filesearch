@@ -127,6 +127,21 @@ BOOL CModifyIndexDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
+	CString strSearchName, strObjectType, strOk, strCancel, strDel;
+	
+	strSearchName.LoadString(IDS_SEARCH_PATH);
+	strObjectType.LoadString(IDS_OBJECT_TYPE);
+	strOk.LoadString(IDS_OK);
+	strCancel.LoadString(IDS_CANCEL);
+	strDel.LoadString(IDS_DELETE);
+	
+	SetDlgItemText(IDC_STATIC_SEARCH_DIR, strSearchName);
+	SetDlgItemText(IDC_STATIC_OBJECT_TYPE, strObjectType);
+	SetDlgItemText(IDOK, strOk);
+	SetDlgItemText(IDCANCEL, strCancel);
+	SetDlgItemText(IDC_BUTTON_DEL_INDEX, strDel);
+	//////////////////////////////////////////////////////////////////////////
+
 	m_modifyAgent.GetSearchInfo();
 	SetDlgItemText(IDC_STATIC_SEARCHPATH,m_modifyAgent.m_szSearchPath);
 

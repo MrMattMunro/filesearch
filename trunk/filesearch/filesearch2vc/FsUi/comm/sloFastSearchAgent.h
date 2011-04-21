@@ -23,6 +23,7 @@ public:
 	int GetPathIndex(char* szPath);
 private:
 	BOOL GetKeyFilePath();
+	void AddList(SearchRectord sr);
 
 	void ClearPathList();
 	void ClearRecList();

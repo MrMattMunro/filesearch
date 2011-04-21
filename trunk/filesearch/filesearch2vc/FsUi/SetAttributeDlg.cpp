@@ -70,6 +70,21 @@ BOOL CSetAttributeDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
+	CString strSoftSet, strSet1, strOk, strCancel;
+	
+	strSoftSet.LoadString(IDS_SOFT_SET);
+	strSet1.LoadString(IDS_SET_1);
+
+	strOk.LoadString(IDS_OK);
+	strCancel.LoadString(IDS_CANCEL);
+	
+	SetDlgItemText(IDC_STATIC_SOFT_SET, strSoftSet);
+	SetDlgItemText(IDC_STATIC_SET_1, strSet1);
+
+	SetDlgItemText(IDOK, strOk);
+	SetDlgItemText(IDCANCEL, strCancel);
+	//////////////////////////////////////////////////////////////////////////
+
 	char szPath[MAX_PATH] = {0};
 	
 	if(m_setAgent.GetSoftPath(IE_NAME,szPath) == 0 )

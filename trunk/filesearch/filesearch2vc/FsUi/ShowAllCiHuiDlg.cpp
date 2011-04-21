@@ -49,6 +49,15 @@ BOOL CShowAllCiHuiDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
+	CString strNewWords, strClose;
+	
+	strNewWords.LoadString(IDS_NEW_WORDS);
+	strClose.LoadString(IDS_CLOSE);
+	
+	SetDlgItemText(IDC_STATIC_NEW_WORDS, strNewWords);
+	SetDlgItemText(IDCANCEL, strClose);
+
+	//////////////////////////////////////////////////////////////////
 
 	ReadAllCiHui();
 
