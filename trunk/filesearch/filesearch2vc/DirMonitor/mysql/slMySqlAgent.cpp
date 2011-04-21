@@ -146,6 +146,8 @@ bool slMySqlAgent::AddRec(File_Action_Log FileLog)
 			break;
 		}
 
+		log.Print(LL_DEBUG_INFO,"insert new record!path=%s, operflg=%s\r\n",FileLog.szSrcName,GetOperFlag(FileLog).c_str());
+
 	} while (0);
 
 	return bRet;

@@ -101,7 +101,7 @@ void slXmlAgent::LoadXML()
 		memcpy(FilterItem.szSearchPath, strSearchPath.GetBuffer(0), strSearchPath.GetLength());
 		memcpy(FilterItem.szSearchType, strTypes.GetBuffer(0), strTypes.GetLength());
 		memcpy(&m_pxmlfilter[i], &FilterItem, sizeof(XmlFilter));
-		log.Print(LL_DEBUG_INFO,"XmlItem(%d),SearchName=%s,SearchPath=%s,,SearchType=%s\r\n",
+		log.Print(LL_DEBUG_INFO,"XmlItem(%d):SearchName=%s,SearchPath=%s,SearchType=%s\r\n",
 			i+1,FilterItem.szSearceName,FilterItem.szSearchPath,FilterItem.szSearchType);
 	}
 

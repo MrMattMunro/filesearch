@@ -35,10 +35,9 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 				GetSystemDirectory(szProcName, MAX_PATH);
 				sprintf(szLogPath,"%s\\slfile.log", szProcName);
 						
-				log.SetFile(szLogPath);
+				log.SetFile(szLogPath,true);
 				log.SetLevel(100);
 				log.SetMode(Log::ToFile );	
-
 			}
 			break;
 		case DLL_PROCESS_DETACH:
