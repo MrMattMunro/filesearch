@@ -32,7 +32,7 @@ public:
 	void OnEventNotify();
 	BOOL CreateTaskPanel();
 
-	void AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, LPCTSTR lpszDesp);
+	void AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption,std::vector<string> DespList);
 	void AddToolboxGroup(UINT nID, LPCTSTR lpszCaption, int nIconIndex);
 
 	void ClearGroupsItems(); 

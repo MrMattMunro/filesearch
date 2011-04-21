@@ -44,6 +44,7 @@ protected:
 	afx_msg void OnButtonCheckExistcihui();
 	afx_msg void OnButtonBrowseCihui();
 	afx_msg void OnCheckOvercihui();
+	virtual BOOL OnInitDialog();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

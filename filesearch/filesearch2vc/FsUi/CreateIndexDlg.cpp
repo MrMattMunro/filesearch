@@ -59,7 +59,18 @@ BOOL CCreateIndexDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
-	
+	CString strSearchName, strObjectType, strOk, strCancel;
+
+	strSearchName.LoadString(IDS_SEARCH_PATH);
+	strObjectType.LoadString(IDS_OBJECT_TYPE);
+	strOk.LoadString(IDS_OK);
+	strCancel.LoadString(IDS_CANCEL);
+
+	SetDlgItemText(IDC_STATIC_SEARCH_DIR, strSearchName);
+	SetDlgItemText(IDC_STATIC_OBJECT_TYPE, strObjectType);
+	SetDlgItemText(IDOK, strOk);
+	SetDlgItemText(IDCANCEL, strCancel);
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }

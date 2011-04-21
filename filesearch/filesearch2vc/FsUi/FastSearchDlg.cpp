@@ -116,10 +116,15 @@ BOOL CFastSearchDlg::OnInitDialog()
 	AddToolboxGroup(4, "pdf", IDI_ICON_PDF);
 	AddToolboxGroup(5, "txt", IDI_ICON_TXT);
 
-	AddLinkItem(1, 1,1,"test11", "desp11");
-	AddLinkItem(1, 2,1,"test12", "desp12");
-	AddLinkItem(2, 1,1,"test2", "desp2");
-	AddLinkItem(3, 1,1,"test3", "desp3");
+	std::vector<string> desp;
+	std::string str1 = "desp1";
+	std::string str2 = "desp2";
+	desp.push_back(str1);
+	desp.push_back(str2);
+	AddLinkItem(1, 1,1,"test11", desp);
+	AddLinkItem(1, 2,1,"test12", desp);
+	AddLinkItem(2, 1,1,"test2", desp);
+	AddLinkItem(3, 1,1,"test3", desp);
 
 	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_WORD, IDI_ICON_WORD);
 	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_EXCEL, IDI_ICON_EXCEL);
@@ -199,13 +204,13 @@ void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
 		int nCount = m_agent.m_RecList.size();
 		for (int i = 0; i < nCount; i++)
 		{
-			SearchRectord sr;
-			memcpy(&sr, &m_agent.m_RecList[i],sizeof(SearchRectord));
+//			SearchRectord sr;
+//			memcpy(&sr, &m_agent.m_RecList[i],sizeof(SearchRectord));
 			
-			int nID = GetFileID(sr.szFileType);
+			int nID = GetFileID(m_agent.m_RecList[i].szFileType);
 			//////////////////////////////////////////////////////////////////////////
 			//ÏÔÊ¾µ½Ê÷ÖÐ
-			AddLinkItem(nID, i,1,sr.szFileName, sr.szDesp);
+			AddLinkItem(nID, i,1,m_agent.m_RecList[i].szFileName,m_agent.m_RecList[i].DespList);
 		}
 	}
 
@@ -269,7 +274,7 @@ void CFastSearchDlg::AddToolboxGroup(UINT nID, LPCTSTR lpszCaption, int nIconInd
 	m_listMap[nID].nItemSize = 0;
 }
 
-void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, LPCTSTR lpszDesp)
+void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<string> DespList)
 {
 
 	CXTPTaskPanelGroup* pFolder = m_listMap[nFolderID].pGroup;
@@ -278,7 +283,12 @@ void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, L
 
 	m_listMap[nFolderID].nItemSize++;
 	CXTPTaskPanelGroupItem* pPointer = pFolder->AddLinkItem(nItemID, 0);
-	pFolder->AddTextItem(lpszDesp);
+	int nSize = DespList.size();
+	for (int i = 0; i < nSize; i++)
+	{
+		pFolder->AddTextItem(DespList[i].c_str());
+	}
+
 	pPointer->SetCaption(lpszCaption);
 	pPointer->SetItemSelected(TRUE);
 	pPointer->AllowDrag(FALSE);

@@ -62,6 +62,28 @@ BOOL CLicenseDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
+	CString strLicInfo, strLic1, strNum,strEmail;
+	CString strStartTime,strEndTime, strReg;
+	
+	strLicInfo.LoadString(IDS_LICENSE_INFO);
+	strLic1.LoadString(IDS_LICENSE_1);
+	strNum.LoadString(IDS_NUM);
+	strEmail.LoadString(IDS_STATIC_EMAIL);
+	strStartTime.LoadString(IDS_BEGINTIME);
+	strEndTime.LoadString(IDS_ENDTIME);
+	strReg.LoadString(IDS_REG);
+	
+	SetDlgItemText(IDC_STATIC_LICENSE_INFO, strLicInfo);
+	SetDlgItemText(IDC_STATIC_LICENSE_1, strLic1);
+	SetDlgItemText(IDC_STATIC_NUM, strNum);
+	SetDlgItemText(IDC_STATIC_EMAIL, strEmail);
+	SetDlgItemText(IDC_STATIC_BEGINTIME, strStartTime);
+	SetDlgItemText(IDC_STATIC_ENDTIME, strEndTime);
+
+	SetDlgItemText(IDC_BUTTON_REG, strReg);
+
+	//////////////////////////////////////////////////////////////////////////
+
 	m_licAgent.Init();
 	UpdateDialog();
 

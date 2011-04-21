@@ -2,6 +2,32 @@
 // Microsoft Developer Studio generated include file.
 // Used by FsUi.rc
 //
+#define IDS_SEARCH_PATH                 1
+#define IDS_OBJECT_TYPE                 2
+#define IDS_OK                          3
+#define IDS_CANCEL                      4
+#define IDS_DELETE                      5
+#define IDS_NEW_WORDS                   6
+#define IDS_CLOSE                       7
+#define IDS_CUSTOM_CIHUI                8
+#define IDS_CIHUI_1                     9
+#define IDS_IMPORT_CIHUI                10
+#define IDS_CIHUI_2                     11
+#define IDS_CIHUI_3                     12
+#define IDS_CHECK_OVERCIHUI             13
+#define IDS_CHECK_EXISTCIHUI            14
+#define IDS_SOFT_SET                    15
+#define IDS_SET_1                       16
+#define IDS_LICENSE_INFO                17
+#define IDS_LICENSE_1                   18
+#define IDS_NUM                         19
+#define IDS_STATIC_EMAIL                20
+#define IDS_BEGINTIME                   21
+#define IDS_ENDTIME                     22
+#define IDS_BEGINTIME_CONTENT           23
+#define IDS_ENTTIME_CONTENT             24
+#define IDS_ERROR_INFO                  25
+#define IDS_REG                         26
 #define IDD_DIALOG_CREATE_INDEX         2000
 #define IDC_EDIT_SEARCH_PATH            2000
 #define IDC_BUTTON_BROWSE               2001
@@ -55,6 +81,21 @@
 #define IDC_STATIC_BEGINTIME_CONTENT    2027
 #define IDC_STATIC_ENTTIME_CONTENT      2028
 #define IDC_STATIC_ERROR_INFO           2029
+#define IDC_STATIC_SEARCH_DIR           2029
+#define IDC_STATIC_OBJECT_TYPE          2030
+#define IDC_STATIC_NEW_WORDS            2031
+#define IDC_STATIC_CUSTOM_CIHUI         2032
+#define IDC_STATIC_LINE                 2033
+#define IDC_STATIC_CIHUI_1              2034
+#define IDC_STATIC_CIHUI_2              2035
+#define IDC_STATIC_CIHUI_3              2036
+#define IDC_STATIC_IMPORT_CIHUI         2037
+#define IDC_STATIC_SOFT_SET             2038
+#define IDC_STATIC_SET_1                2039
+#define IDC_STATIC_LICENSE_INFO         2040
+#define IDC_STATIC_LICENSE_1            2041
+#define IDC_STATIC_NUM                  2042
+#define IDC_STATIC_EMAIL                2043
 
 // Next default values for new objects
 // 
@@ -62,7 +103,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        2013
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         2029
+#define _APS_NEXT_CONTROL_VALUE         2044
 #define _APS_NEXT_SYMED_VALUE           2000
 #endif
 #endif

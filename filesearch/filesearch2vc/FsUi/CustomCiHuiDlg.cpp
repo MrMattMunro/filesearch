@@ -130,3 +130,37 @@ void CCustomCiHuiDlg::OnCheckOvercihui()
 	// TODO: Add your control notification handler code here
 	SetModified();
 }
+
+BOOL CCustomCiHuiDlg::OnInitDialog() 
+{
+	CDialog::OnInitDialog();
+	
+	// TODO: Add extra initialization here
+	CString strCustomCihui, strCihui1, strCihui2,strCihui3;
+	CString strImportCihui,strOverCihui, strCheckAll,strOk, strCancel;
+	
+	strCustomCihui.LoadString(IDS_CUSTOM_CIHUI);
+	strCihui1.LoadString(IDS_CIHUI_1);
+	strCihui2.LoadString(IDS_CIHUI_2);
+	strCihui3.LoadString(IDS_CIHUI_3);
+	strImportCihui.LoadString(IDS_IMPORT_CIHUI);
+	strOverCihui.LoadString(IDS_CHECK_OVERCIHUI);
+	strCheckAll.LoadString(IDS_CHECK_EXISTCIHUI);
+
+	strOk.LoadString(IDS_OK);
+	strCancel.LoadString(IDS_CANCEL);
+	
+	SetDlgItemText(IDC_STATIC_CUSTOM_CIHUI, strCustomCihui);
+	SetDlgItemText(IDC_STATIC_CIHUI_1, strCihui1);
+	SetDlgItemText(IDC_STATIC_CIHUI_2, strCihui2);
+	SetDlgItemText(IDC_STATIC_CIHUI_3, strCihui3);
+	SetDlgItemText(IDC_STATIC_IMPORT_CIHUI, strImportCihui);
+	SetDlgItemText(IDC_CHECK_OVERCIHUI, strOverCihui);
+	SetDlgItemText(IDC_BUTTON_CHECK_EXISTCIHUI, strCheckAll);
+
+	SetDlgItemText(IDOK, strOk);
+	SetDlgItemText(IDCANCEL, strCancel);
+	
+	return TRUE;  // return TRUE unless you set the focus to a control
+	              // EXCEPTION: OCX Property Pages should return FALSE
+}

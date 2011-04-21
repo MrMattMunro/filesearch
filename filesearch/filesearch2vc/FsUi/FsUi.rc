@@ -66,8 +66,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2011,4,7,1
- PRODUCTVERSION 1,0,0,6
+ FILEVERSION 2011,4,19,1
+ PRODUCTVERSION 1,0,0,7
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -85,14 +85,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "slfile\0"
             VALUE "FileDescription", "FsUi DLL\0"
-            VALUE "FileVersion", "2011, 4, 7, 1\0"
+            VALUE "FileVersion", "2011, 4, 19, 1\0"
             VALUE "InternalName", "FsUi\0"
             VALUE "LegalCopyright", "版权所有 (C) 2011\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "FsUi.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "FsUi Dynamic Link Library\0"
-            VALUE "ProductVersion", "1, 0, 0, 6\0"
+            VALUE "ProductVersion", "1, 0, 0, 7\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -117,11 +117,11 @@ FONT 10, "宋体"
 BEGIN
     DEFPUSHBUTTON   "确定",IDOK,73,56,36,15
     PUSHBUTTON      "取消",IDCANCEL,157,56,36,15
-    LTEXT           "搜索目录:",IDC_STATIC,8,16,35,8
-    EDITTEXT        IDC_EDIT_SEARCH_PATH,47,14,162,13,ES_AUTOHSCROLL | 
+    LTEXT           "搜索目录:",IDC_STATIC_SEARCH_DIR,8,16,35,8
+    EDITTEXT        IDC_EDIT_SEARCH_PATH,47,14,170,13,ES_AUTOHSCROLL | 
                     ES_READONLY
-    PUSHBUTTON      "浏览...",IDC_BUTTON_BROWSE,215,14,36,14
-    LTEXT           "对象文档:",IDC_STATIC,8,37,35,8
+    PUSHBUTTON      "...",IDC_BUTTON_BROWSE,221,13,23,14
+    LTEXT           "对象文档:",IDC_STATIC_OBJECT_TYPE,8,37,35,8
     CONTROL         "excel",IDC_CHECK_EXCEL,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,47,36,31,10
     CONTROL         "word",IDC_CHECK_WORD,"Button",BS_AUTOCHECKBOX | 
@@ -143,23 +143,23 @@ FONT 10, "宋体"
 BEGIN
     DEFPUSHBUTTON   "确定",IDOK,67,159,40,14,NOT WS_VISIBLE
     PUSHBUTTON      "取消",IDCANCEL,153,160,40,14,NOT WS_VISIBLE
-    LTEXT           "选择自定义词汇的（支持txt、excel格式）文件:",IDC_STATIC,
-                    22,78,163,8
+    LTEXT           "选择自定义词汇的（支持txt、excel格式）文件:",
+                    IDC_STATIC_CIHUI_2,22,78,163,8
     EDITTEXT        IDC_EDIT_CIHUI_PATH,22,93,197,14,ES_AUTOHSCROLL | 
                     ES_READONLY
-    PUSHBUTTON      "浏览...",IDC_BUTTON_BROWSE_CIHUI,189,74,32,14
+    PUSHBUTTON      "...",IDC_BUTTON_BROWSE_CIHUI,194,74,25,14
     CONTROL         "覆盖已有自定义词汇",IDC_CHECK_OVERCIHUI,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,38,128,83,10
     PUSHBUTTON      "查看已有词汇",IDC_BUTTON_CHECK_EXISTCIHUI,164,25,56,16
-    LTEXT           "自定义词汇管理",IDC_STATIC,9,13,53,8
-    LTEXT           "......................................",IDC_STATIC,65,
-                    11,153,8
-    LTEXT           "自定义词汇用于保存搜索索引的专有名称。",IDC_STATIC,21,
-                    29,142,8
-    LTEXT           "导入自定义词汇",IDC_STATIC,10,59,53,8
+    LTEXT           "自定义词汇管理",IDC_STATIC_CUSTOM_CIHUI,9,13,53,8
+    LTEXT           "......................................",IDC_STATIC_LINE,
+                    65,11,153,8
+    LTEXT           "自定义词汇用于保存搜索索引的专有名称。",
+                    IDC_STATIC_CIHUI_1,21,29,142,8
+    LTEXT           "导入自定义词汇",IDC_STATIC_IMPORT_CIHUI,10,59,53,8
     LTEXT           "......................................",IDC_STATIC,67,
                     57,153,8
-    LTEXT           "存在已有词汇时:",IDC_STATIC,22,114,57,8
+    LTEXT           "存在已有词汇时:",IDC_STATIC_CIHUI_3,22,114,57,8
 END
 
 IDD_DIALOG_MODIFY_INDEX DIALOG DISCARDABLE  0, 0, 259, 78
@@ -169,23 +169,23 @@ FONT 10, "宋体"
 BEGIN
     DEFPUSHBUTTON   "确定",IDOK,53,53,39,15
     PUSHBUTTON      "取消",IDCANCEL,163,53,39,15
-    LTEXT           "搜索目录:",IDC_STATIC,8,12,35,8
-    LTEXT           "对象文档:",IDC_STATIC,8,32,35,8
-    LTEXT           "path",IDC_STATIC_SEARCHPATH,46,11,113,12
+    LTEXT           "搜索目录:",IDC_STATIC,8,16,35,8
+    LTEXT           "对象文档:",IDC_STATIC,8,36,35,8
+    LTEXT           "path",IDC_STATIC_SEARCHPATH,46,15,190,12
     CONTROL         "excel",IDC_CHECK_EXCEL,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,46,32,34,10
+                    WS_TABSTOP,46,36,34,10
     CONTROL         "word",IDC_CHECK_WORD,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,81,32,30,10
+                    WS_TABSTOP,81,36,30,10
     CONTROL         "pdf",IDC_CHECK_PDF,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,114,32,28,10
+                    WS_TABSTOP,114,36,28,10
     CONTROL         "ppt",IDC_CHECK_PPT,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,142,32,25,10
+                    WS_TABSTOP,142,36,25,10
     CONTROL         "html",IDC_CHECK_HTML,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,170,32,30,10
+                    WS_TABSTOP,170,36,30,10
     CONTROL         "txt",IDC_CHECK_TXT_MODIFY,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,202,32,25,10
+                    WS_TABSTOP,202,36,25,10
     CONTROL         "chm",IDC_CHECK_CHM,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,229,32,24,10
+                    WS_TABSTOP,229,36,24,10
     PUSHBUTTON      "删除",IDC_BUTTON_DEL_INDEX,108,53,39,15
 END
 
@@ -197,7 +197,7 @@ BEGIN
     PUSHBUTTON      "关闭",IDCANCEL,52,246,38,14
     LISTBOX         IDC_LIST_ALL_CIHUI,9,34,118,207,LBS_SORT | 
                     LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "关键词:",IDC_STATIC,7,14,26,8
+    LTEXT           "关键词:",IDC_STATIC_NEW_WORDS,7,14,26,8
     EDITTEXT        IDC_EDIT_KEY_WORD,35,12,90,14,ES_AUTOHSCROLL
 END
 
@@ -214,29 +214,29 @@ BEGIN
     LTEXT           "PPT:",IDC_STATIC,23,113,17,8
     LTEXT           "PDF:",IDC_STATIC,23,134,17,8
     LTEXT           "TXT:",IDC_STATIC,23,155,17,8
-    EDITTEXT        IDC_EDIT_IE_PATH,49,48,144,13,ES_AUTOHSCROLL | 
+    EDITTEXT        IDC_EDIT_IE_PATH,49,48,152,13,ES_AUTOHSCROLL | 
                     ES_READONLY
-    LTEXT           "您可以设置文档默认使用哪种软件进行查看。",IDC_STATIC,23,
-                    31,150,8
-    EDITTEXT        IDC_EDIT_WORD_PATH,49,70,144,13,ES_AUTOHSCROLL | 
+    LTEXT           "您可以设置文档默认使用哪种软件进行查看。",
+                    IDC_STATIC_SET_1,23,31,150,8
+    EDITTEXT        IDC_EDIT_WORD_PATH,49,70,152,13,ES_AUTOHSCROLL | 
                     ES_READONLY
-    EDITTEXT        IDC_EDIT_EXCEL_PATH,49,90,144,13,ES_AUTOHSCROLL | 
+    EDITTEXT        IDC_EDIT_EXCEL_PATH,49,90,152,13,ES_AUTOHSCROLL | 
                     ES_READONLY
-    EDITTEXT        IDC_EDIT_PPT_PATH,49,111,144,13,ES_AUTOHSCROLL | 
+    EDITTEXT        IDC_EDIT_PPT_PATH,49,111,152,13,ES_AUTOHSCROLL | 
                     ES_READONLY
-    EDITTEXT        IDC_EDIT_PDF_PATH,49,131,144,13,ES_AUTOHSCROLL | 
+    EDITTEXT        IDC_EDIT_PDF_PATH,49,131,152,13,ES_AUTOHSCROLL | 
                     ES_READONLY
-    EDITTEXT        IDC_EDIT_TXT_PATH,49,152,144,13,ES_AUTOHSCROLL | 
+    EDITTEXT        IDC_EDIT_TXT_PATH,49,152,152,13,ES_AUTOHSCROLL | 
                     ES_READONLY
-    PUSHBUTTON      "浏览...",IDC_BUTTON_BROWSER_IE,199,47,32,14
-    PUSHBUTTON      "浏览...",IDC_BUTTON_BROWSER_WORD,199,68,32,14
-    PUSHBUTTON      "浏览...",IDC_BUTTON_BROWSER_EXCEL,199,89,32,14
-    PUSHBUTTON      "浏览...",IDC_BUTTON_BROWSER_PPT,199,110,32,14
-    PUSHBUTTON      "浏览...",IDC_BUTTON_BROWSER_PDF,199,131,32,14
-    PUSHBUTTON      "浏览...",IDC_BUTTON_BROWSER_TXT,199,152,32,14
-    LTEXT           "文档软件关联设置",IDC_STATIC,8,14,60,8
-    LTEXT           "......................................",IDC_STATIC,73,
-                    13,155,8
+    PUSHBUTTON      "...",IDC_BUTTON_BROWSER_IE,205,47,22,14
+    PUSHBUTTON      "...",IDC_BUTTON_BROWSER_WORD,205,68,22,14
+    PUSHBUTTON      "...",IDC_BUTTON_BROWSER_EXCEL,205,89,22,14
+    PUSHBUTTON      "...",IDC_BUTTON_BROWSER_PPT,205,110,22,14
+    PUSHBUTTON      "...",IDC_BUTTON_BROWSER_PDF,205,131,22,14
+    PUSHBUTTON      "...",IDC_BUTTON_BROWSER_TXT,205,152,22,14
+    LTEXT           "文档软件关联设置",IDC_STATIC_SOFT_SET,8,14,60,8
+    LTEXT           "......................................",IDC_STATIC_LINE,
+                    73,13,155,8
 END
 
 IDD_DIALOG_FAST_SEARCH DIALOG DISCARDABLE  0, 0, 241, 350
@@ -254,13 +254,13 @@ STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "License"
 FONT 10, "宋体"
 BEGIN
-    LTEXT           "注册基本信息",IDC_STATIC,11,13,46,8
+    LTEXT           "注册基本信息",IDC_STATIC_LICENSE_INFO,11,13,46,8
     LTEXT           "......................................",IDC_STATIC,60,9,
                     155,8
-    LTEXT           "用户填写注册基本信息，包括订单号，电子邮箱",IDC_STATIC,
-                    22,28,157,8
-    LTEXT           "订单号:",IDC_STATIC,23,46,27,8
-    LTEXT           "电子邮箱:",IDC_STATIC,23,65,35,8
+    LTEXT           "用户填写注册基本信息，包括订单号，电子邮箱",
+                    IDC_STATIC_LICENSE_1,22,28,157,8
+    LTEXT           "订单号:",IDC_STATIC_NUM,23,46,27,8
+    LTEXT           "电子邮箱:",IDC_STATIC_EMAIL,23,65,35,8
     EDITTEXT        IDC_EDIT_NUM,60,43,122,13,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDIT_EMAIL,60,64,122,13,ES_AUTOHSCROLL
     LTEXT           "到期时间:",IDC_STATIC_ENDTIME,23,111,35,8
@@ -312,6 +312,46 @@ IDI_ICON_EXCEL          ICON    DISCARDABLE     "res\\excel.ico"
 IDI_ICON_PPT            ICON    DISCARDABLE     "res\\ppt.ico"
 IDI_ICON_PDF            ICON    DISCARDABLE     "res\\pdf.ico"
 IDI_ICON_TXT            ICON    DISCARDABLE     "res\\notepad.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SEARCH_PATH         "搜索目录:"
+    IDS_OBJECT_TYPE         "对象文档:"
+    IDS_OK                  "确定"
+    IDS_CANCEL              "取消"
+    IDS_DELETE              "删除"
+    IDS_NEW_WORDS           "关键词:"
+    IDS_CLOSE               "关闭"
+    IDS_CUSTOM_CIHUI        "自定义词汇管理"
+    IDS_CIHUI_1             "自定义词汇用于保存搜索索引的专有名称。"
+    IDS_IMPORT_CIHUI        "导入自定义词汇"
+    IDS_CIHUI_2             "选择自定义词汇的（支持txt、excel格式）文件:"
+    IDS_CIHUI_3             "存在已有词汇时:"
+    IDS_CHECK_OVERCIHUI     "覆盖已有自定义词汇"
+    IDS_CHECK_EXISTCIHUI    "查看已有词汇"
+    IDS_SOFT_SET            "文档软件关联设置"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SET_1               "您可以设置文档默认使用哪种软件进行查看。"
+    IDS_LICENSE_INFO        "注册基本信息"
+    IDS_LICENSE_1           "用户填写注册基本信息，包括订单号，电子邮箱"
+    IDS_NUM                 "订单号:"
+    IDS_STATIC_EMAIL        "电子邮箱:"
+    IDS_BEGINTIME           "注册时间:"
+    IDS_ENDTIME             "到期时间:"
+    IDS_BEGINTIME_CONTENT   "starttime"
+    IDS_ENTTIME_CONTENT     "endtime"
+    IDS_ERROR_INFO          "errorinfo"
+    IDS_REG                 "注册"
+END
+
 #endif    // Chinese (P.R.C.) resources
 /////////////////////////////////////////////////////////////////////////////
 

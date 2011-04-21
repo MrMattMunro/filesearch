@@ -3,14 +3,14 @@
 
 #pragma pack(push, 1)
 
-
 typedef struct _SearchRectord
 {
 	char szFileType[20];
 	char szFileName[MAX_PATH];
 	char szFilePath[MAX_PATH];
-	char szDesp[1000];
 	char szContent[1000];
+	std::vector<std::string> DespList;
+//	char szDesp[1000];
 }SearchRectord, *pSearchRectord;
 
 typedef struct _PathIndex
@@ -26,7 +26,6 @@ typedef struct _LicenseInfo
 	char szStartDate[32];
 	char szEndDate[32];
 }LicenseInfo,*LPLicenseInfo;
-
 
 typedef struct _FastItem
 {
