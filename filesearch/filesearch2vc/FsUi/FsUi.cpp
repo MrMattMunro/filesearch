@@ -175,7 +175,21 @@ DWORD __stdcall FsSetSheet()
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
 	OutputDebugString("===========Enter in FsSetSheet!");
-	CXTPPropertySheet ps(_T("œµÕ≥…Ë÷√"));
+	CString strSysSet;
+	LANGUAGE lag = lag_Japanese;
+	switch(lag)
+	{
+	case lag_chinese:
+		strSysSet.LoadString(IDS_SHEET_SYS_SET);
+		break;
+	case lag_Japanese:
+		strSysSet.LoadString(IDS_SHEET_SYS_SET_JP);
+		break;
+	case lag_engish:
+		break;
+	}
+	
+	CXTPPropertySheet ps(strSysSet);
 	
 	CPropertyPageTaskPanelNavigator* pList = new CPropertyPageTaskPanelNavigator();
 	
