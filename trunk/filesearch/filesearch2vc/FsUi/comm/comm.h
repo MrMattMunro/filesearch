@@ -1,6 +1,12 @@
 #if !defined(AFX_COMM__INCLUDED_)
 #define AFX_COMM__INCLUDED_
 
+typedef enum{
+	lag_chinese = 0,
+	lag_Japanese,
+	lag_engish
+}LANGUAGE;
+
 #pragma pack(push, 1)
 
 typedef struct _SearchRectord

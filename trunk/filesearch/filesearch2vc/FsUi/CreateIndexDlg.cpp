@@ -60,11 +60,25 @@ BOOL CCreateIndexDlg::OnInitDialog()
 	
 	// TODO: Add extra initialization here
 	CString strSearchName, strObjectType, strOk, strCancel;
-
-	strSearchName.LoadString(IDS_SEARCH_PATH);
-	strObjectType.LoadString(IDS_OBJECT_TYPE);
-	strOk.LoadString(IDS_OK);
-	strCancel.LoadString(IDS_CANCEL);
+	
+	LANGUAGE lag = lag_Japanese;
+	switch(lag)
+	{
+	case lag_chinese:
+		strSearchName.LoadString(IDS_SEARCH_PATH);
+		strObjectType.LoadString(IDS_OBJECT_TYPE);
+		strOk.LoadString(IDS_OK);
+		strCancel.LoadString(IDS_CANCEL);
+		break;
+	case lag_Japanese:
+		strSearchName.LoadString(IDS_SEARCH_PATH_JP);
+		strObjectType.LoadString(IDS_OBJECT_TYPE_JP);
+		strOk.LoadString(IDS_OK_JP);
+		strCancel.LoadString(IDS_CANCEL_JP);
+		break;
+	case lag_engish:
+		break;
+	}
 
 	SetDlgItemText(IDC_STATIC_SEARCH_DIR, strSearchName);
 	SetDlgItemText(IDC_STATIC_OBJECT_TYPE, strObjectType);
@@ -145,9 +159,30 @@ void CCreateIndexDlg::OnOK()
 	char szPath[MAX_PATH];
 	GetDlgItemText(IDC_EDIT_SEARCH_PATH,szPath, MAX_PATH );
 
+	CString strNewIndex, strSelectPath, strSelectObject, strIndexExists;
+	LANGUAGE lag = lag_Japanese;
+	switch(lag)
+	{
+	case lag_chinese:
+		strNewIndex.LoadString(IDS_NEW_INDEX);
+		strSelectPath.LoadString(IDS_SELECT_PATH);
+		strSelectObject.LoadString(IDS_SELECT_OBJECT);
+		strIndexExists.LoadString(IDS_PATH_EXISTS);
+		break;
+	case lag_Japanese:
+		strNewIndex.LoadString(IDS_NEW_INDEX_JP);
+		strSelectPath.LoadString(IDS_SELECT_PATH_JP);
+		strSelectObject.LoadString(IDS_SELECT_OBJECT_JP);
+		strIndexExists.LoadString(IDS_PATH_EXISTS_JP);
+		break;
+	case lag_engish:
+		break;
+	}
+
+
 	if (strlen(szPath) == 0)
 	{
-		MessageBox("请选择搜索目录！","新建索引",MB_OK | MB_ICONWARNING);
+		MessageBox(strSelectPath,strNewIndex,MB_OK | MB_ICONWARNING);
 		return ;
 	}
 
@@ -167,7 +202,7 @@ void CCreateIndexDlg::OnOK()
 
 	if (strTypes.GetLength() == 0)
 	{
-		MessageBox("请选择对象文档！","新建索引",MB_OK | MB_ICONWARNING);
+		MessageBox(strSelectObject,strNewIndex,MB_OK | MB_ICONWARNING);
 		return ;
 	}
 	
@@ -180,7 +215,7 @@ void CCreateIndexDlg::OnOK()
 	sloCreateIndexAgent create;
 	if (!create.EventCreateIndex(szPath,(char*)szTypes.c_str()))
 	{
-		MessageBox("该目录索引已经存在，不能重复建立！","新建索引",MB_OK | MB_ICONWARNING);
+		MessageBox(strIndexExists,strNewIndex,MB_OK | MB_ICONWARNING);
 		SetDlgItemText(IDC_EDIT_SEARCH_PATH,"");
 		return ;
 	}

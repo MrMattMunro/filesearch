@@ -53,7 +53,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /dll /machine:I386
-# ADD LINK32 /nologo /subsystem:windows /dll /machine:I386 /out:"C:/WINDOWS/system32/FsUi.dll"
+# ADD LINK32 /nologo /subsystem:windows /dll /machine:I386 /out:"../publish/FsUi.dll"
 
 !ELSEIF  "$(CFG)" == "FsUi - Win32 Debug"
 

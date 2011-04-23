@@ -42,12 +42,35 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 
 	SetFont(pFont);
 	
+	CString strBasicSet, strNomal, strCihui,strLicMgr, strLicInfo;
+
+	LANGUAGE lag = lag_Japanese;
+	switch(lag)
+	{
+	case lag_chinese:		
+		strBasicSet.LoadString(IDS_BASIC_SET);
+		strNomal.LoadString(IDS_SET_NOMARL);
+		strCihui.LoadString(IDS_CUSTOM_CH);
+		strLicMgr.LoadString(IDS_LICENSE_MANAGE);
+		strLicInfo.LoadString(IDS_SET_LICENSE_INFO);
+		
+		break;
+	case lag_Japanese:
+		strBasicSet.LoadString(IDS_BASIC_SET_JP);
+		strNomal.LoadString(IDS_SET_NOMARL_JP);
+		strCihui.LoadString(IDS_CUSTOM_CH_JP);
+		strLicMgr.LoadString(IDS_LICENSE_MANAGE_JP);
+		strLicInfo.LoadString(IDS_SET_LICENSE_INFO_JP);
+		break;
+	case lag_engish:
+		break;
+	}	
 	CXTPTaskPanelGroup* pGroup = AddGroup(0);
-	pGroup->SetCaption(_T("基本设置"));
+	pGroup->SetCaption(strBasicSet);
 
 	int i = 0;
 	CXTPTaskPanelGroupItem* pItem = pGroup->AddLinkItem(0, i);
-	pItem->SetCaption(_T("常规"));
+	pItem->SetCaption(strNomal);
 
 	CXTPPropertyPage* pPage = m_pSheet->GetPage(0);
 	pItem->SetItemData((DWORD_PTR)pPage);
@@ -55,18 +78,18 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 
 	i = 1;
 	pItem = pGroup->AddLinkItem(1, i);
-	pItem->SetCaption(_T("词汇"));
+	pItem->SetCaption(strCihui);
 	
 	pPage = m_pSheet->GetPage(1);
 	pItem->SetItemData((DWORD_PTR)pPage);
 	pPage->m_dwData = (DWORD_PTR)pItem;
 
 	pGroup = AddGroup(1);
-	pGroup->SetCaption(_T("License管理"));
+	pGroup->SetCaption(strLicMgr);
 
 	i = 2;
 	pItem = pGroup->AddLinkItem(0, i);
-	pItem->SetCaption(_T("License信息"));
+	pItem->SetCaption(strLicInfo);
 	
 	pPage = m_pSheet->GetPage(2);
 	pItem->SetItemData((DWORD_PTR)pPage);

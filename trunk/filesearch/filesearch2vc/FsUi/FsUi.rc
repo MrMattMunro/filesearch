@@ -350,6 +350,80 @@ BEGIN
     IDS_ENTTIME_CONTENT     "endtime"
     IDS_ERROR_INFO          "errorinfo"
     IDS_REG                 "注册"
+    IDS_NEW_INDEX           "新建索引"
+    IDS_MODIFY_INDEX        "修改索引"
+    IDS_DEL_INDEX           "删除索引"
+    IDS_SELECT_PATH         "请选择搜索目录！"
+    IDS_SELECT_OBJECT       "请选择对象文档"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PATH_EXISTS         "该目录索引已经存在，不能重复建立！"
+    IDS_SELECT_FILE         "请选择词汇文件！"
+    IDS_MODIFY_INDEX_OK     "您确定要修改该索引吗？"
+    IDS_NO_DEALWITH         "您未做任何修改！"
+    IDS_DEL_INDEX_OK        "您确定要删除该索引吗？"
+    IDS_SHEET_SYS_SET       "系统设置"
+    IDS_BASIC_SET           "基本设置"
+    IDS_SET_NOMARL          "常规"
+    IDS_CUSTOM_CH           "词汇"
+    IDS_LICENSE_MANAGE      "License管理"
+    IDS_SET_LICENSE_INFO    "License信息"
+    IDS_SEARCH_PATH_JP      "検 索名前:"
+    IDS_OBJECT_TYPE_JP      "文書種類:"
+    IDS_OK_JP               "確定"
+    IDS_CANCEL_JP           "キャンセル"
+    IDS_DELETE_JP           "削除"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_NEW_WORDS_JP        "キーワード:"
+    IDS_CLOSE_JP            "閉じる"
+    IDS_CUSTOM_CIHUI_JP     "カスタマイズ辞書の"
+    IDS_CIHUI_1_JP          "自定义词汇用于保存搜索索引的专有名称。"
+    IDS_IMPORT_CIHUI_JP     "カスタマイズ辞書の作成"
+    IDS_CIHUI_2_JP          "語彙ファイル："
+    IDS_CIHUI_3_JP          "存在已有词汇时:"
+    IDS_CHECK_OVERCIHUI_JP  "もとの辞書をオーバーライドする"
+    IDS_CHECK_EXISTCIHUI_JP "インポートした辞書を表示する"
+    IDS_SOFT_SET_JP         "文档软件关联设置"
+    IDS_SET_1_JP            "您可以设置文档默认使用哪种软件进行查看。"
+    IDS_LICENSE_INFO_JP     "注册基本信息"
+    IDS_LICENSE_1_JP        "用户填写注册基本信息，包括订单号，电子邮箱"
+    IDS_NUM_JP              "订单号:"
+    IDS_STATIC_EMAIL_JP     "电子邮箱:"
+    IDS_BEGINTIME_JP        "注册时间:"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ENDTIME_JP          "到期时间:"
+    IDS_BEGINTIME_CONTENT_JP "starttime"
+    IDS_ENTTIME_CONTENT_JP  "endtime"
+    IDS_ERROR_INFO_JP       "errorinfo"
+    IDS_REG_JP              "注册"
+    IDS_NEW_INDEX_JP        "検索の新規"
+    IDS_MODIFY_INDEX_JP     "修改索引"
+    IDS_DEL_INDEX_JP        "删除索引"
+    IDS_SELECT_PATH_JP      "検索ディレクトリの選択:"
+    IDS_SELECT_OBJECT_JP    "请选择对象文档"
+    IDS_PATH_EXISTS_JP      "作成された検索と重複なので、修正してください"
+    IDS_SELECT_FILE_JP      "語彙ファイル："
+    IDS_MODIFY_INDEX_OK_JP  "您确定要修改该索引吗？"
+    IDS_NO_DEALWITH_JP      "您未做任何修改！"
+    IDS_DEL_INDEX_OK_JP     "您确定要删除该索引吗？"
+    IDS_SHEET_SYS_SET_JP    "設置"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BASIC_SET_JP        "基本设置"
+    IDS_SET_NOMARL_JP       "常规"
+    IDS_CUSTOM_CH_JP        "词汇"
+    IDS_LICENSE_MANAGE_JP   "License管理"
+    IDS_SET_LICENSE_INFO_JP "License信息"
 END
 
 #endif    // Chinese (P.R.C.) resources

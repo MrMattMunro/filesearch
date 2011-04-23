@@ -58,10 +58,27 @@ BOOL CCustomCiHuiDlg::OnApply()
 	{
 
 		UpdateData(TRUE);
+		CString strCustomCihui, strSelectFile;
+
+		LANGUAGE lag = lag_Japanese;
+		switch(lag)
+		{
+		case lag_chinese:
+			strCustomCihui.LoadString(IDS_CUSTOM_CIHUI);
+			strSelectFile.LoadString(IDS_SELECT_FILE);
+			break;
+		case lag_Japanese:
+			strCustomCihui.LoadString(IDS_CUSTOM_CIHUI_JP);
+			strSelectFile.LoadString(IDS_SELECT_FILE_JP);
+			break;
+		case lag_engish:
+			break;
+		}
+
 		
 		if (!m_strBrowsePath.GetLength())
 		{
-			MessageBox("请选择词汇文件！","自定义词汇",MB_OK | MB_ICONWARNING);
+			MessageBox(strSelectFile,strCustomCihui,MB_OK | MB_ICONWARNING);
 			return TRUE;
 		}
 		
@@ -138,17 +155,37 @@ BOOL CCustomCiHuiDlg::OnInitDialog()
 	// TODO: Add extra initialization here
 	CString strCustomCihui, strCihui1, strCihui2,strCihui3;
 	CString strImportCihui,strOverCihui, strCheckAll,strOk, strCancel;
-	
-	strCustomCihui.LoadString(IDS_CUSTOM_CIHUI);
-	strCihui1.LoadString(IDS_CIHUI_1);
-	strCihui2.LoadString(IDS_CIHUI_2);
-	strCihui3.LoadString(IDS_CIHUI_3);
-	strImportCihui.LoadString(IDS_IMPORT_CIHUI);
-	strOverCihui.LoadString(IDS_CHECK_OVERCIHUI);
-	strCheckAll.LoadString(IDS_CHECK_EXISTCIHUI);
+	LANGUAGE lag = lag_Japanese;
+	switch(lag)
+	{
+	case lag_chinese:
+		strCustomCihui.LoadString(IDS_CUSTOM_CIHUI);
+		strCihui1.LoadString(IDS_CIHUI_1);
+		strCihui2.LoadString(IDS_CIHUI_2);
+		strCihui3.LoadString(IDS_CIHUI_3);
+		strImportCihui.LoadString(IDS_IMPORT_CIHUI);
+		strOverCihui.LoadString(IDS_CHECK_OVERCIHUI);
+		strCheckAll.LoadString(IDS_CHECK_EXISTCIHUI);
+		
+		strOk.LoadString(IDS_OK);
+		strCancel.LoadString(IDS_CANCEL);
+		break;
+	case lag_Japanese:
+		strCustomCihui.LoadString(IDS_CUSTOM_CIHUI_JP);
+		strCihui1.LoadString(IDS_CIHUI_1_JP);
+		strCihui2.LoadString(IDS_CIHUI_2_JP);
+		strCihui3.LoadString(IDS_CIHUI_3_JP);
+		strImportCihui.LoadString(IDS_IMPORT_CIHUI_JP);
+		strOverCihui.LoadString(IDS_CHECK_OVERCIHUI_JP);
+		strCheckAll.LoadString(IDS_CHECK_EXISTCIHUI_JP);
+		
+		strOk.LoadString(IDS_OK);
+		strCancel.LoadString(IDS_CANCEL);
+		break;
+	case lag_engish:
+		break;
+		}
 
-	strOk.LoadString(IDS_OK);
-	strCancel.LoadString(IDS_CANCEL);
 	
 	SetDlgItemText(IDC_STATIC_CUSTOM_CIHUI, strCustomCihui);
 	SetDlgItemText(IDC_STATIC_CIHUI_1, strCihui1);

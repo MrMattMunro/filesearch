@@ -50,9 +50,22 @@ BOOL CShowAllCiHuiDlg::OnInitDialog()
 	
 	// TODO: Add extra initialization here
 	CString strNewWords, strClose;
+	LANGUAGE lag = lag_Japanese;
+	switch(lag)
+	{
+	case lag_chinese:		
+		strNewWords.LoadString(IDS_NEW_WORDS);
+		strClose.LoadString(IDS_CLOSE);
 	
-	strNewWords.LoadString(IDS_NEW_WORDS);
-	strClose.LoadString(IDS_CLOSE);
+	break;
+	case lag_Japanese:
+		strNewWords.LoadString(IDS_NEW_WORDS_JP);
+		strClose.LoadString(IDS_CLOSE_JP);
+		
+		break;
+	case lag_engish:
+		break;
+	}			
 	
 	SetDlgItemText(IDC_STATIC_NEW_WORDS, strNewWords);
 	SetDlgItemText(IDCANCEL, strClose);

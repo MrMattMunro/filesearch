@@ -64,14 +64,31 @@ BOOL CLicenseDlg::OnInitDialog()
 	// TODO: Add extra initialization here
 	CString strLicInfo, strLic1, strNum,strEmail;
 	CString strStartTime,strEndTime, strReg;
-	
-	strLicInfo.LoadString(IDS_LICENSE_INFO);
-	strLic1.LoadString(IDS_LICENSE_1);
-	strNum.LoadString(IDS_NUM);
-	strEmail.LoadString(IDS_STATIC_EMAIL);
-	strStartTime.LoadString(IDS_BEGINTIME);
-	strEndTime.LoadString(IDS_ENDTIME);
-	strReg.LoadString(IDS_REG);
+	LANGUAGE lag = lag_Japanese;
+	switch(lag)
+	{
+	case lag_chinese:		
+		strLicInfo.LoadString(IDS_LICENSE_INFO);
+		strLic1.LoadString(IDS_LICENSE_1);
+		strNum.LoadString(IDS_NUM);
+		strEmail.LoadString(IDS_STATIC_EMAIL);
+		strStartTime.LoadString(IDS_BEGINTIME);
+		strEndTime.LoadString(IDS_ENDTIME);
+		strReg.LoadString(IDS_REG);
+		break;
+	case lag_Japanese:
+		strLicInfo.LoadString(IDS_LICENSE_INFO_JP);
+		strLic1.LoadString(IDS_LICENSE_1_JP);
+		strNum.LoadString(IDS_NUM_JP);
+		strEmail.LoadString(IDS_STATIC_EMAIL_JP);
+		strStartTime.LoadString(IDS_BEGINTIME_JP);
+		strEndTime.LoadString(IDS_ENDTIME_JP);
+		strReg.LoadString(IDS_REG_JP);
+		break;
+	case lag_engish:
+		break;
+	}
+
 	
 	SetDlgItemText(IDC_STATIC_LICENSE_INFO, strLicInfo);
 	SetDlgItemText(IDC_STATIC_LICENSE_1, strLic1);

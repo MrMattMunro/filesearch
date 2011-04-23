@@ -71,13 +71,29 @@ BOOL CSetAttributeDlg::OnInitDialog()
 	
 	// TODO: Add extra initialization here
 	CString strSoftSet, strSet1, strOk, strCancel;
-	
-	strSoftSet.LoadString(IDS_SOFT_SET);
-	strSet1.LoadString(IDS_SET_1);
+	LANGUAGE lag = lag_Japanese;
+	switch(lag)
+	{
+	case lag_chinese:		
+		strSoftSet.LoadString(IDS_SOFT_SET);
+		strSet1.LoadString(IDS_SET_1);
 
-	strOk.LoadString(IDS_OK);
-	strCancel.LoadString(IDS_CANCEL);
+		strOk.LoadString(IDS_OK);
+		strCancel.LoadString(IDS_CANCEL);
 	
+		break;
+	case lag_Japanese:
+		strSoftSet.LoadString(IDS_SOFT_SET_JP);
+		strSet1.LoadString(IDS_SET_1_JP);
+
+		strOk.LoadString(IDS_OK_JP);
+		strCancel.LoadString(IDS_CANCEL_JP);
+	
+		break;
+	case lag_engish:
+		break;
+	}		
+
 	SetDlgItemText(IDC_STATIC_SOFT_SET, strSoftSet);
 	SetDlgItemText(IDC_STATIC_SET_1, strSet1);
 

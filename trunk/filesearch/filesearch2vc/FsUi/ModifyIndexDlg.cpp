@@ -60,7 +60,25 @@ void CModifyIndexDlg::OnOK()
 	// TODO: Add extra validation here
 	//更新T_SEACHER表中filetype字段及 是否已更新=0(待更新)
 	UpdateData(TRUE);
+	
+	CString strModifyIndex, strModifyIndexOk, strNoDealWith;
 
+	LANGUAGE lag = lag_Japanese;
+	switch(lag)
+	{
+	case lag_chinese:		
+		strModifyIndex.LoadString(IDS_MODIFY_INDEX);
+		strModifyIndexOk.LoadString(IDS_MODIFY_INDEX_OK);
+		strNoDealWith.LoadString(IDS_NO_DEALWITH);
+		break;
+	case lag_Japanese:
+		strModifyIndex.LoadString(IDS_MODIFY_INDEX_JP);
+		strModifyIndexOk.LoadString(IDS_MODIFY_INDEX_OK_JP);
+		strNoDealWith.LoadString(IDS_NO_DEALWITH_JP);
+		break;
+	case lag_engish:
+		break;
+	}
 	CString strTypes;
 	if (m_bWord)
 		strTypes += "word";
@@ -84,7 +102,7 @@ void CModifyIndexDlg::OnOK()
 	if (szTypes.compare(m_modifyAgent.m_szSearchType))
 	{
 		//修改索引type
-		int nRet = MessageBox("您确定要修改此索引吗？","修改索引",MB_YESNO | MB_ICONWARNING);
+		int nRet = MessageBox(strModifyIndexOk,strModifyIndex,MB_YESNO | MB_ICONWARNING);
 		if (nRet == 6)
 		{
 			m_modifyAgent.EventModifyIndex((char*)szTypes.c_str());
@@ -92,7 +110,7 @@ void CModifyIndexDlg::OnOK()
 		}
 	}else
 	{
-		MessageBox("您未做任何修改！","修改索引",MB_OK | MB_ICONWARNING);
+		MessageBox(strNoDealWith,strModifyIndex,MB_OK | MB_ICONWARNING);
 	}
 
 //	CDialog::OnOK();
@@ -108,7 +126,23 @@ void CModifyIndexDlg::OnCancel()
 void CModifyIndexDlg::OnButtonDelIndex() 
 {
 	// TODO: Add your control notification handler code here
-	int nRet = MessageBox("您确定要删除该索引吗？","删除索引",MB_YESNO | MB_ICONWARNING);
+	CString strDelIndex, strDelIndexOK;
+	LANGUAGE lag = lag_Japanese;
+	switch(lag)
+	{
+	case lag_chinese:		
+		strDelIndex.LoadString(IDS_DEL_INDEX);
+		strDelIndexOK.LoadString(IDS_DEL_INDEX_OK);
+		break;
+	case lag_Japanese:
+		strDelIndex.LoadString(IDS_DEL_INDEX_JP);
+		strDelIndexOK.LoadString(IDS_DEL_INDEX_OK_JP);
+		break;
+	case lag_engish:
+		break;
+	}
+
+	int nRet = MessageBox(strDelIndexOK,strDelIndex,MB_YESNO | MB_ICONWARNING);
 	if (nRet == 6)
 	{
 		m_modifyAgent.EventDelIndex();
@@ -128,12 +162,27 @@ BOOL CModifyIndexDlg::OnInitDialog()
 	
 	// TODO: Add extra initialization here
 	CString strSearchName, strObjectType, strOk, strCancel, strDel;
-	
-	strSearchName.LoadString(IDS_SEARCH_PATH);
-	strObjectType.LoadString(IDS_OBJECT_TYPE);
-	strOk.LoadString(IDS_OK);
-	strCancel.LoadString(IDS_CANCEL);
-	strDel.LoadString(IDS_DELETE);
+	LANGUAGE lag = lag_Japanese;
+	switch(lag)
+	{
+	case lag_chinese:		
+		strSearchName.LoadString(IDS_SEARCH_PATH);
+		strObjectType.LoadString(IDS_OBJECT_TYPE);
+		strOk.LoadString(IDS_OK);
+		strCancel.LoadString(IDS_CANCEL);
+		strDel.LoadString(IDS_DELETE);
+		break;
+	case lag_Japanese:
+		strSearchName.LoadString(IDS_SEARCH_PATH_JP);
+		strObjectType.LoadString(IDS_OBJECT_TYPE_JP);
+		strOk.LoadString(IDS_OK_JP);
+		strCancel.LoadString(IDS_CANCEL_JP);
+		strDel.LoadString(IDS_DELETE_JP);
+		break;
+	case lag_engish:
+		break;
+	}	
+
 	
 	SetDlgItemText(IDC_STATIC_SEARCH_DIR, strSearchName);
 	SetDlgItemText(IDC_STATIC_OBJECT_TYPE, strObjectType);
