@@ -28,8 +28,8 @@ LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2011,1,17,1
- PRODUCTVERSION 1,0,0,1
+ FILEVERSION 2011,4,21,1
+ PRODUCTVERSION 1,0,0,2
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -47,14 +47,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "rwei\0"
             VALUE "FileDescription", "FileSearch\0"
-            VALUE "FileVersion", "2011, 1, 17, 1\0"
+            VALUE "FileVersion", "2011, 4, 21, 1\0"
             VALUE "InternalName", "FileSearch\0"
             VALUE "LegalCopyright", "Copyright ? 2011\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "FileSearch.dll\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "rwei FileSearch\0"
-            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "ProductVersion", "1, 0, 0, 2\0"
             VALUE "SpecialBuild", "\0"
         END
     END

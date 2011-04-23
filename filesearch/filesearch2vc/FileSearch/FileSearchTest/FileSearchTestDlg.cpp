@@ -170,7 +170,7 @@ HCURSOR CFileSearchTestDlg::OnQueryDragIcon()
 	return (HCURSOR) m_hIcon;
 }
 
-typedef BOOL (__stdcall *fnNotifyService)();
+typedef int (__stdcall *fnNotifyService)();
 fnNotifyService g_fnNotifyService;
 
 void CFileSearchTestDlg::OnButton1() 
