@@ -12,8 +12,9 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 }
 
 #define   EventName  (L"Global\\FS_Index_Notify")
-BOOL __stdcall NotifyService()
+int __stdcall NotifyService()
 {
+	int nRet = 0;
 	HANDLE hevent = OpenEventW(EVENT_ALL_ACCESS,false,EventName);
 	
 	if ((hevent == NULL) || (hevent == INVALID_HANDLE_VALUE) )
@@ -27,9 +28,12 @@ BOOL __stdcall NotifyService()
 	if (bsucc)
 		OutputDebugStringA("SetEvent succ");
 	else
+	{
 		OutputDebugStringA("SetEvent failed");
+		nRet = -1;
+	}
 
 	CloseHandle(hevent);
 
-	return bsucc;
+	return nRet;
 }
