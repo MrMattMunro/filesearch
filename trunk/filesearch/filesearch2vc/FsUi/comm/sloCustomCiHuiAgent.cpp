@@ -65,6 +65,7 @@ BOOL sloCustomCiHuiAgent::GetProFilePath()
 		_splitpath( szFileExePath, drive, dir, fname, ext );
 		sprintf(m_szpropertiesPath,"%s%s%s",drive, dir,CUS_PRO_NAME);
 		sprintf(m_szcustomtxtPath,"%s%s%s",drive, dir,CUS_TXT_NAME);
+		return TRUE;
 	}
 	
 	return FALSE;

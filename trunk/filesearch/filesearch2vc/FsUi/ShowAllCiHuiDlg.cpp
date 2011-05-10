@@ -50,7 +50,7 @@ BOOL CShowAllCiHuiDlg::OnInitDialog()
 	
 	// TODO: Add extra initialization here
 	CString strNewWords, strClose;
-	LANGUAGE lag = lag_Japanese;
+	LANGUAGE lag = g_lag.m_lag;
 	switch(lag)
 	{
 	case lag_chinese:		
@@ -64,6 +64,8 @@ BOOL CShowAllCiHuiDlg::OnInitDialog()
 		
 		break;
 	case lag_engish:
+		strNewWords.LoadString(IDS_NEW_WORDS_EN);
+		strClose.LoadString(IDS_CLOSE_EN);
 		break;
 	}			
 	

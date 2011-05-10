@@ -66,8 +66,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2011,4,19,1
- PRODUCTVERSION 1,0,0,7
+ FILEVERSION 2011,5,1,1
+ PRODUCTVERSION 1,0,0,8
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -85,14 +85,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "slfile\0"
             VALUE "FileDescription", "FsUi DLL\0"
-            VALUE "FileVersion", "2011, 4, 19, 1\0"
+            VALUE "FileVersion", "2011, 5, 1, 1\0"
             VALUE "InternalName", "FsUi\0"
             VALUE "LegalCopyright", "版权所有 (C) 2011\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "FsUi.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "FsUi Dynamic Link Library\0"
-            VALUE "ProductVersion", "1, 0, 0, 7\0"
+            VALUE "ProductVersion", "1, 0, 0, 8\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -385,45 +385,95 @@ BEGIN
     IDS_CIHUI_1_JP          "自定义词汇用于保存搜索索引的专有名称。"
     IDS_IMPORT_CIHUI_JP     "カスタマイズ辞書の作成"
     IDS_CIHUI_2_JP          "語彙ファイル："
-    IDS_CIHUI_3_JP          "存在已有词汇时:"
+    IDS_CIHUI_3_JP          "入力した語彙が存在する時:"
     IDS_CHECK_OVERCIHUI_JP  "もとの辞書をオーバーライドする"
     IDS_CHECK_EXISTCIHUI_JP "インポートした辞書を表示する"
-    IDS_SOFT_SET_JP         "文档软件关联设置"
+    IDS_SOFT_SET_JP         "ドキュメントを開くソフトの設置"
     IDS_SET_1_JP            "您可以设置文档默认使用哪种软件进行查看。"
-    IDS_LICENSE_INFO_JP     "注册基本信息"
+    IDS_LICENSE_INFO_JP     "基本情報の登録"
     IDS_LICENSE_1_JP        "用户填写注册基本信息，包括订单号，电子邮箱"
-    IDS_NUM_JP              "订单号:"
-    IDS_STATIC_EMAIL_JP     "电子邮箱:"
-    IDS_BEGINTIME_JP        "注册时间:"
+    IDS_NUM_JP              "注文番号"
+    IDS_STATIC_EMAIL_JP     "メール"
+    IDS_BEGINTIME_JP        "登録期日"
 END
 
 STRINGTABLE DISCARDABLE 
 BEGIN
-    IDS_ENDTIME_JP          "到期时间:"
+    IDS_ENDTIME_JP          "使用期限"
     IDS_BEGINTIME_CONTENT_JP "starttime"
     IDS_ENTTIME_CONTENT_JP  "endtime"
     IDS_ERROR_INFO_JP       "errorinfo"
-    IDS_REG_JP              "注册"
+    IDS_REG_JP              "登録"
     IDS_NEW_INDEX_JP        "検索の新規"
-    IDS_MODIFY_INDEX_JP     "修改索引"
-    IDS_DEL_INDEX_JP        "删除索引"
+    IDS_MODIFY_INDEX_JP     "インデックスファイルを更新します"
+    IDS_DEL_INDEX_JP        "インデックスファイルを削除します"
     IDS_SELECT_PATH_JP      "検索ディレクトリの選択:"
-    IDS_SELECT_OBJECT_JP    "请选择对象文档"
+    IDS_SELECT_OBJECT_JP    "ドキュメントを選択してください"
     IDS_PATH_EXISTS_JP      "作成された検索と重複なので、修正してください"
     IDS_SELECT_FILE_JP      "語彙ファイル："
-    IDS_MODIFY_INDEX_OK_JP  "您确定要修改该索引吗？"
-    IDS_NO_DEALWITH_JP      "您未做任何修改！"
-    IDS_DEL_INDEX_OK_JP     "您确定要删除该索引吗？"
+    IDS_MODIFY_INDEX_OK_JP  "インデックスファイルの更新しますか？"
+    IDS_NO_DEALWITH_JP      "いかなる修正を行いません！"
+    IDS_DEL_INDEX_OK_JP     "インデックスファイルを削除しますか？"
     IDS_SHEET_SYS_SET_JP    "設置"
 END
 
 STRINGTABLE DISCARDABLE 
 BEGIN
-    IDS_BASIC_SET_JP        "基本设置"
-    IDS_SET_NOMARL_JP       "常规"
-    IDS_CUSTOM_CH_JP        "词汇"
-    IDS_LICENSE_MANAGE_JP   "License管理"
-    IDS_SET_LICENSE_INFO_JP "License信息"
+    IDS_BASIC_SET_JP        "基本設置"
+    IDS_SET_NOMARL_JP       "常規"
+    IDS_CUSTOM_CH_JP        "語彙"
+    IDS_LICENSE_MANAGE_JP   "ライセンスの管理"
+    IDS_SET_LICENSE_INFO_JP "ライセンスの情報"
+    IDS_SEARCH_PATH_EN      "Search Directory:"
+    IDS_OBJECT_TYPE_EN      "Doc Type:"
+    IDS_OK_EN               "OK"
+    IDS_CANCEL_EN           "Cancel"
+    IDS_DELETE_EN           "Delete"
+    IDS_NEW_WORDS_EN        "key Word"
+    IDS_CLOSE_EN            "Close"
+    IDS_CUSTOM_CIHUI_EN     "Custom Dictionary"
+    IDS_CIHUI_1_EN          "自定义词汇用于保存搜索索引的专有名称。"
+    IDS_IMPORT_CIHUI_EN     "Import custom Dictionary"
+    IDS_CIHUI_2_EN          "Dic File:"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CIHUI_3_EN          "Existed Dictionary:"
+    IDS_CHECK_OVERCIHUI_EN  "Over Dictionarys"
+    IDS_CHECK_EXISTCIHUI_EN "View existed words"
+    IDS_SOFT_SET_EN         "Set document softs"
+    IDS_SET_1_EN            "You can set open this document with softs"
+    IDS_LICENSE_INFO_EN     "Register infomation"
+    IDS_LICENSE_1_EN        "User file in regist info,and order number,email"
+    IDS_NUM_EN              "Order number:"
+    IDS_STATIC_EMAIL_EN     "Email:"
+    IDS_BEGINTIME_EN        "Regist Time:"
+    IDS_ENDTIME_EN          "Over Time:"
+    IDS_BEGINTIME_CONTENT_EN "starttime"
+    IDS_ENTTIME_CONTENT_EN  "endtime"
+    IDS_ERROR_INFO_EN       "errorinfo"
+    IDS_REG_EN              "Register"
+    IDS_NEW_INDEX_EN        "Create Index"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MODIFY_INDEX_EN     "Modify Index"
+    IDS_DEL_INDEX_EN        "Delete Index"
+    IDS_SELECT_PATH_EN      "Please choose search path！"
+    IDS_SELECT_OBJECT_EN    "Please choose document type"
+    IDS_PATH_EXISTS_EN      "Can't create existed index！"
+    IDS_SELECT_FILE_EN      "Please choose dictionary file！"
+    IDS_MODIFY_INDEX_OK_EN  "Do you sure to modify the index？"
+    IDS_NO_DEALWITH_EN      "Nothing changed！"
+    IDS_DEL_INDEX_OK_EN     "Do you sure to delete the index？"
+    IDS_SHEET_SYS_SET_EN    "System Set"
+    IDS_BASIC_SET_EN        "Basic Set"
+    IDS_SET_NOMARL_EN       "Normal"
+    IDS_CUSTOM_CH_EN        "Dictionary"
+    IDS_LICENSE_MANAGE_EN   "License Manage"
+    IDS_SET_LICENSE_INFO_EN "License Infomation"
 END
 
 #endif    // Chinese (P.R.C.) resources

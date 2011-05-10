@@ -64,7 +64,7 @@ BOOL CLicenseDlg::OnInitDialog()
 	// TODO: Add extra initialization here
 	CString strLicInfo, strLic1, strNum,strEmail;
 	CString strStartTime,strEndTime, strReg;
-	LANGUAGE lag = lag_Japanese;
+	LANGUAGE lag = g_lag.m_lag;
 	switch(lag)
 	{
 	case lag_chinese:		
@@ -86,6 +86,13 @@ BOOL CLicenseDlg::OnInitDialog()
 		strReg.LoadString(IDS_REG_JP);
 		break;
 	case lag_engish:
+		strLicInfo.LoadString(IDS_LICENSE_INFO_EN);
+		strLic1.LoadString(IDS_LICENSE_1_EN);
+		strNum.LoadString(IDS_NUM_EN);
+		strEmail.LoadString(IDS_STATIC_EMAIL_EN);
+		strStartTime.LoadString(IDS_BEGINTIME_EN);
+		strEndTime.LoadString(IDS_ENDTIME_EN);
+		strReg.LoadString(IDS_REG_EN);
 		break;
 	}
 

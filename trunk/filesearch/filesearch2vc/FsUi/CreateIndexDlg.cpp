@@ -61,7 +61,7 @@ BOOL CCreateIndexDlg::OnInitDialog()
 	// TODO: Add extra initialization here
 	CString strSearchName, strObjectType, strOk, strCancel;
 	
-	LANGUAGE lag = lag_Japanese;
+	LANGUAGE lag = g_lag.m_lag;
 	switch(lag)
 	{
 	case lag_chinese:
@@ -77,6 +77,10 @@ BOOL CCreateIndexDlg::OnInitDialog()
 		strCancel.LoadString(IDS_CANCEL_JP);
 		break;
 	case lag_engish:
+		strSearchName.LoadString(IDS_SEARCH_PATH_EN);
+		strObjectType.LoadString(IDS_OBJECT_TYPE_EN);
+		strOk.LoadString(IDS_OK_EN);
+		strCancel.LoadString(IDS_CANCEL_EN);
 		break;
 	}
 
@@ -160,7 +164,7 @@ void CCreateIndexDlg::OnOK()
 	GetDlgItemText(IDC_EDIT_SEARCH_PATH,szPath, MAX_PATH );
 
 	CString strNewIndex, strSelectPath, strSelectObject, strIndexExists;
-	LANGUAGE lag = lag_Japanese;
+	LANGUAGE lag = g_lag.m_lag;
 	switch(lag)
 	{
 	case lag_chinese:
@@ -176,9 +180,12 @@ void CCreateIndexDlg::OnOK()
 		strIndexExists.LoadString(IDS_PATH_EXISTS_JP);
 		break;
 	case lag_engish:
+		strNewIndex.LoadString(IDS_NEW_INDEX_EN);
+		strSelectPath.LoadString(IDS_SELECT_PATH_EN);
+		strSelectObject.LoadString(IDS_SELECT_OBJECT_EN);
+		strIndexExists.LoadString(IDS_PATH_EXISTS_EN);	
 		break;
 	}
-
 
 	if (strlen(szPath) == 0)
 	{

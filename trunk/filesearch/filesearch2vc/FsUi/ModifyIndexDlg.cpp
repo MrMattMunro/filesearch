@@ -63,7 +63,7 @@ void CModifyIndexDlg::OnOK()
 	
 	CString strModifyIndex, strModifyIndexOk, strNoDealWith;
 
-	LANGUAGE lag = lag_Japanese;
+	LANGUAGE lag = g_lag.m_lag;
 	switch(lag)
 	{
 	case lag_chinese:		
@@ -77,6 +77,9 @@ void CModifyIndexDlg::OnOK()
 		strNoDealWith.LoadString(IDS_NO_DEALWITH_JP);
 		break;
 	case lag_engish:
+		strModifyIndex.LoadString(IDS_MODIFY_INDEX_EN);
+		strModifyIndexOk.LoadString(IDS_MODIFY_INDEX_OK_EN);
+		strNoDealWith.LoadString(IDS_NO_DEALWITH_EN);
 		break;
 	}
 	CString strTypes;
@@ -127,7 +130,7 @@ void CModifyIndexDlg::OnButtonDelIndex()
 {
 	// TODO: Add your control notification handler code here
 	CString strDelIndex, strDelIndexOK;
-	LANGUAGE lag = lag_Japanese;
+	LANGUAGE lag = g_lag.m_lag;
 	switch(lag)
 	{
 	case lag_chinese:		
@@ -139,6 +142,8 @@ void CModifyIndexDlg::OnButtonDelIndex()
 		strDelIndexOK.LoadString(IDS_DEL_INDEX_OK_JP);
 		break;
 	case lag_engish:
+		strDelIndex.LoadString(IDS_DEL_INDEX_EN);
+		strDelIndexOK.LoadString(IDS_DEL_INDEX_OK_EN);
 		break;
 	}
 
@@ -162,7 +167,7 @@ BOOL CModifyIndexDlg::OnInitDialog()
 	
 	// TODO: Add extra initialization here
 	CString strSearchName, strObjectType, strOk, strCancel, strDel;
-	LANGUAGE lag = lag_Japanese;
+	LANGUAGE lag = g_lag.m_lag;
 	switch(lag)
 	{
 	case lag_chinese:		
@@ -180,6 +185,11 @@ BOOL CModifyIndexDlg::OnInitDialog()
 		strDel.LoadString(IDS_DELETE_JP);
 		break;
 	case lag_engish:
+		strSearchName.LoadString(IDS_SEARCH_PATH_EN);
+		strObjectType.LoadString(IDS_OBJECT_TYPE_EN);
+		strOk.LoadString(IDS_OK_EN);
+		strCancel.LoadString(IDS_CANCEL_EN);
+		strDel.LoadString(IDS_DELETE_EN);
 		break;
 	}	
 

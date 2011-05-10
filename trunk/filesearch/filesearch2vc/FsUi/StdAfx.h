@@ -59,6 +59,8 @@ using namespace std;
 #include "mysqlcomm.h"
 #include <XTToolkitPro.h>   // Codejock Software Components
 //////////////////////////////////////////////////////////////////////////
+#include "sloLanguageAgent.h"
+extern sloLanguageAgent g_lag;
 
 #define WM_PROGRESS_MSG   WM_USER + 100
 //{{AFX_INSERT_LOCATION}}
