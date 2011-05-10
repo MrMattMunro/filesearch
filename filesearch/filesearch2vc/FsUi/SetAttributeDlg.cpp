@@ -71,7 +71,7 @@ BOOL CSetAttributeDlg::OnInitDialog()
 	
 	// TODO: Add extra initialization here
 	CString strSoftSet, strSet1, strOk, strCancel;
-	LANGUAGE lag = lag_Japanese;
+	LANGUAGE lag = g_lag.m_lag;
 	switch(lag)
 	{
 	case lag_chinese:		
@@ -91,6 +91,11 @@ BOOL CSetAttributeDlg::OnInitDialog()
 	
 		break;
 	case lag_engish:
+		strSoftSet.LoadString(IDS_SOFT_SET_EN);
+		strSet1.LoadString(IDS_SET_1_EN);
+		
+		strOk.LoadString(IDS_OK_EN);
+		strCancel.LoadString(IDS_CANCEL_EN);
 		break;
 	}		
 

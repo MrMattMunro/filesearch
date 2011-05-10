@@ -44,7 +44,7 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 	
 	CString strBasicSet, strNomal, strCihui,strLicMgr, strLicInfo;
 
-	LANGUAGE lag = lag_Japanese;
+	LANGUAGE lag = g_lag.m_lag;
 	switch(lag)
 	{
 	case lag_chinese:		

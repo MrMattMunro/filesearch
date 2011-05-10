@@ -78,7 +78,7 @@ int sloModifyIndexAgent::GetSearchInfo()
 BOOL sloModifyIndexAgent::EventModifyIndex(char* pszFileTypes)
 {
 	BOOL bRet = TRUE;
-	std::string strQuerySQL = "update t_searcher set filetype='%s',hasupdate='0',lastmodify='%s' where id=%d";
+	std::string strQuerySQL = "update t_searcher set modifyfiletype='%s',hasupdate='0',lastmodify='%s' where id=%d";
 	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(),pszFileTypes, sloCommAgent::GetCurTime(),m_nIndexID);
 	if (FAILED(hr))
 		bRet = FALSE;

@@ -74,6 +74,7 @@ BOOL sloSetAttrAgent::GetProFilePath()
 		
 		_splitpath( szFileExePath, drive, dir, fname, ext );
 		sprintf(m_szpropertiesPath,"%s%s%s",drive, dir,FILEOPENER_PRO_NAME);
+		return TRUE;
 	}
 	
 	return FALSE;

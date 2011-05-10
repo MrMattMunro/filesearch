@@ -67,12 +67,15 @@ CFsUiApp::CFsUiApp()
 // The one and only CFsUiApp object
 
 CFsUiApp theApp;
+sloLanguageAgent g_lag;
 
 BOOL CFsUiApp::InitInstance() 
 {
 	// TODO: Add your specialized code here and/or call the base class
 //	SetDialogBkColor(RGB(243,243,243),RGB(0,0,0));
 	SetDialogBkColor(RGB(230,235,235),RGB(0,0,0));
+
+	g_lag.GetLanguage();
 
 	return CWinApp::InitInstance();
 }
@@ -176,7 +179,7 @@ DWORD __stdcall FsSetSheet()
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
 	OutputDebugString("===========Enter in FsSetSheet!");
 	CString strSysSet;
-	LANGUAGE lag = lag_Japanese;
+	LANGUAGE lag = g_lag.m_lag;
 	switch(lag)
 	{
 	case lag_chinese:
@@ -186,6 +189,7 @@ DWORD __stdcall FsSetSheet()
 		strSysSet.LoadString(IDS_SHEET_SYS_SET_JP);
 		break;
 	case lag_engish:
+		strSysSet.LoadString(IDS_SHEET_SYS_SET_EN);
 		break;
 	}
 	
