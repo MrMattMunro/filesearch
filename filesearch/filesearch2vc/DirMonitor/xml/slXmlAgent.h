@@ -17,13 +17,16 @@ typedef struct _XmlFilter
 	char szSearchType[MAX_PATH*2];
 }XmlFilter,*pXmlFilter;
 
-class slXmlAgent  
+#include "mysqlcomm.h"
+class slXmlAgent  :public mysqlcomm
 {
 public:
 	slXmlAgent();
 	virtual ~slXmlAgent();
 
 	void LoadXML();
+
+	int LoadDB();
 
 	std::string GetXmlPath();
 
