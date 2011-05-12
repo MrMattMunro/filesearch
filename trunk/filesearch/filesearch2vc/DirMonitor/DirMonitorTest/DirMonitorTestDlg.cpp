@@ -127,8 +127,7 @@ BOOL CDirMonitorTestDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 	
 	// TODO: Add extra initialization here
-	g_hinstance = LoadLibrary("FileMonitor.dll");
-//	g_hinstance = LoadLibrary("LogDispatch.dll");
+	g_hinstance = LoadLibraryA("FileMonitor.dll");
 	DWORD dwerr = GetLastError();
 	if (!g_hinstance)
 	{

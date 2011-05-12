@@ -93,7 +93,8 @@ DWORD __stdcall Monitor_Start_Dir(char* pszDirPath, DWORD dwLen)
 	DWORD dwWatch = 0;
 	CString	m_strDirectoryToMonitor(pszDirPath);
 
-	g_xmlFilterAgent.LoadXML();
+//	g_xmlFilterAgent.LoadXML();
+	g_xmlFilterAgent.LoadDB();
 
 	DWORD dwChangeFilter = FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_LAST_WRITE;;
 	BOOL bWatchSubDir = TRUE;

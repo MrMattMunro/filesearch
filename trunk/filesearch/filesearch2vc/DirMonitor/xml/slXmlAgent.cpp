@@ -108,6 +108,64 @@ void slXmlAgent::LoadXML()
 	return;
 }
 
+int slXmlAgent::LoadDB()
+{
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return -1;
+	}
+
+	std::string strQuerySQL = "select * from t_searcher";
+	HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str() );
+	if (FAILED(hr))
+		return -2;
+	
+	int nCount = m_pMySqlDB->GetRowCount();	//记录条数
+	int nFieldCount = m_pMySqlDB->GetFieldCount();
+
+	if(nCount >= 1 && nFieldCount >= 1)
+	{
+		m_nCount = nCount;
+		m_pxmlfilter = new XmlFilter[nCount];
+		memset(m_pxmlfilter, NULL, sizeof(XmlFilter)*nCount);
+		for (int i = 0; i < nCount; i++)
+		{
+			bool bSucc = m_pMySqlDB->GetRow();
+			if(bSucc==false)
+				return -1;
+			
+			int nIDLen = 0;
+			char* pID = m_pMySqlDB->GetField("id",&nIDLen);
+
+			char szSearchName[MAX_PATH] = {0};
+			sprintf(szSearchName,"searcher%s",pID);
+
+			int nFileTypeLen = 0;
+			char* pFileType = m_pMySqlDB->GetField("filetype",&nFileTypeLen);
+			if (nFileTypeLen == 0)
+				continue ;	
+		
+			int nFilePathLen = 0;
+			char* pFilePath = m_pMySqlDB->GetField("path",&nFilePathLen);
+			if (nFilePathLen == 0)
+				continue;
+			
+			XmlFilter FilterItem;
+			memset(&FilterItem, NULL, sizeof(XmlFilter));
+			FilterItem.nIndex = i;
+			memcpy(FilterItem.szSearceName, szSearchName, strlen(szSearchName));
+			memcpy(FilterItem.szSearchPath, pFilePath, nFilePathLen);
+			memcpy(FilterItem.szSearchType, pFileType, nFileTypeLen);
+			memcpy(&m_pxmlfilter[i], &FilterItem, sizeof(XmlFilter));
+			log.Print(LL_DEBUG_INFO,"XmlItem(%d):SearchName=%s,SearchPath=%s,SearchType=%s\r\n",
+				i+1,FilterItem.szSearceName,FilterItem.szSearchPath,FilterItem.szSearchType);			
+		}
+	}
+	
+	return 0;	
+}
+
 bool slXmlAgent::Filters(char* pszFullPath)
 {
 	OutputDebugStringA(pszFullPath);

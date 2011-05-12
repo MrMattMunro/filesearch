@@ -116,6 +116,10 @@ SOURCE=.\DirMonitor.rc
 # End Source File
 # Begin Source File
 
+SOURCE=.\mysql\mysqlcomm.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\mysql\MySQLDB.cpp
 # End Source File
 # Begin Source File
@@ -170,6 +174,10 @@ SOURCE=.\DirectoryChanges.h
 # Begin Source File
 
 SOURCE=.\DirMonitor.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\mysql\mysqlcomm.h
 # End Source File
 # Begin Source File
 
