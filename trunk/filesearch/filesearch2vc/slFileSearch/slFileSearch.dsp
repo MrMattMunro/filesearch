@@ -47,7 +47,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /Yu"stdafx.h" /FD /GZ /c
-# ADD CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /I "." /I "thread" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Yu"stdafx.h" /FD /GZ /c
+# ADD CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /I "." /I "thread" /I "..\log" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Yu"stdafx.h" /FD /GZ /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804 /d "_DEBUG"
 # ADD RSC /l 0x804 /d "_DEBUG"
@@ -59,8 +59,8 @@ LINK32=link.exe
 # ADD LINK32 /nologo /subsystem:windows /debug /machine:I386 /out:"../bin/slFileSearch.exe" /pdbtype:sept
 # Begin Custom Build - Performing registration
 OutDir=.\Debug
-TargetPath=\rw\slsearch\workdir\file monitor\bin\slFileSearch.exe
-InputPath=\rw\slsearch\workdir\file monitor\bin\slFileSearch.exe
+TargetPath=\rw\slsearch\workdir\filesearch\filesearch2vc\bin\slFileSearch.exe
+InputPath=\rw\slsearch\workdir\filesearch\filesearch2vc\bin\slFileSearch.exe
 SOURCE="$(InputPath)"
 
 "$(OutDir)\regsvr32.trg" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
@@ -126,7 +126,7 @@ SOURCE="$(InputPath)"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MT /W3 /GX /O1 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /Yu"stdafx.h" /FD /c
-# ADD CPP /nologo /MT /W3 /GX /O1 /I "." /I "thread" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_ATL_DLL" /Yu"stdafx.h" /FD /c
+# ADD CPP /nologo /MT /W3 /GX /O1 /I "." /I "thread" /I "..\log" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_ATL_DLL" /Yu"stdafx.h" /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804 /d "NDEBUG"
 # ADD RSC /l 0x804 /d "NDEBUG"
@@ -138,8 +138,8 @@ LINK32=link.exe
 # ADD LINK32 /nologo /subsystem:windows /machine:I386 /out:"../publish/slFileSearch.exe"
 # Begin Custom Build - Performing registration
 OutDir=.\ReleaseMinSize
-TargetPath=\rw\slsearch\workdir\file monitor\publish\slFileSearch.exe
-InputPath=\rw\slsearch\workdir\file monitor\publish\slFileSearch.exe
+TargetPath=\rw\slsearch\workdir\filesearch\filesearch2vc\publish\slFileSearch.exe
+InputPath=\rw\slsearch\workdir\filesearch\filesearch2vc\publish\slFileSearch.exe
 SOURCE="$(InputPath)"
 
 "$(OutDir)\regsvr32.trg" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
@@ -284,6 +284,29 @@ SOURCE="$(InputPath)"
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
+SOURCE=..\log\Log.cpp
+
+!IF  "$(CFG)" == "slFileSearch - Win32 Debug"
+
+# ADD CPP /YX
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Unicode Debug"
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Release MinSize"
+
+# ADD CPP /YX
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Release MinDependency"
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Unicode Release MinSize"
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Unicode Release MinDependency"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
 SOURCE=.\slDirMonitorAgent.cpp
 # End Source File
 # Begin Source File
@@ -320,6 +343,10 @@ SOURCE=.\thread\Thread.cpp
 # Begin Group "Header Files"
 
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
+# Begin Source File
+
+SOURCE=..\log\Log.h
+# End Source File
 # Begin Source File
 
 SOURCE=.\Resource.h
