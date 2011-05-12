@@ -50,8 +50,7 @@ int sltIndexNotifyThread::run()
 		switch (dwWaitResult)
 		{
 		case WAIT_OBJECT_0:
-			OutputDebugStringA("WAIT_OBJECT_0 ");
-
+			log.Print(LL_DEBUG_INFO,"Revice Event Global\\FS_Index_Notify!\r\n");
 			//ÖØÆô¼à¿ØÄ£¿é
 			m_dirmon.StopMonitor();
 
@@ -96,7 +95,7 @@ int sltIndexNotifyThread::CreateIndexEvent()
 		{
 			OutputDebugStringA("CreateEventW succ");
 		}else
-			OutputDebugStringA("CreateEventW failed");
+			log.Print(LL_DEBUG_INFO,"[Error]CreateEventW Global\\FS_Index_Notify failed!\r\n");
 
 	}
 

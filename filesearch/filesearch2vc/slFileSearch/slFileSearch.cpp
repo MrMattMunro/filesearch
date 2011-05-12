@@ -320,7 +320,7 @@ void CServiceModule::SetServiceStatus(DWORD dwState)
     m_status.dwCurrentState = dwState;
     ::SetServiceStatus(m_hServiceStatus, &m_status);
 }
-
+extern Log log;
 void CServiceModule::Run()
 {
     _Module.dwThreadID = GetCurrentThreadId();
@@ -346,6 +346,14 @@ void CServiceModule::Run()
     LogEvent(_T("Service started"));
     if (m_bService)
         SetServiceStatus(SERVICE_RUNNING);
+
+	char szSystemPath[MAX_PATH] = {0};
+	GetSystemDirectory(szSystemPath, MAX_PATH);
+	char szLogPath[MAX_PATH] = {0};
+	sprintf(szLogPath, "%s\\FileSearchService.log", szSystemPath);
+	log.SetFile(szLogPath, true);
+	log.SetMode(Log::ToFile);
+	log.SetLevel(LL_DEBUG_INFO);
 
 	_center.StartService();
 

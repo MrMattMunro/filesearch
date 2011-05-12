@@ -29,7 +29,7 @@ BOOL slDirMonitorAgent::LoadDll()
 	m_hinstance = LoadLibraryA(DIR_MONITOR_NAME);
 	if (!m_hinstance)
 	{
-		OutputDebugStringA("DirMonitor.dllÎÄ¼þÎ´ÕÒµ½!");
+		log.Print(LL_DEBUG_INFO,"[Error]Not find FileMonitor.dll\r\n");
 		return FALSE;
 	}
 	
@@ -38,6 +38,7 @@ BOOL slDirMonitorAgent::LoadDll()
 	m_fnMonitor_Start_Dir = (fnMonitor_Start_Dir)GetProcAddress(m_hinstance, "Monitor_Start_Dir");
 	if (!m_fnMonitor_Start_AllDisk || !m_fnMonitor_Stop || !m_fnMonitor_Start_Dir)
 	{
+		log.Print(LL_DEBUG_INFO,"[Error]Not find export fun!\r\n");
 		return FALSE;
 	}
 	
