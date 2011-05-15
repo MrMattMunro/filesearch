@@ -112,7 +112,7 @@ END
 
 IDD_DIALOG_CREATE_INDEX DIALOG DISCARDABLE  0, 0, 262, 79
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "新建文档索引"
+CAPTION "新建文档内容搜索"
 FONT 10, "宋体"
 BEGIN
     DEFPUSHBUTTON   "确定",IDOK,73,56,36,15
@@ -143,23 +143,23 @@ FONT 10, "宋体"
 BEGIN
     DEFPUSHBUTTON   "确定",IDOK,67,159,40,14,NOT WS_VISIBLE
     PUSHBUTTON      "取消",IDCANCEL,153,160,40,14,NOT WS_VISIBLE
-    LTEXT           "选择自定义词汇的（支持txt、excel格式）文件:",
-                    IDC_STATIC_CIHUI_2,22,78,163,8
-    EDITTEXT        IDC_EDIT_CIHUI_PATH,22,93,197,14,ES_AUTOHSCROLL | 
+    LTEXT           "选择词汇文件(txt文件，excel文件)",IDC_STATIC_CIHUI_2,24,
+                    79,123,8
+    EDITTEXT        IDC_EDIT_CIHUI_PATH,25,112,165,14,ES_AUTOHSCROLL | 
                     ES_READONLY
-    PUSHBUTTON      "...",IDC_BUTTON_BROWSE_CIHUI,194,74,25,14
-    CONTROL         "覆盖已有自定义词汇",IDC_CHECK_OVERCIHUI,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,38,128,83,10
+    PUSHBUTTON      "...",IDC_BUTTON_BROWSE_CIHUI,196,110,25,14
+    CONTROL         "覆盖",IDC_CHECK_OVERCIHUI,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,82,93,28,10
     PUSHBUTTON      "查看已有词汇",IDC_BUTTON_CHECK_EXISTCIHUI,164,25,56,16
     LTEXT           "自定义词汇管理",IDC_STATIC_CUSTOM_CIHUI,9,13,53,8
     LTEXT           "......................................",IDC_STATIC_LINE,
                     65,11,153,8
-    LTEXT           "自定义词汇用于保存搜索索引的专有名称。",
-                    IDC_STATIC_CIHUI_1,21,29,142,8
+    LTEXT           "用于保存用户使用的专有词汇。",IDC_STATIC_CIHUI_1,21,29,
+                    105,8
     LTEXT           "导入自定义词汇",IDC_STATIC_IMPORT_CIHUI,10,59,53,8
     LTEXT           "......................................",IDC_STATIC,67,
                     57,153,8
-    LTEXT           "存在已有词汇时:",IDC_STATIC_CIHUI_3,22,114,57,8
+    LTEXT           "存在已有词汇:",IDC_STATIC_CIHUI_3,25,95,50,8
 END
 
 IDD_DIALOG_MODIFY_INDEX DIALOG DISCARDABLE  0, 0, 259, 78
@@ -203,7 +203,7 @@ END
 
 IDD_DIALOG_SET_ATTR DIALOG DISCARDABLE  0, 0, 241, 195
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "指定打开文件的软件"
+CAPTION "系统设置"
 FONT 10, "宋体"
 BEGIN
     DEFPUSHBUTTON   "确定",IDOK,81,176,38,14,NOT WS_VISIBLE
@@ -251,7 +251,7 @@ END
 
 IDD_DIALOG_LICENSE DIALOG DISCARDABLE  0, 0, 249, 190
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "License"
+CAPTION "注册信息管理"
 FONT 10, "宋体"
 BEGIN
     LTEXT           "注册基本信息",IDC_STATIC_LICENSE_INFO,11,13,46,8

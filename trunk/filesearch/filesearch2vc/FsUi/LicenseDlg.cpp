@@ -62,49 +62,14 @@ BOOL CLicenseDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
-	CString strLicInfo, strLic1, strNum,strEmail;
-	CString strStartTime,strEndTime, strReg;
-	LANGUAGE lag = g_lag.m_lag;
-	switch(lag)
-	{
-	case lag_chinese:		
-		strLicInfo.LoadString(IDS_LICENSE_INFO);
-		strLic1.LoadString(IDS_LICENSE_1);
-		strNum.LoadString(IDS_NUM);
-		strEmail.LoadString(IDS_STATIC_EMAIL);
-		strStartTime.LoadString(IDS_BEGINTIME);
-		strEndTime.LoadString(IDS_ENDTIME);
-		strReg.LoadString(IDS_REG);
-		break;
-	case lag_Japanese:
-		strLicInfo.LoadString(IDS_LICENSE_INFO_JP);
-		strLic1.LoadString(IDS_LICENSE_1_JP);
-		strNum.LoadString(IDS_NUM_JP);
-		strEmail.LoadString(IDS_STATIC_EMAIL_JP);
-		strStartTime.LoadString(IDS_BEGINTIME_JP);
-		strEndTime.LoadString(IDS_ENDTIME_JP);
-		strReg.LoadString(IDS_REG_JP);
-		break;
-	case lag_engish:
-		strLicInfo.LoadString(IDS_LICENSE_INFO_EN);
-		strLic1.LoadString(IDS_LICENSE_1_EN);
-		strNum.LoadString(IDS_NUM_EN);
-		strEmail.LoadString(IDS_STATIC_EMAIL_EN);
-		strStartTime.LoadString(IDS_BEGINTIME_EN);
-		strEndTime.LoadString(IDS_ENDTIME_EN);
-		strReg.LoadString(IDS_REG_EN);
-		break;
-	}
+	SetDlgItemText(IDC_STATIC_LICENSE_INFO, g_lag.LoadString("label.license"));
+	SetDlgItemText(IDC_STATIC_LICENSE_1,  g_lag.LoadString("label.licensenote"));
+	SetDlgItemText(IDC_STATIC_NUM,  g_lag.LoadString("label.num"));
+	SetDlgItemText(IDC_STATIC_EMAIL,  g_lag.LoadString("label.email"));
+	SetDlgItemText(IDC_STATIC_BEGINTIME,  g_lag.LoadString("label.regtime"));
+	SetDlgItemText(IDC_STATIC_ENDTIME,  g_lag.LoadString("label.endtime"));
 
-	
-	SetDlgItemText(IDC_STATIC_LICENSE_INFO, strLicInfo);
-	SetDlgItemText(IDC_STATIC_LICENSE_1, strLic1);
-	SetDlgItemText(IDC_STATIC_NUM, strNum);
-	SetDlgItemText(IDC_STATIC_EMAIL, strEmail);
-	SetDlgItemText(IDC_STATIC_BEGINTIME, strStartTime);
-	SetDlgItemText(IDC_STATIC_ENDTIME, strEndTime);
-
-	SetDlgItemText(IDC_BUTTON_REG, strReg);
+	SetDlgItemText(IDC_BUTTON_REG,  g_lag.LoadString("button.register"));
 
 	//////////////////////////////////////////////////////////////////////////
 

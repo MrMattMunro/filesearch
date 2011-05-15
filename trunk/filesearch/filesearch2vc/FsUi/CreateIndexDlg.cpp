@@ -59,35 +59,10 @@ BOOL CCreateIndexDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
-	CString strSearchName, strObjectType, strOk, strCancel;
-	
-	LANGUAGE lag = g_lag.m_lag;
-	switch(lag)
-	{
-	case lag_chinese:
-		strSearchName.LoadString(IDS_SEARCH_PATH);
-		strObjectType.LoadString(IDS_OBJECT_TYPE);
-		strOk.LoadString(IDS_OK);
-		strCancel.LoadString(IDS_CANCEL);
-		break;
-	case lag_Japanese:
-		strSearchName.LoadString(IDS_SEARCH_PATH_JP);
-		strObjectType.LoadString(IDS_OBJECT_TYPE_JP);
-		strOk.LoadString(IDS_OK_JP);
-		strCancel.LoadString(IDS_CANCEL_JP);
-		break;
-	case lag_engish:
-		strSearchName.LoadString(IDS_SEARCH_PATH_EN);
-		strObjectType.LoadString(IDS_OBJECT_TYPE_EN);
-		strOk.LoadString(IDS_OK_EN);
-		strCancel.LoadString(IDS_CANCEL_EN);
-		break;
-	}
-
-	SetDlgItemText(IDC_STATIC_SEARCH_DIR, strSearchName);
-	SetDlgItemText(IDC_STATIC_OBJECT_TYPE, strObjectType);
-	SetDlgItemText(IDOK, strOk);
-	SetDlgItemText(IDCANCEL, strCancel);
+	SetDlgItemText(IDC_STATIC_SEARCH_DIR, g_lag.LoadString("label.searchdir"));
+	SetDlgItemText(IDC_STATIC_OBJECT_TYPE, g_lag.LoadString("label.doc"));
+	SetDlgItemText(IDOK, g_lag.LoadString("button.confirm"));
+	SetDlgItemText(IDCANCEL, g_lag.LoadString("button.cancel"));
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
@@ -163,33 +138,9 @@ void CCreateIndexDlg::OnOK()
 	char szPath[MAX_PATH];
 	GetDlgItemText(IDC_EDIT_SEARCH_PATH,szPath, MAX_PATH );
 
-	CString strNewIndex, strSelectPath, strSelectObject, strIndexExists;
-	LANGUAGE lag = g_lag.m_lag;
-	switch(lag)
-	{
-	case lag_chinese:
-		strNewIndex.LoadString(IDS_NEW_INDEX);
-		strSelectPath.LoadString(IDS_SELECT_PATH);
-		strSelectObject.LoadString(IDS_SELECT_OBJECT);
-		strIndexExists.LoadString(IDS_PATH_EXISTS);
-		break;
-	case lag_Japanese:
-		strNewIndex.LoadString(IDS_NEW_INDEX_JP);
-		strSelectPath.LoadString(IDS_SELECT_PATH_JP);
-		strSelectObject.LoadString(IDS_SELECT_OBJECT_JP);
-		strIndexExists.LoadString(IDS_PATH_EXISTS_JP);
-		break;
-	case lag_engish:
-		strNewIndex.LoadString(IDS_NEW_INDEX_EN);
-		strSelectPath.LoadString(IDS_SELECT_PATH_EN);
-		strSelectObject.LoadString(IDS_SELECT_OBJECT_EN);
-		strIndexExists.LoadString(IDS_PATH_EXISTS_EN);	
-		break;
-	}
-
 	if (strlen(szPath) == 0)
 	{
-		MessageBox(strSelectPath,strNewIndex,MB_OK | MB_ICONWARNING);
+		MessageBox(g_lag.LoadString("message.selectsearchdir"),g_lag.LoadString("title.createnew"),MB_OK | MB_ICONWARNING);
 		return ;
 	}
 
@@ -209,7 +160,7 @@ void CCreateIndexDlg::OnOK()
 
 	if (strTypes.GetLength() == 0)
 	{
-		MessageBox(strSelectObject,strNewIndex,MB_OK | MB_ICONWARNING);
+		MessageBox(g_lag.LoadString("title.createnew"),g_lag.LoadString("title.createnew"),MB_OK | MB_ICONWARNING);
 		return ;
 	}
 	
@@ -222,7 +173,7 @@ void CCreateIndexDlg::OnOK()
 	sloCreateIndexAgent create;
 	if (!create.EventCreateIndex(szPath,(char*)szTypes.c_str()))
 	{
-		MessageBox(strIndexExists,strNewIndex,MB_OK | MB_ICONWARNING);
+		MessageBox(g_lag.LoadString("message.direxist"),g_lag.LoadString("title.createnew"),MB_OK | MB_ICONWARNING);
 		SetDlgItemText(IDC_EDIT_SEARCH_PATH,"");
 		return ;
 	}

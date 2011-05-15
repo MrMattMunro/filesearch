@@ -49,28 +49,8 @@ BOOL CShowAllCiHuiDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
-	CString strNewWords, strClose;
-	LANGUAGE lag = g_lag.m_lag;
-	switch(lag)
-	{
-	case lag_chinese:		
-		strNewWords.LoadString(IDS_NEW_WORDS);
-		strClose.LoadString(IDS_CLOSE);
-	
-	break;
-	case lag_Japanese:
-		strNewWords.LoadString(IDS_NEW_WORDS_JP);
-		strClose.LoadString(IDS_CLOSE_JP);
-		
-		break;
-	case lag_engish:
-		strNewWords.LoadString(IDS_NEW_WORDS_EN);
-		strClose.LoadString(IDS_CLOSE_EN);
-		break;
-	}			
-	
-	SetDlgItemText(IDC_STATIC_NEW_WORDS, strNewWords);
-	SetDlgItemText(IDCANCEL, strClose);
+	SetDlgItemText(IDC_STATIC_NEW_WORDS, g_lag.LoadString("label.keywords"));
+	SetDlgItemText(IDCANCEL, g_lag.LoadString("button.close"));
 
 	//////////////////////////////////////////////////////////////////
 

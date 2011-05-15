@@ -4,24 +4,24 @@
 Version=1
 ClassCount=9
 Class1=CFsUiApp
-LastClass=CLicenseDlg
+LastClass=CCustomCiHuiDlg
 NewFileInclude2=#include "FsUi.h"
 ResourceCount=7
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
 LastTemplate=CDialog
-Resource1=IDD_DIALOG_ALL_CIHUI
+Resource1=IDD_DIALOG_CUSTOM_DICT
 Class3=CCustomCiHuiDlg
-Resource2=IDD_DIALOG_FAST_SEARCH
+Resource2=IDD_DIALOG_ALL_CIHUI
 Class4=CModifyIndexDlg
-Resource3=IDD_DIALOG_MODIFY_INDEX
+Resource3=IDD_DIALOG_SET_ATTR
 Class5=CShowAllCiHuiDlg
 Resource4=IDD_DIALOG_CREATE_INDEX
 Class6=CSetAttributeDlg
-Resource5=IDD_DIALOG_SET_ATTR
+Resource5=IDD_DIALOG_FAST_SEARCH
 Class7=CFastSearchDlg
 Class8=CSearchThread
-Resource6=IDD_DIALOG_CUSTOM_DICT
+Resource6=IDD_DIALOG_MODIFY_INDEX
 Class9=CLicenseDlg
 Resource7=IDD_DIALOG_LICENSE
 
@@ -85,7 +85,7 @@ ImplementationFile=CustomCiHuiDlg.cpp
 BaseClass=CDialog
 Filter=D
 VirtualFilter=dWC
-LastObject=CCustomCiHuiDlg
+LastObject=IDC_BUTTON_BROWSE_CIHUI
 
 [DLG:IDD_DIALOG_MODIFY_INDEX]
 Type=1
