@@ -70,40 +70,12 @@ BOOL CSetAttributeDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
-	CString strSoftSet, strSet1, strOk, strCancel;
-	LANGUAGE lag = g_lag.m_lag;
-	switch(lag)
-	{
-	case lag_chinese:		
-		strSoftSet.LoadString(IDS_SOFT_SET);
-		strSet1.LoadString(IDS_SET_1);
 
-		strOk.LoadString(IDS_OK);
-		strCancel.LoadString(IDS_CANCEL);
-	
-		break;
-	case lag_Japanese:
-		strSoftSet.LoadString(IDS_SOFT_SET_JP);
-		strSet1.LoadString(IDS_SET_1_JP);
+	SetDlgItemText(IDC_STATIC_SOFT_SET, g_lag.LoadString("label.set"));
+	SetDlgItemText(IDC_STATIC_SET_1, g_lag.LoadString("label.setnote"));
 
-		strOk.LoadString(IDS_OK_JP);
-		strCancel.LoadString(IDS_CANCEL_JP);
-	
-		break;
-	case lag_engish:
-		strSoftSet.LoadString(IDS_SOFT_SET_EN);
-		strSet1.LoadString(IDS_SET_1_EN);
-		
-		strOk.LoadString(IDS_OK_EN);
-		strCancel.LoadString(IDS_CANCEL_EN);
-		break;
-	}		
-
-	SetDlgItemText(IDC_STATIC_SOFT_SET, strSoftSet);
-	SetDlgItemText(IDC_STATIC_SET_1, strSet1);
-
-	SetDlgItemText(IDOK, strOk);
-	SetDlgItemText(IDCANCEL, strCancel);
+	SetDlgItemText(IDOK, g_lag.LoadString("button.confirm"));
+	SetDlgItemText(IDCANCEL, g_lag.LoadString("button.cancel"));
 	//////////////////////////////////////////////////////////////////////////
 
 	char szPath[MAX_PATH] = {0};

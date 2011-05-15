@@ -61,27 +61,6 @@ void CModifyIndexDlg::OnOK()
 	//更新T_SEACHER表中filetype字段及 是否已更新=0(待更新)
 	UpdateData(TRUE);
 	
-	CString strModifyIndex, strModifyIndexOk, strNoDealWith;
-
-	LANGUAGE lag = g_lag.m_lag;
-	switch(lag)
-	{
-	case lag_chinese:		
-		strModifyIndex.LoadString(IDS_MODIFY_INDEX);
-		strModifyIndexOk.LoadString(IDS_MODIFY_INDEX_OK);
-		strNoDealWith.LoadString(IDS_NO_DEALWITH);
-		break;
-	case lag_Japanese:
-		strModifyIndex.LoadString(IDS_MODIFY_INDEX_JP);
-		strModifyIndexOk.LoadString(IDS_MODIFY_INDEX_OK_JP);
-		strNoDealWith.LoadString(IDS_NO_DEALWITH_JP);
-		break;
-	case lag_engish:
-		strModifyIndex.LoadString(IDS_MODIFY_INDEX_EN);
-		strModifyIndexOk.LoadString(IDS_MODIFY_INDEX_OK_EN);
-		strNoDealWith.LoadString(IDS_NO_DEALWITH_EN);
-		break;
-	}
 	CString strTypes;
 	if (m_bWord)
 		strTypes += "word";
@@ -105,7 +84,7 @@ void CModifyIndexDlg::OnOK()
 	if (szTypes.compare(m_modifyAgent.m_szSearchType))
 	{
 		//修改索引type
-		int nRet = MessageBox(strModifyIndexOk,strModifyIndex,MB_YESNO | MB_ICONWARNING);
+		int nRet = MessageBox(g_lag.LoadString("message.suremodifyindex"),g_lag.LoadString("title.modifysearch"),MB_YESNO | MB_ICONWARNING);
 		if (nRet == 6)
 		{
 			m_modifyAgent.EventModifyIndex((char*)szTypes.c_str());
@@ -113,7 +92,7 @@ void CModifyIndexDlg::OnOK()
 		}
 	}else
 	{
-		MessageBox(strNoDealWith,strModifyIndex,MB_OK | MB_ICONWARNING);
+		MessageBox(g_lag.LoadString("message.nomodify"),g_lag.LoadString("title.modifysearch"),MB_OK | MB_ICONWARNING);
 	}
 
 //	CDialog::OnOK();
@@ -129,25 +108,7 @@ void CModifyIndexDlg::OnCancel()
 void CModifyIndexDlg::OnButtonDelIndex() 
 {
 	// TODO: Add your control notification handler code here
-	CString strDelIndex, strDelIndexOK;
-	LANGUAGE lag = g_lag.m_lag;
-	switch(lag)
-	{
-	case lag_chinese:		
-		strDelIndex.LoadString(IDS_DEL_INDEX);
-		strDelIndexOK.LoadString(IDS_DEL_INDEX_OK);
-		break;
-	case lag_Japanese:
-		strDelIndex.LoadString(IDS_DEL_INDEX_JP);
-		strDelIndexOK.LoadString(IDS_DEL_INDEX_OK_JP);
-		break;
-	case lag_engish:
-		strDelIndex.LoadString(IDS_DEL_INDEX_EN);
-		strDelIndexOK.LoadString(IDS_DEL_INDEX_OK_EN);
-		break;
-	}
-
-	int nRet = MessageBox(strDelIndexOK,strDelIndex,MB_YESNO | MB_ICONWARNING);
+	int nRet = MessageBox(g_lag.LoadString("message.suredelindex"),g_lag.LoadString("title.modifysearch"),MB_YESNO | MB_ICONWARNING);
 	if (nRet == 6)
 	{
 		m_modifyAgent.EventDelIndex();
@@ -165,40 +126,12 @@ BOOL CModifyIndexDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	
-	// TODO: Add extra initialization here
-	CString strSearchName, strObjectType, strOk, strCancel, strDel;
-	LANGUAGE lag = g_lag.m_lag;
-	switch(lag)
-	{
-	case lag_chinese:		
-		strSearchName.LoadString(IDS_SEARCH_PATH);
-		strObjectType.LoadString(IDS_OBJECT_TYPE);
-		strOk.LoadString(IDS_OK);
-		strCancel.LoadString(IDS_CANCEL);
-		strDel.LoadString(IDS_DELETE);
-		break;
-	case lag_Japanese:
-		strSearchName.LoadString(IDS_SEARCH_PATH_JP);
-		strObjectType.LoadString(IDS_OBJECT_TYPE_JP);
-		strOk.LoadString(IDS_OK_JP);
-		strCancel.LoadString(IDS_CANCEL_JP);
-		strDel.LoadString(IDS_DELETE_JP);
-		break;
-	case lag_engish:
-		strSearchName.LoadString(IDS_SEARCH_PATH_EN);
-		strObjectType.LoadString(IDS_OBJECT_TYPE_EN);
-		strOk.LoadString(IDS_OK_EN);
-		strCancel.LoadString(IDS_CANCEL_EN);
-		strDel.LoadString(IDS_DELETE_EN);
-		break;
-	}	
-
-	
-	SetDlgItemText(IDC_STATIC_SEARCH_DIR, strSearchName);
-	SetDlgItemText(IDC_STATIC_OBJECT_TYPE, strObjectType);
-	SetDlgItemText(IDOK, strOk);
-	SetDlgItemText(IDCANCEL, strCancel);
-	SetDlgItemText(IDC_BUTTON_DEL_INDEX, strDel);
+	// TODO: Add extra initialization here	
+	SetDlgItemText(IDC_STATIC_SEARCH_DIR, g_lag.LoadString("label.searchdir"));
+	SetDlgItemText(IDC_STATIC_OBJECT_TYPE, g_lag.LoadString("label.doc"));
+	SetDlgItemText(IDOK, g_lag.LoadString("button.confirm"));
+	SetDlgItemText(IDCANCEL, g_lag.LoadString("button.cancel"));
+	SetDlgItemText(IDC_BUTTON_DEL_INDEX, g_lag.LoadString("button.delete"));
 	//////////////////////////////////////////////////////////////////////////
 
 	m_modifyAgent.GetSearchInfo();

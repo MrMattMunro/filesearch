@@ -58,29 +58,10 @@ BOOL CCustomCiHuiDlg::OnApply()
 	{
 
 		UpdateData(TRUE);
-		CString strCustomCihui, strSelectFile;
-
-		LANGUAGE lag = g_lag.m_lag;
-		switch(lag)
-		{
-		case lag_chinese:
-			strCustomCihui.LoadString(IDS_CUSTOM_CIHUI);
-			strSelectFile.LoadString(IDS_SELECT_FILE);
-			break;
-		case lag_Japanese:
-			strCustomCihui.LoadString(IDS_CUSTOM_CIHUI_JP);
-			strSelectFile.LoadString(IDS_SELECT_FILE_JP);
-			break;
-		case lag_engish:
-			strCustomCihui.LoadString(IDS_CUSTOM_CIHUI_EN);
-			strSelectFile.LoadString(IDS_SELECT_FILE_EN);
-			break;
-		}
-
 		
 		if (!m_strBrowsePath.GetLength())
 		{
-			MessageBox(strSelectFile,strCustomCihui,MB_OK | MB_ICONWARNING);
+			MessageBox(g_lag.LoadString("message.selectwordsfile"),g_lag.LoadString("title.adddic"),MB_OK | MB_ICONWARNING);
 			return TRUE;
 		}
 		
@@ -155,59 +136,16 @@ BOOL CCustomCiHuiDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
-	CString strCustomCihui, strCihui1, strCihui2,strCihui3;
-	CString strImportCihui,strOverCihui, strCheckAll,strOk, strCancel;
-	LANGUAGE lag = g_lag.m_lag;
-	switch(lag)
-	{
-	case lag_chinese:
-		strCustomCihui.LoadString(IDS_CUSTOM_CIHUI);
-		strCihui1.LoadString(IDS_CIHUI_1);
-		strCihui2.LoadString(IDS_CIHUI_2);
-		strCihui3.LoadString(IDS_CIHUI_3);
-		strImportCihui.LoadString(IDS_IMPORT_CIHUI);
-		strOverCihui.LoadString(IDS_CHECK_OVERCIHUI);
-		strCheckAll.LoadString(IDS_CHECK_EXISTCIHUI);
-		
-		strOk.LoadString(IDS_OK);
-		strCancel.LoadString(IDS_CANCEL);
-		break;
-	case lag_Japanese:
-		strCustomCihui.LoadString(IDS_CUSTOM_CIHUI_JP);
-		strCihui1.LoadString(IDS_CIHUI_1_JP);
-		strCihui2.LoadString(IDS_CIHUI_2_JP);
-		strCihui3.LoadString(IDS_CIHUI_3_JP);
-		strImportCihui.LoadString(IDS_IMPORT_CIHUI_JP);
-		strOverCihui.LoadString(IDS_CHECK_OVERCIHUI_JP);
-		strCheckAll.LoadString(IDS_CHECK_EXISTCIHUI_JP);
-		
-		strOk.LoadString(IDS_OK_JP);
-		strCancel.LoadString(IDS_CANCEL_JP);
-		break;
-	case lag_engish:
-		strCustomCihui.LoadString(IDS_CUSTOM_CIHUI_EN);
-		strCihui1.LoadString(IDS_CIHUI_1_EN);
-		strCihui2.LoadString(IDS_CIHUI_2_EN);
-		strCihui3.LoadString(IDS_CIHUI_3_EN);
-		strImportCihui.LoadString(IDS_IMPORT_CIHUI_EN);
-		strOverCihui.LoadString(IDS_CHECK_OVERCIHUI_EN);
-		strCheckAll.LoadString(IDS_CHECK_EXISTCIHUI_EN);
-		
-		strOk.LoadString(IDS_OK_EN);
-		strCancel.LoadString(IDS_CANCEL_EN);
-		break;
-	}
+	SetDlgItemText(IDC_STATIC_CUSTOM_CIHUI, g_lag.LoadString("label.customwords"));
+	SetDlgItemText(IDC_STATIC_CIHUI_1, g_lag.LoadString("label.customwordsnote"));
+	SetDlgItemText(IDC_STATIC_CIHUI_2, g_lag.LoadString("label.selectwordsfile"));
+	SetDlgItemText(IDC_STATIC_CIHUI_3, g_lag.LoadString("label.existwordsnote"));
+	SetDlgItemText(IDC_STATIC_IMPORT_CIHUI, g_lag.LoadString("label.importwords"));
+	SetDlgItemText(IDC_CHECK_OVERCIHUI, g_lag.LoadString("label.overwords"));
+	SetDlgItemText(IDC_BUTTON_CHECK_EXISTCIHUI, g_lag.LoadString("button.viewdic"));
 
-	SetDlgItemText(IDC_STATIC_CUSTOM_CIHUI, strCustomCihui);
-	SetDlgItemText(IDC_STATIC_CIHUI_1, strCihui1);
-	SetDlgItemText(IDC_STATIC_CIHUI_2, strCihui2);
-	SetDlgItemText(IDC_STATIC_CIHUI_3, strCihui3);
-	SetDlgItemText(IDC_STATIC_IMPORT_CIHUI, strImportCihui);
-	SetDlgItemText(IDC_CHECK_OVERCIHUI, strOverCihui);
-	SetDlgItemText(IDC_BUTTON_CHECK_EXISTCIHUI, strCheckAll);
-
-	SetDlgItemText(IDOK, strOk);
-	SetDlgItemText(IDCANCEL, strCancel);
+	SetDlgItemText(IDOK, g_lag.LoadString("button.confirm"));
+	SetDlgItemText(IDCANCEL, g_lag.LoadString("button.cancel"));
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
