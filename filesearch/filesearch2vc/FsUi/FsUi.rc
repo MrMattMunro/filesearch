@@ -66,7 +66,7 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2011,5,1,1
+ FILEVERSION 2011,5,15,1
  PRODUCTVERSION 1,0,0,8
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
@@ -85,7 +85,7 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "slfile\0"
             VALUE "FileDescription", "FsUi DLL\0"
-            VALUE "FileVersion", "2011, 5, 1, 1\0"
+            VALUE "FileVersion", "2011, 5, 15, 1\0"
             VALUE "InternalName", "FsUi\0"
             VALUE "LegalCopyright", "版权所有 (C) 2011\0"
             VALUE "LegalTrademarks", "\0"
@@ -152,13 +152,9 @@ BEGIN
                     WS_TABSTOP,82,93,28,10
     PUSHBUTTON      "查看已有词汇",IDC_BUTTON_CHECK_EXISTCIHUI,164,25,56,16
     LTEXT           "自定义词汇管理",IDC_STATIC_CUSTOM_CIHUI,9,13,53,8
-    LTEXT           "......................................",IDC_STATIC_LINE,
-                    65,11,153,8
     LTEXT           "用于保存用户使用的专有词汇。",IDC_STATIC_CIHUI_1,21,29,
                     105,8
     LTEXT           "导入自定义词汇",IDC_STATIC_IMPORT_CIHUI,10,59,53,8
-    LTEXT           "......................................",IDC_STATIC,67,
-                    57,153,8
     LTEXT           "存在已有词汇:",IDC_STATIC_CIHUI_3,25,95,50,8
 END
 
@@ -235,8 +231,6 @@ BEGIN
     PUSHBUTTON      "...",IDC_BUTTON_BROWSER_PDF,205,131,22,14
     PUSHBUTTON      "...",IDC_BUTTON_BROWSER_TXT,205,152,22,14
     LTEXT           "文档软件关联设置",IDC_STATIC_SOFT_SET,8,14,60,8
-    LTEXT           "......................................",IDC_STATIC_LINE,
-                    73,13,155,8
 END
 
 IDD_DIALOG_FAST_SEARCH DIALOG DISCARDABLE  0, 0, 241, 350
@@ -255,8 +249,6 @@ CAPTION "注册信息管理"
 FONT 10, "宋体"
 BEGIN
     LTEXT           "注册基本信息",IDC_STATIC_LICENSE_INFO,11,13,46,8
-    LTEXT           "......................................",IDC_STATIC,60,9,
-                    155,8
     LTEXT           "用户填写注册基本信息，包括订单号，电子邮箱",
                     IDC_STATIC_LICENSE_1,22,28,157,8
     LTEXT           "订单号:",IDC_STATIC_NUM,23,46,27,8
@@ -312,6 +304,18 @@ IDI_ICON_EXCEL          ICON    DISCARDABLE     "res\\excel.ico"
 IDI_ICON_PPT            ICON    DISCARDABLE     "res\\ppt.ico"
 IDI_ICON_PDF            ICON    DISCARDABLE     "res\\pdf.ico"
 IDI_ICON_TXT            ICON    DISCARDABLE     "res\\notepad.ico"
+IDI_ICON_SYS_SET        ICON    DISCARDABLE     "res\\SETUP INFORMATION INF.ICO"
+IDI_ICON_SET_NORMAL     ICON    DISCARDABLE     "res\\set_nomarl.ICO"
+IDI_ICON_SET_TOOLS      ICON    DISCARDABLE     "res\\tools1.ico"
+IDI_ICON_CIHUI          ICON    DISCARDABLE     "res\\Bookshelf.ico"
+IDI_ICON_CIHUI1         ICON    DISCARDABLE     "res\\Note.ico"
+IDI_ICON_CIHUI2         ICON    DISCARDABLE     "res\\Book2.ico"
+IDI_ICON_REG_MANAGER    ICON    DISCARDABLE     "res\\Registry Entries REG.ico"
+IDI_ICON_REG_INFO       ICON    DISCARDABLE     "res\\Registration.ico"
+IDI_ICON_REG_MANAGE2    ICON    DISCARDABLE     "res\\Recycle.ico"
+IDI_ICON_FIND           ICON    DISCARDABLE     "res\\n33start_find.ico"
+IDI_ICON_NEW_INDEX      ICON    DISCARDABLE     "res\\New Text Doc.ico"
+IDI_ICON_MODIFY_INDEX   ICON    DISCARDABLE     "res\\DEVTOOL.ICO"
 
 /////////////////////////////////////////////////////////////////////////////
 //

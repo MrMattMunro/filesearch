@@ -301,11 +301,35 @@ SOURCE=.\StdAfx.h
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 # Begin Source File
 
+SOURCE=.\res\Book2.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\Bookshelf.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\DEVTOOL.ICO
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\excel.ico
 # End Source File
 # Begin Source File
 
 SOURCE=.\res\FsUi.rc2
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\n33start_find.ico
+# End Source File
+# Begin Source File
+
+SOURCE=".\res\New Text Doc.ico"
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\Note.ico
 # End Source File
 # Begin Source File
 
@@ -318,6 +342,34 @@ SOURCE=.\res\pdf.ico
 # Begin Source File
 
 SOURCE=.\res\ppt.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\Recycle.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\Registration.ico
+# End Source File
+# Begin Source File
+
+SOURCE=".\res\Registry Entries REG.ico"
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\set_nomarl.ICO
+# End Source File
+# Begin Source File
+
+SOURCE=".\res\SETUP INFORMATION INF.ICO"
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\SYS_SET.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\tools1.ico
 # End Source File
 # Begin Source File
 

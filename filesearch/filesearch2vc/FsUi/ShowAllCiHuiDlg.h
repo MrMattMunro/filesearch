@@ -42,6 +42,7 @@ protected:
 	//{{AFX_MSG(CShowAllCiHuiDlg)
 	virtual BOOL OnInitDialog();
 	afx_msg void OnChangeEditKeyWord();
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

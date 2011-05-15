@@ -159,33 +159,44 @@
 #define IDC_EDIT_KEY_WORD               2012
 #define IDD_DIALOG_LICENSE              2012
 #define IDC_EDIT_IE_PATH                2013
+#define IDI_ICON_SYS_SET                2013
 #define IDC_EDIT_WORD_PATH              2014
+#define IDI_ICON_SET_NORMAL             2014
 #define IDC_EDIT_EXCEL_PATH             2015
 #define IDC_EDIT_PPT_PATH               2016
 #define IDC_EDIT_PDF_PATH               2017
 #define IDC_EDIT_TXT_PATH               2018
 #define IDC_BUTTON_BROWSER_IE           2019
+#define IDI_ICON_SET_TOOLS              2019
 #define IDC_BUTTON_BROWSER_WORD         2020
 #define IDC_EDIT_SEARCH_KEY             2020
+#define IDI_ICON_CIHUI                  2020
 #define IDC_BUTTON_BROWSER_EXCEL        2021
 #define IDC_COMBO_PATH                  2021
+#define IDI_ICON_CIHUI1                 2021
 #define IDC_BUTTON_BROWSER_PPT          2022
 #define IDC_EDIT_NO                     2022
 #define IDC_EDIT_NUM                    2022
+#define IDI_ICON_CIHUI2                 2022
 #define IDC_BUTTON_BROWSER_PDF          2023
 #define IDC_EDIT_EMAIL                  2023
+#define IDI_ICON_REG_MANAGER            2023
 #define IDC_BUTTON_BROWSER_TXT          2024
 #define IDC_BUTTON_REG                  2024
+#define IDI_ICON_REG_INFO               2024
 #define IDC_STATIC_BEGINTIME            2025
+#define IDI_ICON_REG_MANAGE2            2025
 #define IDC_STATIC_ENDTIME              2026
+#define IDI_ICON_FIND                   2026
 #define IDC_STATIC_BEGINTIME_CONTENT    2027
+#define IDI_ICON_NEW_INDEX              2027
 #define IDC_STATIC_ENTTIME_CONTENT      2028
+#define IDI_ICON_MODIFY_INDEX           2028
 #define IDC_STATIC_ERROR_INFO           2029
 #define IDC_STATIC_SEARCH_DIR           2029
 #define IDC_STATIC_OBJECT_TYPE          2030
 #define IDC_STATIC_NEW_WORDS            2031
 #define IDC_STATIC_CUSTOM_CIHUI         2032
-#define IDC_STATIC_LINE                 2033
 #define IDC_STATIC_CIHUI_1              2034
 #define IDC_STATIC_CIHUI_2              2035
 #define IDC_STATIC_CIHUI_3              2036
@@ -201,7 +212,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        2013
+#define _APS_NEXT_RESOURCE_VALUE        2029
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         2044
 #define _APS_NEXT_SYMED_VALUE           2000

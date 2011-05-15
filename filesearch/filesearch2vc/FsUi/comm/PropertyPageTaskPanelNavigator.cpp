@@ -34,19 +34,22 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 		return FALSE;
 	
 	SetBehaviour(xtpTaskPanelBehaviourToolbox);
-	SetTheme(xtpTaskPanelThemeShortcutBarOffice2003);
+	SetTheme(xtpTaskPanelThemeShortcutBarOffice2007);
+
+
+	CXTPPaintManager::SetTheme( xtpThemeRibbon);
 	SetSelectItemOnFocus(TRUE);
 	
-	SetIconSize(CSize(25, 25));
-	SetGroupIconSize(CSize(55, 55));
+	SetIconSize(CSize(18, 18));
+//	SetGroupIconSize(CSize(55, 55));
 
 	SetFont(pFont);
 	
-	CXTPTaskPanelGroup* pGroup = AddGroup(0);
+	CXTPTaskPanelGroup* pGroup = AddGroup(0,IDI_ICON_SET_TOOLS);
 	pGroup->SetCaption(g_lag.LoadString("title.basicset"));
 
 	int i = 0;
-	CXTPTaskPanelGroupItem* pItem = pGroup->AddLinkItem(0, i);
+	CXTPTaskPanelGroupItem* pItem = pGroup->AddLinkItem(0, IDI_ICON_SYS_SET);
 	pItem->SetCaption(g_lag.LoadString("title.general"));
 
 	CXTPPropertyPage* pPage = m_pSheet->GetPage(0);
@@ -54,33 +57,44 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 	pPage->m_dwData = (DWORD_PTR)pItem;
 
 	i = 1;
-	pItem = pGroup->AddLinkItem(1, i);
+	pItem = pGroup->AddLinkItem(1, IDI_ICON_CIHUI2);
 	pItem->SetCaption(g_lag.LoadString("title.words"));
 	
 	pPage = m_pSheet->GetPage(1);
 	pItem->SetItemData((DWORD_PTR)pPage);
 	pPage->m_dwData = (DWORD_PTR)pItem;
 
-	pGroup = AddGroup(1);
+	pGroup = AddGroup(1,IDI_ICON_REG_INFO);
 	pGroup->SetCaption(g_lag.LoadString("title.licensemanager"));
 
 	i = 2;
-	pItem = pGroup->AddLinkItem(0, i);
+	pItem = pGroup->AddLinkItem(0, IDI_ICON_REG_MANAGER);
 	pItem->SetCaption(g_lag.LoadString("title.licenseinfo"));
 	
 	pPage = m_pSheet->GetPage(2);
 	pItem->SetItemData((DWORD_PTR)pPage);
 	pPage->m_dwData = (DWORD_PTR)pItem;
 
-
-	pGroup = AddGroup(2);
-	pGroup->SetCaption(_T("状态和提醒"));
-
+//	pGroup = AddGroup(2);
+//	pGroup->SetCaption(_T("状态和提醒"));
 
 	int nMargin = 2;
 	GetPaintManager()->m_rcItemOuterMargins.SetRect(nMargin, nMargin, nMargin, nMargin);
 
 	Reposition();
+
+	GetImageManager()->SetIcon(IDI_ICON_SYS_SET, IDI_ICON_SYS_SET);
+	GetImageManager()->SetIcon(IDI_ICON_SET_NORMAL, IDI_ICON_SET_NORMAL);
+	GetImageManager()->SetIcon(IDI_ICON_SET_TOOLS, IDI_ICON_SET_TOOLS);
+	GetImageManager()->SetIcon(IDI_ICON_CIHUI, IDI_ICON_CIHUI);
+	GetImageManager()->SetIcon(IDI_ICON_CIHUI1, IDI_ICON_CIHUI1);
+	GetImageManager()->SetIcon(IDI_ICON_CIHUI2, IDI_ICON_CIHUI2);
+	GetImageManager()->SetIcon(IDI_ICON_REG_INFO, IDI_ICON_REG_INFO);
+	GetImageManager()->SetIcon(IDI_ICON_REG_MANAGER, IDI_ICON_REG_MANAGER);	
+	GetImageManager()->SetIcon(IDI_ICON_REG_MANAGE2, IDI_ICON_REG_MANAGE2);
+
+//	SetGroupIconSize( CSize(16, 24));
+	SetGroupIconSize( CSize(24, 48));
 
 //	m_pSheet->SetPageBorderStyle(xtpPageBorderFrame);
 	

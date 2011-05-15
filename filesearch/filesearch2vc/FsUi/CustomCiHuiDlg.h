@@ -45,6 +45,7 @@ protected:
 	afx_msg void OnButtonBrowseCihui();
 	afx_msg void OnCheckOvercihui();
 	virtual BOOL OnInitDialog();
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
