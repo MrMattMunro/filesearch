@@ -38,6 +38,7 @@ void CShowAllCiHuiDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CShowAllCiHuiDlg, CDialog)
 	//{{AFX_MSG_MAP(CShowAllCiHuiDlg)
 	ON_EN_CHANGE(IDC_EDIT_KEY_WORD, OnChangeEditKeyWord)
+	ON_WM_CTLCOLOR()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -163,4 +164,23 @@ void CShowAllCiHuiDlg::ClearListBox()
 	{
 		m_AllCiHuiListBox.DeleteString( 0 );
 	}
+}
+
+HBRUSH CShowAllCiHuiDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor) 
+{
+//	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+	
+	// TODO: Change any attributes of the DC here
+	COLORREF backColor = RGB(216, 231, 252); //office 2003背景色
+	pDC->SetBkMode(TRANSPARENT);             //设置控件背景透明
+	
+	// 判断下是不是你要改的控件ID 
+	if( pWnd->GetDlgCtrlID() == IDCANCEL || pWnd->GetDlgCtrlID() == IDOK )
+	{
+		pDC->SetBkColor(RGB(153, 255, 204));
+	}
+	
+	return CreateSolidBrush(backColor);      //创建背景刷子	
+	// TODO: Return a different brush if the default is not desired
+//	return hbr;
 }

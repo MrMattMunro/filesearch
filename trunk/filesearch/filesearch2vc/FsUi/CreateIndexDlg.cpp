@@ -48,6 +48,7 @@ BEGIN_MESSAGE_MAP(CCreateIndexDlg, CDialog)
 	//{{AFX_MSG_MAP(CCreateIndexDlg)
 	ON_WM_PAINT()
 	ON_BN_CLICKED(IDC_BUTTON_BROWSE, OnButtonBrowse)
+	ON_WM_CTLCOLOR()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -57,7 +58,11 @@ END_MESSAGE_MAP()
 BOOL CCreateIndexDlg::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-	
+	HICON m_hIcon;
+	m_hIcon=AfxGetApp()->LoadIcon(IDI_ICON_NEW_INDEX);
+	SetIcon(m_hIcon,TRUE); //设置为大图标
+
+	//SetIcon(m_hIcon,FALSE);//设置为小图标
 	// TODO: Add extra initialization here
 	SetDlgItemText(IDC_STATIC_SEARCH_DIR, g_lag.LoadString("label.searchdir"));
 	SetDlgItemText(IDC_STATIC_OBJECT_TYPE, g_lag.LoadString("label.doc"));
@@ -186,4 +191,23 @@ void CCreateIndexDlg::OnCancel()
 	// TODO: Add extra cleanup here
 	
 	CDialog::OnCancel();
+}
+
+HBRUSH CCreateIndexDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor) 
+{
+//	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+	
+	// TODO: Change any attributes of the DC here
+	COLORREF backColor = RGB(216, 231, 252); //office 2003背景色
+	pDC->SetBkMode(TRANSPARENT);             //设置控件背景透明
+	
+	// 判断下是不是你要改的控件ID 
+	if( pWnd->GetDlgCtrlID() == IDCANCEL || pWnd->GetDlgCtrlID() == IDOK )
+	{
+		pDC->SetBkColor(RGB(153, 255, 204));
+	}
+	
+	return CreateSolidBrush(backColor);      //创建背景刷子
+	// TODO: Return a different brush if the default is not desired
+//	return hbr;
 }
