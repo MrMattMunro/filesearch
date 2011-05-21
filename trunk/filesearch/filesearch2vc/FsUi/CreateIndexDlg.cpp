@@ -26,6 +26,7 @@ CCreateIndexDlg::CCreateIndexDlg(CWnd* pParent /*=NULL*/)
 	m_bTxt = FALSE;
 	m_bPpt = FALSE;
 	m_bWord = FALSE;
+	m_nTheme = 6;
 	//}}AFX_DATA_INIT
 }
 
@@ -40,6 +41,9 @@ void CCreateIndexDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Check(pDX, IDC_CHECK_TXT, m_bTxt);
 	DDX_Check(pDX, IDC_CHECK_PPT, m_bPpt);
 	DDX_Check(pDX, IDC_CHECK_WORD, m_bWord);
+	DDX_Control(pDX, IDOK, m_btnOk);
+	DDX_Control(pDX, IDCANCEL, m_btnCancel);
+	DDX_Control(pDX, IDC_BUTTON_BROWSE, m_btnFolder);
 	//}}AFX_DATA_MAP
 }
 
@@ -68,6 +72,11 @@ BOOL CCreateIndexDlg::OnInitDialog()
 	SetDlgItemText(IDC_STATIC_OBJECT_TYPE, g_lag.LoadString("label.doc"));
 	SetDlgItemText(IDOK, g_lag.LoadString("button.confirm"));
 	SetDlgItemText(IDCANCEL, g_lag.LoadString("button.cancel"));
+
+	m_btnOk.SetBitmap(0, IDB_BITMAP_OK);
+	m_btnCancel.SetBitmap(0, IDB_BITMAP_CANCEL);
+	m_btnFolder.SetBitmap(0, IDB_BITMAP_FOLDER);
+	m_btnFolder.SetFlatStyle(TRUE);	
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
@@ -195,10 +204,10 @@ void CCreateIndexDlg::OnCancel()
 
 HBRUSH CCreateIndexDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor) 
 {
-//	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 	
 	// TODO: Change any attributes of the DC here
-	COLORREF backColor = RGB(216, 231, 252); //office 2003背景色
+/*	COLORREF backColor = RGB(216, 231, 252); //office 2003背景色
 	pDC->SetBkMode(TRANSPARENT);             //设置控件背景透明
 	
 	// 判断下是不是你要改的控件ID 
@@ -208,6 +217,7 @@ HBRUSH CCreateIndexDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	}
 	
 	return CreateSolidBrush(backColor);      //创建背景刷子
+	*/
 	// TODO: Return a different brush if the default is not desired
-//	return hbr;
+	return hbr;
 }

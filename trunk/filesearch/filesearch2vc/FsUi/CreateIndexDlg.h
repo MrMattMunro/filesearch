@@ -25,6 +25,7 @@ public:
 	BOOL	m_bTxt;
 	BOOL	m_bPpt;
 	BOOL	m_bWord;
+	int		m_nTheme;
 	//}}AFX_DATA
 
 
@@ -37,7 +38,9 @@ public:
 
 // Implementation
 protected:
-
+	CXTPButton m_btnOk;
+	CXTPButton m_btnCancel;
+	CXTPButton m_btnFolder;
 	// Generated message map functions
 	//{{AFX_MSG(CCreateIndexDlg)
 	virtual BOOL OnInitDialog();

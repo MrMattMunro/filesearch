@@ -10,18 +10,18 @@ ResourceCount=7
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
 LastTemplate=CDialog
-Resource1=IDD_DIALOG_SET_ATTR
+Resource1=IDD_DIALOG_FAST_SEARCH
 Class3=CCustomCiHuiDlg
-Resource2=IDD_DIALOG_MODIFY_INDEX
+Resource2=IDD_DIALOG_ALL_CIHUI
 Class4=CModifyIndexDlg
-Resource3=IDD_DIALOG_FAST_SEARCH
+Resource3=IDD_DIALOG_CUSTOM_DICT
 Class5=CShowAllCiHuiDlg
-Resource4=IDD_DIALOG_CUSTOM_DICT
+Resource4=IDD_DIALOG_CREATE_INDEX
 Class6=CSetAttributeDlg
-Resource5=IDD_DIALOG_ALL_CIHUI
+Resource5=IDD_DIALOG_SET_ATTR
 Class7=CFastSearchDlg
 Class8=CSearchThread
-Resource6=IDD_DIALOG_CREATE_INDEX
+Resource6=IDD_DIALOG_MODIFY_INDEX
 Class9=CLicenseDlg
 Resource7=IDD_DIALOG_LICENSE
 
@@ -63,7 +63,7 @@ VirtualFilter=dWC
 [DLG:IDD_DIALOG_CUSTOM_DICT]
 Type=1
 Class=CCustomCiHuiDlg
-ControlCount=11
+ControlCount=13
 Control1=IDOK,button,1073807361
 Control2=IDCANCEL,button,1073807360
 Control3=IDC_STATIC_CIHUI_2,static,1342308352
@@ -75,6 +75,8 @@ Control8=IDC_STATIC_CUSTOM_CIHUI,static,1342308352
 Control9=IDC_STATIC_CIHUI_1,static,1342308352
 Control10=IDC_STATIC_IMPORT_CIHUI,static,1342308352
 Control11=IDC_STATIC_CIHUI_3,static,1342308352
+Control12=IDC_STATIC,static,1342177283
+Control13=IDC_STATIC,static,1342177283
 
 [CLS:CCustomCiHuiDlg]
 Type=0
@@ -133,7 +135,7 @@ VirtualFilter=dWC
 [DLG:IDD_DIALOG_SET_ATTR]
 Type=1
 Class=CSetAttributeDlg
-ControlCount=22
+ControlCount=23
 Control1=IDOK,button,1073807361
 Control2=IDCANCEL,button,1073807360
 Control3=IDC_STATIC,static,1342308352
@@ -156,6 +158,7 @@ Control19=IDC_BUTTON_BROWSER_PPT,button,1342242816
 Control20=IDC_BUTTON_BROWSER_PDF,button,1342242816
 Control21=IDC_BUTTON_BROWSER_TXT,button,1342242816
 Control22=IDC_STATIC_SOFT_SET,static,1342308352
+Control23=IDC_STATIC,static,1342177283
 
 [CLS:CSetAttributeDlg]
 Type=0
@@ -193,7 +196,7 @@ LastObject=CSearchThread
 [DLG:IDD_DIALOG_LICENSE]
 Type=1
 Class=CLicenseDlg
-ControlCount=12
+ControlCount=13
 Control1=IDC_STATIC_LICENSE_INFO,static,1342308352
 Control2=IDC_STATIC_LICENSE_1,static,1342308352
 Control3=IDC_STATIC_NUM,static,1342308352
@@ -206,6 +209,7 @@ Control9=IDC_STATIC_BEGINTIME_CONTENT,static,1342308352
 Control10=IDC_STATIC_ENTTIME_CONTENT,static,1342308352
 Control11=IDC_STATIC_BEGINTIME,static,1342308352
 Control12=IDC_STATIC_ERROR_INFO,static,1342308352
+Control13=IDC_STATIC,static,1342177283
 
 [CLS:CLicenseDlg]
 Type=0

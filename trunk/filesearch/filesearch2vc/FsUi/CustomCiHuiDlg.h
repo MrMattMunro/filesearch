@@ -36,7 +36,8 @@ public:
 	DWORD m_dwApply;
 // Implementation
 protected:
-
+	CXTPButton m_btnFolder;
+	CXTPButton m_btnShowAllCihui;
 	// Generated message map functions
 	//{{AFX_MSG(CCustomCiHuiDlg)
 	virtual void OnOK();

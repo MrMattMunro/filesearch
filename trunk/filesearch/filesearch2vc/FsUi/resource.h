@@ -194,14 +194,24 @@
 #define IDI_ICON_MODIFY_INDEX           2028
 #define IDC_STATIC_ERROR_INFO           2029
 #define IDC_STATIC_SEARCH_DIR           2029
+#define IDB_BITMAP_OK                   2029
 #define IDC_STATIC_OBJECT_TYPE          2030
+#define IDB_BITMAP_CANCEL               2030
 #define IDC_STATIC_NEW_WORDS            2031
+#define IDB_BITMAP_FOLDER               2031
 #define IDC_STATIC_CUSTOM_CIHUI         2032
+#define IDB_BITMAP_DELETE               2032
+#define IDB_BITMAP_FORWARD              2033
 #define IDC_STATIC_CIHUI_1              2034
+#define IDI_ICON_HAND                   2034
 #define IDC_STATIC_CIHUI_2              2035
+#define IDB_BITMAP_CHECK_ALLCIHUI       2035
 #define IDC_STATIC_CIHUI_3              2036
+#define IDB_BITMAP_CHECK_CIHUI          2036
 #define IDC_STATIC_IMPORT_CIHUI         2037
+#define IDB_BITMAP_REGISTER             2037
 #define IDC_STATIC_SOFT_SET             2038
+#define IDB_BITMAP_FOLDER2              2038
 #define IDC_STATIC_SET_1                2039
 #define IDC_STATIC_LICENSE_INFO         2040
 #define IDC_STATIC_LICENSE_1            2041
@@ -212,7 +222,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        2029
+#define _APS_NEXT_RESOURCE_VALUE        2039
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         2044
 #define _APS_NEXT_SYMED_VALUE           2000

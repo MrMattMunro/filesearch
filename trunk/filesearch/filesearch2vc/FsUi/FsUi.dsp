@@ -309,6 +309,22 @@ SOURCE=.\res\Bookshelf.ico
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\cancel16.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\db_find16_h.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\db_register16_h.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\delete16.bmp
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\DEVTOOL.ICO
 # End Source File
 # Begin Source File
@@ -317,7 +333,27 @@ SOURCE=.\res\excel.ico
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\find_nextb24_h.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\folder_open16.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\folder_open24.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\forward24.bmp
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\FsUi.rc2
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\HAND.ICO
 # End Source File
 # Begin Source File
 
@@ -334,6 +370,10 @@ SOURCE=.\res\Note.ico
 # Begin Source File
 
 SOURCE=.\res\notepad.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\ok.bmp
 # End Source File
 # Begin Source File
 
