@@ -28,6 +28,7 @@ void CLicenseDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CLicenseDlg)
+	DDX_Control(pDX, IDC_BUTTON_REG, m_btnReg);
 		// NOTE: the ClassWizard will add DDX and DDV calls here
 	//}}AFX_DATA_MAP
 }
@@ -60,7 +61,9 @@ void CLicenseDlg::OnCancel()
 BOOL CLicenseDlg::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-	
+
+	m_btnReg.SetBitmap(0, IDB_BITMAP_REGISTER);
+
 	// TODO: Add extra initialization here
 	SetDlgItemText(IDC_STATIC_LICENSE_INFO, g_lag.LoadString("label.license"));
 	SetDlgItemText(IDC_STATIC_LICENSE_1,  g_lag.LoadString("label.licensenote"));
@@ -182,24 +185,24 @@ void CLicenseDlg::OnButtonReg()
 
 HBRUSH CLicenseDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor) 
 {
-//	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 	
 	// TODO: Change any attributes of the DC here
-	COLORREF backColor = RGB(216, 231, 252); //office 2003背景色
-	pDC->SetBkMode(TRANSPARENT);             //设置控件背景透明
-	
-	// 判断下是不是你要改的控件ID 
-	if( pWnd->GetDlgCtrlID() == IDCANCEL || pWnd->GetDlgCtrlID() == IDOK )
-	{
-		pDC->SetBkColor(RGB(153, 255, 204));
-	}
-
-	if(pWnd->GetDlgCtrlID()==IDC_STATIC_ERROR_INFO) 
-		pDC->SetTextColor(RGB(255,0,0)); //设置字体颜色为蓝色
-	
-	return CreateSolidBrush(backColor);      //创建背景刷子	
+// 	COLORREF backColor = RGB(216, 231, 252); //office 2003背景色
+// 	pDC->SetBkMode(TRANSPARENT);             //设置控件背景透明
+// 	
+// 	// 判断下是不是你要改的控件ID 
+// 	if( pWnd->GetDlgCtrlID() == IDCANCEL || pWnd->GetDlgCtrlID() == IDOK )
+// 	{
+// 		pDC->SetBkColor(RGB(153, 255, 204));
+// 	}
+// 
+// 	if(pWnd->GetDlgCtrlID()==IDC_STATIC_ERROR_INFO) 
+// 		pDC->SetTextColor(RGB(255,0,0)); //设置字体颜色为蓝色
+// 	
+// 	return CreateSolidBrush(backColor);      //创建背景刷子	
 
 
 	// TODO: Return a different brush if the default is not desired
-//	return hbr;
+	return hbr;
 }

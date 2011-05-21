@@ -203,7 +203,7 @@ void CFsUiTestDlg::OnButton1()
 
 	g_fnFsCreateIndex();
 
-	FreeLibrary(hins);
+//	FreeLibrary(hins);
 }
 
 typedef DWORD (__stdcall *fnFsModifyIndex)(int nID);

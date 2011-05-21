@@ -41,6 +41,12 @@ void CSetAttributeDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT_PPT_PATH, m_strPPT);
 	DDX_Text(pDX, IDC_EDIT_TXT_PATH, m_strTxt);
 	DDX_Text(pDX, IDC_EDIT_WORD_PATH, m_strWord);
+	DDX_Control(pDX, IDC_BUTTON_BROWSER_IE, m_btnFolderIE);
+	DDX_Control(pDX, IDC_BUTTON_BROWSER_WORD, m_btnFolderWord);
+	DDX_Control(pDX, IDC_BUTTON_BROWSER_EXCEL, m_btnFolderExcel);
+	DDX_Control(pDX, IDC_BUTTON_BROWSER_PPT, m_btnFolderPPT);
+	DDX_Control(pDX, IDC_BUTTON_BROWSER_PDF, m_btnFolderPdf);
+	DDX_Control(pDX, IDC_BUTTON_BROWSER_TXT, m_btnFolderTxt);
 	//}}AFX_DATA_MAP
 }
 
@@ -69,7 +75,24 @@ END_MESSAGE_MAP()
 BOOL CSetAttributeDlg::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
+
+	m_btnFolderIE.SetBitmap(0, IDB_BITMAP_FOLDER2);
+	m_btnFolderIE.SetFlatStyle(TRUE);	
 	
+	m_btnFolderWord.SetBitmap(0, IDB_BITMAP_FOLDER2);
+	m_btnFolderWord.SetFlatStyle(TRUE);	
+
+	m_btnFolderExcel.SetBitmap(0, IDB_BITMAP_FOLDER2);
+	m_btnFolderExcel.SetFlatStyle(TRUE);	
+
+	m_btnFolderPPT.SetBitmap(0, IDB_BITMAP_FOLDER2);
+	m_btnFolderPPT.SetFlatStyle(TRUE);	
+
+	m_btnFolderPdf.SetBitmap(0, IDB_BITMAP_FOLDER2);
+	m_btnFolderPdf.SetFlatStyle(TRUE);	
+
+	m_btnFolderTxt.SetBitmap(0, IDB_BITMAP_FOLDER2);
+	m_btnFolderTxt.SetFlatStyle(TRUE);	
 	// TODO: Add extra initialization here
 
 	SetDlgItemText(IDC_STATIC_SOFT_SET, g_lag.LoadString("label.set"));
@@ -246,19 +269,19 @@ void CSetAttributeDlg::OnCancel()
 
 HBRUSH CSetAttributeDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor) 
 {
-//	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 	
 	// TODO: Change any attributes of the DC here
-	COLORREF backColor = RGB(216, 231, 252); //office 2003背景色
-	pDC->SetBkMode(TRANSPARENT);             //设置控件背景透明
-	
-	// 判断下是不是你要改的控件ID 
-	if( pWnd->GetDlgCtrlID() == IDCANCEL || pWnd->GetDlgCtrlID() == IDOK )
-	{
-		pDC->SetBkColor(RGB(153, 255, 204));
-	}
-	
-	return CreateSolidBrush(backColor);      //创建背景刷子	
+// 	COLORREF backColor = RGB(216, 231, 252); //office 2003背景色
+// 	pDC->SetBkMode(TRANSPARENT);             //设置控件背景透明
+// 	
+// 	// 判断下是不是你要改的控件ID 
+// 	if( pWnd->GetDlgCtrlID() == IDCANCEL || pWnd->GetDlgCtrlID() == IDOK )
+// 	{
+// 		pDC->SetBkColor(RGB(153, 255, 204));
+// 	}
+// 	
+// 	return CreateSolidBrush(backColor);      //创建背景刷子	
 	// TODO: Return a different brush if the default is not desired
-//	return hbr;
+	return hbr;
 }

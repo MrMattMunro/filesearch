@@ -34,6 +34,8 @@ void CCustomCiHuiDlg::DoDataExchange(CDataExchange* pDX)
 	//{{AFX_DATA_MAP(CCustomCiHuiDlg)
 	DDX_Text(pDX, IDC_EDIT_CIHUI_PATH, m_strBrowsePath);
 	DDX_Check(pDX, IDC_CHECK_OVERCIHUI, m_bIsOverCiHui);
+	DDX_Control(pDX, IDC_BUTTON_BROWSE_CIHUI, m_btnFolder);
+	DDX_Control(pDX, IDC_BUTTON_CHECK_EXISTCIHUI, m_btnShowAllCihui);
 	//}}AFX_DATA_MAP
 }
 
@@ -135,7 +137,12 @@ void CCustomCiHuiDlg::OnCheckOvercihui()
 BOOL CCustomCiHuiDlg::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
+
+	m_btnFolder.SetBitmap(0, IDB_BITMAP_FOLDER);
+	m_btnFolder.SetFlatStyle(TRUE);
 	
+	m_btnShowAllCihui.SetBitmap(0, IDB_BITMAP_CHECK_CIHUI);
+
 	// TODO: Add extra initialization here
 	SetDlgItemText(IDC_STATIC_CUSTOM_CIHUI, g_lag.LoadString("label.customwords"));
 	SetDlgItemText(IDC_STATIC_CIHUI_1, g_lag.LoadString("label.customwordsnote"));
@@ -154,19 +161,19 @@ BOOL CCustomCiHuiDlg::OnInitDialog()
 
 HBRUSH CCustomCiHuiDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor) 
 {
-//	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 	
 	// TODO: Change any attributes of the DC here
-	COLORREF backColor = RGB(216, 231, 252); //office 2003背景色
-	pDC->SetBkMode(TRANSPARENT);             //设置控件背景透明
-	
-	// 判断下是不是你要改的控件ID 
-	if( pWnd->GetDlgCtrlID() == IDCANCEL || pWnd->GetDlgCtrlID() == IDOK )
-	{
-		pDC->SetBkColor(RGB(153, 255, 204));
-	}
-	
-	return CreateSolidBrush(backColor);      //创建背景刷子		
+// 	COLORREF backColor = RGB(216, 231, 252); //office 2003背景色
+// 	pDC->SetBkMode(TRANSPARENT);             //设置控件背景透明
+// 	
+// 	// 判断下是不是你要改的控件ID 
+// 	if( pWnd->GetDlgCtrlID() == IDCANCEL || pWnd->GetDlgCtrlID() == IDOK )
+// 	{
+// 		pDC->SetBkColor(RGB(153, 255, 204));
+// 	}
+// 	
+// 	return CreateSolidBrush(backColor);      //创建背景刷子		
 	// TODO: Return a different brush if the default is not desired
-//	return hbr;
+	return hbr;
 }

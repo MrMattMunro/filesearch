@@ -32,6 +32,7 @@ public:
 	BOOL	m_bExcel;
 	BOOL	m_bChm;
 	BOOL	m_bTxt;
+	int		m_nTheme;
 	//}}AFX_DATA
 
 
@@ -44,7 +45,9 @@ public:
 
 // Implementation
 protected:
-
+	CXTPButton m_btnOk;
+	CXTPButton m_btnCancel;
+	CXTPButton m_btnDelete;
 	// Generated message map functions
 	//{{AFX_MSG(CModifyIndexDlg)
 	virtual void OnOK();

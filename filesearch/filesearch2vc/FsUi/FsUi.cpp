@@ -68,14 +68,38 @@ CFsUiApp::CFsUiApp()
 
 CFsUiApp theApp;
 sloLanguageAgent g_lag;
+CString m_strStylesPath;
 
 BOOL CFsUiApp::InitInstance() 
 {
 	// TODO: Add your specialized code here and/or call the base class
 //	SetDialogBkColor(RGB(243,243,243),RGB(0,0,0));
-	SetDialogBkColor(RGB(230,235,235),RGB(0,0,0));
+//	SetDialogBkColor(RGB(230,235,235),RGB(0,0,0));
 
 	g_lag.GetLanguage();
+
+	TCHAR szStylesPath[_MAX_PATH];
+	
+	VERIFY(::GetModuleFileName(
+		AfxGetApp()->m_hInstance, szStylesPath, _MAX_PATH));		
+	
+	m_strStylesPath = szStylesPath;
+	int nIndex  = m_strStylesPath.ReverseFind(_T('\\'));
+	if (nIndex > 0) {
+		m_strStylesPath = m_strStylesPath.Left(nIndex);
+	}
+	else {
+		m_strStylesPath.Empty();
+	}
+	m_strStylesPath += _T("\\Styles\\");
+	
+	
+	//XTPSkinManager()->AddColorFilter(new CXTPSkinManagerColorFilterColorize(50, 100, 1));
+	
+	XTPSkinManager()->SetApplyOptions(XTPSkinManager()->GetApplyOptions() | xtpSkinApplyMetrics);
+//	XTPSkinManager()->LoadSkin(m_strStylesPath + _T("WinXP.Luna.cjstyles"), _T("NormalBlue.ini"));	
+	//Vista,WinXP.Luna,WinXP.Royale, Office2007
+	XTPSkinManager()->LoadSkin(m_strStylesPath + _T("Office2007.cjstyles"), _T("NormalBlue.ini"));
 
 	return CWinApp::InitInstance();
 }

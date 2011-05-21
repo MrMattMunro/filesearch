@@ -42,7 +42,12 @@ public:
 
 // Implementation
 protected:
-
+	CXTPButton m_btnFolderIE;
+	CXTPButton m_btnFolderWord;
+	CXTPButton m_btnFolderExcel;
+	CXTPButton m_btnFolderPPT;
+	CXTPButton m_btnFolderPdf;
+	CXTPButton m_btnFolderTxt;
 	// Generated message map functions
 	//{{AFX_MSG(CSetAttributeDlg)
 	virtual BOOL OnInitDialog();
