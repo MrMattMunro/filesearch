@@ -267,6 +267,27 @@ BEGIN
     ICON            IDI_ICON_HAND,IDC_STATIC,6,9,18,20
 END
 
+IDD_DIALOG_SKIN DIALOG DISCARDABLE  0, 0, 241, 190
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "外观"
+FONT 10, "宋体"
+BEGIN
+    LTEXT           "皮肤外观",IDC_STATIC_SKIN_SET,27,15,31,8
+    ICON            IDI_ICON_HAND,IDC_STATIC,6,9,20,20
+    LTEXT           "请选项程序皮肤:",IDC_STATIC_SKIN_SELECT,28,30,57,8
+    LISTBOX         IDC_LIST_SKIN,29,42,65,130,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "皮肤预览:",IDC_STATIC_SKIN_PREVIEW,102,30,35,8
+    GROUPBOX        "",IDC_STATIC,102,39,136,97
+    LTEXT           "作者:",IDC_STATIC_AUTHOR,103,143,20,8
+    LTEXT           "slfile",IDC_STATIC_AUTHOR_NAME,126,143,31,10
+    LTEXT           "主页:",IDC_STATIC_HOMEPAGE,102,155,20,8
+    LTEXT           "www.slfile.com",IDC_STATIC_HOMEPAGE_NAME,126,154,77,10
+    LTEXT           "邮箱:",IDC_STATIC_SKIN_EAMIL,102,168,20,8
+    LTEXT           "support@slfile.net",IDC_STATIC_SKIN_EAMIL_NAME,126,167,
+                    73,10
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

@@ -256,7 +256,7 @@ void CFsUiTestDlg::OnButton6()
 	
 	g_fnFsImportCustomCiHui();
 	
-	FreeLibrary(hins);		
+//	FreeLibrary(hins);		
 }
 
 typedef DWORD (__stdcall *fnFsSetAttribute)();
@@ -281,7 +281,7 @@ void CFsUiTestDlg::OnButton7()
 	
 	g_fnFsSetAttribute();
 	
-	FreeLibrary(hins);		
+//	FreeLibrary(hins);		
 }
 
 typedef DWORD (__stdcall *fnFsFastSearch)();
@@ -306,7 +306,7 @@ void CFsUiTestDlg::OnButton8()
 	
 	g_fnFsFastSearch();
 	
-	FreeLibrary(hins);		
+//	FreeLibrary(hins);		
 }
 
 typedef DWORD (__stdcall *fnFsSetSheet)();
@@ -331,7 +331,7 @@ void CFsUiTestDlg::OnButton9()
 	
 	g_fnFsSetSheet();
 	
-	FreeLibrary(hins);	
+//	FreeLibrary(hins);	
 }
 
 void GetDrvSpaceInfo(char* pDisk) 

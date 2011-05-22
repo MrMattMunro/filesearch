@@ -33,7 +33,6 @@ public:
 	virtual BOOL OnApply();
 	virtual BOOL OnSetActive();
 	virtual BOOL OnKillActive();
-	DWORD m_dwApply;
 // Implementation
 protected:
 	CXTPButton m_btnFolder;

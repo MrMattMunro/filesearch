@@ -122,15 +122,16 @@ BOOL CFastSearchDlg::OnInitDialog()
 	AddToolboxGroup(4, "pdf", IDI_ICON_PDF);
 	AddToolboxGroup(5, "txt", IDI_ICON_TXT);
 
-	std::vector<string> desp;
-	std::string str1 = "desp1";
-	std::string str2 = "desp2";
-	desp.push_back(str1);
-	desp.push_back(str2);
-	AddLinkItem(1, 1,1,"test11", desp);
-	AddLinkItem(1, 2,1,"test12", desp);
-	AddLinkItem(2, 1,1,"test2", desp);
-	AddLinkItem(3, 1,1,"test3", desp);
+	//test code
+// 	std::vector<string> desp;
+// 	std::string str1 = "desp1";
+// 	std::string str2 = "desp2";
+// 	desp.push_back(str1);
+// 	desp.push_back(str2);
+// 	AddLinkItem(1, 1,1,"test11", desp);
+// 	AddLinkItem(1, 2,1,"test12", desp);
+// 	AddLinkItem(2, 1,1,"test2", desp);
+// 	AddLinkItem(3, 1,1,"test3", desp);
 
 	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_WORD, IDI_ICON_WORD);
 	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_EXCEL, IDI_ICON_EXCEL);

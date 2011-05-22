@@ -152,6 +152,10 @@ SOURCE=.\ShowAllCiHuiDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\SkinDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\comm\sloCommAgent.cpp
 # End Source File
 # Begin Source File
@@ -185,6 +189,10 @@ SOURCE=.\comm\sloRegAgent.cpp
 # Begin Source File
 
 SOURCE=.\comm\sloSetAttrAgent.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\sloSkinAgent.cpp
 # End Source File
 # Begin Source File
 
@@ -253,6 +261,10 @@ SOURCE=.\ShowAllCiHuiDlg.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\SkinDlg.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\comm\sloCommAgent.h
 # End Source File
 # Begin Source File
@@ -286,6 +298,10 @@ SOURCE=.\comm\sloRegAgent.h
 # Begin Source File
 
 SOURCE=.\comm\sloSetAttrAgent.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\sloSkinAgent.h
 # End Source File
 # Begin Source File
 
