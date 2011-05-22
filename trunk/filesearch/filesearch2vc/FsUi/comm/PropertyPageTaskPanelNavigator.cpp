@@ -45,9 +45,11 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 
 	SetFont(pFont);
 	
+	//添加基本设置group
 	CXTPTaskPanelGroup* pGroup = AddGroup(0,IDI_ICON_SET_TOOLS);
 	pGroup->SetCaption(g_lag.LoadString("title.basicset"));
 
+	//添加常规item
 	int i = 0;
 	CXTPTaskPanelGroupItem* pItem = pGroup->AddLinkItem(0, IDI_ICON_SYS_SET);
 	pItem->SetCaption(g_lag.LoadString("title.general"));
@@ -56,6 +58,7 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 	pItem->SetItemData((DWORD_PTR)pPage);
 	pPage->m_dwData = (DWORD_PTR)pItem;
 
+	//添加词汇item
 	i = 1;
 	pItem = pGroup->AddLinkItem(1, IDI_ICON_CIHUI2);
 	pItem->SetCaption(g_lag.LoadString("title.words"));
@@ -64,14 +67,25 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 	pItem->SetItemData((DWORD_PTR)pPage);
 	pPage->m_dwData = (DWORD_PTR)pItem;
 
+	//添加皮肤item
+	i = 2;
+	pItem = pGroup->AddLinkItem(2, IDI_ICON_CIHUI2);
+	pItem->SetCaption(g_lag.LoadString("title.skin"));
+	
+	pPage = m_pSheet->GetPage(2);
+	pItem->SetItemData((DWORD_PTR)pPage);
+	pPage->m_dwData = (DWORD_PTR)pItem;
+
+	//添加注册管理group
 	pGroup = AddGroup(1,IDI_ICON_REG_INFO);
 	pGroup->SetCaption(g_lag.LoadString("title.licensemanager"));
 
+	//添加注册信息item
 	i = 2;
 	pItem = pGroup->AddLinkItem(0, IDI_ICON_REG_MANAGER);
 	pItem->SetCaption(g_lag.LoadString("title.licenseinfo"));
 	
-	pPage = m_pSheet->GetPage(2);
+	pPage = m_pSheet->GetPage(3);
 	pItem->SetItemData((DWORD_PTR)pPage);
 	pPage->m_dwData = (DWORD_PTR)pItem;
 

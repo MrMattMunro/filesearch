@@ -2,28 +2,30 @@
 
 [General Info]
 Version=1
-ClassCount=9
+ClassCount=10
 Class1=CFsUiApp
-LastClass=CCustomCiHuiDlg
+LastClass=CSkinDlg
 NewFileInclude2=#include "FsUi.h"
-ResourceCount=7
+ResourceCount=8
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
 LastTemplate=CDialog
-Resource1=IDD_DIALOG_CUSTOM_DICT
+Resource1=IDD_DIALOG_SET_ATTR
 Class3=CCustomCiHuiDlg
-Resource2=IDD_DIALOG_FAST_SEARCH
+Resource2=IDD_DIALOG_CUSTOM_DICT
 Class4=CModifyIndexDlg
-Resource3=IDD_DIALOG_ALL_CIHUI
+Resource3=IDD_DIALOG_LICENSE
 Class5=CShowAllCiHuiDlg
-Resource4=IDD_DIALOG_MODIFY_INDEX
+Resource4=IDD_DIALOG_FAST_SEARCH
 Class6=CSetAttributeDlg
-Resource5=IDD_DIALOG_CREATE_INDEX
+Resource5=IDD_DIALOG_ALL_CIHUI
 Class7=CFastSearchDlg
 Class8=CSearchThread
-Resource6=IDD_DIALOG_SET_ATTR
+Resource6=IDD_DIALOG_CREATE_INDEX
 Class9=CLicenseDlg
-Resource7=IDD_DIALOG_LICENSE
+Resource7=IDD_DIALOG_MODIFY_INDEX
+Class10=CSkinDlg
+Resource8=IDD_DIALOG_SKIN
 
 [CLS:CFsUiApp]
 Type=0
@@ -85,7 +87,7 @@ ImplementationFile=CustomCiHuiDlg.cpp
 BaseClass=CDialog
 Filter=D
 VirtualFilter=dWC
-LastObject=IDC_BUTTON_BROWSE_CIHUI
+LastObject=CCustomCiHuiDlg
 
 [DLG:IDD_DIALOG_MODIFY_INDEX]
 Type=1
@@ -219,4 +221,30 @@ BaseClass=CDialog
 Filter=D
 LastObject=CLicenseDlg
 VirtualFilter=dWC
+
+[DLG:IDD_DIALOG_SKIN]
+Type=1
+Class=CSkinDlg
+ControlCount=12
+Control1=IDC_STATIC_SKIN_SET,static,1342308352
+Control2=IDC_STATIC,static,1342177283
+Control3=IDC_STATIC_SKIN_SELECT,static,1342308352
+Control4=IDC_LIST_SKIN,listbox,1352728835
+Control5=IDC_STATIC_SKIN_PREVIEW,static,1342308352
+Control6=IDC_STATIC,button,1342177287
+Control7=IDC_STATIC_AUTHOR,static,1342308352
+Control8=IDC_STATIC_AUTHOR_NAME,static,1342308352
+Control9=IDC_STATIC_HOMEPAGE,static,1342308352
+Control10=IDC_STATIC_HOMEPAGE_NAME,static,1342308352
+Control11=IDC_STATIC_SKIN_EAMIL,static,1342308352
+Control12=IDC_STATIC_SKIN_EAMIL_NAME,static,1342308352
+
+[CLS:CSkinDlg]
+Type=0
+HeaderFile=SkinDlg.h
+ImplementationFile=SkinDlg.cpp
+BaseClass=CDialog
+Filter=D
+VirtualFilter=dWC
+LastObject=CSkinDlg
 

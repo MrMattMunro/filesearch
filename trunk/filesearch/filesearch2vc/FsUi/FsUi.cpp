@@ -9,7 +9,9 @@
 #include "SetAttributeDlg.h"
 #include "FastSearchDlg.h"
 #include "LicenseDlg.h"
+#include "SkinDlg.h"
 #include "PropertyPageTaskPanelNavigator.h"
+#include "sloSkinAgent.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -68,7 +70,7 @@ CFsUiApp::CFsUiApp()
 
 CFsUiApp theApp;
 sloLanguageAgent g_lag;
-CString m_strStylesPath;
+sloSkinAgent	g_skin;
 
 BOOL CFsUiApp::InitInstance() 
 {
@@ -77,29 +79,30 @@ BOOL CFsUiApp::InitInstance()
 //	SetDialogBkColor(RGB(230,235,235),RGB(0,0,0));
 
 	g_lag.GetLanguage();
+	g_skin.InitSkin();
 
-	TCHAR szStylesPath[_MAX_PATH];
-	
-	VERIFY(::GetModuleFileName(
-		AfxGetApp()->m_hInstance, szStylesPath, _MAX_PATH));		
-	
-	m_strStylesPath = szStylesPath;
-	int nIndex  = m_strStylesPath.ReverseFind(_T('\\'));
-	if (nIndex > 0) {
-		m_strStylesPath = m_strStylesPath.Left(nIndex);
-	}
-	else {
-		m_strStylesPath.Empty();
-	}
-	m_strStylesPath += _T("\\Styles\\");
-	
-	
-	//XTPSkinManager()->AddColorFilter(new CXTPSkinManagerColorFilterColorize(50, 100, 1));
-	
-	XTPSkinManager()->SetApplyOptions(XTPSkinManager()->GetApplyOptions() | xtpSkinApplyMetrics);
-//	XTPSkinManager()->LoadSkin(m_strStylesPath + _T("WinXP.Luna.cjstyles"), _T("NormalBlue.ini"));	
-	//Vista,WinXP.Luna,WinXP.Royale, Office2007
-	XTPSkinManager()->LoadSkin(m_strStylesPath + _T("Office2007.cjstyles"), _T("NormalBlue.ini"));
+// 	TCHAR szStylesPath[_MAX_PATH];
+// 	
+// 	VERIFY(::GetModuleFileName(
+// 		AfxGetApp()->m_hInstance, szStylesPath, _MAX_PATH));		
+// 	
+// 	m_strStylesPath = szStylesPath;
+// 	int nIndex  = m_strStylesPath.ReverseFind(_T('\\'));
+// 	if (nIndex > 0) {
+// 		m_strStylesPath = m_strStylesPath.Left(nIndex);
+// 	}
+// 	else {
+// 		m_strStylesPath.Empty();
+// 	}
+// 	m_strStylesPath += _T("\\Styles\\");
+// 	
+// 	
+// 	//XTPSkinManager()->AddColorFilter(new CXTPSkinManagerColorFilterColorize(50, 100, 1));
+// 	
+// 	XTPSkinManager()->SetApplyOptions(XTPSkinManager()->GetApplyOptions() | xtpSkinApplyMetrics);
+// //	XTPSkinManager()->LoadSkin(m_strStylesPath + _T("WinXP.Luna.cjstyles"), _T("NormalBlue.ini"));	
+// 	//Vista,WinXP.Luna,WinXP.Royale, Office2007
+// 	XTPSkinManager()->LoadSkin(m_strStylesPath + _T("Office2007.cjstyles"), _T("NormalBlue.ini"));
 
 	return CWinApp::InitInstance();
 }
@@ -213,8 +216,10 @@ DWORD __stdcall FsSetSheet()
 	CCustomCiHuiDlg		cihuidlg;
 	CSetAttributeDlg	attrdlg;
 	CLicenseDlg			licdlg;
+	CSkinDlg			skindlg;
 	ps.AddPage(&attrdlg);
 	ps.AddPage(&cihuidlg);
+	ps.AddPage(&skindlg);
 	ps.AddPage(&licdlg);
 
 	ps.SetResizable();

@@ -23,7 +23,6 @@ CCustomCiHuiDlg::CCustomCiHuiDlg(CWnd* pParent /*=NULL*/)
 	//{{AFX_DATA_INIT(CCustomCiHuiDlg)
 	m_strBrowsePath = _T("");
 	m_bIsOverCiHui = FALSE;
-	m_dwApply = 0;
 	//}}AFX_DATA_INIT
 }
 
