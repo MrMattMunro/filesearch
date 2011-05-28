@@ -66,8 +66,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2011,5,15,1
- PRODUCTVERSION 1,0,0,8
+ FILEVERSION 2011,5,22,1
+ PRODUCTVERSION 1,0,0,9
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -85,14 +85,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "slfile\0"
             VALUE "FileDescription", "FsUi DLL\0"
-            VALUE "FileVersion", "2011, 5, 15, 1\0"
+            VALUE "FileVersion", "2011, 5, 22, 1\0"
             VALUE "InternalName", "FsUi\0"
             VALUE "LegalCopyright", "版权所有 (C) 2011\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "FsUi.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "FsUi Dynamic Link Library\0"
-            VALUE "ProductVersion", "1, 0, 0, 8\0"
+            VALUE "ProductVersion", "1, 0, 0, 9\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -241,9 +241,11 @@ STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "快速查找"
 FONT 9, "宋体"
 BEGIN
-    EDITTEXT        IDC_EDIT_SEARCH_KEY,11,327,92,15,ES_AUTOHSCROLL
-    COMBOBOX        IDC_COMBO_PATH,118,328,113,15,CBS_DROPDOWN | CBS_SORT | 
+    EDITTEXT        IDC_EDIT_SEARCH_KEY,20,325,90,14,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_PATH,120,325,109,13,CBS_DROPDOWN | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP
+    CONTROL         2046,IDC_STATIC,"Static",SS_BITMAP | SS_CENTERIMAGE,7,
+                    325,14,14
 END
 
 IDD_DIALOG_LICENSE DIALOG DISCARDABLE  0, 0, 249, 190
@@ -274,17 +276,17 @@ FONT 10, "宋体"
 BEGIN
     LTEXT           "皮肤外观",IDC_STATIC_SKIN_SET,27,15,31,8
     ICON            IDI_ICON_HAND,IDC_STATIC,6,9,20,20
-    LTEXT           "请选项程序皮肤:",IDC_STATIC_SKIN_SELECT,28,30,57,8
-    LISTBOX         IDC_LIST_SKIN,29,42,65,130,LBS_SORT | 
+    LTEXT           "请选项程序皮肤:",IDC_STATIC_SKIN_SELECT,27,30,57,8
+    LISTBOX         IDC_LIST_SKIN,28,42,65,142,LBS_SORT | 
                     LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "皮肤预览:",IDC_STATIC_SKIN_PREVIEW,102,30,35,8
-    GROUPBOX        "",IDC_STATIC,102,39,136,97
-    LTEXT           "作者:",IDC_STATIC_AUTHOR,103,143,20,8
-    LTEXT           "slfile",IDC_STATIC_AUTHOR_NAME,126,143,31,10
-    LTEXT           "主页:",IDC_STATIC_HOMEPAGE,102,155,20,8
-    LTEXT           "www.slfile.com",IDC_STATIC_HOMEPAGE_NAME,126,154,77,10
-    LTEXT           "邮箱:",IDC_STATIC_SKIN_EAMIL,102,168,20,8
-    LTEXT           "support@slfile.net",IDC_STATIC_SKIN_EAMIL_NAME,126,167,
+    LTEXT           "皮肤预览:",IDC_STATIC_SKIN_PREVIEW,98,30,35,8
+    GROUPBOX        "",IDC_STATIC,98,39,142,105
+    LTEXT           "作者:",IDC_STATIC_AUTHOR,103,151,20,8
+    LTEXT           "slfile",IDC_STATIC_AUTHOR_NAME,126,151,31,10
+    LTEXT           "主页:",IDC_STATIC_HOMEPAGE,102,163,20,8
+    LTEXT           "www.slfile.com",IDC_STATIC_HOMEPAGE_NAME,126,162,77,10
+    LTEXT           "邮箱:",IDC_STATIC_SKIN_EAMIL,102,176,20,8
+    LTEXT           "support@slfile.net",IDC_STATIC_SKIN_EAMIL_NAME,126,175,
                     73,10
 END
 
@@ -335,6 +337,9 @@ IDI_ICON_FIND           ICON    DISCARDABLE     "res\\n33start_find.ico"
 IDI_ICON_NEW_INDEX      ICON    DISCARDABLE     "res\\New Text Doc.ico"
 IDI_ICON_MODIFY_INDEX   ICON    DISCARDABLE     "res\\DEVTOOL.ICO"
 IDI_ICON_HAND           ICON    DISCARDABLE     "res\\HAND.ICO"
+IDI_ICON_SKIN           ICON    DISCARDABLE     "res\\PAINT~32.ICO"
+IDI_ICON_FAST_FIND      ICON    DISCARDABLE     "res\\Find.ico"
+IDI_ICON_FAST_SEARCH    ICON    DISCARDABLE     "res\\Sherlock.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -350,6 +355,11 @@ IDB_BITMAP_CHECK_ALLCIHUI BITMAP  DISCARDABLE     "res\\find_nextb24_h.bmp"
 IDB_BITMAP_CHECK_CIHUI  BITMAP  DISCARDABLE     "res\\db_find16_h.bmp"
 IDB_BITMAP_REGISTER     BITMAP  DISCARDABLE     "res\\db_register16_h.bmp"
 IDB_BITMAP_FOLDER2      BITMAP  DISCARDABLE     "res\\folder_open16.bmp"
+IDB_BITMAP_FAST_SCH     BITMAP  DISCARDABLE     "res\\Sherlock.bmp"
+IDB_BITMAP_OFFICE2007   BITMAP  DISCARDABLE     "res\\preview_office2007.bmp"
+IDB_BITMAP_VISTA        BITMAP  DISCARDABLE     "res\\preview_vista.bmp"
+IDB_BITMAP_XPPLUNA      BITMAP  DISCARDABLE     "res\\preview_winxpluna.bmp"
+IDB_BITMAP_XPPROYALE    BITMAP  DISCARDABLE     "res\\previcw_winxproyale.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //

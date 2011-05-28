@@ -69,7 +69,7 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 
 	//Ìí¼ÓÆ¤·ôitem
 	i = 2;
-	pItem = pGroup->AddLinkItem(2, IDI_ICON_CIHUI2);
+	pItem = pGroup->AddLinkItem(2, IDI_ICON_SKIN);
 	pItem->SetCaption(g_lag.LoadString("title.skin"));
 	
 	pPage = m_pSheet->GetPage(2);
@@ -106,6 +106,7 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 	GetImageManager()->SetIcon(IDI_ICON_REG_INFO, IDI_ICON_REG_INFO);
 	GetImageManager()->SetIcon(IDI_ICON_REG_MANAGER, IDI_ICON_REG_MANAGER);	
 	GetImageManager()->SetIcon(IDI_ICON_REG_MANAGE2, IDI_ICON_REG_MANAGE2);
+	GetImageManager()->SetIcon(IDI_ICON_SKIN, IDI_ICON_SKIN);
 
 //	SetGroupIconSize( CSize(16, 24));
 	SetGroupIconSize( CSize(24, 48));

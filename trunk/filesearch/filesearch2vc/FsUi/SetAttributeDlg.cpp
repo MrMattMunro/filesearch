@@ -212,8 +212,7 @@ BOOL CSetAttributeDlg::OnApply()
 //	ASSERT_VALID(this);	
 	if (g_dwApplyID == 1)
 	{
-		MessageBox("CSetAttributeDlg OnApply");
-		
+
 		UpdateData(TRUE);
 		m_setAgent.GetProFilePath();
 		

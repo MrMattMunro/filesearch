@@ -42,6 +42,7 @@ BEGIN_MESSAGE_MAP(CFastSearchDlg, CDialog)
 	ON_CBN_EDITCHANGE(IDC_COMBO_PATH, OnEditchangeComboPath)
 	ON_EN_CHANGE(IDC_EDIT_SEARCH_KEY, OnChangeEditSearchKey)
 	ON_CBN_SELCHANGE(IDC_COMBO_PATH, OnSelchangeComboPath)
+	ON_MESSAGE(XTPWM_TASKPANEL_NOTIFY, OnTaskPanelNotify)
 	ON_WM_DESTROY()
 	ON_WM_CTLCOLOR()
 	//}}AFX_MSG_MAP
@@ -123,15 +124,15 @@ BOOL CFastSearchDlg::OnInitDialog()
 	AddToolboxGroup(5, "txt", IDI_ICON_TXT);
 
 	//test code
-// 	std::vector<string> desp;
-// 	std::string str1 = "desp1";
-// 	std::string str2 = "desp2";
-// 	desp.push_back(str1);
-// 	desp.push_back(str2);
-// 	AddLinkItem(1, 1,1,"test11", desp);
-// 	AddLinkItem(1, 2,1,"test12", desp);
-// 	AddLinkItem(2, 1,1,"test2", desp);
-// 	AddLinkItem(3, 1,1,"test3", desp);
+	std::vector<string> desp;
+	std::string str1 = "desp1";
+	std::string str2 = "desp2";
+	desp.push_back(str1);
+	desp.push_back(str2);
+	AddLinkItem(1, 1,1,"D:\\3.txt", desp);
+	AddLinkItem(1, 2,1,"D:\\3.doc", desp);
+	AddLinkItem(2, 1,1,"D:\\3.xls", desp);
+	AddLinkItem(3, 1,1,"D:\\3.ppt", desp);
 
 	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_WORD, IDI_ICON_WORD);
 	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_EXCEL, IDI_ICON_EXCEL);
@@ -383,4 +384,50 @@ HBRUSH CFastSearchDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 // 	return CreateSolidBrush(backColor);      //´´½¨±³¾°Ë¢×Ó	
 	// TODO: Return a different brush if the default is not desired
 	return hbr;
+}
+
+LRESULT CFastSearchDlg::OnTaskPanelNotify(WPARAM wParam, LPARAM lParam)
+{
+	switch(wParam)
+	{
+	case XTP_TPN_CLICK:
+		{
+//			MessageBox("Click Event:");
+			/*
+			CXTPTaskPanelGroupItem* pItem = (CXTPTaskPanelGroupItem*)lParam;
+			TRACE(_T("Click Event: pItem.Caption = %s, pItem.ID = %i\n"), pItem->GetCaption(), pItem->GetID());
+			MessageBox("Click Event:");
+			//if (IsToggleButtons())
+			{
+				pItem->SetItemSelected(!pItem->IsItemSelected());
+			}
+			//////////////////////////////////////////////////////////////////////////
+			//add code
+			ShellExecute(NULL, "open",pItem->GetCaption(),NULL, NULL, SW_SHOW);
+			*/
+		}
+		break;
+	case XTP_TPN_DBLCLICK:
+		{
+			MessageBox("DBLCLICK Event:");
+			CXTPTaskPanelGroupItem* pItem = (CXTPTaskPanelGroupItem*)lParam;
+			TRACE(_T("Click Event: pItem.Caption = %s, pItem.ID = %i\n"), pItem->GetCaption(), pItem->GetID());
+
+			//if (IsToggleButtons())
+			{
+				pItem->SetItemSelected(!pItem->IsItemSelected());
+			}
+			//////////////////////////////////////////////////////////////////////////
+			//add code
+			ShellExecute(NULL, "open",pItem->GetCaption(),NULL, NULL, SW_SHOW);	
+		}
+		break;	
+	case XTP_TPN_RCLICK:
+		MessageBox("XTP_TPN_RCLICK Event:");
+		//		OnTaskPanelRButtonDown((CXTPTaskPanelItem*)lParam);
+		break;
+	default:
+		break;	
+	}
+	return 0;
 }
