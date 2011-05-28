@@ -138,6 +138,10 @@ int CMySQLDB::GetFieldCount()
 
 int CMySQLDB::GetRowCount()
 {
+	if (!m_res)
+	{
+		return 0;
+	}
 	return (int)mysql_num_rows(m_res);
 }
 
