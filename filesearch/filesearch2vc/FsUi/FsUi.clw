@@ -10,18 +10,18 @@ ResourceCount=8
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
 LastTemplate=CDialog
-Resource1=IDD_DIALOG_SET_ATTR
+Resource1=IDD_DIALOG_CUSTOM_DICT
 Class3=CCustomCiHuiDlg
-Resource2=IDD_DIALOG_CUSTOM_DICT
+Resource2=IDD_DIALOG_ALL_CIHUI
 Class4=CModifyIndexDlg
-Resource3=IDD_DIALOG_LICENSE
+Resource3=IDD_DIALOG_CREATE_INDEX
 Class5=CShowAllCiHuiDlg
-Resource4=IDD_DIALOG_FAST_SEARCH
+Resource4=IDD_DIALOG_SET_ATTR
 Class6=CSetAttributeDlg
-Resource5=IDD_DIALOG_ALL_CIHUI
+Resource5=IDD_DIALOG_FAST_SEARCH
 Class7=CFastSearchDlg
 Class8=CSearchThread
-Resource6=IDD_DIALOG_CREATE_INDEX
+Resource6=IDD_DIALOG_LICENSE
 Class9=CLicenseDlg
 Resource7=IDD_DIALOG_MODIFY_INDEX
 Class10=CSkinDlg
@@ -174,9 +174,10 @@ VirtualFilter=dWC
 [DLG:IDD_DIALOG_FAST_SEARCH]
 Type=1
 Class=CFastSearchDlg
-ControlCount=2
+ControlCount=3
 Control1=IDC_EDIT_SEARCH_KEY,edit,1350631552
 Control2=IDC_COMBO_PATH,combobox,1344340226
+Control3=IDC_STATIC,static,1342177806
 
 [CLS:CFastSearchDlg]
 Type=0

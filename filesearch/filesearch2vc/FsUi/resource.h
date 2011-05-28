@@ -215,27 +215,36 @@
 #define IDC_STATIC_SET_1                2039
 #define IDD_DIALOG_SKIN                 2039
 #define IDC_STATIC_LICENSE_INFO         2040
+#define IDI_ICON_SKIN                   2040
 #define IDC_STATIC_LICENSE_1            2041
+#define IDI_ICON_FAST_FIND              2041
 #define IDC_STATIC_NUM                  2042
+#define IDI_ICON_FAST_SEARCH            2042
 #define IDC_STATIC_EMAIL                2043
 #define IDC_STATIC_SKIN_SET             2044
 #define IDC_STATIC_SKIN_SELECT          2045
 #define IDC_LIST_SKIN                   2046
+#define IDB_BITMAP_FAST_SCH             2046
 #define IDC_STATIC_SKIN_PREVIEW         2047
+#define IDB_BITMAP_OFFICE2007           2047
 #define IDC_STATIC_AUTHOR               2048
+#define IDB_BITMAP_VISTA                2048
 #define IDC_STATIC_AUTHOR_NAME          2049
+#define IDB_BITMAP_XPPLUNA              2049
 #define IDC_STATIC_HOMEPAGE             2050
+#define IDB_BITMAP_XPPROYALE            2050
 #define IDC_STATIC_HOMEPAGE_NAME        2051
 #define IDC_STATIC_SKIN_EAMIL           2052
 #define IDC_STATIC_SKIN_EAMIL_NAME      2053
+#define IDC_LIST1                       2054
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        2040
+#define _APS_NEXT_RESOURCE_VALUE        2051
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         2049
+#define _APS_NEXT_CONTROL_VALUE         2055
 #define _APS_NEXT_SYMED_VALUE           2000
 #endif
 #endif

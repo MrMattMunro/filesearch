@@ -43,7 +43,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_WINDLL" /D "_AFXDLL" /Yu"stdafx.h" /FD /c
-# ADD CPP /nologo /MD /W3 /GX /O2 /I "." /I "comm" /I "../mysql" /I "../utils" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_WINDLL" /D "_AFXDLL" /D "_MBCS" /D "_USRDLL" /Yu"stdafx.h" /FD /c
+# ADD CPP /nologo /MD /W3 /GX /O2 /I "." /I "comm" /I "../mysql" /I "../utils" /I "bitmap" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_WINDLL" /D "_AFXDLL" /D "_MBCS" /D "_USRDLL" /Yu"stdafx.h" /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804 /d "NDEBUG" /d "_AFXDLL"
@@ -69,7 +69,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_WINDLL" /D "_AFXDLL" /Yu"stdafx.h" /FD /GZ /c
-# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "." /I "comm" /I "../mysql" /I "../utils" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_WINDLL" /D "_AFXDLL" /D "_MBCS" /D "_USRDLL" /D "D_STLP_DEBUG" /D "__STL_DEBUG" /Yu"stdafx.h" /FD /GZ /Zm200 /c
+# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "." /I "comm" /I "../mysql" /I "../utils" /I "bitmap" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_WINDLL" /D "_AFXDLL" /D "_MBCS" /D "_USRDLL" /D "D_STLP_DEBUG" /D "__STL_DEBUG" /Yu"stdafx.h" /FD /GZ /Zm200 /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804 /d "_DEBUG" /d "_AFXDLL"
@@ -349,6 +349,14 @@ SOURCE=.\res\excel.ico
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\Find.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\Find.ico
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\find_nextb24_h.bmp
 # End Source File
 # Begin Source File
@@ -393,11 +401,31 @@ SOURCE=.\res\ok.bmp
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\PAINT~32.ICO
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\pdf.ico
 # End Source File
 # Begin Source File
 
 SOURCE=.\res\ppt.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\previcw_winxproyale.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\preview_office2007.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\preview_vista.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\preview_winxpluna.bmp
 # End Source File
 # Begin Source File
 
@@ -421,6 +449,14 @@ SOURCE=".\res\SETUP INFORMATION INF.ICO"
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\Sherlock.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\Sherlock.ico
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\SYS_SET.ico
 # End Source File
 # Begin Source File
@@ -440,6 +476,18 @@ SOURCE=.\res\word.ico
 SOURCE=..\Utils\Thread.cpp
 # End Source File
 # End Group
+# Begin Group "bitmap"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\bitmap\EnBitmap.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\bitmap\ImageProcessors.cpp
+# End Source File
+# End Group
 # Begin Source File
 
 SOURCE=.\res\app.manifest
@@ -447,6 +495,10 @@ SOURCE=.\res\app.manifest
 # Begin Source File
 
 SOURCE=.\ReadMe.txt
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\Sherlock.PNG
 # End Source File
 # End Target
 # End Project
