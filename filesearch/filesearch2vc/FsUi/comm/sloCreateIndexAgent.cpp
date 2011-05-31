@@ -218,7 +218,7 @@ BOOL sloCreateIndexAgent::EventCreateIndex(char* pszSearchPath, char* pszFileTyp
 	BuildIndexPath();
 
 	BOOL bRet = TRUE;
-	std::string strQuerySQL = "insert into t_searcher(path,indexpath,filetype,hascreateindex,hasupdate,hasdel,lastmodify) values('%s','%s','%s','0','0','0','%s')";
+	std::string strQuerySQL = "insert into t_searcher(path,indexpath,filetype,hascreateindex,hasupdate,hasdel,lastmodify) values('%s','%s','%s','0','1','0','%s')";
 	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(),ConverSqlPath(pszSearchPath).c_str(), ConverSqlPath(m_szIndexPath).c_str(), pszFileTypes, sloCommAgent::GetCurTime());
 	if (FAILED(hr))
 		bRet = FALSE;
