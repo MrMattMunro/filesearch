@@ -86,7 +86,7 @@ BOOL sloModifyIndexAgent::EventModifyIndex(char* pszFileTypes)
 	return bRet;	
 }
 
-//update t_searcher set filetype='%s',hasupdate='0',lastmodify='%s' where id=%d
+//update t_searcher set hasdel='1',lastmodify='%s' where id=%d
 BOOL sloModifyIndexAgent::EventDelIndex()
 {
 	BOOL bRet = TRUE;
