@@ -66,8 +66,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2011,5,26,1
- PRODUCTVERSION 1,0,0,9
+ FILEVERSION 2011,5,31,1
+ PRODUCTVERSION 1,0,0,10
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -85,14 +85,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "slfile\0"
             VALUE "FileDescription", "FsUi DLL\0"
-            VALUE "FileVersion", "2011, 5, 26, 1\0"
+            VALUE "FileVersion", "2011, 5, 31, 1\0"
             VALUE "InternalName", "FsUi\0"
             VALUE "LegalCopyright", "∞Ê»®À˘”– (C) 2011\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "FsUi.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "FsUi Dynamic Link Library\0"
-            VALUE "ProductVersion", "1, 0, 0, 9\0"
+            VALUE "ProductVersion", "1, 0, 0, 10\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -244,8 +244,8 @@ BEGIN
     EDITTEXT        IDC_EDIT_SEARCH_KEY,20,325,90,14,ES_AUTOHSCROLL
     COMBOBOX        IDC_COMBO_PATH,120,325,109,13,CBS_DROPDOWN | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP
-    CONTROL         2046,IDC_STATIC,"Static",SS_BITMAP | SS_CENTERIMAGE,7,
-                    325,14,14
+    ICON            IDI_ICON_FAST_SEARCH,IDC_STATIC,0,319,20,24,
+                    SS_CENTERIMAGE
 END
 
 IDD_DIALOG_LICENSE DIALOG DISCARDABLE  0, 0, 249, 190
