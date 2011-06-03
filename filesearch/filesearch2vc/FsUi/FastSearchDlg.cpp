@@ -42,11 +42,13 @@ BEGIN_MESSAGE_MAP(CFastSearchDlg, CDialog)
 	ON_CBN_EDITCHANGE(IDC_COMBO_PATH, OnEditchangeComboPath)
 	ON_EN_CHANGE(IDC_EDIT_SEARCH_KEY, OnChangeEditSearchKey)
 	ON_CBN_SELCHANGE(IDC_COMBO_PATH, OnSelchangeComboPath)
-	ON_MESSAGE(XTPWM_TASKPANEL_NOTIFY, OnTaskPanelNotify)
 	ON_WM_DESTROY()
 	ON_WM_CTLCOLOR()
+	ON_MESSAGE(XTPWM_TASKPANEL_NOTIFY, OnTaskPanelNotify)
+	ON_WM_KILLFOCUS()
 	//}}AFX_MSG_MAP
 	ON_MESSAGE(WM_PROGRESS_MSG, OnProgressChange)
+	ON_MESSAGE(WM_ACTIVATE, OnActivate) 
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -99,9 +101,10 @@ BOOL CFastSearchDlg::OnInitDialog()
 	sltFastSearchThread::newInstance();
 	sltFastSearchThread::getInstance()->Init(this->GetSafeHwnd());
 	sltFastSearchThread::getInstance()->startup();
-
+	OutputDebugString("11111111117777777");
 	SetWinPos();
 
+	OutputDebugString("1111111111888888888");
 	if (m_agent.GetAllPath() == 0)
 	{
 		int nSize = m_agent.m_PathList.size();
@@ -123,7 +126,7 @@ BOOL CFastSearchDlg::OnInitDialog()
 	AddToolboxGroup(4, "pdf", IDI_ICON_PDF);
 	AddToolboxGroup(5, "txt", IDI_ICON_TXT);
 
-	//test code
+#if 0
 	std::vector<string> desp;
 	std::string str1 = "desp1";
 	std::string str2 = "desp2";
@@ -133,6 +136,7 @@ BOOL CFastSearchDlg::OnInitDialog()
 	AddLinkItem(1, 2,1,"D:\\3.doc", desp);
 	AddLinkItem(2, 1,1,"D:\\3.xls", desp);
 	AddLinkItem(3, 1,1,"D:\\3.ppt", desp);
+#endif
 
 	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_WORD, IDI_ICON_WORD);
 	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_EXCEL, IDI_ICON_EXCEL);
@@ -142,6 +146,7 @@ BOOL CFastSearchDlg::OnInitDialog()
 	m_wndTaskPanel.SetGroupIconSize( CSize(16, 24));
 
 	UpdateGroupsCaption();
+	OutputDebugString("111111111199999999");
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -365,6 +370,7 @@ void CFastSearchDlg::OnDestroy()
 	
 	// TODO: Add your message handler code here
 	sltFastSearchThread::getInstance()->shutdownflag();
+	OutputDebugString("OnDestroy\r\n");
 }
 
 HBRUSH CFastSearchDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor) 
@@ -430,4 +436,21 @@ LRESULT CFastSearchDlg::OnTaskPanelNotify(WPARAM wParam, LPARAM lParam)
 		break;	
 	}
 	return 0;
+}
+
+void CFastSearchDlg::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
+{
+	OutputDebugString("11111111111111");
+	CDialog::OnActivate(nState, pWndOther, bMinimized);
+	
+	// TODO: 在此处添加消息处理程序代码
+// 	//如果处于非激活状态，则关闭窗口
+// 	if(nState==WA_INACTIVE)
+// 	{		OutputDebugString("1111111111111333333333333");
+// 		//PostMessage(WM_CLOSE, NULL, NULL);   
+// 		//this-> PostMessage(WM_QUIT,NULL,NULL);   //失去焦点,关闭对话框..
+// 	//	PostQuitMessage(0); 
+// 	}
+
+		//	OutputDebugString("111111111111144444444");
 }

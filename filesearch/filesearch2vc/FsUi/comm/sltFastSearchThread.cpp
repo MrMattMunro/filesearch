@@ -37,6 +37,10 @@ HRESULT sltFastSearchThread::startup()
 
 void sltFastSearchThread::shutdownflag()
 {
+	if (m_bShutdown == TRUE)
+	{
+		return ;
+	}
 	m_bShutdown = TRUE;
 	if (NULL != m_pSearchThread)
 	{

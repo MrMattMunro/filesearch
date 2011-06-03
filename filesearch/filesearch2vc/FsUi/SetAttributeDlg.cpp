@@ -247,7 +247,9 @@ void CSetAttributeDlg::OnOK()
 	// TODO: Add extra validation here
 	UpdateData(TRUE);
 	m_setAgent.GetProFilePath();
-
+	
+	//add code 
+	//不采用写文件，将数据写入db
 	sloCommAgent::WritePropertyfileString(IE_NAME,m_strIE.GetBuffer(0), m_setAgent.m_szpropertiesPath);
 	sloCommAgent::WritePropertyfileString(WORD_NAME,m_strWord.GetBuffer(0), m_setAgent.m_szpropertiesPath);
 
