@@ -47,7 +47,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /Yu"stdafx.h" /FD /GZ /c
-# ADD CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /I "." /I "thread" /I "..\log" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Yu"stdafx.h" /FD /GZ /c
+# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "." /I "thread" /I "..\log" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Yu"stdafx.h" /FD /GZ /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804 /d "_DEBUG"
 # ADD RSC /l 0x804 /d "_DEBUG"
@@ -126,7 +126,7 @@ SOURCE="$(InputPath)"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MT /W3 /GX /O1 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /Yu"stdafx.h" /FD /c
-# ADD CPP /nologo /MT /W3 /GX /O1 /I "." /I "thread" /I "..\log" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_ATL_DLL" /Yu"stdafx.h" /FD /c
+# ADD CPP /nologo /MD /W3 /GX /O1 /I "." /I "thread" /I "..\log" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_ATL_DLL" /Yu"stdafx.h" /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804 /d "NDEBUG"
 # ADD RSC /l 0x804 /d "NDEBUG"
@@ -308,10 +308,48 @@ SOURCE=..\log\Log.cpp
 # Begin Source File
 
 SOURCE=.\slDirMonitorAgent.cpp
+
+!IF  "$(CFG)" == "slFileSearch - Win32 Debug"
+
+# ADD CPP /YX
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Unicode Debug"
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Release MinSize"
+
+# ADD CPP /YX
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Release MinDependency"
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Unicode Release MinSize"
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Unicode Release MinDependency"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\slFileSearch.cpp
+
+!IF  "$(CFG)" == "slFileSearch - Win32 Debug"
+
+# ADD CPP /YX
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Unicode Debug"
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Release MinSize"
+
+# ADD CPP /YX
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Release MinDependency"
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Unicode Release MinSize"
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Unicode Release MinDependency"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
@@ -325,10 +363,48 @@ SOURCE=.\slFileSearch.rc
 # Begin Source File
 
 SOURCE=.\slServiceCenter.cpp
+
+!IF  "$(CFG)" == "slFileSearch - Win32 Debug"
+
+# ADD CPP /YX
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Unicode Debug"
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Release MinSize"
+
+# ADD CPP /YX
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Release MinDependency"
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Unicode Release MinSize"
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Unicode Release MinDependency"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\sltIndexNotifyThread.cpp
+
+!IF  "$(CFG)" == "slFileSearch - Win32 Debug"
+
+# ADD CPP /YX
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Unicode Debug"
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Release MinSize"
+
+# ADD CPP /YX
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Release MinDependency"
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Unicode Release MinSize"
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Unicode Release MinDependency"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
@@ -338,6 +414,25 @@ SOURCE=.\StdAfx.cpp
 # Begin Source File
 
 SOURCE=.\thread\Thread.cpp
+
+!IF  "$(CFG)" == "slFileSearch - Win32 Debug"
+
+# ADD CPP /YX
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Unicode Debug"
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Release MinSize"
+
+# ADD CPP /YX
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Release MinDependency"
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Unicode Release MinSize"
+
+!ELSEIF  "$(CFG)" == "slFileSearch - Win32 Unicode Release MinDependency"
+
+!ENDIF 
+
 # End Source File
 # End Group
 # Begin Group "Header Files"
