@@ -59,10 +59,18 @@ using namespace std;
 #include "mysqlcomm.h"
 #include <XTToolkitPro.h>   // Codejock Software Components
 //////////////////////////////////////////////////////////////////////////
+
+#include "sloSkinAgent.h"
 #include "sloLanguageAgent.h"
 extern sloLanguageAgent g_lag;
 
 #define WM_PROGRESS_MSG   WM_USER + 100
+
+#define WORD_NAME	"word"
+#define EXCEL_NAME	"excel"
+#define PPT_NAME	"ppt"
+#define PDF_NAME	"pdf"
+#define TXT_NAME	"txt"
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 

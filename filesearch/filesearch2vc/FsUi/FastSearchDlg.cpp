@@ -48,7 +48,7 @@ BEGIN_MESSAGE_MAP(CFastSearchDlg, CDialog)
 	ON_WM_KILLFOCUS()
 	//}}AFX_MSG_MAP
 	ON_MESSAGE(WM_PROGRESS_MSG, OnProgressChange)
-	ON_MESSAGE(WM_ACTIVATE, OnActivate) 
+//	ON_MESSAGE(WM_ACTIVATE, OnActivate) 
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -101,10 +101,8 @@ BOOL CFastSearchDlg::OnInitDialog()
 	sltFastSearchThread::newInstance();
 	sltFastSearchThread::getInstance()->Init(this->GetSafeHwnd());
 	sltFastSearchThread::getInstance()->startup();
-	OutputDebugString("11111111117777777");
-	SetWinPos();
 
-	OutputDebugString("1111111111888888888");
+	SetWinPos();
 	if (m_agent.GetAllPath() == 0)
 	{
 		int nSize = m_agent.m_PathList.size();
@@ -132,10 +130,10 @@ BOOL CFastSearchDlg::OnInitDialog()
 	std::string str2 = "desp2";
 	desp.push_back(str1);
 	desp.push_back(str2);
-	AddLinkItem(1, 1,1,"D:\\3.txt", desp);
-	AddLinkItem(1, 2,1,"D:\\3.doc", desp);
-	AddLinkItem(2, 1,1,"D:\\3.xls", desp);
-	AddLinkItem(3, 1,1,"D:\\3.ppt", desp);
+	AddLinkItem(1, 1,1,"3.txt", desp);
+	AddLinkItem(1, 2,1,"3.doc", desp);
+	AddLinkItem(2, 1,1,"3.xls", desp);
+	AddLinkItem(3, 1,1,"3.ppt", desp);
 #endif
 
 	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_WORD, IDI_ICON_WORD);
@@ -146,7 +144,7 @@ BOOL CFastSearchDlg::OnInitDialog()
 	m_wndTaskPanel.SetGroupIconSize( CSize(16, 24));
 
 	UpdateGroupsCaption();
-	OutputDebugString("111111111199999999");
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -205,7 +203,6 @@ void CFastSearchDlg::OnSelchangeComboPath()
 //处理文件检测事件
 void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
 {
-	OutputDebugString("OnProgressChange");
 
 	//清空LinkItem
 	ClearGroupsItems();
@@ -232,11 +229,6 @@ void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
 
 }
 
-#define WORD_NAME	"word"
-#define EXCEL_NAME	"excel"
-#define PPT_NAME	"ppt"
-#define PDF_NAME	"pdf"
-#define TXT_NAME	"txt"
 int CFastSearchDlg::GetFileID(char* szFileType)
 {
 	if (strlen(szFileType) == 0)
@@ -370,7 +362,6 @@ void CFastSearchDlg::OnDestroy()
 	
 	// TODO: Add your message handler code here
 	sltFastSearchThread::getInstance()->shutdownflag();
-	OutputDebugString("OnDestroy\r\n");
 }
 
 HBRUSH CFastSearchDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor) 
@@ -399,23 +390,14 @@ LRESULT CFastSearchDlg::OnTaskPanelNotify(WPARAM wParam, LPARAM lParam)
 	case XTP_TPN_CLICK:
 		{
 //			MessageBox("Click Event:");
-			/*
-			CXTPTaskPanelGroupItem* pItem = (CXTPTaskPanelGroupItem*)lParam;
-			TRACE(_T("Click Event: pItem.Caption = %s, pItem.ID = %i\n"), pItem->GetCaption(), pItem->GetID());
-			MessageBox("Click Event:");
-			//if (IsToggleButtons())
-			{
-				pItem->SetItemSelected(!pItem->IsItemSelected());
-			}
-			//////////////////////////////////////////////////////////////////////////
-			//add code
-			ShellExecute(NULL, "open",pItem->GetCaption(),NULL, NULL, SW_SHOW);
-			*/
+
 		}
 		break;
 	case XTP_TPN_DBLCLICK:
 		{
-			MessageBox("DBLCLICK Event:");
+			//////////////////////////////////////////////////////////////////////////
+			//add code
+//			MessageBox("DBLCLICK Event:");
 			CXTPTaskPanelGroupItem* pItem = (CXTPTaskPanelGroupItem*)lParam;
 			TRACE(_T("Click Event: pItem.Caption = %s, pItem.ID = %i\n"), pItem->GetCaption(), pItem->GetID());
 
@@ -423,13 +405,17 @@ LRESULT CFastSearchDlg::OnTaskPanelNotify(WPARAM wParam, LPARAM lParam)
 			{
 				pItem->SetItemSelected(!pItem->IsItemSelected());
 			}
-			//////////////////////////////////////////////////////////////////////////
-			//add code
-			ShellExecute(NULL, "open",pItem->GetCaption(),NULL, NULL, SW_SHOW);	
+
+			//find file full path from file name
+			std::string strFilePath = m_agent.GetFilePathFromName(pItem->GetCaption().GetBuffer(0));
+			if (strFilePath.size() != 0)
+			{				
+				ShellExecute(NULL, "open",strFilePath.c_str(),NULL, NULL, SW_SHOW);	
+			}
 		}
 		break;	
 	case XTP_TPN_RCLICK:
-		MessageBox("XTP_TPN_RCLICK Event:");
+//		MessageBox("XTP_TPN_RCLICK Event:");
 		//		OnTaskPanelRButtonDown((CXTPTaskPanelItem*)lParam);
 		break;
 	default:
@@ -437,7 +423,7 @@ LRESULT CFastSearchDlg::OnTaskPanelNotify(WPARAM wParam, LPARAM lParam)
 	}
 	return 0;
 }
-
+/*
 void CFastSearchDlg::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
 {
 	OutputDebugString("11111111111111");
@@ -454,3 +440,4 @@ void CFastSearchDlg::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
 
 		//	OutputDebugString("111111111111144444444");
 }
+*/

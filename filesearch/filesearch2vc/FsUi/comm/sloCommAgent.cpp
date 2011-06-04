@@ -37,6 +37,25 @@ char* sloCommAgent::GetCurTime(int nAddYear)
 	return pszTime;
 }
 
+
+string sloCommAgent::ConverSqlPath(string strPath)
+{
+	std::string strData = strPath;
+	std::string strTmp = strData;
+	
+	int nPos1 = 0;
+	int nPos2 = strTmp.find_first_of('\\');	
+	while(nPos2 != -1)
+	{
+		strData.insert(nPos1 + nPos2,"\\");
+		strTmp.erase(0,nPos2+1);
+		nPos1 += nPos2+2;
+		nPos2 = strTmp.find_first_of('\\');	
+	}
+	
+	return strData;
+}
+
 BOOL sloCommAgent::DoFileDialog(char *szPath, LPCTSTR lpszFilter,LPCTSTR lpszDefExt  )
 {
 	CFileDialog hFileDlg(true,NULL ,

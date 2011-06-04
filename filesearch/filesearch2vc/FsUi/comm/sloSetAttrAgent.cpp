@@ -60,6 +60,31 @@ int sloSetAttrAgent::GetSoftPath(char* szFileType, char* szPath)
 	return 0;
 }
 
+BOOL sloSetAttrAgent::UpdateSoftPath(char* szFileType, char* szPath)
+{
+	BOOL bRet = FALSE;
+
+	do 
+	{
+		//
+		if (!m_pMySqlDB && !ConnectDB())
+			break ;
+		
+		std::string strQuerySQL = "update t_fileopener set exepath='%s',lastmodify='%s' where filetype='%s'";
+		HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(),sloCommAgent::ConverSqlPath(szPath).c_str(), sloCommAgent::GetCurTime(),szFileType);
+		if (FAILED(hr))
+		{
+			bRet = FALSE;
+			break;
+		}
+
+		bRet = TRUE;
+
+	} while (0);
+
+	return bRet;
+}
+
 #define  FILEOPENER_PRO_NAME "tomcat\\webapps\\slfile\\WEB-INF\\classes\\com\\searchlocal\\properties\\fileopener.properties"
 BOOL sloSetAttrAgent::GetProFilePath()
 {
@@ -78,4 +103,11 @@ BOOL sloSetAttrAgent::GetProFilePath()
 	}
 	
 	return FALSE;
+}
+
+
+BOOL sloSetAttrAgent::EventSetAttr()
+{
+	//update db
+	return TRUE;
 }

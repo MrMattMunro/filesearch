@@ -23,7 +23,7 @@ private:
 	void BuildIndexPath();
 
 	int GetMaxIndexID();
-	string ConverSqlPath(string strPath);
+//	string ConverSqlPath(string strPath);
  
 	//disk
 	void GetDrvSpaceInfo(char* pDisk);

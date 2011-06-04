@@ -15,7 +15,10 @@ public:
 	sloSetAttrAgent();
 	virtual ~sloSetAttrAgent();
 
+	BOOL EventSetAttr();
+
 	int GetSoftPath(char* szFileType, char* szPath);
+	BOOL UpdateSoftPath(char* szFileType, char* szPath);
 public:
 	BOOL GetProFilePath();
 

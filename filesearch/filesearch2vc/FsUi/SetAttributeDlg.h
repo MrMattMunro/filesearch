@@ -16,6 +16,7 @@ class CSetAttributeDlg : public  CXTPPropertyPage/*CDialog*/
 // Construction
 public:
 	CSetAttributeDlg(CWnd* pParent = NULL);   // standard constructor
+	void OKEvent();
 
 	sloSetAttrAgent m_setAgent;
 // Dialog Data
@@ -48,6 +49,13 @@ protected:
 	CXTPButton m_btnFolderPPT;
 	CXTPButton m_btnFolderPdf;
 	CXTPButton m_btnFolderTxt;
+
+	CString	m_strOldExcel;
+	CString	m_strOldIE;
+	CString	m_strOldPdf;
+	CString	m_strOldPPT;
+	CString	m_strOldTxt;
+	CString	m_strOldWord;
 	// Generated message map functions
 	//{{AFX_MSG(CSetAttributeDlg)
 	virtual BOOL OnInitDialog();
