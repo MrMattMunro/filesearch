@@ -21,6 +21,8 @@ public:
 	DWORD GetSearchRecords();
 
 	int GetPathIndex(char* szPath);
+
+	std::string GetFilePathFromName(char* szName);
 private:
 	BOOL GetKeyFilePath();
 	void AddList(SearchRectord sr);

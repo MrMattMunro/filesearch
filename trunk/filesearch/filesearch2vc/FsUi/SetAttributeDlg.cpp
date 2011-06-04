@@ -127,6 +127,12 @@ BOOL CSetAttributeDlg::OnInitDialog()
 	if(m_setAgent.GetSoftPath(TXT_NAME,szPath) == 0 )
 		m_strTxt = szPath;
 
+	m_strOldWord = m_strWord;
+	m_strOldExcel = m_strExcel;
+	m_strOldPPT = m_strPPT;
+	m_strOldPdf = m_strPdf;
+	m_strOldTxt = m_strTxt;
+	m_strOldIE = m_strIE;
 	UpdateData(FALSE);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -206,25 +212,80 @@ void CSetAttributeDlg::OnButtonBrowserTxt()
 		SetModified();
 	}	
 }
+
+void CSetAttributeDlg::OKEvent() 
+{
+	// TODO: Add extra validation here
+	UpdateData(TRUE);
+// 	CString	strNewExcel,strNewIE,strNewPdf,strNewPPT,strNewTxt,strNewWord;
+// 	GetDlgItemText(IDC_EDIT_EXCEL_PATH, strNewExcel);
+// 	GetDlgItemText(IDC_EDIT_IE_PATH, strNewIE);
+// 	GetDlgItemText(IDC_EDIT_PDF_PATH, strNewPdf);
+// 	GetDlgItemText(IDC_EDIT_PPT_PATH, strNewPPT);
+// 	GetDlgItemText(IDC_EDIT_TXT_PATH, strNewTxt);
+// 	GetDlgItemText(IDC_EDIT_WORD_PATH, strNewWord);
+	//add code 
+	//不采用写文件，将数据写入db
+#if 0
+	//write file
+	m_setAgent.GetProFilePath();
+	sloCommAgent::WritePropertyfileString(IE_NAME,m_strIE.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+	sloCommAgent::WritePropertyfileString(WORD_NAME,m_strWord.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+	
+	sloCommAgent::WritePropertyfileString(EXCEL_NAME,m_strExcel.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+	sloCommAgent::WritePropertyfileString(PPT_NAME,m_strPPT.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+	sloCommAgent::WritePropertyfileString(PDF_NAME,m_strPdf.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+	sloCommAgent::WritePropertyfileString(TXT_NAME,m_strTxt.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+#else
+	//write db
+	//cmp old
+	if (m_strOldWord != m_strWord)
+	{
+		m_setAgent.UpdateSoftPath(WORD_NAME, m_strWord.GetBuffer(0));
+		m_strOldWord = m_strWord;
+	}
+	
+	if (m_strOldExcel != m_strExcel)
+	{
+		m_setAgent.UpdateSoftPath(EXCEL_NAME, m_strExcel.GetBuffer(0));
+		m_strOldExcel = m_strExcel;
+	}
+
+	if (m_strOldPPT != m_strPPT)
+	{
+		m_setAgent.UpdateSoftPath(PPT_NAME, m_strPPT.GetBuffer(0));
+		m_strOldPPT = m_strPPT;
+	}
+
+	if (m_strOldPdf != m_strPdf)
+	{
+		m_setAgent.UpdateSoftPath(PDF_NAME, m_strPdf.GetBuffer(0));
+		m_strOldPdf = m_strPdf;
+	}
+
+	if (m_strOldTxt != m_strTxt)
+	{
+		m_setAgent.UpdateSoftPath(TXT_NAME, m_strTxt.GetBuffer(0));
+		m_strOldTxt = m_strTxt;
+	}
+
+	if (m_strOldIE != m_strIE)
+	{
+		m_setAgent.UpdateSoftPath(IE_NAME, m_strIE.GetBuffer(0));
+		m_strOldIE = m_strIE;
+	}
+	
+#endif
+
+}
+
 extern DWORD g_dwApplyID;
 BOOL CSetAttributeDlg::OnApply()
 {
 //	ASSERT_VALID(this);	
 	if (g_dwApplyID == 1)
 	{
-
-		UpdateData(TRUE);
-		m_setAgent.GetProFilePath();
-		
-		sloCommAgent::WritePropertyfileString(IE_NAME,m_strIE.GetBuffer(0), m_setAgent.m_szpropertiesPath);
-		sloCommAgent::WritePropertyfileString(WORD_NAME,m_strWord.GetBuffer(0), m_setAgent.m_szpropertiesPath);
-		
-		sloCommAgent::WritePropertyfileString(EXCEL_NAME,m_strExcel.GetBuffer(0), m_setAgent.m_szpropertiesPath);
-		sloCommAgent::WritePropertyfileString(PPT_NAME,m_strPPT.GetBuffer(0), m_setAgent.m_szpropertiesPath);
-		sloCommAgent::WritePropertyfileString(PDF_NAME,m_strPdf.GetBuffer(0), m_setAgent.m_szpropertiesPath);
-		sloCommAgent::WritePropertyfileString(TXT_NAME,m_strTxt.GetBuffer(0), m_setAgent.m_szpropertiesPath);
-		
-		return TRUE;
+		OKEvent();
 	}
 
 	return TRUE;
@@ -245,18 +306,7 @@ BOOL CSetAttributeDlg::OnKillActive()
 void CSetAttributeDlg::OnOK() 
 {
 	// TODO: Add extra validation here
-	UpdateData(TRUE);
-	m_setAgent.GetProFilePath();
-	
-	//add code 
-	//不采用写文件，将数据写入db
-	sloCommAgent::WritePropertyfileString(IE_NAME,m_strIE.GetBuffer(0), m_setAgent.m_szpropertiesPath);
-	sloCommAgent::WritePropertyfileString(WORD_NAME,m_strWord.GetBuffer(0), m_setAgent.m_szpropertiesPath);
-
-	sloCommAgent::WritePropertyfileString(EXCEL_NAME,m_strExcel.GetBuffer(0), m_setAgent.m_szpropertiesPath);
-	sloCommAgent::WritePropertyfileString(PPT_NAME,m_strPPT.GetBuffer(0), m_setAgent.m_szpropertiesPath);
-	sloCommAgent::WritePropertyfileString(PDF_NAME,m_strPdf.GetBuffer(0), m_setAgent.m_szpropertiesPath);
-	sloCommAgent::WritePropertyfileString(TXT_NAME,m_strTxt.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+	OKEvent();
 
 	CDialog::OnOK();
 }

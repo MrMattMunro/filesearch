@@ -74,7 +74,7 @@ protected:
 	LRESULT OnTaskPanelNotify(WPARAM wParam, LPARAM lParam);
 	DECLARE_MESSAGE_MAP()
 	afx_msg void OnProgressChange(WPARAM wParam, LPARAM lParam);
-	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
+//	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
 };
 
 //{{AFX_INSERT_LOCATION}}

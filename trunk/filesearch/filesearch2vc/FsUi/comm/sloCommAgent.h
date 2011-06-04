@@ -21,7 +21,7 @@ public:
 	static BOOL IsFileExists(LPCTSTR lpszFileName) ;
 	static BOOL GetPropertyfileString(LPCTSTR lpKeyName, LPCTSTR lpDefault, LPTSTR lpReturnedString, DWORD nSize, LPCTSTR lpFileName);
 	static BOOL WritePropertyfileString(LPCTSTR lpKeyName, LPCTSTR lpString, LPCTSTR lpFileName);
-
+	static string ConverSqlPath(string strPath);
 };
 
 #endif // !defined(AFX_SLOCOMMAGENT_H__DC6A156B_963F_4AAB_9116_E934A742DE58__INCLUDED_)

@@ -28,6 +28,41 @@ sloFastSearchAgent::~sloFastSearchAgent()
 
 }
 
+std::string sloFastSearchAgent::GetFilePathFromName(char* szName)
+{
+	std::string strPath= "";
+
+	do 
+	{
+		//
+		if (!m_pMySqlDB && !ConnectDB())
+		{
+			break;
+		}
+		
+		std::string strQuerySQL = "select * from t_result where filename='%s'";
+		HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), sloCommAgent::ConverSqlPath(szName).c_str());
+		if (FAILED(hr))
+			break;
+		
+		int nCount = m_pMySqlDB->GetRowCount();
+		int nFieldCount = m_pMySqlDB->GetFieldCount();
+		if(nCount >= 1 && nFieldCount >= 1)
+		{			
+			bool bSucc = m_pMySqlDB->GetRow();
+			if(bSucc==false)
+				break;
+			
+			int nFilePathLen = 0;
+			char* pFilePath = m_pMySqlDB->GetField("filepath",&nFilePathLen);
+			if (nFilePathLen != 0 && pFilePath != NULL)
+				strPath = pFilePath;				
+		}
+	} while (0);
+
+	return strPath;
+}
+
 DWORD sloFastSearchAgent::GetAllPath()
 {
 	//从数据库中获取最大的索引id

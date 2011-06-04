@@ -157,7 +157,7 @@ int sloCreateIndexAgent::GetMaxIndexID()
 
 	return dwMaxID;
 }
-
+/*
 string sloCreateIndexAgent::ConverSqlPath(string strPath)
 {
 	std::string strData = strPath;
@@ -175,7 +175,7 @@ string sloCreateIndexAgent::ConverSqlPath(string strPath)
 	
 	return strData;
 }
-
+*/
 BOOL sloCreateIndexAgent::IsSearchPathExist(char* pszSearchPath)
 {
 	//从数据库中获取最大的索引id
@@ -186,7 +186,7 @@ BOOL sloCreateIndexAgent::IsSearchPathExist(char* pszSearchPath)
 	
 	int dwMaxID = 0;
 	std::string strQuerySQL = "select * from t_searcher where path='%s'";
-	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), ConverSqlPath(pszSearchPath).c_str());
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), sloCommAgent::ConverSqlPath(pszSearchPath).c_str());
 	if (FAILED(hr))
 		return -1;
 	
@@ -219,7 +219,7 @@ BOOL sloCreateIndexAgent::EventCreateIndex(char* pszSearchPath, char* pszFileTyp
 
 	BOOL bRet = TRUE;
 	std::string strQuerySQL = "insert into t_searcher(path,indexpath,filetype,hascreateindex,hasupdate,hasdel,lastmodify) values('%s','%s','%s','0','1','0','%s')";
-	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(),ConverSqlPath(pszSearchPath).c_str(), ConverSqlPath(m_szIndexPath).c_str(), pszFileTypes, sloCommAgent::GetCurTime());
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(),sloCommAgent::ConverSqlPath(pszSearchPath).c_str(), sloCommAgent::ConverSqlPath(m_szIndexPath).c_str(), pszFileTypes, sloCommAgent::GetCurTime());
 	if (FAILED(hr))
 		bRet = FALSE;
 	
