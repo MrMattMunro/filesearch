@@ -30,11 +30,7 @@ HRESULT sltIndexNotifyThread::startup()
 void sltIndexNotifyThread::shutdown()
 {
 	m_bShutdown = TRUE;
-	if (m_hevent)
-	{
-		CloseHandle(m_hevent);
-	}
-
+	SetEvent(m_hevent);
 }
 
 int sltIndexNotifyThread::run()
@@ -66,6 +62,12 @@ int sltIndexNotifyThread::run()
 		}		
 
 	}
+
+	if (m_hevent)
+	{
+		CloseHandle(m_hevent);
+	}
+
 	
 	return 0;
 	
