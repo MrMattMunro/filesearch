@@ -85,7 +85,7 @@ BOOL sloSetAttrAgent::UpdateSoftPath(char* szFileType, char* szPath)
 	return bRet;
 }
 
-#define  FILEOPENER_PRO_NAME "tomcat\\webapps\\slfile\\WEB-INF\\classes\\com\\searchlocal\\properties\\fileopener.properties"
+#define  FILEOPENER_PRO_NAME "tomcat\\webapps\\slfile\\WEB-INF\\classes\\com\\web\\searchlocal\\properties\\fileopener.properties"
 BOOL sloSetAttrAgent::GetProFilePath()
 {
 	char szFileExePath[MAX_PATH] = {0};

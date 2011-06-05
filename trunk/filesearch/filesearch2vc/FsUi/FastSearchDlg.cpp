@@ -46,9 +46,10 @@ BEGIN_MESSAGE_MAP(CFastSearchDlg, CDialog)
 	ON_WM_CTLCOLOR()
 	ON_MESSAGE(XTPWM_TASKPANEL_NOTIFY, OnTaskPanelNotify)
 	ON_WM_KILLFOCUS()
+	ON_WM_ACTIVATE()
 	//}}AFX_MSG_MAP
 	ON_MESSAGE(WM_PROGRESS_MSG, OnProgressChange)
-//	ON_MESSAGE(WM_ACTIVATE, OnActivate) 
+
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -423,21 +424,15 @@ LRESULT CFastSearchDlg::OnTaskPanelNotify(WPARAM wParam, LPARAM lParam)
 	}
 	return 0;
 }
-/*
-void CFastSearchDlg::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
+
+void CFastSearchDlg::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized) 
 {
-	OutputDebugString("11111111111111");
 	CDialog::OnActivate(nState, pWndOther, bMinimized);
 	
-	// TODO: 在此处添加消息处理程序代码
-// 	//如果处于非激活状态，则关闭窗口
-// 	if(nState==WA_INACTIVE)
-// 	{		OutputDebugString("1111111111111333333333333");
-// 		//PostMessage(WM_CLOSE, NULL, NULL);   
-// 		//this-> PostMessage(WM_QUIT,NULL,NULL);   //失去焦点,关闭对话框..
-// 	//	PostQuitMessage(0); 
-// 	}
-
-		//	OutputDebugString("111111111111144444444");
+	// TODO: Add your message handler code here
+	//如果处于非激活状态，则关闭窗口
+	if(nState==WA_INACTIVE)
+	{
+		DestroyWindow();
+	}
 }
-*/
