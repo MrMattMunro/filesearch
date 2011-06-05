@@ -1,0 +1,20 @@
+// slFileSearch.idl : IDL source for slFileSearch.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (slFileSearch.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(5E4FE5A2-476F-4DAF-8B42-CA9590D62844),
+	version(1.0),
+	helpstring("slFileSearch 1.0 Type Library")
+]
+library SLFILESEARCHLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+};
