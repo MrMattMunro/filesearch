@@ -204,7 +204,7 @@ BOOL sloFastSearchAgent::IsKeyFileExist()
 	return sloCommAgent::IsFileExists(m_szKeyPath);
 }
 
-#define  KEY_PRO_NAME "tomcat\\webapps\\slfile\\WEB-INF\\classes\\com\\searchlocal\\properties\\keyWord.properties"
+#define  KEY_PRO_NAME "tomcat\\webapps\\slfile\\WEB-INF\\classes\\com\\web\\searchlocal\\properties\\keyWord.properties"
 BOOL sloFastSearchAgent::GetKeyFilePath()
 {
 	char szFileExePath[MAX_PATH] = {0};

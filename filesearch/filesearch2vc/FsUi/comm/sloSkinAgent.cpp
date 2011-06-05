@@ -33,7 +33,7 @@ sloSkinAgent::~sloSkinAgent()
 #define  SKIN_NAME			"Office2007"
 #define  SKIN_NAME_EXT		".cjstyles"
 
-#define  SKIN_PRO_NAME "tomcat\\webapps\\slfile\\WEB-INF\\classes\\com\\searchlocal\\properties\\skin.properties"
+#define  SKIN_PRO_NAME "tomcat\\webapps\\slfile\\WEB-INF\\classes\\com\\web\\searchlocal\\properties\\skin.properties"
 
 BOOL sloSkinAgent::GetSkinPath()
 {

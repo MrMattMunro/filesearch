@@ -70,11 +70,11 @@ protected:
 	afx_msg void OnSelchangeComboPath();
 	afx_msg void OnDestroy();
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
 	//}}AFX_MSG
 	LRESULT OnTaskPanelNotify(WPARAM wParam, LPARAM lParam);
 	DECLARE_MESSAGE_MAP()
 	afx_msg void OnProgressChange(WPARAM wParam, LPARAM lParam);
-//	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
 };
 
 //{{AFX_INSERT_LOCATION}}

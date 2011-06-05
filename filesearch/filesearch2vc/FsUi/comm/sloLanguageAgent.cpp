@@ -30,7 +30,7 @@ sloLanguageAgent::~sloLanguageAgent()
 }
 
 
-#define  LANGUAGE_PRO_NAME "tomcat\\webapps\\slfile\\WEB-INF\\classes\\com\\searchlocal\\properties\\"
+#define  LANGUAGE_PRO_NAME "tomcat\\webapps\\slfile\\WEB-INF\\classes\\com\\web\\searchlocal\\properties\\"
 #define  LAG_FILE_NAME		"language.properties"
 #define  LAG_FILE_NAME_CN	"ApplicationResources_cn_src.properties"
 #define  LAG_FILE_NAME_JP	"ApplicationResources_jp_src.properties"
