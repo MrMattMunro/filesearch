@@ -125,7 +125,7 @@ BOOL CFastSearchDlg::OnInitDialog()
 	AddToolboxGroup(4, "pdf", IDI_ICON_PDF);
 	AddToolboxGroup(5, "txt", IDI_ICON_TXT);
 
-#if 0
+#if 1
 	std::vector<string> desp;
 	std::string str1 = "desp1";
 	std::string str2 = "desp2";
@@ -142,7 +142,8 @@ BOOL CFastSearchDlg::OnInitDialog()
 	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_PPT, IDI_ICON_PPT);
 	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_PDF, IDI_ICON_PDF);
 	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_TXT, IDI_ICON_TXT);
-	m_wndTaskPanel.SetGroupIconSize( CSize(16, 24));
+	m_wndTaskPanel.SetGroupIconSize( CSize(16, 16));
+	m_wndTaskPanel.SetIconSize( CSize(16, 16));
 
 	UpdateGroupsCaption();
 
@@ -280,6 +281,12 @@ void CFastSearchDlg::AddToolboxGroup(UINT nID, LPCTSTR lpszCaption, int nIconInd
 	m_listMap[nID].nItemSize = 0;
 }
 
+int imageid[5] = {	IDI_ICON_WORD,
+					IDI_ICON_EXCEL,
+					IDI_ICON_PPT,
+					IDI_ICON_PDF,
+					IDI_ICON_TXT
+					};
 void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<string> DespList)
 {
 
@@ -288,11 +295,12 @@ void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, L
 		return ;
 
 	m_listMap[nFolderID].nItemSize++;
-	CXTPTaskPanelGroupItem* pPointer = pFolder->AddLinkItem(nItemID, 0);
+	CXTPTaskPanelGroupItem* pPointer = pFolder->AddLinkItem(nItemID, 0/*imageid[nFolderID-1]*/);
 	int nSize = DespList.size();
 	for (int i = 0; i < nSize; i++)
 	{
-		pFolder->AddTextItem(DespList[i].c_str());
+		std::string strTextItem = "              " + DespList[i];
+		pFolder->AddTextItem(strTextItem.c_str());
 	}
 
 	pPointer->SetCaption(lpszCaption);
@@ -433,6 +441,7 @@ void CFastSearchDlg::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
 	//如果处于非激活状态，则关闭窗口
 	if(nState==WA_INACTIVE)
 	{
-		DestroyWindow();
+		//DestroyWindow();  //DoModal函数不会返回
+		CDialog::OnCancel();
 	}
 }

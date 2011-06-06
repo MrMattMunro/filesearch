@@ -66,8 +66,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2011,6,5,1
- PRODUCTVERSION 1,0,0,12
+ FILEVERSION 2011,6,6,1
+ PRODUCTVERSION 1,0,0,13
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -85,14 +85,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "slfile\0"
             VALUE "FileDescription", "FsUi DLL\0"
-            VALUE "FileVersion", "2011, 6, 5, 1\0"
+            VALUE "FileVersion", "2011, 6, 6, 1\0"
             VALUE "InternalName", "FsUi\0"
             VALUE "LegalCopyright", "版权所有 (C) 2011\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "FsUi.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "FsUi Dynamic Link Library\0"
-            VALUE "ProductVersion", "1, 0, 0, 12\0"
+            VALUE "ProductVersion", "1, 0, 0, 13\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -241,10 +241,10 @@ STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "快速查找"
 FONT 9, "宋体"
 BEGIN
-    EDITTEXT        IDC_EDIT_SEARCH_KEY,20,325,90,14,ES_AUTOHSCROLL
-    COMBOBOX        IDC_COMBO_PATH,120,325,109,13,CBS_DROPDOWN | CBS_SORT | 
+    EDITTEXT        IDC_EDIT_SEARCH_KEY,23,328,90,14,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_PATH,125,328,109,71,CBS_DROPDOWN | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP
-    ICON            IDI_ICON_FAST_SEARCH,IDC_STATIC,0,319,20,24,
+    ICON            IDI_ICON_FAST_SEARCH,IDC_STATIC,0,324,20,20,
                     SS_CENTERIMAGE
 END
 
