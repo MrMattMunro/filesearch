@@ -125,7 +125,7 @@ BOOL CFastSearchDlg::OnInitDialog()
 	AddToolboxGroup(4, "pdf", IDI_ICON_PDF);
 	AddToolboxGroup(5, "txt", IDI_ICON_TXT);
 
-#if 1
+#if 0
 	std::vector<string> desp;
 	std::string str1 = "desp1";
 	std::string str2 = "desp2";
