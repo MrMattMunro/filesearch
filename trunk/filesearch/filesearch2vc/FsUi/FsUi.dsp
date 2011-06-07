@@ -442,6 +442,10 @@ SOURCE=".\res\Registry Entries REG.ico"
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\searchtool.ico
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\set_nomarl.ICO
 # End Source File
 # Begin Source File
