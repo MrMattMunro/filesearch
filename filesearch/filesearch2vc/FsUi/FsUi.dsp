@@ -382,6 +382,10 @@ SOURCE=.\res\HAND.ICO
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\html.ico
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\n33start_find.ico
 # End Source File
 # Begin Source File

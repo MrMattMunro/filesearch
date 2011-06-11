@@ -42,6 +42,7 @@ public:
 	CXTPTaskPanel m_wndTaskPanel;
 	sloFastSearchAgent m_agent;
 	std::map<int, GroupInfo> m_listMap;
+	BOOL m_bDestory;
 
 //	CSearchThread* m_pSearchThread;
 // Dialog Data
