@@ -10,20 +10,20 @@ ResourceCount=8
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
 LastTemplate=CDialog
-Resource1=IDD_DIALOG_FAST_SEARCH
+Resource1=IDD_DIALOG_ALL_CIHUI
 Class3=CCustomCiHuiDlg
-Resource2=IDD_DIALOG_CUSTOM_DICT
+Resource2=IDD_DIALOG_SET_ATTR
 Class4=CModifyIndexDlg
-Resource3=IDD_DIALOG_CREATE_INDEX
+Resource3=IDD_DIALOG_LICENSE
 Class5=CShowAllCiHuiDlg
-Resource4=IDD_DIALOG_ALL_CIHUI
+Resource4=IDD_DIALOG_CUSTOM_DICT
 Class6=CSetAttributeDlg
-Resource5=IDD_DIALOG_SET_ATTR
+Resource5=IDD_DIALOG_CREATE_INDEX
 Class7=CFastSearchDlg
 Class8=CSearchThread
-Resource6=IDD_DIALOG_MODIFY_INDEX
+Resource6=IDD_DIALOG_FAST_SEARCH
 Class9=CLicenseDlg
-Resource7=IDD_DIALOG_LICENSE
+Resource7=IDD_DIALOG_MODIFY_INDEX
 Class10=CSkinDlg
 Resource8=IDD_DIALOG_SKIN
 
@@ -104,7 +104,7 @@ Control8=IDC_CHECK_PDF,button,1342242819
 Control9=IDC_CHECK_PPT,button,1342242819
 Control10=IDC_CHECK_HTML,button,1342242819
 Control11=IDC_CHECK_TXT_MODIFY,button,1342242819
-Control12=IDC_CHECK_CHM,button,1342242819
+Control12=IDC_CHECK_CHM,button,1073807363
 Control13=IDC_BUTTON_DEL_INDEX,button,1342242816
 
 [CLS:CModifyIndexDlg]

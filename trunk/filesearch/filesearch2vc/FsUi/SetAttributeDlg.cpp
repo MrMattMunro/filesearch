@@ -66,12 +66,6 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CSetAttributeDlg message handlers
 
-#define IE_NAME		"html"
-#define WORD_NAME	"word"
-#define EXCEL_NAME	"excel"
-#define PPT_NAME	"ppt"
-#define PDF_NAME	"pdf"
-#define TXT_NAME	"txt"
 BOOL CSetAttributeDlg::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
@@ -104,7 +98,7 @@ BOOL CSetAttributeDlg::OnInitDialog()
 
 	char szPath[MAX_PATH] = {0};
 	
-	if(m_setAgent.GetSoftPath(IE_NAME,szPath) == 0 )
+	if(m_setAgent.GetSoftPath(HTML_NAME,szPath) == 0 )
 		m_strIE = szPath;
 
 	memset(szPath, NULL, MAX_PATH);
@@ -229,7 +223,7 @@ void CSetAttributeDlg::OKEvent()
 #if 0
 	//write file
 	m_setAgent.GetProFilePath();
-	sloCommAgent::WritePropertyfileString(IE_NAME,m_strIE.GetBuffer(0), m_setAgent.m_szpropertiesPath);
+	sloCommAgent::WritePropertyfileString(HTML_NAME,m_strIE.GetBuffer(0), m_setAgent.m_szpropertiesPath);
 	sloCommAgent::WritePropertyfileString(WORD_NAME,m_strWord.GetBuffer(0), m_setAgent.m_szpropertiesPath);
 	
 	sloCommAgent::WritePropertyfileString(EXCEL_NAME,m_strExcel.GetBuffer(0), m_setAgent.m_szpropertiesPath);
@@ -271,7 +265,7 @@ void CSetAttributeDlg::OKEvent()
 
 	if (m_strOldIE != m_strIE)
 	{
-		m_setAgent.UpdateSoftPath(IE_NAME, m_strIE.GetBuffer(0));
+		m_setAgent.UpdateSoftPath(HTML_NAME, m_strIE.GetBuffer(0));
 		m_strOldIE = m_strIE;
 	}
 	

@@ -71,6 +71,8 @@ extern sloLanguageAgent g_lag;
 #define PPT_NAME	"ppt"
 #define PDF_NAME	"pdf"
 #define TXT_NAME	"txt"
+#define HTML_NAME	"html"
+
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 

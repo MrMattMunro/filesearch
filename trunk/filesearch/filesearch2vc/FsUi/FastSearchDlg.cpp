@@ -22,6 +22,7 @@ CFastSearchDlg::CFastSearchDlg(CWnd* pParent /*=NULL*/)
 {
 	//{{AFX_DATA_INIT(CFastSearchDlg)
 	m_strKey = _T("");
+	m_bDestory = TRUE;
 //	m_pSearchThread = NULL;
 	//}}AFX_DATA_INIT
 }
@@ -117,13 +118,14 @@ BOOL CFastSearchDlg::OnInitDialog()
 
 	CreateTaskPanel();
 
-	//excel, word,pdf,txt,ppt
+	//excel, word,pdf,txt,ppt,html
 	//循环显示group
 	AddToolboxGroup(1, "word", IDI_ICON_WORD);
 	AddToolboxGroup(2, "excel", IDI_ICON_EXCEL);
 	AddToolboxGroup(3, "ppt", IDI_ICON_PPT);
 	AddToolboxGroup(4, "pdf", IDI_ICON_PDF);
 	AddToolboxGroup(5, "txt", IDI_ICON_TXT);
+	AddToolboxGroup(6, "html", IDI_ICON_HTML);
 
 #if 0
 	std::vector<string> desp;
@@ -132,7 +134,7 @@ BOOL CFastSearchDlg::OnInitDialog()
 	desp.push_back(str1);
 	desp.push_back(str2);
 	AddLinkItem(1, 1,1,"3.txt", desp);
-	AddLinkItem(1, 2,1,"3.doc", desp);
+	AddLinkItem(1, 2,1,"2.doc", desp);
 	AddLinkItem(2, 1,1,"3.xls", desp);
 	AddLinkItem(3, 1,1,"3.ppt", desp);
 #endif
@@ -142,6 +144,7 @@ BOOL CFastSearchDlg::OnInitDialog()
 	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_PPT, IDI_ICON_PPT);
 	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_PDF, IDI_ICON_PDF);
 	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_TXT, IDI_ICON_TXT);
+	m_wndTaskPanel.GetImageManager()->SetIcon(IDI_ICON_HTML, IDI_ICON_HTML);
 	m_wndTaskPanel.SetGroupIconSize( CSize(16, 16));
 	m_wndTaskPanel.SetIconSize( CSize(16, 16));
 
@@ -246,6 +249,8 @@ int CFastSearchDlg::GetFileID(char* szFileType)
 		return 4;
 	if (!strcmp(szFileType, TXT_NAME))
 		return 5;
+	if (!strcmp(szFileType, HTML_NAME))
+		return 5;
 	
 	return -1;
 
@@ -281,11 +286,12 @@ void CFastSearchDlg::AddToolboxGroup(UINT nID, LPCTSTR lpszCaption, int nIconInd
 	m_listMap[nID].nItemSize = 0;
 }
 
-int imageid[5] = {	IDI_ICON_WORD,
+int imageid[6] = {	IDI_ICON_WORD,
 					IDI_ICON_EXCEL,
 					IDI_ICON_PPT,
 					IDI_ICON_PDF,
-					IDI_ICON_TXT
+					IDI_ICON_TXT,
+					IDI_ICON_HTML
 					};
 void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<string> DespList)
 {
@@ -355,6 +361,9 @@ void CFastSearchDlg::UpdateGroupsCaption()
 		case 5:
 			strCaption = "txt  (";
 			break;
+		case 6:
+			strCaption = "html  (";
+			break;
 		default:
 			break ;
 		}
@@ -399,7 +408,21 @@ LRESULT CFastSearchDlg::OnTaskPanelNotify(WPARAM wParam, LPARAM lParam)
 	case XTP_TPN_CLICK:
 		{
 //			MessageBox("Click Event:");
-
+			CXTPTaskPanelGroupItem* pItem = (CXTPTaskPanelGroupItem*)lParam;
+			TRACE(_T("Click Event: pItem.Caption = %s, pItem.ID = %i\n"), pItem->GetCaption(), pItem->GetID());
+			
+			//if (IsToggleButtons())
+			{
+				pItem->SetItemSelected(!pItem->IsItemSelected());
+			}
+			
+			//find file full path from file name
+			std::string strFilePath = m_agent.GetFilePathFromName(pItem->GetCaption().GetBuffer(0));
+			if (strFilePath.size() != 0)
+			{				
+				m_bDestory = FALSE;
+				ShellExecute(NULL, "open",strFilePath.c_str(),NULL, NULL, SW_SHOW);	
+			}
 		}
 		break;
 	case XTP_TPN_DBLCLICK:
@@ -407,20 +430,6 @@ LRESULT CFastSearchDlg::OnTaskPanelNotify(WPARAM wParam, LPARAM lParam)
 			//////////////////////////////////////////////////////////////////////////
 			//add code
 //			MessageBox("DBLCLICK Event:");
-			CXTPTaskPanelGroupItem* pItem = (CXTPTaskPanelGroupItem*)lParam;
-			TRACE(_T("Click Event: pItem.Caption = %s, pItem.ID = %i\n"), pItem->GetCaption(), pItem->GetID());
-
-			//if (IsToggleButtons())
-			{
-				pItem->SetItemSelected(!pItem->IsItemSelected());
-			}
-
-			//find file full path from file name
-			std::string strFilePath = m_agent.GetFilePathFromName(pItem->GetCaption().GetBuffer(0));
-			if (strFilePath.size() != 0)
-			{				
-				ShellExecute(NULL, "open",strFilePath.c_str(),NULL, NULL, SW_SHOW);	
-			}
 		}
 		break;	
 	case XTP_TPN_RCLICK:
@@ -439,7 +448,7 @@ void CFastSearchDlg::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
 	
 	// TODO: Add your message handler code here
 	//如果处于非激活状态，则关闭窗口
-	if(nState==WA_INACTIVE)
+	if(nState==WA_INACTIVE && m_bDestory)
 	{
 		//DestroyWindow();  //DoModal函数不会返回
 		CDialog::OnCancel();
