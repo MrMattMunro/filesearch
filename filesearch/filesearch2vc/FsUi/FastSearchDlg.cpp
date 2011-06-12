@@ -250,7 +250,7 @@ int CFastSearchDlg::GetFileID(char* szFileType)
 	if (!strcmp(szFileType, TXT_NAME))
 		return 5;
 	if (!strcmp(szFileType, HTML_NAME))
-		return 5;
+		return 6;
 	
 	return -1;
 
@@ -303,13 +303,31 @@ void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, L
 	m_listMap[nFolderID].nItemSize++;
 	CXTPTaskPanelGroupItem* pPointer = pFolder->AddLinkItem(nItemID, 0/*imageid[nFolderID-1]*/);
 	int nSize = DespList.size();
-	for (int i = 0; i < nSize; i++)
+	if (nFolderID == 6)
 	{
-		std::string strTextItem = "              " + DespList[i];
-		pFolder->AddTextItem(strTextItem.c_str());
+		//html不显示具体内容，只显示个数
+		int nNewSize = strlen(lpszCaption) + 5;
+		char* pCaption = new char[nNewSize + 1];
+		memset(pCaption, NULL, nNewSize + 1);
+		sprintf(pCaption,"%s (%d)",lpszCaption, nSize);
+
+		pPointer->SetCaption(pCaption);
+	
+		if (pCaption)
+		{
+			delete[] pCaption;
+			pCaption = NULL;
+		}
+	}else
+	{
+		for (int i = 0; i < nSize; i++)
+		{
+			std::string strTextItem = "              " + DespList[i];
+			pFolder->AddTextItem(strTextItem.c_str());
+		}
+		pPointer->SetCaption(lpszCaption);
 	}
 
-	pPointer->SetCaption(lpszCaption);
 	pPointer->SetItemSelected(TRUE);
 	pPointer->AllowDrag(FALSE);
 	pPointer->AllowDrop(FALSE);
@@ -347,19 +365,19 @@ void CFastSearchDlg::UpdateGroupsCaption()
 		switch(i)
 		{
 		case 1:
-			strCaption = "word (";
+			strCaption = "word  (";
 			break;
 		case 2:
-			strCaption = "excel(";
+			strCaption = "excel (";
 			break;
 		case 3:
-			strCaption = "ppt  (";
+			strCaption = "ppt     (";
 			break;
 		case 4:
-			strCaption = "pdf  (";
+			strCaption = "pdf     (";
 			break;
 		case 5:
-			strCaption = "txt  (";
+			strCaption = "txt     (";
 			break;
 		case 6:
 			strCaption = "html  (";
@@ -410,14 +428,25 @@ LRESULT CFastSearchDlg::OnTaskPanelNotify(WPARAM wParam, LPARAM lParam)
 //			MessageBox("Click Event:");
 			CXTPTaskPanelGroupItem* pItem = (CXTPTaskPanelGroupItem*)lParam;
 			TRACE(_T("Click Event: pItem.Caption = %s, pItem.ID = %i\n"), pItem->GetCaption(), pItem->GetID());
-			
+
 			//if (IsToggleButtons())
 			{
 				pItem->SetItemSelected(!pItem->IsItemSelected());
 			}
-			
+
+			CString strFileName = pItem->GetCaption();
+			CString strGroupCaption = pItem->GetItemGroup()->GetCaption();
+			if (strGroupCaption.Find(HTML_NAME, 0) != -1)
+			{
+				//html ,去除文件名后的(%d)
+				std::string sFileName = strFileName.GetBuffer(0);
+				int nPos = sFileName.find_last_of('(');
+				sFileName = sFileName.substr(0, nPos - 1);
+				strFileName = sFileName.c_str();
+			}
+
 			//find file full path from file name
-			std::string strFilePath = m_agent.GetFilePathFromName(pItem->GetCaption().GetBuffer(0));
+			std::string strFilePath = m_agent.GetFilePathFromName(strFileName.GetBuffer(0));
 			if (strFilePath.size() != 0)
 			{				
 				m_bDestory = FALSE;
