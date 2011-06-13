@@ -11,6 +11,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // CFastSearchDlg dialog
 #include "sloFastSearchAgent.h"
+#include "sloSetAttrAgent.h"
 #include <map>
 
 typedef struct _GroupInfo
@@ -41,6 +42,7 @@ public:
 
 	CXTPTaskPanel m_wndTaskPanel;
 	sloFastSearchAgent m_agent;
+	sloSetAttrAgent m_setAgent;
 	std::map<int, GroupInfo> m_listMap;
 	BOOL m_bDestory;
 
