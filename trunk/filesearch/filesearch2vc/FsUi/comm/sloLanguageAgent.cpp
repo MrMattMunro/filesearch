@@ -56,9 +56,10 @@ BOOL sloLanguageAgent::GetProFilePath()
 	return FALSE;
 }
 
+//C:\Program Files\slfile\tomcat\\webapps\\slfile\\WEB-INF\\classes\\com\\web\\searchlocal\\properties
 #define CHINESE		"chinese"
 #define JAPANESE	"japanese"
-#define ENGISH		"engish"
+#define ENGISH		"english"
 LANGUAGE sloLanguageAgent::GetLanguage()
 {
 	GetProFilePath();

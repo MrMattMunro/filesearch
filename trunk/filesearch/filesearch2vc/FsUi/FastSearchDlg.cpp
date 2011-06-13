@@ -450,7 +450,39 @@ LRESULT CFastSearchDlg::OnTaskPanelNotify(WPARAM wParam, LPARAM lParam)
 			if (strFilePath.size() != 0)
 			{				
 				m_bDestory = FALSE;
-				ShellExecute(NULL, "open",strFilePath.c_str(),NULL, NULL, SW_SHOW);	
+
+				char szPath[MAX_PATH] = {0};
+				CString strGroupName;
+				if (strGroupCaption.Find(HTML_NAME, 0) != -1)
+				{
+					strGroupName = HTML_NAME;
+				}
+				if (strGroupCaption.Find(WORD_NAME, 0) != -1)
+				{
+					strGroupName = WORD_NAME;
+				}
+				if (strGroupCaption.Find(EXCEL_NAME, 0) != -1)
+				{
+					strGroupName = EXCEL_NAME;
+				}
+				if (strGroupCaption.Find(PPT_NAME, 0) != -1)
+				{
+					strGroupName = PPT_NAME;
+				}
+				if (strGroupCaption.Find(PDF_NAME, 0) != -1)
+				{
+					strGroupName = PDF_NAME;
+				}
+				if (strGroupCaption.Find(TXT_NAME, 0) != -1)
+				{
+					strGroupName = TXT_NAME;
+				}
+
+				if(m_setAgent.GetSoftPath(strGroupName.GetBuffer(0),szPath) == 0 )
+				{
+					ShellExecute(this->m_hWnd,"open",szPath,strFilePath.c_str(),"",SW_SHOW );
+				}else
+					ShellExecute(NULL, "open",strFilePath.c_str(),NULL, NULL, SW_SHOW);
 			}
 		}
 		break;
