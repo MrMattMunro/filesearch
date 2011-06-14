@@ -73,6 +73,12 @@ extern sloLanguageAgent g_lag;
 #define TXT_NAME	"txt"
 #define HTML_NAME	"html"
 
+#define THREME_NAME_NORMAL			"<Ä¬ÈÏÆ¤·ô>"
+#define THREME_NAME_2007			"Office2007"
+#define THREME_NAME_VISTA			"Vista"
+#define THREME_NAME_XP_ROYALE		"WinXP.Royale"
+#define THREME_NAME_XP_LUNA			"WinXP.Luna"
+
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 

@@ -30,7 +30,7 @@ sloSkinAgent::~sloSkinAgent()
 }
 
 #define  SKIN_PATH			"client\\Styles\\"
-#define  SKIN_NAME			"Office2007"
+//#define  SKIN_NAME			"Office2007"
 #define  SKIN_NAME_EXT		".cjstyles"
 
 #define  SKIN_PRO_NAME "tomcat\\webapps\\slfile\\WEB-INF\\classes\\com\\web\\searchlocal\\properties\\skin.properties"
@@ -66,7 +66,7 @@ void sloSkinAgent::InitSkin()
 	//从配置文件中读取skinname
 	//如果没有就采用默认皮肤
 	char szSkinName[MAX_PATH] = {0};
-	sloCommAgent::GetPropertyfileString(SKINE_POR_KEY_NAME, "Office2007", szSkinName, MAX_PATH, m_szSkinProPath );
+	sloCommAgent::GetPropertyfileString(SKINE_POR_KEY_NAME, THREME_NAME_VISTA, szSkinName, MAX_PATH, m_szSkinProPath );
 	sprintf(m_szSkinName,"%s%s%s",m_szSkinPath,szSkinName, SKIN_NAME_EXT);
 
 	//XTPSkinManager()->AddColorFilter(new CXTPSkinManagerColorFilterColorize(50, 100, 1));

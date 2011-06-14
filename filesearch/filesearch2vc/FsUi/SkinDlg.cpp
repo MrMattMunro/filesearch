@@ -71,11 +71,7 @@ END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // CSkinDlg message handlers
-#define THREME_NAME_NORMAL			"<Ä¬ÈÏÆ¤·ô>"
-#define THREME_NAME_2007			"Office2007"
-#define THREME_NAME_VISTA			"Vista"
-#define THREME_NAME_XP_ROYALE		"WinXP.Royale"
-#define THREME_NAME_XP_LUNA			"WinXP.Luna"
+
 BOOL CSkinDlg::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
@@ -141,7 +137,7 @@ void CSkinDlg::OnSelchangeListSkin()
 	m_skinbox.GetText(nIndex, strText);
 	memset(&m_szSkinTheme, NULL, MAX_PATH);
 	if (strText == THREME_NAME_NORMAL)
-		strText = THREME_NAME_2007;
+		strText = THREME_NAME_VISTA;
 
 	memcpy(&m_szSkinTheme, strText.GetBuffer(0), strText.GetLength());
 
@@ -151,10 +147,10 @@ void CSkinDlg::OnSelchangeListSkin()
 
 	CEnBitmap bitmap;
 	CBitmap bit;
-	if (strText == THREME_NAME_NORMAL || strText == THREME_NAME_2007 )
+	if (strText == THREME_NAME_2007 )
 	{
 		bit.LoadBitmap(IDB_BITMAP_OFFICE2007);
-	}else if (strText == THREME_NAME_VISTA )
+	}else if (strText == THREME_NAME_NORMAL || strText == THREME_NAME_VISTA )
 	{
 		bit.LoadBitmap(IDB_BITMAP_VISTA);
 	}else if (strText == THREME_NAME_XP_ROYALE)
