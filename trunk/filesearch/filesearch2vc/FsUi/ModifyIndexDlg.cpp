@@ -139,8 +139,8 @@ BOOL CModifyIndexDlg::OnInitDialog()
 	m_btnCancel.SetBitmap(0, IDB_BITMAP_CANCEL);
 	m_btnDelete.SetBitmap(0, IDB_BITMAP_DELETE);
 	// TODO: Add extra initialization here	
-	SetDlgItemText(IDC_STATIC_SEARCH_DIR, g_lag.LoadString("label.searchdir"));
-	SetDlgItemText(IDC_STATIC_OBJECT_TYPE, g_lag.LoadString("label.doc"));
+	SetDlgItemText(IDC_STATIC_SEARCH_DIR_MODIFY, g_lag.LoadString("label.searchdir"));
+	SetDlgItemText(IDC_STATIC_OBJECT_TYPE_MODIFY, g_lag.LoadString("label.doc"));
 	SetDlgItemText(IDOK, g_lag.LoadString("button.confirm"));
 	SetDlgItemText(IDCANCEL, g_lag.LoadString("button.cancel"));
 	SetDlgItemText(IDC_BUTTON_DEL_INDEX, g_lag.LoadString("button.delete"));

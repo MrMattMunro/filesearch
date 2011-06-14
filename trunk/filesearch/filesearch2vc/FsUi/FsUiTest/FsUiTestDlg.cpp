@@ -231,7 +231,7 @@ void CFsUiTestDlg::OnButton4()
 	int nId = atoi(szID);
 	g_fnFsModifyIndex(nId);
 
-	FreeLibrary(hins);	
+//	FreeLibrary(hins);	
 }
 
 typedef DWORD (__stdcall *fnFsImportCustomCiHui)();

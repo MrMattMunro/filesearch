@@ -62,17 +62,48 @@ BOOL sloLanguageAgent::GetProFilePath()
 LANGUAGE sloLanguageAgent::GetLanguage()
 {
 	GetProFilePath();
-	char szLanguage[MAX_PATH] = {0};
-	sloCommAgent::GetPropertyfileString("language", "chinese", szLanguage, MAX_PATH, m_szpropertiesPath );
 	LANGUAGE lag = lag_chinese;
-	if (strcmp(szLanguage, JAPANESE) == 0)
+	char szLanguage[MAX_PATH] = {0};
+	BOOL bRet = sloCommAgent::GetPropertyfileString("language", "chinese", szLanguage, MAX_PATH, m_szpropertiesPath );
+	if (bRet)
 	{
-		lag = lag_Japanese;
-		sprintf(m_szLagFilePath,"%s%s",m_szPathHead,LAG_FILE_NAME_JP );
-	}else if(strcmp(szLanguage, ENGISH) == 0)
+		if (strcmp(szLanguage, JAPANESE) == 0)
+		{
+			lag = lag_Japanese;
+			memset(m_szLagFilePath, NULL, MAX_PATH);
+			sprintf(m_szLagFilePath,"%s%s",m_szPathHead,LAG_FILE_NAME_JP );
+		}else if(strcmp(szLanguage, ENGISH) == 0)
+		{
+			lag = lag_engish;
+			memset(m_szLagFilePath, NULL, MAX_PATH);
+			sprintf(m_szLagFilePath,"%s%s",m_szPathHead,LAG_FILE_NAME_EN );
+		}
+	}else
 	{
-		lag = lag_engish;
-		sprintf(m_szLagFilePath,"%s%s",m_szPathHead,LAG_FILE_NAME_EN );
+		//文件被占用，采用此方式打开
+		FILE *fp = fopen(m_szpropertiesPath,"r+");
+		fseek(fp, 0 ,SEEK_END);
+		int nLen = ftell(fp);
+		fseek(fp, 0 ,SEEK_SET);
+
+		char *pData = new char[nLen + 1];
+		memset(pData, NULL, nLen+1);
+
+		int nRead = fread(pData, sizeof(char), nLen, fp);
+		std::string strData = pData;
+		if(strData.find(JAPANESE) != -1)
+		{
+			lag = lag_Japanese;
+			memset(m_szLagFilePath, NULL, MAX_PATH);
+			sprintf(m_szLagFilePath,"%s%s",m_szPathHead,LAG_FILE_NAME_JP );
+		}else if (strData.find(ENGISH) != -1)
+		{
+			lag = lag_engish;
+			memset(m_szLagFilePath, NULL, MAX_PATH);
+			sprintf(m_szLagFilePath,"%s%s",m_szPathHead,LAG_FILE_NAME_EN );		
+		}
+
+		fclose(fp);
 	}
 
 	m_lag = lag;
@@ -84,7 +115,7 @@ CString sloLanguageAgent::LoadString(char* pID)
 {
 	char szText[MAX_PATH] = {0};
 	sloCommAgent::GetPropertyfileString(pID, "null", szText, MAX_PATH, m_szLagFilePath);
-
+	
 	CString strText = szText;	
 	return strText;
 }
