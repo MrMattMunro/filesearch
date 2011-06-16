@@ -50,7 +50,7 @@ BOOL sloLanguageAgent::GetProFilePath()
 		_splitpath( szFileExePath, drive, dir, fname, ext );
 		sprintf(m_szpropertiesPath,"%s%s%s%s",drive, dir,LANGUAGE_PRO_NAME, LAG_FILE_NAME);
 		sprintf(m_szPathHead,"%s%s%s",drive, dir,LANGUAGE_PRO_NAME);
-		sprintf(m_szLagFilePath,"%s%s",m_szPathHead,LAG_FILE_NAME_CN );
+		sprintf(m_szLagFilePath,"%s%s",m_szPathHead,LAG_FILE_NAME_EN );
 	}
 	
 	return FALSE;
@@ -62,8 +62,34 @@ BOOL sloLanguageAgent::GetProFilePath()
 LANGUAGE sloLanguageAgent::GetLanguage()
 {
 	GetProFilePath();
-	LANGUAGE lag = lag_chinese;
+	LANGUAGE lag = lag_engish;
 	char szLanguage[MAX_PATH] = {0};
+	
+	LANGID lcid =GetUserDefaultLCID();
+
+	if(lcid == 0x409 || lcid == 0x809)
+	{   
+		//美国英语
+		OutputDebugString("英语");
+	}
+	
+	if(lcid == 0x0411)
+	{   
+		//日文
+		lag = lag_Japanese;
+		memset(m_szLagFilePath, NULL, MAX_PATH);
+		sprintf(m_szLagFilePath,"%s%s",m_szPathHead,LAG_FILE_NAME_JP );	
+	}
+	
+	if(lcid == 0x804)
+	{   
+		//中国简体
+		lag = lag_chinese;
+		memset(m_szLagFilePath, NULL, MAX_PATH);
+		sprintf(m_szLagFilePath,"%s%s",m_szPathHead,LAG_FILE_NAME_CN );		 
+	}   
+
+	/*
 	BOOL bRet = sloCommAgent::GetPropertyfileString("language", "chinese", szLanguage, MAX_PATH, m_szpropertiesPath );
 	if (bRet)
 	{
@@ -105,7 +131,7 @@ LANGUAGE sloLanguageAgent::GetLanguage()
 
 		fclose(fp);
 	}
-
+*/
 	m_lag = lag;
 
 	return lag;

@@ -71,7 +71,7 @@ void sloSkinAgent::InitSkin()
 
 	//XTPSkinManager()->AddColorFilter(new CXTPSkinManagerColorFilterColorize(50, 100, 1));
 	XTPSkinManager()->SetApplyOptions(XTPSkinManager()->GetApplyOptions() | xtpSkinApplyMetrics);
-	XTPSkinManager()->LoadSkin(m_szSkinName, _T("NormalBlue.ini"));
+	XTPSkinManager()->LoadSkin(m_szSkinName, NULL/*_T("NormalBlue.ini")*/);
 }
 
 
