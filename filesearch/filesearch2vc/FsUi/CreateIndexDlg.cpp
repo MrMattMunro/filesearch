@@ -68,6 +68,8 @@ BOOL CCreateIndexDlg::OnInitDialog()
 
 	//SetIcon(m_hIcon,FALSE);//设置为小图标
 	// TODO: Add extra initialization here
+	SetWindowText(g_lag.LoadString("title.createnew"));
+
 	SetDlgItemText(IDC_STATIC_SEARCH_DIR, g_lag.LoadString("label.searchdir"));
 	SetDlgItemText(IDC_STATIC_OBJECT_TYPE, g_lag.LoadString("label.doc"));
 	SetDlgItemText(IDOK, g_lag.LoadString("button.confirm"));

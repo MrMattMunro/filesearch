@@ -236,7 +236,7 @@ void sloFastSearchAgent::ClearRecList()
 
 int sloFastSearchAgent::GetPathIndex(char* szPath)
 {
-	if (strcmp(szPath, "È«²¿") == 0)
+	if (strcmp(szPath, g_lag.LoadString("title.fastsearch")) == 0)
 	{
 		return 0;
 	}

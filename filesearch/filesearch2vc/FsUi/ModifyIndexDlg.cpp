@@ -135,6 +135,8 @@ BOOL CModifyIndexDlg::OnInitDialog()
 	m_hIcon=AfxGetApp()->LoadIcon(IDI_ICON_MODIFY_INDEX);
 	SetIcon(m_hIcon,TRUE); //设置为大图标
 
+	SetWindowText(g_lag.LoadString("title.modifysearch"));
+
 	m_btnOk.SetBitmap(0, IDB_BITMAP_OK);
 	m_btnCancel.SetBitmap(0, IDB_BITMAP_CANCEL);
 	m_btnDelete.SetBitmap(0, IDB_BITMAP_DELETE);

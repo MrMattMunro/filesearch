@@ -317,7 +317,7 @@ bool sloLicenseAgent::IsEmailAddr(char* str,char* error)
 	if(strlen2==0)
 	{
 		//MessageBox(NULL,"输入的E-mail地址不能为空，请重新输入","提示",MB_ICONINFORMATION);
-		strcpy(error2,"输入字符串为空");
+		strcpy(error2,g_lag.LoadString("errors.nocharts"));
 		return false;
 	}
 	for(P=strempt; *P!='\0';P++)
@@ -325,68 +325,68 @@ bool sloLicenseAgent::IsEmailAddr(char* str,char* error)
 		if(*P==' ')
 		{
 			//MessageBox(NULL,"输入的E-mail地址中不能包含空格符，请重新输入","提示",MB_ICONINFORMATION);
-			strcpy(error2,"输入字符串不能有空字符");
+			strcpy(error2,g_lag.LoadString("errors.hasnullchart"));
 			return false;
 		}
 		else if((((*P>=48)&&(*P<=57))||((*P>=64)&&(*P<=90))||((*P>=97)&&(*P<=122))||*P==45||*P=='.'||*P==95)==0)
 		{
-			strcpy(error2,"输入字符串有不允许字符");
+			strcpy(error2,g_lag.LoadString("errors.hasinvalidchart"));
 			return false;
 		}
 	}
 	if(strlen2>50)
 	{
 		//MessageBox(NULL,"email地址长度不能超过50位","提示",MB_ICONINFORMATION);
-		strcpy(error2,"输入字符串长度超过50位");
+		strcpy(error2,g_lag.LoadString("errors.overlen"));
 		return false;
 	}
 	strempt2=strstr(strempt,"@");
 	if(!strempt2)
 	{
-		strcpy(error2,"输入字符串没有\"@\"字符");
+		strcpy(error2,g_lag.LoadString("errors.invalidchart1"));
 		return false;
 	}
 	if(!(strempt2-strempt))
 	{
-		strcpy(error2,"\"@\"字符前必须包含一个字母");
+		strcpy(error2,g_lag.LoadString("errors.invalidchart2"));
 		return false;
 	}
 	if (strempt2-strempt==1)
 		if(((*strempt>=65)&&(*strempt<=90))||((*strempt>=97)&&(*strempt<=122))==0)
 		{
-			strcpy(error2,"\"@\"字符前要以字母开头");
+			strcpy(error2,g_lag.LoadString("errors.invalidchart3"));
 			return false;
 		}
 		if (!(P=strstr(strempt2,".")))
 		{
-			strcpy(error2,"输入字符串没有\".\"字符");
+			strcpy(error2,g_lag.LoadString("errors.invalidchart4"));
 			return false;
 		}
 		else
 		{  
 			if(!(P-strempt2-1))
 			{
-				strcpy(error2,"输入字符串\"@\"和\".\"字符之间要用字母");
+				strcpy(error2,g_lag.LoadString("errors.invalidchart5"));
 				return false;
 			}
 			if(P-strempt2-1==1)
 				if(((*(strempt2+1)>=65)&&(*(strempt2+1)<=90))||((*(strempt2+1)>=97)&&(*(strempt2+1)<=122))==0)
 				{
-					strcpy(error2,"输入字符串\"@\"和\".\"字符之间必有一个字母");
+					strcpy(error2,g_lag.LoadString("errors.invalidchart6"));
 					return false;
 				}
 		}
 		strempt2=strstr(strempt,".");
 		if(*(strempt2+1)=='\0')
 		{
-			strcpy(error2,"输入字符串\".\"字符之后要有字母");
+			strcpy(error2,g_lag.LoadString("errors.invalidchart7"));
 			return false;
 		}
 		if(((*(strempt2+1)>=65)&&(*(strempt2+1)<=90))||((*(strempt2+1)>=97)&&(*(strempt2+1)<=122))==0)
 		{
-			strcpy(error2,"输入字符串\".\"字符之后必有一个字母");
+			strcpy(error2,g_lag.LoadString("errors.invalidchart8"));
 			return false;
 		}
-		strcpy(error2,"这是一个正确的邮箱地址");
+//		strcpy(error2,"这是一个正确的邮箱地址");
 		return true;
 }

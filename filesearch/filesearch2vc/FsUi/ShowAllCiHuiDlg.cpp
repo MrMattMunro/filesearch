@@ -54,6 +54,7 @@ BOOL CShowAllCiHuiDlg::OnInitDialog()
 	SetDlgItemText(IDCANCEL, g_lag.LoadString("button.close"));
 
 	//////////////////////////////////////////////////////////////////
+	SetWindowText(g_lag.LoadString("title.adddic"));
 
 	ReadAllCiHui();
 
