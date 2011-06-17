@@ -91,7 +91,7 @@ BOOL CFastSearchDlg::OnInitDialog()
 	//SetIcon(m_hIcon,FALSE);//设置为小图标
 
 	// TODO: Add extra initialization here
-
+	SetWindowText(g_lag.LoadString("title.fastsearch"));
 // 	if (NULL == m_pSearchThread)
 // 	{
 // 		OutputDebugString("AfxBeginThread ");
@@ -113,8 +113,9 @@ BOOL CFastSearchDlg::OnInitDialog()
 			m_BoxList.AddString(m_agent.m_PathList[i].szPath);
 		}
 	}
-	m_BoxList.InsertString(0,"全部");
-	m_BoxList.SelectString(0,"全部");
+
+	m_BoxList.InsertString(0,g_lag.LoadString("label.fastserlist"));
+	m_BoxList.SelectString(0,g_lag.LoadString("label.fastserlist"));
 
 	CreateTaskPanel();
 

@@ -82,10 +82,6 @@ BOOL CLicenseDlg::OnInitDialog()
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
-#define ERROR_INFO_SUCCEED				"注册信息已经提交，一日之内确认后，软件将被注册！\r\n"
-#define ERROR_INFO_ORDERNO				"请填写订单号！\r\n"
-#define ERROR_INFO_EMAIL				"请填写正确的电子邮箱！\r\n错误信息："
-#define ERROR_INFO_REGISTER_FAILED		"License注册失败！\r\n"
 
 BOOL CLicenseDlg::UpdateDialog() 
 {
@@ -122,8 +118,8 @@ BOOL CLicenseDlg::UpdateDialog()
 		(CStatic*)GetDlgItem(IDC_STATIC_ENDTIME)->ShowWindow(SW_HIDE);
 		(CStatic*)GetDlgItem(IDC_STATIC_ERROR_INFO)->ShowWindow(SW_HIDE);
 	
-		CString strErrorInfo = "提示：";
-		strErrorInfo += ERROR_INFO_SUCCEED;
+		CString strErrorInfo = g_lag.LoadString("label.info");
+		strErrorInfo += g_lag.LoadString("label.reginfo");
 
 		(CStatic*)GetDlgItem(IDC_STATIC_ERROR_INFO)->ShowWindow(SW_SHOW);
 		((CStatic*)GetDlgItem(IDC_STATIC_ERROR_INFO))->SetWindowText(strErrorInfo.GetBuffer(0));
@@ -144,7 +140,7 @@ void CLicenseDlg::OnButtonReg()
 {
 	// TODO: Add your control notification handler code here
 	CString strNum, strEMail;
-	CString strErrorInfo = "提示：";
+	CString strErrorInfo = g_lag.LoadString("label.info");
 	
 	BOOL bRet = TRUE;
 	do 
@@ -153,7 +149,7 @@ void CLicenseDlg::OnButtonReg()
 		GetDlgItemText(IDC_EDIT_EMAIL,strEMail);
 		if (strNum.GetLength() == 0)
 		{
-			strErrorInfo += ERROR_INFO_ORDERNO;
+			strErrorInfo += g_lag.LoadString("errors.nonum");
 			bRet = FALSE ;
 			break ;
 		}
@@ -162,7 +158,7 @@ void CLicenseDlg::OnButtonReg()
 		char szErrInfo[1024] = {0};
 		if( m_licAgent.IsEmailAddr(strEMail.GetBuffer(0),szErrInfo) == false)
 		{
-			strErrorInfo += ERROR_INFO_EMAIL;
+			strErrorInfo += g_lag.LoadString("errors.invalidemail");
 			strErrorInfo += szErrInfo;
 			bRet = FALSE ;
 			break ;		
@@ -170,12 +166,12 @@ void CLicenseDlg::OnButtonReg()
 		
 		if (m_licAgent.EventLicense(strNum.GetBuffer(0), strEMail.GetBuffer(0)) == FALSE)
 		{
-			strErrorInfo += ERROR_INFO_REGISTER_FAILED;
+			strErrorInfo += g_lag.LoadString("errors.regfailed");
 			bRet = FALSE ;
 			break ;	
 		}
-
-		strErrorInfo += ERROR_INFO_SUCCEED;
+		
+		strErrorInfo += g_lag.LoadString("label.reginfo");
 	} while (0);
 	
 	(CStatic*)GetDlgItem(IDC_STATIC_ERROR_INFO)->ShowWindow(SW_SHOW);
