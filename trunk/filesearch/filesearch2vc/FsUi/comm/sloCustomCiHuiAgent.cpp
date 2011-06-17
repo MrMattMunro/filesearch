@@ -49,7 +49,7 @@ BOOL sloCustomCiHuiAgent::EventCustomCiHui(BOOL bOver, char* pszFilePath)
 	return bSucc;
 }
 
-#define  CUS_PRO_NAME "tomcat\\webapps\\slfile\\WEB-INF\\classes\\com\\web\\searchlocal\\properties\\custumdic.properties"
+#define  CUS_PRO_NAME "tomcat\\webapps\\slfile\\WEB-INF\\classes\\com\\web\\searchlocal\\properties\\customdic.properties"
 #define  CUS_TXT_NAME "dic\\custom.dic"
 BOOL sloCustomCiHuiAgent::GetProFilePath()
 {
