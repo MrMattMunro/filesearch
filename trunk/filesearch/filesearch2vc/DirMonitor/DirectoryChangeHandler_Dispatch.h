@@ -9,12 +9,11 @@
 #pragma once
 #endif // _MSC_VER > 1000
 #include "DirectoryChanges.h"
-#include "slLogSendThread.h"
 
 class CDirectoryChangeHandler_Dispatch : public CDirectoryChangeHandler 
 {
 public:
-	CDirectoryChangeHandler_Dispatch(slLogSendThread* plogSendAgent);
+	CDirectoryChangeHandler_Dispatch();
 	virtual ~CDirectoryChangeHandler_Dispatch();
 	//These functions are called when the directory to watch has had a change made to it
 	void On_FileAdded(const CString & strFileName);
@@ -32,7 +31,6 @@ private:
 	DWORD    m_dwModifyCurTick;
 	DWORD    m_dwAddCurTick;
 	DWORD    m_dwRenameCurTick;
-	slLogSendThread* m_lplogSendAgent;
 };
 
 #endif // !defined(AFX_DIRECTORYCHANGEHANDLER_DISPATCH_H__B42A149F_41E9_4897_9BE8_8185D22CFF84__INCLUDED_)

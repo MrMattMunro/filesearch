@@ -140,6 +140,10 @@ SOURCE=.\reg\slRegAgent.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\sltDirMonitorThread.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\xml\slXmlAgent.cpp
 # End Source File
 # Begin Source File
@@ -202,6 +206,10 @@ SOURCE=.\mysql\slMySqlAgent.h
 # Begin Source File
 
 SOURCE=.\reg\slRegAgent.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\sltDirMonitorThread.h
 # End Source File
 # Begin Source File
 

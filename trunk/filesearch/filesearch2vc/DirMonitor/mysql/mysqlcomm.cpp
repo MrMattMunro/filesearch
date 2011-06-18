@@ -36,7 +36,14 @@ bool mysqlcomm::ConnectDB()
 	m_pMySqlDB = new CMySQLDB();
 	
 	//connect db
-	return m_pMySqlDB->Connect("127.0.0.1", 3306, "root","changsong","COMMONINFO");
+	bool bRet = m_pMySqlDB->Connect("127.0.0.1", 3306, "root","changsong","COMMONINFO");
+	if (bRet)
+	{
+		log.Print(LL_DEBUG_INFO, "[Info]Connect Db(COMMONINFO) Succ!\r\n");
+	}else
+		log.Print(LL_DEBUG_INFO, "[Error]Connect Db(COMMONINFO) Failed!\r\n");
+
+	return bRet;
 }
 
 

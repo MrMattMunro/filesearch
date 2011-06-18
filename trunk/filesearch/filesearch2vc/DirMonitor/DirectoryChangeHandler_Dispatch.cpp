@@ -6,6 +6,8 @@
 #include "DirMonitor.h"
 #include "DirectoryChangeHandler_Dispatch.h"
 
+extern slLogSendThread		g_LogSendThread;
+
 #ifdef _DEBUG
 #undef THIS_FILE
 static char THIS_FILE[]=__FILE__;
@@ -16,18 +18,16 @@ static char THIS_FILE[]=__FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CDirectoryChangeHandler_Dispatch::CDirectoryChangeHandler_Dispatch(slLogSendThread* plogSendAgent)
+CDirectoryChangeHandler_Dispatch::CDirectoryChangeHandler_Dispatch()
 {
 	m_lastmodify = _T("");
 	m_dwAddCurTick = 0;
 	m_dwModifyCurTick = 0;
 	m_dwRenameCurTick = 0;
-	m_lplogSendAgent = plogSendAgent;
 }
 
 CDirectoryChangeHandler_Dispatch::~CDirectoryChangeHandler_Dispatch()
 {
-	m_lplogSendAgent->shutdown();
 }
 
 
@@ -66,7 +66,7 @@ void CDirectoryChangeHandler_Dispatch::On_FileAdded(const CString & strFileName)
 	memcpy(filelog.szSrcName, strTmpName.GetBuffer(0),strTmpName.GetLength());
 	AddFileLogTime(filelog);
 
-	m_lplogSendAgent->AddLog(filelog);
+	g_LogSendThread.AddLog(filelog);
 
 	log.Print(LL_DEBUG_INFO, "File Added!FileName=%s\r\n",m_strFileAddName.GetBuffer(0));
 }
@@ -78,7 +78,7 @@ void CDirectoryChangeHandler_Dispatch::On_FileRemoved(const CString & strFileNam
 	filelog.FileActon = FILE_REMOVED;
 	memcpy(filelog.szSrcName, strTmpName.GetBuffer(0),strTmpName.GetLength());
 	AddFileLogTime(filelog);
-	m_lplogSendAgent->AddLog(filelog);
+	g_LogSendThread.AddLog(filelog);
 
 	log.Print(LL_DEBUG_INFO, "File Removed!FileName=%s\r\n",strTmpName.GetBuffer(0));
 }
@@ -101,7 +101,7 @@ void CDirectoryChangeHandler_Dispatch::On_FileModified(const CString & strFileNa
 		filelog.FileActon = FILE_MODIFYED;
 		memcpy(filelog.szSrcName, strTmpName.GetBuffer(0),strTmpName.GetLength());
 		AddFileLogTime(filelog);
-		m_lplogSendAgent->AddLog(filelog);
+		g_LogSendThread.AddLog(filelog);
 
 // 		m_lastmodify.Empty();
 // 		m_lastmodify.Format(strFileName); 
@@ -122,7 +122,7 @@ void CDirectoryChangeHandler_Dispatch::On_FileNameChanged(const CString & strOld
 	memcpy(filelog.szSrcName+strTmpOldName.GetLength(),"*",1);
 	memcpy(filelog.szSrcName+strTmpOldName.GetLength()+1,strTmpNewName.GetBuffer(0),strTmpNewName.GetLength());
 	AddFileLogTime(filelog);
-	m_lplogSendAgent->AddLog(filelog);
+	g_LogSendThread.AddLog(filelog);
 
 	OutputDebugStringA("File name changed from");
 	log.Print(LL_DEBUG_INFO, "File Name Changed!SrcName=%s, DesName=%s\r\n",strTmpOldName.GetBuffer(0),strTmpNewName.GetBuffer(0));

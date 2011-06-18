@@ -59,6 +59,10 @@ using namespace std;
 #include "omnithread.h"
 #include "tyu_common_interface.h"
 
+#include "slLogSendThread.h"
+#include "slXmlAgent.h"
+
+
 extern Log log;
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
