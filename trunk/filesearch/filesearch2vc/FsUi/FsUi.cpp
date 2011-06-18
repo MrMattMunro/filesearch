@@ -79,6 +79,14 @@ BOOL CFsUiApp::InitInstance()
 	g_lag.GetLanguage();
 	g_skin.InitSkin();
 
+	char szSystemPath[MAX_PATH] = {0};
+	GetSystemDirectory(szSystemPath, MAX_PATH);
+	char szLogPath[MAX_PATH] = {0};
+	sprintf(szLogPath, "%s\\fsui.log", szSystemPath);
+	flog.SetFile(szLogPath,true);
+	flog.SetLevel(100);
+	flog.SetMode(Log::ToFile );	
+
 	return CWinApp::InitInstance();
 }
 
@@ -89,11 +97,14 @@ BOOL CFsUiApp::InitInstance()
 */
 DWORD __stdcall FsCreateIndex()
 {
+	flog.Print(LL_DEBUG_INFO,"[info]Enter FsCreateIndex!\r\n");
+
 	if (sltCreateIndexDlgThread::getInstance() == NULL)
 		sltCreateIndexDlgThread::newInstance();	
 
 	sltCreateIndexDlgThread::getInstance()->startup();
 	
+	flog.Print(LL_DEBUG_INFO,"[info]Leave FsCreateIndex!\r\n");
 	return 0;
 }
 
@@ -103,11 +114,14 @@ DWORD __stdcall FsCreateIndex()
 */
 DWORD __stdcall FsModifyIndex(int nID)
 {
+	flog.Print(LL_DEBUG_INFO,"[info]Enter FsModifyIndex!\r\n");
+
 	if (sltModifyIndexDlgThread::getInstance() == NULL)
 		sltModifyIndexDlgThread::newInstance();	
 	
 	sltModifyIndexDlgThread::getInstance()->startup(nID);
 
+	flog.Print(LL_DEBUG_INFO,"[info]Leave FsModifyIndex!\r\n");
 	return 0;
 }
 
@@ -117,11 +131,14 @@ DWORD __stdcall FsModifyIndex(int nID)
 */
 DWORD __stdcall FsFastSearch()
 {
+	flog.Print(LL_DEBUG_INFO,"[info]Enter FsFastSearch!\r\n");
+
 	if (sltFastSearchDlgThread::getInstance() == NULL)
 		sltFastSearchDlgThread::newInstance();	
 	
 	sltFastSearchDlgThread::getInstance()->startup();
 	
+	flog.Print(LL_DEBUG_INFO,"[info]Leave FsFastSearch!\r\n");
 	return 0;
 }
 
@@ -130,11 +147,14 @@ DWORD __stdcall FsFastSearch()
 */
 DWORD __stdcall FsSetSheet()
 {
+	flog.Print(LL_DEBUG_INFO,"[info]Enter FsSetSheet!\r\n");
+
 	if (sltSetSheetDlgThread::getInstance() == NULL)
 		sltSetSheetDlgThread::newInstance();	
 	
 	sltSetSheetDlgThread::getInstance()->startup();
-	
+
+	flog.Print(LL_DEBUG_INFO,"[info]Leave FsSetSheet!\r\n");	
 	return 0;
 }
 
