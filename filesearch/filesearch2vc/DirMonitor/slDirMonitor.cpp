@@ -2,16 +2,17 @@
 #include "slDirMonitor.h"
 #include "DirectoryChanges.h"
 #include "DirectoryChangeHandler_Dispatch.h"
-#include "slLogSendThread.h"
-#include "slXmlAgent.h"
+#include "sltDirMonitorThread.h"
 
 //default filters
 #define INCLUDE_FILTERS_STRING ""
 #define EXCLUDE_FILTERS_STRING ""
 
 CDirectoryChangeWatcher			m_DirWatcher;
-slLogSendThread* g_lpLogSendAgent = NULL;
-slXmlAgent g_xmlFilterAgent;
+slLogSendThread		g_LogSendThread;
+slXmlAgent			g_xmlFilterAgent;
+
+sltDirMonitorThread g_DirMonThread;
 
 CString	m_strExcludeFilter1;
 CString	m_strIncludeFilter1;
@@ -55,6 +56,28 @@ BOOL APIENTRY DllMain( HANDLE hModule,
     return TRUE;
 }
 
+//Æô¶¯¼à¿Ø
+DWORD __stdcall Monitor_Start()
+{
+	log.Print(LL_DEBUG_INFO, "[Info]Enter Monitor_Start\r\n");
+	g_DirMonThread.startup();
+
+	log.Print(LL_DEBUG_INFO, "[Info]Leave Monitor_Start\r\n");
+	return 0;
+}
+
+//Í£Ö¹¼à¿Ø
+DWORD __stdcall Monitor_Stop()
+{
+	log.Print(LL_DEBUG_INFO, "[Info]Enter Monitor_Stop\r\n");
+
+	m_DirWatcher.UnwatchAllDirectories();
+
+	log.Print(LL_DEBUG_INFO, "[Info]Leave Monitor_Stop\r\n");
+	return 0;
+}
+
+
 DWORD __stdcall Monitor_Start_AllDisk(BOOL bRemovableDisk)
 {
 	DWORD dwRet = 0;
@@ -93,25 +116,13 @@ DWORD __stdcall Monitor_Start_Dir(char* pszDirPath, DWORD dwLen)
 	DWORD dwWatch = 0;
 	CString	m_strDirectoryToMonitor(pszDirPath);
 
-//	g_xmlFilterAgent.LoadXML();
-	g_xmlFilterAgent.LoadDB();
-
 	DWORD dwChangeFilter = FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_LAST_WRITE;;
 	BOOL bWatchSubDir = TRUE;
 	
 	if( m_DirWatcher.IsWatchingDirectory( m_strDirectoryToMonitor) )
 		m_DirWatcher.UnwatchDirectory( m_strDirectoryToMonitor );
-	if (!g_lpLogSendAgent)
-	{
-		g_lpLogSendAgent = new slLogSendThread();
-		if (!g_lpLogSendAgent)
-		{
-			return -1;
-		}
-		g_lpLogSendAgent->startup();
 
-	}
-	CDirectoryChangeHandler_Dispatch * pHandler = new CDirectoryChangeHandler_Dispatch(g_lpLogSendAgent);
+	CDirectoryChangeHandler_Dispatch * pHandler = new CDirectoryChangeHandler_Dispatch();
 		
 	if( ERROR_SUCCESS != (dwWatch = m_DirWatcher.WatchDirectory(m_strDirectoryToMonitor, 
 		dwChangeFilter,
@@ -127,10 +138,4 @@ DWORD __stdcall Monitor_Start_Dir(char* pszDirPath, DWORD dwLen)
 		pHandler->Release();
 
 	return dwRet;
-}
-
-DWORD __stdcall Monitor_Stop()
-{
-	m_DirWatcher.UnwatchAllDirectories();
-	return 0;
 }

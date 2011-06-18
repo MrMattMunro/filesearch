@@ -5,6 +5,8 @@ DWORD __stdcall Monitor_Start_Dir(char* pszDirPath, DWORD dwLen);
 
 DWORD __stdcall Monitor_Start_AllDisk(BOOL bRemovableDisk);
 
-DWORD __stdcall Monitor_StopMonitor();
+DWORD __stdcall Monitor_Stop();
+
+DWORD __stdcall Monitor_Start();
 
 #endif

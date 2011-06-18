@@ -108,18 +108,27 @@ void slXmlAgent::LoadXML()
 	return;
 }
 
+//////////////////////////////////////////////////////////////////////////
+//-1 连接数据库失败
+//-2 执行sql语句失败
+//-3 查询记录为空
+//
 int slXmlAgent::LoadDB()
 {
 	//从数据库中获取最大的索引id
 	if (!m_pMySqlDB && !ConnectDB())
 	{
+		log.Print(LL_DEBUG_INFO, "[Error]Connect Db Failed!DBName=COMMONINFO\r\n");
 		return -1;
 	}
 
 	std::string strQuerySQL = "select * from t_searcher";
 	HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str() );
 	if (FAILED(hr))
+	{
+		log.Print(LL_DEBUG_INFO, "[Error]Exe sql(%s) failed!\r\n",strQuerySQL.c_str());
 		return -2;
+	}
 	
 	int nCount = m_pMySqlDB->GetRowCount();	//记录条数
 	int nFieldCount = m_pMySqlDB->GetFieldCount();
@@ -133,7 +142,10 @@ int slXmlAgent::LoadDB()
 		{
 			bool bSucc = m_pMySqlDB->GetRow();
 			if(bSucc==false)
-				return -1;
+			{
+				log.Print(LL_DEBUG_INFO, "[Error]GetRow Failed\r\n");
+				return -3;
+			}
 			
 			int nIDLen = 0;
 			char* pID = m_pMySqlDB->GetField("id",&nIDLen);
@@ -161,6 +173,10 @@ int slXmlAgent::LoadDB()
 			log.Print(LL_DEBUG_INFO,"XmlItem(%d):SearchName=%s,SearchPath=%s,SearchType=%s\r\n",
 				i+1,FilterItem.szSearceName,FilterItem.szSearchPath,FilterItem.szSearchType);			
 		}
+	}else
+	{
+		log.Print(LL_DEBUG_INFO, "[Error]t_searcher no record\r\n");
+		return -3;
 	}
 	
 	return 0;	

@@ -34,7 +34,7 @@ public:
 
 	string GetDbNameFromPath(char* szFileName);
 
-private:
+public:
 	void Clear();
 
 	pXmlFilter m_pxmlfilter;
