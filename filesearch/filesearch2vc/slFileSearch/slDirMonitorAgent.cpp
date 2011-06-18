@@ -36,9 +36,13 @@ BOOL slDirMonitorAgent::LoadDll()
 	m_fnMonitor_Start_AllDisk = (fnMonitor_Start_AllDisk)GetProcAddress(m_hinstance, "Monitor_Start_AllDisk");
 	m_fnMonitor_Stop = (fnMonitor_Stop)GetProcAddress(m_hinstance, "Monitor_Stop");
 	m_fnMonitor_Start_Dir = (fnMonitor_Start_Dir)GetProcAddress(m_hinstance, "Monitor_Start_Dir");
-	if (!m_fnMonitor_Start_AllDisk || !m_fnMonitor_Stop || !m_fnMonitor_Start_Dir)
+	m_fnMonitor_Start = (fnMonitor_Start)GetProcAddress(m_hinstance, "Monitor_Start");
+	if (!m_fnMonitor_Start_AllDisk || 
+		!m_fnMonitor_Stop || 
+		!m_fnMonitor_Start_Dir ||
+		!m_fnMonitor_Start)
 	{
-		log.Print(LL_DEBUG_INFO,"[Error]Not find export fun!\r\n");
+		log.Print(LL_DEBUG_INFO,"[Error]Not find FileMonitor.dll export fun!\r\n");
 		return FALSE;
 	}
 	
@@ -70,7 +74,7 @@ BOOL slDirMonitorAgent::StartMonitor()
 		}
 	}
 	
-	return m_fnMonitor_Start_AllDisk(FALSE) == 0 ? TRUE : FALSE;
+	return m_fnMonitor_Start() == 0 ? TRUE : FALSE;
 }
 
 BOOL slDirMonitorAgent::StopMonitor()
