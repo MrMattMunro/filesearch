@@ -52,6 +52,7 @@ using namespace std;
 #include "tyu_common_interface.h"
 
 #include "Singleton.h"
+#include "log.h"
 
 //////////////////////////////////////////////////////////////////////////
 #include "comm.h"
