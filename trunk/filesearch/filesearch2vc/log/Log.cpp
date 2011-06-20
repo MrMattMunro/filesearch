@@ -145,7 +145,7 @@ inline void Log::ReallyPrintLine(LPSTR line)
 
 void Log::ReallyPrint(LPSTR format, va_list ap) 
 {
-	return ;
+//	return ;
 	time_t current = time(0);
 	if (current != m_lastLogTime) {
 		m_lastLogTime = current;
