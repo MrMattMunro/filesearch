@@ -21,7 +21,6 @@ slServiceCenter::~slServiceCenter()
 
 BOOL slServiceCenter::StartService()
 {
-
 	_FileMonitor.StartMonitor();
 	_IndexNotifyThread.startup();
 	

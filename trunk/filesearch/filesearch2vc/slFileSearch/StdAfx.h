@@ -59,6 +59,7 @@ using namespace std;
 
 #include "log.h"
 
+#include "slDirMonitorAgent.h"
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 

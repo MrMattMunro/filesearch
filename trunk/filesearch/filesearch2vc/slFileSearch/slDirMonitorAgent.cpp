@@ -73,7 +73,6 @@ BOOL slDirMonitorAgent::StartMonitor()
 			return FALSE;
 		}
 	}
-	
 	return m_fnMonitor_Start() == 0 ? TRUE : FALSE;
 }
 
