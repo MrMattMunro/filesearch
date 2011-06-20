@@ -79,7 +79,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /dll /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 /nologo /subsystem:windows /dll /debug /machine:I386 /out:"../bin/FileMonitor.dll" /pdbtype:sept
+# ADD LINK32 /nologo /subsystem:windows /dll /debug /machine:I386 /out:"C:/WINDOWS/system32/FileMonitor.dll" /pdbtype:sept
 
 !ENDIF 
 
@@ -182,10 +182,6 @@ SOURCE=.\DirMonitor.h
 # Begin Source File
 
 SOURCE=.\mysql\mysqlcomm.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\mysql\MySQLDB.h
 # End Source File
 # Begin Source File
 

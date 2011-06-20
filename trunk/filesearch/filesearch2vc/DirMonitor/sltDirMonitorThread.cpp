@@ -74,8 +74,8 @@ int sltDirMonitorThread::run()
 			//获取监控目录开始监控
 			Monitor_Start_Dir(g_xmlFilterAgent.m_pxmlfilter[i].szSearchPath, 0);
 		}
-
-			
+		
+		break;		
 	}
 	
 	return 0;
