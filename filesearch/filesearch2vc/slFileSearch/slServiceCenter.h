@@ -8,7 +8,6 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-#include "slDirMonitorAgent.h"
 #include "sltIndexNotifyThread.h"
 
 class slServiceCenter  
@@ -23,6 +22,7 @@ public:
 private:
 	slDirMonitorAgent _FileMonitor;
 	sltIndexNotifyThread _IndexNotifyThread;
+
 };
 
 #endif // !defined(AFX_SLSERVICECENTER_H__1C92D504_EDDB_44DB_A25C_4D5FA91D245D__INCLUDED_)
