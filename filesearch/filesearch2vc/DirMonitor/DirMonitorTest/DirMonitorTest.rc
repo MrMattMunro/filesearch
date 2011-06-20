@@ -97,6 +97,7 @@ BEGIN
     PUSHBUTTON      "stop monitor",IDC_BUTTON2,173,59,74,24
     PUSHBUTTON      "start monitor dir",IDC_BUTTON3,35,77,89,28
     PUSHBUTTON      "Button4",IDC_BUTTON4,159,121,71,26
+    PUSHBUTTON      "start monitor",IDC_BUTTON5,175,20,70,25
 END
 
 

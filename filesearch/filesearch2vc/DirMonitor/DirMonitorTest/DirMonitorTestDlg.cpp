@@ -87,6 +87,7 @@ BEGIN_MESSAGE_MAP(CDirMonitorTestDlg, CDialog)
 	ON_WM_CLOSE()
 	ON_BN_CLICKED(IDC_BUTTON3, OnButton3)
 	ON_BN_CLICKED(IDC_BUTTON4, OnButton4)
+	ON_BN_CLICKED(IDC_BUTTON5, OnButton5)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -95,9 +96,11 @@ END_MESSAGE_MAP()
 typedef DWORD (__stdcall *fnMonitor_Start_Dir)(char* pszDirPath, DWORD dwLen);
 typedef DWORD (__stdcall *fnMonitor_Start_AllDisk)(BOOL bRemovableDisk);
 typedef DWORD (__stdcall *fnMonitor_Stop)();
+typedef DWORD (__stdcall *fnMonitor_Start)();
 fnMonitor_Start_AllDisk g_fnMonitor_Start_AllDisk;
 fnMonitor_Stop g_fnMonitor_Stop;
 fnMonitor_Start_Dir g_fnMonitor_Start_Dir;
+fnMonitor_Start g_fnMonitor_Start;
 HINSTANCE g_hinstance;
 BOOL CDirMonitorTestDlg::OnInitDialog()
 {
@@ -138,7 +141,11 @@ BOOL CDirMonitorTestDlg::OnInitDialog()
 	g_fnMonitor_Start_AllDisk = (fnMonitor_Start_AllDisk)GetProcAddress(g_hinstance, "Monitor_Start_AllDisk");
 	g_fnMonitor_Stop = (fnMonitor_Stop)GetProcAddress(g_hinstance, "Monitor_Stop");
 	g_fnMonitor_Start_Dir = (fnMonitor_Start_Dir)GetProcAddress(g_hinstance, "Monitor_Start_Dir");
-	if (!g_fnMonitor_Start_AllDisk || !g_fnMonitor_Stop || !g_fnMonitor_Start_Dir)
+	g_fnMonitor_Start = (fnMonitor_Start)GetProcAddress(g_hinstance, "Monitor_Start");
+	if (!g_fnMonitor_Start_AllDisk || 
+		!g_fnMonitor_Stop || 
+		!g_fnMonitor_Start_Dir ||
+		!g_fnMonitor_Start)
 	{
 		return TRUE;
 	}
@@ -224,7 +231,7 @@ void CDirMonitorTestDlg::OnButton3()
 	{
 		return ;
 	}
-	g_fnMonitor_Start_Dir("c:\\test", 8);
+	g_fnMonitor_Start_Dir("D:\\test1", 8);
 }
 
 void CDirMonitorTestDlg::OnClose() 
@@ -248,4 +255,14 @@ void CDirMonitorTestDlg::OnButton4()
 	std::string str1 = "xyzabc";
 	pos = str1.find("abcf");
 
+}
+
+void CDirMonitorTestDlg::OnButton5() 
+{
+	// TODO: Add your control notification handler code here
+	if (!g_fnMonitor_Start)
+	{
+		return ;
+	}
+	g_fnMonitor_Start();	
 }

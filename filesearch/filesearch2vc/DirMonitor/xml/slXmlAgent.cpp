@@ -217,6 +217,8 @@ bool slXmlAgent::Filters(char* pszFullPath)
 		if (strFullPath.find(m_pxmlfilter[i].szSearchPath) != -1 && strSearchType.find(strType) != -1)
 			return false;
 	}
+
+	return false;
 	
 	return true;
 }

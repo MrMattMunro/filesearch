@@ -3,7 +3,7 @@ Microsoft Developer Studio Workspace File, Format Version 6.00
 
 ###############################################################################
 
-Project: "DirMonitor"=".\DirMonitor.dsp" - Package Owner=<4>
+Project: "DirMonitor"=.\DirMonitor.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -15,7 +15,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "DirMonitorTest"=".\DirMonitorTest\DirMonitorTest.dsp" - Package Owner=<4>
+Project: "DirMonitorTest"=.\DirMonitorTest\DirMonitorTest.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -30,7 +30,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "slFileSearch"="..\slFileSearch\slFileSearch.dsp" - Package Owner=<4>
+Project: "slFileSearch"=..\slFileSearch\slFileSearch.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -38,6 +38,9 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name DirMonitor
+    End Project Dependency
 }}}
 
 ###############################################################################

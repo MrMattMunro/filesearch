@@ -322,19 +322,19 @@ void CDelayedNotificationWindow::PostNotification(CDirChangeNotification * pNoti
 {
 	ASSERT( pNotification );
 	ASSERT( s_hWnd );
-	ASSERT( ::IsWindow( s_hWnd ) );
+/*	ASSERT( ::IsWindow( s_hWnd ) );
 
 	PostMessage(s_hWnd, 
 				UWM_DELAYED_DIRECTORY_NOTIFICATION, 
 				0, 
 				reinterpret_cast<LPARAM>( pNotification ));
-
+*/
 //  if you don't want the notification delayed, 
 //  
 //	if( false )
-//	{
-//		pNotification->DispatchNotificationFunction();
-//	}
+	{
+		pNotification->DispatchNotificationFunction();
+	}
 }
 
 /////////////////////////////////////////////////////////
