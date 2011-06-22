@@ -19,12 +19,12 @@ extern slXmlAgent g_xmlFilterAgent;
 
 slMySqlAgent::slMySqlAgent()
 {
-	m_pMySqlDB = NULL;
+
 }
 
 slMySqlAgent::~slMySqlAgent()
 {
-	
+	ReleassObjectsDB();	
 }
 
 bool slMySqlAgent::LogRecord(File_Action_Log FileLog)
@@ -35,21 +35,124 @@ bool slMySqlAgent::LogRecord(File_Action_Log FileLog)
 		std::string strDbName = g_xmlFilterAgent.GetDbNameFromPath(FileLog.szSrcName);
 		memcpy(FileLog.szDbName, strDbName.c_str(), strDbName.size());
 		
-		//
-		m_pMySqlDB = new CMySQLDB();
+		//建立索引，每种连接对应一个DB数据库，保证数据库的连接数与索引数目一致
 		
-		//connect db
-		bool bRet = m_pMySqlDB->Connect("127.0.0.1", 3306, "root","changsong",strDbName.c_str());
-		if (bRet == false)
+		CMySQLDB* pMySqlDB = GetObjectDB(strDbName);
+		if (pMySqlDB->m_strDB.size() ==0 )
 		{
-			log.Print(LL_DEBUG_INFO,"Connect Sql Failed!IP=127.0.0.1, Port=3306,DbName=%s\r\n", strDbName.c_str());
-			break;
+			//未连接，进行首次连接
+			//connect db
+			bool bRet = pMySqlDB->Connect("127.0.0.1", 3306, "root","changsong",strDbName.c_str());
+			if (bRet == false)
+			{
+				log.Print(LL_DEBUG_INFO,"Connect Sql Failed!IP=127.0.0.1, Port=3306,DbName=%s\r\n", strDbName.c_str());
+				break;
+			}
 		}
+		
 		//add db
-		AddRec(FileLog);
+		AddRec(pMySqlDB, FileLog);
 
 	} while (0);
 
+
+	return bRet;
+}
+
+CMySQLDB* slMySqlAgent::GetObjectDB(std::string strSearchName)
+{
+	CMySQLDB* pMySqlDB = NULL;
+	int nSize = m_DbPools.size();
+	for (int i = 0; i < nSize; i++)
+	{
+		DbPools dbItem = m_DbPools[i];
+		if (strSearchName == dbItem.strDBName)
+		{
+			pMySqlDB = dbItem.pSqlDB;
+			break;
+		}
+	}
+
+	if (!pMySqlDB)
+	{
+		DbPools dbItem;
+		dbItem.strDBName = strSearchName;
+		dbItem.pSqlDB = new CMySQLDB();
+		pMySqlDB = dbItem.pSqlDB;
+		m_DbPools.push_back(dbItem);
+	}
+
+	return pMySqlDB;
+
+}
+
+void slMySqlAgent::ReleassObjectsDB()
+{
+	for (std::vector<DbPools>::iterator item = m_DbPools.begin(); item != m_DbPools.end();)
+	{
+		DbPools dbItem = *item;
+		if (dbItem.pSqlDB)
+		{
+			delete dbItem.pSqlDB;
+			dbItem.pSqlDB = NULL;
+		}
+		m_DbPools.erase(item);
+	}
+}
+
+bool slMySqlAgent::AddRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog)
+{
+	bool bRet = true;
+	do 
+	{
+		//修改的记录首先检查最近有没有此记录
+		//
+		if (FileLog.FileActon == FILE_MODIFYED)
+		{
+			std::string strQuerySQL = "select max(lastmodify) as maxtime from t_changeinfo where path='%s' and operflg=1 or operflg=2";
+			HRESULT hr = pMySqlDB->Query(strQuerySQL.c_str(), ConverSqlPath(FileLog.szSrcName).c_str());
+			if (FAILED(hr))
+			{
+				log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,doSqlExe Failed!Sql=%s\r\n",strQuerySQL.c_str());
+				bRet = false;
+				break;
+			}
+			int nCount = pMySqlDB->GetRowCount();
+			if(nCount >= 1)
+			{	
+				bRet = pMySqlDB->GetRow();
+				if(bRet==false)
+				{
+					log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,GetRow Failed!Sql=%s\r\n",strQuerySQL.c_str());
+					break;
+				}
+				
+				int nTimeLen = 0;
+				char* pTime = pMySqlDB->GetField("maxtime",&nTimeLen);
+				if(pTime!=NULL && nTimeLen > 1)
+				{	
+					std::string strTime(pTime,nTimeLen);
+					if (strcmp(pTime, FileLog.szLogTime) == 0)
+					{
+						bRet = false;
+						break;
+					}
+				}
+			}
+		}
+		
+		std::string strInsertSQL = "insert into t_changeinfo(path,operflg,hasoper,lastmodify) values('%s','%s','0','%s')";
+		HRESULT hr = pMySqlDB->Query(strInsertSQL.c_str(),ConverSqlPath(FileLog.szSrcName).c_str(), GetOperFlag(FileLog).c_str(),FileLog.szLogTime);
+		if (FAILED(hr))
+		{
+			log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,doSqlExe Failed!Sql=%s\r\n",strInsertSQL.c_str());
+			bRet = false;
+			break;
+		}
+
+		log.Print(LL_DEBUG_INFO,"insert new record!path=%s, operflg=%s\r\n",FileLog.szSrcName,GetOperFlag(FileLog).c_str());
+
+	} while (0);
 
 	return bRet;
 }
@@ -74,7 +177,7 @@ string slMySqlAgent::GetOperFlag(File_Action_Log FileLog)
 	default:
 		break;
 	}
-
+	
 	return strOperFlag;
 }
 
@@ -92,94 +195,6 @@ string slMySqlAgent::ConverSqlPath(string strPath)
 		nPos1 += nPos2+2;
 		nPos2 = strTmp.find_first_of('\\');	
 	}
-
+	
 	return strData;
 }
-
-bool slMySqlAgent::AddRec(File_Action_Log FileLog)
-{
-	bool bRet = true;
-	do 
-	{
-		//修改的记录首先检查最近有没有此记录
-		//
-		if (FileLog.FileActon == FILE_MODIFYED)
-		{
-			std::string strQuerySQL = "select max(lastmodify) as maxtime from t_changeinfo where path='%s' and operflg=1 or operflg=2";
-			HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), ConverSqlPath(FileLog.szSrcName).c_str());
-			if (FAILED(hr))
-			{
-				log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,doSqlExe Failed!Sql=%s\r\n",strQuerySQL.c_str());
-				bRet = false;
-				break;
-			}
-			int nCount = m_pMySqlDB->GetRowCount();
-			if(nCount >= 1)
-			{	
-				bRet = m_pMySqlDB->GetRow();
-				if(bRet==false)
-				{
-					log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,GetRow Failed!Sql=%s\r\n",strQuerySQL.c_str());
-					break;
-				}
-				
-				int nTimeLen = 0;
-				char* pTime = m_pMySqlDB->GetField("maxtime",&nTimeLen);
-				if(pTime!=NULL && nTimeLen > 1)
-				{	
-					std::string strTime(pTime,nTimeLen);
-					if (strcmp(pTime, FileLog.szLogTime) == 0)
-					{
-						bRet = false;
-						break;
-					}
-				}
-			}
-		}
-		
-		std::string strInsertSQL = "insert into t_changeinfo(path,operflg,hasoper,lastmodify) values('%s','%s','0','%s')";
-		HRESULT hr = doSqlExe(TRUE, strInsertSQL.c_str(),ConverSqlPath(FileLog.szSrcName).c_str(), GetOperFlag(FileLog).c_str(),FileLog.szLogTime);
-		if (FAILED(hr))
-		{
-			log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,doSqlExe Failed!Sql=%s\r\n",strInsertSQL.c_str());
-			bRet = false;
-			break;
-		}
-
-		log.Print(LL_DEBUG_INFO,"insert new record!path=%s, operflg=%s\r\n",FileLog.szSrcName,GetOperFlag(FileLog).c_str());
-
-	} while (0);
-
-	return bRet;
-}
-
-
-BOOL slMySqlAgent::doSqlExe(BOOL bCombin,const char* szSQL,...)
-{
-	BOOL bSucc = FALSE; 	
-	try
-	{	
-		if(bCombin)
-		{
-			int pos = 0;
-			char buffer[DEFAULT_SQL_CMD_SIZE] = {0 };
-			va_list args;
-			va_start(args, szSQL);
-			pos += _vsnprintf(buffer+pos,DEFAULT_SQL_CMD_SIZE,szSQL, args);
-			va_end(args);
-			bSucc = m_pMySqlDB->Query(buffer,pos);
-		}else
-		{
-			bSucc = m_pMySqlDB->Query(szSQL,strlen(szSQL));	
-		}
-	}
-	catch (...)
-	{
-		log.Print(LL_DEBUG_INFO,"Exception in slMySqlAgent::doSqlExe!\r\n");	
-		bSucc = FALSE;
-	}
-	
-	return bSucc;
-	
-}
-

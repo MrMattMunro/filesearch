@@ -5,9 +5,6 @@
 #include "stdafx.h"
 #include "DirMonitor.h"
 #include "slLogSendThread.h"
-#include "slXmlAgent.h"
-
-extern slXmlAgent g_xmlFilterAgent;
 
 #ifdef _DEBUG
 #undef THIS_FILE

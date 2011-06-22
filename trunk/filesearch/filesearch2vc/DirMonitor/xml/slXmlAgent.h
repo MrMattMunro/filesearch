@@ -9,13 +9,6 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-typedef struct _XmlFilter
-{
-	int  nIndex;
-	char szSearceName[MAX_PATH];
-	char szSearchPath[MAX_PATH];
-	char szSearchType[MAX_PATH*2];
-}XmlFilter,*pXmlFilter;
 
 #include "mysqlcomm.h"
 class slXmlAgent  :public mysqlcomm

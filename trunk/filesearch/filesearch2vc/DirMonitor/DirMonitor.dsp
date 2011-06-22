@@ -181,10 +181,6 @@ SOURCE=.\DirMonitor.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\mysql\mysqlcomm.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\Resource.h
 # End Source File
 # Begin Source File

@@ -73,6 +73,11 @@ DWORD __stdcall Monitor_Stop()
 
 	m_DirWatcher.UnwatchAllDirectories();
 
+	//Í£Ö¹·¢ËÍÏß³Ì
+	g_LogSendThread.shutdown();
+	g_xmlFilterAgent.Clear();
+	g_DirMonThread.shutdown();
+
 	log.Print(LL_DEBUG_INFO, "[Info]Leave Monitor_Stop\r\n");
 	return 0;
 }
