@@ -25,7 +25,6 @@ slXmlAgent::slXmlAgent()
 
 slXmlAgent::~slXmlAgent()
 {
-
 	Clear();
 }
 

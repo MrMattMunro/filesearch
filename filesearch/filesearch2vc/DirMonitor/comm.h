@@ -30,6 +30,14 @@ typedef struct _File_Action_Log
 
 }File_Action_Log,*pFile_Action_Log;
 
+typedef struct _XmlFilter
+{
+	int  nIndex;
+	char szSearceName[MAX_PATH];
+	char szSearchPath[MAX_PATH];
+	char szSearchType[MAX_PATH*2];
+}XmlFilter,*pXmlFilter;
+
 #pragma pack(pop)
 
 #endif
