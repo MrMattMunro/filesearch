@@ -16,6 +16,7 @@ public:
 	mysqlcomm();
 	virtual ~mysqlcomm();
 
+	bool CreateDB();
 	bool ConnectDB();
 	BOOL doSqlExe(BOOL bCombin,const char* szSQL,...);
 public:

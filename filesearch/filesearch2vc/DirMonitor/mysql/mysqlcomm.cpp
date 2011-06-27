@@ -29,11 +29,31 @@ mysqlcomm::~mysqlcomm()
 		m_pMySqlDB = NULL;
 	}
 }
+
+bool mysqlcomm::CreateDB()
+{
+	//
+	if (!m_pMySqlDB)
+	{
+		m_pMySqlDB = new CMySQLDB();
+		if (!m_pMySqlDB)
+		{
+			log.Print(LL_DEBUG_INFO, "[Info]CreateDB Failed!\r\n");
+			return false;
+		}
+	}
+
+	return true;
+}
+
 //////////////////////////////////////////////////////////////////////////
 bool mysqlcomm::ConnectDB()
 {
 	//
-	m_pMySqlDB = new CMySQLDB();
+	if (!CreateDB())
+	{
+		return false;
+	}
 	
 	//connect db
 	bool bRet = m_pMySqlDB->Connect("127.0.0.1", 3306, "root","changsong","COMMONINFO");

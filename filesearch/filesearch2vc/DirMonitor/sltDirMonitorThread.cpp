@@ -48,6 +48,7 @@ int sltDirMonitorThread::run()
 	BOOL bsucc = FALSE;
 
 	g_LogSendThread.startup();	
+	int nRetry = 0;
 	
 	for(;;)
 	{
@@ -56,9 +57,10 @@ int sltDirMonitorThread::run()
 
 		//首次连接数据库
 		//连接失败，继续连接
-		if (!g_xmlFilterAgent.m_pMySqlDB && !g_xmlFilterAgent.ConnectDB())
+
+		if (!g_xmlFilterAgent.ConnectDB())
 		{
-			log.Print(LL_DEBUG_INFO, "[Error]Try to Connect Db Failed!DBName=COMMONINFO\r\n");
+			log.Print(LL_DEBUG_INFO, "[Warn]Try to Connect Db Failed!DBName=COMMONINFO\r\n");
 			sleep(1000*30);
 			continue;
 		}
@@ -66,7 +68,17 @@ int sltDirMonitorThread::run()
 		log.Print(LL_DEBUG_INFO, "[Info]Connect Db succ!DBName=COMMONINFO\r\n");
 		//连接成功，读取待监控的目录，并监视该目录
 		if (g_xmlFilterAgent.LoadDB() != 0)
-			break;
+		{
+			log.Print(LL_DEBUG_INFO, "[Warn]Try to LoadDB Failed!DBName=COMMONINFO\r\n");
+			sleep(1000*10);
+			if (nRetry++ > 5)
+			{
+				log.Print(LL_DEBUG_INFO, "[Error]Over Try Time LoadDB Failed!DBName=COMMONINFO\r\n");
+				break;
+			}
+
+			continue;
+		}
 
 		int nDirCount = g_xmlFilterAgent.m_nCount;
 		for (int i = 0; i < nDirCount; i++)
