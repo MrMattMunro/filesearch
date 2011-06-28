@@ -13,8 +13,8 @@ DWORD __stdcall DoExe(char* szPath)
 {
 
 	//查找java，cmd进程，并结束掉
-	slTerminateProcess("java.exe");
-	slTerminateProcess("update.exe");
+//	slTerminateProcess("java.exe");
+//	slTerminateProcess("update.exe");
 
 	//然后在执行相应的进程
 	ShellExecute(NULL, "open",szPath, NULL,NULL, SW_SHOWNORMAL); 
