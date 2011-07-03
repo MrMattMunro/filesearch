@@ -15,8 +15,8 @@ Class3=CAboutDlg
 ResourceCount=4
 Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
-Resource3=IDD_FSUITEST_DIALOG
-Resource4=IDD_FSUITEST_DIALOG (Chinese (P.R.C.))
+Resource3=IDD_FSUITEST_DIALOG (Chinese (P.R.C.))
+Resource4=IDD_FSUITEST_DIALOG
 
 [CLS:CFsUiTestApp]
 Type=0
@@ -51,7 +51,7 @@ Control4=IDOK,button,1342373889
 [DLG:IDD_FSUITEST_DIALOG]
 Type=1
 Class=CFsUiTestDlg
-ControlCount=14
+ControlCount=15
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_BUTTON1,button,1342242816
@@ -66,6 +66,7 @@ Control11=IDC_BUTTON6,button,1342242816
 Control12=IDC_BUTTON7,button,1342242816
 Control13=IDC_BUTTON8,button,1342242816
 Control14=IDC_BUTTON9,button,1342242816
+Control15=IDC_BUTTON10,button,1342242816
 
 [DLG:IDD_FSUITEST_DIALOG (Chinese (P.R.C.))]
 Type=1

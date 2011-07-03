@@ -93,6 +93,7 @@ BEGIN_MESSAGE_MAP(CFsUiTestDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON7, OnButton7)
 	ON_BN_CLICKED(IDC_BUTTON8, OnButton8)
 	ON_BN_CLICKED(IDC_BUTTON9, OnButton9)
+	ON_BN_CLICKED(IDC_BUTTON10, OnButton10)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -425,3 +426,9 @@ void CFsUiTestDlg::OnButton5()
 }
 
 
+
+void CFsUiTestDlg::OnButton10() 
+{
+	// TODO: Add your control notification handler code here
+	ShellExecute(this->m_hWnd,"open","C:\\Program Files\\Microsoft Office\\OFFICE11\\WINWORD.EXE","\"D:\\slfile╡Бйтнд╪Ч\\╡Бйтdir3\\1 2.doc\"","",SW_SHOW );	
+}

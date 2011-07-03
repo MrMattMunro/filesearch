@@ -88,17 +88,9 @@ BOOL CFastSearchDlg::OnInitDialog()
 	HICON m_hIcon;
 	m_hIcon=AfxGetApp()->LoadIcon(IDI_ICON_FIND);
 	SetIcon(m_hIcon,TRUE); //设置为大图标
-	//SetIcon(m_hIcon,FALSE);//设置为小图标
 
 	// TODO: Add extra initialization here
 	SetWindowText(g_lag.LoadString("title.fastsearch"));
-// 	if (NULL == m_pSearchThread)
-// 	{
-// 		OutputDebugString("AfxBeginThread ");
-// 		m_pSearchThread = (CSearchThread*)AfxBeginThread(RUNTIME_CLASS(CSearchThread), THREAD_PRIORITY_NORMAL, 0, CREATE_SUSPENDED , 0);		
-// 		m_pSearchThread->m_hParentWnd = this->GetSafeHwnd();
-// 		m_pSearchThread->ResumeThread();
-// 	}	
 
 	sltFastSearchThread::newInstance();
 	sltFastSearchThread::getInstance()->Init(this->GetSafeHwnd());
@@ -134,8 +126,9 @@ BOOL CFastSearchDlg::OnInitDialog()
 	std::string str2 = "desp2";
 	desp.push_back(str1);
 	desp.push_back(str2);
-	AddLinkItem(1, 1,1,"3.txt", desp);
-	AddLinkItem(1, 2,1,"2.doc", desp);
+	AddLinkItem(1, 1,1,"D:\\slfile测试文件\\测试dir3\\2009 年度审计项目完成情况.xls", desp);
+	AddLinkItem(1, 1,1,"D:\\slfile测试文件\\测试dir3\\1 2.doc", desp);
+	AddLinkItem(1, 2,1,"d:\\1 2.txt", desp);
 	AddLinkItem(2, 1,1,"3.xls", desp);
 	AddLinkItem(3, 1,1,"3.ppt", desp);
 #endif
@@ -220,9 +213,6 @@ void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
 		int nCount = m_agent.m_RecList.size();
 		for (int i = 0; i < nCount; i++)
 		{
-//			SearchRectord sr;
-//			memcpy(&sr, &m_agent.m_RecList[i],sizeof(SearchRectord));
-			
 			int nID = GetFileID(m_agent.m_RecList[i].szFileType);
 			//////////////////////////////////////////////////////////////////////////
 			//显示到树中
@@ -426,7 +416,6 @@ LRESULT CFastSearchDlg::OnTaskPanelNotify(WPARAM wParam, LPARAM lParam)
 	{
 	case XTP_TPN_CLICK:
 		{
-//			MessageBox("Click Event:");
 			CXTPTaskPanelGroupItem* pItem = (CXTPTaskPanelGroupItem*)lParam;
 			TRACE(_T("Click Event: pItem.Caption = %s, pItem.ID = %i\n"), pItem->GetCaption(), pItem->GetID());
 
@@ -481,9 +470,19 @@ LRESULT CFastSearchDlg::OnTaskPanelNotify(WPARAM wParam, LPARAM lParam)
 
 				if(m_setAgent.GetSoftPath(strGroupName.GetBuffer(0),szPath) == 0 )
 				{
-					ShellExecute(this->m_hWnd,"open",szPath,strFilePath.c_str(),"",SW_SHOW );
+					//打开进程参数的文件全路径中，如果含有“ ”（空格），则改路径必须用加上“”
+					//解决无法打开文件路径中带有空格的文件
+					std::string strFilePathOpen = "\"";
+					strFilePathOpen += strFilePath;
+					strFilePathOpen += "\"";
+					flog.Print(LL_DEBUG_INFO,"[info]ShellExecute softpath=%s, filepath=%s\r\n",szPath,strFilePathOpen.c_str());
+
+					ShellExecute(this->m_hWnd,"open",szPath,strFilePathOpen.c_str(),"",SW_SHOW );
 				}else
+				{
+					flog.Print(LL_DEBUG_INFO,"[info]ShellExecute filepath=%s\r\n",strFilePath.c_str());
 					ShellExecute(NULL, "open",strFilePath.c_str(),NULL, NULL, SW_SHOW);
+				}
 			}
 		}
 		break;
