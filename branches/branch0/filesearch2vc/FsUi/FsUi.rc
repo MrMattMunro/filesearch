@@ -1,0 +1,554 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\FsUi.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2011,7,2,1
+ PRODUCTVERSION 1,0,0,21
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "slfile\0"
+            VALUE "FileDescription", "FsUi DLL\0"
+            VALUE "FileVersion", "2011, 7, 2, 1\0"
+            VALUE "InternalName", "FsUi\0"
+            VALUE "LegalCopyright", "版权所有 (C) 2011\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "FsUi.DLL\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "FsUi Dynamic Link Library\0"
+            VALUE "ProductVersion", "1, 0, 0, 21\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG_CREATE_INDEX DIALOG DISCARDABLE  0, 0, 262, 79
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "新建文档内容搜索"
+FONT 10, "宋体"
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,78,56,40,14
+    PUSHBUTTON      "取消",IDCANCEL,162,56,40,14
+    RTEXT           "搜索目录:",IDC_STATIC_SEARCH_DIR,8,16,40,8
+    EDITTEXT        IDC_EDIT_SEARCH_PATH,52,14,170,13,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    PUSHBUTTON      "",IDC_BUTTON_BROWSE,226,13,18,14
+    RTEXT           "对象文档:",IDC_STATIC_OBJECT_TYPE,8,37,40,8
+    CONTROL         "excel",IDC_CHECK_EXCEL,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,52,36,31,10
+    CONTROL         "word",IDC_CHECK_WORD,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,91,36,27,10
+    CONTROL         "ppt",IDC_CHECK_PPT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,127,36,23,10
+    CONTROL         "pdf",IDC_CHECK_PDF,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,158,36,24,10
+    CONTROL         "html",IDC_CHECK_HTML,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,190,36,26,10
+    CONTROL         "txt",IDC_CHECK_TXT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,224,36,26,10
+END
+
+IDD_DIALOG_CUSTOM_DICT DIALOG DISCARDABLE  0, 0, 238, 195
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "导入自定义词汇"
+FONT 10, "宋体"
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,83,159,40,14,NOT WS_VISIBLE
+    PUSHBUTTON      "取消",IDCANCEL,151,156,40,14,NOT WS_VISIBLE
+    LTEXT           "选择词汇文件(txt文件，excel文件)",IDC_STATIC_CIHUI_2,37,
+                    79,123,8
+    EDITTEXT        IDC_EDIT_CIHUI_PATH,37,111,177,15,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    PUSHBUTTON      "",IDC_BUTTON_BROWSE_CIHUI,217,110,19,14
+    CONTROL         "覆盖",IDC_CHECK_OVERCIHUI,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,93,94,34,10
+    PUSHBUTTON      "查看已有词汇",IDC_BUTTON_CHECK_EXISTCIHUI,168,25,62,15
+    LTEXT           "自定义词汇管理",IDC_STATIC_CUSTOM_CIHUI,28,15,53,8
+    LTEXT           "用于保存用户使用的专有词汇。",IDC_STATIC_CIHUI_1,37,29,
+                    126,8
+    LTEXT           "导入自定义词汇",IDC_STATIC_IMPORT_CIHUI,28,59,53,8
+    LTEXT           "存在已有词汇:",IDC_STATIC_CIHUI_3,37,94,50,8
+    ICON            IDI_ICON_HAND,IDC_STATIC,6,9,20,20
+    ICON            IDI_ICON_HAND,IDC_STATIC,5,52,20,20
+END
+
+IDD_DIALOG_MODIFY_INDEX DIALOG DISCARDABLE  0, 0, 262, 79
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "修改文件内容搜索"
+FONT 10, "宋体"
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,53,56,39,15
+    PUSHBUTTON      "取消",IDCANCEL,163,56,39,15
+    RTEXT           "搜索目录:",IDC_STATIC_SEARCH_DIR_MODIFY,6,16,41,8
+    RTEXT           "对象文档:",IDC_STATIC_OBJECT_TYPE_MODIFY,6,36,41,8
+    LTEXT           "path",IDC_STATIC_SEARCHPATH,51,16,195,10
+    CONTROL         "excel",IDC_CHECK_EXCEL,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,51,36,34,10
+    CONTROL         "word",IDC_CHECK_WORD,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,90,36,30,10
+    CONTROL         "pdf",IDC_CHECK_PDF,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,157,36,28,10
+    CONTROL         "ppt",IDC_CHECK_PPT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,126,36,25,10
+    CONTROL         "html",IDC_CHECK_HTML,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,190,36,30,10
+    CONTROL         "txt",IDC_CHECK_TXT_MODIFY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,224,36,25,10
+    CONTROL         "chm",IDC_CHECK_CHM,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,17,54,24,10
+    PUSHBUTTON      "删除",IDC_BUTTON_DEL_INDEX,108,56,39,15
+END
+
+IDD_DIALOG_ALL_CIHUI DIALOG DISCARDABLE  0, 0, 137, 265
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "查看已导入词汇"
+FONT 10, "宋体"
+BEGIN
+    PUSHBUTTON      "关闭",IDCANCEL,46,244,44,16
+    LISTBOX         IDC_LIST_ALL_CIHUI,9,34,118,207,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "关键词:",IDC_STATIC_NEW_WORDS,0,14,33,8
+    EDITTEXT        IDC_EDIT_KEY_WORD,35,12,90,14,ES_AUTOHSCROLL
+END
+
+IDD_DIALOG_SET_ATTR DIALOG DISCARDABLE  0, 0, 241, 195
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "系统设置"
+FONT 10, "宋体"
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,84,176,38,14,NOT WS_VISIBLE
+    PUSHBUTTON      "取消",IDCANCEL,157,175,38,14,NOT WS_VISIBLE
+    LTEXT           "IE:",IDC_STATIC,33,50,13,8
+    LTEXT           "WORD:",IDC_STATIC,33,71,21,8
+    LTEXT           "EXCEL:",IDC_STATIC,33,92,25,8
+    LTEXT           "PPT:",IDC_STATIC,33,113,17,8
+    LTEXT           "PDF:",IDC_STATIC,33,134,17,8
+    LTEXT           "TXT:",IDC_STATIC,33,155,17,8
+    EDITTEXT        IDC_EDIT_IE_PATH,59,48,164,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "您可以设置文档默认使用哪种软件进行查看。",
+                    IDC_STATIC_SET_1,33,31,150,8
+    EDITTEXT        IDC_EDIT_WORD_PATH,59,70,164,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDIT_EXCEL_PATH,59,90,164,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDIT_PPT_PATH,59,111,164,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDIT_PDF_PATH,59,131,164,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDIT_TXT_PATH,59,152,164,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    PUSHBUTTON      "",IDC_BUTTON_BROWSER_IE,225,47,15,14
+    PUSHBUTTON      "",IDC_BUTTON_BROWSER_WORD,225,68,15,14
+    PUSHBUTTON      "",IDC_BUTTON_BROWSER_EXCEL,225,89,15,14
+    PUSHBUTTON      "",IDC_BUTTON_BROWSER_PPT,225,110,15,14
+    PUSHBUTTON      "",IDC_BUTTON_BROWSER_PDF,225,131,15,14
+    PUSHBUTTON      "",IDC_BUTTON_BROWSER_TXT,225,152,15,14
+    LTEXT           "文档软件关联设置",IDC_STATIC_SOFT_SET,27,15,60,8
+    ICON            IDI_ICON_HAND,IDC_STATIC,6,9,18,20
+END
+
+IDD_DIALOG_FAST_SEARCH DIALOG DISCARDABLE  0, 0, 241, 350
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "快速查找"
+FONT 9, "宋体"
+BEGIN
+    EDITTEXT        IDC_EDIT_SEARCH_KEY,23,328,90,14,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_PATH,125,328,109,71,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    ICON            IDI_ICON_FAST_SEARCH,IDC_STATIC,0,324,20,20,
+                    SS_CENTERIMAGE
+END
+
+IDD_DIALOG_LICENSE DIALOG DISCARDABLE  0, 0, 249, 190
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "注册信息管理"
+FONT 10, "宋体"
+BEGIN
+    LTEXT           "注册基本信息",IDC_STATIC_LICENSE_INFO,27,16,46,8
+    LTEXT           "用户填写注册基本信息，包括订单号，电子邮箱",
+                    IDC_STATIC_LICENSE_1,33,33,157,8
+    LTEXT           "订单号:",IDC_STATIC_NUM,34,51,27,8
+    LTEXT           "电子邮箱:",IDC_STATIC_EMAIL,34,70,35,8
+    EDITTEXT        IDC_EDIT_NUM,71,48,115,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_EMAIL,71,69,115,13,ES_AUTOHSCROLL
+    LTEXT           "到期时间:",IDC_STATIC_ENDTIME,34,116,35,8
+    PUSHBUTTON      "注册",IDC_BUTTON_REG,191,52,53,21
+    LTEXT           "starttime",IDC_STATIC_BEGINTIME_CONTENT,75,98,120,8
+    LTEXT           "endtime",IDC_STATIC_ENTTIME_CONTENT,75,116,120,8
+    LTEXT           "注册时间:",IDC_STATIC_BEGINTIME,34,98,35,8
+    LTEXT           "errorinfo",IDC_STATIC_ERROR_INFO,33,132,203,24
+    ICON            IDI_ICON_HAND,IDC_STATIC,6,9,20,20
+END
+
+IDD_DIALOG_SKIN DIALOG DISCARDABLE  0, 0, 241, 190
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "外观"
+FONT 10, "宋体"
+BEGIN
+    LTEXT           "皮肤外观",IDC_STATIC_SKIN_SET,27,15,31,8
+    ICON            IDI_ICON_HAND,IDC_STATIC,6,9,20,20
+    LTEXT           "请选项程序皮肤:",IDC_STATIC_SKIN_SELECT,27,30,57,8
+    LISTBOX         IDC_LIST_SKIN,28,42,65,142,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "皮肤预览:",IDC_STATIC_SKIN_PREVIEW,98,30,35,8
+    GROUPBOX        "",IDC_STATIC,98,39,142,105
+    RTEXT           "作者:",IDC_STATIC_AUTHOR,100,151,44,8
+    LTEXT           "slfile",IDC_STATIC_AUTHOR_NAME,149,151,73,10
+    RTEXT           "主页:",IDC_STATIC_HOMEPAGE,100,163,44,8
+    LTEXT           "www.slfile.com",IDC_STATIC_HOMEPAGE_NAME,149,162,73,10
+    RTEXT           "邮箱:",IDC_STATIC_SKIN_EAMIL,100,176,44,8
+    LTEXT           "support@slfile.net",IDC_STATIC_SKIN_EAMIL_NAME,149,175,
+                    73,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DIALOG_ALL_CIHUI, DIALOG
+    BEGIN
+        TOPMARGIN, 1
+    END
+
+    IDD_DIALOG_FAST_SEARCH, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 349
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON_WORD           ICON    DISCARDABLE     "res\\word.ico"
+IDI_ICON_EXCEL          ICON    DISCARDABLE     "res\\excel.ico"
+IDI_ICON_PPT            ICON    DISCARDABLE     "res\\ppt.ico"
+IDI_ICON_PDF            ICON    DISCARDABLE     "res\\pdf.ico"
+IDI_ICON_TXT            ICON    DISCARDABLE     "res\\notepad.ico"
+IDI_ICON_SYS_SET        ICON    DISCARDABLE     "res\\SETUP INFORMATION INF.ICO"
+IDI_ICON_SET_NORMAL     ICON    DISCARDABLE     "res\\set_nomarl.ICO"
+IDI_ICON_SET_TOOLS      ICON    DISCARDABLE     "res\\tools1.ico"
+IDI_ICON_CIHUI          ICON    DISCARDABLE     "res\\Bookshelf.ico"
+IDI_ICON_CIHUI1         ICON    DISCARDABLE     "res\\Note.ico"
+IDI_ICON_CIHUI2         ICON    DISCARDABLE     "res\\Book2.ico"
+IDI_ICON_REG_MANAGER    ICON    DISCARDABLE     "res\\Registry Entries REG.ico"
+IDI_ICON_REG_INFO       ICON    DISCARDABLE     "res\\Registration.ico"
+IDI_ICON_REG_MANAGE2    ICON    DISCARDABLE     "res\\Recycle.ico"
+IDI_ICON_FIND           ICON    DISCARDABLE     "res\\n33start_find.ico"
+IDI_ICON_NEW_INDEX      ICON    DISCARDABLE     "res\\New Text Doc.ico"
+IDI_ICON_MODIFY_INDEX   ICON    DISCARDABLE     "res\\DEVTOOL.ICO"
+IDI_ICON_HAND           ICON    DISCARDABLE     "res\\HAND.ICO"
+IDI_ICON_SKIN           ICON    DISCARDABLE     "res\\PAINT~32.ICO"
+IDI_ICON_FAST_FIND      ICON    DISCARDABLE     "res\\Find.ico"
+IDI_ICON_FAST_SEARCH    ICON    DISCARDABLE     "res\\Sherlock.ico"
+IDI_ICON_HTML           ICON    DISCARDABLE     "res\\html.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BITMAP_OK           BITMAP  DISCARDABLE     "res\\ok.bmp"
+IDB_BITMAP_CANCEL       BITMAP  DISCARDABLE     "res\\cancel16.bmp"
+IDB_BITMAP_FOLDER       BITMAP  DISCARDABLE     "res\\folder_open24.bmp"
+IDB_BITMAP_DELETE       BITMAP  DISCARDABLE     "res\\delete16.bmp"
+IDB_BITMAP_FORWARD      BITMAP  DISCARDABLE     "res\\forward24.bmp"
+IDB_BITMAP_CHECK_ALLCIHUI BITMAP  DISCARDABLE     "res\\find_nextb24_h.bmp"
+IDB_BITMAP_CHECK_CIHUI  BITMAP  DISCARDABLE     "res\\db_find16_h.bmp"
+IDB_BITMAP_REGISTER     BITMAP  DISCARDABLE     "res\\db_register16_h.bmp"
+IDB_BITMAP_FOLDER2      BITMAP  DISCARDABLE     "res\\folder_open16.bmp"
+IDB_BITMAP_FAST_SCH     BITMAP  DISCARDABLE     "res\\Sherlock.bmp"
+IDB_BITMAP_OFFICE2007   BITMAP  DISCARDABLE     "res\\preview_office2007.bmp"
+IDB_BITMAP_VISTA        BITMAP  DISCARDABLE     "res\\preview_vista.bmp"
+IDB_BITMAP_XPPLUNA      BITMAP  DISCARDABLE     "res\\preview_winxpluna.bmp"
+IDB_BITMAP_XPPROYALE    BITMAP  DISCARDABLE     "res\\previcw_winxproyale.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SEARCH_PATH         "搜索目录:"
+    IDS_OBJECT_TYPE         "对象文档:"
+    IDS_OK                  "确定"
+    IDS_CANCEL              "取消"
+    IDS_DELETE              "删除"
+    IDS_NEW_WORDS           "关键词:"
+    IDS_CLOSE               "关闭"
+    IDS_CUSTOM_CIHUI        "自定义词汇管理"
+    IDS_CIHUI_1             "自定义词汇用于保存搜索索引的专有名称。"
+    IDS_IMPORT_CIHUI        "导入自定义词汇"
+    IDS_CIHUI_2             "选择自定义词汇的（支持txt、excel格式）文件:"
+    IDS_CIHUI_3             "存在已有词汇时:"
+    IDS_CHECK_OVERCIHUI     "覆盖已有自定义词汇"
+    IDS_CHECK_EXISTCIHUI    "查看已有词汇"
+    IDS_SOFT_SET            "文档软件关联设置"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SET_1               "您可以设置文档默认使用哪种软件进行查看。"
+    IDS_LICENSE_INFO        "注册基本信息"
+    IDS_LICENSE_1           "用户填写注册基本信息，包括订单号，电子邮箱"
+    IDS_NUM                 "订单号:"
+    IDS_STATIC_EMAIL        "电子邮箱:"
+    IDS_BEGINTIME           "注册时间:"
+    IDS_ENDTIME             "到期时间:"
+    IDS_BEGINTIME_CONTENT   "starttime"
+    IDS_ENTTIME_CONTENT     "endtime"
+    IDS_ERROR_INFO          "errorinfo"
+    IDS_REG                 "注册"
+    IDS_NEW_INDEX           "新建索引"
+    IDS_MODIFY_INDEX        "修改索引"
+    IDS_DEL_INDEX           "删除索引"
+    IDS_SELECT_PATH         "请选择搜索目录！"
+    IDS_SELECT_OBJECT       "请选择对象文档"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PATH_EXISTS         "该目录索引已经存在，不能重复建立！"
+    IDS_SELECT_FILE         "请选择词汇文件！"
+    IDS_MODIFY_INDEX_OK     "您确定要修改该索引吗？"
+    IDS_NO_DEALWITH         "您未做任何修改！"
+    IDS_DEL_INDEX_OK        "您确定要删除该索引吗？"
+    IDS_SHEET_SYS_SET       "系统设置"
+    IDS_BASIC_SET           "基本设置"
+    IDS_SET_NOMARL          "常规"
+    IDS_CUSTOM_CH           "词汇"
+    IDS_LICENSE_MANAGE      "License管理"
+    IDS_SET_LICENSE_INFO    "License信息"
+    IDS_SEARCH_PATH_JP      "検 索名前:"
+    IDS_OBJECT_TYPE_JP      "文書種類:"
+    IDS_OK_JP               "確定"
+    IDS_CANCEL_JP           "キャンセル"
+    IDS_DELETE_JP           "削除"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_NEW_WORDS_JP        "キーワード:"
+    IDS_CLOSE_JP            "閉じる"
+    IDS_CUSTOM_CIHUI_JP     "カスタマイズ辞書の"
+    IDS_CIHUI_1_JP          "自定义词汇用于保存搜索索引的专有名称。"
+    IDS_IMPORT_CIHUI_JP     "カスタマイズ辞書の作成"
+    IDS_CIHUI_2_JP          "語彙ファイル："
+    IDS_CIHUI_3_JP          "入力した語彙が存在する時:"
+    IDS_CHECK_OVERCIHUI_JP  "もとの辞書をオーバーライドする"
+    IDS_CHECK_EXISTCIHUI_JP "インポートした辞書を表示する"
+    IDS_SOFT_SET_JP         "ドキュメントを開くソフトの設置"
+    IDS_SET_1_JP            "您可以设置文档默认使用哪种软件进行查看。"
+    IDS_LICENSE_INFO_JP     "基本情報の登録"
+    IDS_LICENSE_1_JP        "用户填写注册基本信息，包括订单号，电子邮箱"
+    IDS_NUM_JP              "注文番号"
+    IDS_STATIC_EMAIL_JP     "メール"
+    IDS_BEGINTIME_JP        "登録期日"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ENDTIME_JP          "使用期限"
+    IDS_BEGINTIME_CONTENT_JP "starttime"
+    IDS_ENTTIME_CONTENT_JP  "endtime"
+    IDS_ERROR_INFO_JP       "errorinfo"
+    IDS_REG_JP              "登録"
+    IDS_NEW_INDEX_JP        "検索の新規"
+    IDS_MODIFY_INDEX_JP     "インデックスファイルを更新します"
+    IDS_DEL_INDEX_JP        "インデックスファイルを削除します"
+    IDS_SELECT_PATH_JP      "検索ディレクトリの選択:"
+    IDS_SELECT_OBJECT_JP    "ドキュメントを選択してください"
+    IDS_PATH_EXISTS_JP      "作成された検索と重複なので、修正してください"
+    IDS_SELECT_FILE_JP      "語彙ファイル："
+    IDS_MODIFY_INDEX_OK_JP  "インデックスファイルの更新しますか？"
+    IDS_NO_DEALWITH_JP      "いかなる修正を行いません！"
+    IDS_DEL_INDEX_OK_JP     "インデックスファイルを削除しますか？"
+    IDS_SHEET_SYS_SET_JP    "設置"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BASIC_SET_JP        "基本設置"
+    IDS_SET_NOMARL_JP       "常規"
+    IDS_CUSTOM_CH_JP        "語彙"
+    IDS_LICENSE_MANAGE_JP   "ライセンスの管理"
+    IDS_SET_LICENSE_INFO_JP "ライセンスの情報"
+    IDS_SEARCH_PATH_EN      "Search Directory:"
+    IDS_OBJECT_TYPE_EN      "Doc Type:"
+    IDS_OK_EN               "OK"
+    IDS_CANCEL_EN           "Cancel"
+    IDS_DELETE_EN           "Delete"
+    IDS_NEW_WORDS_EN        "key Word"
+    IDS_CLOSE_EN            "Close"
+    IDS_CUSTOM_CIHUI_EN     "Custom Dictionary"
+    IDS_CIHUI_1_EN          "自定义词汇用于保存搜索索引的专有名称。"
+    IDS_IMPORT_CIHUI_EN     "Import custom Dictionary"
+    IDS_CIHUI_2_EN          "Dic File:"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CIHUI_3_EN          "Existed Dictionary:"
+    IDS_CHECK_OVERCIHUI_EN  "Over Dictionarys"
+    IDS_CHECK_EXISTCIHUI_EN "View existed words"
+    IDS_SOFT_SET_EN         "Set document softs"
+    IDS_SET_1_EN            "You can set open this document with softs"
+    IDS_LICENSE_INFO_EN     "Register infomation"
+    IDS_LICENSE_1_EN        "User file in regist info,and order number,email"
+    IDS_NUM_EN              "Order number:"
+    IDS_STATIC_EMAIL_EN     "Email:"
+    IDS_BEGINTIME_EN        "Regist Time:"
+    IDS_ENDTIME_EN          "Over Time:"
+    IDS_BEGINTIME_CONTENT_EN "starttime"
+    IDS_ENTTIME_CONTENT_EN  "endtime"
+    IDS_ERROR_INFO_EN       "errorinfo"
+    IDS_REG_EN              "Register"
+    IDS_NEW_INDEX_EN        "Create Index"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MODIFY_INDEX_EN     "Modify Index"
+    IDS_DEL_INDEX_EN        "Delete Index"
+    IDS_SELECT_PATH_EN      "Please choose search path！"
+    IDS_SELECT_OBJECT_EN    "Please choose document type"
+    IDS_PATH_EXISTS_EN      "Can't create existed index！"
+    IDS_SELECT_FILE_EN      "Please choose dictionary file！"
+    IDS_MODIFY_INDEX_OK_EN  "Do you sure to modify the index？"
+    IDS_NO_DEALWITH_EN      "Nothing changed！"
+    IDS_DEL_INDEX_OK_EN     "Do you sure to delete the index？"
+    IDS_SHEET_SYS_SET_EN    "System Set"
+    IDS_BASIC_SET_EN        "Basic Set"
+    IDS_SET_NOMARL_EN       "Normal"
+    IDS_CUSTOM_CH_EN        "Dictionary"
+    IDS_LICENSE_MANAGE_EN   "License Manage"
+    IDS_SET_LICENSE_INFO_EN "License Infomation"
+END
+
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\FsUi.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

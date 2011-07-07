@@ -1,0 +1,11 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		{2A97C2C2-A453-4902-9A23-93A1CB85A60B} = s 'slFileSearch'
+		'slFileSearch.EXE'
+		{
+			val AppID = s {2A97C2C2-A453-4902-9A23-93A1CB85A60B}
+		}
+	}
+}

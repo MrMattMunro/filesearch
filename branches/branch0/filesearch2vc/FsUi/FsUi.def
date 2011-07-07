@@ -1,0 +1,13 @@
+; FsUi.def : Declares the module parameters for the DLL.
+
+LIBRARY      "FsUi"
+DESCRIPTION  'FsUi Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here
+	FsCreateIndex		@1
+	FsModifyIndex		@2
+	FsImportCustomCiHui	@3
+	FsSetAttribute		@4
+	FsFastSearch		@5
+	FsSetSheet			@6
