@@ -1104,6 +1104,12 @@ bool CDelayedDirectoryChangeHandler::NotifyClientOfFileChange(CDirChangeNotifica
 			}
 		}
 
+		//过滤临时目录和临时文件
+		if(true == ExcludeThisNotification(pNot->m_szFileName1/* + dwFileNameOffset*/) )
+		{
+			return false;
+		}
+
 // 		if( false == IncludeThisNotification(pNot->m_szFileName1 + dwFileNameOffset)
 // 		||	true == ExcludeThisNotification(pNot->m_szFileName1/* + dwFileNameOffset*/) )
 // 		{

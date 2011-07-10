@@ -162,18 +162,35 @@ bool slMySqlAgent::AddRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog)
 
 
 //根据文件名获取文件最后访问时间
-std::string GetFileLastModifyTime(char* szFileName)
+std::string GetFileLastModifyTime(char* szFileName, std::string strDefaultValue)
 {
-	WIN32_FIND_DATA ffd ;
-	HANDLE hFind = FindFirstFile("C:\\1.doc",&ffd);
-	SYSTEMTIME stUTC, stLocal;
-	FileTimeToSystemTime(&(ffd.ftLastWriteTime), &stUTC);
-	SystemTimeToTzSpecificLocalTime(NULL, &stUTC, &stLocal);
-	
-	char szDateTime[MAX_PATH] = {0};
-	sprintf(szDateTime,"%04d-%02d-%02d %02d:%02d:%02d",
-		stLocal.wYear, stLocal.wMonth, stLocal.wDay, stLocal.wHour, stLocal.wMinute, stLocal.wSecond);
-	std::string strDateTime = szDateTime;
+	std::string strDateTime;
+	do 
+	{
+		try
+		{
+			WIN32_FIND_DATA ffd ;
+			HANDLE hFind = FindFirstFile(szFileName,&ffd);
+			if (hFind == INVALID_HANDLE_VALUE)
+			{
+				strDateTime = strDefaultValue;
+				break;
+			}
+			SYSTEMTIME stUTC, stLocal;
+			FileTimeToSystemTime(&(ffd.ftLastWriteTime), &stUTC);
+			SystemTimeToTzSpecificLocalTime(NULL, &stUTC, &stLocal); //正在打开的文档报异常
+				
+			char szDateTime[MAX_PATH] = {0};
+			sprintf(szDateTime,"%04d-%02d-%02d %02d:%02d:%02d",
+				stLocal.wYear, stLocal.wMonth, stLocal.wDay, stLocal.wHour, stLocal.wMinute, stLocal.wSecond);
+			strDateTime = szDateTime;
+		}
+		catch (...)
+		{
+			strDateTime = strDefaultValue;
+		}
+	} while (0);
+
 	return strDateTime;
 }
 
@@ -229,10 +246,10 @@ bool slMySqlAgent::AddRecentRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog, BOO
 		if (bRecentRec)
 		{
 			strInsertSQL = "insert into t_recent_changeinfo(path,operflg,hasoper,systime,lastmodify) values('%s','%s','0','%s','%s')";
-			hr = pMySqlDB->Query(strInsertSQL.c_str(),ConverSqlPath(FileLog.szSrcName).c_str(), GetOperFlag(FileLog).c_str(),FileLog.szLogTime, GetFileLastModifyTime(FileLog.szSrcName).c_str());
+			hr = pMySqlDB->Query(strInsertSQL.c_str(),ConverSqlPath(FileLog.szSrcName).c_str(), GetOperFlag(FileLog).c_str(),FileLog.szLogTime, GetFileLastModifyTime(FileLog.szSrcName, FileLog.szLogTime).c_str());
 		}else{
 			strInsertSQL = "insert into t_changeinfo(path,operflg,hasoper,lastmodify) values('%s','%s','0','%s')";
-			hr = pMySqlDB->Query(strInsertSQL.c_str(),ConverSqlPath(FileLog.szSrcName).c_str(), GetOperFlag(FileLog).c_str(), GetFileLastModifyTime(FileLog.szSrcName).c_str());
+			hr = pMySqlDB->Query(strInsertSQL.c_str(),ConverSqlPath(FileLog.szSrcName).c_str(), GetOperFlag(FileLog).c_str(), GetFileLastModifyTime(FileLog.szSrcName, FileLog.szLogTime).c_str());
 		}	
 
 		if (FAILED(hr))
