@@ -33,12 +33,14 @@ public:
 	void OnEventNotify();
 	BOOL CreateTaskPanel();
 
-	void AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption,std::vector<string> DespList);
-	void AddToolboxGroup(UINT nID, LPCTSTR lpszCaption, int nIconIndex);
+	void AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<string> DespList,LPCTSTR lpszTooltip = "");
+	void AddToolboxGroup(UINT nID, LPCTSTR lpszCaption, LPCTSTR lpszTooltip = "", int nIconIndex = 0);
 
 	void ClearGroupsItems(); 
 
 	void UpdateGroupsCaption(); 
+
+	void OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam);
 
 	CXTPTaskPanel m_wndTaskPanel;
 	sloFastSearchAgent m_agent;
