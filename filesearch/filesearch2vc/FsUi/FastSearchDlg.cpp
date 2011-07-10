@@ -81,6 +81,7 @@ void CFastSearchDlg::SetWinPos()
 	SetWindowPos(&wndTopMost,cx-rcDlgs.Width(),cy-rcDlgs.Height()-30,rcDlgs.Width(),rcDlgs.Height(),SWP_NOSIZE); 
 }
 
+
 BOOL CFastSearchDlg::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
@@ -108,17 +109,23 @@ BOOL CFastSearchDlg::OnInitDialog()
 
 	m_BoxList.InsertString(0,g_lag.LoadString("label.fastserlist"));
 	m_BoxList.SelectString(0,g_lag.LoadString("label.fastserlist"));
+	m_BoxList.InsertString(1, RECENT_3DAY);
+	m_BoxList.InsertString(2, RECENT_1WEEK);
+	m_BoxList.InsertString(3, RECENT_2WEEK);
+	m_BoxList.InsertString(4, RECENT_1MON);
 
 	CreateTaskPanel();
 
 	//excel, word,pdf,txt,ppt,html
 	//循环显示group
-	AddToolboxGroup(1, "word", IDI_ICON_WORD);
-	AddToolboxGroup(2, "excel", IDI_ICON_EXCEL);
-	AddToolboxGroup(3, "ppt", IDI_ICON_PPT);
-	AddToolboxGroup(4, "pdf", IDI_ICON_PDF);
-	AddToolboxGroup(5, "txt", IDI_ICON_TXT);
-	AddToolboxGroup(6, "html", IDI_ICON_HTML);
+	char szTooltip[MAX_PATH*2] = {0};
+	sprintf(szTooltip,"单击 【展开/合拢】 搜索列表\r\n搜索列表:\r\n     【左键单击】打开文档\r\n     【右键单击】打开文档所在的目录");
+	AddToolboxGroup(1, "word", szTooltip, IDI_ICON_WORD);
+	AddToolboxGroup(2, "excel", szTooltip, IDI_ICON_EXCEL);
+	AddToolboxGroup(3, "ppt", szTooltip, IDI_ICON_PPT);
+	AddToolboxGroup(4, "pdf", szTooltip, IDI_ICON_PDF);
+	AddToolboxGroup(5, "txt", szTooltip, IDI_ICON_TXT);
+	AddToolboxGroup(6, "html", szTooltip, IDI_ICON_HTML);
 
 #if 0
 	std::vector<string> desp;
@@ -167,6 +174,18 @@ void CFastSearchDlg::OnEventNotify()
 	memset(&fast, NULL, sizeof(FastItem));
 	strcpy(fast.szKey, strKey.GetBuffer(0));
 	strcpy(fast.szID, szID);
+	if (nId == -1)
+	{
+		//设置type值
+		if( strtemp == RECENT_3DAY)
+			strcpy(fast.szType, "3");
+		if( strtemp == RECENT_1WEEK)
+			strcpy(fast.szType, "7");
+		if( strtemp == RECENT_2WEEK)
+			strcpy(fast.szType, "14");
+		if( strtemp == RECENT_1MON)
+			strcpy(fast.szType, "30");
+	}
 
 	//如果文件存在，则记录下当前key
 	if (m_agent.IsKeyFileExist())
@@ -216,7 +235,7 @@ void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
 			int nID = GetFileID(m_agent.m_RecList[i].szFileType);
 			//////////////////////////////////////////////////////////////////////////
 			//显示到树中
-			AddLinkItem(nID, i,1,m_agent.m_RecList[i].szFileName,m_agent.m_RecList[i].DespList);
+			AddLinkItem(nID, i,1,m_agent.m_RecList[i].szFileName,m_agent.m_RecList[i].DespList, m_agent.m_RecList[i].szFilePath);
 		}
 	}
 
@@ -269,10 +288,18 @@ BOOL CFastSearchDlg::CreateTaskPanel()
 	return TRUE;
 }
 
-void CFastSearchDlg::AddToolboxGroup(UINT nID, LPCTSTR lpszCaption, int nIconIndex)
+/*
+参数:
+nID:			Group对象的ID			
+lpszCaption:	Group对象的caption
+lpszTooltip:	Group对象鼠标放在上面显示的caption
+nIconIndex:     Group对象图标的索引编号
+*/
+void CFastSearchDlg::AddToolboxGroup(UINT nID, LPCTSTR lpszCaption, LPCTSTR lpszTooltip/* = ""*/, int nIconIndex/* = 0*/)
 {
 	CXTPTaskPanelGroup* pFolder = m_wndTaskPanel.AddGroup(nID, nIconIndex);	
 	pFolder->SetCaption(lpszCaption);
+	pFolder->SetTooltip(lpszTooltip);
 	m_listMap[nID].pGroup = pFolder;
 	m_listMap[nID].nItemSize = 0;
 }
@@ -284,7 +311,7 @@ int imageid[6] = {	IDI_ICON_WORD,
 					IDI_ICON_TXT,
 					IDI_ICON_HTML
 					};
-void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<string> DespList)
+void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<string> DespList,LPCTSTR lpszTooltip/* = ""*/)
 {
 
 	CXTPTaskPanelGroup* pFolder = m_listMap[nFolderID].pGroup;
@@ -293,6 +320,7 @@ void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, L
 
 	m_listMap[nFolderID].nItemSize++;
 	CXTPTaskPanelGroupItem* pPointer = pFolder->AddLinkItem(nItemID, 0/*imageid[nFolderID-1]*/);
+	pPointer->SetTooltip(lpszTooltip);
 	int nSize = DespList.size();
 	if (nFolderID == 6)
 	{
@@ -410,92 +438,120 @@ HBRUSH CFastSearchDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	return hbr;
 }
 
+void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
+{
+	CXTPTaskPanelGroupItem* pItem = (CXTPTaskPanelGroupItem*)lParam;
+	TRACE(_T("Click Event: pItem.Caption = %s, pItem.ID = %i\n"), pItem->GetCaption(), pItem->GetID());
+	
+	//if (IsToggleButtons())
+	{
+		pItem->SetItemSelected(!pItem->IsItemSelected());
+	}
+	
+	CString strFileName = pItem->GetCaption();
+	CString strGroupCaption = pItem->GetItemGroup()->GetCaption();
+	if (strGroupCaption.Find(HTML_NAME, 0) != -1)
+	{
+		//html ,去除文件名后的(%d)
+		std::string sFileName = strFileName.GetBuffer(0);
+		int nPos = sFileName.find_last_of('(');
+		sFileName = sFileName.substr(0, nPos - 1);
+		strFileName = sFileName.c_str();
+	}
+	
+	//find file full path from file name
+	std::string strFilePath = m_agent.GetFilePathFromName(strFileName.GetBuffer(0));
+	
+	//处理【左键】点击事件，打开文档
+	if (XTP_TPN_CLICK == wParam && strFilePath.size() != 0)
+	{	
+		//处理【左键】点击事件，打开文档
+		m_bDestory = FALSE;
+		
+		char szPath[MAX_PATH] = {0};
+		CString strGroupName;
+		if (strGroupCaption.Find(HTML_NAME, 0) != -1)
+		{
+			strGroupName = HTML_NAME;
+		}
+		if (strGroupCaption.Find(WORD_NAME, 0) != -1)
+		{
+			strGroupName = WORD_NAME;
+		}
+		if (strGroupCaption.Find(EXCEL_NAME, 0) != -1)
+		{
+			strGroupName = EXCEL_NAME;
+		}
+		if (strGroupCaption.Find(PPT_NAME, 0) != -1)
+		{
+			strGroupName = PPT_NAME;
+		}
+		if (strGroupCaption.Find(PDF_NAME, 0) != -1)
+		{
+			strGroupName = PDF_NAME;
+		}
+		if (strGroupCaption.Find(TXT_NAME, 0) != -1)
+		{
+			strGroupName = TXT_NAME;
+		}
+		
+		if(m_setAgent.GetSoftPath(strGroupName.GetBuffer(0),szPath) == 0 )
+		{
+			//打开进程参数的文件全路径中，如果含有“ ”（空格），则改路径必须用加上“”
+			//解决无法打开文件路径中带有空格的文件
+			std::string strFilePathOpen = "\"";
+			strFilePathOpen += strFilePath;
+			strFilePathOpen += "\"";
+			flog.Print(LL_DEBUG_INFO,"[info]ShellExecute softpath=%s, filepath=%s\r\n",szPath,strFilePathOpen.c_str());
+			
+			ShellExecute(this->m_hWnd,"open",szPath,strFilePathOpen.c_str(),"",SW_SHOW );
+		}else
+		{
+			flog.Print(LL_DEBUG_INFO,"[info]ShellExecute filepath=%s\r\n",strFilePath.c_str());
+			ShellExecute(NULL, "open",strFilePath.c_str(),NULL, NULL, SW_SHOW);
+		}
+	}
+
+	//处理【右键】点击事件，打开文档所在的文件夹
+	if (XTP_TPN_RCLICK == wParam && strFilePath.size() != 0)
+	{
+		//处理【右键】点击事件，打开文档所在的文件夹
+		//根据文件名获取文件所在的路径
+		m_bDestory = FALSE;
+		
+		char szFilePath[MAX_PATH] = {0};
+		char drive[_MAX_DRIVE];
+		char dir[_MAX_DIR];
+
+		_splitpath( strFilePath.c_str(), drive, dir, NULL, NULL );
+		sprintf(szFilePath,"%s%s",drive, dir);
+
+		//打开此目录
+		ShellExecute(NULL, "explore", szFilePath, NULL, NULL, SW_SHOWNORMAL);		
+	}
+
+}
+
 LRESULT CFastSearchDlg::OnTaskPanelNotify(WPARAM wParam, LPARAM lParam)
 {
 	switch(wParam)
 	{
 	case XTP_TPN_CLICK:
 		{
-			CXTPTaskPanelGroupItem* pItem = (CXTPTaskPanelGroupItem*)lParam;
-			TRACE(_T("Click Event: pItem.Caption = %s, pItem.ID = %i\n"), pItem->GetCaption(), pItem->GetID());
-
-			//if (IsToggleButtons())
-			{
-				pItem->SetItemSelected(!pItem->IsItemSelected());
-			}
-
-			CString strFileName = pItem->GetCaption();
-			CString strGroupCaption = pItem->GetItemGroup()->GetCaption();
-			if (strGroupCaption.Find(HTML_NAME, 0) != -1)
-			{
-				//html ,去除文件名后的(%d)
-				std::string sFileName = strFileName.GetBuffer(0);
-				int nPos = sFileName.find_last_of('(');
-				sFileName = sFileName.substr(0, nPos - 1);
-				strFileName = sFileName.c_str();
-			}
-
-			//find file full path from file name
-			std::string strFilePath = m_agent.GetFilePathFromName(strFileName.GetBuffer(0));
-			if (strFilePath.size() != 0)
-			{				
-				m_bDestory = FALSE;
-
-				char szPath[MAX_PATH] = {0};
-				CString strGroupName;
-				if (strGroupCaption.Find(HTML_NAME, 0) != -1)
-				{
-					strGroupName = HTML_NAME;
-				}
-				if (strGroupCaption.Find(WORD_NAME, 0) != -1)
-				{
-					strGroupName = WORD_NAME;
-				}
-				if (strGroupCaption.Find(EXCEL_NAME, 0) != -1)
-				{
-					strGroupName = EXCEL_NAME;
-				}
-				if (strGroupCaption.Find(PPT_NAME, 0) != -1)
-				{
-					strGroupName = PPT_NAME;
-				}
-				if (strGroupCaption.Find(PDF_NAME, 0) != -1)
-				{
-					strGroupName = PDF_NAME;
-				}
-				if (strGroupCaption.Find(TXT_NAME, 0) != -1)
-				{
-					strGroupName = TXT_NAME;
-				}
-
-				if(m_setAgent.GetSoftPath(strGroupName.GetBuffer(0),szPath) == 0 )
-				{
-					//打开进程参数的文件全路径中，如果含有“ ”（空格），则改路径必须用加上“”
-					//解决无法打开文件路径中带有空格的文件
-					std::string strFilePathOpen = "\"";
-					strFilePathOpen += strFilePath;
-					strFilePathOpen += "\"";
-					flog.Print(LL_DEBUG_INFO,"[info]ShellExecute softpath=%s, filepath=%s\r\n",szPath,strFilePathOpen.c_str());
-
-					ShellExecute(this->m_hWnd,"open",szPath,strFilePathOpen.c_str(),"",SW_SHOW );
-				}else
-				{
-					flog.Print(LL_DEBUG_INFO,"[info]ShellExecute filepath=%s\r\n",strFilePath.c_str());
-					ShellExecute(NULL, "open",strFilePath.c_str(),NULL, NULL, SW_SHOW);
-				}
-			}
+			OnTaskPanelClickDownEvent(wParam, lParam);
 		}
 		break;
 	case XTP_TPN_DBLCLICK:
 		{
 			//////////////////////////////////////////////////////////////////////////
 			//add code
-//			MessageBox("DBLCLICK Event:");
+			MessageBox("DBLCLICK Event:");
 		}
 		break;	
 	case XTP_TPN_RCLICK:
-//		MessageBox("XTP_TPN_RCLICK Event:");
-		//		OnTaskPanelRButtonDown((CXTPTaskPanelItem*)lParam);
+		{
+			OnTaskPanelClickDownEvent(wParam, lParam);
+		}
 		break;
 	default:
 		break;	

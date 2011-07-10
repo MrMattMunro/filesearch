@@ -234,11 +234,19 @@ void sloFastSearchAgent::ClearRecList()
 	m_RecList.clear();
 }
 
+//
+//返回值:
+//id分配:  0-全部 -1-最近文档
 int sloFastSearchAgent::GetPathIndex(char* szPath)
 {
 	if (strcmp(szPath, g_lag.LoadString("label.fastserlist")) == 0)
 	{
 		return 0;
+	}
+
+	if (strncmp(szPath, RECENT, sizeof(RECENT)) == 0)
+	{
+		return -1;
 	}
 
 	int nCount = m_PathList.size();

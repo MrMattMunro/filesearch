@@ -95,7 +95,7 @@ int CShowAllCiHuiDlg::ReadAllCiHui()
     fclose(fp);   
 
 	//½âÎö´Ê»ã
-	char* pBegin = content, 
+	char* pBegin = content; 
 	char* pCur = pBegin;
 	for (int i = 0; i < len; i++)
 	{
