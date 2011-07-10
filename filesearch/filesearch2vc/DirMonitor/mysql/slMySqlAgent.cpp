@@ -35,6 +35,28 @@ bool slMySqlAgent::LogRecord(File_Action_Log FileLog)
 		std::string strDbName = g_xmlFilterAgent.GetDbNameFromPath(FileLog.szSrcName);
 		memcpy(FileLog.szDbName, strDbName.c_str(), strDbName.size());
 		
+		if (strDbName == DEFAULT_DB_NAME)
+		{
+			//非索引目录下的文件记录，插入一条记录
+			bRet = LogRecordDB(strDbName, FileLog);
+		}else
+		{
+			//索引目录下的文件记录，插入两条记录
+			bRet = LogRecordDB(strDbName, FileLog);
+			bRet = LogRecordDB(DEFAULT_DB_NAME, FileLog);
+		}
+
+	} while (0);
+
+	return bRet;
+}
+
+
+bool slMySqlAgent::LogRecordDB(std::string strDbName, File_Action_Log FileLog)
+{
+	bool bRet = true;
+	do 
+	{	
 		//建立索引，每种连接对应一个DB数据库，保证数据库的连接数与索引数目一致	
 		CMySQLDB* pMySqlDB = GetObjectDB(strDbName);
 		if (pMySqlDB->m_strDB.size() ==0 )
@@ -50,16 +72,16 @@ bool slMySqlAgent::LogRecord(File_Action_Log FileLog)
 		}
 		
 		//add db
-		BOOL bRecentRec = FALSE;
 		if (strDbName == DEFAULT_DB_NAME)
-			bRecentRec = TRUE;
-
-		AddRecentRec(pMySqlDB, FileLog, bRecentRec);
-
+		{	
+			bRet = AddRecentRec(pMySqlDB, FileLog, TRUE);
+		}else
+			bRet = AddRecentRec(pMySqlDB, FileLog, FALSE);	
 	} while (0);
-
+	
 	return bRet;
 }
+
 
 CMySQLDB* slMySqlAgent::GetObjectDB(std::string strSearchName)
 {

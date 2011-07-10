@@ -24,7 +24,7 @@ public:
 	bool LogRecord(File_Action_Log FileLog);
 
 private:
-
+	bool LogRecordDB(std::string strDbName, File_Action_Log FileLog);
 	bool AddRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog);
 	bool AddRecentRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog, BOOL bRecentRec = TRUE);
 
