@@ -37,10 +37,12 @@ BOOL slDirMonitorAgent::LoadDll()
 	m_fnMonitor_Stop = (fnMonitor_Stop)GetProcAddress(m_hinstance, "Monitor_Stop");
 	m_fnMonitor_Start_Dir = (fnMonitor_Start_Dir)GetProcAddress(m_hinstance, "Monitor_Start_Dir");
 	m_fnMonitor_Start = (fnMonitor_Start)GetProcAddress(m_hinstance, "Monitor_Start");
+	m_fnMonitor_Reset = (fnMonitor_Reset)GetProcAddress(m_hinstance, "Monitor_Reset");
 	if (!m_fnMonitor_Start_AllDisk || 
 		!m_fnMonitor_Stop || 
 		!m_fnMonitor_Start_Dir ||
-		!m_fnMonitor_Start)
+		!m_fnMonitor_Start ||
+		!m_fnMonitor_Reset)
 	{
 		log.Print(LL_DEBUG_INFO,"[Error]Not find FileMonitor.dll export fun!\r\n");
 		return FALSE;
@@ -89,4 +91,19 @@ BOOL slDirMonitorAgent::StopMonitor()
 	m_fnMonitor_Stop();
 
 	return TRUE;
+}
+
+
+BOOL slDirMonitorAgent::ResetMonitor()
+{
+	if (!m_bInit)
+	{
+		if (!LoadDll())
+		{
+			return FALSE;
+		}
+	}
+	
+	return m_fnMonitor_Reset() == 0 ? TRUE : FALSE;
+
 }
