@@ -46,13 +46,12 @@ int sltIndexNotifyThread::run()
 		switch (dwWaitResult)
 		{
 		case WAIT_OBJECT_0:
-			log.Print(LL_DEBUG_INFO,"Revice Event Global\\FS_Index_Notify!\r\n");
-			//ÖØÆô¼à¿ØÄ£¿é
-			m_dirmon.StopMonitor();
+			log.Print(LL_DEBUG_INFO,"Receive Event Global\\FS_Index_Notify!\r\n");
 
-			Sleep(500);
-
-			m_dirmon.StartMonitor();
+			if (m_dirmon.ResetMonitor() != 0)
+			{
+				log.Print(LL_DEBUG_INFO,"Receive Event ResetMonitor Failed\r\n");
+			}
 
 			ResetEvent(m_hevent);
 			

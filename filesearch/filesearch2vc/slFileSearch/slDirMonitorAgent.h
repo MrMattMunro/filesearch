@@ -13,6 +13,7 @@ typedef DWORD (__stdcall *fnMonitor_Start_Dir)(char* pszDirPath, DWORD dwLen);
 typedef DWORD (__stdcall *fnMonitor_Start_AllDisk)(BOOL bRemovableDisk);
 typedef DWORD (__stdcall *fnMonitor_Stop)();
 typedef DWORD (__stdcall *fnMonitor_Start)();
+typedef DWORD (__stdcall *fnMonitor_Reset)();
 class slDirMonitorAgent  
 {
 public:
@@ -21,7 +22,7 @@ public:
 	
 	BOOL StartMonitor();
 	BOOL StopMonitor();
-	
+	BOOL ResetMonitor();
 protected:
 	BOOL LoadDll();
 	BOOL FreeDll();
@@ -31,6 +32,7 @@ private:
 	fnMonitor_Stop m_fnMonitor_Stop;
 	fnMonitor_Start_Dir m_fnMonitor_Start_Dir;
 	fnMonitor_Start m_fnMonitor_Start;
+	fnMonitor_Reset m_fnMonitor_Reset;
 	HINSTANCE m_hinstance;
 	BOOL m_bInit;
 };
