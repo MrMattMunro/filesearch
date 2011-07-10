@@ -80,12 +80,15 @@ int sltDirMonitorThread::run()
 			continue;
 		}
 
-		int nDirCount = g_xmlFilterAgent.m_nCount;
-		for (int i = 0; i < nDirCount; i++)
-		{
-			//获取监控目录开始监控
-			Monitor_Start_Dir(g_xmlFilterAgent.m_pxmlfilter[i].szSearchPath, 0);
-		}
+		//监控所有目录
+		Monitor_Start_AllDisk(FALSE);
+
+// 		int nDirCount = g_xmlFilterAgent.m_nCount;
+// 		for (int i = 0; i < nDirCount; i++)
+// 		{
+// 			//获取监控目录开始监控
+// 			Monitor_Start_Dir(g_xmlFilterAgent.m_pxmlfilter[i].szSearchPath, 0);
+// 		}
 		
 		break;		
 	}

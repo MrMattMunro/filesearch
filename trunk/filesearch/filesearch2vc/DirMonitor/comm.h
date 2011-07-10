@@ -9,6 +9,7 @@ enum File_Action{
 	FILE_NAMECHANGE
 };
 
+#define	DEFAULT_DB_NAME		"commoninfo"
 
 #pragma pack(push, 1)
 

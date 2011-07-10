@@ -66,6 +66,16 @@ DWORD __stdcall Monitor_Start()
 	return 0;
 }
 
+//重置过滤目录
+//0    成功
+//其它 失败
+DWORD __stdcall Monitor_Reset()
+{
+	//
+	//索引目录改变，重新读取待过滤的目录
+	return g_xmlFilterAgent.LoadDB();
+}
+
 //停止监控
 DWORD __stdcall Monitor_Stop()
 {
@@ -82,7 +92,7 @@ DWORD __stdcall Monitor_Stop()
 	return 0;
 }
 
-
+//监控索引磁盘
 DWORD __stdcall Monitor_Start_AllDisk(BOOL bRemovableDisk)
 {
 	DWORD dwRet = 0;
@@ -114,6 +124,7 @@ DWORD __stdcall Monitor_Start_AllDisk(BOOL bRemovableDisk)
 	return dwRet;
 }
 
+//监控固定磁盘
 DWORD __stdcall Monitor_Start_Dir(char* pszDirPath, DWORD dwLen)
 {
 	log.Print(LL_DEBUG_INFO,"Begin To Monitor %s\r\n",pszDirPath);

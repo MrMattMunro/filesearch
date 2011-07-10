@@ -88,6 +88,7 @@ BEGIN_MESSAGE_MAP(CDirMonitorTestDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON3, OnButton3)
 	ON_BN_CLICKED(IDC_BUTTON4, OnButton4)
 	ON_BN_CLICKED(IDC_BUTTON5, OnButton5)
+	ON_BN_CLICKED(IDC_BUTTON6, OnButton6)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -265,4 +266,18 @@ void CDirMonitorTestDlg::OnButton5()
 		return ;
 	}
 	g_fnMonitor_Start();	
+}
+
+void CDirMonitorTestDlg::OnButton6() 
+{
+	// TODO: Add your control notification handler code here
+	WIN32_FIND_DATA ffd ;
+	HANDLE hFind = FindFirstFile("C:\\1.doc",&ffd);
+	SYSTEMTIME stUTC, stLocal;
+	FileTimeToSystemTime(&(ffd.ftLastWriteTime), &stUTC);
+	SystemTimeToTzSpecificLocalTime(NULL, &stUTC, &stLocal);
+	CString myTime;
+	myTime.Format("%d. %d %d, %d:%d", stLocal.wDay,stLocal.wMonth,stLocal.wYear,stLocal.wHour,stLocal.wMinute);
+	//--
+	
 }

@@ -134,6 +134,7 @@ int slXmlAgent::LoadDB()
 
 	if(nCount >= 1 && nFieldCount >= 1)
 	{
+		Clear();
 		m_nCount = nCount;
 		m_pxmlfilter = new XmlFilter[nCount];
 		memset(m_pxmlfilter, NULL, sizeof(XmlFilter)*nCount);
@@ -181,6 +182,13 @@ int slXmlAgent::LoadDB()
 	return 0;	
 }
 
+#define ALL_FILE_TYPES		"word,excel,ppt,pdf,txt,html"
+//false 记录
+//true  过滤掉该记录，不记录
+//过滤规则:
+//如果该文件在索引目录下，则比较文件类型，符合，则记录，否则，不记录
+//如果该文件不再索引目录下，则比较文件类型（索引文件类型），符合，则记录，否则，不记录
+//需要建立索引文件类型库
 bool slXmlAgent::Filters(char* pszFullPath)
 {
 	OutputDebugStringA(pszFullPath);
@@ -207,18 +215,35 @@ bool slXmlAgent::Filters(char* pszFullPath)
 		strType = "excel";
 	}
 	
-    char szPath[MAX_PATH] = {0};
-	sprintf(szPath, "%s%s",drive,dir);
-	for (int i = 0; i < m_nCount; i++)
+	//检测是否在已建索引库中
+	BOOL bInSearcher = FALSE;
+	int i = 0;
+	for (i; i < m_nCount; i++)
 	{
 		std::string strFullPath = pszFullPath;
-		std::string strSearchType = m_pxmlfilter[i].szSearchType;
-		if (strFullPath.find(m_pxmlfilter[i].szSearchPath) != -1 && strSearchType.find(strType) != -1)
-			return false;
+
+		if (strFullPath.find(m_pxmlfilter[i].szSearchPath) != -1)
+		{	
+			bInSearcher = TRUE;
+			break;
+		}
+	}
+	
+	//构建文件类型库，初始化为所有文件类型库
+	std::string strSearchType = ALL_FILE_TYPES;
+	if (bInSearcher)
+	{
+		//在索引目录库中
+		strSearchType = m_pxmlfilter[i].szSearchType;
+	}
+	
+	//检索文件类型
+	if(strSearchType.find(strType) != -1)
+	{
+		//符合监控文件类型，则记录
+		return false;
 	}
 
-	return false;
-	
 	return true;
 }
 
@@ -243,7 +268,7 @@ string slXmlAgent::GetDbNameFromPath(char* szFileName)
 		}
 	}
 
-	return "";
+	return DEFAULT_DB_NAME;
 
 }
 

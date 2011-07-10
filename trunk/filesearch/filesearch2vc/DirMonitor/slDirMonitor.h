@@ -9,4 +9,6 @@ DWORD __stdcall Monitor_Stop();
 
 DWORD __stdcall Monitor_Start();
 
+DWORD __stdcall Monitor_Reset();
+
 #endif

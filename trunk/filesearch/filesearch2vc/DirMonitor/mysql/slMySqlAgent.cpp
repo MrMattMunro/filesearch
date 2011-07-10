@@ -35,8 +35,7 @@ bool slMySqlAgent::LogRecord(File_Action_Log FileLog)
 		std::string strDbName = g_xmlFilterAgent.GetDbNameFromPath(FileLog.szSrcName);
 		memcpy(FileLog.szDbName, strDbName.c_str(), strDbName.size());
 		
-		//建立索引，每种连接对应一个DB数据库，保证数据库的连接数与索引数目一致
-		
+		//建立索引，每种连接对应一个DB数据库，保证数据库的连接数与索引数目一致	
 		CMySQLDB* pMySqlDB = GetObjectDB(strDbName);
 		if (pMySqlDB->m_strDB.size() ==0 )
 		{
@@ -51,10 +50,13 @@ bool slMySqlAgent::LogRecord(File_Action_Log FileLog)
 		}
 		
 		//add db
-		AddRec(pMySqlDB, FileLog);
+		BOOL bRecentRec = FALSE;
+		if (strDbName == DEFAULT_DB_NAME)
+			bRecentRec = TRUE;
+
+		AddRecentRec(pMySqlDB, FileLog, bRecentRec);
 
 	} while (0);
-
 
 	return bRet;
 }
@@ -100,6 +102,7 @@ void slMySqlAgent::ReleassObjectsDB()
 	}
 }
 
+//向数据库中插入一条记录，同一文件修改记录可插入多次
 bool slMySqlAgent::AddRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog)
 {
 	bool bRet = true;
@@ -154,6 +157,95 @@ bool slMySqlAgent::AddRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog)
 
 	} while (0);
 
+	return bRet;
+}
+
+
+//根据文件名获取文件最后访问时间
+std::string GetFileLastModifyTime(char* szFileName)
+{
+	WIN32_FIND_DATA ffd ;
+	HANDLE hFind = FindFirstFile("C:\\1.doc",&ffd);
+	SYSTEMTIME stUTC, stLocal;
+	FileTimeToSystemTime(&(ffd.ftLastWriteTime), &stUTC);
+	SystemTimeToTzSpecificLocalTime(NULL, &stUTC, &stLocal);
+	
+	char szDateTime[MAX_PATH] = {0};
+	sprintf(szDateTime,"%04d-%02d-%02d %02d:%02d:%02d",
+		stLocal.wYear, stLocal.wMonth, stLocal.wDay, stLocal.wHour, stLocal.wMinute, stLocal.wSecond);
+	std::string strDateTime = szDateTime;
+	return strDateTime;
+}
+
+//向数据库中插入一条记录，同一文件修改记录只插入一条
+bool slMySqlAgent::AddRecentRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog, BOOL bRecentRec)
+{
+	bool bRet = true;
+	do 
+	{
+		//修改的记录首先检查最近有没有此记录
+		//
+		if (FileLog.FileActon == FILE_MODIFYED)
+		{
+			//查找一天之内，该文件是否有修改记录
+			//select * from t_changeinfo where path='%s' and operflg=1 or operflg=2 and lastmodify between current_date() And date_add(current_date(), interval 1 day) 
+			std::string strQuerySQL ;
+			if (bRecentRec)
+			{
+				strQuerySQL = "select * from t_recent_changeinfo where path='%s' and operflg=1 or operflg=2 and lastmodify between current_date() And date_add(current_date(), interval 1 day)";
+			}else
+				strQuerySQL = "select * from t_changeinfo where path='%s' and operflg=1 or operflg=2 and lastmodify between current_date() And date_add(current_date(), interval 1 day)";
+
+			HRESULT hr = pMySqlDB->Query(strQuerySQL.c_str(), ConverSqlPath(FileLog.szSrcName).c_str());
+			if (FAILED(hr))
+			{
+				log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,doSqlExe Failed!Sql=%s\r\n",strQuerySQL.c_str());
+				bRet = false;
+				break;
+			}
+			int nCount = pMySqlDB->GetRowCount();
+			if(nCount >= 1)
+			{	
+				bRet = pMySqlDB->GetRow();
+				if(bRet==false)
+				{
+					log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,GetRow Failed!Sql=%s\r\n",strQuerySQL.c_str());
+					break;
+				}
+				
+				int nPathLen = 0;
+				char* pPath = pMySqlDB->GetField("path",&nPathLen);
+				if(pPath!=NULL && nPathLen > 1)
+				{	
+					//一天之内存在此记录，则不记录
+					break;
+				}
+			}
+		}
+		
+		//根据文件名获取文件最后修改时间
+		std::string strInsertSQL;
+		HRESULT hr;
+		if (bRecentRec)
+		{
+			strInsertSQL = "insert into t_recent_changeinfo(path,operflg,hasoper,systime,lastmodify) values('%s','%s','0','%s','%s')";
+			hr = pMySqlDB->Query(strInsertSQL.c_str(),ConverSqlPath(FileLog.szSrcName).c_str(), GetOperFlag(FileLog).c_str(),FileLog.szLogTime, GetFileLastModifyTime(FileLog.szSrcName).c_str());
+		}else{
+			strInsertSQL = "insert into t_changeinfo(path,operflg,hasoper,lastmodify) values('%s','%s','0','%s')";
+			hr = pMySqlDB->Query(strInsertSQL.c_str(),ConverSqlPath(FileLog.szSrcName).c_str(), GetOperFlag(FileLog).c_str(), GetFileLastModifyTime(FileLog.szSrcName).c_str());
+		}	
+
+		if (FAILED(hr))
+		{
+			log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,doSqlExe Failed!Sql=%s\r\n",strInsertSQL.c_str());
+			bRet = false;
+			break;
+		}
+		
+		log.Print(LL_DEBUG_INFO,"insert new record!path=%s, operflg=%s\r\n",FileLog.szSrcName,GetOperFlag(FileLog).c_str());
+		
+	} while (0);
+	
 	return bRet;
 }
 

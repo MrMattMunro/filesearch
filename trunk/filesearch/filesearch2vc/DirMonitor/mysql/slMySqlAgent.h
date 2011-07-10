@@ -26,6 +26,8 @@ public:
 private:
 
 	bool AddRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog);
+	bool AddRecentRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog, BOOL bRecentRec = TRUE);
+
 	string GetOperFlag(File_Action_Log FileLog);
 	string ConverSqlPath(string strPath);
 
