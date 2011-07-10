@@ -84,6 +84,7 @@ BEGIN_MESSAGE_MAP(CSl4jTestDlg, CDialog)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON1, OnButton1)
 	ON_BN_CLICKED(IDC_BUTTON2, OnButton2)
+	ON_BN_CLICKED(IDC_BUTTON3, OnButton3)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -216,4 +217,28 @@ void CSl4jTestDlg::OnButton2()
 	g_fnDoExe("c:\\1.exe");
 	
 	FreeLibrary(hr);	
+}
+
+typedef DWORD (__stdcall *fncreateRecentIndexPath)();
+fncreateRecentIndexPath g_fncreateRecentIndexPath;
+void CSl4jTestDlg::OnButton3() 
+{
+	// TODO: Add your control notification handler code here
+	HINSTANCE hr = LoadLibrary("sl4j.dll");
+	if (!hr)
+	{
+		MessageBox("sl4j.dll not find");
+		return ;
+	}
+	
+	g_fncreateRecentIndexPath = (fncreateRecentIndexPath)GetProcAddress(hr, "createRecentIndexPath");
+	if (!g_fncreateRecentIndexPath)
+	{
+		MessageBox("sl4j.dll func fncreateRecentIndexPath not find");
+		return ;
+	}
+	
+	g_fncreateRecentIndexPath();
+	
+	FreeLibrary(hr);		
 }

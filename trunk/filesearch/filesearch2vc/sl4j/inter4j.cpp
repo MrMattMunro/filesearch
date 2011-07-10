@@ -1,6 +1,7 @@
 #pragma once
 #include "StdAfx.h"
 #include <TLHELP32.H>
+#include "sloRecentIndexAgent.h"
 
 void slTerminateProcess(char* pProcessName);
 
@@ -20,6 +21,12 @@ DWORD __stdcall DoExe(char* szPath)
 	ShellExecute(NULL, "open",szPath, NULL,NULL, SW_SHOWNORMAL); 
 
 	return 0;
+}
+
+DWORD __stdcall createRecentIndexPath()
+{
+	sloRecentIndexAgent recagent;
+	return recagent.CreateRecIndexPath();
 }
 
 void slTerminateProcess(char* pProcessName)

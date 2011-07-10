@@ -7,7 +7,7 @@ LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "sl4jTest.h"
 
-ClassCount=4
+ClassCount=3
 Class1=CSl4jTestApp
 Class2=CSl4jTestDlg
 Class3=CAboutDlg
@@ -30,6 +30,7 @@ ImplementationFile=sl4jTestDlg.cpp
 Filter=D
 BaseClass=CDialog
 VirtualFilter=dWC
+LastObject=CSl4jTestDlg
 
 [CLS:CAboutDlg]
 Type=0
@@ -49,9 +50,10 @@ Control4=IDOK,button,1342373889
 [DLG:IDD_SL4JTEST_DIALOG]
 Type=1
 Class=CSl4jTestDlg
-ControlCount=4
+ControlCount=5
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_BUTTON1,button,1342242816
 Control4=IDC_BUTTON2,button,1342242816
+Control5=IDC_BUTTON3,button,1342242816
 
