@@ -9,3 +9,4 @@ EXPORTS
 	Monitor_Start_AllDisk				@2
 	Monitor_Stop						@3
 	Monitor_Start						@4
+	Monitor_Reset						@5
