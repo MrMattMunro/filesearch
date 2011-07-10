@@ -4,9 +4,11 @@
 #include "DirectoryChangeHandler_Dispatch.h"
 #include "sltDirMonitorThread.h"
 
+
 //default filters
-#define INCLUDE_FILTERS_STRING ""
-#define EXCLUDE_FILTERS_STRING ""
+#define INCLUDE_FILTERS_STRING	""
+#define EXCLUDE_FILTERS_STRING	"*\\SYSTEM VOLUME INFORMATION\\*;*\\WINDOWS\\*;*\\WINNT\\*;*\\RECYCLER\\*;*\\LOCAL SETTINGS\\*;*\\APPLICATION DATA\\*;*\\TEMPLATES\\*;*.LNK;*\\NTUSER.DAT;;*\\COOKIES\\*;*\\RECYCLED\\*;*\\*.BAK;*\\*.BACK;"
+
 
 CDirectoryChangeWatcher			m_DirWatcher;
 slLogSendThread		g_LogSendThread;
@@ -34,7 +36,7 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 				char szLogPath[MAX_PATH] = {0};
 				char szProcName[MAX_PATH] = {0};
 				GetSystemDirectory(szProcName, MAX_PATH);
-				sprintf(szLogPath,"%s\\slfile.log", szProcName);
+				sprintf(szLogPath,"%s\\DirMonitor.log", szProcName);
 						
 				log.SetFile(szLogPath,true);
 				log.SetLevel(100);
@@ -145,7 +147,7 @@ DWORD __stdcall Monitor_Start_Dir(char* pszDirPath, DWORD dwLen)
 		pHandler,
 		bWatchSubDir,
 		m_strIncludeFilter1,
-		m_strExcludeFilter1)) )
+		EXCLUDE_FILTERS_STRING)) )
 	{
 		dwRet = 1;
 	}
