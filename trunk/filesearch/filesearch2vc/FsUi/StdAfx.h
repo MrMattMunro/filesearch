@@ -49,7 +49,7 @@
 using namespace std;
 
 #include "omnithread.h"
-#include "tyu_common_interface.h"
+#include "tyu_common_interface_nolog.h"
 
 #include "Singleton.h"
 #include "log.h"
