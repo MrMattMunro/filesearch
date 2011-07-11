@@ -231,9 +231,9 @@ bool slMySqlAgent::AddRecentRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog, BOO
 			std::string strQuerySQL ;
 			if (bRecentRec)
 			{
-				strQuerySQL = "select * from t_recent_changeinfo where path='%s' and operflg=1 or operflg=2 and lastmodify between current_date() And date_add(current_date(), interval 1 day)";
+				strQuerySQL = "select * from t_recent_changeinfo where path='%s' and operflg=2 and lastmodify between current_date() And date_add(current_date(), interval 1 day)";
 			}else
-				strQuerySQL = "select * from t_changeinfo where path='%s' and operflg=1 or operflg=2 and lastmodify between current_date() And date_add(current_date(), interval 1 day)";
+				strQuerySQL = "select * from t_changeinfo where path='%s' and operflg=2 and lastmodify between current_date() And date_add(current_date(), interval 1 day)";
 
 			HRESULT hr = pMySqlDB->Query(strQuerySQL.c_str(), ConverSqlPath(FileLog.szSrcName).c_str());
 			if (FAILED(hr))
@@ -257,9 +257,11 @@ bool slMySqlAgent::AddRecentRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog, BOO
 				if(pPath!=NULL && nPathLen > 1)
 				{	
 					//一天之内存在此记录，则不记录
+					log.Print(LL_DEBUG_INFO,"[Info]Exist in the day!\r\n");
 					break;
 				}
-			}
+			}else
+				log.Print(LL_DEBUG_INFO,"[Info]Not Exist this record in the day!\r\n");
 		}
 		
 		//根据文件名获取文件最后修改时间
