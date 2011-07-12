@@ -231,7 +231,7 @@ bool slMySqlAgent::AddRecentRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog, BOO
 			std::string strQuerySQL ;
 			if (bRecentRec)
 			{
-				strQuerySQL = "select * from t_recent_changeinfo where path='%s' and operflg=2 and lastmodify between current_date() And date_add(current_date(), interval 1 day)";
+				strQuerySQL = "select * from t_recent_changeinfo where path='%s' and operflg=2 and systime between current_date() And date_add(current_date(), interval 1 day)";
 			}else
 				strQuerySQL = "select * from t_changeinfo where path='%s' and operflg=2 and lastmodify between current_date() And date_add(current_date(), interval 1 day)";
 
