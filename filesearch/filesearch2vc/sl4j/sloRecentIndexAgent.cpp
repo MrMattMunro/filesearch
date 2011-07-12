@@ -40,7 +40,8 @@ DWORD sloRecentIndexAgent::CreateRecIndexPath()
 	
 	//构建最近访问文件的索引目录 
 	char szRecentIndexPath[MAX_PATH] = {0};
-	sprintf(szRecentIndexPath,"%c:\\recent_files_index",disk.GetMaxFreeSpaceDisk());
+	char cMaxDisk = disk.GetMaxFreeSpaceDisk();
+	sprintf(szRecentIndexPath,"%c:\\recent_files_index", cMaxDisk);
 	
 	//创建该目录，并设置为隐藏属性
 	if (!PathFileExists(szRecentIndexPath))
@@ -55,6 +56,9 @@ DWORD sloRecentIndexAgent::CreateRecIndexPath()
 	//写入配置文件
 	if(GetProFilePath() == FALSE)
 		return -2;
+
+	memset(szRecentIndexPath, NULL, MAX_PATH);
+	sprintf(szRecentIndexPath,"%c:\\\\recent_files_index", cMaxDisk);
 	
 	BOOL bRet = sloCommAgent::WritePropertyfileString(PATH_NAME, szRecentIndexPath, m_szpropertiesPath);
 	
