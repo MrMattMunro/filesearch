@@ -15,6 +15,7 @@ public:
 	slRegAgent();
 	virtual ~slRegAgent();
 
+
 	BOOL ReadXmlPath(TCHAR *szXmlPath);
 public:
 	//Set value reg

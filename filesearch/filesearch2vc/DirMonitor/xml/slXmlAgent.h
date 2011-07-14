@@ -11,7 +11,10 @@
 
 
 #include "mysqlcomm.h"
-class slXmlAgent  :public mysqlcomm
+#include "sloFilterAgent.h"
+#include "FilterAgent.h"
+
+class slXmlAgent  :public mysqlcomm, public CFilterAgent
 {
 public:
 	slXmlAgent();
@@ -31,9 +34,12 @@ public:
 	void Clear();
 
 	pXmlFilter m_pxmlfilter;
+	std::vector<XmlFilter> m_searcherList;
 	int m_nCount;
 
 	BOOL m_bInit;
+
+	sloFilterAgent m_filterAgent;
 };
 
 #endif // !defined(AFX_SLXMLAGENT_H__EBFD94D2_A970_405E_8A9D_D78AC361DC9C__INCLUDED_)

@@ -30,10 +30,16 @@ slXmlAgent::~slXmlAgent()
 
 void slXmlAgent::Clear()
 {
-	for (int i = 0; i < m_nCount; i++)
+// 	for (int i = 0; i < m_nCount; i++)
+// 	{
+// 		delete &m_pxmlfilter[i];
+// 	}
+
+	for (std::vector<XmlFilter>::iterator item = m_searcherList.begin(); item != m_searcherList.end();)
 	{
-		delete &m_pxmlfilter[i];
+		m_searcherList.erase(item);
 	}
+
 	m_nCount = 0;
 	m_bInit = FALSE;
 }
@@ -134,10 +140,9 @@ int slXmlAgent::LoadDB()
 
 	if(nCount >= 1 && nFieldCount >= 1)
 	{
+		m_filterAgent.Init();
 		Clear();
 		m_nCount = nCount;
-		m_pxmlfilter = new XmlFilter[nCount];
-		memset(m_pxmlfilter, NULL, sizeof(XmlFilter)*nCount);
 		for (int i = 0; i < nCount; i++)
 		{
 			bool bSucc = m_pMySqlDB->GetRow();
@@ -169,9 +174,12 @@ int slXmlAgent::LoadDB()
 			memcpy(FilterItem.szSearceName, szSearchName, strlen(szSearchName));
 			memcpy(FilterItem.szSearchPath, pFilePath, nFilePathLen);
 			memcpy(FilterItem.szSearchType, pFileType, nFileTypeLen);
-			memcpy(&m_pxmlfilter[i], &FilterItem, sizeof(XmlFilter));
-			log.Print(LL_DEBUG_INFO,"XmlItem(%d):SearchName=%s,SearchPath=%s,SearchType=%s\r\n",
-				i+1,FilterItem.szSearceName,FilterItem.szSearchPath,FilterItem.szSearchType);			
+			std::string strExts = m_filterAgent.GetExtsFromTypes(pFileType);
+			memcpy(FilterItem.szExts, strExts.c_str(), strExts.size());
+			m_searcherList.push_back(FilterItem);
+			log.Print(LL_DEBUG_INFO,"XmlItem(%d):SearchName=%s,SearchPath=%s,SearchType=%s, Exts=%s\r\n",
+				i+1,m_searcherList[i].szSearceName,m_searcherList[i].szSearchPath,
+				m_searcherList[i].szSearchType, m_searcherList[i].szExts);			
 		}
 	}else
 	{
@@ -191,58 +199,42 @@ int slXmlAgent::LoadDB()
 //需要建立索引文件类型库
 bool slXmlAgent::Filters(char* pszFullPath)
 {
-	OutputDebugStringA(pszFullPath);
-	char drive[_MAX_DRIVE];
-	char dir[_MAX_DIR];
-	char fname[_MAX_FNAME];
+	//获取文件路径，和后缀名
 	char ext[_MAX_EXT];
 	
-	_splitpath( pszFullPath, drive, dir, fname, ext );
+	_splitpath( pszFullPath, NULL, NULL, NULL, ext );
 	if (!strlen(ext))
 		return true;
-
-	if(strchr(fname,'~') != NULL)
-		return true;
-
-	std::string strType = ext+1;
-	if (strType.find("doc") != -1 || strType.find("docx") != -1)
-	{
-		strType = "word";
-	}
-
-	if (strType.find("xls") != -1 || strType.find("xlsx") != -1)
-	{
-		strType = "excel";
-	}
 	
+	//根据文件路径，查找是否在索引目录队列中
 	//检测是否在已建索引库中
 	BOOL bInSearcher = FALSE;
 	int i = 0;
 	for (i; i < m_nCount; i++)
 	{
 		std::string strFullPath = pszFullPath;
-
-		if (strFullPath.find(m_pxmlfilter[i].szSearchPath) != -1)
+		
+		if (strncmp(pszFullPath, m_searcherList[i].szSearchPath, strlen(m_searcherList[i].szSearchPath)) == 0)
 		{	
+			//索引目录中的文件
 			bInSearcher = TRUE;
 			break;
 		}
 	}
-	
-	//构建文件类型库，初始化为所有文件类型库
-	std::string strSearchType = ALL_FILE_TYPES;
-	if (bInSearcher)
+
+	//在索引目录队列中，则获取文档类型
+	std::string strExts = m_searcherList[i].szExts;
+	if (!bInSearcher)
 	{
-		//在索引目录库中
-		strSearchType = m_pxmlfilter[i].szSearchType;
+		strExts = m_filterAgent.GetAllExts();
 	}
-	
-	//检索文件类型
-	if(strSearchType.find(strType) != -1)
-	{
-		//符合监控文件类型，则记录
+
+	//根据文档类型获取过滤后缀名库
+	SetFilters(strExts.c_str(), "");
+
+	if(IncludeThisNotification(ext+1))
 		return false;
-	}
+
 
 	return true;
 }
@@ -262,9 +254,9 @@ string slXmlAgent::GetDbNameFromPath(char* szFileName)
 
 	for (int i = 0; i < m_nCount; i++)
 	{
-		if( strncmp(szSearchPath, m_pxmlfilter[i].szSearchPath, strlen(m_pxmlfilter[i].szSearchPath)) == 0 )
+		if( strncmp(szSearchPath, m_searcherList[i].szSearchPath, strlen(m_searcherList[i].szSearchPath)) == 0 )
 		{
-			return strSearchName = m_pxmlfilter[i].szSearceName; 
+			return strSearchName = m_searcherList[i].szSearceName; 
 		}
 	}
 
