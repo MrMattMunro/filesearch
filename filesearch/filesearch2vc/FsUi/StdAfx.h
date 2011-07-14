@@ -9,6 +9,12 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
+#ifndef WINVER
+#define WINVER 0x0500
+#else
+#undef	WINVER
+#define WINVER 0x0500
+#endif
 
 #define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
 
@@ -35,6 +41,7 @@
 #include <afxcmn.h>			// MFC support for Windows Common Controls
 #endif // _AFX_NO_AFXCMN_SUPPORT
 //#include <afxsock.h>		// MFC socket extensions
+#include <winuser.h>
 
 #include <WinSock2.h>
 #pragma  warning(disable : 4284)

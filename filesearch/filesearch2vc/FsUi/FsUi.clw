@@ -10,30 +10,30 @@ ResourceCount=16
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
 LastTemplate=CDialog
-Resource1=IDD_DIALOG_CUSTOM_DICT
+Resource1=IDD_DIALOG_LICENSE
 Class3=CCustomCiHuiDlg
-Resource2=IDD_DIALOG_SET_ATTR
+Resource2=IDD_DIALOG_MODIFY_INDEX
 Class4=CModifyIndexDlg
 Resource3=IDD_DIALOG_CUSTOM_DICT (Chinese (P.R.C.))
 Class5=CShowAllCiHuiDlg
-Resource4=IDD_DIALOG_FAST_SEARCH
+Resource4=IDD_DIALOG_ALL_CIHUI
 Class6=CSetAttributeDlg
-Resource5=IDD_DIALOG_LICENSE
+Resource5=IDD_DIALOG_SET_ATTR
 Class7=CFastSearchDlg
 Class8=CSearchThread
 Resource6=IDD_DIALOG_SKIN (Chinese (P.R.C.))
 Class9=CLicenseDlg
-Resource7=IDD_DIALOG_CREATE_INDEX
+Resource7=IDD_DIALOG_SKIN
 Class10=CSkinDlg
 Resource8=IDD_DIALOG_MODIFY_INDEX (Chinese (P.R.C.))
 Resource9=IDD_DIALOG_ALL_CIHUI (Chinese (P.R.C.))
 Resource10=IDD_DIALOG_LICENSE (Chinese (P.R.C.))
-Resource11=IDD_DIALOG_ALL_CIHUI
+Resource11=IDD_DIALOG_CUSTOM_DICT
 Resource12=IDD_DIALOG_FAST_SEARCH (Chinese (P.R.C.))
 Resource13=IDD_DIALOG_CREATE_INDEX (Chinese (P.R.C.))
-Resource14=IDD_DIALOG_MODIFY_INDEX
+Resource14=IDD_DIALOG_CREATE_INDEX
 Resource15=IDD_DIALOG_SET_ATTR (Chinese (P.R.C.))
-Resource16=IDD_DIALOG_SKIN
+Resource16=IDD_DIALOG_FAST_SEARCH
 
 [CLS:CFsUiApp]
 Type=0
@@ -184,9 +184,9 @@ Type=1
 Class=CFastSearchDlg
 ControlCount=4
 Control1=IDC_EDIT_SEARCH_KEY,edit,1350631552
-Control2=IDC_COMBO_PATH,combobox,1344340226
+Control2=IDC_COMBO_PATH,combobox,1344340227
 Control3=IDC_STATIC,static,1342177795
-Control4=IDC_COMBO_PATH_RECENT,combobox,1344340226
+Control4=IDC_COMBO_PATH_RECENT,combobox,1344340227
 
 [CLS:CFastSearchDlg]
 Type=0
@@ -195,7 +195,7 @@ ImplementationFile=FastSearchDlg.cpp
 BaseClass=CDialog
 Filter=W
 VirtualFilter=dWC
-LastObject=IDC_COMBO_PATH_RECENT
+LastObject=CFastSearchDlg
 
 [CLS:CSearchThread]
 Type=0

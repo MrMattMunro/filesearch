@@ -142,6 +142,7 @@ BOOL CFastSearchDlg::OnInitDialog()
 	sltFastSearchThread::getInstance()->startup();
 
 	SetWinPos();
+	m_BoxList.ResetContent(); // Clean up all contents
 	if (m_agent.GetAllPath() == 0)
 	{
 		int nSize = m_agent.m_PathList.size();
@@ -152,15 +153,15 @@ BOOL CFastSearchDlg::OnInitDialog()
 	}
 
 	m_BoxList.InsertString(0, RECENT);
-	m_BoxList.SelectString(0, RECENT);
 	m_BoxList.InsertString(1,g_lag.LoadString("label.fastserlist"));
+	m_BoxList.SetCurSel(0);
 
 	//初始化话最近文档boxlist
 	m_BoxListRecent.InsertString(0, RECENT_3DAY);
-	m_BoxListRecent.SelectString(0, RECENT_3DAY);
 	m_BoxListRecent.InsertString(1, RECENT_1WEEK);
 	m_BoxListRecent.InsertString(2, RECENT_2WEEK);
 	m_BoxListRecent.InsertString(3, RECENT_1MON);
+	m_BoxListRecent.SetCurSel(0);
 
 	CreateTaskPanel();
 
