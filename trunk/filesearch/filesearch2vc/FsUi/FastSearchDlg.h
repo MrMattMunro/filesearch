@@ -13,6 +13,7 @@
 #include "sloFastSearchAgent.h"
 #include "sloSetAttrAgent.h"
 #include <map>
+#include "TTComboBox.h"
 
 typedef struct _GroupInfo
 {
@@ -54,8 +55,8 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CFastSearchDlg)
 	enum { IDD = IDD_DIALOG_FAST_SEARCH };
-	CComboBox	m_BoxListRecent;
-	CComboBox	m_BoxList;
+	CTTComboBox	m_BoxListRecent;
+	CTTComboBox	m_BoxList;
 	CString	m_strKey;
 	//}}AFX_DATA
 
