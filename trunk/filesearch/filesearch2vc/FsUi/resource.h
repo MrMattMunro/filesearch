@@ -178,6 +178,7 @@
 #define IDC_EDIT_NO                     2022
 #define IDC_EDIT_NUM                    2022
 #define IDI_ICON_CIHUI2                 2022
+#define IDC_COMBO_PATH_RECENT           2022
 #define IDC_BUTTON_BROWSER_PDF          2023
 #define IDC_EDIT_EMAIL                  2023
 #define IDI_ICON_REG_MANAGER            2023

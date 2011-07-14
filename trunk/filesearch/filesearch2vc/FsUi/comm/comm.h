@@ -8,10 +8,10 @@ typedef enum{
 }LANGUAGE;
 
 #define RECENT			"最近文档"
-#define RECENT_3DAY		"最近文档  3天"
-#define RECENT_1WEEK	"最近文档  一周"
-#define RECENT_2WEEK	"最近文档  二周"
-#define RECENT_1MON		"最近文档  一个月"
+#define RECENT_3DAY		"3天"
+#define RECENT_1WEEK	"一周"
+#define RECENT_2WEEK	"二周"
+#define RECENT_1MON		"一个月"
 
 #pragma pack(push, 1)
 
