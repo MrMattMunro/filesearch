@@ -101,7 +101,7 @@ BOOL sltFastSearchThread::DoLog(FastItem fast)
 	//Ð´ÈëkeywordºÍid×Ö¶Î
 	sloCommAgent::WritePropertyfileString("keyword", fast.szKey, m_agent.m_szKeyPath);
 	sloCommAgent::WritePropertyfileString("id", fast.szID, m_agent.m_szKeyPath);
-	if (strlen(fast.szType) == 0)
+	if (strlen(fast.szType) != 0)
 	{
 		sloCommAgent::WritePropertyfileString("type", fast.szType, m_agent.m_szKeyPath);
 	}

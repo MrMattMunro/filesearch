@@ -29,6 +29,7 @@ public:
 	int GetFileID(char* szFileType);
 
 	void SetWinPos();
+	void SetComboxPos(BOOL bRecent);
 
 	void OnEventNotify();
 	BOOL CreateTaskPanel();
@@ -47,11 +48,13 @@ public:
 	sloSetAttrAgent m_setAgent;
 	std::map<int, GroupInfo> m_listMap;
 	BOOL m_bDestory;
+	BOOL m_bCommboxRecentStatus;
 
 //	CSearchThread* m_pSearchThread;
 // Dialog Data
 	//{{AFX_DATA(CFastSearchDlg)
 	enum { IDD = IDD_DIALOG_FAST_SEARCH };
+	CComboBox	m_BoxListRecent;
 	CComboBox	m_BoxList;
 	CString	m_strKey;
 	//}}AFX_DATA
@@ -76,6 +79,7 @@ protected:
 	afx_msg void OnDestroy();
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
+	afx_msg void OnSelchangeComboPathRecent();
 	//}}AFX_MSG
 	LRESULT OnTaskPanelNotify(WPARAM wParam, LPARAM lParam);
 	DECLARE_MESSAGE_MAP()

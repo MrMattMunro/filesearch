@@ -23,6 +23,7 @@ CFastSearchDlg::CFastSearchDlg(CWnd* pParent /*=NULL*/)
 	//{{AFX_DATA_INIT(CFastSearchDlg)
 	m_strKey = _T("");
 	m_bDestory = TRUE;
+	m_bCommboxRecentStatus = TRUE;
 //	m_pSearchThread = NULL;
 	//}}AFX_DATA_INIT
 }
@@ -32,6 +33,7 @@ void CFastSearchDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CFastSearchDlg)
+	DDX_Control(pDX, IDC_COMBO_PATH_RECENT, m_BoxListRecent);
 	DDX_Control(pDX, IDC_COMBO_PATH, m_BoxList);
 	DDX_Text(pDX, IDC_EDIT_SEARCH_KEY, m_strKey);
 	//}}AFX_DATA_MAP
@@ -45,9 +47,10 @@ BEGIN_MESSAGE_MAP(CFastSearchDlg, CDialog)
 	ON_CBN_SELCHANGE(IDC_COMBO_PATH, OnSelchangeComboPath)
 	ON_WM_DESTROY()
 	ON_WM_CTLCOLOR()
+	ON_WM_ACTIVATE()
 	ON_MESSAGE(XTPWM_TASKPANEL_NOTIFY, OnTaskPanelNotify)
 	ON_WM_KILLFOCUS()
-	ON_WM_ACTIVATE()
+	ON_CBN_SELCHANGE(IDC_COMBO_PATH_RECENT, OnSelchangeComboPathRecent)
 	//}}AFX_MSG_MAP
 	ON_MESSAGE(WM_PROGRESS_MSG, OnProgressChange)
 
@@ -82,6 +85,47 @@ void CFastSearchDlg::SetWinPos()
 }
 
 
+void CFastSearchDlg::SetComboxPos(BOOL bRecent)
+{
+
+	RECT rcDlgs;
+	m_BoxList.GetWindowRect(&rcDlgs);   //得到对话框的Rect 对话框的大小
+	ScreenToClient(&rcDlgs);             //把屏幕的值转成相应的实际的值 
+	
+	//cx cy,就是屏幕最右下角的x,y的值 
+	if (m_bCommboxRecentStatus == TRUE)
+	{
+		//当前状态处于选中【最近文档】状态
+		if (bRecent == TRUE)
+		{
+			//由【最近文档】-》【最新文档】
+			return ;
+		}else
+		{
+			//由【最近文档】-》【索引目录】
+			m_BoxList.MoveWindow(rcDlgs.left,rcDlgs.top,(rcDlgs.right - rcDlgs.left + 45),(rcDlgs.bottom - rcDlgs.top),TRUE);   // 
+			m_bCommboxRecentStatus = FALSE;
+			//隐藏最近文档commbox
+			m_BoxListRecent.ShowWindow(SW_HIDE);
+		}
+	}else{
+		//当前状态处于选中【索引目录】状态
+		if (bRecent == TRUE)
+		{
+			//由【索引目录】-》【最新文档】
+			m_BoxList.MoveWindow(rcDlgs.left,rcDlgs.top,(rcDlgs.right - rcDlgs.left - 45),(rcDlgs.bottom - rcDlgs.top),TRUE);   // 
+			m_bCommboxRecentStatus = TRUE;
+			//显示最近文档commbox
+			m_BoxListRecent.ShowWindow(SW_SHOWNORMAL);
+		}else
+		{
+			//由【索引目录】-》【索引目录】
+			return ;
+		}
+	}
+}
+
+
 BOOL CFastSearchDlg::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
@@ -107,12 +151,16 @@ BOOL CFastSearchDlg::OnInitDialog()
 		}
 	}
 
-	m_BoxList.InsertString(0,g_lag.LoadString("label.fastserlist"));
-	m_BoxList.SelectString(0,g_lag.LoadString("label.fastserlist"));
-	m_BoxList.InsertString(1, RECENT_3DAY);
-	m_BoxList.InsertString(2, RECENT_1WEEK);
-	m_BoxList.InsertString(3, RECENT_2WEEK);
-	m_BoxList.InsertString(4, RECENT_1MON);
+	m_BoxList.InsertString(0, RECENT);
+	m_BoxList.SelectString(0, RECENT);
+	m_BoxList.InsertString(1,g_lag.LoadString("label.fastserlist"));
+
+	//初始化话最近文档boxlist
+	m_BoxListRecent.InsertString(0, RECENT_3DAY);
+	m_BoxListRecent.SelectString(0, RECENT_3DAY);
+	m_BoxListRecent.InsertString(1, RECENT_1WEEK);
+	m_BoxListRecent.InsertString(2, RECENT_2WEEK);
+	m_BoxListRecent.InsertString(3, RECENT_1MON);
 
 	CreateTaskPanel();
 
@@ -175,16 +223,23 @@ void CFastSearchDlg::OnEventNotify()
 	strcpy(fast.szKey, strKey.GetBuffer(0));
 	strcpy(fast.szID, szID);
 	if (nId == -1)
-	{
+	{	
+		SetComboxPos(TRUE);
+		//获取最近文档commbox内容
+		int nRecIndex = m_BoxListRecent.GetCurSel();		//得到被选中内容索引
+		CString strRectemp;						//存放得到的编辑框内容
+		m_BoxListRecent.GetLBText(nRecIndex,strRectemp);	//得到被选中内容的名字
 		//设置type值
-		if( strtemp == RECENT_3DAY)
+		if( strRectemp == RECENT_3DAY)
 			strcpy(fast.szType, "3");
-		if( strtemp == RECENT_1WEEK)
+		if( strRectemp == RECENT_1WEEK)
 			strcpy(fast.szType, "7");
-		if( strtemp == RECENT_2WEEK)
+		if( strRectemp == RECENT_2WEEK)
 			strcpy(fast.szType, "14");
-		if( strtemp == RECENT_1MON)
+		if( strRectemp == RECENT_1MON)
 			strcpy(fast.szType, "30");
+	}else{
+		SetComboxPos(FALSE);
 	}
 
 	//如果文件存在，则记录下当前key
@@ -217,6 +272,11 @@ void CFastSearchDlg::OnSelchangeComboPath()
 	OnEventNotify();
 }
 
+void CFastSearchDlg::OnSelchangeComboPathRecent() 
+{
+	// TODO: Add your control notification handler code here
+	OnEventNotify();	
+}
 
 //处理文件检测事件
 void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
@@ -571,3 +631,4 @@ void CFastSearchDlg::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
 		CDialog::OnCancel();
 	}
 }
+
