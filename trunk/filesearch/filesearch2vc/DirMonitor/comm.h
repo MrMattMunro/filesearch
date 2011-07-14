@@ -37,6 +37,7 @@ typedef struct _XmlFilter
 	char szSearceName[MAX_PATH];
 	char szSearchPath[MAX_PATH];
 	char szSearchType[MAX_PATH*2];
+	char szExts[MAX_PATH*5];
 }XmlFilter,*pXmlFilter;
 
 #pragma pack(pop)

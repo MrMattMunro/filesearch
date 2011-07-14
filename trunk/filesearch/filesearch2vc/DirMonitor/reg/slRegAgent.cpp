@@ -45,6 +45,7 @@ BOOL slRegAgent::ReadXmlPath(TCHAR *szXmlPath)
 	return TRUE;	
 }
 
+
 //////////////////////////////////////////////////////////////////////////
 //basic function
 int slRegAgent::SetValue_B (struct HKEY__*ReRootKey,TCHAR *ReSubKey,TCHAR *ReValueName,BYTE ReSetContent_B[1024])
