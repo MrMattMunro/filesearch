@@ -232,7 +232,7 @@ bool slXmlAgent::Filters(char* pszFullPath)
 	//根据文档类型获取过滤后缀名库
 	SetFilters(strExts.c_str(), "");
 
-	if(IncludeThisNotification(ext+1))
+	if(IncludeThisNotification(ext))
 		return false;
 
 
