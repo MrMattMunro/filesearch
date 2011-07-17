@@ -430,5 +430,13 @@ void CFsUiTestDlg::OnButton5()
 void CFsUiTestDlg::OnButton10() 
 {
 	// TODO: Add your control notification handler code here
-	ShellExecute(this->m_hWnd,"open","C:\\Program Files\\Microsoft Office\\OFFICE11\\WINWORD.EXE","\"D:\\slfile测试文件\\测试dir3\\1 2.doc\"","",SW_SHOW );	
+	//ShellExecute(this->m_hWnd,"open","C:\\Program Files\\Microsoft Office\\OFFICE11\\WINWORD.EXE","\"D:\\slfile测试文件\\测试dir3\\1 2.doc\"","",SW_SHOW );	
+	char szParam[_MAX_PATH+64]={0};
+	strcpy(szParam,"/e,/select, ");
+	strcat(szParam,"D:\\1.txt");
+	ShellExecute(NULL,"open","explorer",szParam,NULL,SW_SHOW);
+
+	
+	//explorer.exe的 /select参数
+
 }
