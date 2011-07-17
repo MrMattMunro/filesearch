@@ -579,7 +579,14 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 		//处理【右键】点击事件，打开文档所在的文件夹
 		//根据文件名获取文件所在的路径
 		m_bDestory = FALSE;
-		
+
+		//打开文档所在的目录，并选择该文档
+		char szParam[_MAX_PATH+64]={0};
+		strcpy(szParam,"/e,/select, ");
+		strcat(szParam,strFilePath.c_str());
+		ShellExecute(NULL,"open","explorer",szParam,NULL,SW_SHOW);
+
+/*		
 		char szFilePath[MAX_PATH] = {0};
 		char drive[_MAX_DRIVE];
 		char dir[_MAX_DIR];
@@ -588,7 +595,8 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 		sprintf(szFilePath,"%s%s",drive, dir);
 
 		//打开此目录
-		ShellExecute(NULL, "explore", szFilePath, NULL, NULL, SW_SHOWNORMAL);		
+		ShellExecute(NULL, "explore", szFilePath, NULL, NULL, SW_SHOWNORMAL);
+*/
 	}
 
 }
