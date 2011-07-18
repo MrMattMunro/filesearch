@@ -1244,8 +1244,16 @@ bool CDelayedDirectoryChangeHandler::ExcludeThisNotification(LPCTSTR szFileName)
 
 	ASSERT( szFileName );
 
-	TCHAR szTmpPath[MAX_PATH] = {0};
-	_tcscpy(szTmpPath, szFileName);
+
+
+	TCHAR szTmpPath[MAX_PATH*4] = {0};
+
+	DWORD dwLen = GetLongPathName(szFileName, szTmpPath, MAX_PATH*4);
+	if (dwLen == 0)
+	{
+		_tcscpy(szTmpPath, szFileName);
+	}
+
 	_tcsupr(szTmpPath);
 
 	if( m_szExcludeFilter == NULL ) // no exclude filter... nothing is excluded...
