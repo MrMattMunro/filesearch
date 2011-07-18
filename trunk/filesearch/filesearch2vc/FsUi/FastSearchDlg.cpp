@@ -221,6 +221,7 @@ BOOL CFastSearchDlg::OnInitDialog()
 
 void CFastSearchDlg::OnEventNotify()
 {
+	BOOL bRectAll = FALSE;
 	//获取界面的Key和SelBox
 	CString strKey;
  	GetDlgItemText(IDC_EDIT_SEARCH_KEY, strKey);
@@ -254,19 +255,40 @@ void CFastSearchDlg::OnEventNotify()
 			strcpy(fast.szType, "14");
 		if( strRectemp == RECENT_1MON)
 			strcpy(fast.szType, "30");
+
+		//当选择【最近文档】时,查看编辑框输入的是否是空格
+		CString strTemp = strKey;
+		int nLen = strTemp.GetLength();
+		if (nLen)
+		{
+			strTemp.TrimLeft(" ");
+			nLen = strTemp.GetLength();
+			if (nLen == 0)
+			{
+				//输入的全是空格
+				bRectAll = TRUE;
+			}
+		}
+		
 	}else{
 		SetComboxPos(FALSE);
 	}
 
-	//如果文件存在，则记录下当前key
-	if (m_agent.IsKeyFileExist())
+	if (bRectAll)
 	{
-		sltFastSearchThread::getInstance()->PostMsg(fast);
-		return ;
+		//选择【最近文档】,编辑框中输入的空格，则直接查找记录
+		OnProgressChangeRecent(fast);
+	}else
+	{
+		//如果文件存在，则记录下当前key
+		if (m_agent.IsKeyFileExist())
+		{
+			sltFastSearchThread::getInstance()->PostMsg(fast);
+			return ;
+		}
+		
+		sltFastSearchThread::getInstance()->DoLog(fast);
 	}
-
-	sltFastSearchThread::getInstance()->DoLog(fast);
-
 }
 
 void CFastSearchDlg::OnChangeEditSearchKey() 
@@ -318,6 +340,33 @@ void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
 	//重新设置group（包含个数）
 	UpdateGroupsCaption();
 
+}
+
+
+//处理最近文档，输入空格，显示所有
+void CFastSearchDlg::OnProgressChangeRecent(FastItem item)
+{	
+	//清空LinkItem
+	ClearGroupsItems();
+	
+	//从T_Result中取出数据
+	int nDays = atoi(item.szType);
+	if( m_agent.GetSearchRecords_Recent(nDays) == 0)
+	{
+		//显示在界面上
+		int nCount = m_agent.m_RecList.size();
+		for (int i = 0; i < nCount; i++)
+		{
+			int nID = GetFileID(m_agent.m_RecList[i].szFileType);
+			//////////////////////////////////////////////////////////////////////////
+			//显示到树中
+			AddLinkItem(nID, i,1,m_agent.m_RecList[i].szFileName,m_agent.m_RecList[i].DespList, m_agent.m_RecList[i].szFilePath);
+		}
+	}
+	
+	//重新设置group（包含个数）
+	UpdateGroupsCaption();
+	
 }
 
 int CFastSearchDlg::GetFileID(char* szFileType)
@@ -387,7 +436,7 @@ int imageid[6] = {	IDI_ICON_WORD,
 					IDI_ICON_TXT,
 					IDI_ICON_HTML
 					};
-void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<string> DespList,LPCTSTR lpszTooltip/* = ""*/)
+void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<string> DespList,LPCTSTR lpszTooltip/* = ""*/,BOOL bShowTextItem/* = FALSE*/)
 {
 
 	CXTPTaskPanelGroup* pFolder = m_listMap[nFolderID].pGroup;
@@ -415,11 +464,15 @@ void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, L
 		}
 	}else
 	{
-		for (int i = 0; i < nSize; i++)
+		if (bShowTextItem)
 		{
-			std::string strTextItem = "              " + DespList[i];
-			pFolder->AddTextItem(strTextItem.c_str());
+			for (int i = 0; i < nSize; i++)
+			{
+				std::string strTextItem = "              " + DespList[i];
+				pFolder->AddTextItem(strTextItem.c_str());
+			}
 		}
+
 		pPointer->SetCaption(lpszCaption);
 	}
 
@@ -510,6 +563,7 @@ HBRUSH CFastSearchDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 // 	}
 // 	
 // 	return CreateSolidBrush(backColor);      //创建背景刷子	
+
 	// TODO: Return a different brush if the default is not desired
 	return hbr;
 }

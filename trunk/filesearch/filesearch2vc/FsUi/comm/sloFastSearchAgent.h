@@ -19,11 +19,14 @@ public:
 	BOOL IsKeyFileExist();
 
 	DWORD GetSearchRecords();
+	DWORD GetSearchRecords_Recent(int nDays);
 
 	int GetPathIndex(char* szPath);
 
 	std::string GetFilePathFromName(char* szName);
 private:
+	DWORD SearchRecords(std::string strQuerySQL);
+
 	BOOL GetKeyFilePath();
 	void AddList(SearchRectord sr);
 

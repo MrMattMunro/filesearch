@@ -431,6 +431,18 @@ void CFsUiTestDlg::OnButton5()
 void CFsUiTestDlg::OnButton10() 
 {
 	// TODO: Add your control notification handler code here
+	CString strData;
+	GetDlgItemText(IDC_EDIT_MODIFY_ID, strData);
+
+	MessageBox(strData);
+	int strLen = strData.GetLength();
+
+	strData.TrimLeft(" ");
+		MessageBox(strData);
+
+	int strLen2 = strData.GetLength();
+	return ;
+	
 	//ShellExecute(this->m_hWnd,"open","C:\\Program Files\\Microsoft Office\\OFFICE11\\WINWORD.EXE","\"D:\\slfile²âÊÔÎÄ¼þ\\²âÊÔdir3\\1 2.doc\"","",SW_SHOW );	
 	char szParam[_MAX_PATH+64]={0};
 	strcpy(szParam,"/e,/select, ");
@@ -449,15 +461,15 @@ HBRUSH CFsUiTestDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 
 	// TODO: Change any attributes of the DC here
-	if(pWnd->GetDlgCtrlID()==IDC_STATIC_GROUP) 
-	{ 
-		CRect rc; 
-		m_groupbox.GetClientRect(&rc); 
-		pDC->FillSolidRect(rc , RGB(0,255,255));//green 
-		// Set the background mode for text to transparent  
-		// so background will show thru. 
-		pDC->SetBkMode(TRANSPARENT); 
-	} 	
+// 	if(pWnd->GetDlgCtrlID()==IDC_STATIC_GROUP) 
+// 	{ 
+// 		CRect rc; 
+// 		m_groupbox.GetClientRect(&rc); 
+// 		pDC->FillSolidRect(rc , RGB(0,255,255));//green 
+// 		// Set the background mode for text to transparent  
+// 		// so background will show thru. 
+// 		pDC->SetBkMode(TRANSPARENT); 
+// 	} 	
 
 	// TODO: Return a different brush if the default is not desired
 	return hbr;
