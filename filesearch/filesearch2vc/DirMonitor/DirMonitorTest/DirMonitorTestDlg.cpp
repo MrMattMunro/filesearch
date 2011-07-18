@@ -246,6 +246,7 @@ void CDirMonitorTestDlg::OnClose()
 }
 
 
+#define  src_path "C:\\DOCUME~1\\1.txt"
 void CDirMonitorTestDlg::OnButton4() 
 {
 	// TODO: Add your control notification handler code here
@@ -255,6 +256,14 @@ void CDirMonitorTestDlg::OnButton4()
 	pos = strcspn( string, "yaf" );
 	std::string str1 = "xyzabc";
 	pos = str1.find("abcf");
+
+	
+	TCHAR tcharSourceFileName[400] = {0} ;
+	char szName[MAX_PATH] = {0};
+	sprintf(szName,"%s", src_path);
+	DWORD dwLen = GetLongPathName(src_path,tcharSourceFileName,MAX_PATH);
+
+	MessageBox(tcharSourceFileName);
 
 }
 
