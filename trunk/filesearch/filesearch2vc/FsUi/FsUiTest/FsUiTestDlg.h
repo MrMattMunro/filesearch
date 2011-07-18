@@ -20,7 +20,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CFsUiTestDlg)
 	enum { IDD = IDD_FSUITEST_DIALOG };
-		// NOTE: the ClassWizard will add data members here
+	CButton	m_groupbox;
 	//}}AFX_DATA
 
 	// ClassWizard generated virtual function overrides
@@ -49,6 +49,7 @@ protected:
 	afx_msg void OnButton8();
 	afx_msg void OnButton9();
 	afx_msg void OnButton10();
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

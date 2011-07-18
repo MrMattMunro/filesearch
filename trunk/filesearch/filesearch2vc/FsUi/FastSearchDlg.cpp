@@ -33,6 +33,7 @@ void CFastSearchDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CFastSearchDlg)
+	DDX_Control(pDX, IDC_STATIC_FIND, m_static_find);
 	DDX_Control(pDX, IDC_COMBO_PATH_RECENT, m_BoxListRecent);
 	DDX_Control(pDX, IDC_COMBO_PATH, m_BoxList);
 	DDX_Text(pDX, IDC_EDIT_SEARCH_KEY, m_strKey);
@@ -126,6 +127,18 @@ void CFastSearchDlg::SetComboxPos(BOOL bRecent)
 }
 
 
+
+
+void CFastSearchDlg::SetStaticFindPos()
+{
+	
+	RECT rcDlgs;
+	m_static_find.GetWindowRect(&rcDlgs);   //得到对话框的Rect 对话框的大小
+	ScreenToClient(&rcDlgs);             //把屏幕的值转成相应的实际的值 
+	
+	m_static_find.MoveWindow(rcDlgs.left,rcDlgs.top,(rcDlgs.right - rcDlgs.left + 3),(rcDlgs.bottom - rcDlgs.top + 3),TRUE);   // 	
+}
+
 BOOL CFastSearchDlg::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
@@ -199,6 +212,8 @@ BOOL CFastSearchDlg::OnInitDialog()
 	m_wndTaskPanel.SetIconSize( CSize(16, 16));
 
 	UpdateGroupsCaption();
+
+	SetStaticFindPos();
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE

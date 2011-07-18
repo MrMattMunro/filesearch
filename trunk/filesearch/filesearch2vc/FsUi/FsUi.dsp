@@ -326,6 +326,10 @@ SOURCE=.\comm\TTComboBox.h
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 # Begin Source File
 
+SOURCE=.\res\AlphaFind.bmp
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\Book2.ico
 # End Source File
 # Begin Source File
@@ -355,6 +359,14 @@ SOURCE=.\res\DEVTOOL.ICO
 # Begin Source File
 
 SOURCE=.\res\excel.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\feiqclose.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\feiqfind.bmp
 # End Source File
 # Begin Source File
 

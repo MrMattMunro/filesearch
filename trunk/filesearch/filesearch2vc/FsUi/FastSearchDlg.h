@@ -31,6 +31,7 @@ public:
 
 	void SetWinPos();
 	void SetComboxPos(BOOL bRecent);
+	void SetStaticFindPos();
 
 	void OnEventNotify();
 	BOOL CreateTaskPanel();
@@ -55,6 +56,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CFastSearchDlg)
 	enum { IDD = IDD_DIALOG_FAST_SEARCH };
+	CStatic	m_static_find;
 	CTTComboBox	m_BoxListRecent;
 	CTTComboBox	m_BoxList;
 	CString	m_strKey;
