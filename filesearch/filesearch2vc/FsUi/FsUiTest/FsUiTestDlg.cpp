@@ -75,7 +75,7 @@ void CFsUiTestDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CFsUiTestDlg)
-		// NOTE: the ClassWizard will add DDX and DDV calls here
+	DDX_Control(pDX, IDC_STATIC_GROUP, m_groupbox);
 	//}}AFX_DATA_MAP
 }
 
@@ -94,6 +94,7 @@ BEGIN_MESSAGE_MAP(CFsUiTestDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON8, OnButton8)
 	ON_BN_CLICKED(IDC_BUTTON9, OnButton9)
 	ON_BN_CLICKED(IDC_BUTTON10, OnButton10)
+	ON_WM_CTLCOLOR()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -439,4 +440,25 @@ void CFsUiTestDlg::OnButton10()
 	
 	//explorer.exeµÄ /select²ÎÊý
 
+}
+
+HBRUSH CFsUiTestDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor) 
+{
+	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+	
+
+
+	// TODO: Change any attributes of the DC here
+	if(pWnd->GetDlgCtrlID()==IDC_STATIC_GROUP) 
+	{ 
+		CRect rc; 
+		m_groupbox.GetClientRect(&rc); 
+		pDC->FillSolidRect(rc , RGB(0,255,255));//green 
+		// Set the background mode for text to transparent  
+		// so background will show thru. 
+		pDC->SetBkMode(TRANSPARENT); 
+	} 	
+
+	// TODO: Return a different brush if the default is not desired
+	return hbr;
 }

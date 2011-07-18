@@ -31,7 +31,7 @@ ImplementationFile=FsUiTestDlg.cpp
 Filter=D
 BaseClass=CDialog
 VirtualFilter=dWC
-LastObject=CFsUiTestDlg
+LastObject=IDC_STATIC_GROUP
 
 [CLS:CAboutDlg]
 Type=0
@@ -61,7 +61,7 @@ Control6=IDC_BUTTON4,button,1342242816
 Control7=IDC_BUTTON5,button,1073807360
 Control8=IDC_STATIC,static,1342308352
 Control9=IDC_EDIT_MODIFY_ID,edit,1350631552
-Control10=IDC_STATIC,button,1342177287
+Control10=IDC_STATIC_GROUP,button,1342177287
 Control11=IDC_BUTTON6,button,1342242816
 Control12=IDC_BUTTON7,button,1342242816
 Control13=IDC_BUTTON8,button,1342242816
