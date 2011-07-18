@@ -110,21 +110,22 @@ DWORD sloFastSearchAgent::GetAllPath()
 	return 0;	
 }
 
-DWORD sloFastSearchAgent::GetSearchRecords()
+
+DWORD sloFastSearchAgent::SearchRecords(std::string strQuerySQL)
 {
-	//从数据库中获取最大的索引id
+	//检测数据是否连接
 	if (!m_pMySqlDB && !ConnectDB())
 	{
 		return -1;
 	}
-
+	
 	ClearRecList();	
-
-	std::string strQuerySQL = "select * from t_result";
+	
+//	std::string strQuerySQL = "select * from t_result";
 	HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str() );
 	if (FAILED(hr))
 		return -2;
-
+	
 	int nCount = m_pMySqlDB->GetRowCount();
 	int nFieldCount = m_pMySqlDB->GetFieldCount();
 	if(nCount >= 1 && nFieldCount >= 1)
@@ -139,19 +140,19 @@ DWORD sloFastSearchAgent::GetSearchRecords()
 			char* pFileType = m_pMySqlDB->GetField("filetype",&nFileTypeLen);
 			if (nFileTypeLen == 0)
 				continue ;
-
+			
 			int nFileNameLen = 0;
 			char* pFileName = m_pMySqlDB->GetField("filename",&nFileNameLen);
-
+			
 			int nFilePathLen = 0;
 			char* pFilePath = m_pMySqlDB->GetField("filepath",&nFilePathLen);
 			
 			int nDespLen = 0;
 			char* pDesp = m_pMySqlDB->GetField("desp",&nDespLen);
-
+			
 			int nContentLen = 0;
 			char* pContent = m_pMySqlDB->GetField("content",&nContentLen);
-
+			
 			//先查找是否有该项
 			SearchRectord sr;
 			memset(&sr, NULL, sizeof(SearchRectord));
@@ -161,20 +162,36 @@ DWORD sloFastSearchAgent::GetSearchRecords()
 				memcpy(sr.szFileName, pFileName, nFileNameLen);
 			if (nFilePathLen)
 				memcpy(sr.szFilePath, pFilePath, nFilePathLen);
-
+			
 			if (nDespLen)
 				sr.DespList.push_back(pDesp);
-
+			
 			if (nContentLen)
 				memcpy(sr.szContent, pContent, nContentLen);
-
+			
 			//m_RecList.push_back(sr);
 			AddList(sr);
-
+			
 		}
 	}
 	
 	return 0;	
+}
+
+
+DWORD sloFastSearchAgent::GetSearchRecords()
+{
+	std::string strQuerySQL = "select * from t_result";
+	
+	return SearchRecords(strQuerySQL);
+}
+
+DWORD sloFastSearchAgent::GetSearchRecords_Recent(int nDays)
+{	
+	//select distinct path from commoninfo.t_recent_changeinfo where TO_DAYS(NOW())-TO_DAYS(systime) >= #days# and operflg != 3 AND operflg != 4 (没有删除与重命名)
+	std::string strQuerySQL = "select * from t_recent_changeinfo";
+	
+	return SearchRecords(strQuerySQL);	
 }
 
 void sloFastSearchAgent::AddList(SearchRectord sr)
