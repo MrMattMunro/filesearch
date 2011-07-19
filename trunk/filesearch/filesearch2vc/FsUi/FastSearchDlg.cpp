@@ -360,7 +360,7 @@ void CFastSearchDlg::OnProgressChangeRecent(FastItem item)
 			int nID = GetFileID(m_agent.m_RecList[i].szFileType);
 			//////////////////////////////////////////////////////////////////////////
 			//显示到树中
-			AddLinkItem(nID, i,1,m_agent.m_RecList[i].szFileName,m_agent.m_RecList[i].DespList, m_agent.m_RecList[i].szFilePath);
+			AddLinkItem(nID, i,1,m_agent.m_RecList[i].szFileName,m_agent.m_RecList[i].DespList, m_agent.m_RecList[i].szFilePath, FALSE);
 		}
 	}
 	
@@ -577,7 +577,7 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 	{
 		pItem->SetItemSelected(!pItem->IsItemSelected());
 	}
-	
+
 	CString strFileName = pItem->GetCaption();
 	CString strGroupCaption = pItem->GetItemGroup()->GetCaption();
 	if (strGroupCaption.Find(HTML_NAME, 0) != -1)
@@ -590,8 +590,9 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 	}
 	
 	//find file full path from file name
-	std::string strFilePath = m_agent.GetFilePathFromName(strFileName.GetBuffer(0));
-	
+	//这种方式可能导致，一个文件名，对应多个路径，则获取不正确
+//	std::string strFilePath = m_agent.GetFilePathFromName(strFileName.GetBuffer(0));
+	std::string strFilePath = pItem->GetTooltip().GetBuffer(0);
 	//处理【左键】点击事件，打开文档
 	if (XTP_TPN_CLICK == wParam && strFilePath.size() != 0)
 	{	
@@ -683,7 +684,7 @@ LRESULT CFastSearchDlg::OnTaskPanelNotify(WPARAM wParam, LPARAM lParam)
 		{
 			//////////////////////////////////////////////////////////////////////////
 			//add code
-			MessageBox("DBLCLICK Event:");
+//			MessageBox("DBLCLICK Event:");
 		}
 		break;	
 	case XTP_TPN_RCLICK:

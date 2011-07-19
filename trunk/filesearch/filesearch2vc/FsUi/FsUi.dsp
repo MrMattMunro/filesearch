@@ -173,6 +173,10 @@ SOURCE=.\comm\sloFastSearchAgent.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\comm\sloFilterAgent.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\comm\sloLanguageAgent.cpp
 # End Source File
 # Begin Source File
@@ -283,6 +287,10 @@ SOURCE=.\comm\sloCustomCiHuiAgent.h
 # Begin Source File
 
 SOURCE=.\comm\sloFastSearchAgent.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\sloFilterAgent.h
 # End Source File
 # Begin Source File
 
