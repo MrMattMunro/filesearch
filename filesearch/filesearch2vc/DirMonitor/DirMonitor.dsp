@@ -140,7 +140,7 @@ SOURCE=.\mysql\slMySqlAgent.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\sloFilterAgent.cpp
+SOURCE=..\FsUi\comm\sloFilterAgent.cpp
 # End Source File
 # Begin Source File
 
@@ -209,7 +209,7 @@ SOURCE=.\mysql\slMySqlAgent.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\sloFilterAgent.h
+SOURCE=..\FsUi\comm\sloFilterAgent.h
 # End Source File
 # Begin Source File
 
