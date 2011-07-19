@@ -1244,15 +1244,15 @@ bool CDelayedDirectoryChangeHandler::ExcludeThisNotification(LPCTSTR szFileName)
 
 	ASSERT( szFileName );
 
-
-
 	TCHAR szTmpPath[MAX_PATH*4] = {0};
 
 	DWORD dwLen = GetLongPathName(szFileName, szTmpPath, MAX_PATH*4);
 	if (dwLen == 0)
 	{
 		_tcscpy(szTmpPath, szFileName);
-	}
+		log.Print(LL_DBERR,"[warn]GetLongPathName org=%s,GetLastError=0x%x\r\n", szFileName, GetLastError());
+	}else
+		log.Print(LL_DBERR,"[warn]GetLongPathName org=%s,des=%s,GetLastError=0x%x\r\n", szFileName, szTmpPath, GetLastError());
 
 	_tcsupr(szTmpPath);
 
