@@ -111,7 +111,7 @@ DWORD sloFastSearchAgent::GetAllPath()
 }
 
 
-DWORD sloFastSearchAgent::SearchRecords(std::string strQuerySQL)
+DWORD sloFastSearchAgent::SearchRecords(std::string strQuerySQL, BOOL bRecent/* = FALSE*/)
 {
 	//检测数据是否连接
 	if (!m_pMySqlDB && !ConnectDB())
@@ -121,7 +121,6 @@ DWORD sloFastSearchAgent::SearchRecords(std::string strQuerySQL)
 	
 	ClearRecList();	
 	
-//	std::string strQuerySQL = "select * from t_result";
 	HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str() );
 	if (FAILED(hr))
 		return -2;
@@ -135,43 +134,65 @@ DWORD sloFastSearchAgent::SearchRecords(std::string strQuerySQL)
 			bool bSucc = m_pMySqlDB->GetRow();
 			if(bSucc==false)
 				return -1;
-			
-			int nFileTypeLen = 0;
-			char* pFileType = m_pMySqlDB->GetField("filetype",&nFileTypeLen);
-			if (nFileTypeLen == 0)
-				continue ;
-			
-			int nFileNameLen = 0;
-			char* pFileName = m_pMySqlDB->GetField("filename",&nFileNameLen);
-			
-			int nFilePathLen = 0;
-			char* pFilePath = m_pMySqlDB->GetField("filepath",&nFilePathLen);
-			
-			int nDespLen = 0;
-			char* pDesp = m_pMySqlDB->GetField("desp",&nDespLen);
-			
-			int nContentLen = 0;
-			char* pContent = m_pMySqlDB->GetField("content",&nContentLen);
-			
+
 			//先查找是否有该项
 			SearchRectord sr;
 			memset(&sr, NULL, sizeof(SearchRectord));
-			if (nFileTypeLen)
-				memcpy(sr.szFileType, pFileType, nFileTypeLen);
-			if (nFileNameLen)
-				memcpy(sr.szFileName, pFileName, nFileNameLen);
-			if (nFilePathLen)
-				memcpy(sr.szFilePath, pFilePath, nFilePathLen);
-			
-			if (nDespLen)
-				sr.DespList.push_back(pDesp);
-			
-			if (nContentLen)
-				memcpy(sr.szContent, pContent, nContentLen);
-			
-			//m_RecList.push_back(sr);
-			AddList(sr);
-			
+			if (!bRecent)
+			{
+				//取t_result表中的数据
+				int nFileTypeLen = 0;
+				char* pFileType = m_pMySqlDB->GetField("filetype",&nFileTypeLen);
+				if (nFileTypeLen == 0)
+					continue ;
+				
+				int nFileNameLen = 0;
+				char* pFileName = m_pMySqlDB->GetField("filename",&nFileNameLen);
+				
+				int nFilePathLen = 0;
+				char* pFilePath = m_pMySqlDB->GetField("filepath",&nFilePathLen);
+				
+				int nDespLen = 0;
+				char* pDesp = m_pMySqlDB->GetField("desp",&nDespLen);
+				
+				int nContentLen = 0;
+				char* pContent = m_pMySqlDB->GetField("content",&nContentLen);
+							
+				if (nFileTypeLen)
+					memcpy(sr.szFileType, pFileType, nFileTypeLen);
+				if (nFileNameLen)
+					memcpy(sr.szFileName, pFileName, nFileNameLen);
+				if (nFilePathLen)
+					memcpy(sr.szFilePath, pFilePath, nFilePathLen);			
+				if (nDespLen)
+					sr.DespList.push_back(pDesp);			
+				if (nContentLen)
+					memcpy(sr.szContent, pContent, nContentLen);
+			}else
+			{
+				m_filterAgent.Init();
+				//取t_recent_changeinfo
+				int nFilePathLen = 0;
+				char* pFilePath = m_pMySqlDB->GetField("path",&nFilePathLen);
+				if (nFilePathLen == 0)
+					continue ;
+				
+				//根据全路径获取文件名
+				char szFileName[MAX_PATH] = {0};
+				char szExt[MAX_PATH] = {0};
+				_splitpath(pFilePath, NULL, NULL, szFileName, szExt);
+				strcat(szFileName, szExt);
+				
+				//根据文件后缀获取文件类型
+				std::string strType = m_filterAgent.GetFileTypeFromExt(szExt);
+				
+				//填充结构体
+				memcpy(sr.szFileType, strType.c_str(), strType.size());
+				memcpy(sr.szFileName, szFileName, strlen(szFileName));
+				memcpy(sr.szFilePath, pFilePath, nFilePathLen);			
+			}
+
+			AddList(sr);	
 		}
 	}
 	
@@ -183,15 +204,17 @@ DWORD sloFastSearchAgent::GetSearchRecords()
 {
 	std::string strQuerySQL = "select * from t_result";
 	
-	return SearchRecords(strQuerySQL);
+	return SearchRecords(strQuerySQL, FALSE);
 }
 
 DWORD sloFastSearchAgent::GetSearchRecords_Recent(int nDays)
 {	
 	//select distinct path from commoninfo.t_recent_changeinfo where TO_DAYS(NOW())-TO_DAYS(systime) >= #days# and operflg != 3 AND operflg != 4 (没有删除与重命名)
-	std::string strQuerySQL = "select * from t_recent_changeinfo";
+//	std::string strQuerySQL = "select distinct path from t_recent_changeinfo where TO_DAYS(NOW())-TO_DAYS(systime) <= %d and operflg != 3 AND operflg != 4";
+	char szSql[1024] = {0};
+	sprintf(szSql, "select distinct path from t_recent_changeinfo where TO_DAYS(NOW())-TO_DAYS(systime) <= %d and operflg != 3 AND operflg != 4", nDays-1);
 	
-	return SearchRecords(strQuerySQL);	
+	return SearchRecords(szSql, TRUE);	
 }
 
 void sloFastSearchAgent::AddList(SearchRectord sr)
@@ -199,7 +222,7 @@ void sloFastSearchAgent::AddList(SearchRectord sr)
 	int nCount = m_RecList.size();
 	for (int i = 0; i < nCount; i++)
 	{
-		if (strcmp(sr.szFileName, m_RecList[i].szFileName) == 0)
+		if (strcmp(sr.szFilePath, m_RecList[i].szFilePath) == 0)
 		{
 			break ;
 		}
