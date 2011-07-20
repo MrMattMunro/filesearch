@@ -33,6 +33,7 @@ void CFastSearchDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CFastSearchDlg)
+	DDX_Control(pDX, IDC_EDIT_SEARCH_KEY, m_keyEdit);
 	DDX_Control(pDX, IDC_STATIC_FIND, m_static_find);
 	DDX_Control(pDX, IDC_COMBO_PATH_RECENT, m_BoxListRecent);
 	DDX_Control(pDX, IDC_COMBO_PATH, m_BoxList);
@@ -148,6 +149,8 @@ BOOL CFastSearchDlg::OnInitDialog()
 	SetIcon(m_hIcon,TRUE); //设置为大图标
 
 	// TODO: Add extra initialization here
+	m_keyEdit.SetIcon(IDI_ICON_FAST_SEARCH);
+
 	SetWindowText(g_lag.LoadString("title.fastsearch"));
 
 	sltFastSearchThread::newInstance();
@@ -213,7 +216,7 @@ BOOL CFastSearchDlg::OnInitDialog()
 
 	UpdateGroupsCaption();
 
-	SetStaticFindPos();
+//	SetStaticFindPos();
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
@@ -225,6 +228,18 @@ void CFastSearchDlg::OnEventNotify()
 	//获取界面的Key和SelBox
 	CString strKey;
  	GetDlgItemText(IDC_EDIT_SEARCH_KEY, strKey);
+
+	if (strKey.GetLength() == 0)
+	{
+		//输入框为空，则情况显示列表
+		//清空LinkItem
+		ClearGroupsItems();
+
+		//重新设置group（包含个数）
+		UpdateGroupsCaption();
+
+		return ;
+	}
 
 	int nIndex = m_BoxList.GetCurSel();		//得到被选中内容索引
 	CString strtemp;						//存放得到的编辑框内容
