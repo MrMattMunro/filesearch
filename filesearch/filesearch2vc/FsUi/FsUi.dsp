@@ -117,6 +117,10 @@ SOURCE=.\FsUi.rc
 # End Source File
 # Begin Source File
 
+SOURCE=.\comm\IconEdit.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\LicenseDlg.cpp
 # End Source File
 # Begin Source File
@@ -231,6 +235,10 @@ SOURCE=.\FastSearchDlg.h
 # Begin Source File
 
 SOURCE=.\FsUi.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\IconEdit.h
 # End Source File
 # Begin Source File
 
@@ -471,6 +479,10 @@ SOURCE=.\res\Registration.ico
 # Begin Source File
 
 SOURCE=".\res\Registry Entries REG.ico"
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\search.ico
 # End Source File
 # Begin Source File
 

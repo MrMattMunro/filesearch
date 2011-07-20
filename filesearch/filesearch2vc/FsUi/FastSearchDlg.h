@@ -14,6 +14,7 @@
 #include "sloSetAttrAgent.h"
 #include <map>
 #include "TTComboBox.h"
+#include "IconEdit.h"
 
 typedef struct _GroupInfo
 {
@@ -58,6 +59,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CFastSearchDlg)
 	enum { IDD = IDD_DIALOG_FAST_SEARCH };
+	CIconEdit	m_keyEdit;
 	CStatic	m_static_find;
 	CTTComboBox	m_BoxListRecent;
 	CTTComboBox	m_BoxList;
