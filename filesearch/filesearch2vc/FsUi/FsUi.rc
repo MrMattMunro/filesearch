@@ -66,7 +66,7 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2011,7,19,1
+ FILEVERSION 2011,7,20,1
  PRODUCTVERSION 1,0,0,23
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
@@ -85,7 +85,7 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "slfile\0"
             VALUE "FileDescription", "FsUi DLL\0"
-            VALUE "FileVersion", "2011, 7, 19, 1\0"
+            VALUE "FileVersion", "2011, 7, 20, 1\0"
             VALUE "InternalName", "FsUi\0"
             VALUE "LegalCopyright", "版权所有 (C) 2011\0"
             VALUE "LegalTrademarks", "\0"
@@ -269,8 +269,27 @@ BEGIN
     LTEXT           "starttime",IDC_STATIC_BEGINTIME_CONTENT,72,90,120,8
     LTEXT           "endtime",IDC_STATIC_ENTTIME_CONTENT,72,108,120,8
     LTEXT           "注册时间:",IDC_STATIC_BEGINTIME,33,90,35,8
-    LTEXT           "errorinfo",IDC_STATIC_ERROR_INFO,33,124,203,24
+    LTEXT           "errorinfo",IDC_STATIC_ERROR_INFO,33,137,203,24
     ICON            IDI_ICON_HAND,IDC_STATIC,6,9,20,20
+    ICON            IDI_ICON_HAND,IDC_STATIC_HAND_LICENSE_BACK,7,119,20,20
+    LTEXT           "license备份",IDC_STATIC_LICENSE_BACKINFO,27,126,44,8
+    EDITTEXT        IDC_EDIT_LICENSE_BACK_PATH,69,157,140,13,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    PUSHBUTTON      "备份",IDC_BUTTON_LICENSE_BACK,203,135,40,16
+    LTEXT           "备份路径:",IDC_STATIC_LICENSE_BACK_TIP,33,159,35,8
+    PUSHBUTTON      "浏览",IDC_BUTTON_BROWSE_BACK_PATH,214,157,28,14
+    LTEXT           "备份license文件，防止系统重装，可以恢复。",
+                    IDC_STATIC_LICENSE_BACK_INFO2,33,141,155,8
+    ICON            IDI_ICON_HAND,IDC_STATIC_HAND_LICENSE_RESOTRE,8,84,18,20
+    LTEXT           "license恢复",IDC_STATIC_LICENSE_RESTOREINFO,27,91,44,8
+    LTEXT           "恢复备份的license文件，还原到系统注册状态。",
+                    IDC_STATIC_LICENSE_RESTORE_INFO2,33,105,163,8
+    LTEXT           "license路径:",IDC_STATIC_LICENSE_RESTORE_TIP,31,119,48,
+                    8
+    EDITTEXT        IDC_EDIT_LICENSE_RESTORE_PATH,83,117,124,13,
+                    ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "浏览",IDC_BUTTON_BROWSE_RESTORE_PATH,213,116,28,14
+    PUSHBUTTON      "恢复",IDC_BUTTON_LICENSE_RESTORE,202,96,40,16
 END
 
 IDD_DIALOG_SKIN DIALOG DISCARDABLE  0, 0, 241, 190

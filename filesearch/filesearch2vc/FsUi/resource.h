@@ -198,8 +198,10 @@
 #define IDB_BITMAP_OK                   2029
 #define IDC_STATIC_OBJECT_TYPE          2030
 #define IDB_BITMAP_CANCEL               2030
+#define IDC_EDIT_LICENSE_BACK_PATH      2030
 #define IDC_STATIC_NEW_WORDS            2031
 #define IDB_BITMAP_FOLDER               2031
+#define IDC_EDIT_LICENSE_RESTORE_PATH   2031
 #define IDC_STATIC_CUSTOM_CIHUI         2032
 #define IDB_BITMAP_DELETE               2032
 #define IDB_BITMAP_FORWARD              2033
@@ -223,15 +225,21 @@
 #define IDI_ICON_FAST_SEARCH            2042
 #define IDC_STATIC_EMAIL                2043
 #define IDC_STATIC_SKIN_SET             2044
+#define IDC_STATIC_LICENSE_BACKINFO     2044
 #define IDC_STATIC_SKIN_SELECT          2045
+#define IDC_STATIC_LICENSE_BACK_TIP     2045
 #define IDC_LIST_SKIN                   2046
 #define IDB_BITMAP_FAST_SCH             2046
+#define IDC_STATIC_LICENSE_BACK_INFO2   2046
 #define IDC_STATIC_SKIN_PREVIEW         2047
 #define IDB_BITMAP_OFFICE2007           2047
+#define IDC_STATIC_LICENSE_RESTOREINFO  2047
 #define IDC_STATIC_AUTHOR               2048
 #define IDB_BITMAP_VISTA                2048
+#define IDC_STATIC_LICENSE_RESTORE_INFO2 2048
 #define IDC_STATIC_AUTHOR_NAME          2049
 #define IDB_BITMAP_XPPLUNA              2049
+#define IDC_STATIC_LICENSE_RESTORE_TIP  2049
 #define IDC_STATIC_HOMEPAGE             2050
 #define IDB_BITMAP_XPPROYALE            2050
 #define IDC_STATIC_HOMEPAGE_NAME        2051
@@ -245,6 +253,12 @@
 #define IDB_BITMAP_FEIQ_CLOSE           2058
 #define IDC_STATIC_FIND                 2058
 #define IDI_ICON_SEARCH_TRAY            2059
+#define IDC_STATIC_HAND_LICENSE_BACK    2060
+#define IDC_BUTTON_LICENSE_BACK         2061
+#define IDC_BUTTON_BROWSE_BACK_PATH     2062
+#define IDC_STATIC_HAND_LICENSE_RESOTRE 2063
+#define IDC_BUTTON_BROWSE_RESTORE_PATH  2064
+#define IDC_BUTTON_LICENSE_RESTORE      2065
 
 // Next default values for new objects
 // 
@@ -252,7 +266,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        2060
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         2060
+#define _APS_NEXT_CONTROL_VALUE         2063
 #define _APS_NEXT_SYMED_VALUE           2000
 #endif
 #endif

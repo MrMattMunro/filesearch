@@ -42,6 +42,10 @@ protected:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnButtonReg();
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+	afx_msg void OnButtonLicenseBack();
+	afx_msg void OnButtonBrowseBackPath();
+	afx_msg void OnButtonBrowseRestorePath();
+	afx_msg void OnButtonLicenseRestore();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

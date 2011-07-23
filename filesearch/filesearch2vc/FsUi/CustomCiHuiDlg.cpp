@@ -118,7 +118,7 @@ void CCustomCiHuiDlg::OnButtonBrowseCihui()
 	// TODO: Add your control notification handler code here
 	char szPath[MAX_PATH] = {0};
 
-	if( sloCommAgent::DoFileDialog(szPath, FITER_TXT_XLS) )
+	if( sloCommAgent::DoFileDialog(TRUE, szPath, FITER_TXT_XLS) )
 	{
 		m_strBrowsePath = szPath;
 		UpdateData(FALSE);
