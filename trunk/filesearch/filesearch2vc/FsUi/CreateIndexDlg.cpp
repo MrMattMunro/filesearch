@@ -113,7 +113,7 @@ void CCreateIndexDlg::OnButtonBrowse()
 	{       
 		SHGetPathFromIDList(pidl,   path);       
 		GetDlgItem(IDC_EDIT_SEARCH_PATH)->SetWindowText(path);       
-  }
+	}
 }
 
 char  *GetPath(HWND   hWnd,char   *pBuffer)  

@@ -38,6 +38,10 @@ BEGIN_MESSAGE_MAP(CLicenseDlg, CDialog)
 	//{{AFX_MSG_MAP(CLicenseDlg)
 	ON_BN_CLICKED(IDC_BUTTON_REG, OnButtonReg)
 	ON_WM_CTLCOLOR()
+	ON_BN_CLICKED(IDC_BUTTON_LICENSE_BACK, OnButtonLicenseBack)
+	ON_BN_CLICKED(IDC_BUTTON_BROWSE_BACK_PATH, OnButtonBrowseBackPath)
+	ON_BN_CLICKED(IDC_BUTTON_BROWSE_RESTORE_PATH, OnButtonBrowseRestorePath)
+	ON_BN_CLICKED(IDC_BUTTON_LICENSE_RESTORE, OnButtonLicenseRestore)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -105,6 +109,30 @@ BOOL CLicenseDlg::UpdateDialog()
 
 		((CStatic*)GetDlgItem(IDC_STATIC_BEGINTIME_CONTENT))->SetWindowText(m_licAgent.m_LicInfo.szStartDate);
 		((CStatic*)GetDlgItem(IDC_STATIC_ENTTIME_CONTENT))->SetWindowText(m_licAgent.m_LicInfo.szEndDate);
+
+		//显示备份界面
+		((CEdit*)GetDlgItem(IDC_EDIT_LICENSE_BACK_PATH))->ShowWindow(SW_SHOW); 
+
+		(CStatic*)GetDlgItem(IDC_STATIC_HAND_LICENSE_BACK)->ShowWindow(SW_SHOW);
+		(CStatic*)GetDlgItem(IDC_STATIC_LICENSE_BACKINFO)->ShowWindow(SW_SHOW);
+		(CStatic*)GetDlgItem(IDC_STATIC_LICENSE_BACK_TIP)->ShowWindow(SW_SHOW);
+		(CStatic*)GetDlgItem(IDC_STATIC_LICENSE_BACK_INFO2)->ShowWindow(SW_SHOW);
+
+		GetDlgItem(IDC_BUTTON_BROWSE_BACK_PATH)->ShowWindow(SW_SHOW);	
+		GetDlgItem(IDC_BUTTON_LICENSE_BACK)->ShowWindow(SW_SHOW);
+
+
+		//隐藏恢复界面	
+		((CEdit*)GetDlgItem(IDC_EDIT_LICENSE_RESTORE_PATH))->ShowWindow(SW_HIDE); 
+
+		(CStatic*)GetDlgItem(IDC_STATIC_HAND_LICENSE_RESOTRE)->ShowWindow(SW_HIDE);
+		(CStatic*)GetDlgItem(IDC_STATIC_LICENSE_RESTOREINFO)->ShowWindow(SW_HIDE);
+		(CStatic*)GetDlgItem(IDC_STATIC_LICENSE_RESTORE_TIP)->ShowWindow(SW_HIDE);
+		(CStatic*)GetDlgItem(IDC_STATIC_LICENSE_RESTORE_INFO2)->ShowWindow(SW_HIDE);
+
+		GetDlgItem(IDC_BUTTON_BROWSE_RESTORE_PATH)->ShowWindow(SW_HIDE);	
+		GetDlgItem(IDC_BUTTON_LICENSE_RESTORE)->ShowWindow(SW_HIDE);
+
 		
 	}else if (m_licAgent.m_bReg)
 	{
@@ -123,6 +151,29 @@ BOOL CLicenseDlg::UpdateDialog()
 
 		(CStatic*)GetDlgItem(IDC_STATIC_ERROR_INFO)->ShowWindow(SW_SHOW);
 		((CStatic*)GetDlgItem(IDC_STATIC_ERROR_INFO))->SetWindowText(strErrorInfo.GetBuffer(0));
+		
+		//隐藏备份界面
+		((CEdit*)GetDlgItem(IDC_EDIT_LICENSE_BACK_PATH))->ShowWindow(SW_HIDE); 
+		
+		(CStatic*)GetDlgItem(IDC_STATIC_HAND_LICENSE_BACK)->ShowWindow(SW_HIDE);
+		(CStatic*)GetDlgItem(IDC_STATIC_LICENSE_BACKINFO)->ShowWindow(SW_HIDE);
+		(CStatic*)GetDlgItem(IDC_STATIC_LICENSE_BACK_TIP)->ShowWindow(SW_HIDE);
+		(CStatic*)GetDlgItem(IDC_STATIC_LICENSE_BACK_INFO2)->ShowWindow(SW_HIDE);
+		
+		GetDlgItem(IDC_BUTTON_BROWSE_BACK_PATH)->ShowWindow(SW_HIDE);	
+		GetDlgItem(IDC_BUTTON_LICENSE_BACK)->ShowWindow(SW_HIDE);
+		
+		//显示恢复界面	
+		((CEdit*)GetDlgItem(IDC_EDIT_LICENSE_RESTORE_PATH))->ShowWindow(SW_SHOW); 
+		
+		(CStatic*)GetDlgItem(IDC_STATIC_HAND_LICENSE_RESOTRE)->ShowWindow(SW_SHOW);
+		(CStatic*)GetDlgItem(IDC_STATIC_LICENSE_RESTOREINFO)->ShowWindow(SW_SHOW);
+		(CStatic*)GetDlgItem(IDC_STATIC_LICENSE_RESTORE_TIP)->ShowWindow(SW_SHOW);
+		(CStatic*)GetDlgItem(IDC_STATIC_LICENSE_RESTORE_INFO2)->ShowWindow(SW_SHOW);
+		
+		GetDlgItem(IDC_BUTTON_BROWSE_RESTORE_PATH)->ShowWindow(SW_SHOW);	
+		GetDlgItem(IDC_BUTTON_LICENSE_RESTORE)->ShowWindow(SW_SHOW);
+
 	}else
 	{
 		//未注册
@@ -130,7 +181,30 @@ BOOL CLicenseDlg::UpdateDialog()
 		(CStatic*)GetDlgItem(IDC_STATIC_ENTTIME_CONTENT)->ShowWindow(SW_HIDE);
 		(CStatic*)GetDlgItem(IDC_STATIC_BEGINTIME)->ShowWindow(SW_HIDE);
 		(CStatic*)GetDlgItem(IDC_STATIC_ENDTIME)->ShowWindow(SW_HIDE);
-		(CStatic*)GetDlgItem(IDC_STATIC_ERROR_INFO)->ShowWindow(SW_HIDE);	
+		(CStatic*)GetDlgItem(IDC_STATIC_ERROR_INFO)->ShowWindow(SW_HIDE);
+		
+		//隐藏备份界面
+		((CEdit*)GetDlgItem(IDC_EDIT_LICENSE_BACK_PATH))->ShowWindow(SW_HIDE); 
+		
+		(CStatic*)GetDlgItem(IDC_STATIC_HAND_LICENSE_BACK)->ShowWindow(SW_HIDE);
+		(CStatic*)GetDlgItem(IDC_STATIC_LICENSE_BACKINFO)->ShowWindow(SW_HIDE);
+		(CStatic*)GetDlgItem(IDC_STATIC_LICENSE_BACK_TIP)->ShowWindow(SW_HIDE);
+		(CStatic*)GetDlgItem(IDC_STATIC_LICENSE_BACK_INFO2)->ShowWindow(SW_HIDE);
+		
+		GetDlgItem(IDC_BUTTON_BROWSE_BACK_PATH)->ShowWindow(SW_HIDE);	
+		GetDlgItem(IDC_BUTTON_LICENSE_BACK)->ShowWindow(SW_HIDE);
+			
+		//显示恢复界面	
+		((CEdit*)GetDlgItem(IDC_EDIT_LICENSE_RESTORE_PATH))->ShowWindow(SW_SHOW); 
+		
+		(CStatic*)GetDlgItem(IDC_STATIC_HAND_LICENSE_RESOTRE)->ShowWindow(SW_SHOW);
+		(CStatic*)GetDlgItem(IDC_STATIC_LICENSE_RESTOREINFO)->ShowWindow(SW_SHOW);
+		(CStatic*)GetDlgItem(IDC_STATIC_LICENSE_RESTORE_TIP)->ShowWindow(SW_SHOW);
+		(CStatic*)GetDlgItem(IDC_STATIC_LICENSE_RESTORE_INFO2)->ShowWindow(SW_SHOW);
+		
+		GetDlgItem(IDC_BUTTON_BROWSE_RESTORE_PATH)->ShowWindow(SW_SHOW);	
+		GetDlgItem(IDC_BUTTON_LICENSE_RESTORE)->ShowWindow(SW_SHOW);
+
 	}
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -201,4 +275,64 @@ HBRUSH CLicenseDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 	// TODO: Return a different brush if the default is not desired
 	return hbr;
+}
+
+void CLicenseDlg::OnButtonLicenseBack() 
+{
+	// TODO: Add your control notification handler code here
+	//检查是否输入了正确的路径
+	CString strPath;
+	GetDlgItemText(IDC_EDIT_LICENSE_BACK_PATH, strPath);
+	if (strPath.GetLength() == 0)
+	{
+		MessageBox("请选择license路径!","license备份",MB_ICONWARNING);
+		return ;
+	}
+
+	BOOL bRet = m_licAgent.BackLicense(strPath.GetBuffer(0));
+	
+
+	
+}
+
+#define FITER_LIC		TEXT("License Files (.lic)|*.lic|")
+#define LICENSE_EXT		".lic"
+void CLicenseDlg::OnButtonBrowseBackPath() 
+{
+	// TODO: Add your control notification handler code here
+	char szPath[MAX_PATH] = {0};
+	
+	if( sloCommAgent::DoFileDialog(FALSE, szPath, FITER_LIC) )
+	{
+		strcat(szPath, LICENSE_EXT);
+		SetDlgItemText(IDC_EDIT_LICENSE_BACK_PATH, szPath);
+	}
+}
+
+void CLicenseDlg::OnButtonBrowseRestorePath() 
+{
+	// TODO: Add your control notification handler code here
+	char szPath[MAX_PATH] = {0};
+	
+	if( sloCommAgent::DoFileDialog(TRUE, szPath, FITER_LIC) )
+	{
+		SetDlgItemText(IDC_EDIT_LICENSE_BACK_PATH, szPath);
+	}
+}
+
+void CLicenseDlg::OnButtonLicenseRestore() 
+{
+	// TODO: Add your control notification handler code here
+	//检查是否输入了正确的路径
+	CString strPath;
+	GetDlgItemText(IDC_EDIT_LICENSE_BACK_PATH, strPath);
+	if (strPath.GetLength() == 0)
+	{
+		MessageBox("请选择license路径!","license恢复",MB_ICONWARNING);
+		return ;
+	}
+	
+	BOOL bRet = m_licAgent.RestoreLicense(strPath.GetBuffer(0));
+	
+
 }

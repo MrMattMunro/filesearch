@@ -22,6 +22,9 @@ public:
 
 	bool IsEmailAddr(char* str,char* error);
 
+	BOOL BackLicense(char* szBackPath);
+	BOOL RestoreLicense(char* szResotrePath);	
+
 private:
 	void SetLicenseInfo(char* szOrderNo, char* szEmail);
 	int	 AddLicenseRec();

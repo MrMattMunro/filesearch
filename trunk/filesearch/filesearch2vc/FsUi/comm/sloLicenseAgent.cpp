@@ -390,3 +390,18 @@ bool sloLicenseAgent::IsEmailAddr(char* str,char* error)
 //		strcpy(error2,"这是一个正确的邮箱地址");
 		return true;
 }
+
+BOOL sloLicenseAgent::BackLicense(char* szBackPath)
+{
+	//拷贝license文件到备份目录
+	//获取
+	//copyfile
+	return TRUE;
+}
+
+BOOL sloLicenseAgent::RestoreLicense(char* szResotrePath)
+{
+	//拷贝备份目录license文件到安装目录
+	//copyfile
+	return TRUE;	
+}
