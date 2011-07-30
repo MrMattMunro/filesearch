@@ -1151,7 +1151,7 @@ bool CDelayedDirectoryChangeHandler::NotifyClientOfFileChange(CDirChangeNotifica
 // 			}			
 // 		}	
 			
-		if (true == ExcludeSearchNotification(pNot->m_szFileName1) )
+		if (true == ExcludeSearchNotification(pNot->m_szFileName1, (pNot->m_eFunctionToDispatch == CDirChangeNotification::eOn_FileAdded)) )
 		{
 			return false;
 		}else
@@ -1288,11 +1288,11 @@ bool CDelayedDirectoryChangeHandler::ExcludeThisNotification(LPCTSTR szFileName)
 	
 }
 
-bool CDelayedDirectoryChangeHandler::ExcludeSearchNotification(LPCTSTR szFileName)
+bool CDelayedDirectoryChangeHandler::ExcludeSearchNotification(LPCTSTR szFileName, BOOL bAdd/* = FALSE*/)
 {
 	ASSERT( szFileName );
 	
-	return g_xmlFilterAgent.Filters((char*)szFileName);
+	return g_xmlFilterAgent.Filters((char*)szFileName, bAdd);
 }
 
 void CDelayedDirectoryChangeHandler::DispatchNotificationFunction(CDirChangeNotification * pNotification)
