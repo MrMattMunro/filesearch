@@ -61,6 +61,10 @@ using namespace std;
 #include "Singleton.h"
 #include "log.h"
 
+
+#include "Shlwapi.h"
+#pragma comment(lib, "Shlwapi.lib")
+
 //////////////////////////////////////////////////////////////////////////
 #include "comm.h"
 #include "sloCommAgent.h"
