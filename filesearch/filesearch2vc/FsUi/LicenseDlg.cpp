@@ -289,10 +289,28 @@ void CLicenseDlg::OnButtonLicenseBack()
 		return ;
 	}
 
-	BOOL bRet = m_licAgent.BackLicense(strPath.GetBuffer(0));
-	
+	//检查备份文件是否存在
+	if (PathFileExists(strPath.GetBuffer(0)))
+	{
+		int nRet = MessageBox("文件已存在，是否覆盖?","license备份",MB_YESNO| MB_ICONQUESTION);
+		if (nRet == 7)
+		{
+			//选择否
+			return ;
+		}
+	}
 
-	
+	char szMsg[MAX_PATH*4] = {0};
+	int nRet = m_licAgent.BackLicense(strPath.GetBuffer(0));
+	if (nRet != 0)
+	{
+		sprintf(szMsg, "备份成功!\r\n备份目录：%s",strPath.GetBuffer(0));
+		MessageBox(szMsg,"license备份", MB_ICONINFORMATION);
+	}else
+	{
+		sprintf(szMsg, "备份失败!\r\n错误码：%d",nRet);
+		MessageBox(szMsg,"license备份", MB_ICONERROR);	
+	}
 }
 
 #define FITER_LIC		TEXT("License Files (.lic)|*.lic|")
@@ -332,7 +350,16 @@ void CLicenseDlg::OnButtonLicenseRestore()
 		return ;
 	}
 	
-	BOOL bRet = m_licAgent.RestoreLicense(strPath.GetBuffer(0));
-	
+	char szMsg[MAX_PATH*4] = {0};
+	int nRet = m_licAgent.RestoreLicense(strPath.GetBuffer(0));
+	if (nRet != 0)
+	{
+		sprintf(szMsg, "恢复成功!\r\n");
+		MessageBox(szMsg,"license恢复", MB_ICONINFORMATION);
+	}else
+	{
+		sprintf(szMsg, "恢复失败!\r\n错误码：%d",nRet);
+		MessageBox(szMsg,"license恢复", MB_ICONERROR);	
+	}	
 
 }

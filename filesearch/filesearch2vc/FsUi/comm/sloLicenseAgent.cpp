@@ -391,17 +391,46 @@ bool sloLicenseAgent::IsEmailAddr(char* str,char* error)
 		return true;
 }
 
-BOOL sloLicenseAgent::BackLicense(char* szBackPath)
+int sloLicenseAgent::BackLicense(char* szBackPath)
 {
-	//拷贝license文件到备份目录
-	//获取
-	//copyfile
-	return TRUE;
+	int nRet = 0;
+	do 
+	{
+		//拷贝license文件到备份目录
+		//获取
+		//copyfile
+		if (strlen(m_szOldLicBatPath) == 0)
+		{
+			//生成license文件
+			if(!GetLicensePath())
+			{
+				nRet = 1;
+				break;
+			}
+		}
+		if (!CopyFile(m_szOldLicBatPath,szBackPath,FALSE))
+		{
+			nRet = GetLastError();
+			break;
+		}
+	} while (0);
+
+	return nRet;
 }
 
-BOOL sloLicenseAgent::RestoreLicense(char* szResotrePath)
+int sloLicenseAgent::RestoreLicense(char* szResotrePath)
 {
-	//拷贝备份目录license文件到安装目录
-	//copyfile
-	return TRUE;	
+	int nRet = 0;
+	do 
+	{
+		//拷贝备份目录license文件到安装目录
+		//copyfile
+		if (!CopyFile(szResotrePath, m_szOldLicBatPath,FALSE))
+		{
+			nRet = GetLastError();
+			break;
+		}
+	}while(0);
+
+	return nRet;	
 }
