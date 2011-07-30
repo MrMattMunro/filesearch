@@ -274,7 +274,7 @@ protected:
 	bool IncludeThisNotification(LPCTSTR szFileName);	//	based on file name.
 	bool ExcludeThisNotification(LPCTSTR szFileName);	//	Allows us to filter notifications
 
-	bool ExcludeSearchNotification(LPCTSTR szFileName);	//	filter tool opt file
+	bool ExcludeSearchNotification(LPCTSTR szFileName, BOOL bAdd = FALSE);	//	filter tool opt file
 
 	CDirChangeNotification * GetNotificationObject();
 	void DisposeOfNotification(CDirChangeNotification * pNotification);

@@ -191,13 +191,14 @@ int slXmlAgent::LoadDB()
 }
 
 #define ALL_FILE_TYPES		"word,excel,ppt,pdf,txt,html"
+#define ADD_FILE_TYPES		"word,excel,ppt,pdf"
 //false 记录
 //true  过滤掉该记录，不记录
 //过滤规则:
 //如果该文件在索引目录下，则比较文件类型，符合，则记录，否则，不记录
 //如果该文件不再索引目录下，则比较文件类型（索引文件类型），符合，则记录，否则，不记录
 //需要建立索引文件类型库
-bool slXmlAgent::Filters(char* pszFullPath)
+bool slXmlAgent::Filters(char* pszFullPath, BOOL bAdd /*= FALSE*/)
 {
 	//获取文件路径，和后缀名
 	char ext[_MAX_EXT];
@@ -226,7 +227,12 @@ bool slXmlAgent::Filters(char* pszFullPath)
 	std::string strExts = m_searcherList[i].szExts;
 	if (!bInSearcher)
 	{
-		strExts = m_filterAgent.GetAllExts();
+		//最近文档,最近修改的记录 新建的状态下，只记录  office和pdf
+		if (bAdd)
+		{
+			strExts = m_filterAgent.GetExtsFromTypes(ADD_FILE_TYPES);
+		}else
+			strExts = m_filterAgent.GetAllExts();
 	}
 
 	//根据文档类型获取过滤后缀名库
@@ -234,7 +240,6 @@ bool slXmlAgent::Filters(char* pszFullPath)
 
 	if(IncludeThisNotification(ext))
 		return false;
-
 
 	return true;
 }

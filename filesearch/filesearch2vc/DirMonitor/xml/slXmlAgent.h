@@ -26,7 +26,7 @@ public:
 
 	std::string GetXmlPath();
 
-	bool Filters(char* pszFullPath);
+	bool Filters(char* pszFullPath, BOOL bAdd = FALSE);
 
 	string GetDbNameFromPath(char* szFileName);
 
