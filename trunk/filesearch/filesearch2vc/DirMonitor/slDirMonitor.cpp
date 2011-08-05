@@ -7,7 +7,7 @@
 
 //default filters
 #define INCLUDE_FILTERS_STRING	""
-#define EXCLUDE_FILTERS_STRING	"*\\SYSTEM VOLUME INFORMATION\\*;*\\WINDOWS\\*;*\\WINNT\\*;*\\RECYCLER\\*;*\\LOCAL SETTINGS\\*;*\\LOCALS~1\\*;*\\APPLICATION DATA\\*;*\\TEMPLATES\\*;*\\COOKIES\\*;*\\RECYCLED\\*;*\\PROGRAM FILES\\360\\*;*\\PROGRAM FILES\\FOXMAIL\\*;*\\THUNDER NETWORK\\THUNDER\\*;*\\TENCENT\\QQ\*;*\\360\\360SE3\\*;"
+#define EXCLUDE_FILTERS_STRING	"*\\SYSTEM VOLUME INFORMATION\\*;*\\WINDOWS\\*;*\\WINNT\\*;*\\RECYCLER\\*;*\\LOCAL SETTINGS\\*;*\\LOCALS~1\\*;*\\APPLICATION DATA\\*;*\\TEMPLATES\\*;*\\COOKIES\\*;*\\PROGRAM FILES\\*;*\\RECYCLED\\*;*\\PROGRAM FILES\\360\\*;*\\PROGRAM FILES\\FOXMAIL\\*;*\\THUNDER NETWORK\\THUNDER\\*;*\\TENCENT\\QQ\*;*\\360\\360SE3\\*;*\\SLFILE\\TOMCAT\\*;"
 
 
 CDirectoryChangeWatcher			m_DirWatcher;
@@ -38,7 +38,7 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 				GetSystemDirectory(szProcName, MAX_PATH);
 				sprintf(szLogPath,"%s\\DirMonitor.log", szProcName);
 						
-				log.SetFile(szLogPath,true);
+				log.SetFile(szLogPath, false);
 				log.SetLevel(100);
 				log.SetMode(Log::ToFile );	
 			}
@@ -134,6 +134,10 @@ DWORD __stdcall Monitor_Start_Dir(char* pszDirPath, DWORD dwLen)
 	DWORD dwWatch = 0;
 	CString	m_strDirectoryToMonitor(pszDirPath);
 
+	g_xmlFilterAgent.m_filterAgent.Init();
+	CString	strExcludeFilter(EXCLUDE_FILTERS_STRING);
+	strExcludeFilter += g_xmlFilterAgent.m_filterAgent.m_szExcludes;
+
 	DWORD dwChangeFilter = FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_LAST_WRITE;;
 	BOOL bWatchSubDir = TRUE;
 	
@@ -147,7 +151,7 @@ DWORD __stdcall Monitor_Start_Dir(char* pszDirPath, DWORD dwLen)
 		pHandler,
 		bWatchSubDir,
 		m_strIncludeFilter1,
-		EXCLUDE_FILTERS_STRING)) )
+		strExcludeFilter)) )
 	{
 		dwRet = 1;
 	}
