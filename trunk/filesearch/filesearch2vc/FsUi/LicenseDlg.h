@@ -7,9 +7,10 @@
 // LicenseDlg.h : header file
 //
 #include "sloLicenseAgent.h"
+
+
 /////////////////////////////////////////////////////////////////////////////
 // CLicenseDlg dialog
-
 class CLicenseDlg :public  CXTPPropertyPage/*CDialog*/
 {
 // Construction
@@ -21,7 +22,10 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CLicenseDlg)
 	enum { IDD = IDD_DIALOG_LICENSE };
-		// NOTE: the ClassWizard will add data members here
+	CXTPButton	m_btnBack;
+	CXTPButton	m_btnRestore;
+	CXTPButton	m_btnFolderRestore;
+	CXTPButton	m_btnFolderBack;
 	//}}AFX_DATA
 
 
@@ -48,6 +52,8 @@ protected:
 	afx_msg void OnButtonLicenseRestore();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+
+
 };
 
 //{{AFX_INSERT_LOCATION}}

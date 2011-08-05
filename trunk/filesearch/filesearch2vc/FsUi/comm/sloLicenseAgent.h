@@ -44,6 +44,9 @@ public:
 	char m_szServerLicBatPath[MAX_PATH];
 	char m_szServerLicTxtPath[MAX_PATH];
 
+	char m_szUpdateProPath[MAX_PATH];
+
+
 	BOOL m_bReg;
 	BOOL m_bDown;
 };

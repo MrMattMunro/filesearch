@@ -148,6 +148,12 @@ BOOL CFastSearchDlg::OnInitDialog()
 	m_hIcon=AfxGetApp()->LoadIcon(IDI_ICON_FIND);
 	SetIcon(m_hIcon,TRUE); //设置为大图标
 
+	
+//    m_FilenameEdit.SubclassDlgItem(IDC_EDIT_SEARCH_KEY, this);
+	
+//	CString strData = "test";
+//	m_FilenameEdit.SetFilename(strData);
+
 	// TODO: Add extra initialization here
 	m_keyEdit.SetIcon(IDI_ICON_FAST_SEARCH);
 

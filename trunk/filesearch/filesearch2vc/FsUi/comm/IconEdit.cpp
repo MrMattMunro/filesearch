@@ -420,15 +420,19 @@ void CIconWnd::OnLButtonDown( UINT nFlags, CPoint point )
 	ClientToScreen(&point);
 	CMenu popupmenu;
 	popupmenu.CreatePopupMenu();
-	popupmenu.AppendMenu(MF_STRING,1,"切换WEB查询");
+	popupmenu.AppendMenu(MF_STRING,1,"更多...");
 //	popupmenu.AppendMenu(MF_STRING,2,"显示推荐企业");
 	int cmd=popupmenu.TrackPopupMenu(TPM_RIGHTALIGN | TPM_LEFTBUTTON |  TPM_RETURNCMD,point.x,point.y,this);
 	switch(cmd)
 	{
 	case 1:
+		//处理菜单【更多...】消息 http://localhost:6666/slfile/load
+		ShellExecute(NULL, "open", "http://localhost:6666/slfile/load", NULL, NULL,SW_SHOWNORMAL); 
+
 		ShowWindow(SW_SHOWNORMAL);//显示主窗口//SetWindowPos(&wndTopMost,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE);//使窗口总是在最前面
 		break;
 	case 2:
+		//MessageBox("2");
 		//PostMessage(WM_CLOSE);
 		break;
 	}

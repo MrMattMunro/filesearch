@@ -15,6 +15,7 @@
 #include <map>
 #include "TTComboBox.h"
 #include "IconEdit.h"
+#include "FilenameEdit.h"
 
 typedef struct _GroupInfo
 {
@@ -91,6 +92,9 @@ protected:
 	LRESULT OnTaskPanelNotify(WPARAM wParam, LPARAM lParam);
 	DECLARE_MESSAGE_MAP()
 	afx_msg void OnProgressChange(WPARAM wParam, LPARAM lParam);
+
+private:
+    CFilenameEdit   m_FilenameEdit;
 };
 
 //{{AFX_INSERT_LOCATION}}

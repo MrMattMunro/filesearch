@@ -21,10 +21,11 @@ static char THIS_FILE[]=__FILE__;
 sloLicenseAgent::sloLicenseAgent()
 {
 	memset(&m_LicInfo, NULL, sizeof(LicenseInfo));
+	memset(m_szUpdateProPath, NULL, MAX_PATH);
 
 	ClearPath();
 		
-		m_bReg = FALSE;
+	m_bReg = FALSE;
 	m_bDown = FALSE;
 }
 
@@ -221,7 +222,8 @@ int sloLicenseAgent::BuildLicenseFile()
 // FTP:  124.42.19.247
 // 用户名:  hd9002427
 // 密码:  ssssss
-#define FTP_SERVER	"124.42.19.247"
+// 密码从配置文件中获取update.properties，字段ip
+#define FTP_SERVER	"hdd00.ourhost.cn"
 #define FTP_USER	"hd9002427"
 #define FTP_PWD		"ssssss"
 #define CUR_FOLDER	"//licences"
@@ -232,14 +234,20 @@ int sloLicenseAgent::UpLoadLicFiles()
 	myftpcomm ftp;	
 	do 
 	{
+		//获取服务器FTP的IP
+		char szIP[MAX_PATH] = {0};
+		sloCommAgent::GetPropertyfileString("ip", FTP_SERVER, szIP, MAX_PATH, m_szUpdateProPath);
+		flog.Print(LL_DEBUG_INFO, "[info]UpLoadLicFiles serverip(%s)\r\n",szIP);
+
 		//连接ftp
-		nRet = ftp.GetFtpConnection(FTP_SERVER, FTP_USER, FTP_PWD);
+		nRet = ftp.GetFtpConnection(szIP, FTP_USER, FTP_PWD);
 		if (nRet != 0)
 			break;
 	
 		//设置当前目录
 		if(!ftp.SetCurrentDirectory(CUR_FOLDER))
 		{
+			flog.Print(LL_DEBUG_INFO, "[error]UpLoadLicFiles SetCurrentDirectory(%s) failed!\r\n",CUR_FOLDER);
 			nRet = -1;
 			break;
 		}
@@ -247,6 +255,7 @@ int sloLicenseAgent::UpLoadLicFiles()
 		//创建目录,目录存在则创建失败
 		if(!ftp.CreateDirectory(m_LicInfo.szStartDate))
 		{
+			flog.Print(LL_DEBUG_INFO, "[error]UpLoadLicFiles CreateDirectory(%s) failed!\r\n",m_LicInfo.szStartDate);
 			nRet = 0/*-2*/;
 //			break;
 		}
@@ -254,6 +263,7 @@ int sloLicenseAgent::UpLoadLicFiles()
 		//上传bat文件
 		if(!ftp.PutFile(m_szLicBatPath, m_szServerLicBatPath))
 		{
+			flog.Print(LL_DEBUG_INFO, "[error]UpLoadLicFiles PutFile(%s:%s) failed!\r\n",m_szLicBatPath, m_szServerLicBatPath);			
 			nRet = -3;
 			break;
 		}
@@ -261,6 +271,8 @@ int sloLicenseAgent::UpLoadLicFiles()
 		//上传txt文件
 		if(!ftp.PutFile(m_szLicTxtPath, m_szServerLicTxtPath))
 		{
+			flog.Print(LL_DEBUG_INFO, "[error]UpLoadLicFiles PutFile(%s:%s) failed!\r\n",m_szLicTxtPath, m_szServerLicTxtPath);			
+
 			nRet = -3;
 			break;
 		}
@@ -273,7 +285,8 @@ int sloLicenseAgent::UpLoadLicFiles()
 	return nRet;
 }
 
-#define  LICENSE_NAME "licence"
+#define  LICENSE_NAME		"licence"
+#define  UPDATE_PRO_NAME	"tomcat\\webapps\\slfile\\WEB-INF\\classes\\com\\web\\searchlocal\\properties\\update.properties"
 
 BOOL sloLicenseAgent::GetLicensePath()
 {
@@ -297,7 +310,9 @@ BOOL sloLicenseAgent::GetLicensePath()
 	
 	sprintf(m_szServerLicBatPath,"%s//%s//%s_%s.dat",CUR_FOLDER,m_LicInfo.szStartDate, LICENSE_NAME,m_LicInfo.szOrderNo);
 	sprintf(m_szServerLicTxtPath,"%s//%s//%s_%s.txt",CUR_FOLDER,m_LicInfo.szStartDate, LICENSE_NAME,m_LicInfo.szOrderNo);
-	
+
+	sprintf(m_szUpdateProPath,"%s%s%s",drive, dir,UPDATE_PRO_NAME);	
+
 	return TRUE;
 	
 }
@@ -391,9 +406,16 @@ bool sloLicenseAgent::IsEmailAddr(char* str,char* error)
 		return true;
 }
 
+//{ACBC1837-15EC-4ea8-BD4F-0AAF3FD526F2}
+//返回值
+//0  成功
+//-1 获取license路径失败
+//
+#define BACK_LICENSE_GUID	"ACBC1837-15EC-4ea8-BD4F-0AAF3FD526F2"
 int sloLicenseAgent::BackLicense(char* szBackPath)
 {
 	int nRet = 0;
+	char *szLicContent = NULL;
 	do 
 	{
 		//拷贝license文件到备份目录
@@ -404,16 +426,69 @@ int sloLicenseAgent::BackLicense(char* szBackPath)
 			//生成license文件
 			if(!GetLicensePath())
 			{
-				nRet = 1;
+				nRet = -1;
 				break;
 			}
 		}
-		if (!CopyFile(m_szOldLicBatPath,szBackPath,FALSE))
+
+		//获取t_license表中的记录,生成license备份文件头
+		License_Back_Head lichead;
+		strcpy(lichead.szGUID, BACK_LICENSE_GUID);
+		memcpy((void*)&lichead.licinfo, &m_LicInfo, sizeof(LicenseInfo));
+		
+		//创建license备份文件
+		//先写文件头
+		FILE *fp = fopen(szBackPath, "w+");
+		if (!fp)
 		{
-			nRet = GetLastError();
+			nRet = -2;
 			break;
 		}
+		
+		//写文件头
+		int nwrite = fwrite(&lichead, sizeof(char), sizeof(License_Back_Head), fp);
+		if (nwrite != sizeof(License_Back_Head))
+		{
+			nRet = -3;
+			break;
+		}
+
+		//写文件体
+		FILE *fporg = fopen(m_szOldLicBatPath, "r+");
+
+		fseek(fporg, 0, SEEK_END);
+		int nsize = ftell(fporg);
+		fseek(fporg, 0, SEEK_SET);
+
+		szLicContent = new char[nsize + 1];
+		memset(szLicContent, NULL, nsize+1);
+
+		int nread = fread(szLicContent, sizeof(char), nsize, fporg);
+		if (nread != nsize)
+		{
+			nRet = -4;
+			break;
+		}
+
+		//写备份文件体
+		nwrite = fwrite(szLicContent, sizeof(char), nsize, fp);
+		if (nwrite != nsize)
+		{
+			nRet = -5;
+			break;
+		}
+
+		//关闭句柄
+		fclose(fp);
+		fclose(fporg);
+
 	} while (0);
+
+	if (szLicContent)
+	{
+		delete szLicContent;
+		szLicContent = NULL;
+	}
 
 	return nRet;
 }
@@ -421,16 +496,54 @@ int sloLicenseAgent::BackLicense(char* szBackPath)
 int sloLicenseAgent::RestoreLicense(char* szResotrePath)
 {
 	int nRet = 0;
+	char *szLicContent = NULL;
 	do 
 	{
-		//拷贝备份目录license文件到安装目录
-		//copyfile
-		if (!CopyFile(szResotrePath, m_szOldLicBatPath,FALSE))
+		//读取文件头
+		FILE *fp = fopen(szResotrePath, "r+");
+		
+		fseek(fp, 0, SEEK_END);
+		int nsize = ftell(fp);
+		fseek(fp, 0, SEEK_SET);
+		
+		szLicContent = new char[nsize + 1];
+		memset(szLicContent, NULL, nsize+1);
+		
+		int nread = fread(szLicContent, sizeof(char), nsize, fp);
+		if (nread != nsize)
 		{
-			nRet = GetLastError();
+			nRet = -1;
 			break;
 		}
+		fclose(fp);
+
+		//校验文件头
+		char szGUID[37] = {0};
+		memcpy(szGUID, szLicContent, 36);
+		if(memcmp(szGUID, BACK_LICENSE_GUID, 36) != 0)
+		{
+			nRet = 1;
+			break;
+		}
+		
+		//创建license文件
+		FILE *fporg = fopen(m_szOldLicBatPath, "w+");
+		int nwrite = fwrite(szLicContent+36, sizeof(char), nsize - 36, fporg);
+		if (nwrite != (nsize - 36))
+		{
+			nRet = -2;
+			break;
+		}
+
+		fclose(fporg);
+
 	}while(0);
+
+	if (szLicContent)
+	{
+		delete szLicContent;
+		szLicContent = NULL;
+	}
 
 	return nRet;	
 }
