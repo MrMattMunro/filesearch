@@ -28,8 +28,11 @@ void CLicenseDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CLicenseDlg)
+	DDX_Control(pDX, IDC_BUTTON_LICENSE_BACK, m_btnBack);
+	DDX_Control(pDX, IDC_BUTTON_LICENSE_RESTORE, m_btnRestore);
+	DDX_Control(pDX, IDC_BUTTON_BROWSE_RESTORE_PATH, m_btnFolderRestore);
+	DDX_Control(pDX, IDC_BUTTON_BROWSE_BACK_PATH, m_btnFolderBack);
 	DDX_Control(pDX, IDC_BUTTON_REG, m_btnReg);
-		// NOTE: the ClassWizard will add DDX and DDV calls here
 	//}}AFX_DATA_MAP
 }
 
@@ -67,6 +70,14 @@ BOOL CLicenseDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	m_btnReg.SetBitmap(0, IDB_BITMAP_REGISTER);
+	m_btnBack.SetBitmap(0, IDB_BITMAP_BACK);
+	m_btnRestore.SetBitmap(0, IDB_BITMAP_RESTORE);
+
+	m_btnFolderRestore.SetBitmap(0, IDB_BITMAP_FOLDER);
+	m_btnFolderRestore.SetFlatStyle(TRUE);
+
+	m_btnFolderBack.SetBitmap(0, IDB_BITMAP_FOLDER2);
+	m_btnFolderBack.SetFlatStyle(TRUE);
 
 	// TODO: Add extra initialization here
 	SetDlgItemText(IDC_STATIC_LICENSE_INFO, g_lag.LoadString("label.license"));
@@ -76,8 +87,18 @@ BOOL CLicenseDlg::OnInitDialog()
 	SetDlgItemText(IDC_STATIC_BEGINTIME,  g_lag.LoadString("label.regtime"));
 	SetDlgItemText(IDC_STATIC_ENDTIME,  g_lag.LoadString("label.endtime"));
 
+	SetDlgItemText(IDC_STATIC_LICENSE_RESTORE_INFO2,  g_lag.LoadString("label.licrestoreinfo"));
+	SetDlgItemText(IDC_STATIC_LICENSE_RESTORE_TIP,  g_lag.LoadString("label.licrestorepath"));
+	SetDlgItemText(IDC_STATIC_LICENSE_BACK_INFO2,  g_lag.LoadString("label.licrebackinfo"));
+	SetDlgItemText(IDC_STATIC_LICENSE_BACK_TIP,  g_lag.LoadString("label.licbackpath"));
+
+	SetDlgItemText(IDC_STATIC_LICENSE_BACKINFO,  g_lag.LoadString("title.licback"));
+	SetDlgItemText(IDC_STATIC_LICENSE_RESTOREINFO,  g_lag.LoadString("title.licrestore"));
+
 	SetDlgItemText(IDC_BUTTON_REG,  g_lag.LoadString("button.register"));
 
+	SetDlgItemText(IDC_BUTTON_LICENSE_RESTORE,  g_lag.LoadString("button.restore"));
+	SetDlgItemText(IDC_BUTTON_LICENSE_BACK,  g_lag.LoadString("button.back"));
 	//////////////////////////////////////////////////////////////////////////
 
 	m_licAgent.Init();
@@ -285,14 +306,14 @@ void CLicenseDlg::OnButtonLicenseBack()
 	GetDlgItemText(IDC_EDIT_LICENSE_BACK_PATH, strPath);
 	if (strPath.GetLength() == 0)
 	{
-		MessageBox("请选择license路径!","license备份",MB_ICONWARNING);
+		MessageBox(g_lag.LoadString("message.selectlicpath"), g_lag.LoadString("title.licback"),MB_ICONWARNING);
 		return ;
 	}
 
 	//检查备份文件是否存在
 	if (PathFileExists(strPath.GetBuffer(0)))
 	{
-		int nRet = MessageBox("文件已存在，是否覆盖?","license备份",MB_YESNO| MB_ICONQUESTION);
+		int nRet = MessageBox(g_lag.LoadString("message.bestrowlicpath"), g_lag.LoadString("title.licback"), MB_YESNO| MB_ICONQUESTION);
 		if (nRet == 7)
 		{
 			//选择否
@@ -302,14 +323,14 @@ void CLicenseDlg::OnButtonLicenseBack()
 
 	char szMsg[MAX_PATH*4] = {0};
 	int nRet = m_licAgent.BackLicense(strPath.GetBuffer(0));
-	if (nRet != 0)
+	if (nRet == 0)
 	{
-		sprintf(szMsg, "备份成功!\r\n备份目录：%s",strPath.GetBuffer(0));
-		MessageBox(szMsg,"license备份", MB_ICONINFORMATION);
+		sprintf(szMsg, "%s%s",g_lag.LoadString("message.licbacksucc"), strPath.GetBuffer(0));
+		MessageBox(szMsg, g_lag.LoadString("title.licback"), MB_ICONINFORMATION);
 	}else
 	{
-		sprintf(szMsg, "备份失败!\r\n错误码：%d",nRet);
-		MessageBox(szMsg,"license备份", MB_ICONERROR);	
+		sprintf(szMsg, "%s%d",g_lag.LoadString("message.licbackfail"), nRet);
+		MessageBox(szMsg, g_lag.LoadString("title.licback"), MB_ICONERROR);	
 	}
 }
 
@@ -334,7 +355,7 @@ void CLicenseDlg::OnButtonBrowseRestorePath()
 	
 	if( sloCommAgent::DoFileDialog(TRUE, szPath, FITER_LIC) )
 	{
-		SetDlgItemText(IDC_EDIT_LICENSE_BACK_PATH, szPath);
+		SetDlgItemText(IDC_EDIT_LICENSE_RESTORE_PATH, szPath);
 	}
 }
 
@@ -343,23 +364,23 @@ void CLicenseDlg::OnButtonLicenseRestore()
 	// TODO: Add your control notification handler code here
 	//检查是否输入了正确的路径
 	CString strPath;
-	GetDlgItemText(IDC_EDIT_LICENSE_BACK_PATH, strPath);
+	GetDlgItemText(IDC_EDIT_LICENSE_RESTORE_PATH, strPath);
 	if (strPath.GetLength() == 0)
 	{
-		MessageBox("请选择license路径!","license恢复",MB_ICONWARNING);
+		MessageBox(g_lag.LoadString("message.selectlicpath"), g_lag.LoadString("title.licrestore"), MB_ICONWARNING);
 		return ;
 	}
 	
 	char szMsg[MAX_PATH*4] = {0};
 	int nRet = m_licAgent.RestoreLicense(strPath.GetBuffer(0));
-	if (nRet != 0)
+	if (nRet == 0)
 	{
-		sprintf(szMsg, "恢复成功!\r\n");
-		MessageBox(szMsg,"license恢复", MB_ICONINFORMATION);
+		sprintf(szMsg, "%s\r\n", g_lag.LoadString("message.licrestoresucc"));
+		MessageBox(szMsg, g_lag.LoadString("title.licrestore"), MB_ICONINFORMATION);
 	}else
 	{
-		sprintf(szMsg, "恢复失败!\r\n错误码：%d",nRet);
-		MessageBox(szMsg,"license恢复", MB_ICONERROR);	
+		sprintf(szMsg, "%s%d",g_lag.LoadString("message.licrestorefail"), nRet);
+		MessageBox(szMsg, g_lag.LoadString("title.licrestore"), MB_ICONERROR);	
 	}	
 
 }

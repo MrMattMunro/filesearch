@@ -26,13 +26,21 @@ public:
 	std::string GetExtsFromTypes(char* szTypes);
 	std::string GetAllExts();
 	std::string GetFileTypeFromExt(char* szExt);
+
 protected:
 	void GetExtsFromFile(char* szKeyName, char* szType);
+	void GetExcludesFromFile(char* szKeyName);
+
 	BOOL GetProFilePath();
+
+public:
+	char m_szExcludes[4096];
+
 private:
 	BOOL m_bInit;
 	std::vector<Ext_Filters> m_exts;
 	char m_szpropertiesPath[MAX_PATH];
+
 };
 
 #endif // !defined(AFX_SLOFILTERAGENT_H__0E1985DA_A484_41DE_AD41_97CB551A74A8__INCLUDED_)

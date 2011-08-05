@@ -46,6 +46,12 @@ typedef struct _FastItem
 	char szType[MAX_PATH];	
 }FastItem,*LPFastItem;
 
+typedef struct _License_Back_Head 
+{
+	char szGUID[36];
+	LicenseInfo licinfo;
+}License_Back_Head,*LPLicense_Back_Head;
+
 #pragma pack(pop)
 
 #endif

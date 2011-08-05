@@ -21,8 +21,8 @@ static char THIS_FILE[]=__FILE__;
 sloFilterAgent::sloFilterAgent()
 {
 	m_bInit = FALSE;
-	memset(m_szpropertiesPath, NULL, MAX_PATH);
-
+	memset(m_szpropertiesPath, NULL, MAX_PATH);	
+	memset(m_szExcludes, NULL, 4096);	
 }
 
 sloFilterAgent::~sloFilterAgent()
@@ -48,6 +48,9 @@ void sloFilterAgent::Init()
 	GetExtsFromFile("exts_txt", "txt");
 	GetExtsFromFile("exts_html", "html");
 
+	//ªÒ»°excludeƒ⁄»›
+	GetExcludesFromFile("exclude");
+
 	m_bInit = TRUE;
 }
 
@@ -60,6 +63,12 @@ void sloFilterAgent::GetExtsFromFile(char* szKeyName, char* szType)
 	item.strType = szType;
 	item.strExts = szText;
 	m_exts.push_back(item);
+}
+
+void sloFilterAgent::GetExcludesFromFile(char* szKeyName)
+{
+	memset(m_szExcludes, NULL, 4096);
+	sloCommAgent::GetPropertyfileString(szKeyName, "", m_szExcludes, 4096, m_szpropertiesPath);
 }
 
 

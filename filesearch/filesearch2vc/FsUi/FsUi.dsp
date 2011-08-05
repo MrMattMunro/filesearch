@@ -346,6 +346,10 @@ SOURCE=.\res\AlphaFind.bmp
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\back16.bmp
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\Book2.ico
 # End Source File
 # Begin Source File
@@ -403,6 +407,10 @@ SOURCE=.\res\folder_open16.bmp
 # Begin Source File
 
 SOURCE=.\res\folder_open24.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\forward16.bmp
 # End Source File
 # Begin Source File
 
@@ -520,6 +528,14 @@ SOURCE=.\res\word.ico
 # Begin Group "utils"
 
 # PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\comm\FilenameEdit.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\FilenameEdit.h
+# End Source File
 # Begin Source File
 
 SOURCE=..\Utils\Thread.cpp
