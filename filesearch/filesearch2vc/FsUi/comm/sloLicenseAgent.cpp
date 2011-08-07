@@ -223,7 +223,7 @@ int sloLicenseAgent::BuildLicenseFile()
 // 用户名:  hd9002427
 // 密码:  ssssss
 // 密码从配置文件中获取update.properties，字段ip
-#define FTP_SERVER	"hdd00.ourhost.cn"
+#define FTP_SERVER	"hd9002427.ourhost.cn"
 #define FTP_USER	"hd9002427"
 #define FTP_PWD		"ssssss"
 #define CUR_FOLDER	"//licences"
@@ -242,7 +242,10 @@ int sloLicenseAgent::UpLoadLicFiles()
 		//连接ftp
 		nRet = ftp.GetFtpConnection(szIP, FTP_USER, FTP_PWD);
 		if (nRet != 0)
+		{
+			flog.Print(LL_DEBUG_INFO, "[error]UpLoadLicFiles GetFtpConnection failed!szIP=%s,GetLastError=0x%x\r\n",szIP, nRet);
 			break;
+		}
 	
 		//设置当前目录
 		if(!ftp.SetCurrentDirectory(CUR_FOLDER))
@@ -276,7 +279,7 @@ int sloLicenseAgent::UpLoadLicFiles()
 			nRet = -3;
 			break;
 		}
-
+		flog.Print(LL_DEBUG_INFO, "[info]UpLoadLicFiles serverip(%s) succ!\r\n",szIP);
 	} while (0);
 
 	//关闭连接

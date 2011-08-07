@@ -420,7 +420,7 @@ void CIconWnd::OnLButtonDown( UINT nFlags, CPoint point )
 	ClientToScreen(&point);
 	CMenu popupmenu;
 	popupmenu.CreatePopupMenu();
-	popupmenu.AppendMenu(MF_STRING,1,"更多...");
+	popupmenu.AppendMenu(MF_STRING,1,g_lag.LoadString("menu.moresearch"));
 //	popupmenu.AppendMenu(MF_STRING,2,"显示推荐企业");
 	int cmd=popupmenu.TrackPopupMenu(TPM_RIGHTALIGN | TPM_LEFTBUTTON |  TPM_RETURNCMD,point.x,point.y,this);
 	switch(cmd)

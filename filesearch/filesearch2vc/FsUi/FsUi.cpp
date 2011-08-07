@@ -82,7 +82,7 @@ BOOL CFsUiApp::InitInstance()
 	char szSystemPath[MAX_PATH] = {0};
 	GetSystemDirectory(szSystemPath, MAX_PATH);
 	char szLogPath[MAX_PATH] = {0};
-	sprintf(szLogPath, "%s\\fsui.log", szSystemPath);
+	sprintf(szLogPath, "%s\\sllogs\\fsui.log", szSystemPath);
 	flog.SetFile(szLogPath,true);
 	flog.SetLevel(100);
 	flog.SetMode(Log::ToFile );	
