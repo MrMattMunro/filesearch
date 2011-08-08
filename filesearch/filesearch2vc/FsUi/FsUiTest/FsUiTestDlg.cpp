@@ -431,6 +431,18 @@ void CFsUiTestDlg::OnButton5()
 void CFsUiTestDlg::OnButton10() 
 {
 	// TODO: Add your control notification handler code here
+
+	int i =800;
+	for (i; i < 1500; i++)
+	{
+		char szOut[MAX_PATH] = {0};
+		sprintf(szOut, "insert into t_recent_changeinfo(path, operflg,hasoper,systime,lastmodify) values('%d.doc', 2, 1, '2011-08-07 18:45:55', '2011-08-07 18:45:55');\r\n" ,i);
+		OutputDebugString(szOut);
+	}
+
+
+	return ;
+
 	CString strData;
 	GetDlgItemText(IDC_EDIT_MODIFY_ID, strData);
 

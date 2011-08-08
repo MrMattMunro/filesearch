@@ -76,7 +76,7 @@ BOOL CLicenseDlg::OnInitDialog()
 	m_btnFolderRestore.SetBitmap(0, IDB_BITMAP_FOLDER);
 	m_btnFolderRestore.SetFlatStyle(TRUE);
 
-	m_btnFolderBack.SetBitmap(0, IDB_BITMAP_FOLDER2);
+	m_btnFolderBack.SetBitmap(0, IDB_BITMAP_FOLDER);
 	m_btnFolderBack.SetFlatStyle(TRUE);
 
 	// TODO: Add extra initialization here
@@ -306,7 +306,7 @@ void CLicenseDlg::OnButtonLicenseBack()
 	GetDlgItemText(IDC_EDIT_LICENSE_BACK_PATH, strPath);
 	if (strPath.GetLength() == 0)
 	{
-		MessageBox(g_lag.LoadString("message.selectlicpath"), g_lag.LoadString("title.licback"),MB_ICONWARNING);
+		MessageBox(g_lag.LoadString("message.selectlicbackpath"), g_lag.LoadString("title.licback"),MB_ICONWARNING);
 		return ;
 	}
 
@@ -341,7 +341,7 @@ void CLicenseDlg::OnButtonBrowseBackPath()
 	// TODO: Add your control notification handler code here
 	char szPath[MAX_PATH] = {0};
 	
-	if( sloCommAgent::DoFileDialog(FALSE, szPath, FITER_LIC) )
+	if( sloCommAgent::DoFileDialog(FALSE, szPath, FITER_LIC, NULL, "slfile_license") )
 	{
 		strcat(szPath, LICENSE_EXT);
 		SetDlgItemText(IDC_EDIT_LICENSE_BACK_PATH, szPath);
@@ -367,7 +367,7 @@ void CLicenseDlg::OnButtonLicenseRestore()
 	GetDlgItemText(IDC_EDIT_LICENSE_RESTORE_PATH, strPath);
 	if (strPath.GetLength() == 0)
 	{
-		MessageBox(g_lag.LoadString("message.selectlicpath"), g_lag.LoadString("title.licrestore"), MB_ICONWARNING);
+		MessageBox(g_lag.LoadString("message.selectlicresorepath"), g_lag.LoadString("title.licrestore"), MB_ICONWARNING);
 		return ;
 	}
 	

@@ -56,10 +56,10 @@ string sloCommAgent::ConverSqlPath(string strPath)
 	return strData;
 }
 
-BOOL sloCommAgent::DoFileDialog(BOOL bOpenFileDialog, char *szPath, LPCTSTR lpszFilter,LPCTSTR lpszDefExt  )
+BOOL sloCommAgent::DoFileDialog(BOOL bOpenFileDialog, char *szPath, LPCTSTR lpszFilter,LPCTSTR lpszDefExt,LPCTSTR lpszFileName/* = NULL*/)
 {
 	CFileDialog hFileDlg(bOpenFileDialog,NULL ,
-		NULL,
+		lpszFileName,
 		OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST,	
 		//TEXT("Text Files (.txt)|*.txt|Excel Files (.xls)|*.xls"),
 		lpszFilter,
