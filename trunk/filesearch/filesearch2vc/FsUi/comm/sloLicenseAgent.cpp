@@ -130,7 +130,7 @@ BOOL sloLicenseAgent::EventLicense(char* szOrderNo, char* szEmail)
 		}
 
 		//注册完成，插入数据库
-		nRet = AddLicenseRec();
+		nRet = AddLicenseRec("0");
 		if (nRet != 0)
 		{
 			bRet = FALSE;
@@ -152,7 +152,7 @@ void sloLicenseAgent::SetLicenseInfo(char* szOrderNo, char* szEmail)
 	strcpy(m_LicInfo.szEndDate,sloCommAgent::GetCurTime(1));
 }
 
-int sloLicenseAgent::AddLicenseRec()
+int sloLicenseAgent::AddLicenseRec(char *szHasDownload)
 {
 	//
 	if (!m_pMySqlDB && !ConnectDB())
@@ -173,8 +173,8 @@ int sloLicenseAgent::AddLicenseRec()
 		}
 	}
 
-	std::string strQuerySQL = "insert into t_licence(orderno,email,hasdownload,startdate,enddate) values('%s','%s','0','%s','%s')";
-	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(),m_LicInfo.szOrderNo, m_LicInfo.szEmail, m_LicInfo.szStartDate, m_LicInfo.szEndDate);
+	std::string strQuerySQL = "insert into t_licence(orderno,email,hasdownload,startdate,enddate) values('%s','%s','%s','%s','%s')";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(),m_LicInfo.szOrderNo, m_LicInfo.szEmail, szHasDownload, m_LicInfo.szStartDate, m_LicInfo.szEndDate);
 	if (FAILED(hr))
 		return -1;
 	
@@ -502,8 +502,26 @@ int sloLicenseAgent::RestoreLicense(char* szResotrePath)
 	char *szLicContent = NULL;
 	do 
 	{
+
+		//获取
+		//copyfile
+		if (strlen(m_szOldLicBatPath) == 0)
+		{
+			//生成license文件
+			if(!GetLicensePath())
+			{
+				nRet = -1;
+				break;
+			}
+		}
+
 		//读取文件头
 		FILE *fp = fopen(szResotrePath, "r+");
+		if (!fp)
+		{
+			nRet = -2;
+			break;
+		}
 		
 		fseek(fp, 0, SEEK_END);
 		int nsize = ftell(fp);
@@ -515,26 +533,44 @@ int sloLicenseAgent::RestoreLicense(char* szResotrePath)
 		int nread = fread(szLicContent, sizeof(char), nsize, fp);
 		if (nread != nsize)
 		{
-			nRet = -1;
+			nRet = -3;
 			break;
 		}
 		fclose(fp);
 
+
+		//取文件头，写数据库
+		License_Back_Head lichead;
+		int nLicHeadLen = sizeof(License_Back_Head);
+		memset(&lichead, NULL, nLicHeadLen);
+		memcpy((void*)&lichead, szLicContent, nLicHeadLen);
+
 		//校验文件头
-		char szGUID[37] = {0};
-		memcpy(szGUID, szLicContent, 36);
-		if(memcmp(szGUID, BACK_LICENSE_GUID, 36) != 0)
+		if(memcmp(lichead.szGUID, BACK_LICENSE_GUID, 36) != 0)
 		{
 			nRet = 1;
 			break;
 		}
-		
+
+		//写t_license表中的记录
+		memcpy(&m_LicInfo, &lichead.licinfo, sizeof(LicenseInfo));
+		if(AddLicenseRec("1") != 0)
+		{
+			nRet = 2;
+			break;
+		}
+
 		//创建license文件
 		FILE *fporg = fopen(m_szOldLicBatPath, "w+");
-		int nwrite = fwrite(szLicContent+36, sizeof(char), nsize - 36, fporg);
-		if (nwrite != (nsize - 36))
+		if (!fporg)
 		{
-			nRet = -2;
+			nRet = -4;
+			break;
+		}
+		int nwrite = fwrite(szLicContent+nLicHeadLen, sizeof(char), nsize - nLicHeadLen, fporg);
+		if (nwrite != (nsize - nLicHeadLen))
+		{
+			nRet = -5;
 			break;
 		}
 

@@ -6,7 +6,8 @@
 #include "FastSearchDlg.h"
 #include "sltFastSearchThread.h"
 
-
+#include "shlwapi.h"
+#pragma comment(lib, "shlwapi.lib")
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -645,6 +646,14 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 		if (strGroupCaption.Find(TXT_NAME, 0) != -1)
 		{
 			strGroupName = TXT_NAME;
+		}
+
+		//检测打开的文件是否存在
+		if (PathFileExists(strFilePath.c_str()) == FALSE)
+		{
+			MessageBox(g_lag.LoadString("message.searchfilenoexist"),g_lag.LoadString("title.fastsearch"),MB_OK | MB_ICONWARNING);
+
+			return ;
 		}
 		
 		if(m_setAgent.GetSoftPath(strGroupName.GetBuffer(0),szPath) == 0 )

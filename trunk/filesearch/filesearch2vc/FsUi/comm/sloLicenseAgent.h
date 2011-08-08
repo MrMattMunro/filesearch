@@ -27,7 +27,7 @@ public:
 
 private:
 	void SetLicenseInfo(char* szOrderNo, char* szEmail);
-	int	 AddLicenseRec();
+	int	 AddLicenseRec(char *szHasDownload);
 
 	int  UpLoadLicFiles();
 	int  BuildLicenseFile();
