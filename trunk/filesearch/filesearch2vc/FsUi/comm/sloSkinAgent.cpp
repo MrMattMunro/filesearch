@@ -71,7 +71,12 @@ void sloSkinAgent::InitSkin()
 
 	//XTPSkinManager()->AddColorFilter(new CXTPSkinManagerColorFilterColorize(50, 100, 1));
 	XTPSkinManager()->SetApplyOptions(XTPSkinManager()->GetApplyOptions() | xtpSkinApplyMetrics);
-	XTPSkinManager()->LoadSkin(m_szSkinName, NULL/*_T("NormalBlue.ini")*/);
+
+	if (strcmp(szSkinName, THREME_NAME_VISTA)  == 0)
+	{
+		XTPSkinManager()->LoadSkin(m_szSkinName, "NormalSilver.ini");
+	}else
+		XTPSkinManager()->LoadSkin(m_szSkinName);
 }
 
 
@@ -79,7 +84,12 @@ void sloSkinAgent::UpdateSkin(char* lpSkinName)
 {
 	memset(&m_szSkinName, NULL, MAX_PATH);
 	sprintf(m_szSkinName,"%s%s%s",m_szSkinPath,lpSkinName, SKIN_NAME_EXT);
-	XTPSkinManager()->LoadSkin(m_szSkinName);
+
+	if (strcmp(lpSkinName, THREME_NAME_VISTA)  == 0)
+	{
+		XTPSkinManager()->LoadSkin(m_szSkinName, "NormalSilver.ini");
+	}else
+		XTPSkinManager()->LoadSkin(m_szSkinName);
 
 	//Ğ´ÅäÖÃÎÄ¼ş
 	sloCommAgent::WritePropertyfileString(SKINE_POR_KEY_NAME, lpSkinName, m_szSkinProPath);

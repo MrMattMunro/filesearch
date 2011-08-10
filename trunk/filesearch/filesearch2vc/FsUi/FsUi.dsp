@@ -342,11 +342,35 @@ SOURCE=.\comm\TTComboBox.h
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 # Begin Source File
 
+SOURCE=.\res\icons\point\addon.ico
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\AlphaFind.bmp
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\icons\point\ARROW6A.ICO
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\icons\point\ARW05RT.ICO
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\back16.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=".\res\icons\base setting\baseSetting.ico"
+# End Source File
+# Begin Source File
+
+SOURCE=".\res\icons\base setting\baseSetting2.ico"
+# End Source File
+# Begin Source File
+
+SOURCE=".\res\icons\base setting\baseSetting5.ico"
 # End Source File
 # Begin Source File
 
@@ -375,6 +399,10 @@ SOURCE=.\res\delete16.bmp
 # Begin Source File
 
 SOURCE=.\res\DEVTOOL.ICO
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\icons\dic\dictionary3.ico
 # End Source File
 # Begin Source File
 
@@ -458,6 +486,14 @@ SOURCE=.\res\pdf.ico
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\icons\point\point.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\icons\point\points12.ico
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\ppt.ico
 # End Source File
 # Begin Source File
@@ -482,6 +518,14 @@ SOURCE=.\res\Recycle.ico
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\icons\register\register.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\icons\register\register3.ico
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\Registration.ico
 # End Source File
 # Begin Source File
@@ -491,6 +535,14 @@ SOURCE=".\res\Registry Entries REG.ico"
 # Begin Source File
 
 SOURCE=.\res\search.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\icons\search\search3.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\icons\search\Search6.ico
 # End Source File
 # Begin Source File
 
@@ -511,6 +563,10 @@ SOURCE=.\res\Sherlock.bmp
 # Begin Source File
 
 SOURCE=.\res\Sherlock.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\icons\skin\skins2.ico
 # End Source File
 # Begin Source File
 

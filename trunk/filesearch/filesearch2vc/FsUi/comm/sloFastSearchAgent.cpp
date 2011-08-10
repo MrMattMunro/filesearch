@@ -284,7 +284,8 @@ int sloFastSearchAgent::GetPathIndex(char* szPath)
 		return 0;
 	}
 
-	if (strncmp(szPath, RECENT, sizeof(RECENT)) == 0)
+	CString strRecent = g_lag.LoadString("combox.recent");
+	if (strncmp(szPath, strRecent.GetBuffer(0), strRecent.GetLength()) == 0)
 	{
 		return -1;
 	}

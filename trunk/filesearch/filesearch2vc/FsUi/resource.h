@@ -181,12 +181,10 @@
 #define IDC_COMBO_PATH_RECENT           2022
 #define IDC_BUTTON_BROWSER_PDF          2023
 #define IDC_EDIT_EMAIL                  2023
-#define IDI_ICON_REG_MANAGER            2023
 #define IDC_BUTTON_BROWSER_TXT          2024
 #define IDC_BUTTON_REG                  2024
 #define IDI_ICON_REG_INFO               2024
 #define IDC_STATIC_BEGINTIME            2025
-#define IDI_ICON_REG_MANAGE2            2025
 #define IDC_STATIC_ENDTIME              2026
 #define IDI_ICON_FIND                   2026
 #define IDC_STATIC_BEGINTIME_CONTENT    2027
@@ -258,15 +256,25 @@
 #define IDC_BUTTON_LICENSE_BACK         2061
 #define IDB_BITMAP_RESTORE              2061
 #define IDC_BUTTON_BROWSE_BACK_PATH     2062
+#define IDI_ICON_BASIC_SET              2062
 #define IDC_STATIC_HAND_LICENSE_RESOTRE 2063
+#define IDI_ICON_BASIC_SET2             2063
 #define IDC_BUTTON_BROWSE_RESTORE_PATH  2064
+#define IDI_ICON_BASIC_SET_NORMAL       2064
 #define IDC_BUTTON_LICENSE_RESTORE      2065
+#define IDI_ICON_BASIC_SET_DIC          2065
+#define IDI_ICON_BASIC_SET_SKIN         2066
+#define IDI_ICON_REGISTER               2067
+#define IDI_ICON_REGISTER_INFO          2068
+#define IDI_ICON_FAST_SEARCH2           2069
+#define IDI_ICON_FAST_SEARCH3           2070
+#define IDI_ICON_POINT2                 2075
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        2062
+#define _APS_NEXT_RESOURCE_VALUE        2076
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         2063
 #define _APS_NEXT_SYMED_VALUE           2000

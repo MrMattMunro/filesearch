@@ -7,12 +7,6 @@ typedef enum{
 	lag_engish
 }LANGUAGE;
 
-#define RECENT			"最近文档"
-#define RECENT_3DAY		"3天"
-#define RECENT_1WEEK	"一周"
-#define RECENT_2WEEK	"二周"
-#define RECENT_1MON		"一个月"
-
 #pragma pack(push, 1)
 
 typedef struct _SearchRectord

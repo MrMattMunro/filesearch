@@ -156,7 +156,7 @@ BOOL CFastSearchDlg::OnInitDialog()
 //	m_FilenameEdit.SetFilename(strData);
 
 	// TODO: Add extra initialization here
-	m_keyEdit.SetIcon(IDI_ICON_FAST_SEARCH);
+	m_keyEdit.SetIcon(IDI_ICON_FAST_SEARCH2);
 
 	SetWindowText(g_lag.LoadString("title.fastsearch"));
 
@@ -175,15 +175,15 @@ BOOL CFastSearchDlg::OnInitDialog()
 		}
 	}
 
-	m_BoxList.InsertString(0, RECENT);
+	m_BoxList.InsertString(0, g_lag.LoadString("combox.recent"));
 	m_BoxList.InsertString(1,g_lag.LoadString("label.fastserlist"));
 	m_BoxList.SetCurSel(0);
 
 	//初始化话最近文档boxlist
-	m_BoxListRecent.InsertString(0, RECENT_3DAY);
-	m_BoxListRecent.InsertString(1, RECENT_1WEEK);
-	m_BoxListRecent.InsertString(2, RECENT_2WEEK);
-	m_BoxListRecent.InsertString(3, RECENT_1MON);
+	m_BoxListRecent.InsertString(0, g_lag.LoadString("combox.recent3day"));
+	m_BoxListRecent.InsertString(1, g_lag.LoadString("combox.recent1week"));
+	m_BoxListRecent.InsertString(2, g_lag.LoadString("combox.recent2week"));
+	m_BoxListRecent.InsertString(3, g_lag.LoadString("combox.recent1mon"));
 	m_BoxListRecent.SetCurSel(0);
 
 	CreateTaskPanel();
@@ -269,13 +269,13 @@ void CFastSearchDlg::OnEventNotify()
 		CString strRectemp;						//存放得到的编辑框内容
 		m_BoxListRecent.GetLBText(nRecIndex,strRectemp);	//得到被选中内容的名字
 		//设置type值
-		if( strRectemp == RECENT_3DAY)
+		if( strRectemp == g_lag.LoadString("combox.recent3day"))
 			strcpy(fast.szType, "3");
-		if( strRectemp == RECENT_1WEEK)
+		if( strRectemp == g_lag.LoadString("combox.recent1week"))
 			strcpy(fast.szType, "7");
-		if( strRectemp == RECENT_2WEEK)
+		if( strRectemp == g_lag.LoadString("combox.recent2week"))
 			strcpy(fast.szType, "14");
-		if( strRectemp == RECENT_1MON)
+		if( strRectemp == g_lag.LoadString("combox.recent1mon"))
 			strcpy(fast.szType, "30");
 
 		//当选择【最近文档】时,查看编辑框输入的是否是空格
