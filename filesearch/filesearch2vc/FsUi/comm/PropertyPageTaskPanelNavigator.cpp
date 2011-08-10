@@ -46,12 +46,12 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 	SetFont(pFont);
 	
 	//添加基本设置group
-	CXTPTaskPanelGroup* pGroup = AddGroup(0,IDI_ICON_SET_TOOLS);
+	CXTPTaskPanelGroup* pGroup = AddGroup(0,IDI_ICON_BASIC_SET);
 	pGroup->SetCaption(g_lag.LoadString("title.basicset"));
 
 	//添加常规item
 	int i = 0;
-	CXTPTaskPanelGroupItem* pItem = pGroup->AddLinkItem(0, IDI_ICON_SYS_SET);
+	CXTPTaskPanelGroupItem* pItem = pGroup->AddLinkItem(0, IDI_ICON_BASIC_SET_NORMAL);
 	pItem->SetCaption(g_lag.LoadString("title.general"));
 
 	CXTPPropertyPage* pPage = m_pSheet->GetPage(0);
@@ -60,7 +60,7 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 
 	//添加词汇item
 	i = 1;
-	pItem = pGroup->AddLinkItem(1, IDI_ICON_CIHUI2);
+	pItem = pGroup->AddLinkItem(1, IDI_ICON_BASIC_SET_DIC);
 	pItem->SetCaption(g_lag.LoadString("title.words"));
 	
 	pPage = m_pSheet->GetPage(1);
@@ -69,7 +69,7 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 
 	//添加皮肤item
 	i = 2;
-	pItem = pGroup->AddLinkItem(2, IDI_ICON_SKIN);
+	pItem = pGroup->AddLinkItem(2, IDI_ICON_BASIC_SET_SKIN);
 	pItem->SetCaption(g_lag.LoadString("title.skin"));
 	
 	pPage = m_pSheet->GetPage(2);
@@ -77,12 +77,12 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 	pPage->m_dwData = (DWORD_PTR)pItem;
 
 	//添加注册管理group
-	pGroup = AddGroup(1,IDI_ICON_REG_INFO);
+	pGroup = AddGroup(1,IDI_ICON_REGISTER);
 	pGroup->SetCaption(g_lag.LoadString("title.licensemanager"));
 
 	//添加注册信息item
 	i = 2;
-	pItem = pGroup->AddLinkItem(0, IDI_ICON_REG_MANAGER);
+	pItem = pGroup->AddLinkItem(0, IDI_ICON_REGISTER_INFO);
 	pItem->SetCaption(g_lag.LoadString("title.licenseinfo"));
 	
 	pPage = m_pSheet->GetPage(3);
@@ -97,16 +97,15 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 
 	Reposition();
 
-	GetImageManager()->SetIcon(IDI_ICON_SYS_SET, IDI_ICON_SYS_SET);
+	GetImageManager()->SetIcon(IDI_ICON_BASIC_SET_NORMAL, IDI_ICON_BASIC_SET_NORMAL);
 	GetImageManager()->SetIcon(IDI_ICON_SET_NORMAL, IDI_ICON_SET_NORMAL);
-	GetImageManager()->SetIcon(IDI_ICON_SET_TOOLS, IDI_ICON_SET_TOOLS);
+	GetImageManager()->SetIcon(IDI_ICON_BASIC_SET, IDI_ICON_BASIC_SET);
 	GetImageManager()->SetIcon(IDI_ICON_CIHUI, IDI_ICON_CIHUI);
 	GetImageManager()->SetIcon(IDI_ICON_CIHUI1, IDI_ICON_CIHUI1);
-	GetImageManager()->SetIcon(IDI_ICON_CIHUI2, IDI_ICON_CIHUI2);
-	GetImageManager()->SetIcon(IDI_ICON_REG_INFO, IDI_ICON_REG_INFO);
-	GetImageManager()->SetIcon(IDI_ICON_REG_MANAGER, IDI_ICON_REG_MANAGER);	
-	GetImageManager()->SetIcon(IDI_ICON_REG_MANAGE2, IDI_ICON_REG_MANAGE2);
-	GetImageManager()->SetIcon(IDI_ICON_SKIN, IDI_ICON_SKIN);
+	GetImageManager()->SetIcon(IDI_ICON_BASIC_SET_DIC, IDI_ICON_BASIC_SET_DIC);
+	GetImageManager()->SetIcon(IDI_ICON_REGISTER, IDI_ICON_REGISTER);
+	GetImageManager()->SetIcon(IDI_ICON_REGISTER_INFO, IDI_ICON_REGISTER_INFO);	
+	GetImageManager()->SetIcon(IDI_ICON_BASIC_SET_SKIN, IDI_ICON_BASIC_SET_SKIN);
 
 //	SetGroupIconSize( CSize(16, 24));
 	SetGroupIconSize( CSize(24, 48));

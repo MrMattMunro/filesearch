@@ -66,8 +66,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2011,8,7,1
- PRODUCTVERSION 1,0,0,26
+ FILEVERSION 2011,8,101,1
+ PRODUCTVERSION 1,0,0,28
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -85,14 +85,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "slfile\0"
             VALUE "FileDescription", "FsUi DLL\0"
-            VALUE "FileVersion", "2011, 8, 7, 1\0"
+            VALUE "FileVersion", "2011, 8, 101, 1\0"
             VALUE "InternalName", "FsUi\0"
             VALUE "LegalCopyright", "版权所有 (C) 2011\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "FsUi.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "FsUi Dynamic Link Library\0"
-            VALUE "ProductVersion", "1, 0, 0, 26\0"
+            VALUE "ProductVersion", "1, 0, 0, 28\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -233,7 +233,7 @@ BEGIN
     PUSHBUTTON      "",IDC_BUTTON_BROWSER_PDF,225,131,15,14
     PUSHBUTTON      "",IDC_BUTTON_BROWSER_TXT,225,152,15,14
     LTEXT           "文档软件关联设置",IDC_STATIC_SOFT_SET,28,15,60,8
-    ICON            IDI_ICON_HAND,IDC_STATIC,6,9,20,20
+    ICON            IDI_ICON_HAND,IDC_STATIC,6,9,18,20
 END
 
 IDD_DIALOG_FAST_SEARCH DIALOG DISCARDABLE  0, 0, 241, 350
@@ -241,7 +241,7 @@ STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "快速查找"
 FONT 9, "宋体"
 BEGIN
-    EDITTEXT        IDC_EDIT_SEARCH_KEY,2,327,105,16,ES_MULTILINE | 
+    EDITTEXT        IDC_EDIT_SEARCH_KEY,2,327,105,15,ES_MULTILINE | 
                     ES_AUTOHSCROLL
     COMBOBOX        IDC_COMBO_PATH,113,328,88,71,CBS_DROPDOWNLIST | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP
@@ -348,9 +348,7 @@ IDI_ICON_SET_TOOLS      ICON    DISCARDABLE     "res\\tools1.ico"
 IDI_ICON_CIHUI          ICON    DISCARDABLE     "res\\Bookshelf.ico"
 IDI_ICON_CIHUI1         ICON    DISCARDABLE     "res\\Note.ico"
 IDI_ICON_CIHUI2         ICON    DISCARDABLE     "res\\Book2.ico"
-IDI_ICON_REG_MANAGER    ICON    DISCARDABLE     "res\\Registry Entries REG.ico"
 IDI_ICON_REG_INFO       ICON    DISCARDABLE     "res\\Registration.ico"
-IDI_ICON_REG_MANAGE2    ICON    DISCARDABLE     "res\\Recycle.ico"
 IDI_ICON_FIND           ICON    DISCARDABLE     "res\\n33start_find.ico"
 IDI_ICON_NEW_INDEX      ICON    DISCARDABLE     "res\\New Text Doc.ico"
 IDI_ICON_MODIFY_INDEX   ICON    DISCARDABLE     "res\\DEVTOOL.ICO"
@@ -360,6 +358,16 @@ IDI_ICON_FAST_FIND      ICON    DISCARDABLE     "res\\Find.ico"
 IDI_ICON_FAST_SEARCH    ICON    DISCARDABLE     "res\\Sherlock.ico"
 IDI_ICON_HTML           ICON    DISCARDABLE     "res\\html.ico"
 IDI_ICON_SEARCH_TRAY    ICON    DISCARDABLE     "res\\search.ico"
+IDI_ICON_BASIC_SET      ICON    DISCARDABLE     "res\\icons\\base setting\\baseSetting5.ico"
+IDI_ICON_BASIC_SET2     ICON    DISCARDABLE     "res\\icons\\base setting\\baseSetting.ico"
+IDI_ICON_BASIC_SET_NORMAL ICON    DISCARDABLE     "res\\icons\\base setting\\baseSetting2.ico"
+IDI_ICON_BASIC_SET_DIC  ICON    DISCARDABLE     "res\\icons\\dic\\dictionary3.ico"
+IDI_ICON_BASIC_SET_SKIN ICON    DISCARDABLE     "res\\icons\\skin\\skins2.ico"
+IDI_ICON_REGISTER       ICON    DISCARDABLE     "res\\icons\\register\\register3.ico"
+IDI_ICON_REGISTER_INFO  ICON    DISCARDABLE     "res\\icons\\register\\register.ico"
+IDI_ICON_FAST_SEARCH2   ICON    DISCARDABLE     "res\\icons\\search\\search3.ico"
+IDI_ICON_FAST_SEARCH3   ICON    DISCARDABLE     "res\\icons\\search\\Search6.ico"
+IDI_ICON_POINT2         ICON    DISCARDABLE     "res\\icons\\point\\ARW05RT.ICO"
 
 /////////////////////////////////////////////////////////////////////////////
 //

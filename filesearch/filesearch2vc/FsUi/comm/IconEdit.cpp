@@ -196,7 +196,7 @@ void CIconEdit::Prepare()
 
 	CRect editRect;
 	GetRect( &editRect );
-	editRect.left += width + 4;
+	editRect.left += width + 5;
 //	editRect.right = editRect.Width() - width;
 	SetRect( &editRect );
 
@@ -283,7 +283,7 @@ void CIconEdit::CreateIcon()
 		int nHeight = GetSystemMetrics( SM_CYSMICON );
 		//left, top, right, and bottom
 	//	CRect iconRect( 0, 50, editRect.left, clientRect.Height()+50 );
-		CRect iconRect( editRect.left - width - 7, editRect.top, editRect.left, editRect.top + nHeight);
+		CRect iconRect( editRect.left - width - 5, editRect.top, editRect.left, editRect.top + nHeight);
 		//iconRect.CopyRect(clientRect);
 
 	//	iconRect.left = clientRect.Width() - width - 2; 
