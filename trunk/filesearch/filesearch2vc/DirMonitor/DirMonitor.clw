@@ -14,4 +14,5 @@ Type=0
 HeaderFile=DirMonitor.h
 ImplementationFile=DirMonitor.cpp
 Filter=N
+LastObject=CDirMonitorApp
 

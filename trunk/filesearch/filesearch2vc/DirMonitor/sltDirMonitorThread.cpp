@@ -67,7 +67,7 @@ int sltDirMonitorThread::run()
 
 		log.Print(LL_DEBUG_INFO, "[Info]Connect Db succ!DBName=COMMONINFO\r\n");
 		//连接成功，读取待监控的目录，并监视该目录
-		if (g_xmlFilterAgent.LoadDB() != 0)
+		if (g_xmlFilterAgent.LoadDB() != 0 )
 		{
 			log.Print(LL_DEBUG_INFO, "[Warn]Try to LoadDB Failed!DBName=COMMONINFO\r\n");
 			sleep(1000*10);

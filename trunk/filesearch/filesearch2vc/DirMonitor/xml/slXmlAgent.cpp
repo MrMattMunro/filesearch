@@ -183,8 +183,8 @@ int slXmlAgent::LoadDB()
 		}
 	}else
 	{
-		log.Print(LL_DEBUG_INFO, "[Error]t_searcher no record\r\n");
-		return -3;
+		log.Print(LL_DEBUG_INFO, "[info]t_searcher no record\r\n");
+		return 0;
 	}
 	
 	return 0;	
@@ -224,7 +224,7 @@ bool slXmlAgent::Filters(char* pszFullPath, BOOL bAdd /*= FALSE*/)
 	}
 
 	//在索引目录队列中，则获取文档类型
-	std::string strExts = m_searcherList[i].szExts;
+	std::string strExts;
 	if (!bInSearcher)
 	{
 		//最近文档,最近修改的记录 新建的状态下，只记录  office和pdf
@@ -233,7 +233,8 @@ bool slXmlAgent::Filters(char* pszFullPath, BOOL bAdd /*= FALSE*/)
 			strExts = m_filterAgent.GetExtsFromTypes(ADD_FILE_TYPES);
 		}else
 			strExts = m_filterAgent.GetAllExts();
-	}
+	}else
+		strExts = m_searcherList[i].szExts;
 
 	//根据文档类型获取过滤后缀名库
 	SetFilters(strExts.c_str(), "");
