@@ -26,6 +26,7 @@ CFastSearchDlg::CFastSearchDlg(CWnd* pParent /*=NULL*/)
 	m_bDestory = TRUE;
 	m_bCommboxRecentStatus = TRUE;
 //	m_pSearchThread = NULL;
+	m_bEditForce = FALSE;
 	//}}AFX_DATA_INIT
 }
 
@@ -51,9 +52,11 @@ BEGIN_MESSAGE_MAP(CFastSearchDlg, CDialog)
 	ON_WM_DESTROY()
 	ON_WM_CTLCOLOR()
 	ON_WM_ACTIVATE()
+	ON_CBN_SELCHANGE(IDC_COMBO_PATH_RECENT, OnSelchangeComboPathRecent)
+	ON_EN_KILLFOCUS(IDC_EDIT_SEARCH_KEY, OnKillfocusEditSearchKey)
 	ON_MESSAGE(XTPWM_TASKPANEL_NOTIFY, OnTaskPanelNotify)
 	ON_WM_KILLFOCUS()
-	ON_CBN_SELCHANGE(IDC_COMBO_PATH_RECENT, OnSelchangeComboPathRecent)
+	ON_EN_SETFOCUS(IDC_EDIT_SEARCH_KEY, OnSetfocusEditSearchKey)
 	//}}AFX_MSG_MAP
 	ON_MESSAGE(WM_PROGRESS_MSG, OnProgressChange)
 
@@ -141,6 +144,7 @@ void CFastSearchDlg::SetStaticFindPos()
 	m_static_find.MoveWindow(rcDlgs.left,rcDlgs.top,(rcDlgs.right - rcDlgs.left + 3),(rcDlgs.bottom - rcDlgs.top + 3),TRUE);   // 	
 }
 
+#define EDIT_TEXT	"搜索 文档内容关键字"
 BOOL CFastSearchDlg::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
@@ -157,6 +161,7 @@ BOOL CFastSearchDlg::OnInitDialog()
 
 	// TODO: Add extra initialization here
 	m_keyEdit.SetIcon(IDI_ICON_FAST_SEARCH2);
+	SetDlgItemText(IDC_EDIT_SEARCH_KEY, EDIT_TEXT);
 
 	SetWindowText(g_lag.LoadString("title.fastsearch"));
 
@@ -321,6 +326,15 @@ void CFastSearchDlg::OnChangeEditSearchKey()
 	// with the ENM_CHANGE flag ORed into the mask.
 	
 	// TODO: Add your control notification handler code here
+	//如果获取的值
+	m_bEditForce = TRUE;
+	CString strKey;
+	GetDlgItemText(IDC_EDIT_SEARCH_KEY, strKey);
+	if(strKey == EDIT_TEXT)
+	{
+		SetDlgItemText(IDC_EDIT_SEARCH_KEY, "");
+	}
+
 	OnEventNotify();
 
 }
@@ -575,16 +589,14 @@ HBRUSH CFastSearchDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 	
 	// TODO: Change any attributes of the DC here
-// 	COLORREF backColor = RGB(216, 231, 252); //office 2003背景色
-// 	pDC->SetBkMode(TRANSPARENT);             //设置控件背景透明
-// 	
-// 	// 判断下是不是你要改的控件ID 
-// 	if( pWnd->GetDlgCtrlID() == IDCANCEL || pWnd->GetDlgCtrlID() == IDOK )
-// 	{
-// 		pDC->SetBkColor(RGB(153, 255, 204));
-// 	}
-// 	
-// 	return CreateSolidBrush(backColor);      //创建背景刷子	
+	if(pWnd-> GetDlgCtrlID() == IDC_EDIT_SEARCH_KEY) 
+	{ 
+		if (m_bEditForce)
+		{
+			pDC-> SetTextColor(RGB(192, 192, 192)); 
+		}else
+			pDC-> SetTextColor(RGB(0, 0, 0)); 
+	} 	
 
 	// TODO: Return a different brush if the default is not desired
 	return hbr;
@@ -737,7 +749,31 @@ void CFastSearchDlg::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
 	if(nState==WA_INACTIVE && m_bDestory)
 	{
 		//DestroyWindow();  //DoModal函数不会返回
-		CDialog::OnCancel();
+//		CDialog::OnCancel();
 	}
 }
 
+
+void CFastSearchDlg::OnKillfocusEditSearchKey() 
+{
+	// TODO: Add your control notification handler code here
+	m_bEditForce = FALSE;
+	CString strKey;
+	GetDlgItemText(IDC_EDIT_SEARCH_KEY, strKey);
+	if(strKey.GetLength() == 0)
+	{
+		SetDlgItemText(IDC_EDIT_SEARCH_KEY, EDIT_TEXT);
+	}
+}
+
+void CFastSearchDlg::OnSetfocusEditSearchKey() 
+{
+	// TODO: Add your control notification handler code here
+	m_bEditForce = TRUE;
+	CString strKey;
+	GetDlgItemText(IDC_EDIT_SEARCH_KEY, strKey);
+	if(strKey == EDIT_TEXT)
+	{
+		SetDlgItemText(IDC_EDIT_SEARCH_KEY, "");
+	}	
+}

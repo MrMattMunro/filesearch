@@ -66,6 +66,7 @@ BEGIN_MESSAGE_MAP(CSkinDlg, CDialog)
 	//{{AFX_MSG_MAP(CSkinDlg)
 	ON_LBN_SELCHANGE(IDC_LIST_SKIN, OnSelchangeListSkin)
 	ON_WM_PAINT()
+	ON_WM_CTLCOLOR()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -94,6 +95,11 @@ BOOL CSkinDlg::OnInitDialog()
 	m_skinbox.AddString(THREME_NAME_XP_ROYALE);
 	m_skinbox.AddString(THREME_NAME_XP_LUNA);
 	m_skinbox.SetCurSel(0);
+
+	//////////////////////////////////////////////////////////////////////////
+	//设置静态文本框的字体
+	f.CreatePointFont(110,"黑体");//这种更简单
+	((CStatic *)this->GetDlgItem(IDC_STATIC_SKIN_SET))->SetFont(&f,true);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
@@ -314,4 +320,19 @@ void CSkinDlg::OnPaint()
 		}
 	}
 	// Do not call CDialog::OnPaint() for painting messages
+}
+
+HBRUSH CSkinDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor) 
+{
+	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+	
+	// TODO: Change any attributes of the DC here
+	if(pWnd-> GetDlgCtrlID() == IDC_STATIC_SKIN_SET) 
+	{ 
+		//		static   HBRUSH   hbrEdit   =   ::CreateSolidBrush(RGB(255,   255,   255)); 
+		//		pDC-> SetBkColor(RGB(255,   255,   255)); 
+		pDC-> SetTextColor(RGB(0, 0, 255)); 
+	} 	
+	// TODO: Return a different brush if the default is not desired
+	return hbr;
 }

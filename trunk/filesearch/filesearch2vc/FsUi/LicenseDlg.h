@@ -39,6 +39,7 @@ public:
 // Implementation
 protected:
 	CXTPButton m_btnReg;
+	CFont f;
 	// Generated message map functions
 	//{{AFX_MSG(CLicenseDlg)
 	virtual void OnOK();
