@@ -88,13 +88,16 @@ BOOL CSetAttributeDlg::OnInitDialog()
 	m_btnFolderTxt.SetBitmap(0, IDB_BITMAP_FOLDER2);
 	m_btnFolderTxt.SetFlatStyle(TRUE);	
 	// TODO: Add extra initialization here
-
 	SetDlgItemText(IDC_STATIC_SOFT_SET, g_lag.LoadString("label.set"));
 	SetDlgItemText(IDC_STATIC_SET_1, g_lag.LoadString("label.setnote"));
 
 	SetDlgItemText(IDOK, g_lag.LoadString("button.confirm"));
 	SetDlgItemText(IDCANCEL, g_lag.LoadString("button.cancel"));
 	//////////////////////////////////////////////////////////////////////////
+
+	//设置静态文本框的字体
+	f.CreatePointFont(110,"黑体");//这种更简单
+	((CStatic *)this->GetDlgItem(IDC_STATIC_SOFT_SET))->SetFont(&f,true);
 
 	char szPath[MAX_PATH] = {0};
 	
@@ -317,16 +320,13 @@ HBRUSH CSetAttributeDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 	
 	// TODO: Change any attributes of the DC here
-// 	COLORREF backColor = RGB(216, 231, 252); //office 2003背景色
-// 	pDC->SetBkMode(TRANSPARENT);             //设置控件背景透明
-// 	
-// 	// 判断下是不是你要改的控件ID 
-// 	if( pWnd->GetDlgCtrlID() == IDCANCEL || pWnd->GetDlgCtrlID() == IDOK )
-// 	{
-// 		pDC->SetBkColor(RGB(153, 255, 204));
-// 	}
-// 	
-// 	return CreateSolidBrush(backColor);      //创建背景刷子	
+	if(pWnd-> GetDlgCtrlID()   ==   IDC_STATIC_SOFT_SET) 
+	{ 
+//		static   HBRUSH   hbrEdit   =   ::CreateSolidBrush(RGB(255,   255,   255)); 
+//		pDC-> SetBkColor(RGB(255,   255,   255)); 
+		pDC-> SetTextColor(RGB(0, 0, 255)); 
+	} 
+
 	// TODO: Return a different brush if the default is not desired
 	return hbr;
 }

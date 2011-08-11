@@ -59,6 +59,7 @@ public:
 protected:
 	CEnBitmap m_bitmap, m_bitmapOrg;
 	CSize m_sizePrev;
+	CFont f;
 
 	void OnChangeProcessing() ;
 	char m_szSkinTheme[MAX_PATH];
@@ -67,6 +68,7 @@ protected:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSelchangeListSkin();
 	afx_msg void OnPaint();
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

@@ -55,6 +55,7 @@ public:
 	std::map<int, GroupInfo> m_listMap;
 	BOOL m_bDestory;
 	BOOL m_bCommboxRecentStatus;
+	BOOL m_bEditForce;
 
 //	CSearchThread* m_pSearchThread;
 // Dialog Data
@@ -88,6 +89,8 @@ protected:
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
 	afx_msg void OnSelchangeComboPathRecent();
+	afx_msg void OnKillfocusEditSearchKey();
+	afx_msg void OnSetfocusEditSearchKey();
 	//}}AFX_MSG
 	LRESULT OnTaskPanelNotify(WPARAM wParam, LPARAM lParam);
 	DECLARE_MESSAGE_MAP()

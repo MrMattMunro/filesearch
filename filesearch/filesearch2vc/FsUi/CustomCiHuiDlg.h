@@ -37,6 +37,7 @@ public:
 protected:
 	CXTPButton m_btnFolder;
 	CXTPButton m_btnShowAllCihui;
+	CFont f;
 	// Generated message map functions
 	//{{AFX_MSG(CCustomCiHuiDlg)
 	virtual void OnOK();

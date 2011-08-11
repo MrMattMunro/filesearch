@@ -56,6 +56,8 @@ protected:
 	CString	m_strOldPPT;
 	CString	m_strOldTxt;
 	CString	m_strOldWord;
+
+	CFont f;
 	// Generated message map functions
 	//{{AFX_MSG(CSetAttributeDlg)
 	virtual BOOL OnInitDialog();
