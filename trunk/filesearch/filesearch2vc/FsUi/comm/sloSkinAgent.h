@@ -17,6 +17,8 @@ public:
 	
 	void InitSkin();
 	void UpdateSkin(char* lpSkinName);
+	std::string GetVersion();
+
 protected:
 	BOOL GetSkinPath();
 	BOOL InitSkinProp();
@@ -24,6 +26,7 @@ public:
 	char m_szSkinPath[MAX_PATH];
 	char m_szSkinName[MAX_PATH*2];
 	char m_szSkinProPath[MAX_PATH];
+	char m_szVerProPath[MAX_PATH];
 
 	std::vector<Skin_Prop> m_skinPropList;
 };

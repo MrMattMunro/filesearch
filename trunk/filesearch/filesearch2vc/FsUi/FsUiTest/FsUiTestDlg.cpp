@@ -452,6 +452,19 @@ void CFsUiTestDlg::OnButton10()
 {
 	// TODO: Add your control notification handler code here
 
+	CString   strURL; 
+	CString MailAddr = "west_virginia@netease.com";
+	
+	//GetWindowText(   strMailAddress   ); 
+	//   装配成   URL   地址 
+	strURL.Format(   "mailto:%s ",   (LPCTSTR)MailAddr); 
+	
+	//   调用   ShellExecute()   执行邮件发送 
+	int   iRet   =   (int)ShellExecute( NULL, _T("open"), strURL.GetBuffer(0), NULL, NULL, SW_SHOW ); 
+
+	int nError = GetLastError();
+	return ;
+
 	int i =800;
 	for (i; i < 1500; i++)
 	{

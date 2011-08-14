@@ -42,7 +42,7 @@ CSkinDlg::CSkinDlg(CWnd* pParent /*=NULL*/)
 	m_bSharpen = FALSE;
 	m_nBlurFactor = 4;
 	m_nSharpenFactor = 4;
-	m_nShrinkFactor = 3;
+	m_nShrinkFactor = 5; //放大缩小
 	m_nEnlargeFactor = 4;
 	m_nRotationAngle = 5;
 	m_nYShearAmount = 10;
@@ -57,6 +57,8 @@ void CSkinDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CSkinDlg)
+	DDX_Control(pDX, IDC_STATIC_SKIN_EAMIL_NAME, m_emailAddressLink);
+	DDX_Control(pDX, IDC_STATIC_HOMEPAGE_NAME, m_urlLink);
 	DDX_Control(pDX, IDC_LIST_SKIN, m_skinbox);
 	//}}AFX_DATA_MAP
 }
@@ -72,7 +74,8 @@ END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // CSkinDlg message handlers
-
+extern DWORD g_dwApplyID;
+extern sloSkinAgent	g_skin;
 BOOL CSkinDlg::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
@@ -81,31 +84,23 @@ BOOL CSkinDlg::OnInitDialog()
 	SetDlgItemText(IDC_STATIC_SKIN_SET, g_lag.LoadString("label.skinset"));
 	SetDlgItemText(IDC_STATIC_SKIN_SELECT, g_lag.LoadString("label.selectskin"));
 	SetDlgItemText(IDC_STATIC_SKIN_PREVIEW, g_lag.LoadString("label.skinpreview"));
-	SetDlgItemText(IDC_STATIC_AUTHOR, g_lag.LoadString("label.skinauthor"));
 
-	SetDlgItemText(IDC_STATIC_AUTHOR_NAME, g_lag.LoadString("label.skinauthorname"));
+	SetDlgItemText(IDC_STATIC_AUTHOR, g_lag.LoadString("label.skinversion"));
+	SetDlgItemText(IDC_STATIC_AUTHOR_NAME, g_skin.GetVersion().c_str());
 	SetDlgItemText(IDC_STATIC_HOMEPAGE, g_lag.LoadString("label.skinhomepage"));
 	SetDlgItemText(IDC_STATIC_HOMEPAGE_NAME, g_lag.LoadString("label.skinhomepagename"));
 	SetDlgItemText(IDC_STATIC_SKIN_EAMIL, g_lag.LoadString("label.skinemail"));
 	SetDlgItemText(IDC_STATIC_SKIN_EAMIL_NAME, g_lag.LoadString("label.skinemailname"));
 
-	m_skinbox.AddString(THREME_NAME_NORMAL);
-	m_skinbox.AddString(THREME_NAME_2007_Blue);
-	m_skinbox.AddString(THREME_NAME_2007_LightBlue);
+	m_skinbox.AddString(g_lag.LoadString("combox.defaultskin"));
 	m_skinbox.AddString(THREME_NAME_2007_Aqua);
-	m_skinbox.AddString(THREME_NAME_2007_Sliver);
-	m_skinbox.AddString(THREME_NAME_2007_Black);
+	m_skinbox.AddString(THREME_NAME_2007_LightBlue);
 
-	m_skinbox.AddString(THREME_NAME_VISTA_Black);
 	m_skinbox.AddString(THREME_NAME_VISTA_Black2);
-	m_skinbox.AddString(THREME_NAME_VISTA_Blue);
 	m_skinbox.AddString(THREME_NAME_VISTA_Sliver);
 
-	m_skinbox.AddString(THREME_NAME_XP_LUNA_Blue);
 	m_skinbox.AddString(THREME_NAME_XP_LUNA_HomeStead);
 	m_skinbox.AddString(THREME_NAME_XP_LUNA_Metallic);
-
-	m_skinbox.AddString(THREME_NAME_XP_ROYALE);
 
 	m_skinbox.SetCurSel(0);
 
@@ -114,11 +109,13 @@ BOOL CSkinDlg::OnInitDialog()
 	f.CreatePointFont(FONT_SIZE,"黑体");//这种更简单
 	((CStatic *)this->GetDlgItem(IDC_STATIC_SKIN_SET))->SetFont(&f,true);
 
+	//
+	m_urlLink.SetURL(g_lag.LoadString("label.skinhomepagename"));
+	m_emailAddressLink.SetURL(g_lag.LoadString("label.skinemailname"));
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
-extern DWORD g_dwApplyID;
-extern sloSkinAgent	g_skin;
+
 BOOL CSkinDlg::OnApply()
 {
 	//	ASSERT_VALID(this);	
@@ -155,7 +152,7 @@ void CSkinDlg::OnSelchangeListSkin()
 	CString strText;
 	m_skinbox.GetText(nIndex, strText);
 	memset(&m_szSkinTheme, NULL, MAX_PATH);
-	if (strText == THREME_NAME_NORMAL)
+	if (strText == g_lag.LoadString("combox.defaultskin"))
 		strText = THREME_NAME_2007_LightBlue;
 
 	memcpy(&m_szSkinTheme, strText.GetBuffer(0), strText.GetLength());
@@ -168,8 +165,8 @@ void CSkinDlg::OnSelchangeListSkin()
 	//office2007
 	if (strText == THREME_NAME_2007_Blue )
 	{
-		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_2007_Blue);
-	}else if (strText == THREME_NAME_NORMAL || strText == THREME_NAME_2007_LightBlue )
+		//bit.LoadBitmap(IDB_BITMAP_THREME_NAME_2007_Blue);
+	}else if (strText == g_lag.LoadString("combox.defaultskin") || strText == THREME_NAME_2007_LightBlue )
 	{
 		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_2007_LightBlue);
 	}else if (strText == THREME_NAME_2007_Aqua)
@@ -177,22 +174,22 @@ void CSkinDlg::OnSelchangeListSkin()
 		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_2007_Aqua);
 	}else if (strText == THREME_NAME_2007_Sliver)
 	{
-		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_2007_Sliver);
+		//bit.LoadBitmap(IDB_BITMAP_THREME_NAME_2007_Sliver);
 	}else if (strText == THREME_NAME_2007_Black)
 	{
-		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_2007_Black);
+		//bit.LoadBitmap(IDB_BITMAP_THREME_NAME_2007_Black);
 	}
 	
 	//vista
 	if (strText == THREME_NAME_VISTA_Black)
 	{
-		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_VISTA_Black);
+		//bit.LoadBitmap(IDB_BITMAP_THREME_NAME_VISTA_Black);
 	}else if (strText == THREME_NAME_VISTA_Black2)
 	{
 		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_VISTA_Black2);
 	}else if (strText == THREME_NAME_VISTA_Blue)
 	{
-		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_VISTA_Blue);
+		//bit.LoadBitmap(IDB_BITMAP_THREME_NAME_VISTA_Blue);
 	}else if (strText == THREME_NAME_VISTA_Sliver)
 	{
 		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_VISTA_Sliver);
@@ -202,7 +199,7 @@ void CSkinDlg::OnSelchangeListSkin()
 	//WinXP.Luna
 	if (strText == THREME_NAME_XP_LUNA_Blue)
 	{
-		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_XP_LUNA_Blue);
+		//bit.LoadBitmap(IDB_BITMAP_THREME_NAME_XP_LUNA_Blue);
 	}else if (strText == THREME_NAME_XP_LUNA_HomeStead)
 	{
 		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_XP_LUNA_HomeStead);
@@ -214,7 +211,7 @@ void CSkinDlg::OnSelchangeListSkin()
 	//WinXP.Royale
 	if (strText == THREME_NAME_XP_ROYALE)
 	{
-		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_XP_ROYALE);
+		//bit.LoadBitmap(IDB_BITMAP_THREME_NAME_XP_ROYALE);
 	}
 
 	if (bitmap.CopyImage(&bit))

@@ -582,6 +582,10 @@ SOURCE=.\res\skin\THREME_NAME_2007_Aqua.bmp
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\skin\THREME_NAME_2007_Aqua.JPG
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\skin\THREME_NAME_2007_Black.bmp
 # End Source File
 # Begin Source File
@@ -655,6 +659,14 @@ SOURCE=.\comm\FilenameEdit.cpp
 # Begin Source File
 
 SOURCE=.\comm\FilenameEdit.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\HYPERLINK.CPP
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\HYPERLINK.H
 # End Source File
 # Begin Source File
 
