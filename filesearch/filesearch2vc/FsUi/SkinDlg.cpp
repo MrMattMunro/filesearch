@@ -98,7 +98,7 @@ BOOL CSkinDlg::OnInitDialog()
 
 	//////////////////////////////////////////////////////////////////////////
 	//设置静态文本框的字体
-	f.CreatePointFont(110,"黑体");//这种更简单
+	f.CreatePointFont(FONT_SIZE,"黑体");//这种更简单
 	((CStatic *)this->GetDlgItem(IDC_STATIC_SKIN_SET))->SetFont(&f,true);
 
 	return TRUE;  // return TRUE unless you set the focus to a control

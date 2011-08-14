@@ -66,15 +66,15 @@ void sloSkinAgent::InitSkin()
 	//从配置文件中读取skinname
 	//如果没有就采用默认皮肤
 	char szSkinName[MAX_PATH] = {0};
-	sloCommAgent::GetPropertyfileString(SKINE_POR_KEY_NAME, THREME_NAME_VISTA, szSkinName, MAX_PATH, m_szSkinProPath );
+	sloCommAgent::GetPropertyfileString(SKINE_POR_KEY_NAME, THREME_NAME_2007, szSkinName, MAX_PATH, m_szSkinProPath );
 	sprintf(m_szSkinName,"%s%s%s",m_szSkinPath,szSkinName, SKIN_NAME_EXT);
 
 	//XTPSkinManager()->AddColorFilter(new CXTPSkinManagerColorFilterColorize(50, 100, 1));
 	XTPSkinManager()->SetApplyOptions(XTPSkinManager()->GetApplyOptions() | xtpSkinApplyMetrics);
 
-	if (strcmp(szSkinName, THREME_NAME_VISTA)  == 0)
+	if (strcmp(szSkinName, THREME_NAME_2007)  == 0)
 	{
-		XTPSkinManager()->LoadSkin(m_szSkinName, "NormalSilver.ini");
+		XTPSkinManager()->LoadSkin(m_szSkinName, "LightBlue.ini");
 	}else
 		XTPSkinManager()->LoadSkin(m_szSkinName);
 }
@@ -85,9 +85,9 @@ void sloSkinAgent::UpdateSkin(char* lpSkinName)
 	memset(&m_szSkinName, NULL, MAX_PATH);
 	sprintf(m_szSkinName,"%s%s%s",m_szSkinPath,lpSkinName, SKIN_NAME_EXT);
 
-	if (strcmp(lpSkinName, THREME_NAME_VISTA)  == 0)
+	if (strcmp(lpSkinName, THREME_NAME_2007)  == 0)
 	{
-		XTPSkinManager()->LoadSkin(m_szSkinName, "NormalSilver.ini");
+		XTPSkinManager()->LoadSkin(m_szSkinName, "LightBlue.ini");
 	}else
 		XTPSkinManager()->LoadSkin(m_szSkinName);
 

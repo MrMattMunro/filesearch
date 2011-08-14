@@ -102,7 +102,7 @@ BOOL CLicenseDlg::OnInitDialog()
 	//////////////////////////////////////////////////////////////////////////
 
 	//设置静态文本框的字体
-	f.CreatePointFont(110,"黑体");//这种更简单
+	f.CreatePointFont(FONT_SIZE,"黑体");//这种更简单
 	((CStatic *)this->GetDlgItem(IDC_STATIC_LICENSE_INFO))->SetFont(&f,true);
 	((CStatic *)this->GetDlgItem(IDC_STATIC_LICENSE_RESTOREINFO))->SetFont(&f,true);
 	((CStatic *)this->GetDlgItem(IDC_STATIC_LICENSE_BACKINFO))->SetFont(&f,true);

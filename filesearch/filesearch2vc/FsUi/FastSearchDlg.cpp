@@ -332,6 +332,7 @@ void CFastSearchDlg::OnChangeEditSearchKey()
 	GetDlgItemText(IDC_EDIT_SEARCH_KEY, strKey);
 	if(strKey == EDIT_TEXT)
 	{
+			OutputDebugString("[slfile]OnChangeEditSearchKey");
 		SetDlgItemText(IDC_EDIT_SEARCH_KEY, "");
 	}
 
@@ -591,11 +592,13 @@ HBRUSH CFastSearchDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	// TODO: Change any attributes of the DC here
 	if(pWnd-> GetDlgCtrlID() == IDC_EDIT_SEARCH_KEY) 
 	{ 
-		if (m_bEditForce)
+		if (!m_bEditForce)
 		{
 			pDC-> SetTextColor(RGB(192, 192, 192)); 
 		}else
+		{
 			pDC-> SetTextColor(RGB(0, 0, 0)); 
+		}
 	} 	
 
 	// TODO: Return a different brush if the default is not desired
@@ -749,7 +752,7 @@ void CFastSearchDlg::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
 	if(nState==WA_INACTIVE && m_bDestory)
 	{
 		//DestroyWindow();  //DoModal函数不会返回
-//		CDialog::OnCancel();
+		CDialog::OnCancel();
 	}
 }
 
@@ -774,6 +777,7 @@ void CFastSearchDlg::OnSetfocusEditSearchKey()
 	GetDlgItemText(IDC_EDIT_SEARCH_KEY, strKey);
 	if(strKey == EDIT_TEXT)
 	{
+		OutputDebugString("[slfile]OnSetfocusEditSearchKey");
 		SetDlgItemText(IDC_EDIT_SEARCH_KEY, "");
 	}	
 }
