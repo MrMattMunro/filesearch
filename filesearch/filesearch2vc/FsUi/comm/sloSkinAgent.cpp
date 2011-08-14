@@ -22,6 +22,7 @@ sloSkinAgent::sloSkinAgent()
 	memset(&m_szSkinPath, NULL, MAX_PATH);	
 	memset(&m_szSkinName, NULL, MAX_PATH*2);
 	memset(&m_szSkinProPath, NULL, MAX_PATH);
+	memset(&m_szVerProPath, NULL, MAX_PATH);
 }
 
 sloSkinAgent::~sloSkinAgent()
@@ -30,13 +31,17 @@ sloSkinAgent::~sloSkinAgent()
 }
 
 #define  SKIN_PATH			"client\\Styles\\"
-//#define  SKIN_NAME			"Office2007"
 #define  SKIN_NAME_EXT		".cjstyles"
 
 #define  SKIN_PRO_NAME "tomcat\\webapps\\slfile\\WEB-INF\\classes\\com\\web\\searchlocal\\properties\\skin.properties"
-
+#define  VERSION_PRO_NAME "tomcat\\webapps\\slfile\\WEB-INF\\classes\\com\\web\\searchlocal\\properties\\update.properties"
 BOOL sloSkinAgent::GetSkinPath()
 {
+	if (strlen(m_szSkinPath) != 0)
+	{
+		return TRUE;
+	}
+
 	char szFileExePath[MAX_PATH] = {0};
 	sloRegAgent reg;
 	if(!reg.ReadInstallPath(szFileExePath))
@@ -51,11 +56,11 @@ BOOL sloSkinAgent::GetSkinPath()
 	sprintf(m_szSkinPath,"%s%s%s",drive, dir,SKIN_PATH);
 
 	sprintf(m_szSkinProPath,"%s%s%s",drive, dir,SKIN_PRO_NAME);	
-	
+	sprintf(m_szVerProPath,"%s%s%s",drive, dir,VERSION_PRO_NAME);	
+
 	return TRUE;
 }
 
-#define THREME_NAME_NORMAL					"<ƒ¨»œ∆§∑Ù>"
 #define THREME_NAME_STYLES_2007				"Office2007.cjstyles"
 #define THREME_NAME_STYLES_VISTA			"Vista.cjstyles"
 #define THREME_NAME_STYLES_XP_ROYALE		"WinXP.Royale.cjstyles"
@@ -216,4 +221,26 @@ void sloSkinAgent::UpdateSkin(char* lpSkinName)
 	
 	//–¥≈‰÷√Œƒº˛
 	sloCommAgent::WritePropertyfileString(SKINE_POR_KEY_NAME, lpSkinName, m_szSkinProPath);
+}
+
+#define VERSION_POR_KEY_NAME	"version"
+std::string sloSkinAgent::GetVersion()
+{
+	if (strlen(m_szVerProPath) == 0)
+	{
+		GetSkinPath();
+	}
+
+	char szVersion[MAX_PATH] = {0};
+	sloCommAgent::GetPropertyfileString(VERSION_POR_KEY_NAME, "1.0.0.0", szVersion, MAX_PATH, m_szVerProPath );
+	
+	std::string strVersion;
+	if (strlen(szVersion) == 0)
+	{
+		strVersion = "1.0.0.0";
+	}else
+		strVersion = szVersion;
+
+	return strVersion;
+
 }

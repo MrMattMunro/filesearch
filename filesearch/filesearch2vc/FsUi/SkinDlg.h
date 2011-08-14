@@ -10,6 +10,8 @@
 /////////////////////////////////////////////////////////////////////////////
 // CSkinDlg dialog
 #include "EnBitmap.h"
+#include "hyperlink.h"
+
 class CSkinDlg : public  CXTPPropertyPage/*CDialog*/
 {
 // Construction
@@ -19,8 +21,9 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CSkinDlg)
 	enum { IDD = IDD_DIALOG_SKIN };
+	CHyperLink	m_emailAddressLink;
+	CHyperLink	m_urlLink;
 	CListBox	m_skinbox;
-
 	BOOL	m_bGrayscale;
 	BOOL	m_bRotate;
 	BOOL	m_bShearDown;

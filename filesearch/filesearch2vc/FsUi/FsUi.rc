@@ -66,8 +66,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2011,8,14,1
- PRODUCTVERSION 1,0,0,29
+ FILEVERSION 2011,8,15,1
+ PRODUCTVERSION 1,0,0,30
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -85,14 +85,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "slfile\0"
             VALUE "FileDescription", "FsUi DLL\0"
-            VALUE "FileVersion", "2011, 8, 14, 1\0"
+            VALUE "FileVersion", "2011, 8, 15, 1\0"
             VALUE "InternalName", "FsUi\0"
             VALUE "LegalCopyright", "版权所有 (C) 2011\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "FsUi.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "FsUi Dynamic Link Library\0"
-            VALUE "ProductVersion", "1, 0, 0, 29\0"
+            VALUE "ProductVersion", "1, 0, 0, 30\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -302,9 +302,10 @@ BEGIN
     ICON            IDI_ICON_POINT3,IDC_STATIC,6,9,20,20
     LTEXT           "请选项程序皮肤:",IDC_STATIC_SKIN_SELECT,28,30,57,8
     LISTBOX         IDC_LIST_SKIN,28,42,65,146,LBS_SORT | 
-                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | 
+                    WS_TABSTOP
     LTEXT           "皮肤预览:",IDC_STATIC_SKIN_PREVIEW,98,30,35,8
-    GROUPBOX        "",IDC_STATIC,99,39,143,116
+    GROUPBOX        "",IDC_STATIC,99,39,140,114
     RTEXT           "作者:",IDC_STATIC_AUTHOR,100,158,44,8
     LTEXT           "slfile",IDC_STATIC_AUTHOR_NAME,149,158,73,10
     RTEXT           "主页:",IDC_STATIC_HOMEPAGE,100,170,44,8
@@ -391,25 +392,16 @@ IDB_BITMAP_CHECK_ALLCIHUI BITMAP  DISCARDABLE     "res\\find_nextb24_h.bmp"
 IDB_BITMAP_CHECK_CIHUI  BITMAP  DISCARDABLE     "res\\db_find16_h.bmp"
 IDB_BITMAP_REGISTER     BITMAP  DISCARDABLE     "res\\db_register16_h.bmp"
 IDB_BITMAP_FOLDER2      BITMAP  DISCARDABLE     "res\\folder_open16.bmp"
-IDB_BITMAP_FAST_SCH     BITMAP  DISCARDABLE     "res\\Sherlock.bmp"
-IDB_BITMAP_ALPHAFIND    BITMAP  DISCARDABLE     "res\\AlphaFind.bmp"
 IDB_BITMAP_FEIQ_FIND    BITMAP  DISCARDABLE     "res\\feiqfind.bmp"
 IDB_BITMAP_FEIQ_CLOSE   BITMAP  DISCARDABLE     "res\\feiqclose.bmp"
 IDB_BITMAP_BACK         BITMAP  DISCARDABLE     "res\\back16.bmp"
 IDB_BITMAP_RESTORE      BITMAP  DISCARDABLE     "res\\forward16.bmp"
 IDB_BITMAP_THREME_NAME_2007_Aqua BITMAP  DISCARDABLE     "res\\skin\\THREME_NAME_2007_Aqua.bmp"
-IDB_BITMAP_THREME_NAME_2007_Black BITMAP  DISCARDABLE     "res\\skin\\THREME_NAME_2007_Black.bmp"
-IDB_BITMAP_THREME_NAME_2007_Blue BITMAP  DISCARDABLE     "res\\skin\\THREME_NAME_2007_Blue.bmp"
 IDB_BITMAP_THREME_NAME_2007_LightBlue BITMAP  DISCARDABLE     "res\\skin\\THREME_NAME_2007_LightBlue.bmp"
-IDB_BITMAP_THREME_NAME_2007_Sliver BITMAP  DISCARDABLE     "res\\skin\\THREME_NAME_2007_Sliver.bmp"
 IDB_BITMAP_THREME_NAME_VISTA_Black2 BITMAP  DISCARDABLE     "res\\skin\\THREME_NAME_VISTA_Black2.bmp"
-IDB_BITMAP_THREME_NAME_VISTA_Black BITMAP  DISCARDABLE     "res\\skin\\THREME_NAME_VISTA_Black.bmp"
-IDB_BITMAP_THREME_NAME_VISTA_Blue BITMAP  DISCARDABLE     "res\\skin\\THREME_NAME_VISTA_Blue.bmp"
 IDB_BITMAP_THREME_NAME_VISTA_Sliver BITMAP  DISCARDABLE     "res\\skin\\THREME_NAME_VISTA_Sliver.bmp"
-IDB_BITMAP_THREME_NAME_XP_LUNA_Blue BITMAP  DISCARDABLE     "res\\skin\\THREME_NAME_XP_LUNA_Blue.bmp"
 IDB_BITMAP_THREME_NAME_XP_LUNA_HomeStead BITMAP  DISCARDABLE     "res\\skin\\THREME_NAME_XP_LUNA_HomeStead.bmp"
 IDB_BITMAP_THREME_NAME_XP_LUNA_Metallic BITMAP  DISCARDABLE     "res\\skin\\THREME_NAME_XP_LUNA_Metallic.bmp"
-IDB_BITMAP_THREME_NAME_XP_ROYALE BITMAP  DISCARDABLE     "res\\skin\\THREME_NAME_XP_ROYALE.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //

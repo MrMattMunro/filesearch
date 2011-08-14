@@ -374,7 +374,7 @@ void CLicenseDlg::OnButtonLicenseRestore()
 	GetDlgItemText(IDC_EDIT_LICENSE_RESTORE_PATH, strPath);
 	if (strPath.GetLength() == 0)
 	{
-		MessageBox(g_lag.LoadString("message.selectlicresorepath"), g_lag.LoadString("title.licrestore"), MB_ICONWARNING);
+		MessageBox(g_lag.LoadString("message.selectlicrestorepath"), g_lag.LoadString("title.licrestore"), MB_ICONWARNING);
 		return ;
 	}
 	
