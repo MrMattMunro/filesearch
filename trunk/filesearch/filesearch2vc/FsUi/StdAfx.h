@@ -91,6 +91,8 @@ extern sloLanguageAgent g_lag;
 #define THREME_NAME_XP_ROYALE		"WinXP.Royale"
 #define THREME_NAME_XP_LUNA			"WinXP.Luna"
 
+#define FONT_SIZE		119
+
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 

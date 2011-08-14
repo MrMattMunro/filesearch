@@ -354,6 +354,10 @@ SOURCE=.\res\icons\point\ARROW6A.ICO
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\icons\point\ARW03RT.ICO
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\icons\point\ARW05RT.ICO
 # End Source File
 # Begin Source File
@@ -575,6 +579,10 @@ SOURCE=.\res\SYS_SET.ico
 # Begin Source File
 
 SOURCE=.\res\tools1.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\icons\point\TRFFC02.ICO
 # End Source File
 # Begin Source File
 
