@@ -85,14 +85,27 @@ extern sloLanguageAgent g_lag;
 #define TXT_NAME	"txt"
 #define HTML_NAME	"html"
 
-#define THREME_NAME_NORMAL			"<Ä¬ÈÏÆ¤·ô>"
-#define THREME_NAME_2007			"Office2007"
-#define THREME_NAME_VISTA			"Vista"
-#define THREME_NAME_XP_ROYALE		"WinXP.Royale"
-#define THREME_NAME_XP_LUNA			"WinXP.Luna"
+#define THREME_NAME_NORMAL					"<Ä¬ÈÏÆ¤·ô>"
+#define THREME_NAME_2007_Blue				"Office2007_Blue"
+#define THREME_NAME_2007_LightBlue			"Office2007_LightBlue"
+#define THREME_NAME_2007_Aqua				"Office2007_Aqua"
+#define THREME_NAME_2007_Sliver				"Office2007_Sliver"
+#define THREME_NAME_2007_Black				"Office2007_Black"
+
+#define THREME_NAME_VISTA_Black				"Vista_Black"
+#define THREME_NAME_VISTA_Black2			"Vista_Black2"
+#define THREME_NAME_VISTA_Blue				"Vista_Blue"
+#define THREME_NAME_VISTA_Sliver			"Vista_Sliver"
+
+#define THREME_NAME_XP_ROYALE				"WinXP.Royale"
+
+#define THREME_NAME_XP_LUNA_Blue			"WinXP.Luna_Blue"
+#define THREME_NAME_XP_LUNA_HomeStead		"WinXP.Luna_HomeStead"
+#define THREME_NAME_XP_LUNA_Metallic		"WinXP.Luna_Metallic"
 
 #define FONT_SIZE		119
 
+enum{PEN_STYLE_SOLID,PEN_STYLE_DASH,PEN_STYLE_DOT};
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 

@@ -46,6 +46,28 @@ typedef struct _License_Back_Head
 	LicenseInfo licinfo;
 }License_Back_Head,*LPLicense_Back_Head;
 
+
+typedef struct _Ext_Filters
+{
+	std::string strType;
+	std::string strExts;
+}Ext_Filters, *LPExt_Filters;
+
+
+typedef struct _Skin_Prop
+{
+	char szSkinShowName[MAX_PATH];
+	char szSkinStyleName[MAX_PATH];
+	char szSkinIniName[MAX_PATH];
+	_Skin_Prop()
+	{
+		memset(szSkinShowName, NULL, MAX_PATH);
+		memset(szSkinStyleName, NULL, MAX_PATH);
+		memset(szSkinIniName, NULL, MAX_PATH);
+	}
+}Skin_Prop, *LPSkin_Prop;
+
+
 #pragma pack(pop)
 
 #endif

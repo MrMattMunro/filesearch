@@ -66,7 +66,7 @@ int sltSetSheetDlgThread::run()
 		ps.AddPage(&skindlg);
 		ps.AddPage(&licdlg);
 		
-		ps.SetResizable();
+		ps.SetResizable(FALSE);
 		
 		ps.DoModal();
 	} while (0);

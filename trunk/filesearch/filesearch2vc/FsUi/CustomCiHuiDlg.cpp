@@ -45,6 +45,7 @@ BEGIN_MESSAGE_MAP(CCustomCiHuiDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON_BROWSE_CIHUI, OnButtonBrowseCihui)
 	ON_BN_CLICKED(IDC_CHECK_OVERCIHUI, OnCheckOvercihui)
 	ON_WM_CTLCOLOR()
+	ON_WM_PAINT()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -179,4 +180,34 @@ HBRUSH CCustomCiHuiDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	
 	// TODO: Return a different brush if the default is not desired
 	return hbr;
+}
+
+void CCustomCiHuiDlg::OnPaint() 
+{
+	CPaintDC dc(this); // device context for painting
+	
+	// TODO: Add your message handler code here
+	COLORREF crColor = RGB(0, 0, 255);
+	CPen NewPen,*pOldPen;
+	switch(PEN_STYLE_DOT)
+	{
+	case PEN_STYLE_SOLID:
+		NewPen.CreatePen(PS_SOLID,1,crColor);
+		break;
+	case PEN_STYLE_DASH:
+		NewPen.CreatePen(PS_DASH,1,crColor);
+		break;
+	case PEN_STYLE_DOT:
+		NewPen.CreatePen(PS_DOT,1,crColor);
+		break;
+	}
+	pOldPen=dc.SelectObject(&NewPen);
+	dc.MoveTo(120, 30);
+	dc.LineTo(420, 30);
+	
+	dc.MoveTo(120, 102);
+	dc.LineTo(420, 102);
+
+	dc.SelectObject(pOldPen);
+	// Do not call CDialog::OnPaint() for painting messages
 }

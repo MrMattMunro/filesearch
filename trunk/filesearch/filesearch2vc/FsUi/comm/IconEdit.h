@@ -4,7 +4,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // CIconWnd window
 
-#define  IDC_BTN_TEST 1000
+#define  IDC_BTN_TEST 2014
 
 class CIconWnd : public CButton
 {
