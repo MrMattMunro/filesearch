@@ -578,6 +578,58 @@ SOURCE=.\res\SYS_SET.ico
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\skin\THREME_NAME_2007_Aqua.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\skin\THREME_NAME_2007_Black.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\skin\THREME_NAME_2007_Blue.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\skin\THREME_NAME_2007_LightBlue.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\skin\THREME_NAME_2007_Sliver.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\skin\THREME_NAME_VISTA_Black.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\skin\THREME_NAME_VISTA_Black2.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\skin\THREME_NAME_VISTA_Blue.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\skin\THREME_NAME_VISTA_Sliver.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\skin\THREME_NAME_XP_LUNA_Blue.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\skin\THREME_NAME_XP_LUNA_HomeStead.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\skin\THREME_NAME_XP_LUNA_Metallic.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\skin\THREME_NAME_XP_ROYALE.bmp
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\tools1.ico
 # End Source File
 # Begin Source File
@@ -592,6 +644,10 @@ SOURCE=.\res\word.ico
 # Begin Group "utils"
 
 # PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\comm\comm.h
+# End Source File
 # Begin Source File
 
 SOURCE=.\comm\FilenameEdit.cpp

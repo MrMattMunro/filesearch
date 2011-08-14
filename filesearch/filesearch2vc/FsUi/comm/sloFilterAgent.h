@@ -9,11 +9,6 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-typedef struct _Ext_Filters
-{
-	std::string strType;
-	std::string strExts;
-}Ext_Filters, *LPExt_Filters;
 
 class sloFilterAgent  
 {

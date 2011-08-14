@@ -90,10 +90,23 @@ BOOL CSkinDlg::OnInitDialog()
 	SetDlgItemText(IDC_STATIC_SKIN_EAMIL_NAME, g_lag.LoadString("label.skinemailname"));
 
 	m_skinbox.AddString(THREME_NAME_NORMAL);
-	m_skinbox.AddString(THREME_NAME_2007);
-	m_skinbox.AddString(THREME_NAME_VISTA);
+	m_skinbox.AddString(THREME_NAME_2007_Blue);
+	m_skinbox.AddString(THREME_NAME_2007_LightBlue);
+	m_skinbox.AddString(THREME_NAME_2007_Aqua);
+	m_skinbox.AddString(THREME_NAME_2007_Sliver);
+	m_skinbox.AddString(THREME_NAME_2007_Black);
+
+	m_skinbox.AddString(THREME_NAME_VISTA_Black);
+	m_skinbox.AddString(THREME_NAME_VISTA_Black2);
+	m_skinbox.AddString(THREME_NAME_VISTA_Blue);
+	m_skinbox.AddString(THREME_NAME_VISTA_Sliver);
+
+	m_skinbox.AddString(THREME_NAME_XP_LUNA_Blue);
+	m_skinbox.AddString(THREME_NAME_XP_LUNA_HomeStead);
+	m_skinbox.AddString(THREME_NAME_XP_LUNA_Metallic);
+
 	m_skinbox.AddString(THREME_NAME_XP_ROYALE);
-	m_skinbox.AddString(THREME_NAME_XP_LUNA);
+
 	m_skinbox.SetCurSel(0);
 
 	//////////////////////////////////////////////////////////////////////////
@@ -143,28 +156,65 @@ void CSkinDlg::OnSelchangeListSkin()
 	m_skinbox.GetText(nIndex, strText);
 	memset(&m_szSkinTheme, NULL, MAX_PATH);
 	if (strText == THREME_NAME_NORMAL)
-		strText = THREME_NAME_VISTA;
+		strText = THREME_NAME_2007_LightBlue;
 
 	memcpy(&m_szSkinTheme, strText.GetBuffer(0), strText.GetLength());
 
 	SetModified();
 	//±‰ªª‘§¿¿Õº–Œ
-//	MessageBox(strText);
 
 	CEnBitmap bitmap;
 	CBitmap bit;
-	if (strText == THREME_NAME_2007 )
+	//office2007
+	if (strText == THREME_NAME_2007_Blue )
 	{
-		bit.LoadBitmap(IDB_BITMAP_OFFICE2007);
-	}else if (strText == THREME_NAME_NORMAL || strText == THREME_NAME_VISTA )
+		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_2007_Blue);
+	}else if (strText == THREME_NAME_NORMAL || strText == THREME_NAME_2007_LightBlue )
 	{
-		bit.LoadBitmap(IDB_BITMAP_VISTA);
-	}else if (strText == THREME_NAME_XP_ROYALE)
+		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_2007_LightBlue);
+	}else if (strText == THREME_NAME_2007_Aqua)
 	{
-		bit.LoadBitmap(IDB_BITMAP_XPPROYALE);
-	}else if (strText == THREME_NAME_XP_LUNA)
+		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_2007_Aqua);
+	}else if (strText == THREME_NAME_2007_Sliver)
 	{
-		bit.LoadBitmap(IDB_BITMAP_XPPLUNA);
+		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_2007_Sliver);
+	}else if (strText == THREME_NAME_2007_Black)
+	{
+		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_2007_Black);
+	}
+	
+	//vista
+	if (strText == THREME_NAME_VISTA_Black)
+	{
+		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_VISTA_Black);
+	}else if (strText == THREME_NAME_VISTA_Black2)
+	{
+		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_VISTA_Black2);
+	}else if (strText == THREME_NAME_VISTA_Blue)
+	{
+		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_VISTA_Blue);
+	}else if (strText == THREME_NAME_VISTA_Sliver)
+	{
+		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_VISTA_Sliver);
+	}
+
+
+	//WinXP.Luna
+	if (strText == THREME_NAME_XP_LUNA_Blue)
+	{
+		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_XP_LUNA_Blue);
+	}else if (strText == THREME_NAME_XP_LUNA_HomeStead)
+	{
+		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_XP_LUNA_HomeStead);
+	}else if (strText == THREME_NAME_XP_LUNA_Metallic)
+	{
+		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_XP_LUNA_Metallic);
+	}
+
+	//WinXP.Royale
+	if (strText == THREME_NAME_XP_ROYALE)
+	{
+		bit.LoadBitmap(IDB_BITMAP_THREME_NAME_XP_ROYALE);
 	}
 
 	if (bitmap.CopyImage(&bit))
@@ -319,6 +369,26 @@ void CSkinDlg::OnPaint()
 			m_sizePrev.cy = BM.bmHeight;
 		}
 	}
+
+	COLORREF crColor = RGB(0, 0, 255);
+	CPen NewPen,*pOldPen;
+	switch(PEN_STYLE_DOT)
+	{
+	case PEN_STYLE_SOLID:
+		NewPen.CreatePen(PS_SOLID,1,crColor);
+		break;
+	case PEN_STYLE_DASH:
+		NewPen.CreatePen(PS_DASH,1,crColor);
+		break;
+	case PEN_STYLE_DOT:
+		NewPen.CreatePen(PS_DOT,1,crColor);
+		break;
+	}
+	pOldPen=dc.SelectObject(&NewPen);
+	dc.MoveTo(120, 30);
+	dc.LineTo(420, 30);
+	
+	dc.SelectObject(pOldPen);
 	// Do not call CDialog::OnPaint() for painting messages
 }
 

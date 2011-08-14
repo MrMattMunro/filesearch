@@ -45,6 +45,7 @@ BEGIN_MESSAGE_MAP(CLicenseDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON_BROWSE_BACK_PATH, OnButtonBrowseBackPath)
 	ON_BN_CLICKED(IDC_BUTTON_BROWSE_RESTORE_PATH, OnButtonBrowseRestorePath)
 	ON_BN_CLICKED(IDC_BUTTON_LICENSE_RESTORE, OnButtonLicenseRestore)
+	ON_WM_PAINT()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -389,4 +390,41 @@ void CLicenseDlg::OnButtonLicenseRestore()
 		MessageBox(szMsg, g_lag.LoadString("title.licrestore"), MB_ICONERROR);	
 	}	
 
+}
+
+void CLicenseDlg::OnPaint() 
+{
+	CPaintDC dc(this); // device context for painting
+	
+	// TODO: Add your message handler code here
+	COLORREF crColor = RGB(0, 0, 255);
+	CPen NewPen,*pOldPen;
+	switch(PEN_STYLE_DOT)
+	{
+	case PEN_STYLE_SOLID:
+		NewPen.CreatePen(PS_SOLID,1,crColor);
+		break;
+	case PEN_STYLE_DASH:
+		NewPen.CreatePen(PS_DASH,1,crColor);
+		break;
+	case PEN_STYLE_DOT:
+		NewPen.CreatePen(PS_DOT,1,crColor);
+		break;
+	}
+	pOldPen=dc.SelectObject(&NewPen);
+	dc.MoveTo(120, 30);
+	dc.LineTo(420, 30);
+
+	if (m_licAgent.m_bDown)
+	{
+		dc.MoveTo(120, 213);
+		dc.LineTo(420, 213);
+	}else
+	{
+		dc.MoveTo(120, 155);
+		dc.LineTo(420, 155);
+	}
+
+	dc.SelectObject(pOldPen);	
+	// Do not call CDialog::OnPaint() for painting messages
 }

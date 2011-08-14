@@ -60,6 +60,7 @@ BEGIN_MESSAGE_MAP(CSetAttributeDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON_BROWSER_PDF, OnButtonBrowserPdf)
 	ON_BN_CLICKED(IDC_BUTTON_BROWSER_TXT, OnButtonBrowserTxt)
 	ON_WM_CTLCOLOR()
+	ON_WM_PAINT()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -329,4 +330,30 @@ HBRUSH CSetAttributeDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 	// TODO: Return a different brush if the default is not desired
 	return hbr;
+}
+
+void CSetAttributeDlg::OnPaint() 
+{
+	CPaintDC dc(this); // device context for painting
+	
+	// TODO: Add your message handler code here
+	COLORREF crColor = RGB(0, 0, 255);
+	CPen NewPen,*pOldPen;
+	switch(PEN_STYLE_DOT)
+	{
+	case PEN_STYLE_SOLID:
+		NewPen.CreatePen(PS_SOLID,1,crColor);
+		break;
+	case PEN_STYLE_DASH:
+		NewPen.CreatePen(PS_DASH,1,crColor);
+		break;
+	case PEN_STYLE_DOT:
+		NewPen.CreatePen(PS_DOT,1,crColor);
+		break;
+	}
+	pOldPen=dc.SelectObject(&NewPen);
+	dc.MoveTo(120, 30);
+	dc.LineTo(420, 30);
+	dc.SelectObject(pOldPen);
+	// Do not call CDialog::OnPaint() for painting messages
 }

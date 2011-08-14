@@ -149,7 +149,7 @@ void CFsUiTestDlg::OnSysCommand(UINT nID, LPARAM lParam)
 // If you add a minimize button to your dialog, you will need the code below
 //  to draw the icon.  For MFC applications using the document/view model,
 //  this is automatically done for you by the framework.
-
+enum{PEN_STYLE_SOLID,PEN_STYLE_DASH,PEN_STYLE_DOT};
 void CFsUiTestDlg::OnPaint() 
 {
 	if (IsIconic())
@@ -168,9 +168,29 @@ void CFsUiTestDlg::OnPaint()
 
 		// Draw the icon
 		dc.DrawIcon(x, y, m_hIcon);
+
 	}
 	else
 	{
+		CPaintDC dc(this); // device context for painting
+		COLORREF crColor = 255;
+		CPen NewPen,*pOldPen;
+		switch(PEN_STYLE_DOT)
+		{
+		case PEN_STYLE_SOLID:
+			NewPen.CreatePen(PS_SOLID,1,crColor);
+			break;
+		case PEN_STYLE_DASH:
+			NewPen.CreatePen(PS_DASH,1,crColor);
+			break;
+		case PEN_STYLE_DOT:
+			NewPen.CreatePen(PS_DOT,1,crColor);
+			break;
+		}
+		pOldPen=dc.SelectObject(&NewPen);
+		dc.MoveTo(50,50);
+		dc.LineTo(200, 50);
+		dc.SelectObject(pOldPen);
 		CDialog::OnPaint();
 	}
 }

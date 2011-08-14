@@ -51,6 +51,7 @@ protected:
 	afx_msg void OnButtonBrowseBackPath();
 	afx_msg void OnButtonBrowseRestorePath();
 	afx_msg void OnButtonLicenseRestore();
+	afx_msg void OnPaint();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 

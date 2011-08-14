@@ -19,10 +19,13 @@ public:
 	void UpdateSkin(char* lpSkinName);
 protected:
 	BOOL GetSkinPath();
+	BOOL InitSkinProp();
 public:
 	char m_szSkinPath[MAX_PATH];
-	char m_szSkinName[MAX_PATH];
+	char m_szSkinName[MAX_PATH*2];
 	char m_szSkinProPath[MAX_PATH];
+
+	std::vector<Skin_Prop> m_skinPropList;
 };
 
 #endif // !defined(AFX_SLOSKINAGENT_H__C3DDDE06_6824_4E85_8A4D_31EE5E7E4319__INCLUDED_)
