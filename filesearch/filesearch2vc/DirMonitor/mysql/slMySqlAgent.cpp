@@ -206,6 +206,9 @@ std::string GetFileLastModifyTime(char* szFileName, std::string strDefaultValue)
 			sprintf(szDateTime,"%04d-%02d-%02d %02d:%02d:%02d",
 				stLocal.wYear, stLocal.wMonth, stLocal.wDay, stLocal.wHour, stLocal.wMinute, stLocal.wSecond);
 			strDateTime = szDateTime;
+			
+			FindClose(hFind);
+
 		}
 		catch (...)
 		{
