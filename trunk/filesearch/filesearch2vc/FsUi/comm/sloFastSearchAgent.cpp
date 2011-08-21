@@ -212,7 +212,7 @@ DWORD sloFastSearchAgent::GetSearchRecords_Recent(int nDays)
 	//select distinct path from commoninfo.t_recent_changeinfo where TO_DAYS(NOW())-TO_DAYS(systime) >= #days# and operflg != 3 AND operflg != 4 (没有删除与重命名)
 //	std::string strQuerySQL = "select distinct path from t_recent_changeinfo where TO_DAYS(NOW())-TO_DAYS(systime) <= %d and operflg != 3 AND operflg != 4";
 	char szSql[1024] = {0};
-	sprintf(szSql, "select distinct path from t_recent_changeinfo where TO_DAYS(NOW())-TO_DAYS(systime) <= %d and operflg='2' limit 0,500", nDays-1);
+	sprintf(szSql, "select distinct path from t_recent_changeinfo where TO_DAYS(NOW())-TO_DAYS(systime) <= %d and operflg='2' Order By systime desc limit 0,500", nDays-1);
 	
 	return SearchRecords(szSql, TRUE);	
 }
