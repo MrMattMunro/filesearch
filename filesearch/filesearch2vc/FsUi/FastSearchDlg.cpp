@@ -332,7 +332,6 @@ void CFastSearchDlg::OnChangeEditSearchKey()
 	GetDlgItemText(IDC_EDIT_SEARCH_KEY, strKey);
 	if(strKey == EDIT_TEXT)
 	{
-			OutputDebugString("[slfile]OnChangeEditSearchKey");
 		SetDlgItemText(IDC_EDIT_SEARCH_KEY, "");
 	}
 
@@ -490,7 +489,11 @@ void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, L
 		int nNewSize = strlen(lpszCaption) + 5;
 		char* pCaption = new char[nNewSize + 1];
 		memset(pCaption, NULL, nNewSize + 1);
-		sprintf(pCaption,"%s (%d)",lpszCaption, nSize);
+		if (bShowTextItem)
+		{
+			sprintf(pCaption,"%s (%d)",lpszCaption, nSize);
+		}else
+			sprintf(pCaption,"%s",lpszCaption);
 
 		pPointer->SetCaption(pCaption);
 	
@@ -618,7 +621,7 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 	CString strFileName = pItem->GetCaption();
 	CString strGroupCaption = pItem->GetItemGroup()->GetCaption();
 	if (strGroupCaption.Find(HTML_NAME, 0) != -1)
-	{
+	{  
 		//html ,去除文件名后的(%d)
 		std::string sFileName = strFileName.GetBuffer(0);
 		int nPos = sFileName.find_last_of('(');
