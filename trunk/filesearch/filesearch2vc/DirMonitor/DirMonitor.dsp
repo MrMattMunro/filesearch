@@ -120,11 +120,11 @@ SOURCE=.\FilterAgent.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\mysql\mysqlcomm.cpp
+SOURCE=..\FsUi\comm\mysqlcomm.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\mysql\MySQLDB.cpp
+SOURCE=..\FsUi\comm\MySQLDB.cpp
 # End Source File
 # Begin Source File
 

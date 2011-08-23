@@ -12,7 +12,7 @@
 typedef struct _DbPools
 {
 	std::string strDBName;
-	CMySQLDB*	pSqlDB;
+	mysqlcomm*	pSqlDB;
 }DbPools,*LPDbPools;
 
 class slMySqlAgent 
@@ -25,13 +25,13 @@ public:
 
 private:
 	bool LogRecordDB(std::string strDbName, File_Action_Log FileLog);
-	bool AddRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog);
-	bool AddRecentRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog, BOOL bRecentRec = TRUE);
+	bool AddRec(mysqlcomm* pMySqlDB, File_Action_Log FileLog);
+	bool AddRecentRec(mysqlcomm* pMySqlDB, File_Action_Log FileLog, BOOL bRecentRec = TRUE);
 
 	string GetOperFlag(File_Action_Log FileLog);
 	string ConverSqlPath(string strPath);
 
-	CMySQLDB* GetObjectDB(std::string strSearchName);
+	mysqlcomm* GetObjectDB(std::string strSearchName);
 	void ReleassObjectsDB();
 private:
 	std::vector<DbPools> m_DbPools;
