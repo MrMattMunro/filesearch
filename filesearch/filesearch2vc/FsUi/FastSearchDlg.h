@@ -41,6 +41,8 @@ public:
 	void AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<string> DespList,LPCTSTR lpszTooltip = "", BOOL bShowTextItem = TRUE);
 	void AddToolboxGroup(UINT nID, LPCTSTR lpszCaption, LPCTSTR lpszTooltip = "", int nIconIndex = 0);
 
+	void AddLinkItemEx(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<string> DespList,LPCTSTR lpszTooltip = "", BOOL bShowTextItem = TRUE);
+
 	void ClearGroupsItems(); 
 
 	void UpdateGroupsCaption(); 

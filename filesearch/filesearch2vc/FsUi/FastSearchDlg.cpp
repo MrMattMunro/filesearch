@@ -369,7 +369,7 @@ void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
 			int nID = GetFileID(m_agent.m_RecList[i].szFileType);
 			//////////////////////////////////////////////////////////////////////////
 			//显示到树中
-			AddLinkItem(nID, i,1,m_agent.m_RecList[i].szFileName,m_agent.m_RecList[i].DespList, m_agent.m_RecList[i].szFilePath);
+			AddLinkItemEx(nID, i,1,m_agent.m_RecList[i].szFileName,m_agent.m_RecList[i].DespList, m_agent.m_RecList[i].szFilePath);
 		}
 	}
 
@@ -440,6 +440,7 @@ BOOL CFastSearchDlg::CreateTaskPanel()
 	m_wndTaskPanel.SetBehaviour(xtpTaskPanelBehaviourExplorer/*xtpTaskPanelBehaviourToolbox*/);
 	m_wndTaskPanel.SetTheme(xtpTaskPanelThemeOfficeXPPlain/*xtpTaskPanelThemeToolbox*/);
 	m_wndTaskPanel.SetSelectItemOnFocus(TRUE);
+	m_wndTaskPanel.SetHotTrackStyle(xtpTaskPanelHighlightText);
 	m_wndTaskPanel.AllowDrag(TRUE);
 
 	int nMargin = 0;
@@ -519,6 +520,57 @@ void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, L
 	pPointer->SetItemSelected(TRUE);
 	pPointer->AllowDrag(FALSE);
 	pPointer->AllowDrop(FALSE);
+}
+
+void CFastSearchDlg::AddLinkItemEx(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<string> DespList,LPCTSTR lpszTooltip/* = ""*/,BOOL bShowTextItem/* = FALSE*/)
+{	
+	CXTPTaskPanelGroup* pFolder = m_listMap[nFolderID].pGroup;
+	if (!pFolder)
+		return ;
+	
+	m_listMap[nFolderID].nItemSize++;
+	CXTPTaskPanelGroupItem* pPointer = pFolder->AddLinkItem(nItemID, 0/*imageid[nFolderID-1]*/);
+	pPointer->SetTooltip(lpszTooltip);
+	int nSize = DespList.size();
+	if (nFolderID == 6)
+	{
+		//html不显示具体内容，只显示个数
+		int nNewSize = strlen(lpszCaption) + 5;
+		char* pCaption = new char[nNewSize + 1];
+		memset(pCaption, NULL, nNewSize + 1);
+		if (bShowTextItem)
+		{
+			sprintf(pCaption,"%s (%d)",lpszCaption, nSize);
+		}else
+			sprintf(pCaption,"%s",lpszCaption);
+		
+		pPointer->SetCaption(pCaption);
+		
+		if (pCaption)
+		{
+			delete[] pCaption;
+			pCaption = NULL;
+		}
+	}else
+	{
+		pPointer->SetCaption(lpszCaption);
+		if (bShowTextItem)
+		{
+			for (int i = 0; i < nSize; i++)
+			{
+				std::string strTextItem = "      " + DespList[i];
+				pPointer = pFolder->AddLinkItem(nItemID, 0/*imageid[nFolderID-1]*/);
+				pPointer->SetCaption(strTextItem.c_str());
+
+				//pFolder->AddTextItem(strTextItem.c_str());
+				pPointer->SetTextColor(RGB(0, 0, 0));
+			}
+		}
+	}
+	
+// 	pPointer->SetItemSelected(TRUE);
+// 	pPointer->AllowDrag(FALSE);
+// 	pPointer->AllowDrop(FALSE);
 }
 
 //清空LinkItem
