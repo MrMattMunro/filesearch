@@ -137,7 +137,7 @@ SOURCE=.\comm\mysqlcomm.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\mysql\MySQLDB.cpp
+SOURCE=.\comm\MySQLDB.cpp
 # End Source File
 # Begin Source File
 
