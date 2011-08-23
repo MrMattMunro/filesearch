@@ -58,15 +58,15 @@ bool slMySqlAgent::LogRecordDB(std::string strDbName, File_Action_Log FileLog)
 	do 
 	{	
 		//建立索引，每种连接对应一个DB数据库，保证数据库的连接数与索引数目一致	
-		CMySQLDB* pMySqlDB = GetObjectDB(strDbName);
-		if (pMySqlDB->m_strDB.size() ==0 )
+		mysqlcomm* pMySqlDB = GetObjectDB(strDbName);
+		if (pMySqlDB->m_pMySqlDB->m_strDB.size() ==0 )
 		{
 			//未连接，进行首次连接
 			//connect db
-			bool bRet = pMySqlDB->Connect("127.0.0.1", 3306, "root","changsong",strDbName.c_str());
+			bool bRet = pMySqlDB->ConnectDB(strDbName)/*pMySqlDB->Connect("127.0.0.1", 3306, "root","changsong",strDbName.c_str())*/;
 			if (bRet == false)
 			{
-				log.Print(LL_DEBUG_INFO,"Connect Sql Failed!IP=127.0.0.1, Port=3306,DbName=%s\r\n", strDbName.c_str());
+				log.Print(LL_DEBUG_INFO,"Connect Sql Failed!IP=127.0.0.1, Port=3333,DbName=%s\r\n", strDbName.c_str());
 				break;
 			}
 		}
@@ -83,9 +83,9 @@ bool slMySqlAgent::LogRecordDB(std::string strDbName, File_Action_Log FileLog)
 }
 
 
-CMySQLDB* slMySqlAgent::GetObjectDB(std::string strSearchName)
+mysqlcomm* slMySqlAgent::GetObjectDB(std::string strSearchName)
 {
-	CMySQLDB* pMySqlDB = NULL;
+	mysqlcomm* pMySqlDB = NULL;
 	int nSize = m_DbPools.size();
 	for (int i = 0; i < nSize; i++)
 	{
@@ -101,7 +101,7 @@ CMySQLDB* slMySqlAgent::GetObjectDB(std::string strSearchName)
 	{
 		DbPools dbItem;
 		dbItem.strDBName = strSearchName;
-		dbItem.pSqlDB = new CMySQLDB();
+		dbItem.pSqlDB = new mysqlcomm();
 		pMySqlDB = dbItem.pSqlDB;
 		m_DbPools.push_back(dbItem);
 	}
@@ -125,7 +125,7 @@ void slMySqlAgent::ReleassObjectsDB()
 }
 
 //向数据库中插入一条记录，同一文件修改记录可插入多次
-bool slMySqlAgent::AddRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog)
+bool slMySqlAgent::AddRec(mysqlcomm* pMySqlDB, File_Action_Log FileLog)
 {
 	bool bRet = true;
 	do 
@@ -135,17 +135,17 @@ bool slMySqlAgent::AddRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog)
 		if (FileLog.FileActon == FILE_MODIFYED)
 		{
 			std::string strQuerySQL = "select max(lastmodify) as maxtime from t_changeinfo where path='%s' and operflg=1 or operflg=2";
-			HRESULT hr = pMySqlDB->Query(strQuerySQL.c_str(), ConverSqlPath(FileLog.szSrcName).c_str());
+			HRESULT hr = pMySqlDB->m_pMySqlDB->Query(strQuerySQL.c_str(), ConverSqlPath(FileLog.szSrcName).c_str());
 			if (FAILED(hr))
 			{
 				log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,doSqlExe Failed!Sql=%s\r\n",strQuerySQL.c_str());
 				bRet = false;
 				break;
 			}
-			int nCount = pMySqlDB->GetRowCount();
+			int nCount = pMySqlDB->m_pMySqlDB->GetRowCount();
 			if(nCount >= 1)
 			{	
-				bRet = pMySqlDB->GetRow();
+				bRet = pMySqlDB->m_pMySqlDB->GetRow();
 				if(bRet==false)
 				{
 					log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,GetRow Failed!Sql=%s\r\n",strQuerySQL.c_str());
@@ -153,7 +153,7 @@ bool slMySqlAgent::AddRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog)
 				}
 				
 				int nTimeLen = 0;
-				char* pTime = pMySqlDB->GetField("maxtime",&nTimeLen);
+				char* pTime = pMySqlDB->m_pMySqlDB->GetField("maxtime",&nTimeLen);
 				if(pTime!=NULL && nTimeLen > 1)
 				{	
 					std::string strTime(pTime,nTimeLen);
@@ -167,7 +167,7 @@ bool slMySqlAgent::AddRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog)
 		}
 		
 		std::string strInsertSQL = "insert into t_changeinfo(path,operflg,hasoper,lastmodify) values('%s','%s','0','%s')";
-		HRESULT hr = pMySqlDB->Query(strInsertSQL.c_str(),ConverSqlPath(FileLog.szSrcName).c_str(), GetOperFlag(FileLog).c_str(),FileLog.szLogTime);
+		HRESULT hr = pMySqlDB->m_pMySqlDB->Query(strInsertSQL.c_str(),ConverSqlPath(FileLog.szSrcName).c_str(), GetOperFlag(FileLog).c_str(),FileLog.szLogTime);
 		if (FAILED(hr))
 		{
 			log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,doSqlExe Failed!Sql=%s\r\n",strInsertSQL.c_str());
@@ -220,7 +220,7 @@ std::string GetFileLastModifyTime(char* szFileName, std::string strDefaultValue)
 }
 
 //向数据库中插入一条记录，同一文件修改记录只插入一条
-bool slMySqlAgent::AddRecentRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog, BOOL bRecentRec)
+bool slMySqlAgent::AddRecentRec(mysqlcomm* pMySqlDB, File_Action_Log FileLog, BOOL bRecentRec)
 {
 	bool bRet = true;
 	do 
@@ -238,17 +238,17 @@ bool slMySqlAgent::AddRecentRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog, BOO
 			}else
 				strQuerySQL = "select * from t_changeinfo where path='%s' and operflg=2 and lastmodify between current_date() And date_add(current_date(), interval 1 day)";
 
-			HRESULT hr = pMySqlDB->Query(strQuerySQL.c_str(), ConverSqlPath(FileLog.szSrcName).c_str());
+			HRESULT hr = pMySqlDB->m_pMySqlDB->Query(strQuerySQL.c_str(), ConverSqlPath(FileLog.szSrcName).c_str());
 			if (FAILED(hr))
 			{
 				log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,doSqlExe Failed!Sql=%s\r\n",strQuerySQL.c_str());
 				bRet = false;
 				break;
 			}
-			int nCount = pMySqlDB->GetRowCount();
+			int nCount = pMySqlDB->m_pMySqlDB->GetRowCount();
 			if(nCount >= 1)
 			{	
-				bRet = pMySqlDB->GetRow();
+				bRet = pMySqlDB->m_pMySqlDB->GetRow();
 				if(bRet==false)
 				{
 					log.Print(LL_DEBUG_INFO,"Error in slMySqlAgent::AddRec,GetRow Failed!Sql=%s\r\n",strQuerySQL.c_str());
@@ -256,7 +256,7 @@ bool slMySqlAgent::AddRecentRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog, BOO
 				}
 				
 				int nPathLen = 0;
-				char* pPath = pMySqlDB->GetField("path",&nPathLen);
+				char* pPath = pMySqlDB->m_pMySqlDB->GetField("path",&nPathLen);
 				if(pPath!=NULL && nPathLen > 1)
 				{	
 					//一天之内存在此记录，则不记录
@@ -273,10 +273,10 @@ bool slMySqlAgent::AddRecentRec(CMySQLDB* pMySqlDB, File_Action_Log FileLog, BOO
 		if (bRecentRec)
 		{
 			strInsertSQL = "insert into t_recent_changeinfo(path,operflg,hasoper,systime,lastmodify) values('%s','%s','0','%s','%s')";
-			hr = pMySqlDB->Query(strInsertSQL.c_str(),ConverSqlPath(FileLog.szSrcName).c_str(), GetOperFlag(FileLog).c_str(),FileLog.szLogTime, GetFileLastModifyTime(FileLog.szSrcName, FileLog.szLogTime).c_str());
+			hr = pMySqlDB->m_pMySqlDB->Query(strInsertSQL.c_str(),ConverSqlPath(FileLog.szSrcName).c_str(), GetOperFlag(FileLog).c_str(),FileLog.szLogTime, GetFileLastModifyTime(FileLog.szSrcName, FileLog.szLogTime).c_str());
 		}else{
 			strInsertSQL = "insert into t_changeinfo(path,operflg,hasoper,lastmodify) values('%s','%s','0','%s')";
-			hr = pMySqlDB->Query(strInsertSQL.c_str(),ConverSqlPath(FileLog.szSrcName).c_str(), GetOperFlag(FileLog).c_str(), GetFileLastModifyTime(FileLog.szSrcName, FileLog.szLogTime).c_str());
+			hr = pMySqlDB->m_pMySqlDB->Query(strInsertSQL.c_str(),ConverSqlPath(FileLog.szSrcName).c_str(), GetOperFlag(FileLog).c_str(), GetFileLastModifyTime(FileLog.szSrcName, FileLog.szLogTime).c_str());
 		}	
 
 		if (FAILED(hr))

@@ -59,7 +59,7 @@ using namespace std;
 #include "omnithread.h"
 #include "tyu_common_interface.h"
 
-#include "MySQLDB.h"
+#include "mysqlcomm.h"
 
 #include "slLogSendThread.h"
 #include "slXmlAgent.h"
