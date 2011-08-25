@@ -10,28 +10,28 @@ ResourceCount=16
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
 LastTemplate=CDialog
-Resource1=IDD_DIALOG_ALL_CIHUI
+Resource1=IDD_DIALOG_CREATE_INDEX
 Class3=CCustomCiHuiDlg
-Resource2=IDD_DIALOG_CREATE_INDEX
+Resource2=IDD_DIALOG_SET_ATTR
 Class4=CModifyIndexDlg
 Resource3=IDD_DIALOG_CUSTOM_DICT (Chinese (P.R.C.))
 Class5=CShowAllCiHuiDlg
-Resource4=IDD_DIALOG_LICENSE
+Resource4=IDD_DIALOG_ALL_CIHUI
 Class6=CSetAttributeDlg
-Resource5=IDD_DIALOG_MODIFY_INDEX
+Resource5=IDD_DIALOG_LICENSE
 Class7=CFastSearchDlg
 Class8=CSearchThread
 Resource6=IDD_DIALOG_SKIN (Chinese (P.R.C.))
 Class9=CLicenseDlg
-Resource7=IDD_DIALOG_CUSTOM_DICT
+Resource7=IDD_DIALOG_FAST_SEARCH
 Class10=CSkinDlg
 Resource8=IDD_DIALOG_MODIFY_INDEX (Chinese (P.R.C.))
 Resource9=IDD_DIALOG_ALL_CIHUI (Chinese (P.R.C.))
 Resource10=IDD_DIALOG_LICENSE (Chinese (P.R.C.))
-Resource11=IDD_DIALOG_SET_ATTR
+Resource11=IDD_DIALOG_CUSTOM_DICT
 Resource12=IDD_DIALOG_FAST_SEARCH (Chinese (P.R.C.))
 Resource13=IDD_DIALOG_CREATE_INDEX (Chinese (P.R.C.))
-Resource14=IDD_DIALOG_FAST_SEARCH
+Resource14=IDD_DIALOG_MODIFY_INDEX
 Resource15=IDD_DIALOG_SET_ATTR (Chinese (P.R.C.))
 Resource16=IDD_DIALOG_SKIN
 
@@ -275,7 +275,7 @@ LastObject=CSkinDlg
 
 [DLG:IDD_DIALOG_CREATE_INDEX (Chinese (P.R.C.))]
 Type=1
-Class=?
+Class=CCreateIndexDlg
 ControlCount=12
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
@@ -292,7 +292,7 @@ Control12=IDC_CHECK_TXT,button,1342242819
 
 [DLG:IDD_DIALOG_CUSTOM_DICT (Chinese (P.R.C.))]
 Type=1
-Class=?
+Class=CCustomCiHuiDlg
 ControlCount=13
 Control1=IDOK,button,1073807361
 Control2=IDCANCEL,button,1073807360
@@ -310,7 +310,7 @@ Control13=IDC_STATIC,static,1342177283
 
 [DLG:IDD_DIALOG_MODIFY_INDEX (Chinese (P.R.C.))]
 Type=1
-Class=?
+Class=CModifyIndexDlg
 ControlCount=13
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
@@ -328,7 +328,7 @@ Control13=IDC_BUTTON_DEL_INDEX,button,1342242816
 
 [DLG:IDD_DIALOG_ALL_CIHUI (Chinese (P.R.C.))]
 Type=1
-Class=?
+Class=CShowAllCiHuiDlg
 ControlCount=4
 Control1=IDCANCEL,button,1342242816
 Control2=IDC_LIST_ALL_CIHUI,listbox,1352728835
@@ -337,7 +337,7 @@ Control4=IDC_EDIT_KEY_WORD,edit,1350631552
 
 [DLG:IDD_DIALOG_SET_ATTR (Chinese (P.R.C.))]
 Type=1
-Class=?
+Class=CSetAttributeDlg
 ControlCount=23
 Control1=IDOK,button,1073807361
 Control2=IDCANCEL,button,1073807360
@@ -365,7 +365,7 @@ Control23=IDC_STATIC,static,1342177283
 
 [DLG:IDD_DIALOG_FAST_SEARCH (Chinese (P.R.C.))]
 Type=1
-Class=?
+Class=CFastSearchDlg
 ControlCount=3
 Control1=IDC_EDIT_SEARCH_KEY,edit,1350631552
 Control2=IDC_COMBO_PATH,combobox,1344340226
@@ -373,7 +373,7 @@ Control3=IDC_STATIC,static,1342177795
 
 [DLG:IDD_DIALOG_LICENSE (Chinese (P.R.C.))]
 Type=1
-Class=?
+Class=CLicenseDlg
 ControlCount=13
 Control1=IDC_STATIC_LICENSE_INFO,static,1342308352
 Control2=IDC_STATIC_LICENSE_1,static,1342308352
@@ -391,7 +391,7 @@ Control13=IDC_STATIC,static,1342177283
 
 [DLG:IDD_DIALOG_SKIN (Chinese (P.R.C.))]
 Type=1
-Class=?
+Class=CSkinDlg
 ControlCount=12
 Control1=IDC_STATIC_SKIN_SET,static,1342308352
 Control2=IDC_STATIC,static,1342177283
