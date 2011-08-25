@@ -16,6 +16,7 @@
 #include "TTComboBox.h"
 #include "IconEdit.h"
 #include "FilenameEdit.h"
+#include "sloOpenFileAgent.h"
 
 typedef struct _GroupInfo
 {
@@ -38,10 +39,10 @@ public:
 	void OnEventNotify();
 	BOOL CreateTaskPanel();
 
-	void AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<string> DespList,LPCTSTR lpszTooltip = "", BOOL bShowTextItem = TRUE);
+	void AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<DespInfo> DespList,LPCTSTR lpszTooltip = "", BOOL bShowTextItem = TRUE);
 	void AddToolboxGroup(UINT nID, LPCTSTR lpszCaption, LPCTSTR lpszTooltip = "", int nIconIndex = 0);
 
-	void AddLinkItemEx(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<string> DespList,LPCTSTR lpszTooltip = "", BOOL bShowTextItem = TRUE);
+	void AddLinkItemEx(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<DespInfo> DespList,LPCTSTR lpszTooltip = "", BOOL bShowTextItem = TRUE);
 
 	void ClearGroupsItems(); 
 
@@ -55,6 +56,7 @@ public:
 	sloFastSearchAgent m_agent;
 	sloSetAttrAgent m_setAgent;
 	std::map<int, GroupInfo> m_listMap;
+	sloOpenFileAgent m_fileopen;
 	BOOL m_bDestory;
 	BOOL m_bCommboxRecentStatus;
 	BOOL m_bEditForce;

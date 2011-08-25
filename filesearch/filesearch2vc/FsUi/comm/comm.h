@@ -51,14 +51,18 @@ typedef struct _XmlFilter
 	char szExts[MAX_PATH*5];
 }XmlFilter,*pXmlFilter;
 
+typedef struct _DespInfo
+{
+	std::string strDesp;
+	std::string strContent;
+}DespInfo, *pDespInfo;
+
 typedef struct _SearchRectord
 {
 	char szFileType[20];
 	char szFileName[MAX_PATH];
 	char szFilePath[MAX_PATH];
-	char szContent[1000];
-	std::vector<std::string> DespList;
-//	char szDesp[1000];
+	std::vector<DespInfo> DespList;
 }SearchRectord, *pSearchRectord;
 
 typedef struct _PathIndex

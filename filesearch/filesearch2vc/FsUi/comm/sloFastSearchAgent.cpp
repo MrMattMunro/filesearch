@@ -163,11 +163,16 @@ DWORD sloFastSearchAgent::SearchRecords(std::string strQuerySQL, BOOL bRecent/* 
 				if (nFileNameLen)
 					memcpy(sr.szFileName, pFileName, nFileNameLen);
 				if (nFilePathLen)
-					memcpy(sr.szFilePath, pFilePath, nFilePathLen);			
-				if (nDespLen)
-					sr.DespList.push_back(pDesp);			
-				if (nContentLen)
-					memcpy(sr.szContent, pContent, nContentLen);
+					memcpy(sr.szFilePath, pFilePath, nFilePathLen);	
+				
+				DespInfo desp;
+				desp.strDesp = pDesp;
+				desp.strContent = pContent;
+				sr.DespList.push_back(desp);
+// 				if (nDespLen)
+// 					sr.DespList.push_back(pDesp);			
+// 				if (nContentLen)
+// 					memcpy(sr.szContent, pContent, nContentLen);
 			}else
 			{
 				m_filterAgent.Init();
