@@ -1,0 +1,12 @@
+; FileOpenAddin.def : Declares the module parameters for the DLL.
+
+LIBRARY      "FileOpenAddin"
+DESCRIPTION  'FileOpenAddin Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here
+	openWordFile	@1
+	openExcelFile	@2
+	openPPTFile		@3
+	openPdfFile		@4
+	openTxtFile		@5
