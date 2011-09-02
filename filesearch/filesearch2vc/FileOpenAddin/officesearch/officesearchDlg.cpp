@@ -86,6 +86,7 @@ BEGIN_MESSAGE_MAP(COfficesearchDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON2, OnButton2)
 	ON_BN_CLICKED(IDC_BUTTON3, OnButton3)
 	ON_BN_CLICKED(IDC_BUTTON4, OnButton4)
+	ON_BN_CLICKED(IDC_BUTTON5, OnButton5)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -199,13 +200,32 @@ HCURSOR COfficesearchDlg::OnQueryDragIcon()
   Selection.Find.Execute
   End Sub
 
+  Selection.GoTo What:=wdGoToPage, Which:=wdGoToNext, Name:="2"
+  Selection.Find.ClearFormatting
+  With Selection.Find
+  .Text = "123"
+  .Replacement.Text = ""
+  .Forward = True
+  .Wrap = wdFindContinue
+  .Format = False
+  .MatchCase = False
+  .MatchWholeWord = False
+  .MatchByte = True
+  .MatchWildcards = False
+  .MatchSoundsLike = False
+  .MatchAllWordForms = False
+  End With
+    Selection.Find.Execute
+
 */
 //打开word指定页
 void COfficesearchDlg::OnButton1() 
 {
 	// TODO: Add your control notification handler code here
-	fileaddin.OpenFile_WORD("D:\\2.doc", 2, "1");
-/*
+	fileaddin.OpenFile_WORD("D:\\2.doc", 2, "134");
+
+	return ;
+
 	CoInitialize(NULL);
 	
 	HRESULT hr = S_OK;
@@ -229,7 +249,7 @@ void COfficesearchDlg::OnButton1()
 		return ;
 	}
 	
-	document = spDocs->Open(&CComVariant("H:\\3.doc"), &vtMissing, &vtMissing, &CComVariant(VARIANT_TRUE));
+	document = spDocs->Open(&CComVariant("D:\\2.doc"), &vtMissing, &vtMissing, &CComVariant(VARIANT_TRUE));
 	if (document == NULL)
 	{
 		OutputDebugStringA("[EnumWord] 打开文档失败\n");
@@ -241,7 +261,7 @@ void COfficesearchDlg::OnButton1()
 	CComPtr<Word::Selection> sel;
 	spWordApp->get_Selection(&sel);
 
-	CComVariant vName("3");
+	CComVariant vName("2");
 	CComVariant count(1);
 	CComVariant What(wdGoToPage);
 	CComVariant Which(wdGoToNext);
@@ -252,13 +272,14 @@ void COfficesearchDlg::OnButton1()
 	sel->get_Information(wdNumberOfPagesInDocument, &pagecount);
 	int nPagecount = pagecount.lVal;
 
-	CComPtr<Word::Find> find;
+ 	CComPtr<Word::Find> find;
 	sel->get_Find(&find);
 	find->ClearFormatting();
 
+
 	CComVariant vFindText("123"), vForward(VARIANT_TRUE);
 	VARIANT_BOOL prop;
-	find->Execute(&vFindText, 
+	hr = find->Execute(&vFindText, 
 		&vtMissing, 
 		&vtMissing, 
 		&vtMissing, 
@@ -274,8 +295,9 @@ void COfficesearchDlg::OnButton1()
 		&vtMissing,
 		&vtMissing);
 
-	CoUninitialize();
-*/
+
+//	CoUninitialize();
+
 }
 
 /*
@@ -441,5 +463,200 @@ void COfficesearchDlg::OnButton4()
 	edit.SetSel(nIndex,nIndex);
 
 	edit.Detach();
+*/	
+}
+
+void COfficesearchDlg::OnButton5() 
+{
+	// TODO: Add your control notification handler code here
+
+	HRESULT                             hr; 
+	CString FileName,LoadFile,SaveFile,SaveFileName,Temp1; 
+	CHAR             FilePath[255]; 
+	VARIANT           Temp; 
+	COleVariant     TEMP2; 
+	CTime NowTime; 
+	hr=CoInitialize(NULL); 
+	VARIANT_BOOL   m_ok,m_ok1; 
+	long   i,j,m,n; 
+	
+	Word::_ApplicationPtr   MyOffice( "Word.Application.9 "); 
+	::GetCurrentDirectory(255,FilePath);   
+	FileName.Format( "D:\\",FilePath);   
+	LoadFile=FileName+ "\\2.doc "; 
+	TEMP2=(COleVariant)LoadFile; 
+	Temp=TEMP2.Detach();   
+	if   (MyOffice)   { 
+		hr=MyOffice-> Documents-> Open(&Temp);   
+		if(FAILED(hr)) 
+		{ 
+			::AfxMessageBox( "文件打开显示错误 "); 
+			MyOffice-> Quit(); 
+		} 
+		Temp1= "123"; 
+		TEMP2.Clear();   
+		TEMP2=(COleVariant)Temp1; 
+		Temp=TEMP2.Detach();   
+		i=MyOffice-> GetSelection()-> GetStart(); 
+		j=MyOffice-> GetSelection()-> GetEnd(); 
+		MyOffice-> GetSelection()-> PutStart(0); 
+		MyOffice-> GetSelection()-> PutEnd(100000); 
+		i=MyOffice-> GetSelection()-> GetStart(); 
+		j=MyOffice-> GetSelection()-> GetEnd(); 
+		m_ok=MyOffice-> ActiveWindow-> GetSelection()-> GetFind()-> Execute(&Temp); 
+		if(m_ok==0) 
+		{ 
+			::AfxMessageBox( "查找文件失败 "); 
+		} 
+		else 
+		{ 
+			::AfxMessageBox( "查找文件成功 "); 
+		} 
+		
+		MyOffice-> Quit(); 
+	} 
+
+/*	_Application   myApp;   
+	Documents   myDocs;   
+	_Document   myDoc;   
+	Range   myRange;   
+	Find   fndInDoc;   
+	Replacement   rpInDoc;   
+	
+	if(!myApp.CreateDispatch( "Word.Application "))   
+	{   
+		AfxMessageBox(_T( "failed "));   
+	}   
+	myApp.SetVisible(TRUE); 
+	
+	COleVariant   vTrue((short)TRUE),   
+		vFalse((short)FALSE), 
+		vOpt((long)DISP_E_PARAMNOTFOUND,   VT_ERROR); 
+	COleVariant   FileName= "D:\\2.doc "; 
+	myDocs=myApp.GetDocuments(); 
+	myDoc=myDocs.Add(FileName,vOpt,vOpt,vOpt); 
+	myRange=myDoc.GetContent();   
+	fndInDoc=myRange.GetFind();   
+	fndInDoc.ClearFormatting();   
+	
+	rpInDoc=fndInDoc.GetReplacement();   
+	rpInDoc.ClearFormatting();   
+	
+	COleVariant       varstrNull( " ");       
+	COleVariant       varZero((short)0);       
+	COleVariant       varTrue(short(1),VT_BOOL);       
+	COleVariant       varFalse(short(0),VT_BOOL);     
+	
+	COleVariant   Text(_T( "123 "));   
+	CComVariant   MatchCase(varFalse);   
+	CComVariant   MatchWholeWord(varFalse);   
+	CComVariant   MatchWildcards(varFalse);   
+	CComVariant   MatchSoundsLike(varFalse);   
+	CComVariant   MatchAllWordForms(varFalse);   
+	CComVariant   Forward(varTrue);   
+	CComVariant   Wrap((short)1);///!!!!!!!!!!!!!!!!!   
+	CComVariant   format(varFalse);   
+	CComVariant   ReplaceWith(_T( "中华人民共和国公民 "));   
+	CComVariant   Replace((short)2);////////!!!!!!!!主要是这里 
+	CComVariant   MatchKashida(varstrNull);   
+	CComVariant   MatchDiacritics(varstrNull);   
+	CComVariant   MatchAlefHamza(varstrNull);   
+	CComVariant   MatchControl(varstrNull); 
+	AfxMessageBox(_T( "检查1 "));     //检查错误 
+	
+	fndInDoc.Execute(&Text,   &MatchCase,   &MatchWholeWord,   &MatchWildcards,   &MatchSoundsLike,   
+		&MatchAllWordForms,   &Forward,   &Wrap,   &format,   &ReplaceWith,&Replace,&MatchKashida,&MatchDiacritics, 
+		&MatchAlefHamza,   &MatchControl); 
+	AfxMessageBox(_T( "检查2 "));     //检查错误 
+	
+	
+	myDoc.Save();   
+	AfxMessageBox(_T( "ok! "));   //test 
+	
+	myRange.ReleaseDispatch(); 
+	fndInDoc.ReleaseDispatch(); 
+	rpInDoc.ReleaseDispatch(); 
+	myDocs.ReleaseDispatch(); 
+	myDoc.ReleaseDispatch(); 
+	
+	CComVariant   SaveChanges(false),OriginalFormat,RouteDocument; 
+	
+	myApp.Quit(&SaveChanges,&OriginalFormat,&RouteDocument); 
+myApp.ReleaseDispatch();
+*/
+
+/*
+	CComPtr<Word::_Document> document;
+	CComPtr<Documents> spDocs = NULL;
+	CApplication     myApp;     
+	CDocuments   myDocs;   
+	CDocument0   myDoc;   
+	CRange   myRange;   
+	CFind   fndInDoc;   
+	CReplacement   rpInDoc;   
+	
+	if(!myApp.CreateDispatch( "Word.Application "))   
+	{   
+		AfxMessageBox(_T( "failed "));   
+		return; 
+	}   
+	myApp.put_Visible(FALSE); 
+	
+	COleVariant   vTrue((short)TRUE),   
+		vFalse((short)FALSE), 
+		vOpt((long)DISP_E_PARAMNOTFOUND,   VT_ERROR); 
+	COleVariant   FileName= "c:\\Hello.doc "; 
+	myDocs=myApp.get_Documents(); 
+	myDoc=myDocs.Add(FileName,vOpt,vOpt,vOpt); 
+	myRange=myDoc.get_Content();   
+	fndInDoc=myRange.get_Find();   
+	fndInDoc.ClearFormatting();   
+	
+	rpInDoc=fndInDoc.get_Replacement();   
+	rpInDoc.ClearFormatting();   
+	
+	COleVariant       varstrNull( " ");       
+	COleVariant       varZero((short)0);       
+	COleVariant       varTrue(short(1),VT_BOOL);       
+	COleVariant       varFalse(short(0),VT_BOOL);     
+	COleVariant   vInt((long)-1,     VT_I4),vIntF((long)0,     VT_I4); 
+	COleVariant   Text(_T( "two "));   
+	CComVariant   MatchCase(varFalse);   
+	CComVariant   MatchWholeWord(varFalse);   
+	CComVariant   MatchWildcards(varFalse);   
+	CComVariant   MatchSoundsLike(varFalse);   
+	CComVariant   MatchAllWordForms(varFalse);   
+	CComVariant   Forward(varTrue);   
+	CComVariant   Wrap((short)1);///!!!!!!!!!!!!!!!!!   
+	CComVariant   format(varFalse);   
+	CComVariant   ReplaceWith(_T( "中华人民共和国公民 "));   
+	CComVariant   Replace((short)2);////////!!!!!!!!主要是这里 
+	CComVariant   MatchKashida(varstrNull);   
+	CComVariant   MatchDiacritics(varstrNull);   
+	CComVariant   MatchAlefHamza(varstrNull);   
+	CComVariant   MatchControl(varstrNull); 
+	AfxMessageBox(_T( "检查1 "));     //检查错误 
+	
+	fndInDoc.Execute(&Text,   &MatchCase,   &MatchWholeWord,   &MatchWildcards,   &MatchSoundsLike,   
+		&MatchAllWordForms,   &Forward,   &Wrap,   &format,   &ReplaceWith,&Replace,&MatchCase,   &MatchWholeWord,   &MatchWildcards,   &MatchSoundsLike);//&MatchKashida,&MatchDiacritics, 
+	//&MatchAlefHamza,   &MatchControl); 
+	AfxMessageBox(_T( "检查2 "));     //检查错误 
+	
+	
+	//myDoc.Save();   
+	
+	myDoc.Close(vInt,vIntF,vFalse); 
+	AfxMessageBox(_T( "ok! "));   //test 
+	
+	myRange.ReleaseDispatch(); 
+	fndInDoc.ReleaseDispatch(); 
+	rpInDoc.ReleaseDispatch(); 
+	myDocs.ReleaseDispatch(); 
+	myDoc.ReleaseDispatch(); 
+	
+	CComVariant   SaveChanges(false),OriginalFormat,RouteDocument; 
+	
+	myApp.Quit(&vOpt,&vOpt,&vOpt); 
+myApp.ReleaseDispatch();
 */	
 }

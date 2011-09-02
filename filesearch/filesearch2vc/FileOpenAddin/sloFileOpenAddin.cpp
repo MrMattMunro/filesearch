@@ -87,7 +87,7 @@ DWORD sloFileOpenAddin::OpenFile_WORD(char* pFileName, int nPage, char* pKeyWord
 				dwRet = 0;
 				break;
 			}
-
+/*
 			//²éÕÒ¹¦ÄÜ
 			VARIANT pagecount;
 			sel->get_Information(wdNumberOfPagesInDocument, &pagecount);
@@ -114,25 +114,7 @@ DWORD sloFileOpenAddin::OpenFile_WORD(char* pFileName, int nPage, char* pKeyWord
 				&vtMissing, 
 				&vtMissing,
 				&vtMissing);
-// 			COleVariant   Text=(_T("1")); 
-// 			CComVariant   MatchCase(_T( "FALSE ")); 
-// 			CComVariant   MatchWholeWord(_T( "TRUE ")); 
-// 			CComVariant   MatchWildcards(_T( "FALSE ")); 
-// 			CComVariant   MatchSoundsLike(_T( "FALSE ")); 
-// 			CComVariant   MatchAllWordForms(_T( "FALSE ")); 
-// 			CComVariant   Forward(_T( "TRUE ")); 
-// 			CComVariant   Warp(_T( "wdFindContinue ")); 
-// 			CComVariant   Format(_T( "FALSE ")); 
-// 			COleVariant   ReplaceWith(_T( "")); 
-// 			CComVariant   Replace(_T( "wdReplaceNone ")); 
-// 			CComVariant   MatchKashida(_T( "FALSE ")); 
-// 			CComVariant   MatchDiacritics(_T( "FALSE ")); 
-// 			CComVariant   MatchAlefHamza(_T( "FALSE ")); 
-// 			CComVariant   MatchControl(_T( "FALSE ")); 
-// 			hr = find->Execute(&Text,&MatchCase,&MatchWholeWord,&MatchWildcards, 
-// 				&MatchSoundsLike,&MatchAllWordForms,&Forward,&Warp,&Format, 
-// 				&ReplaceWith,&Replace,&MatchKashida,&MatchDiacritics, 
-// 				&MatchAlefHamza,&MatchControl); 
+*/
 		}
 		catch (...)
 		{
