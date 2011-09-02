@@ -193,7 +193,7 @@ SOURCE=.\comm\sloModifyIndexAgent.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\sloOpenFileAgent.cpp
+SOURCE=.\comm\sloOpenFileAgent.cpp
 # End Source File
 # Begin Source File
 
@@ -318,7 +318,7 @@ SOURCE=.\comm\sloModifyIndexAgent.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\sloOpenFileAgent.h
+SOURCE=.\comm\sloOpenFileAgent.h
 # End Source File
 # Begin Source File
 

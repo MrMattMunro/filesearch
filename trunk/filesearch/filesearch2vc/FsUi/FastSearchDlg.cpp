@@ -303,6 +303,9 @@ void CFastSearchDlg::OnEventNotify()
 		SetComboxPos(FALSE);
 	}
 
+	if(strKey == EDIT_TEXT)
+		return ;
+
 	if (bRectAll)
 	{
 		//选择【最近文档】,编辑框中输入的空格，则直接查找记录
@@ -345,6 +348,7 @@ void CFastSearchDlg::OnChangeEditSearchKey()
 void CFastSearchDlg::OnSelchangeComboPath() 
 {
 	// TODO: Add your control notification handler code here
+	
 	OnEventNotify();
 }
 
@@ -679,9 +683,7 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 	//检查item是文件，还是搜索内容
 	//检查前3个字符是否为空字符
 	CString strFirst = strFileName.Left(3);
-	strFirst.Remove(' ');
-	int nSize = strFirst.GetLength();
-	if (nSize > 0)
+	if (strFirst != "   ")
 	{
 		//点击的文档链接
 		CString strGroupCaption = pItem->GetItemGroup()->GetCaption();
@@ -747,12 +749,12 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 				strFilePathOpen += strFilePath;
 				strFilePathOpen += "\"";
 				flog.Print(LL_DEBUG_INFO,"[info]ShellExecute softpath=%s, filepath=%s\r\n",szPath,strFilePathOpen.c_str());
-				
-				ShellExecute(this->m_hWnd,"open",szPath,strFilePathOpen.c_str(),"",SW_SHOW );
+			
+				ShellExecute(NULL, "open", szPath, strFilePathOpen.c_str(), "", SW_SHOW );
 			}else
 			{
 				flog.Print(LL_DEBUG_INFO,"[info]ShellExecute filepath=%s\r\n",strFilePath.c_str());
-				ShellExecute(NULL, "open",strFilePath.c_str(),NULL, NULL, SW_SHOW);
+				ShellExecute(NULL, "open", strFilePath.c_str(), NULL, NULL, SW_SHOW);
 			}
 		}
 		
@@ -782,6 +784,14 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 		CString strDespFileName = pItem->GetDragText();
 		CString strKeyWords;
 		GetDlgItemText(IDC_EDIT_SEARCH_KEY, strKeyWords);
+
+		//检测打开的文件是否存在
+		if (PathFileExists(strDespFileName.GetBuffer(0)) == FALSE)
+		{
+			MessageBox(g_lag.LoadString("message.searchfilenoexist"),g_lag.LoadString("title.fastsearch"),MB_OK | MB_ICONWARNING);
+			
+			return ;
+		}
 
 		//获取文档类型
 		CString strGroupCaption = pItem->GetItemGroup()->GetCaption();
@@ -817,7 +827,7 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 					nPage = atoi(strPage.GetBuffer(0));	
 				}
 
-				m_fileopen.m_fnopenWordFile(strDespFileName.GetBuffer(0), nPage, strKeyWords.GetBuffer(0));
+				m_fileopen.m_fnopenWordFile(strDespFileName.GetBuffer(0), 3/*nPage*/, strKeyWords.GetBuffer(0));
 			}
 			if (strGroupCaption.Find(EXCEL_NAME, 0) != -1)
 			{
@@ -851,22 +861,62 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 			if (strGroupCaption.Find(PPT_NAME, 0) != -1)
 			{
 				//打开ppt文档
+				//第1页
+				int nPage, nStart, nEnd;
+				nStart = strDesp.Find("第", 0);
+				nEnd = strDesp.Find("页",0);
+				if (nEnd <= nStart)
+				{
+					nPage = 1;
+				}else
+				{
+					CString strPage = strDesp.Mid(nStart+2, nEnd - 2);
+					nPage = atoi(strPage.GetBuffer(0));	
+				}
+				
+				m_fileopen.m_fnopenPPTFile(strDespFileName.GetBuffer(0), nPage, strKeyWords.GetBuffer(0));
 
 			}
 			if (strGroupCaption.Find(PDF_NAME, 0) != -1)
 			{
 				//打开pdf文档
+				char szPath[MAX_PATH] = {0};
+				if(m_setAgent.GetSoftPath(PDF_NAME,szPath) == 0 )
+				{
+					//打开进程参数的文件全路径中，如果含有“ ”（空格），则改路径必须用加上“”
+					//解决无法打开文件路径中带有空格的文件
+					std::string strFilePathOpen = "\"";
+					strFilePathOpen += strDespFileName.GetBuffer(0);
+					strFilePathOpen += "\"";
+					flog.Print(LL_DEBUG_INFO,"[info]ShellExecute softpath=%s, filepath=%s\r\n",szPath,strFilePathOpen.c_str());
+					
+					ShellExecute(this->m_hWnd,"open",szPath,strFilePathOpen.c_str(),"",SW_SHOW );
+				}else
+				{
+					flog.Print(LL_DEBUG_INFO,"[info]ShellExecute filepath=%s\r\n",strDespFileName.GetBuffer(0));
+					ShellExecute(NULL, "open", strDespFileName.GetBuffer(0), NULL, NULL, SW_SHOW);
+				}
 			}
 			if (strGroupCaption.Find(TXT_NAME, 0) != -1)
 			{
 				//打开txt文档
-
+				//第3行
+				int nPage, nStart, nEnd;
+				nStart = strDesp.Find("第", 0);
+				nEnd = strDesp.Find("行",0);
+				if (nEnd <= nStart)
+				{
+					nPage = 1;
+				}else
+				{
+					CString strPage = strDesp.Mid(nStart+2, nEnd - 2);
+					nPage = atoi(strPage.GetBuffer(0));	
+				}
+				
+				m_fileopen.m_fnopenTxtFile(strDespFileName.GetBuffer(0), nPage, strKeyWords.GetBuffer(0));
 			}
 		}
-
 	}
-	
-
 }
 
 LRESULT CFastSearchDlg::OnTaskPanelNotify(WPARAM wParam, LPARAM lParam)
@@ -905,7 +955,7 @@ void CFastSearchDlg::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
 	if(nState==WA_INACTIVE && m_bDestory)
 	{
 		//DestroyWindow();  //DoModal函数不会返回
-//		CDialog::OnCancel();
+		CDialog::OnCancel();
 	}
 }
 
