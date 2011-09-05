@@ -879,18 +879,32 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 			}
 			if (strGroupCaption.Find(PDF_NAME, 0) != -1)
 			{
+				int nPage, nStart, nEnd;
+				nStart = strDesp.Find("第", 0);
+				nEnd = strDesp.Find("页",0);
+				if (nEnd <= nStart)
+				{
+					nPage = 1;
+				}else
+				{
+					CString strPage = strDesp.Mid(nStart+2, nEnd - 2);
+					nPage = atoi(strPage.GetBuffer(0));	
+				}
+
 				//打开pdf文档
 				char szPath[MAX_PATH] = {0};
 				if(m_setAgent.GetSoftPath(PDF_NAME,szPath) == 0 )
 				{
 					//打开进程参数的文件全路径中，如果含有“ ”（空格），则改路径必须用加上“”
 					//解决无法打开文件路径中带有空格的文件
-					std::string strFilePathOpen = "\"";
-					strFilePathOpen += strDespFileName.GetBuffer(0);
-					strFilePathOpen += "\"";
-					flog.Print(LL_DEBUG_INFO,"[info]ShellExecute softpath=%s, filepath=%s\r\n",szPath,strFilePathOpen.c_str());
+					char szCmd[MAX_PATH*4] = {0};
+					sprintf(szCmd, "/a page=%d \"%s\"", nPage, strDespFileName.GetBuffer(0));
+// 					std::string strFilePathOpen = "\"";
+// 					strFilePathOpen += strDespFileName.GetBuffer(0);
+// 					strFilePathOpen += "\"";
+					flog.Print(LL_DEBUG_INFO,"[info]ShellExecute softpath=%s, filepath=%s\r\n",szPath,szCmd);
 					
-					ShellExecute(this->m_hWnd,"open",szPath,strFilePathOpen.c_str(),"",SW_SHOW );
+					ShellExecute(this->m_hWnd, "open", szPath, szCmd, "",SW_SHOW );
 				}else
 				{
 					flog.Print(LL_DEBUG_INFO,"[info]ShellExecute filepath=%s\r\n",strDespFileName.GetBuffer(0));

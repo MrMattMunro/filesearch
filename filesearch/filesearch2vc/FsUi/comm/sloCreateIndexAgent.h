@@ -20,7 +20,7 @@ public:
 
 private:
 	void BuildSearchName();
-	void BuildIndexPath();
+	int BuildIndexPath();
 
 	int GetMaxIndexID();
 //	string ConverSqlPath(string strPath);
