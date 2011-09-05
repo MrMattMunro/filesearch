@@ -27,6 +27,8 @@ public:
 // Overrides
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CFileOpenAddinApp)
+	public:
+	virtual BOOL InitInstance();
 	//}}AFX_VIRTUAL
 
 	//{{AFX_MSG(CFileOpenAddinApp)

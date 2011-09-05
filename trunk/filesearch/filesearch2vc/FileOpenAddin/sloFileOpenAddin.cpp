@@ -32,6 +32,7 @@ sloFileOpenAddin::~sloFileOpenAddin()
 */
 DWORD sloFileOpenAddin::OpenFile_WORD(char* pFileName, int nPage, char* pKeyWords /*= NULL*/)
 {
+	log.Print(LL_DEBUG_INFO, "[info]OpenFile_WORD enter!pFileName=%s, nPage=%d, pKeyWords=%s\r\n", pFileName, nPage, pKeyWords);
 	DWORD dwRet = 0;
 	do 
 	{
@@ -47,6 +48,8 @@ DWORD sloFileOpenAddin::OpenFile_WORD(char* pFileName, int nPage, char* pKeyWord
 			}
 			if (FAILED(hr))
 			{
+				log.Print(LL_DEBUG_INFO, "[error]OpenFile_WORD CreateInstance failed!GetLastError=0x%x\r\n", GetLastError());
+
 				dwRet = -1;
 				break;
 			}
@@ -58,6 +61,8 @@ DWORD sloFileOpenAddin::OpenFile_WORD(char* pFileName, int nPage, char* pKeyWord
 			spWordApp->get_Documents(&spDocs);
 			if (spDocs == NULL)
 			{
+				log.Print(LL_DEBUG_INFO, "[error]OpenFile_WORD get_Documents failed!GetLastError=0x%x\r\n", GetLastError());
+
 				dwRet = -2;
 				break;
 			}
@@ -66,6 +71,8 @@ DWORD sloFileOpenAddin::OpenFile_WORD(char* pFileName, int nPage, char* pKeyWord
 			document = spDocs->Open(&filename, &vtMissing, &vtMissing, &CComVariant(VARIANT_TRUE));
 			if (document == NULL)
 			{
+				log.Print(LL_DEBUG_INFO, "[error]OpenFile_WORD open document failed!GetLastError=0x%x\r\n", GetLastError());
+
 				dwRet = -3;
 				break;
 			}
@@ -84,6 +91,8 @@ DWORD sloFileOpenAddin::OpenFile_WORD(char* pFileName, int nPage, char* pKeyWord
 			//没有关键字查找功能
 			if (!pKeyWords)
 			{
+				log.Print(LL_DEBUG_INFO, "[error]OpenFile_WORD pKeyWords null!GetLastError=0x%x\r\n", GetLastError());
+
 				dwRet = 0;
 				break;
 			}
@@ -118,6 +127,7 @@ DWORD sloFileOpenAddin::OpenFile_WORD(char* pFileName, int nPage, char* pKeyWord
 		}
 		catch (...)
 		{
+			log.Print(LL_DEBUG_INFO, "[error]exception in OpenFile_WORD!GetLastError=0x%x\r\n", GetLastError());
 			dwRet = -1;
 			break;
 		}
@@ -125,12 +135,17 @@ DWORD sloFileOpenAddin::OpenFile_WORD(char* pFileName, int nPage, char* pKeyWord
 	
 	CoUninitialize();
 
+	log.Print(LL_DEBUG_INFO, "[info]OpenFile_WORD leave!pFileName=%s, nPage=%d, pKeyWords=%s\r\n", pFileName, nPage, pKeyWords);
+
 	return dwRet;
 	
 }
 
 DWORD sloFileOpenAddin::OpenFile_EXCEL(char* pFileName, char* pSheet, int nRow, char* pKeyWords/* = NULL*/)
 {
+	log.Print(LL_DEBUG_INFO, "[info]OpenFile_EXCEL enter!pFileName=%s,pSheet=%s, nRow=%d, pKeyWords=%s\r\n", 
+		pFileName, pSheet , nRow, pKeyWords);
+
 	DWORD dwRet = 0;
 	do 
 	{
@@ -143,6 +158,7 @@ DWORD sloFileOpenAddin::OpenFile_EXCEL(char* pFileName, char* pSheet, int nRow, 
 			HRESULT hr = spExcelApp.CreateInstance(L"Excel.Application");
 			if (FAILED(hr))
 			{
+				log.Print(LL_DEBUG_INFO, "[error]OpenFile_EXCEL CreateInstance failed!GetLastError=0x%x\r\n", GetLastError());
 				dwRet = -1;
 				break;
 			}
@@ -154,6 +170,8 @@ DWORD sloFileOpenAddin::OpenFile_EXCEL(char* pFileName, char* pSheet, int nRow, 
 			spExcelApp->get_Workbooks(&spWorkbooks);
 			if (spWorkbooks == NULL)
 			{
+				log.Print(LL_DEBUG_INFO, "[error]OpenFile_EXCEL get_Workbooks failed!GetLastError=0x%x\r\n", GetLastError());
+
 				dwRet = -2;
 				break;
 			}
@@ -162,6 +180,8 @@ DWORD sloFileOpenAddin::OpenFile_EXCEL(char* pFileName, char* pSheet, int nRow, 
 			m_spWb = spWorkbooks->Open(pFileName);
 			if (m_spWb == NULL)
 			{
+				log.Print(LL_DEBUG_INFO, "[error]OpenFile_EXCEL Open failed!GetLastError=0x%x\r\n", GetLastError());
+
 				dwRet = -3;
 				break;
 			}
@@ -175,6 +195,8 @@ DWORD sloFileOpenAddin::OpenFile_EXCEL(char* pFileName, char* pSheet, int nRow, 
 			//没有关键字查找功能
 			if (!pKeyWords)
 			{
+				log.Print(LL_DEBUG_INFO, "[error]OpenFile_EXCEL pKeyWords null!GetLastError=0x%x\r\n", GetLastError());
+
 				break;
 			}
 
@@ -195,19 +217,24 @@ DWORD sloFileOpenAddin::OpenFile_EXCEL(char* pFileName, char* pSheet, int nRow, 
 		}
 		catch (...)
 		{
+			log.Print(LL_DEBUG_INFO, "[error]exception in OpenFile_EXCEL!GetLastError=0x%x\r\n", GetLastError());
+
 			dwRet = -1;
 			break;	
 		}
 	} while (0);
 	
 	CoUninitialize();
-
+	log.Print(LL_DEBUG_INFO, "[info]OpenFile_EXCEL leave!pFileName=%s,pSheet=%s, nRow=%d, pKeyWords=%s\r\n", 
+		pFileName, pSheet , nRow, pKeyWords);
 	return dwRet;
 
 }
 
 DWORD sloFileOpenAddin::OpenFile_PPT(char* pFileName, int nPage, char* pKeyWords/* = NULL*/)
 {
+	log.Print(LL_DEBUG_INFO, "[info]OpenFile_PPT enter!pFileName=%s, nPage=%d, pKeyWords=%s\r\n", pFileName, nPage, pKeyWords);
+
 	DWORD dwRet = 0;
 	do 
 	{
@@ -218,6 +245,8 @@ DWORD sloFileOpenAddin::OpenFile_PPT(char* pFileName, int nPage, char* pKeyWords
 			HRESULT hr = spPPTApp.CreateInstance(L"PowerPoint.Application");
 			if (FAILED(hr))
 			{
+				log.Print(LL_DEBUG_INFO, "[error]OpenFile_PPT CreateInstance failed!GetLastError=0x%x\r\n", GetLastError());
+
 				dwRet = -1;
 				break;
 			}
@@ -230,6 +259,8 @@ DWORD sloFileOpenAddin::OpenFile_PPT(char* pFileName, int nPage, char* pKeyWords
 			spPPTApp->get_Presentations(&spPresents);
 			if (spPresents == NULL)
 			{
+				log.Print(LL_DEBUG_INFO, "[error]OpenFile_PPT get_Presentations failed!GetLastError=0x%x\r\n", GetLastError());
+
 				dwRet = -2;
 				break;
 			}
@@ -238,6 +269,8 @@ DWORD sloFileOpenAddin::OpenFile_PPT(char* pFileName, int nPage, char* pKeyWords
 			m_spPres = spPresents->Open(pFileName, msoFalse, msoFalse, msoTrue);
 			if (m_spPres == NULL)
 			{
+				log.Print(LL_DEBUG_INFO, "[error]OpenFile_PPT Open failed!GetLastError=0x%x\r\n", GetLastError());
+
 				dwRet = -3;
 				break;
 			}
@@ -272,11 +305,14 @@ DWORD sloFileOpenAddin::OpenFile_PPT(char* pFileName, int nPage, char* pKeyWords
 		}
 		catch (...)
 		{
+			log.Print(LL_DEBUG_INFO, "[error]exception in OpenFile_PPT!GetLastError=0x%x\r\n", GetLastError());
+
 			dwRet = -1;
 			break;
 		}
 
 	} while (0);
+	log.Print(LL_DEBUG_INFO, "[info]OpenFile_PPT leave!pFileName=%s, nPage=%d, pKeyWords=%s\r\n", pFileName, nPage, pKeyWords);
 
 	return dwRet;
 }
@@ -284,12 +320,15 @@ DWORD sloFileOpenAddin::OpenFile_PPT(char* pFileName, int nPage, char* pKeyWords
 DWORD sloFileOpenAddin::OpenFile_PDF(char* pFileName, int nPage, char* pKeyWords/* = NULL*/)
 {
 	DWORD dwRet =0 ;
+//	ShellExecute(NULL, "open", pFileName, "/a page=3", NULL, SW_SHOW);
 
 	return dwRet;
 }
 
 DWORD sloFileOpenAddin::OpenFile_TXT(char* pFileName, int nRow, char* pKeyWords/* = NULL*/)
 {
+	log.Print(LL_DEBUG_INFO, "[info]OpenFile_PPT enter!pFileName=%s, nRow=%d, pKeyWords=%s\r\n", pFileName, nRow, pKeyWords);
+
 	DWORD dwRet =0 ;
 	do 
 	{
@@ -320,6 +359,8 @@ DWORD sloFileOpenAddin::OpenFile_TXT(char* pFileName, int nRow, char* pKeyWords/
 				txtwnd = FindWindow("NotePad", szWindowsName);
 				if (txtwnd == NULL)
 				{
+					log.Print(LL_DEBUG_INFO, "[error]OpenFile_PPT FindWindow NotePad failed!GetLastError=0x%x\r\n", GetLastError());
+
 					dwRet = -3;
 					break;
 				}
@@ -339,6 +380,9 @@ DWORD sloFileOpenAddin::OpenFile_TXT(char* pFileName, int nRow, char* pKeyWords/
 			nIndex = edit.LineIndex(nLine);
 			if (nIndex == -1)
 			{
+				log.Print(LL_DEBUG_INFO, "[error]OpenFile_PPT LineIndex failed!nIndex = %d, GetLastError=0x%x\r\n",
+					nIndex, GetLastError());
+
 				//行数超过了范围
 				dwRet = -2;
 				break;
@@ -349,10 +393,13 @@ DWORD sloFileOpenAddin::OpenFile_TXT(char* pFileName, int nRow, char* pKeyWords/
 		}
 		catch (...)
 		{
+			log.Print(LL_DEBUG_INFO, "[error]exception in OpenFile_PPT!GetLastError=0x%x\r\n",GetLastError());
 			dwRet = -1;
 			break;
 		}
 	} while (0);
+
+	log.Print(LL_DEBUG_INFO, "[info]OpenFile_PPT leave!pFileName=%s, nRow=%d, pKeyWords=%s\r\n", pFileName, nRow, pKeyWords);
 
 	return dwRet;	
 }

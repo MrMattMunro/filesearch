@@ -87,6 +87,7 @@ BEGIN_MESSAGE_MAP(COfficesearchDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON3, OnButton3)
 	ON_BN_CLICKED(IDC_BUTTON4, OnButton4)
 	ON_BN_CLICKED(IDC_BUTTON5, OnButton5)
+	ON_BN_CLICKED(IDC_BUTTON6, OnButton6)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -659,4 +660,11 @@ myApp.ReleaseDispatch();
 	myApp.Quit(&vOpt,&vOpt,&vOpt); 
 myApp.ReleaseDispatch();
 */	
+}
+
+void COfficesearchDlg::OnButton6() 
+{
+	// TODO: Add your control notification handler code here
+	ShellExecute(NULL, "open", "D:\\Program Files\\Adobe\\Reader 8.0\\Reader\\AcroRd32.exe", "/a page=3 d:\\1.pdf", NULL, SW_SHOW);
+	
 }

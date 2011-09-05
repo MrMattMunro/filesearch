@@ -14,3 +14,6 @@ Type=0
 HeaderFile=FileOpenAddin.h
 ImplementationFile=FileOpenAddin.cpp
 Filter=N
+BaseClass=CWinApp
+VirtualFilter=AC
+

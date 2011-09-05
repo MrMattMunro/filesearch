@@ -50,7 +50,7 @@ Control4=IDOK,button,1342373889
 [DLG:IDD_OFFICESEARCH_DIALOG]
 Type=1
 Class=COfficesearchDlg
-ControlCount=7
+ControlCount=8
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_BUTTON1,button,1342242816
@@ -58,4 +58,5 @@ Control4=IDC_BUTTON2,button,1342242816
 Control5=IDC_BUTTON3,button,1342242816
 Control6=IDC_BUTTON4,button,1342242816
 Control7=IDC_BUTTON5,button,1342242816
+Control8=IDC_BUTTON6,button,1342242816
 
