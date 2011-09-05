@@ -59,6 +59,8 @@ using namespace PPT;
 
 #include <atlbase.h>
 
+#include "log.h"
+
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 

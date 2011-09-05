@@ -56,6 +56,7 @@ CFileOpenAddinApp::CFileOpenAddinApp()
 {
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
+
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -87,4 +88,18 @@ DWORD __stdcall openPdfFile(char* pFileName, int nPage, char* pKeyWords/* = NULL
 DWORD __stdcall openTxtFile(char* pFileName, int nRow, char* pKeyWords/* = NULL*/)
 {
 	return fileaddin.OpenFile_TXT(pFileName, nRow, pKeyWords);
+}
+
+BOOL CFileOpenAddinApp::InitInstance() 
+{
+	// TODO: Add your specialized code here and/or call the base class
+	char szSystemPath[MAX_PATH] = {0};
+	GetSystemDirectory(szSystemPath, MAX_PATH);
+	char szLogPath[MAX_PATH] = {0};
+	sprintf(szLogPath, "%s\\fileopenaddin.log", szSystemPath);
+	log.SetFile(szLogPath,true);
+	log.SetLevel(100);
+	log.SetMode(Log::ToFile );	
+
+	return CWinApp::InitInstance();
 }
