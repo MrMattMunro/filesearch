@@ -102,14 +102,14 @@ void sloCreateIndexAgent::BuildSearchName()
 
 }
 
-void sloCreateIndexAgent::BuildIndexPath()
+int sloCreateIndexAgent::BuildIndexPath()
 {
 	//从数据库中获取已经存在的searchname的个数
 	FindAllDrivers();
 
 	int nNameCount = GetMaxIndexID();
 	if (nNameCount == -1)
-		return ;
+		return -1;
 
 	memset(m_szIndexPath, NULL, MAX_PATH);
 	sprintf(m_szIndexPath,"%c:\\searcher_%d_index",m_cMaxDriver,nNameCount+1);	
@@ -122,6 +122,8 @@ void sloCreateIndexAgent::BuildIndexPath()
 			SetFileAttributes(m_szIndexPath,FILE_ATTRIBUTE_HIDDEN);
 		}
 	}
+
+	return nNameCount+1;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -215,11 +217,11 @@ BOOL sloCreateIndexAgent::EventCreateIndex(char* pszSearchPath, char* pszFileTyp
 		return FALSE;
 
 	//构建索引目录
-	BuildIndexPath();
+	int nID = BuildIndexPath();
 
 	BOOL bRet = TRUE;
-	std::string strQuerySQL = "insert into t_searcher(path,indexpath,filetype,hascreateindex,hasupdate,hasdel,lastmodify) values('%s','%s','%s','0','1','0','%s')";
-	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(),sloCommAgent::ConverSqlPath(pszSearchPath).c_str(), sloCommAgent::ConverSqlPath(m_szIndexPath).c_str(), pszFileTypes, sloCommAgent::GetCurTime());
+	std::string strQuerySQL = "insert into t_searcher(id, path,indexpath,filetype,hascreateindex,hasupdate,hasdel,lastmodify) values('%d','%s','%s','%s','0','1','0','%s')";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), nID, sloCommAgent::ConverSqlPath(pszSearchPath).c_str(), sloCommAgent::ConverSqlPath(m_szIndexPath).c_str(), pszFileTypes, sloCommAgent::GetCurTime());
 	if (FAILED(hr))
 		bRet = FALSE;
 	
