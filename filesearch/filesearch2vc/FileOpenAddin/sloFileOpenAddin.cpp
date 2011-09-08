@@ -44,7 +44,7 @@ DWORD sloFileOpenAddin::OpenFile_WORD(char* pFileName, int nPage, char* pKeyWord
 			//创建word实例
 			Word::_ApplicationPtr spWordApp = NULL;
 			{
-				hr = spWordApp.CreateInstance(L"Word.Application.11");
+				hr = spWordApp.CreateInstance(L"Word.Application");
 			}
 			if (FAILED(hr))
 			{
@@ -275,7 +275,7 @@ DWORD sloFileOpenAddin::OpenFile_PPT(char* pFileName, int nPage, char* pKeyWords
 				break;
 			}
 			
-			CComVariant item(2);
+			CComVariant item(nPage);
 			m_spPres->GetSlides()->Item(&item)->Select();
 			
 			//查找内容
@@ -336,8 +336,6 @@ DWORD sloFileOpenAddin::OpenFile_TXT(char* pFileName, int nRow, char* pKeyWords/
 		{
 			//去掉路径		
 			char szWindowsName[MAX_PATH] = {0};
-			char drive[_MAX_DRIVE];
-			char dir[_MAX_DIR];
 			char fname[_MAX_FNAME];
 			char ext[_MAX_EXT];
 			_splitpath(pFileName, NULL, NULL, fname, ext);
@@ -349,13 +347,17 @@ DWORD sloFileOpenAddin::OpenFile_TXT(char* pFileName, int nRow, char* pKeyWords/
 			HWND txtwnd = FindWindow("NotePad", szWindowsName);
 			if (txtwnd == NULL)
 			{
+				//获取记事本路径
+				char szNotePadPath[MAX_PATH] = {0};
+				char szWinDir[MAX_PATH] = {0};
+				GetWindowsDirectory(szWinDir, MAX_PATH);
+				sprintf(szNotePadPath, "%s\\notepad.exe", szWinDir);
 				//打开该文档
-				ShellExecute(NULL, "open", pFileName, NULL, NULL, SW_SHOW);
+				ShellExecute(NULL, "open", szNotePadPath, pFileName, NULL, SW_SHOW);
 
 				Sleep(200);
 
 				//再次检测该文本是否打开
-
 				txtwnd = FindWindow("NotePad", szWindowsName);
 				if (txtwnd == NULL)
 				{

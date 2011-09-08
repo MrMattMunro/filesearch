@@ -223,19 +223,20 @@ HCURSOR COfficesearchDlg::OnQueryDragIcon()
 void COfficesearchDlg::OnButton1() 
 {
 	// TODO: Add your control notification handler code here
-	fileaddin.OpenFile_WORD("D:\\2.doc", 2, "134");
+//	fileaddin.OpenFile_WORD("D:\\2.doc", 2, "134");
 
-	return ;
+//	return ;
 
 	CoInitialize(NULL);
 	
 	HRESULT hr = S_OK;
 	Word::_ApplicationPtr spWordApp = NULL;
 	{
-		hr = spWordApp.CreateInstance(L"Word.Application.11");
+		hr = spWordApp.CreateInstance(L"Word.Application");
 	}
 	if (FAILED(hr))
 	{
+		MessageBox("Open CreateInstance failed!");
 		CoUninitialize();
 		return ;
 	}
@@ -246,14 +247,16 @@ void COfficesearchDlg::OnButton1()
 	spWordApp->get_Documents(&spDocs);
 	if (spDocs == NULL)
 	{
+		MessageBox("Open get_Documents failed!");
 		OutputDebugStringA("[EnumWord] 获取文档对象集合失败\n");
 		return ;
 	}
 	
-	document = spDocs->Open(&CComVariant("D:\\2.doc"), &vtMissing, &vtMissing, &CComVariant(VARIANT_TRUE));
+	document = spDocs->Open(&CComVariant("E:\\2.doc"), &vtMissing, &vtMissing, &CComVariant(VARIANT_TRUE));
 	if (document == NULL)
 	{
 		OutputDebugStringA("[EnumWord] 打开文档失败\n");
+		MessageBox("Open D:\\2.doc failed!");
 		return ;
 	}
 	//光标执行第几页
@@ -262,13 +265,13 @@ void COfficesearchDlg::OnButton1()
 	CComPtr<Word::Selection> sel;
 	spWordApp->get_Selection(&sel);
 
-	CComVariant vName("2");
+	CComVariant vName(4);
 	CComVariant count(1);
 	CComVariant What(wdGoToPage);
 	CComVariant Which(wdGoToNext);
 	CComPtr<Word::Range> range;
 	range = sel->GoTo(&What, &Which, &count, &vName);
-
+/*
 	VARIANT pagecount;
 	sel->get_Information(wdNumberOfPagesInDocument, &pagecount);
 	int nPagecount = pagecount.lVal;
@@ -295,7 +298,7 @@ void COfficesearchDlg::OnButton1()
 		&vtMissing, 
 		&vtMissing,
 		&vtMissing);
-
+*/
 
 //	CoUninitialize();
 
@@ -330,8 +333,8 @@ void COfficesearchDlg::OnButton1()
 void COfficesearchDlg::OnButton2() 
 {
 	// TODO: Add your control notification handler code here
-	fileaddin.OpenFile_EXCEL("h:\\3.xls", "Sheet3", 20, "123");
-/*
+//	fileaddin.OpenFile_EXCEL("h:\\3.xls", "Sheet3", 20, "123");
+
 	CoInitialize(NULL);
 
 	Excel::_ApplicationPtr spExcelApp;
@@ -353,7 +356,7 @@ void COfficesearchDlg::OnButton2()
 	}
 	
 	CComPtr<Excel::_Workbook> m_spWb;
-	m_spWb = spWorkbooks->Open("h:\\3.xls");
+	m_spWb = spWorkbooks->Open("E:\\3.xls");
 	if (m_spWb == NULL)
 	{
 		OutputDebugStringA("[EnumExcel] 打开工作薄失败\n");
@@ -369,7 +372,7 @@ void COfficesearchDlg::OnButton2()
 	spExcelApp->GetCells()->Find(&What, &vtMissing, &LookIn,
 		&LookAt, &SearchOrder, xlNext, 
 		&vtMissing, &vtMissing,	&vtMissing)->Activate();
-*/
+
 }
 
 /*
@@ -381,8 +384,8 @@ void COfficesearchDlg::OnButton3()
 {
 	// TODO: Add your control notification handler code here
 
-	fileaddin.OpenFile_PPT("H:\\1.ppt", 2, "5");
-/*	CoInitialize(NULL);
+//	fileaddin.OpenFile_PPT("H:\\1.ppt", 2, "5");
+	CoInitialize(NULL);
 	PPT::_ApplicationPtr spPPTApp;
 	HRESULT hr = spPPTApp.CreateInstance(L"PowerPoint.Application");
 	if (FAILED(hr))
@@ -404,14 +407,14 @@ void COfficesearchDlg::OnButton3()
 	}
 		
 	CComPtr<PPT::_Presentation> m_spPres;
-	m_spPres = spPresents->Open("H:\\1.ppt", msoFalse, msoFalse, msoTrue);
+	m_spPres = spPresents->Open("E:\\1.ppt", msoFalse, msoFalse, msoTrue);
 	if (m_spPres == NULL)
 	{
 		OutputDebugStringA("[EnumPPT] 打开ppt文档失败\n");
 		return ;
 	}
 
-	CComVariant item(2);
+	CComVariant item(8);
 	m_spPres->GetSlides()->Item(&item)->Select();
 
 	//查找内容
@@ -421,7 +424,7 @@ void COfficesearchDlg::OnButton3()
 	CComPtr<PPT::Shapes> shapes;
 	docwin->GetSelection()->GetSlideRange()->get_Shapes(&shapes);
 
-	CComBSTR strText("5");
+	CComBSTR strText("java");
 	int nCount = shapes->GetCount();
 	for (int i = 0; i < nCount; i++)
 	{
@@ -438,33 +441,87 @@ void COfficesearchDlg::OnButton3()
 			break;
 		}
 	}
-*/	
+	
 }
 
 void COfficesearchDlg::OnButton4() 
 {
 	// TODO: Add your control notification handler code here
-	fileaddin.OpenFile_TXT("H:\\1.txt", 7, "3524");
-/*
-	CWnd* ptxtwnd = FindWindow("NotePad","689.txt - 记事本");
-	HWND hwnd = FindWindowEx(ptxtwnd->m_hWnd, NULL, "Edit", "");
+//	fileaddin.OpenFile_TXT("H:\\1.txt", 7, "3524");
 
-	CEdit edit;
-	edit.Attach(hwnd);
-
-	edit.SetFocus();
-
-	int nLine = 2;
-	int nIndex = -1;
-	nIndex = edit.LineIndex(nLine);
-	if (nIndex == -1)
+	char szFileName[MAX_PATH] = "E:\\1.php";
+	DWORD dwRet =0 ;
+	do 
 	{
-		return ;
-	}
-	edit.SetSel(nIndex,nIndex);
-
-	edit.Detach();
-*/	
+		try
+		{
+			//去掉路径		
+			char szWindowsName[MAX_PATH] = {0};
+			char drive[_MAX_DRIVE];
+			char dir[_MAX_DIR];
+			char fname[_MAX_FNAME];
+			char ext[_MAX_EXT];
+			_splitpath(szFileName, NULL, NULL, fname, ext);
+			
+			
+			sprintf(szWindowsName, "%s%s - 记事本", fname,ext);
+			
+			//检测该文本是否打开
+			CWnd* txtwnd = FindWindow("NotePad", szWindowsName);
+			if (txtwnd == NULL)
+			{
+				//获取记事本路径
+				char szNotePadPath[MAX_PATH] = {0};
+				char szWinDir[MAX_PATH] = {0};
+				GetWindowsDirectory(szWinDir, MAX_PATH);
+				sprintf(szNotePadPath, "%s\\notepad.exe", szWinDir);
+				//打开该文档
+				ShellExecute(NULL, "open", szNotePadPath, szFileName, NULL, SW_SHOW);
+				
+				Sleep(200);
+				
+				//再次检测该文本是否打开
+				
+				txtwnd = FindWindow("NotePad", szWindowsName);
+				if (txtwnd == NULL)
+				{
+					MessageBox("FindWindow NotePad failed!");
+					dwRet = -3;
+					break;
+				}
+			}
+			
+			//查找edit控件句柄
+			HWND hwnd = FindWindowEx(txtwnd->m_hWnd, NULL, "Edit", "");
+			
+			CEdit edit;
+			edit.Attach(hwnd);
+			
+			edit.SetFocus();
+			
+			int nLine = 3 - 1;
+			int nIndex = -1;
+			//line转换
+			nIndex = edit.LineIndex(nLine);
+			if (nIndex == -1)
+			{				
+				MessageBox("FindWindow LineIndex failed!");
+				//行数超过了范围
+				dwRet = -2;
+				break;
+			}
+			edit.SetSel(nIndex,nIndex);
+			
+			edit.Detach();
+		}
+		catch (...)
+		{
+				MessageBox("exception!");
+			dwRet = -1;
+			break;
+		}
+	} while (0);
+	
 }
 
 void COfficesearchDlg::OnButton5() 

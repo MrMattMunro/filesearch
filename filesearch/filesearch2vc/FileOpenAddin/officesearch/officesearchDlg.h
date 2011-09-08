@@ -8,7 +8,7 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "sloFileOpenAddin.h"
+//#include "sloFileOpenAddin.h"
 /////////////////////////////////////////////////////////////////////////////
 // COfficesearchDlg dialog
 
@@ -18,7 +18,7 @@ class COfficesearchDlg : public CDialog
 public:
 	COfficesearchDlg(CWnd* pParent = NULL);	// standard constructor
 
-	sloFileOpenAddin fileaddin;
+//	sloFileOpenAddin fileaddin;
 // Dialog Data
 	//{{AFX_DATA(COfficesearchDlg)
 	enum { IDD = IDD_OFFICESEARCH_DIALOG };
