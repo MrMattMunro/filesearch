@@ -827,7 +827,7 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 					nPage = atoi(strPage.GetBuffer(0));	
 				}
 
-				m_fileopen.m_fnopenWordFile(strDespFileName.GetBuffer(0), 3/*nPage*/, strKeyWords.GetBuffer(0));
+				m_fileopen.m_fnopenWordFile(strDespFileName.GetBuffer(0), nPage, strKeyWords.GetBuffer(0));
 			}
 			if (strGroupCaption.Find(EXCEL_NAME, 0) != -1)
 			{
