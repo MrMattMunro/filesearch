@@ -104,10 +104,6 @@ SOURCE=.\officesearchDlg.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\sloFileOpenAddin.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\StdAfx.cpp
 # ADD CPP /Yc"stdafx.h"
 # End Source File
@@ -126,10 +122,6 @@ SOURCE=.\officesearchDlg.h
 # Begin Source File
 
 SOURCE=.\Resource.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\sloFileOpenAddin.h
 # End Source File
 # Begin Source File
 
