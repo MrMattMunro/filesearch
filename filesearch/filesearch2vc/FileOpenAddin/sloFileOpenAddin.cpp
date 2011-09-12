@@ -213,7 +213,9 @@ DWORD sloFileOpenAddin::OpenFile_EXCEL(char* pFileName, char* pSheet, int nRow, 
 				&vtMissing,	
 				&vtMissing);
 
-			range->Activate();	
+// 			if(range)
+// 				range->Activate();
+
 		}
 		catch (...)
 		{
