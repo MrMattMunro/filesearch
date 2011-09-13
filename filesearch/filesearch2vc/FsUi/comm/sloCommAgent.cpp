@@ -224,4 +224,27 @@ BOOL sloCommAgent::GetPropertyfileString(LPCTSTR lpKeyName, LPCTSTR lpDefault, L
 	return bResult;
 }
 
+//将string类对象中的数字字符提取出来
+int sloCommAgent::string2int(CString str)
+{
+    int length;
+    int i;
+    TCHAR temp2[15];
+    lstrcpy(temp2,str);    //copies a string to a buffer
+	
+    TCHAR temp[4];
+    int count;
+    count=0;
+    length=strlen(temp2);    //length保存了字符数组temp2的长度
+    for(i=0;i<length;i++)
+    {
+        if ((temp2[i]<='9')&&(temp2[i]>='0')) 
+        {
+            temp[count]=temp2[i];
+            count++;
+        }
+    }
+    return (::atoi(temp));
+}
+
 

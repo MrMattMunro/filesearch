@@ -15,6 +15,11 @@ CMySQLDB::CMySQLDB()
 {
 	m_handle = NULL;
 	m_res = NULL;
+	m_strHost = "";
+	m_nPort = 0;
+	m_strUser = "";
+	m_strPwd = "";
+	m_strDB = "";
 }
 
 CMySQLDB::~CMySQLDB()
