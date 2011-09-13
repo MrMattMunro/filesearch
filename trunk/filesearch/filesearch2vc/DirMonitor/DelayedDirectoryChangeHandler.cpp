@@ -1251,8 +1251,7 @@ bool CDelayedDirectoryChangeHandler::ExcludeThisNotification(LPCTSTR szFileName)
 	{
 		_tcscpy(szTmpPath, szFileName);
 		log.Print(LL_DBERR,"[warn]GetLongPathName org=%s,GetLastError=0x%x\r\n", szFileName, GetLastError());
-	}else
-		log.Print(LL_DBERR,"[info]GetLongPathName org=%s,des=%s\r\n", szFileName, szTmpPath);
+	}
 
 	_tcsupr(szTmpPath);
 
