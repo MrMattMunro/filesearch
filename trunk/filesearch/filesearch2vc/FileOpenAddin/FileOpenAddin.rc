@@ -66,8 +66,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,3
- PRODUCTVERSION 2011,9,8,1
+ FILEVERSION 1,0,0,4
+ PRODUCTVERSION 2011,9,11,1
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -85,14 +85,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "\0"
             VALUE "FileDescription", "FileOpenAddin DLL\0"
-            VALUE "FileVersion", "1, 0, 0, 3\0"
+            VALUE "FileVersion", "1, 0, 0, 4\0"
             VALUE "InternalName", "FileOpenAddin\0"
             VALUE "LegalCopyright", "∞Ê»®À˘”– (C) 2011\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "FileOpenAddin.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "FileOpenAddin Dynamic Link Library\0"
-            VALUE "ProductVersion", "2011, 9, 8, 1\0"
+            VALUE "ProductVersion", "2011, 9, 11, 1\0"
             VALUE "SpecialBuild", "\0"
         END
     END
