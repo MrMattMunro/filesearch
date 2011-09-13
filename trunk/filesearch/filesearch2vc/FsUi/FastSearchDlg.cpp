@@ -144,7 +144,6 @@ void CFastSearchDlg::SetStaticFindPos()
 	m_static_find.MoveWindow(rcDlgs.left,rcDlgs.top,(rcDlgs.right - rcDlgs.left + 3),(rcDlgs.bottom - rcDlgs.top + 3),TRUE);   // 	
 }
 
-#define EDIT_TEXT	"搜索 文档内容关键字"
 BOOL CFastSearchDlg::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
@@ -161,7 +160,7 @@ BOOL CFastSearchDlg::OnInitDialog()
 
 	// TODO: Add extra initialization here
 	m_keyEdit.SetIcon(IDI_ICON_FAST_SEARCH2);
-	SetDlgItemText(IDC_EDIT_SEARCH_KEY, EDIT_TEXT);
+	SetDlgItemText(IDC_EDIT_SEARCH_KEY, g_lag.LoadString("label.searchtip"));
 
 	SetWindowText(g_lag.LoadString("title.fastsearch"));
 
@@ -303,7 +302,7 @@ void CFastSearchDlg::OnEventNotify()
 		SetComboxPos(FALSE);
 	}
 
-	if(strKey == EDIT_TEXT)
+	if(strKey == g_lag.LoadString("label.searchtip"))
 		return ;
 
 	if (bRectAll)
@@ -335,7 +334,7 @@ void CFastSearchDlg::OnChangeEditSearchKey()
 	m_bEditForce = TRUE;
 	CString strKey;
 	GetDlgItemText(IDC_EDIT_SEARCH_KEY, strKey);
-	if(strKey == EDIT_TEXT)
+	if(strKey == g_lag.LoadString("label.searchtip"))
 	{
 		SetDlgItemText(IDC_EDIT_SEARCH_KEY, "");
 	}
@@ -531,13 +530,23 @@ void CFastSearchDlg::AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, L
 	pPointer->AllowDrop(FALSE);
 }
 
+
+#define MAX_SHOW_NUM  100
 void CFastSearchDlg::AddLinkItemEx(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<DespInfo> DespList,LPCTSTR lpszTooltip/* = ""*/,BOOL bShowTextItem/* = FALSE*/)
 {	
 	CXTPTaskPanelGroup* pFolder = m_listMap[nFolderID].pGroup;
 	if (!pFolder)
 		return ;
 	
+	if (m_listMap[nFolderID].nItemSize >= MAX_SHOW_NUM)
+	{
+		//如果同一类文档显示超过最大数目，则不在显示
+
+		return; 
+	}
+	//记录此类文档显示个数
 	m_listMap[nFolderID].nItemSize++;
+
 	CXTPTaskPanelGroupItem* pPointer = pFolder->AddLinkItem(nItemID, 0/*imageid[nFolderID-1]*/);
 	pPointer->SetTooltip(lpszTooltip);
 	int nSize = DespList.size();
@@ -815,17 +824,7 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 			{
 				//打开word文档
 				//根据第几页，解析出页数。//第27页
-				int nPage, nStart, nEnd;
-				nStart = strDesp.Find("第", 0);
-				nEnd = strDesp.Find("页",0);
-				if (nEnd <= nStart)
-				{
-					nPage = 1;
-				}else
-				{
-					CString strPage = strDesp.Mid(nStart+2, nEnd - 2);
-					nPage = atoi(strPage.GetBuffer(0));	
-				}
+				int nPage = sloCommAgent::string2int(strDesp);
 
 				m_fileopen.m_fnopenWordFile(strDespFileName.GetBuffer(0), nPage, strKeyWords.GetBuffer(0));
 			}
@@ -834,16 +833,6 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 				//打开excel文档
 				//『交行』页第12行
 				int nRow, nStart, nEnd;
-				nStart = strDesp.Find("第", 0);
-				nEnd = strDesp.Find("行",nStart);
-				if (nEnd <= nStart)
-				{
-					nRow = 1;
-				}else
-				{
-					CString strRow = strDesp.Mid(nStart+2, nEnd - 2);
-					nRow = atoi(strRow.GetBuffer(0));	
-				}
 
 				//解析sheet名
 				nStart = strDesp.Find("『", 0);
@@ -855,6 +844,9 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 				}
 				CString strSheet = strDesp.Mid(nStart+2, nEnd - 2);
 
+				CString strNum = strDesp.Mid(nEnd);
+				nRow = sloCommAgent::string2int(strNum);
+
 				m_fileopen.m_fnopenExcelFile(strDespFileName.GetBuffer(0),strSheet.GetBuffer(0) ,nRow,strKeyWords.GetBuffer(0) );
 
 			}
@@ -862,34 +854,14 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 			{
 				//打开ppt文档
 				//第1页
-				int nPage, nStart, nEnd;
-				nStart = strDesp.Find("第", 0);
-				nEnd = strDesp.Find("页",0);
-				if (nEnd <= nStart)
-				{
-					nPage = 1;
-				}else
-				{
-					CString strPage = strDesp.Mid(nStart+2, nEnd - 2);
-					nPage = atoi(strPage.GetBuffer(0));	
-				}
+				int nPage= sloCommAgent::string2int(strDesp);
 				
 				m_fileopen.m_fnopenPPTFile(strDespFileName.GetBuffer(0), nPage, strKeyWords.GetBuffer(0));
 
 			}
 			if (strGroupCaption.Find(PDF_NAME, 0) != -1)
 			{
-				int nPage, nStart, nEnd;
-				nStart = strDesp.Find("第", 0);
-				nEnd = strDesp.Find("页",0);
-				if (nEnd <= nStart)
-				{
-					nPage = 1;
-				}else
-				{
-					CString strPage = strDesp.Mid(nStart+2, nEnd - 2);
-					nPage = atoi(strPage.GetBuffer(0));	
-				}
+				int nPage= sloCommAgent::string2int(strDesp);
 
 				//打开pdf文档
 				char szPath[MAX_PATH] = {0};
@@ -899,9 +871,7 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 					//解决无法打开文件路径中带有空格的文件
 					char szCmd[MAX_PATH*4] = {0};
 					sprintf(szCmd, "/a page=%d \"%s\"", nPage, strDespFileName.GetBuffer(0));
-// 					std::string strFilePathOpen = "\"";
-// 					strFilePathOpen += strDespFileName.GetBuffer(0);
-// 					strFilePathOpen += "\"";
+
 					flog.Print(LL_DEBUG_INFO,"[info]ShellExecute softpath=%s, filepath=%s\r\n",szPath,szCmd);
 					
 					ShellExecute(this->m_hWnd, "open", szPath, szCmd, "",SW_SHOW );
@@ -915,17 +885,7 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 			{
 				//打开txt文档
 				//第3行
-				int nPage, nStart, nEnd;
-				nStart = strDesp.Find("第", 0);
-				nEnd = strDesp.Find("行",0);
-				if (nEnd <= nStart)
-				{
-					nPage = 1;
-				}else
-				{
-					CString strPage = strDesp.Mid(nStart+2, nEnd - 2);
-					nPage = atoi(strPage.GetBuffer(0));	
-				}
+				int nPage = sloCommAgent::string2int(strDesp);
 				
 				m_fileopen.m_fnopenTxtFile(strDespFileName.GetBuffer(0), nPage, strKeyWords.GetBuffer(0));
 			}
@@ -982,7 +942,7 @@ void CFastSearchDlg::OnKillfocusEditSearchKey()
 	GetDlgItemText(IDC_EDIT_SEARCH_KEY, strKey);
 	if(strKey.GetLength() == 0)
 	{
-		SetDlgItemText(IDC_EDIT_SEARCH_KEY, EDIT_TEXT);
+		SetDlgItemText(IDC_EDIT_SEARCH_KEY, g_lag.LoadString("label.searchtip"));
 	}
 }
 
@@ -992,7 +952,7 @@ void CFastSearchDlg::OnSetfocusEditSearchKey()
 	m_bEditForce = TRUE;
 	CString strKey;
 	GetDlgItemText(IDC_EDIT_SEARCH_KEY, strKey);
-	if(strKey == EDIT_TEXT)
+	if(strKey == g_lag.LoadString("label.searchtip"))
 	{
 		OutputDebugString("[slfile]OnSetfocusEditSearchKey");
 		SetDlgItemText(IDC_EDIT_SEARCH_KEY, "");
