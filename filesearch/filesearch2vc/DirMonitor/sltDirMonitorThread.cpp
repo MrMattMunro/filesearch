@@ -60,7 +60,8 @@ int sltDirMonitorThread::run()
 
 		if (!g_xmlFilterAgent.ConnectDB())
 		{
-			log.Print(LL_DEBUG_INFO, "[Warn]Try to Connect Db Failed!DBName=COMMONINFO\r\n");
+			log.Print(LL_DEBUG_INFO, "[Warn]Try to Connect Db Failed!DBName=COMMONINFO!ServerIP=%s,Port=%d,UserName=%s, Pwd=%s\r\n",
+				g_xmlFilterAgent.m_szServerIP, g_xmlFilterAgent.m_nPort, g_xmlFilterAgent.m_szUserName, g_xmlFilterAgent.m_szPwd);
 			sleep(1000*30);
 			continue;
 		}

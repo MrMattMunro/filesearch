@@ -102,6 +102,7 @@ mysqlcomm* slMySqlAgent::GetObjectDB(std::string strSearchName)
 		DbPools dbItem;
 		dbItem.strDBName = strSearchName;
 		dbItem.pSqlDB = new mysqlcomm();
+		dbItem.pSqlDB->CreateDB();
 		pMySqlDB = dbItem.pSqlDB;
 		m_DbPools.push_back(dbItem);
 	}
