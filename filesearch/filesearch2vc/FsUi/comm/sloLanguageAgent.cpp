@@ -140,7 +140,7 @@ LANGUAGE sloLanguageAgent::GetLanguage()
 CString sloLanguageAgent::LoadString(char* pID)
 {
 	char szText[MAX_PATH] = {0};
-	sloCommAgent::GetPropertyfileString(pID, "null", szText, MAX_PATH, m_szLagFilePath);
+	sloCommAgent::GetPropertyfileString(pID, "", szText, MAX_PATH, m_szLagFilePath);
 	
 	CString strText = szText;	
 	return strText;

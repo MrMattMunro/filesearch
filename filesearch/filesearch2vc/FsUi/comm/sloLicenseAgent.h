@@ -10,7 +10,7 @@
 #endif // _MSC_VER > 1000
 
 
-class sloLicenseAgent    :public mysqlcomm
+class sloLicenseAgent :public mysqlcomm
 {
 public:
 	sloLicenseAgent();

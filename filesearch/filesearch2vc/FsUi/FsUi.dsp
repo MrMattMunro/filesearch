@@ -714,6 +714,14 @@ SOURCE=.\comm\sltFastSearchDlgThread.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\comm\sltLicenseThread.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\sltLicenseThread.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\comm\sltModifyIndexDlgThread.cpp
 # End Source File
 # Begin Source File

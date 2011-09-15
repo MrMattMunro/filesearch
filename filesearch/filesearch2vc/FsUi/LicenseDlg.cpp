@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "FsUi.h"
 #include "LicenseDlg.h"
+#include "sltLicenseThread.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -266,14 +267,21 @@ void CLicenseDlg::OnButtonReg()
 			break ;		
 		}
 		
-		if (m_licAgent.EventLicense(strNum.GetBuffer(0), strEMail.GetBuffer(0)) == FALSE)
-		{
-			strErrorInfo += g_lag.LoadString("errors.regfailed");
-			bRet = FALSE ;
-			break ;	
-		}
+		//¿ªÆôÏß³Ì×¢²á
+		if(sltLicenseThread::getInstance() == NULL)
+			sltLicenseThread::newInstance();
+
+		sltLicenseThread::getInstance()->startup(strNum.GetBuffer(0), strEMail.GetBuffer(0), this);
+		strErrorInfo += g_lag.LoadString("label.reging");
+
+//		if (m_licAgent.EventLicense(strNum.GetBuffer(0), strEMail.GetBuffer(0)) == FALSE)
+//		{
+//			strErrorInfo += g_lag.LoadString("errors.regfailed");
+//			bRet = FALSE ;
+//			break ;	
+//		}
 		
-		strErrorInfo += g_lag.LoadString("label.reginfo");
+//		strErrorInfo += g_lag.LoadString("label.reginfo");
 	} while (0);
 	
 	(CStatic*)GetDlgItem(IDC_STATIC_ERROR_INFO)->ShowWindow(SW_SHOW);
