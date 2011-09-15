@@ -66,16 +66,41 @@ BOOL sloSetAttrAgent::UpdateSoftPath(char* szFileType, char* szPath)
 
 	do 
 	{
-		//
+		//连接数据库
 		if (!m_pMySqlDB && !ConnectDB())
 			break ;
 		
-		std::string strQuerySQL = "update t_fileopener set exepath='%s',lastmodify='%s' where filetype='%s'";
-		HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(),sloCommAgent::ConverSqlPath(szPath).c_str(), sloCommAgent::GetCurTime(),szFileType);
+		//如果数据库中没有该条记录，则插入新记录
+		std::string strQuerySQL = "select * from t_fileopener where filetype='%s'";	
+		HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), szFileType);
 		if (FAILED(hr))
 		{
 			bRet = FALSE;
 			break;
+		}
+		
+		int nCount = m_pMySqlDB->GetRowCount();
+		int nFieldCount = m_pMySqlDB->GetFieldCount();
+		if(nCount >= 1 && nFieldCount >= 1)
+		{	
+			//如果数据库中有该条记录，则更新此记录
+			strQuerySQL = "update t_fileopener set exepath='%s',lastmodify='%s' where filetype='%s'";
+			HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(),sloCommAgent::ConverSqlPath(szPath).c_str(), sloCommAgent::GetCurTime(),szFileType);
+			if (FAILED(hr))
+			{
+				bRet = FALSE;
+				break;
+			}		
+		}else
+		{
+			//插入记录
+			strQuerySQL = "insert into t_fileopener(filetype,exepath, lastmodify) values('%s', '%s', '%s')";
+			HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(),szFileType,sloCommAgent::ConverSqlPath(szPath).c_str(), sloCommAgent::GetCurTime());
+			if (FAILED(hr))
+			{
+				bRet = FALSE;
+				break;
+			}	
 		}
 
 		bRet = TRUE;

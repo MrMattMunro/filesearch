@@ -308,10 +308,10 @@ BOOL sloLicenseAgent::GetLicensePath()
 	ClearPath();
 
 	sprintf(m_szOldLicBatPath,"%s%s%s.dat",drive, dir,LICENSE_NAME);
-	sprintf(m_szLicBatPath,"%s%s%s_%s.dat",drive, dir,LICENSE_NAME,m_LicInfo.szOrderNo);
+	sprintf(m_szLicBatPath,"%s%s%s_%s.rar",drive, dir,LICENSE_NAME,m_LicInfo.szOrderNo);
 	sprintf(m_szLicTxtPath,"%s%s%s_%s.txt",drive, dir,LICENSE_NAME,m_LicInfo.szOrderNo);
 	
-	sprintf(m_szServerLicBatPath,"%s//%s//%s_%s.dat",CUR_FOLDER,m_LicInfo.szStartDate, LICENSE_NAME,m_LicInfo.szOrderNo);
+	sprintf(m_szServerLicBatPath,"%s//%s//%s_%s.rar",CUR_FOLDER,m_LicInfo.szStartDate, LICENSE_NAME,m_LicInfo.szOrderNo);
 	sprintf(m_szServerLicTxtPath,"%s//%s//%s_%s.txt",CUR_FOLDER,m_LicInfo.szStartDate, LICENSE_NAME,m_LicInfo.szOrderNo);
 
 	sprintf(m_szUpdateProPath,"%s%s%s",drive, dir,UPDATE_PRO_NAME);	
