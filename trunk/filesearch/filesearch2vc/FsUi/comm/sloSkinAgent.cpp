@@ -23,6 +23,7 @@ sloSkinAgent::sloSkinAgent()
 	memset(&m_szSkinName, NULL, MAX_PATH*2);
 	memset(&m_szSkinProPath, NULL, MAX_PATH);
 	memset(&m_szVerProPath, NULL, MAX_PATH);
+	m_bInit = FALSE;
 }
 
 sloSkinAgent::~sloSkinAgent()
@@ -177,6 +178,11 @@ BOOL sloSkinAgent::InitSkinProp()
 //Vista,WinXP.Luna,WinXP.Royale, Office2007
 void sloSkinAgent::InitSkin()
 {
+	if (m_bInit)
+	{
+		return ;
+	}
+
 	InitSkinProp();
 
 	GetSkinPath();
@@ -200,6 +206,8 @@ void sloSkinAgent::InitSkin()
 
 	XTPSkinManager()->LoadSkin(m_szSkinName, m_skinPropList[i].szSkinIniName);
 
+
+	m_bInit = TRUE;
 }
 
 
