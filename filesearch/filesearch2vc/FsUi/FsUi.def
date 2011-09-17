@@ -11,3 +11,4 @@ EXPORTS
 	FsSetAttribute		@4
 	FsFastSearch		@5
 	FsSetSheet			@6
+	FsLoadSkin			@7

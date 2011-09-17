@@ -158,6 +158,19 @@ DWORD __stdcall FsSetSheet()
 	return 0;
 }
 
+
+/*
+  功能：加载皮肤
+*/
+DWORD __stdcall FsLoadSkin()
+{
+	OutputDebugString("===========Enter in FsLoadSkin!");
+	
+	g_skin.InitSkin();
+	
+	return 0;
+}
+
 //////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// 未用  //////////////////////////////////
 /*

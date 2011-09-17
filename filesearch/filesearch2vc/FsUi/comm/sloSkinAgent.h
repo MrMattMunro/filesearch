@@ -29,6 +29,8 @@ public:
 	char m_szVerProPath[MAX_PATH];
 
 	std::vector<Skin_Prop> m_skinPropList;
+
+	BOOL m_bInit;
 };
 
 #endif // !defined(AFX_SLOSKINAGENT_H__C3DDDE06_6824_4E85_8A4D_31EE5E7E4319__INCLUDED_)
