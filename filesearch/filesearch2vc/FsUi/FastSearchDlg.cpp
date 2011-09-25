@@ -869,12 +869,13 @@ void CFastSearchDlg::OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam)
 				{
 					//打开进程参数的文件全路径中，如果含有“ ”（空格），则改路径必须用加上“”
 					//解决无法打开文件路径中带有空格的文件
-					char szCmd[MAX_PATH*4] = {0};
-					sprintf(szCmd, "/a page=%d \"%s\"", nPage, strDespFileName.GetBuffer(0));
-
-					flog.Print(LL_DEBUG_INFO,"[info]ShellExecute softpath=%s, filepath=%s\r\n",szPath,szCmd);
-					
-					ShellExecute(this->m_hWnd, "open", szPath, szCmd, "",SW_SHOW );
+// 					char szCmd[MAX_PATH*4] = {0};
+// 					sprintf(szCmd, "/a page=%d \"%s\"", nPage, strDespFileName.GetBuffer(0));
+// 
+// 					flog.Print(LL_DEBUG_INFO,"[info]ShellExecute softpath=%s, filepath=%s\r\n",szPath,szCmd);
+// 					
+// 					ShellExecute(this->m_hWnd, "open", szPath, szCmd, "",SW_SHOW );
+					m_fileopen.m_fnopenPdfFile(szPath, strDespFileName.GetBuffer(0), nPage, strKeyWords.GetBuffer(0));
 				}else
 				{
 					flog.Print(LL_DEBUG_INFO,"[info]ShellExecute filepath=%s\r\n",strDespFileName.GetBuffer(0));

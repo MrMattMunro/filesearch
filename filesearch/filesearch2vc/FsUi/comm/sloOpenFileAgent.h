@@ -11,8 +11,8 @@
 typedef DWORD (__stdcall *fnopenWordFile)(char* pFileName, int nPage, char* pKeyWords/* = NULL*/);
 typedef DWORD (__stdcall *fnopenExcelFile)(char* pFileName, char* pSheet, int nRow, char* pKeyWords/* = NULL*/);
 typedef DWORD (__stdcall *fnopenPPTFile)(char* pFileName, int nPage, char* pKeyWords/* = NULL*/);
-typedef DWORD (__stdcall *fnopenPdfFile)(char* pFileName, int nPage, char* pKeyWords/* = NULL*/);
 typedef DWORD (__stdcall *fnopenTxtFile)(char* pFileName, int nRow, char* pKeyWords/* = NULL*/);
+typedef DWORD (__stdcall *fnopenPdfFile)(char* pPdfSoftPath,char* pFileName, int nPage, char* pKeyWords/* = NULL*/);
 class sloOpenFileAgent  
 {
 public:
