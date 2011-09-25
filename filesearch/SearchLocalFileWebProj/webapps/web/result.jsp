@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=utf-8" language="java"%>
-<%@ page import="com.searchlocal.bean.*"%>
-<%@ page import="com.searchlocal.entity.*"%>
-<%@ page import="com.searchlocal.param.CreateNewParam"%>
-<%@ page import="com.searchlocal.util.StringUtil"%>
+<%@ page import="com.web.searchlocal.bean.*"%>
+<%@ page import="com.web.searchlocal.entity.*"%>
+<%@ page import="com.web.searchlocal.param.CreateNewParam"%>
+<%@ page import="com.web.searchlocal.util.StringUtil"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.searchlocal.constants.Constant"%>
+<%@ page import="com.web.searchlocal.constants.Constant"%>
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -205,7 +205,7 @@
 					String webpage = (String)session.getAttribute(Constant.web_page);
 					if(obj instanceof WordFileBean){
 						WordFileBean bean = (WordFileBean)obj;
-						attachstring= the + bean.getParagraphNo()+(String)session.getAttribute(Constant.web_photogragh);
+						attachstring= the + bean.getPage()+ webpage;
 					}
 					if(obj instanceof ExcelFileBean){
 						ExcelFileBean bean = (ExcelFileBean)obj;
@@ -231,9 +231,14 @@
 					%>
 		<tr>
 			<td width="7px"></td>
-			<td><a href="open?path=<%=bobj.getPath()%>">【<%=bobj.getFilename()%>】<%=attachstring%></a>&nbsp;&nbsp;
+			<td><a href="open?path=<%=bobj.getPath()%>&attach=<%=attachstring%>">【<%=bobj.getFilename()%>】<%=attachstring%></a>&nbsp;&nbsp;
+			<!--  
 			<a class="previewlink" onclick="preview('<%= StringUtil.convertPath(bobj.getPath())%>' , '<%= i%>', this);"><%=(String)session.getAttribute(Constant.web_preview)%></a>
-			&nbsp;&nbsp;&nbsp;&nbsp;<a class="viewlink" onclick="openInNewWindow();"><%=(String)session.getAttribute(Constant.web_view)%></a></td>
+			&nbsp;&nbsp;&nbsp;&nbsp;<a class="viewlink" onclick="openInNewWindow();">
+			<%=(String)session.getAttribute(Constant.web_view)%></a>
+			-->
+
+			</td>
 		</tr>
 		<tr>
            	<td width="7px"></td>
