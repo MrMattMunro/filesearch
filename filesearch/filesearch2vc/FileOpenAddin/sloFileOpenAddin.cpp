@@ -319,10 +319,20 @@ DWORD sloFileOpenAddin::OpenFile_PPT(char* pFileName, int nPage, char* pKeyWords
 	return dwRet;
 }
 
-DWORD sloFileOpenAddin::OpenFile_PDF(char* pFileName, int nPage, char* pKeyWords/* = NULL*/)
+DWORD sloFileOpenAddin::OpenFile_PDF(char* pPdfSoftPath, char* pFileName, int nPage, char* pKeyWords/* = NULL*/)
 {
 	DWORD dwRet =0 ;
+	if (nPage <= 0)
+	{
+		nPage = 1;
+	}
 //	ShellExecute(NULL, "open", pFileName, "/a page=3", NULL, SW_SHOW);
+	//打开进程参数的文件全路径中，如果含有“ ”（空格），则改路径必须用加上“”
+	//解决无法打开文件路径中带有空格的文件
+	char szCmd[MAX_PATH*4] = {0};
+	sprintf(szCmd, "/a page=%d \"%s\"", nPage, pFileName);
+	
+	ShellExecute(NULL, "open", pPdfSoftPath, szCmd, "",SW_SHOW );
 
 	return dwRet;
 }
