@@ -80,9 +80,9 @@ DWORD __stdcall openPPTFile(char* pFileName, int nPage, char* pKeyWords/* = NULL
 	return fileaddin.OpenFile_PPT(pFileName, nPage, pKeyWords);
 }
 
-DWORD __stdcall openPdfFile(char* pFileName, int nPage, char* pKeyWords/* = NULL*/)
+DWORD __stdcall openPdfFile(char* pPdfSoftPath, char* pFileName, int nPage, char* pKeyWords/* = NULL*/)
 {
-	return fileaddin.OpenFile_PDF(pFileName, nPage, pKeyWords);
+	return fileaddin.OpenFile_PDF(pPdfSoftPath, pFileName, nPage, pKeyWords);
 }
 
 DWORD __stdcall openTxtFile(char* pFileName, int nRow, char* pKeyWords/* = NULL*/)
