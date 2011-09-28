@@ -1,4 +1,4 @@
-package com.searchlocal.bean;
+package com.web.searchlocal.bean;
 
 public class ExcelFileBean extends BaseFileBean {
 

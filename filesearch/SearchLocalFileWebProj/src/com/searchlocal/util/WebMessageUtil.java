@@ -1,12 +1,13 @@
-package com.searchlocal.util;
+package com.web.searchlocal.util;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.util.Locale;
+import java.util.Properties;
 
-import com.searchlocal.constants.Constant;
+import com.web.searchlocal.constants.Constant;
 
 
 public class WebMessageUtil {
@@ -19,13 +20,19 @@ public class WebMessageUtil {
 	 * @param args
 	 */
 	public WebMessageUtil() {
-		FileInputStream in;
+		FileInputStream in = null;
 		try {
 			if (prop.isEmpty()) {
-				in = new FileInputStream(Constant.LANGUAGE_RS);
-				prop.load(in);
-				String language = prop.getProperty(Constant.LANGUAGE);
-				prop.clear();
+				Locale local = Locale.getDefault();
+				String languagep = local.getLanguage();
+				String language = Constant.LanguageClassify.ENGLISH;
+				if ("zh".equals(languagep)) {
+					language = Constant.LanguageClassify.CHINESE;
+				}
+				if ("ja".equals(languagep)) {
+					language = Constant.LanguageClassify.JAPANESE;
+				}
+				
 				if (language.equals(Constant.LanguageClassify.CHINESE)) {
 					in = new FileInputStream(Constant.CHINESE_RS);
 				}

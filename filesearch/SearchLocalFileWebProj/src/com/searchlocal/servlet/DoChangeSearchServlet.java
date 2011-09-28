@@ -1,4 +1,4 @@
-package com.searchlocal.servlet;
+package com.web.searchlocal.servlet;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.searchlocal.constants.Constant;
-import com.searchlocal.param.CreateNewParam;
-import com.searchlocal.util.SessionUtil;
+import com.web.searchlocal.constants.Constant;
+import com.web.searchlocal.param.CreateNewParam;
+import com.web.searchlocal.util.SessionUtil;
 
 /**
  * 
@@ -31,11 +31,8 @@ public class DoChangeSearchServlet extends HttpServlet {
 
 	/**
 	 * 
-	 * 
-	 * 
 	 * @param request
 	 * @param response
-	 * 
 	 * @throws ServletException
 	 * @throws IOException
 	 */
@@ -45,19 +42,17 @@ public class DoChangeSearchServlet extends HttpServlet {
 		HttpSession session = SessionUtil.getNewSession(request);
 		session.setAttribute("searchtype", "all");
 
-		String searchname = request.getParameter("searchname");
+		String id = request.getParameter("id");
 
-		List entityList = (List) session.getAttribute("entityList");
-		for (Iterator iter = entityList.iterator(); iter.hasNext();) {
+		List<CreateNewParam> entityList = (List<CreateNewParam>) session.getAttribute("entityList");
+		for (Iterator<CreateNewParam> iter = entityList.iterator(); iter.hasNext();) {
 			CreateNewParam element = (CreateNewParam) iter.next();
-			if (searchname.equals(element.getSearchname())) {
-				element.setSearchname(element.getSearchname());
-				element.setPath(element.getPath());
+			if (id.equals(element.getId())) {
 				session.setAttribute("element", element);
 			}
 		}
 
-		session.setAttribute("searchname", searchname);
+		session.setAttribute("id", id);
 		ServletContext sc = getServletContext();
 		RequestDispatcher rd = sc.getRequestDispatcher(Constant.WEB_INDEX_JSP);
 		rd.forward(request, response);

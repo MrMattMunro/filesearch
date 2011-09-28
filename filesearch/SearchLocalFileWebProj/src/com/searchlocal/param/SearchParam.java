@@ -1,10 +1,10 @@
-package com.searchlocal.param;
+package com.web.searchlocal.param;
 
 public class SearchParam {
-
+	
+	private String id;
+	
 	private String query;
-
-	private String searchname;
 
 	private int startRow;
 
@@ -58,21 +58,6 @@ public class SearchParam {
 	}
 
 	/**
-	 * @return Returns the searchname.
-	 */
-	public String getSearchname() {
-		return searchname;
-	}
-
-	/**
-	 * @param searchname
-	 *            The searchname to set.
-	 */
-	public void setSearchname(String searchname) {
-		this.searchname = searchname;
-	}
-
-	/**
 	 * @return Returns the searchtype.
 	 */
 	public String getSearchtype() {
@@ -84,6 +69,24 @@ public class SearchParam {
 	 */
 	public void setSearchtype(String searchtype) {
 		this.searchtype = searchtype;
+	}
+
+	/**
+	 * 取得id
+	 * 
+	 * @return String id 
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * 设定id 
+	 * 
+	 * @param String id 
+	 */
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

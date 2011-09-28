@@ -1,4 +1,4 @@
-package com.searchlocal.servlet;
+package com.web.searchlocal.servlet;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,35 +11,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.searchlocal.constants.Constant;
-import com.searchlocal.entity.PageEntity;
-import com.searchlocal.exception.LogicException;
-import com.searchlocal.param.SearchParam;
-import com.searchlocal.service.SearchService;
-import com.searchlocal.service.impl.SearchServiceImpl;
-import com.searchlocal.util.PagerHelper;
-import com.searchlocal.util.SessionUtil;
-import com.searchlocal.util.StringUtil;
+import com.web.searchlocal.constants.Constant;
+import com.web.searchlocal.entity.PageEntity;
+import com.web.searchlocal.exception.LogicException;
+import com.web.searchlocal.param.SearchParam;
+import com.web.searchlocal.service.SearchService;
+import com.web.searchlocal.service.impl.SearchServiceImpl;
+import com.web.searchlocal.util.PagerHelper;
+import com.web.searchlocal.util.SessionUtil;
+import com.web.searchlocal.util.StringUtil;
 
 /**
+ * 检索索引文件
  * 
- * @version $Revision$
+ * <p>Title: 检索索引文件</p>
+ * <p>Description: </p>
+ * <p>site: www.slfile.net</p>
+ * @author changsong:qianjinfu@gmail.com
+ * @version 1.0
  */
 public class DoSearchServlet extends HttpServlet {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 构造器
+	 */
 	public DoSearchServlet() {
 	}
 
 	/**
-	 * 
-	 * 
+	 * 根据关键字检索
 	 * 
 	 * @param request
 	 * @param response
-	 * 
 	 * @throws ServletException
 	 * @throws IOException
 	 */
@@ -52,26 +58,36 @@ public class DoSearchServlet extends HttpServlet {
 		HttpSession session = SessionUtil.getNewSession(request);
 		String searchtype = (String) session.getAttribute("searchtype");
 		
+		// 检索全部
 		if(StringUtil.isNullString(searchtype)){
-			searchtype = "all";
+			searchtype = Constant.ALL;
 		}
 
-		String searchname = (String) request.getParameter("searchname");
-		if (null == searchname) {
-			searchname = (String) session.getAttribute("searchname");
+		// 搜索名称
+		String id = (String) request.getParameter("id");
+		if (null == id) {
+			id = (String) session.getAttribute("id");
 		}
 
 		session.removeAttribute("pageEntity");
 
+		// 设置参数
 		SearchParam param = new SearchParam();
+		// 关键字
 		param.setQuery(query);
-		param.setSearchname(searchname);
+		// 检索名
+		param.setId(id);
 		param.setSearchtype(searchtype);
 
-		// get count of search
+		// 取得检索结果条数
 		SearchService searchService = new SearchServiceImpl();
-		int totalRows = searchService.getCount(param);
-		PageEntity pageEntity = PagerHelper.getPager(null, null, null,totalRows);
+		int totalRows = 0;
+		try {
+			totalRows = searchService.getCount(param);
+		} catch (LogicException e1) {
+			e1.printStackTrace();
+		}
+		PageEntity pageEntity = PagerHelper.getPager(null, null, null, totalRows);
 
 		param.setStartRow(pageEntity.getStartRow());
 		param.setEndRow(pageEntity.getEndRow());
@@ -84,7 +100,7 @@ public class DoSearchServlet extends HttpServlet {
 
 		session.setAttribute("pageEntity", pageEntity);
 		session.setAttribute("query", query);
-		session.setAttribute("searchname", searchname);
+		session.setAttribute("id", id);
 		session.setAttribute("beanList", beanList);
 		request.setAttribute("cpageNo", "1");
 

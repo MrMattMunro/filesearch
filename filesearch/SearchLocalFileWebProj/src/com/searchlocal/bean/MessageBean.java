@@ -1,11 +1,11 @@
-package com.searchlocal.bean;
+package com.web.searchlocal.bean;
 
 /**
  * 消息Bean
  * 
  * <p>Title: 消息Bean</p>
  * <p>Description: </p>
- * <p>site: www.slfile.com</p>
+ * <p>site: www.slfile.net</p>
  * @author changsong:qianjinfu@gmail.com
  * @version 1.0
  */

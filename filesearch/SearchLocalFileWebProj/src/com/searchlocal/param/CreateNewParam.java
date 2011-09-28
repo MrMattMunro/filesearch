@@ -1,10 +1,10 @@
-package com.searchlocal.param;
+package com.web.searchlocal.param;
 
 import java.util.List;
 
 public class CreateNewParam {
 
-	private String searchname;
+	private String id;
 
 	private String path;
 
@@ -58,18 +58,39 @@ public class CreateNewParam {
 	}
 
 	/**
-	 * @return Returns the searchname.
+	 * 取得id
+	 * 
+	 * @return String id 
 	 */
-	public String getSearchname() {
-		return searchname;
+	public String getId() {
+		return id;
 	}
 
 	/**
-	 * @param searchname
-	 *            The searchname to set.
+	 * 设定id 
+	 * 
+	 * @param String id 
 	 */
-	public void setSearchname(String searchname) {
-		this.searchname = searchname;
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * 取得indexpath
+	 * 
+	 * @return String indexpath 
+	 */
+	public String getIndexpath() {
+		return indexpath;
+	}
+
+	/**
+	 * 设定indexpath 
+	 * 
+	 * @param String indexpath 
+	 */
+	public void setIndexpath(String indexpath) {
+		this.indexpath = indexpath;
 	}
 
 }

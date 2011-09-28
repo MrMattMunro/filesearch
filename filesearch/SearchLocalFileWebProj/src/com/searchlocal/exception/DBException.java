@@ -1,4 +1,4 @@
-package com.searchlocal.exception;
+package com.web.searchlocal.exception;
 
 /**
  * 

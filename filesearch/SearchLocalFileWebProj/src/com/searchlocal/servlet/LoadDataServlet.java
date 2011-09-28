@@ -1,6 +1,7 @@
-package com.searchlocal.servlet;
+package com.web.searchlocal.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,11 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.searchlocal.constants.Constant;
-import com.searchlocal.param.CreateNewParam;
-import com.searchlocal.util.SessionUtil;
-import com.searchlocal.util.WebMessageUtil;
-import com.searchlocal.util.XMLConfig;
+import com.web.searchlocal.constants.Constant;
+import com.web.searchlocal.factory.SearcherFactory;
+import com.web.searchlocal.param.CreateNewParam;
+import com.web.searchlocal.util.JsonUtil;
+import com.web.searchlocal.util.SessionUtil;
+import com.web.searchlocal.util.WebMessageUtil;
 
 /**
  * 
@@ -45,22 +47,27 @@ public class LoadDataServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = SessionUtil.getNewSession(request);
-
-		List entityList = XMLConfig.getList();
-		CreateNewParam element = new CreateNewParam();
+		List<CreateNewParam> entityList = SearcherFactory.getSearcher();
+		CreateNewParam element = null;
+		
 		session.setAttribute(Constant.is_no_search, Boolean.FALSE);
 		if (entityList.size() > 0) {
 			element = (CreateNewParam) entityList.get(0);
-			element.setSearchname(element.getSearchname());
 			element.setPath(element.getPath());
 		} else {
 			session.setAttribute(Constant.is_no_search, Boolean.TRUE);
 		}
-
+		
+		// 从Session取得检索对象
+		CreateNewParam selement = (CreateNewParam)session.getAttribute("element");
+		if(null != selement){
+		   element = selement;
+		}
+		
 		session.setAttribute("entityList", entityList);
 		session.setAttribute("element", element);
 		session.setAttribute("searchtype", "all");
-
+		
 		// menu
 		session.setAttribute(Constant.web_searchname, msg
 				.getMsgbyId(Constant.web_searchname));
@@ -115,9 +122,17 @@ public class LoadDataServlet extends HttpServlet {
 
 		session.setAttribute(Constant.web_error_nosearcher, msg.getMsgbyId(Constant.web_error_nosearcher));
 		session.setAttribute(Constant.web_info_loading, msg.getMsgbyId(Constant.web_info_loading));
-
-		ServletContext sc = getServletContext();
-		RequestDispatcher rd = sc.getRequestDispatcher(Constant.WEB_INDEX_JSP);
-		rd.forward(request, response);
+		
+		
+		JsonUtil jsonUtil = new JsonUtil();
+		String json = jsonUtil.voList2JsonString(entityList);
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html;charset=GBK");
+		out.print(json);
+		out.close();
+		
+//		ServletContext sc = getServletContext();
+//		RequestDispatcher rd = sc.getRequestDispatcher(Constant.WEB_INDEX_JSP);
+//		rd.forward(request, response);
 	}
 }

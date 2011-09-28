@@ -1,4 +1,4 @@
-package com.searchlocal.util;
+package com.web.searchlocal.util;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;

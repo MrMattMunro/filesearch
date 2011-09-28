@@ -1,12 +1,12 @@
-package com.searchlocal.convertswf;
+package com.web.searchlocal.convertswf;
 
 import java.io.File;
 
 import jp.ne.so_net.ga2.no_ji.jcom.IDispatch;
 import jp.ne.so_net.ga2.no_ji.jcom.ReleaseManager;
 
-import com.searchlocal.util.Escape;
-import com.searchlocal.util.StringUtil;
+import com.web.searchlocal.util.Escape;
+import com.web.searchlocal.util.StringUtil;
 
 /**
  * 将文档转换成SWF文件
@@ -24,7 +24,12 @@ public class Doc2Flash {
 		ReleaseManager rm = new ReleaseManager();
 		try {
 			// Create Server object
-			IDispatch p2f = new IDispatch(rm, "Print2Flash3.Server");
+			//IDispatch p2f = new IDispatch(rm, "Print2Flash3.Server");
+			//Macromedia.FlashPaper.ContextMenu.1
+			//Macromedia.FlashPaper.ContextMenu
+			//Macromedia FlashPaper
+			// Macromedia FlashPaper winspool,Ne02:,15,45
+			IDispatch p2f = new IDispatch(rm, "Macromedia.FlashPaper.ContextMenu");
 
 			// Setup interface and protection options
 			IDispatch defProfile = (IDispatch) p2f.get("DefaultProfile");
@@ -58,7 +63,6 @@ public class Doc2Flash {
 				Object[] param = new Object[] { filepath, tempPath, new String("/FormName:Letter"), 
 						new String("/Orientation:2") };
 				p2f.method("ConvertFile", param);
-				System.out.println("Conversion completed successfully");
 			} 
 			// 删除掉以前修改多次的而生成的SWF文件
 			String temp = swfFileName.substring(0, swfFileName.length()-18);
@@ -73,9 +77,7 @@ public class Doc2Flash {
 			}
 			return swfFileName;
 		} catch (Exception e) {
-			
 			// TODO
-			System.out.println("An error occurred at conversion: " + e.toString());
 		}  finally {
 			rm.release();
 		}

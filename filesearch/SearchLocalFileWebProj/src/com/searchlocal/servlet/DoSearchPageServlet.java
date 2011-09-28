@@ -1,4 +1,4 @@
-package com.searchlocal.servlet;
+package com.web.searchlocal.servlet;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.searchlocal.constants.Constant;
-import com.searchlocal.entity.PageEntity;
-import com.searchlocal.exception.LogicException;
-import com.searchlocal.param.SearchParam;
-import com.searchlocal.service.SearchService;
-import com.searchlocal.service.impl.SearchServiceImpl;
-import com.searchlocal.util.PagerHelper;
-import com.searchlocal.util.SessionUtil;
+import com.web.searchlocal.constants.Constant;
+import com.web.searchlocal.entity.PageEntity;
+import com.web.searchlocal.exception.LogicException;
+import com.web.searchlocal.param.SearchParam;
+import com.web.searchlocal.service.SearchService;
+import com.web.searchlocal.service.impl.SearchServiceImpl;
+import com.web.searchlocal.util.PagerHelper;
+import com.web.searchlocal.util.SessionUtil;
 
 /**
  * 
@@ -29,23 +29,14 @@ public class DoSearchPageServlet extends HttpServlet {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 1L;
 
-	/** WEB_INDEX_JSP */
-	private static final String WEB_INDEX_JSP = "/webapp/web/result.jsp";
-
-	/** ENCODE_UTF_8 */
-	private static final String ENCODE_UTF_8 = "utf-8";
-
-
 	public DoSearchPageServlet() {
 	}
 
 	/**
 	 * 
 	 * 
-	 * 
 	 * @param request
 	 * @param response
-	 * 
 	 * @throws ServletException
 	 * @throws IOException
 	 */
@@ -57,7 +48,7 @@ public class DoSearchPageServlet extends HttpServlet {
 		String query = (String) session.getAttribute("query");
 
 		// TODO
-		String searchname = (String) session.getAttribute("searchname");
+		String id = (String) session.getAttribute("id");
 		String searchtype = (String) session.getAttribute("searchtype");
 
 		PageEntity spageEntity = (PageEntity) session
@@ -83,7 +74,7 @@ public class DoSearchPageServlet extends HttpServlet {
 
 		SearchParam param = new SearchParam();
 		param.setQuery(query);
-		param.setSearchname(searchname);
+		param.setId(id);
 		param.setSearchtype(searchtype);
 
 		// get count of search

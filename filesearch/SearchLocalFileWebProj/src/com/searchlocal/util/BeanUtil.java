@@ -1,16 +1,16 @@
-package com.searchlocal.util;
+package com.web.searchlocal.util;
 
 import org.apache.lucene.document.Document;
 
-import com.searchlocal.bean.BaseFileBean;
-import com.searchlocal.bean.ChmFileBean;
-import com.searchlocal.bean.ExcelFileBean;
-import com.searchlocal.bean.HtmlFileBean;
-import com.searchlocal.bean.PdfFileBean;
-import com.searchlocal.bean.PptFileBean;
-import com.searchlocal.bean.TxtFileBean;
-import com.searchlocal.bean.WordFileBean;
-import com.searchlocal.constants.Constant;
+import com.web.searchlocal.bean.BaseFileBean;
+import com.web.searchlocal.bean.ChmFileBean;
+import com.web.searchlocal.bean.ExcelFileBean;
+import com.web.searchlocal.bean.HtmlFileBean;
+import com.web.searchlocal.bean.PdfFileBean;
+import com.web.searchlocal.bean.PptFileBean;
+import com.web.searchlocal.bean.TxtFileBean;
+import com.web.searchlocal.bean.WordFileBean;
+import com.web.searchlocal.constants.Constant;
 
 public class BeanUtil {
 
@@ -46,8 +46,8 @@ public class BeanUtil {
 			filebean.setPath(absolutepath);
 			filebean.setContent(content);
 
-			String paragraphNo = element.get("paragraphNo");
-			filebean.setParagraphNo(Integer.parseInt(paragraphNo));
+			String page = element.get("page");
+			filebean.setPage(Integer.parseInt(page));
 			return filebean;
 		}
 		if (suffixname.equals(Constant.FileClassify.XLS) || suffixname.equals(Constant.FileClassify.XLS2007) ) {
