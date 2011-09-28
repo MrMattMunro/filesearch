@@ -1,7 +1,7 @@
-package com.searchlocal.util;
+package com.web.searchlocal.util;
 
-import com.searchlocal.constants.Constant;
-import com.searchlocal.entity.PageEntity;
+import com.web.searchlocal.constants.Constant;
+import com.web.searchlocal.entity.PageEntity;
 
 public class PagerHelper {
 

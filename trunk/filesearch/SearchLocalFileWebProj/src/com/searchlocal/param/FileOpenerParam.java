@@ -1,4 +1,4 @@
-package com.searchlocal.param;
+package com.web.searchlocal.param;
 
 public class FileOpenerParam {
 

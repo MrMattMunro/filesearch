@@ -1,4 +1,4 @@
-package com.searchlocal.entity;
+package com.web.searchlocal.entity;
 
 import java.io.Serializable;
 

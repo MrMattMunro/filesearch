@@ -1,4 +1,4 @@
-package com.searchlocal.servlet;
+package com.web.searchlocal.servlet;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,24 +11,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.searchlocal.constants.Constant;
-import com.searchlocal.entity.PageEntity;
-import com.searchlocal.exception.LogicException;
-import com.searchlocal.param.SearchParam;
-import com.searchlocal.service.SearchService;
-import com.searchlocal.service.impl.SearchServiceImpl;
-import com.searchlocal.util.PagerHelper;
-import com.searchlocal.util.SessionUtil;
+import com.web.searchlocal.constants.Constant;
+import com.web.searchlocal.entity.PageEntity;
+import com.web.searchlocal.exception.LogicException;
+import com.web.searchlocal.param.SearchParam;
+import com.web.searchlocal.service.SearchService;
+import com.web.searchlocal.service.impl.SearchServiceImpl;
+import com.web.searchlocal.util.PagerHelper;
+import com.web.searchlocal.util.SessionUtil;
 
 /**
+ * 点击[页码]查询
  * 
- * @version $Revision$
+ * <p>Title: 检索索引文件</p>
+ * <p>Description: </p>
+ * <p>site: www.slfile.net</p>
+ * @author changsong:qianjinfu@gmail.com
+ * @version 1.0
  */
 public class DoPageTypeChangeServlet extends HttpServlet {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 
+	 */
 	public DoPageTypeChangeServlet() {
 	}
 
@@ -51,18 +59,24 @@ public class DoPageTypeChangeServlet extends HttpServlet {
 		session.setAttribute("searchtype", searchtype);
 		String query =(String)session.getAttribute("query");
 		
-		String searchname = (String)session.getAttribute("searchname");
+		String id = (String)session.getAttribute("id");
 		
 	
 		session.removeAttribute("pageEntity");
 		SearchParam param = new SearchParam();
 		param.setQuery(query);
-		param.setSearchname(searchname);
+		param.setId(id);
 		param.setSearchtype(searchtype);
 
 		// get count of search
 		SearchService searchService = new SearchServiceImpl();
-		int totalRows = searchService.getCount(param);
+		int totalRows = 0;
+		try {
+			totalRows = searchService.getCount(param);
+		} catch (LogicException e1) {
+			// TODO 注意消除资源(关闭I/O等)
+			e1.printStackTrace();
+		}
 		PageEntity pageEntity = PagerHelper.getPager(null, null, null,
 				totalRows);
 

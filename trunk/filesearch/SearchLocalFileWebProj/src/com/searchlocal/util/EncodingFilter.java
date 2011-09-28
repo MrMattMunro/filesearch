@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package com.searchlocal.util;
+package com.web.searchlocal.util;
 
 
 import java.io.IOException;

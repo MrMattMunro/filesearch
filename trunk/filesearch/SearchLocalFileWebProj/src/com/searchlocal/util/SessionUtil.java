@@ -1,4 +1,4 @@
-package com.searchlocal.util;
+package com.web.searchlocal.util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

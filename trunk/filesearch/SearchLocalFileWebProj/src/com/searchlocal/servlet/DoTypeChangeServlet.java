@@ -1,4 +1,4 @@
-package com.searchlocal.servlet;
+package com.web.searchlocal.servlet;
 
 import java.io.IOException;
 
@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.searchlocal.constants.Constant;
-import com.searchlocal.util.SessionUtil;
+import com.web.searchlocal.constants.Constant;
+import com.web.searchlocal.util.SessionUtil;
 
 /**
  * 

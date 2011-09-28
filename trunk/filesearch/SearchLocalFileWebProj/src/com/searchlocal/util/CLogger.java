@@ -1,12 +1,12 @@
-package com.searchlocal.util;
+package com.web.searchlocal.util;
 
 import java.io.File;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
-import com.searchlocal.constants.Constant;
-import com.searchlocal.exception.LogicException;
+import com.web.searchlocal.constants.Constant;
+import com.web.searchlocal.exception.LogicException;
 
 public class CLogger {
 

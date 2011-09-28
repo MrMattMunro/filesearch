@@ -1,8 +1,10 @@
-package com.searchlocal.util;
+package com.web.searchlocal.util;
 
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import com.searchlocal.constants.Constant;
+import com.web.searchlocal.constants.Constant;
 
 public class StringUtil {
 
@@ -21,7 +23,7 @@ public class StringUtil {
 	}
 	
 	public static boolean isNullString(String s) {
-		return "".equals(s)||  s==null ;
+		return "".equals(s.trim())||  s==null ;
 	}
 
 	public static String getSwfFileName(String path) {
@@ -141,5 +143,35 @@ public class StringUtil {
 		}
 		return returntype;
 	}
-
+	
+	public static String findNum(String str) {
+		String rstr = "";
+		String regEx = "[0-9]+"; 
+		Pattern p = Pattern.compile(regEx);
+		Matcher m = p.matcher(str);
+		if (m.find()) {
+			rstr =  m.group();
+		}
+		return rstr;
+	}
+	
+	public static String findSheetName(String str) {
+		String startPre = "『"; 
+		String ednPre = "』";
+		int start = str.indexOf(startPre);
+		int end = str.indexOf(ednPre);
+		str = str.substring(start + 1, end);
+		System.out.println(str) ;
+		return str;
+	}
+	
+	public static void main(String[] args){
+		findNum("第2页");
+		findNum("第211页");
+		findNum("第2113页");
+		findSheetName("第『k开始』页");
+		findSheetName("第『k开的始』页");
+		findSheetName("第『1212』页");
+		findSheetName("第『1k2开始3』页");
+	}
 }

@@ -1,5 +1,6 @@
-package com.searchlocal.servlet;
+package com.web.searchlocal.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -8,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.searchlocal.convertswf.Doc2Flash;
-import com.searchlocal.util.StringUtil;
+import com.web.searchlocal.flashpaper.FileConvert;
+import com.web.searchlocal.flashpaper.impl.FileConvert4SwfImpl;
+import com.web.searchlocal.util.StringUtil;
 
 /**
  * 
@@ -46,8 +48,13 @@ public class PreViewDocServlet extends HttpServlet {
 		String swfFilePaths  = getServletContext().getRealPath(""); 
 		
 		// 生成文件名
-		String swffile = Doc2Flash.convert2Flash(filepath, swfFilePaths);
+		// String swffile = Doc2Flash.convert2Flash(filepath, swfFilePaths);
+		File inputFileInst = new File(filepath);
+		File outputFileInst = new File(swfFilePaths);
+		FileConvert fc = new FileConvert4SwfImpl();
+		fc.doConvertFile(inputFileInst, outputFileInst);
 		
+	   String swffile = swfFilePaths + File.separator + inputFileInst.getName();
 		String json = json(swffile, index, filepath);
 		writeJsonDatas(response, json);
 	}

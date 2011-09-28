@@ -8,7 +8,7 @@
  * This software is the proprietary information of ICSS, Inc.
  * Use is subject to license terms.
  */
-package com.searchlocal.util;
+package com.web.searchlocal.util;
 
 /**
 * JavaScript escape/unescape 编码的 Java 实现
