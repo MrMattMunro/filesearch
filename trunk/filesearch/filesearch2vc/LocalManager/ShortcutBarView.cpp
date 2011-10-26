@@ -24,6 +24,8 @@
 #include "ShortcutBarDoc.h"
 #include "ShortcutBarView.h"
 #include "GroupDlg.h"
+#include "sloCommAgent.h"
+#include "MainFrm.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -276,8 +278,16 @@ void CShortcutBarView::OnContextMenu(CWnd* pWnd, CPoint point)
 					int nCount = rList.GetItemCount();
 					rList.InsertItem(nCount, NULL, 0);
 					rList.SetItemText(nCount, 2, groupdlg.m_szGroupName);
-					rList.SetItemText(nCount, 3, _T("222!"));
+					rList.SetItemText(nCount, 3, sloCommAgent::GetCurTime());
 					//并更新数据库表
+					CMainFrame* pFrameWnd = (CMainFrame*)GetParentFrame();
+					ASSERT_KINDOF (CMainFrame, pFrameWnd);
+
+					if( strlen(pFrameWnd->m_paneFolders.m_szTypeName) != 0 )
+					{
+						//选中子节点
+						sloMysqlAgent::GetInstance()->AddKeyword(pFrameWnd->m_paneFolders.m_szTypeName, groupdlg.m_szGroupName);
+					}
 				}
 			}
 			break;		
@@ -301,8 +311,16 @@ void CShortcutBarView::OnContextMenu(CWnd* pWnd, CPoint point)
 				int nCount = rList.GetItemCount();
 				rList.InsertItem(nCount, NULL, 0);
 				rList.SetItemText(nCount, 2, groupdlg.m_szGroupName);
-				rList.SetItemText(nCount, 3, _T("222!"));
+				rList.SetItemText(nCount, 3, sloCommAgent::GetCurTime());
 				//并更新数据库表
+				CMainFrame* pFrameWnd = (CMainFrame*)GetParentFrame();
+				ASSERT_KINDOF (CMainFrame, pFrameWnd);
+				
+				if( strlen(pFrameWnd->m_paneFolders.m_szTypeName) != 0 )
+				{
+					//选中子节点
+					sloMysqlAgent::GetInstance()->AddKeyword(pFrameWnd->m_paneFolders.m_szTypeName, groupdlg.m_szGroupName);
+				}
 			}
 		}
 		break;		
@@ -313,7 +331,12 @@ void CShortcutBarView::OnContextMenu(CWnd* pWnd, CPoint point)
 				//确定删除
 				CListCtrl& rList = GetListCtrl();	
 				int nItem = rList.GetSelectionMark();
+				CString strDelKeyword = rList.GetItemText(nItem, 2);
 				rList.DeleteItem(nItem);
+
+				//删除数据库
+				sloMysqlAgent::GetInstance()->DelKeyword(strDelKeyword.GetBuffer(0));
+
 			}
 		}
 		break;		
@@ -321,14 +344,16 @@ void CShortcutBarView::OnContextMenu(CWnd* pWnd, CPoint point)
 		{
 			CGroupDlg groupdlg;
 			int nItem = rList.GetSelectionMark();
-			groupdlg.SetDefaultValue(rList.GetItemText(nItem, 2).GetBuffer(0));	
+			CString strOldKeyword = rList.GetItemText(nItem, 2);
+			groupdlg.SetDefaultValue(strOldKeyword.GetBuffer(0));	
 			int nRet = groupdlg.DoModal();
 			if (nRet == 1)
 			{
+				char* pTime = sloCommAgent::GetCurTime();
 				rList.SetItemText(nItem, 2, groupdlg.m_szGroupName);
-				rList.SetItemText(nItem, 3, _T("bbb!"));
+				rList.SetItemText(nItem, 3, pTime);
 				//并更新数据库表
-
+				sloMysqlAgent::GetInstance()->UpdateKeyword(strOldKeyword.GetBuffer(0), groupdlg.m_szGroupName, pTime);
 			}
 		}
 		break;

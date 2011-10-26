@@ -288,10 +288,10 @@ BOOL sloMysqlAgent::GetKeyWordsFromDB(int nGroupID, int nTypeID)
 			if(pTypeID == NULL && nTypeIDLen <= 1)
 				return FALSE;
 	
-			int nGroupIDLen = 0;
-			char* pGroupID = m_pMySqlDB->GetField("key_group",&nGroupIDLen);
-			if(pGroupID == NULL && nGroupIDLen <= 1)
-				return FALSE;
+//			int nGroupIDLen = 0;
+// 			char* pGroupID = m_pMySqlDB->GetField("key_group",&nGroupIDLen);
+// 			if(pGroupID == NULL && nGroupIDLen <= 1)
+// 				return FALSE;
 
 			int nKeyNameLen = 0;
 			char* pKeyName = m_pMySqlDB->GetField("key_name",&nKeyNameLen);
@@ -307,7 +307,7 @@ BOOL sloMysqlAgent::GetKeyWordsFromDB(int nGroupID, int nTypeID)
 			memset(&keyword, NULL, sizeof(KeyWords_Type));
 			keyword.nID = atoi(pID);
 			keyword.nTypeID = atoi(pTypeID);
-			keyword.nGroupID = atoi(pGroupID);
+			keyword.nGroupID = 0/*atoi(pGroupID)*/;
 			strcpy(keyword.szKeyName, pKeyName);
 			strcpy(keyword.szDate, pDate);
 			m_KeywordsList.push_back(keyword);
@@ -398,4 +398,83 @@ void sloMysqlAgent::ClearTypeList()
 void sloMysqlAgent::ClearKeywordsList()
 {
 	m_KeywordsList.clear();
+}
+
+BOOL sloMysqlAgent::AddKeyword(char* szTypeName, char* szKeyName)
+{
+	BOOL bRet = TRUE;
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	int nTypeID = 0;
+	std::string strQuerySQL = "select * from t_keywords_type where type_name='%s'";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), szTypeName);
+	if (FAILED(hr))
+		return FALSE;
+	
+	int nCount = m_pMySqlDB->GetRowCount();
+	int nFieldCount = m_pMySqlDB->GetFieldCount();
+	if(nCount >= 1 && nFieldCount >= 1)
+	{	
+		
+		bool bSucc = m_pMySqlDB->GetRow();
+		if(bSucc==false)
+			return FALSE;
+		
+		int nIDLen = 0;
+		char* pID = m_pMySqlDB->GetField("Id",&nIDLen);
+		if(pID == NULL && nIDLen <= 1)
+			return FALSE;
+		
+		nTypeID = atoi(pID);
+	}
+
+	//插入数据库
+	strQuerySQL = "insert into t_keywords(key_name,key_type) values('%s',%d)";
+	hr = doSqlExe(TRUE, strQuerySQL.c_str(), szKeyName, nTypeID);
+	if (FAILED(hr))
+		bRet = FALSE;	
+
+	return bRet;
+	
+}
+
+BOOL sloMysqlAgent::DelKeyword(char* szKeyName)
+{
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	//delete from t_keywords_type where type_name='%s'
+	BOOL bRet = TRUE;
+	std::string strQuerySQL = "delete from t_keywords where key_name='%s'";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), szKeyName);
+	if (FAILED(hr))
+		bRet = FALSE;
+	
+	return bRet;		
+}
+
+
+BOOL sloMysqlAgent::UpdateKeyword(char* szOldKeyName, char* szNewKeyName, char* pTime)
+{
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	//update t_keywords_type set type_name='%s' where type_name='%s'
+	BOOL bRet = TRUE;
+	std::string strQuerySQL = "update t_keywords set key_name='%s',date='%s', is_index=0 where key_name='%s'";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), szNewKeyName, pTime, szOldKeyName);
+	if (FAILED(hr))
+		bRet = FALSE;
+	
+	return bRet;			
 }

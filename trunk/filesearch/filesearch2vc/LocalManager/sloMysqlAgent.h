@@ -47,11 +47,17 @@ public:
 	BOOL GetKeyWordsFromDB(int nGroupID, int nTypeID);
 	BOOL GetKeyWordsFromGroupName(char* szGroupName);
 	BOOL GetKeyWordsFromTypeName(char* szTypeName);
+public:
 	//type
 	BOOL AddType(char* szGroupName, char* szTypeName);
 	BOOL DelType(char* szTypeName);
 	BOOL UpdateType(char* szOldTypeName, char* szNewTypeName);
-
+public:
+	//keywords
+	BOOL AddKeyword(char* szTypeName, char* szKeyName);
+	BOOL DelKeyword(char* szKeyName);
+	BOOL UpdateKeyword(char* szOldKeyName, char* szNewKeyName, char* pTime);
+public:	
 	void ClearGroupList();
 	void ClearTypeList();
 	void ClearKeywordsList();

@@ -17,11 +17,11 @@ Class5=CShortcutBarView
 Class6=CShortcutPaneCalendar
 
 ResourceCount=6
-Resource1=IDD_DIALOG_GROUP
-Resource2=IDR_MENU_POPUP_TREE_PARENT
+Resource1=IDR_POPUP_MENU (English (U.S.))
+Resource2=IDD_DIALOG_GROUP
 Resource3=IDR_MENU_POPUP_TREE_CHILD
 Resource4=IDR_MENU_POPUP_LIST
-Resource5=IDR_POPUP_MENU (English (U.S.))
+Resource5=IDR_MENU_POPUP_TREE_PARENT
 Class7=CGroupDlg
 Resource6=IDR_MAINFRAME (English (U.S.))
 

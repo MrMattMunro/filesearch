@@ -62,6 +62,9 @@ CShortcutPaneFolders::CShortcutPaneFolders()
 	}
 
 	m_bSelect = FALSE;
+
+	memset(m_szTypeName, NULL, MAX_PATH);
+
 }
 
 CShortcutPaneFolders::~CShortcutPaneFolders()
@@ -167,7 +170,7 @@ void CShortcutPaneFolders::OnContextMenu(CWnd* pWnd, CPoint point)
 			{
 			case ID_TREE_ADD_TYPE:
 				//pItem->CopyToClipboard();
-				//MessageBox("新增分组");
+
 				CGroupDlg groupdlg;
 				int nRet = groupdlg.DoModal();
 				if (nRet == 1)
@@ -259,6 +262,9 @@ void CShortcutPaneFolders::OnSelchanged(NMHDR* /*pNMHDR*/, LRESULT* pResult)
 		{
 			//选中类型item
 			pFrameWnd->m_pShortcutBarView->ShowListContent(2, strItemText.GetBuffer(0));
+			//记录选中类型
+			memset(m_szTypeName, NULL, MAX_PATH);
+			strcpy(m_szTypeName, strItemText.GetBuffer(0));
 		}
 
 		//ShowRecords(wndReportCtrl, strItemText);
