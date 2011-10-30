@@ -55,7 +55,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /machine:I386
-# ADD LINK32 /nologo /subsystem:windows /machine:I386 /out:"../publish/ShortcutBar.exe" /libpath:"../../../lib/vc60"
+# ADD LINK32 /nologo /subsystem:windows /machine:I386 /out:"../publish/LocalManager.exe" /libpath:"../../../lib/vc60"
 
 !ELSEIF  "$(CFG)" == "ShortcutBar - Win32 Debug"
 
@@ -81,7 +81,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 /nologo /subsystem:windows /debug /machine:I386 /out:"../bin//ShortcutBarD.exe" /pdbtype:sept /libpath:"../../../lib/vc60"
+# ADD LINK32 /nologo /subsystem:windows /debug /machine:I386 /out:"../bin/LocalManager.exe" /pdbtype:sept /libpath:"../../../lib/vc60"
 
 !ELSEIF  "$(CFG)" == "ShortcutBar - Win32 Unicode Release"
 
