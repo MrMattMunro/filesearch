@@ -47,19 +47,20 @@ BOOL CShortcutPaneCalendar::Create(LPCTSTR lpszCaption, CXTPShortcutBar* pParent
 	if (!CXTPShortcutBarPane::Create(lpszCaption, pParent))
 		return FALSE;
 
-	m_wndCalendar.Create(WS_CHILD|WS_VISIBLE|MCS_NOTODAY , CPoint(0, 0), this, 0);
+//	m_wndCalendar.Create(WS_CHILD|WS_VISIBLE|MCS_NOTODAY , CPoint(0, 0), this, 0);
 
-	AddItem(_T("Calendar"), &m_wndCalendar, 300);
+//	AddItem(_T("Calendar"), &m_wndCalendar, 300);
 
 
 	VERIFY(m_wndTreeCalendar.Create(WS_VISIBLE|TVS_HASBUTTONS|TVS_LINESATROOT, CXTPEmptyRect(), this, 0));
 
 	m_wndTreeCalendar.SetImageList(&m_ilTreeIcons, TVSIL_NORMAL);
 
-	m_wndTreeCalendar.InsertItem (_T("Calendar"), 0, 0);
+	m_wndTreeCalendar.InsertItem (_T("技术"), 0, 0);
+	m_wndTreeCalendar.InsertItem (_T("新闻"), 0, 0);
+	m_wndTreeCalendar.InsertItem (_T("我的草稿"), 0, 0);
 
-
-	AddItem(_T("My Calendars"), &m_wndTreeCalendar, 115);
+	AddItem(_T("网址收藏夹"), &m_wndTreeCalendar, 115);
 
 
 

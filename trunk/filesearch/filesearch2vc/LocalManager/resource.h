@@ -30,6 +30,7 @@
 #define IDI_SEARCH                      145
 #define IDD_DIALOG_GROUP                145
 #define IDI_ARCHIVE                     146
+#define IDR_MENU_MAINFRAME              146
 #define IDB_SHORTCUTS_SMALL             159
 #define IDB_SHORTCUTS_BIG               160
 #define IDB_SHORTCUTS_SMALL_ALPHA       161
@@ -58,14 +59,17 @@
 #define ID_TREE_ADD_TYPE                32795
 #define ID_DEL_GROUP                    32796
 #define ID_MODIFY_GROUP                 32797
+#define ID_MENU_SYSTEM_SET              32798
+#define ID_MENU_ADD_GROUP               32799
+#define ID_MENU_ADD_KEYWORD             32800
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        146
-#define _APS_NEXT_COMMAND_VALUE         32798
+#define _APS_NEXT_RESOURCE_VALUE        147
+#define _APS_NEXT_COMMAND_VALUE         32801
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

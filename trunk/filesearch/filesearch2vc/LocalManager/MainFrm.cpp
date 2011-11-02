@@ -55,9 +55,11 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_UPDATE_COMMAND_UI(ID_THEME_SHOWEXPANDBUTTON, OnUpdateThemeShowexpandbutton)
 	ON_COMMAND(ID_THEME_SHOWACTIVEITEMONTOP, OnThemeShowactiveitemontop)
 	ON_UPDATE_COMMAND_UI(ID_THEME_SHOWACTIVEITEMONTOP, OnUpdateThemeShowactiveitemontop)
-	ON_MESSAGE(XTPWM_SHORTCUTBAR_NOTIFY, OnShortcutBarNotify)
 	ON_COMMAND(ID_THEME_ALLOWFREERESIZE, OnThemeAllowfreeresize)
 	ON_UPDATE_COMMAND_UI(ID_THEME_ALLOWFREERESIZE, OnUpdateThemeAllowfreeresize)
+	ON_MESSAGE(XTPWM_SHORTCUTBAR_NOTIFY, OnShortcutBarNotify)
+	ON_COMMAND(ID_MENU_SYSTEM_SET, OnMenuSystemSet)
+	ON_UPDATE_COMMAND_UI(ID_MENU_SYSTEM_SET, OnUpdateMenuSystemSet)
 	//}}AFX_MSG_MAP
 
 	ON_COMMAND(XTP_ID_CUSTOMIZE, OnCustomize)
@@ -115,7 +117,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	CXTPCommandBars* pCommandBars = GetCommandBars();
 
-	pCommandBars->SetMenu(_T("Menu Bar"), IDR_MAINFRAME);
+	pCommandBars->SetMenu(_T("Menu Bar"), IDR_MENU_MAINFRAME/*IDR_MAINFRAME*/);
 
 
 	CXTPToolBar* pStandardBar = (CXTPToolBar*)pCommandBars->Add(_T("Standard"), xtpBarTop);
@@ -188,8 +190,8 @@ void CMainFrame::CreateShortcutBar()
 
 
 	VERIFY(m_paneMail.Create(_T("Mail"), &m_wndShortcutBar));
-	VERIFY(m_paneCalendar.Create(_T("Calendar"), &m_wndShortcutBar));
-	VERIFY(m_paneFolders.Create(_T("Folders"), &m_wndShortcutBar));
+	VERIFY(m_paneCalendar.Create(_T("ÍøÖ·"), &m_wndShortcutBar));
+	VERIFY(m_paneFolders.Create(_T("´Ê»ã"), &m_wndShortcutBar));
 	VERIFY(m_paneContacts.Create(_T("Contacts"), &m_wndShortcutBar));
 
 //	CXTPShortcutBarItem* pItemMail = m_wndShortcutBar.AddItem(ID_SHORTCUT_MAIL, &m_paneMail);
@@ -202,7 +204,11 @@ void CMainFrame::CreateShortcutBar()
 //	m_wndShortcutBar.AddItem(ID_SHORTCUT_JOURNAL);
 
 	CXTPShortcutBarItem* pItemFolder = m_wndShortcutBar.AddItem(ID_SHORTCUT_FOLDERS, &m_paneFolders);
-	
+	pItemFolder->SetCaption("´Ê»ã¹ÜÀí");
+
+	CXTPShortcutBarItem* pItemCalendar = m_wndShortcutBar.AddItem(ID_SHORTCUT_CALENDAR, &m_paneCalendar);
+	pItemCalendar->SetCaption("ÍøÖ·¹ÜÀí");
+
 	m_wndShortcutBar.AllowMinimize(TRUE);
 	
 	m_wndShortcutBar.SelectItem(pItemFolder);
@@ -422,5 +428,17 @@ void CMainFrame::OnThemeAllowfreeresize()
 void CMainFrame::OnUpdateThemeAllowfreeresize(CCmdUI* pCmdUI) 
 {
 	pCmdUI->SetCheck(m_wndShortcutBar.IsAllowFreeResize()? TRUE: FALSE);		
+	
+}
+
+void CMainFrame::OnMenuSystemSet() 
+{
+	// TODO: Add your command handler code here
+	MessageBox("OnMenuSystemSet");
+}
+
+void CMainFrame::OnUpdateMenuSystemSet(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
 	
 }
