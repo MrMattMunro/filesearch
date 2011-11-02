@@ -62,6 +62,19 @@ BEGIN
     END
 END
 
+IDR_MENU_MAINFRAME MENU DISCARDABLE 
+BEGIN
+    POPUP "系统(&S)"
+    BEGIN
+        MENUITEM "系统设置",                    ID_MENU_SYSTEM_SET
+    END
+    POPUP "词汇管理(&C)"
+    BEGIN
+        MENUITEM "新增分组",                    ID_MENU_ADD_GROUP
+        MENUITEM "新增词汇",                    ID_MENU_ADD_KEYWORD
+    END
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -107,6 +120,82 @@ END
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
 #endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+IDB_SHORTCUTS_SMALL     BITMAP  DISCARDABLE     "res\\Shortcuts_small.bmp"
+IDB_SHORTCUTS_BIG       BITMAP  DISCARDABLE     "res\\Shortcuts_big.bmp"
+IDB_SHORTCUTS_SMALL_ALPHA BITMAP  DISCARDABLE     "res\\Shortcuts_small_alpha.bmp"
+IDB_SHORTCUTS_BIG_ALPHA BITMAP  DISCARDABLE     "res\\Shortcuts_big_alpha.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "Theme"
+    BEGIN
+        MENUITEM "Office 2000",                 ID_THEME_OFFICE2000
+        MENUITEM "Office XP",                   ID_THEME_OFFICEXP
+        MENUITEM "Office 2003",                 ID_THEME_OFFICE2003
+        MENUITEM "Office 2007",                 ID_THEME_OFFICE2007
+        MENUITEM SEPARATOR
+        MENUITEM "Client Pane",                 ID_THEME_CLIENTPANE
+        MENUITEM "Show Expand Button",          ID_THEME_SHOWEXPANDBUTTON
+        MENUITEM "Show Active Item On Top",     ID_THEME_SHOWACTIVEITEMONTOP
+        MENUITEM "Allow Free Resize",           ID_THEME_ALLOWFREERESIZE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About Shortcut Bar Sample...", ID_APP_ABOUT
+    END
+END
+
+IDR_POPUP_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "Theme"
+    BEGIN
+        MENUITEM "Office 2000",                 ID_THEME_OFFICE2000
+        MENUITEM "Office XP",                   ID_THEME_OFFICEXP
+        MENUITEM "Office 2003",                 ID_THEME_OFFICE2003
+        MENUITEM "Office 2007",                 ID_THEME_OFFICE2007
+    END
+END
+
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -175,17 +264,6 @@ IDI_ARCHIVE             ICON    DISCARDABLE     "res\\icon17.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// Bitmap
-//
-
-IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
-IDB_SHORTCUTS_SMALL     BITMAP  DISCARDABLE     "res\\Shortcuts_small.bmp"
-IDB_SHORTCUTS_BIG       BITMAP  DISCARDABLE     "res\\Shortcuts_big.bmp"
-IDB_SHORTCUTS_SMALL_ALPHA BITMAP  DISCARDABLE     "res\\Shortcuts_small_alpha.bmp"
-IDB_SHORTCUTS_BIG_ALPHA BITMAP  DISCARDABLE     "res\\Shortcuts_big_alpha.bmp"
-
-/////////////////////////////////////////////////////////////////////////////
-//
 // Toolbar
 //
 
@@ -202,71 +280,6 @@ BEGIN
     BUTTON      ID_FILE_PRINT
     SEPARATOR
     BUTTON      ID_APP_ABOUT
-END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Menu
-//
-
-IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
-BEGIN
-    POPUP "&File"
-    BEGIN
-        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
-        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
-        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
-        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
-        MENUITEM SEPARATOR
-        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
-        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
-        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
-        MENUITEM SEPARATOR
-        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
-        MENUITEM SEPARATOR
-        MENUITEM "E&xit",                       ID_APP_EXIT
-    END
-    POPUP "&Edit"
-    BEGIN
-        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
-        MENUITEM SEPARATOR
-        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
-        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
-        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
-    END
-    POPUP "&View"
-    BEGIN
-        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
-        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
-    END
-    POPUP "Theme"
-    BEGIN
-        MENUITEM "Office 2000",                 ID_THEME_OFFICE2000
-        MENUITEM "Office XP",                   ID_THEME_OFFICEXP
-        MENUITEM "Office 2003",                 ID_THEME_OFFICE2003
-        MENUITEM "Office 2007",                 ID_THEME_OFFICE2007
-        MENUITEM SEPARATOR
-        MENUITEM "Client Pane",                 ID_THEME_CLIENTPANE
-        MENUITEM "Show Expand Button",          ID_THEME_SHOWEXPANDBUTTON
-        MENUITEM "Show Active Item On Top",     ID_THEME_SHOWACTIVEITEMONTOP
-        MENUITEM "Allow Free Resize",           ID_THEME_ALLOWFREERESIZE
-    END
-    POPUP "&Help"
-    BEGIN
-        MENUITEM "&About Shortcut Bar Sample...", ID_APP_ABOUT
-    END
-END
-
-IDR_POPUP_MENU MENU DISCARDABLE 
-BEGIN
-    POPUP "Theme"
-    BEGIN
-        MENUITEM "Office 2000",                 ID_THEME_OFFICE2000
-        MENUITEM "Office XP",                   ID_THEME_OFFICEXP
-        MENUITEM "Office 2003",                 ID_THEME_OFFICE2003
-        MENUITEM "Office 2007",                 ID_THEME_OFFICE2007
-    END
 END
 
 

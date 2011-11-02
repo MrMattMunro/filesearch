@@ -129,6 +129,8 @@ protected:
 	afx_msg void OnUpdateThemeShowactiveitemontop(CCmdUI* pCmdUI);
 	afx_msg void OnThemeAllowfreeresize();
 	afx_msg void OnUpdateThemeAllowfreeresize(CCmdUI* pCmdUI);
+	afx_msg void OnMenuSystemSet();
+	afx_msg void OnUpdateMenuSystemSet(CCmdUI* pCmdUI);
 	//}}AFX_MSG
 	afx_msg void OnCustomize();
 	afx_msg LRESULT OnShortcutBarNotify(WPARAM wParam, LPARAM lParam);

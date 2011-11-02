@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CGroupDlg
+LastClass=CMainFrame
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "shortcutbar.h"
@@ -16,21 +16,24 @@ Class4=CShortcutBarSplitter
 Class5=CShortcutBarView
 Class6=CShortcutPaneCalendar
 
-ResourceCount=6
-Resource1=IDR_MENU_POPUP_TREE_CHILD
-Resource2=IDR_POPUP_MENU (English (U.S.))
-Resource3=IDR_MENU_POPUP_LIST
+ResourceCount=7
+Resource1=IDR_POPUP_MENU (English (U.S.))
+Resource2=IDR_MENU_MAINFRAME
+Resource3=IDR_MENU_POPUP_TREE_PARENT
 Resource4=IDD_DIALOG_GROUP
-Resource5=IDR_MENU_POPUP_TREE_PARENT
+Resource5=IDR_MENU_POPUP_LIST
 Class7=CGroupDlg
-Resource6=IDR_MAINFRAME (English (U.S.))
+Resource6=IDR_MENU_POPUP_TREE_CHILD
+Resource7=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CMainFrame]
 Type=0
 BaseClass=CFrameWnd
 HeaderFile=MainFrm.h
 ImplementationFile=MainFrm.cpp
-LastObject=CMainFrame
+LastObject=ID_MENU_ADD_GROUP
+Filter=T
+VirtualFilter=fWC
 
 [CLS:CShortcutBarApp]
 Type=0
@@ -88,7 +91,7 @@ CommandCount=8
 
 [MNU:IDR_MAINFRAME (English (U.S.))]
 Type=1
-Class=?
+Class=CMainFrame
 Command1=ID_FILE_NEW
 Command2=ID_FILE_OPEN
 Command3=ID_FILE_SAVE
@@ -172,4 +175,12 @@ BaseClass=CDialog
 Filter=D
 LastObject=CGroupDlg
 VirtualFilter=dWC
+
+[MNU:IDR_MENU_MAINFRAME]
+Type=1
+Class=?
+Command1=ID_MENU_SYSTEM_SET
+Command2=ID_MENU_ADD_GROUP
+Command3=ID_MENU_ADD_KEYWORD
+CommandCount=3
 
