@@ -104,23 +104,7 @@ SOURCE=.\FsUiTestDlg.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\comm\mysqlcomm.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\mysql\MySQLDB.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=..\comm\sloCommAgent.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=..\comm\sloCreateIndexAgent.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=..\comm\sloModifyIndexAgent.cpp
 # End Source File
 # Begin Source File
 
@@ -141,19 +125,7 @@ SOURCE=.\FsUiTestDlg.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\mysql\MySQLDB.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\Resource.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\comm\sloCreateIndexAgent.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\comm\sloModifyIndexAgent.h
 # End Source File
 # Begin Source File
 

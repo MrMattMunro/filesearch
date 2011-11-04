@@ -11,6 +11,8 @@
 #include "sltSetSheetDlgThread.h"
 #include "sltFastSearchDlgThread.h"
 
+#include "FloatWnd.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -170,6 +172,42 @@ DWORD __stdcall FsLoadSkin()
 	
 	return 0;
 }
+
+
+CFloatWnd* g_pFloatWnd = NULL;
+/*
+  功能：加载FloatWnd
+  nshow:
+       1 : show
+	   0 : hide
+*/
+DWORD __stdcall FsLoadFloatWnd(int nShow)
+{
+	OutputDebugString("===========Enter in FsLoadFloatWnd!");
+	
+	if(g_pFloatWnd == NULL)
+	{		
+		AFX_MANAGE_STATE(AfxGetStaticModuleState());
+		g_pFloatWnd = new CFloatWnd;
+		if (g_pFloatWnd == NULL)
+		{
+			return -1;
+		}
+		g_pFloatWnd->Create(IDD_FLOATWND,NULL);
+	}
+
+
+	if (nShow == 1)
+	{
+		g_pFloatWnd->ShowWindow(SW_SHOW);
+	}else
+		g_pFloatWnd->ShowWindow(SW_HIDE);
+
+	g_pFloatWnd->OnUpdateTransparent(255);
+
+	return 0;
+}
+
 
 //////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// 未用  //////////////////////////////////

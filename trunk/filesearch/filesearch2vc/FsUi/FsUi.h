@@ -18,6 +18,11 @@
 // CFsUiApp
 // See FsUi.cpp for the implementation of this class
 //
+DWORD __stdcall FsCreateIndex();
+DWORD __stdcall FsModifyIndex(int nID);
+DWORD __stdcall FsFastSearch();
+DWORD __stdcall FsSetSheet();
+DWORD __stdcall FsLoadSkin();
 
 class CFsUiApp : public CWinApp
 {
