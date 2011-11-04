@@ -4,8 +4,8 @@
 #include "stdafx.h"
 #include "FsUiTest.h"
 #include "FsUiTestDlg.h"
-#include "sloCreateIndexAgent.h"
-#include "sloModifyIndexAgent.h"
+//#include "sloCreateIndexAgent.h"
+//#include "sloModifyIndexAgent.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -95,6 +95,7 @@ BEGIN_MESSAGE_MAP(CFsUiTestDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON9, OnButton9)
 	ON_BN_CLICKED(IDC_BUTTON10, OnButton10)
 	ON_WM_CTLCOLOR()
+	ON_BN_CLICKED(IDC_BUTTON11, OnButton11)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -356,6 +357,30 @@ void CFsUiTestDlg::OnButton9()
 //	FreeLibrary(hins);	
 }
 
+
+typedef DWORD (__stdcall *fnFsLoadFloatWnd)(int nShow);
+fnFsLoadFloatWnd g_fnFsLoadFloatWnd;
+void CFsUiTestDlg::OnButton11() 
+{
+	// TODO: Add your control notification handler code here
+	HINSTANCE hins = LoadLibrary("FsUi.dll");
+	if (!hins)
+	{
+		DWORD dwErr = GetLastError();
+		MessageBox("Not Find FsUi.dll");
+		return ;
+	}
+	
+	g_fnFsLoadFloatWnd = (fnFsLoadFloatWnd)GetProcAddress(hins, "FsLoadFloatWnd");
+	if (!g_fnFsLoadFloatWnd)
+	{
+		MessageBox("Not Find Func FsLoadFloatWnd");
+		return ;
+	}
+	
+	g_fnFsLoadFloatWnd(1);
+}
+
 void GetDrvSpaceInfo(char* pDisk) 
 {
 	
@@ -415,8 +440,8 @@ void CFsUiTestDlg::OnButton2()
 {
 	// TODO: Add your control notification handler code here
 	//FindAllDrivers();
-	sloCreateIndexAgent slinfo;
-	slinfo.EventCreateIndex("c:\\1","*.txt,*.xls");
+//	sloCreateIndexAgent slinfo;
+//	slinfo.EventCreateIndex("c:\\1","*.txt,*.xls");
 }
 
 void CFsUiTestDlg::OnButton3() 
@@ -441,9 +466,9 @@ void CFsUiTestDlg::OnButton3()
 void CFsUiTestDlg::OnButton5() 
 {
 	// TODO: Add your control notification handler code here
-	sloModifyIndexAgent modifyAgent;
-	modifyAgent.SetIndexID(3);
-	modifyAgent.GetSearchInfo();
+//	sloModifyIndexAgent modifyAgent;
+//	modifyAgent.SetIndexID(3);
+//	modifyAgent.GetSearchInfo();
 }
 
 
@@ -519,3 +544,4 @@ HBRUSH CFsUiTestDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	// TODO: Return a different brush if the default is not desired
 	return hbr;
 }
+

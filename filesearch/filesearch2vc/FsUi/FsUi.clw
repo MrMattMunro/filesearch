@@ -2,38 +2,41 @@
 
 [General Info]
 Version=1
-ClassCount=10
+ClassCount=11
 Class1=CFsUiApp
-LastClass=CShowAllCiHuiDlg
+LastClass=CFloatWnd
 NewFileInclude2=#include "FsUi.h"
-ResourceCount=16
+ResourceCount=18
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
 LastTemplate=CDialog
-Resource1=IDD_DIALOG_CREATE_INDEX
+Resource1=IDD_DIALOG_ALL_CIHUI
 Class3=CCustomCiHuiDlg
-Resource2=IDD_DIALOG_SET_ATTR
+Resource2=IDD_DIALOG_SKIN
 Class4=CModifyIndexDlg
 Resource3=IDD_DIALOG_CUSTOM_DICT (Chinese (P.R.C.))
 Class5=CShowAllCiHuiDlg
-Resource4=IDD_DIALOG_ALL_CIHUI
+Resource4=IDD_FLOATWND
 Class6=CSetAttributeDlg
-Resource5=IDD_DIALOG_LICENSE
+Resource5=IDD_DIALOG_MODIFY_INDEX
 Class7=CFastSearchDlg
 Class8=CSearchThread
 Resource6=IDD_DIALOG_SKIN (Chinese (P.R.C.))
 Class9=CLicenseDlg
-Resource7=IDD_DIALOG_FAST_SEARCH
+Resource7=IDD_DIALOG_CUSTOM_DICT
 Class10=CSkinDlg
 Resource8=IDD_DIALOG_MODIFY_INDEX (Chinese (P.R.C.))
 Resource9=IDD_DIALOG_ALL_CIHUI (Chinese (P.R.C.))
 Resource10=IDD_DIALOG_LICENSE (Chinese (P.R.C.))
-Resource11=IDD_DIALOG_CUSTOM_DICT
+Resource11=IDD_DIALOG_SET_ATTR
 Resource12=IDD_DIALOG_FAST_SEARCH (Chinese (P.R.C.))
 Resource13=IDD_DIALOG_CREATE_INDEX (Chinese (P.R.C.))
-Resource14=IDD_DIALOG_MODIFY_INDEX
+Resource14=IDD_DIALOG_LICENSE
 Resource15=IDD_DIALOG_SET_ATTR (Chinese (P.R.C.))
-Resource16=IDD_DIALOG_SKIN
+Resource16=IDD_DIALOG_FAST_SEARCH
+Class11=CFloatWnd
+Resource17=IDD_DIALOG_CREATE_INDEX
+Resource18=IDR_MENU_FLOATWND
 
 [CLS:CFsUiApp]
 Type=0
@@ -405,4 +408,33 @@ Control9=IDC_STATIC_HOMEPAGE,static,1342308354
 Control10=IDC_STATIC_HOMEPAGE_NAME,static,1342308352
 Control11=IDC_STATIC_SKIN_EAMIL,static,1342308354
 Control12=IDC_STATIC_SKIN_EAMIL_NAME,static,1342308352
+
+[DLG:IDD_FLOATWND]
+Type=1
+Class=CFloatWnd
+ControlCount=1
+Control1=IDC_LOGO,static,1342177294
+
+[CLS:CFloatWnd]
+Type=0
+HeaderFile=FloatWnd.h
+ImplementationFile=FloatWnd.cpp
+BaseClass=CDialog
+Filter=W
+LastObject=ID_MENU_TRANS_80
+VirtualFilter=dWC
+
+[MNU:IDR_MENU_FLOATWND]
+Type=1
+Class=?
+Command1=ID_MENU_NEW_INDEX
+Command2=ID_MENU_SYS_SET
+Command3=ID_MENU_WEB_QUERY
+Command4=ID_MENU_TRANS_100
+Command5=ID_MENU_TRANS_80
+Command6=ID_MENU_TRANS_60
+Command7=ID_MENU_TRANS_40
+Command8=ID_MENU_TRANS_20
+Command9=ID_HIDE
+CommandCount=9
 

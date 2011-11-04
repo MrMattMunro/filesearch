@@ -105,6 +105,10 @@ SOURCE=.\FastSearchDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\FloatWnd.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\FsUi.cpp
 # End Source File
 # Begin Source File
@@ -235,6 +239,10 @@ SOURCE=.\CustomCiHuiDlg.h
 # Begin Source File
 
 SOURCE=.\FastSearchDlg.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\FloatWnd.h
 # End Source File
 # Begin Source File
 
@@ -467,6 +475,10 @@ SOURCE=.\res\HAND.ICO
 # Begin Source File
 
 SOURCE=.\res\html.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\logo.bmp
 # End Source File
 # Begin Source File
 

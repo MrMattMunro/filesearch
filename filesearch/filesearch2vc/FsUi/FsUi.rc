@@ -66,8 +66,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2011,9,15,1
- PRODUCTVERSION 1,0,0,34
+ FILEVERSION 2011,11,5,1
+ PRODUCTVERSION 1,0,0,35
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -85,14 +85,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "slfile\0"
             VALUE "FileDescription", "FsUi DLL\0"
-            VALUE "FileVersion", "2011, 9, 15, 1\0"
+            VALUE "FileVersion", "2011, 11, 5, 1\0"
             VALUE "InternalName", "FsUi\0"
             VALUE "LegalCopyright", "版权所有 (C) 2011\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "FsUi.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "FsUi Dynamic Link Library\0"
-            VALUE "ProductVersion", "1, 0, 0, 34\0"
+            VALUE "ProductVersion", "1, 0, 0, 35\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -315,6 +315,13 @@ BEGIN
                     73,10
 END
 
+IDD_FLOATWND DIALOG DISCARDABLE  0, 0, 187, 94
+STYLE WS_POPUP
+FONT 9, "宋体"
+BEGIN
+    CONTROL         2093,IDC_LOGO,"Static",SS_BITMAP,63,13,43,43
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -402,6 +409,34 @@ IDB_BITMAP_THREME_NAME_VISTA_Black2 BITMAP  DISCARDABLE     "res\\skin\\THREME_N
 IDB_BITMAP_THREME_NAME_VISTA_Sliver BITMAP  DISCARDABLE     "res\\skin\\THREME_NAME_VISTA_Sliver.bmp"
 IDB_BITMAP_THREME_NAME_XP_LUNA_HomeStead BITMAP  DISCARDABLE     "res\\skin\\THREME_NAME_XP_LUNA_HomeStead.bmp"
 IDB_BITMAP_THREME_NAME_XP_LUNA_Metallic BITMAP  DISCARDABLE     "res\\skin\\THREME_NAME_XP_LUNA_Metallic.bmp"
+IDB_BITMAP_LOGO         BITMAP  DISCARDABLE     "res\\logo.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_FLOATWND MENU DISCARDABLE 
+BEGIN
+    POPUP "右键菜单(&R)"
+    BEGIN
+        MENUITEM "新建索引(&N)",                ID_MENU_NEW_INDEX
+        MENUITEM "系统设置(&S)",                ID_MENU_SYS_SET
+        MENUITEM "Web查询(&Q)",                 ID_MENU_WEB_QUERY
+        MENUITEM SEPARATOR
+        POPUP "透明度(&T)"
+        BEGIN
+            MENUITEM "100%",                        ID_MENU_TRANS_100
+            MENUITEM "80%",                         ID_MENU_TRANS_80
+            MENUITEM "60%",                         ID_MENU_TRANS_60
+            MENUITEM "40%",                         ID_MENU_TRANS_40
+            MENUITEM "20%",                         ID_MENU_TRANS_20
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "隐藏(&S)",                    ID_HIDE
+    END
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -564,6 +599,21 @@ BEGIN
     IDS_CUSTOM_CH_EN        "Dictionary"
     IDS_LICENSE_MANAGE_EN   "License Manage"
     IDS_SET_LICENSE_INFO_EN "License Infomation"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_SHOW                 "隐藏或显示主窗口"
+    ID_HIDE                 "隐藏"
+    ID_MENU_NEW_INDEX       "新建索引"
+    ID_MENU_SYS_SET         "系统设置"
+    ID_MENU_WEB_QUERY       "Web查询"
+    ID_MENU_TRANSPORT       "透明度"
+    ID_MENU_TRANS_100       "100%"
+    ID_MENU_TRANS_80        "80%"
+    ID_MENU_TRANS_60        "60%"
+    ID_MENU_TRANS_40        "40%"
+    ID_MENU_TRANS_20        "20%"
 END
 
 #endif    // Chinese (P.R.C.) resources
