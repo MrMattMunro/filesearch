@@ -21,6 +21,9 @@
 #include "stdafx.h"
 #include "resource.h"
 #include "ShortcutPaneCalendar.h"
+#include "MainFrm.h"
+#include "ShortcutBarView.h"
+#include "GroupDlg.h"
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -34,6 +37,10 @@ CShortcutPaneCalendar::CShortcutPaneCalendar()
 	ASSERT(hIcon);
 
 	m_ilTreeIcons.Add (hIcon);
+
+	m_bSelect = FALSE;
+	
+	memset(m_szTypeName, NULL, MAX_PATH);
 }
 
 CShortcutPaneCalendar::~CShortcutPaneCalendar()
@@ -56,9 +63,19 @@ BOOL CShortcutPaneCalendar::Create(LPCTSTR lpszCaption, CXTPShortcutBar* pParent
 
 	m_wndTreeCalendar.SetImageList(&m_ilTreeIcons, TVSIL_NORMAL);
 
-	m_wndTreeCalendar.InsertItem (_T("技术"), 0, 0);
-	m_wndTreeCalendar.InsertItem (_T("新闻"), 0, 0);
-	m_wndTreeCalendar.InsertItem (_T("我的草稿"), 0, 0);
+	//读取数据库，获取树基本信息
+	sloMysqlAgent::GetInstance()->GetGroupsFromDB_Website();
+	HTREEITEM hItem;
+	//获取分组个数
+	int nGroupSize = sloMysqlAgent::GetInstance()->m_GroupListWebsite.size();
+	for (int i = 0; i < nGroupSize; i++)
+	{
+		hItem = m_wndTreeCalendar.InsertItem (sloMysqlAgent::GetInstance()->m_GroupListWebsite[i].szGroupName, 0, 0);
+	}
+
+// 	m_wndTreeCalendar.InsertItem (_T("技术"), 0, 0);
+// 	m_wndTreeCalendar.InsertItem (_T("新闻"), 0, 0);
+// 	m_wndTreeCalendar.InsertItem (_T("我的草稿"), 0, 0);
 
 	AddItem(_T("网址收藏夹"), &m_wndTreeCalendar, 115);
 
@@ -70,6 +87,8 @@ BOOL CShortcutPaneCalendar::Create(LPCTSTR lpszCaption, CXTPShortcutBar* pParent
 BEGIN_MESSAGE_MAP(CShortcutPaneCalendar, CXTPShortcutBarPane)
 	//{{AFX_MSG_MAP(CShortcutPaneCalendar)
 	ON_WM_SIZE()
+	ON_NOTIFY(TVN_SELCHANGED, 0, OnSelchanged)
+	ON_WM_CONTEXTMENU()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -83,4 +102,120 @@ void CShortcutPaneCalendar::OnSize(UINT nType, int cx, int cy)
 	}
 
 	CXTPShortcutBarPane::OnSize(nType, cx, cy);
+}
+
+
+
+void CShortcutPaneCalendar::OnSelchanged(NMHDR* /*pNMHDR*/, LRESULT* pResult)
+{
+	//clear report ctrl columns and content
+	CMainFrame* pFrameWnd = (CMainFrame*)GetParentFrame();
+	ASSERT_KINDOF (CMainFrame, pFrameWnd);
+	
+	// Get the selected tree item and its icon.
+	//	int nImage;
+	HTREEITEM htItem = m_wndTreeCalendar.GetSelectedItem();
+	if (htItem != NULL)
+	{
+		m_bSelect = TRUE;
+		//		m_wndTreeCtrl.GetItemImage( htItem, nImage, nImage );
+		
+		// 		pFrameWnd->UpdateCaption(m_wndTreeCtrl.GetItemText( htItem ),
+		// 			m_ilTreeIcons.ExtractIcon(nImage));
+		CString strItemText = m_wndTreeCalendar.GetItemText(htItem);
+		m_wndTreeCalendar.SelectItem(htItem);	
+		
+		pFrameWnd->m_pShortcutBarView->ShowListContent_Website( strItemText.GetBuffer(0));
+		//记录选中类型
+		memset(m_szTypeName, NULL, MAX_PATH);
+		strcpy(m_szTypeName, strItemText.GetBuffer(0));
+			
+		//ShowRecords(wndReportCtrl, strItemText);
+	}
+	
+	*pResult = 0;
+	
+}
+
+void CShortcutPaneCalendar::OnContextMenu(CWnd* pWnd, CPoint point) 
+{
+	// TODO: Add your message handler code here
+	CPoint pt;
+	GetCursorPos(&pt);
+	
+	UINT uFlags;
+	ScreenToClient(&pt);
+	
+	HTREEITEM hItemSelected = m_wndTreeCalendar.GetSelectedItem();
+	if (hItemSelected != NULL && m_bSelect)
+	{
+		m_bSelect = FALSE;
+		CString strItemText = m_wndTreeCalendar.GetItemText(hItemSelected);
+
+		//如果选中父节点
+		CMenu menu;
+		VERIFY(menu.LoadMenu(IDR_MENU_POPUP_TREE_CHILD));
+		ClientToScreen(&pt);
+		int nReturn = CXTPCommandBars::TrackPopupMenu(menu.GetSubMenu(0), TPM_LEFTALIGN|TPM_RETURNCMD|TPM_NONOTIFY, pt.x, pt.y, this);
+		
+		switch (nReturn)
+		{
+		case ID_DEL_GROUP:
+			//pItem->CopyToClipboard();
+			{
+				int nRet = MessageBox("您确认删除该分组？","删除分组", MB_YESNO | MB_ICONWARNING);
+				if(6 == nRet)
+				{
+					m_wndTreeCalendar.DeleteItem(hItemSelected);
+					//并更新数据库表
+					sloMysqlAgent::GetInstance()->DelGroup_Website(strItemText.GetBuffer(0));
+				}
+				
+			}
+			break;	
+		case ID_MODIFY_GROUP:
+			//pItem->CopyToClipboard();
+			{
+				CGroupDlg groupdlg;
+				groupdlg.SetDefaultValue(strItemText.GetBuffer(0));
+				int nRet = groupdlg.DoModal();
+				if (nRet == 1)
+				{
+					m_wndTreeCalendar.SetItemText(hItemSelected, groupdlg.m_szGroupName);
+					//并写入数据库表
+					sloMysqlAgent::GetInstance()->UpdateGroup_Website(strItemText.GetBuffer(0), groupdlg.m_szGroupName);
+				}
+			}
+			break;				
+		}
+	}
+	else
+	{
+		//选中空白位置，显示增加菜单
+		//如果未选中父节点
+		CMenu menu;
+		VERIFY(menu.LoadMenu(IDR_MENU_POPUP_TREE_PARENT));
+		ClientToScreen(&pt);
+		int nReturn = CXTPCommandBars::TrackPopupMenu(menu.GetSubMenu(0), TPM_LEFTALIGN|TPM_RETURNCMD|TPM_NONOTIFY, pt.x, pt.y, this);
+		
+		switch (nReturn)
+		{
+		case ID_TREE_ADD_TYPE:
+			//pItem->CopyToClipboard();
+			{
+				CGroupDlg groupdlg;
+				int nRet = groupdlg.DoModal();
+				if (nRet == 1)
+				{
+					//点击确定
+					m_wndTreeCalendar.InsertItem(groupdlg.m_szGroupName, 0, 0);	
+
+					//并更新数据库表t_keywords_type
+					sloMysqlAgent::GetInstance()->AddGroup_Website(groupdlg.m_szGroupName);
+				}
+			}
+			break;		
+		}
+		return;
+	}	
 }

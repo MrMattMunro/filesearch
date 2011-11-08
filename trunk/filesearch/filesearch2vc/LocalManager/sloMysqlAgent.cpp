@@ -478,3 +478,216 @@ BOOL sloMysqlAgent::UpdateKeyword(char* szOldKeyName, char* szNewKeyName, char* 
 	
 	return bRet;			
 }
+
+
+//////////////////////////////////////////////////////////////////////////
+void sloMysqlAgent::ClearGroupList_Website()
+{
+	m_GroupListWebsite.clear();	
+}
+void sloMysqlAgent::ClearWebsiteList()
+{
+	m_WebsiteList.clear();
+}
+
+BOOL sloMysqlAgent::AddGroup_Website(char* szGroupName)
+{
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	//从
+	BOOL bRet = TRUE;
+	std::string strQuerySQL = "insert into t_website_type(website_type) values('%s')";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), szGroupName);
+	if (FAILED(hr))
+		bRet = FALSE;
+	
+	return bRet;	
+}
+
+BOOL sloMysqlAgent::DelGroup_Website(char* szGroupName)
+{
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	//delete from t_keywords_type where type_name='%s'
+	BOOL bRet = TRUE;
+	std::string strQuerySQL = "delete from t_website_type where website_type='%s'";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), szGroupName);
+	if (FAILED(hr))
+		bRet = FALSE;
+	
+	return bRet;		
+}
+
+BOOL sloMysqlAgent::UpdateGroup_Website(char* szOldGroupName, char* szNewGroupName)
+{
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	//update t_keywords_type set type_name='%s' where type_name='%s'
+	BOOL bRet = TRUE;
+	std::string strQuerySQL = "update t_website_type set website_type='%s' where website_type='%s'";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), szNewGroupName, szOldGroupName);
+	if (FAILED(hr))
+		bRet = FALSE;
+	
+	return bRet;			
+}
+
+BOOL sloMysqlAgent::GetGroupsFromDB_Website()
+{
+	ClearGroupList();
+	
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	int dwMaxID = 0;
+	std::string strQuerySQL = "select * from t_website_type";
+	HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str());
+	if (FAILED(hr))
+		return -1;
+	
+	int nCount = m_pMySqlDB->GetRowCount();
+	int nFieldCount = m_pMySqlDB->GetFieldCount();
+	if(nCount >= 1 && nFieldCount >= 1)
+	{	
+		for (int i = 0; i < nCount; i++)
+		{
+			bool bSucc = m_pMySqlDB->GetRow();
+			if(bSucc==false)
+				return FALSE;
+			
+			int nIDLen = 0;
+			char* pID = m_pMySqlDB->GetField("Id",&nIDLen);
+			if(pID == NULL && nIDLen <= 1)
+				return FALSE;
+			
+			int nGroupNameLen = 0;
+			char* pGroupName = m_pMySqlDB->GetField("website_type",&nGroupNameLen);
+			if(pGroupName == NULL && nGroupNameLen <= 1)
+				return FALSE;
+			
+			WebSite_Group group;
+			memset(&group, NULL, sizeof(WebSite_Group));
+			group.nID = atoi(pID);
+			strcpy(group.szGroupName, pGroupName);
+			m_GroupListWebsite.push_back(group);
+		}
+	}
+	
+	return TRUE;	
+}
+BOOL sloMysqlAgent::GetWebsiteFromDB(int nGroupID)
+{
+	ClearWebsiteList();
+	
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	std::string strQuerySQL;
+	if (nGroupID == 0)
+	{
+		strQuerySQL = "select * from t_website"; 
+		HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str());
+		if (FAILED(hr))
+			return -1;
+	}else
+	{
+		strQuerySQL = "select * from t_website where website_type_id=%d"; 
+		HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), nGroupID);
+		if (FAILED(hr))
+			return -1;
+	}
+	
+	int nCount = m_pMySqlDB->GetRowCount();
+	int nFieldCount = m_pMySqlDB->GetFieldCount();
+	if(nCount >= 1 && nFieldCount >= 1)
+	{	
+		for (int i = 0; i < nCount; i++)
+		{
+			bool bSucc = m_pMySqlDB->GetRow();
+			if(bSucc==false)
+				return FALSE;
+			
+			int nIDLen = 0;
+			char* pID = m_pMySqlDB->GetField("Id",&nIDLen);
+			if(pID == NULL && nIDLen <= 1)
+				return FALSE;
+			
+			int nTypeIDLen = 0;
+			char* pTypeID = m_pMySqlDB->GetField("website_type_id",&nTypeIDLen);
+			if(pTypeID == NULL && nTypeIDLen <= 1)
+				return FALSE;
+			
+			int nWebsiteNameLen = 0;
+			char* pWebsiteName = m_pMySqlDB->GetField("website",&nWebsiteNameLen);
+			if(pWebsiteName == NULL && nWebsiteNameLen <= 1)
+				return FALSE;
+			
+			int nDateLen = 0;
+			char* pDate = m_pMySqlDB->GetField("date",&nDateLen);
+			if(pDate == NULL && nDateLen <= 1)
+				return FALSE;
+			
+			WebSite website;
+			memset(&website, NULL, sizeof(WebSite));
+			website.nID = atoi(pID);
+			website.nTypeID = atoi(pTypeID);
+			strcpy(website.szSiteName, pWebsiteName);
+			strcpy(website.szDate, pDate);
+			m_WebsiteList.push_back(website);
+		}
+	}
+	
+	return TRUE;		
+}
+
+BOOL sloMysqlAgent::GetWebsiteFromGroupName(char* szGroupName)
+{
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	int nTypeID = 0;
+	std::string strQuerySQL = "select * from t_website_type where website_type='%s'";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), szGroupName);
+	if (FAILED(hr))
+		return -1;
+	
+	int nCount = m_pMySqlDB->GetRowCount();
+	int nFieldCount = m_pMySqlDB->GetFieldCount();
+	if(nCount >= 1 && nFieldCount >= 1)
+	{	
+
+		bool bSucc = m_pMySqlDB->GetRow();
+		if(bSucc==false)
+			return FALSE;
+		
+		int nIDLen = 0;
+		char* pID = m_pMySqlDB->GetField("Id",&nIDLen);
+		if(pID == NULL && nIDLen <= 1)
+			return FALSE;
+		
+		nTypeID = atoi(pID);
+	}
+
+	return GetWebsiteFromDB(nTypeID);	
+}

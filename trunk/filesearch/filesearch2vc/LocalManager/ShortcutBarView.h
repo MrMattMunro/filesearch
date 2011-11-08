@@ -36,6 +36,7 @@ protected: // create from serialization only
 public:
 	CShortcutBarDoc* GetDocument();
 	void ShowListContent(int nType, char* szGroupName);
+	void ShowListContent_Website(char* szGroupName);
 // Operations
 public:
 	CImageList  m_imageList;

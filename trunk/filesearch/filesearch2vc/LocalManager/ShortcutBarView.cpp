@@ -141,11 +141,18 @@ static int arColWidths[] = {
 		180
 };
 
-static CString arColLabels[] = {
+static CString arColLabels_keywords[] = {
 	_T(" "),
 		_T(" "),
 		_T("词汇名称"),
 		_T("创建日期")
+};
+
+static CString arColLabels_website[] = {
+	_T(" "),
+		_T(" "),
+		_T("网址名称"),
+		_T("添加日期")
 };
 
 int CShortcutBarView::OnCreate(LPCREATESTRUCT lpCreateStruct)
@@ -178,7 +185,7 @@ bool CShortcutBarView::SortList(int /*nCol*/, bool /*bAscending*/)
 void CShortcutBarView::InitializeHeaderControl()
 {
 	// Insert the columns.
-	BuildColumns(_countof(arColWidths), arColWidths, arColLabels);
+	BuildColumns(_countof(arColWidths), arColWidths, arColLabels_keywords);
 	
 	// Subclass the flat header control.
 	SubclassHeader(false);
@@ -196,12 +203,12 @@ void CShortcutBarView::InitializeHeaderControl()
 void CShortcutBarView::InitializeListControl()
 {
 	// build a date string to insert into the list control.
-	CTime tm = CTime::GetCurrentTime();
-	CString strDay[] = { _T("Sun"),_T("Mon"),_T("Tue"),_T("Wed"),_T("Thr"),_T("Fri"),_T("Sat") };
-	CString strTime;
-	
-	strTime.Format(_T("%s %d/%d/%d"), strDay[tm.GetDayOfWeek()-1],
-		tm.GetMonth(), tm.GetDay(), tm.GetYear());
+// 	CTime tm = CTime::GetCurrentTime();
+// 	CString strDay[] = { _T("Sun"),_T("Mon"),_T("Tue"),_T("Wed"),_T("Thr"),_T("Fri"),_T("Sat") };
+// 	CString strTime;
+// 	
+// 	strTime.Format(_T("%s %d/%d/%d"), strDay[tm.GetDayOfWeek()-1],
+// 		tm.GetMonth(), tm.GetDay(), tm.GetYear());
 	
 	// set the image list for the list control.
 	CListCtrl& rList = GetListCtrl();
@@ -214,7 +221,7 @@ void CShortcutBarView::InitializeListControl()
 	{
 		rList.InsertItem(i, NULL, 0);
 		rList.SetItemText(i, 2, sloMysqlAgent::GetInstance()->m_KeywordsList[i].szKeyName);
-		rList.SetItemText(0, 3, sloMysqlAgent::GetInstance()->m_KeywordsList[i].szDate);	
+		rList.SetItemText(i, 3, sloMysqlAgent::GetInstance()->m_KeywordsList[i].szDate);	
 	}
 
 	// insert the first item.
@@ -396,5 +403,25 @@ void CShortcutBarView::ShowListContent(int nType, char* szGroupName)
 		rList.InsertItem(i, NULL, 0);
 		rList.SetItemText(i, 2, sloMysqlAgent::GetInstance()->m_KeywordsList[i].szKeyName);
 		rList.SetItemText(i, 3, sloMysqlAgent::GetInstance()->m_KeywordsList[i].szDate);	
+	}
+}
+
+//ntype 
+// 1 显示组下所有类型的keywords
+// 2 显示某种类型的keywords
+void CShortcutBarView::ShowListContent_Website(char* szGroupName)
+{
+	sloMysqlAgent::GetInstance()->GetWebsiteFromGroupName(szGroupName);
+	
+	CListCtrl& rList = GetListCtrl();
+	
+	//清空列表
+	rList.DeleteAllItems();
+	int nCount = sloMysqlAgent::GetInstance()->m_WebsiteList.size();
+	for(int i = 0; i < nCount; i++)
+	{
+		rList.InsertItem(i, NULL, 0);
+		rList.SetItemText(i, 2, sloMysqlAgent::GetInstance()->m_WebsiteList[i].szSiteName);
+		rList.SetItemText(i, 3, sloMysqlAgent::GetInstance()->m_WebsiteList[i].szDate);	
 	}
 }

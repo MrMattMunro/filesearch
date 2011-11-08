@@ -201,6 +201,10 @@ SOURCE=.\sloMysqlAgent.cpp
 SOURCE=.\StdAfx.cpp
 # ADD CPP /Yc"stdafx.h"
 # End Source File
+# Begin Source File
+
+SOURCE=.\WebsiteDlg.cpp
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
@@ -256,6 +260,10 @@ SOURCE=.\sloMysqlAgent.h
 # Begin Source File
 
 SOURCE=.\StdAfx.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\WebsiteDlg.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"
