@@ -36,6 +36,7 @@ public:
 
 	CXTTreeCtrl m_wndTreeContacts;
 	CImageList m_ilTreeIcons;
+
 };
 
 #endif // !defined(AFX_SHORTCUTPANECONTACTS_H__03BA0B52_DDD8_4E32_BFBA_CC2F6B7CDCEB__INCLUDED_)

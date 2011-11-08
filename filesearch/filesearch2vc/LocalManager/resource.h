@@ -31,11 +31,13 @@
 #define IDD_DIALOG_GROUP                145
 #define IDI_ARCHIVE                     146
 #define IDR_MENU_MAINFRAME              146
+#define IDD_DIALOG_WEBSITE              147
 #define IDB_SHORTCUTS_SMALL             159
 #define IDB_SHORTCUTS_BIG               160
 #define IDB_SHORTCUTS_SMALL_ALPHA       161
 #define IDB_SHORTCUTS_BIG_ALPHA         162
 #define IDC_EDIT_GROUP_NAME             1000
+#define IDC_EDIT_WEBSITE                1001
 #define ID_THEME_OFFICE2000             32771
 #define ID_THEME_OFFICEXP               32772
 #define ID_THEME_OFFICE2003             32773
@@ -68,9 +70,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        147
+#define _APS_NEXT_RESOURCE_VALUE        148
 #define _APS_NEXT_COMMAND_VALUE         32801
-#define _APS_NEXT_CONTROL_VALUE         1001
+#define _APS_NEXT_CONTROL_VALUE         1002
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

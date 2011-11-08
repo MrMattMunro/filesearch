@@ -9,6 +9,9 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+
+//////////////////////////////////////////////////////////////////////////
+//keywords
 typedef struct _KeyWords_Group
 {	
 	int nID;
@@ -31,6 +34,22 @@ typedef struct _KeyWords
 	char szDate[100];
 }KeyWords, *LPKeyWords;
 
+
+//////////////////////////////////////////////////////////////////////////
+//web site
+typedef struct _WebSite_Group
+{	
+	int nID;
+	char szGroupName[100];
+}WebSite_Group, *LPWebSite_Group;
+
+typedef struct _WebSite
+{	
+	int nID;
+	int nTypeID;
+	char szSiteName[100];
+	char szDate[100];
+}WebSite, *LPWebSite;
 
 class sloMysqlAgent  :public mysqlcomm
 {
@@ -62,9 +81,29 @@ public:
 	void ClearTypeList();
 	void ClearKeywordsList();
 
+//////////////////////////////////////////////////////////////////////////
+//website
+public:
+	void ClearGroupList_Website();
+	void ClearWebsiteList();
+public:
+	//type
+	BOOL AddGroup_Website(char* szGroupName);
+	BOOL DelGroup_Website(char* szGroupName);
+	BOOL UpdateGroup_Website(char* szOldGroupName, char* szNewGroupName);
+public:
+	BOOL GetGroupsFromDB_Website();
+	BOOL GetWebsiteFromDB(int nGroupID);
+	BOOL GetWebsiteFromGroupName(char* szGroupName);
+
+public:
 	std::vector<KeyWords_Group> m_GroupList;
 	std::vector<KeyWords_Type> m_TypeList;
 	std::vector<KeyWords> m_KeywordsList;
+
+
+	std::vector<WebSite_Group> m_GroupListWebsite;
+	std::vector<WebSite> m_WebsiteList;
 };
 
 #endif // !defined(AFX_SLOMYSQLAGENT_H__3286BA47_C6E5_424A_8B4E_34DEECE39BD0__INCLUDED_)

@@ -39,9 +39,12 @@ public:
 	CXTTreeCtrl m_wndTreeCalendar;
 
 	CImageList m_ilTreeIcons;
-
+	BOOL m_bSelect;
+	char m_szTypeName[MAX_PATH];
 	//{{AFX_MSG(CShortcutPaneCalendar)
 	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnSelchanged(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 

@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=CMainFrame
+LastClass=CWebsiteDlg
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "shortcutbar.h"
 LastPage=0
 
-ClassCount=7
+ClassCount=8
 Class1=CMainFrame
 Class2=CShortcutBarApp
 Class3=CShortcutBarDoc
@@ -16,22 +16,24 @@ Class4=CShortcutBarSplitter
 Class5=CShortcutBarView
 Class6=CShortcutPaneCalendar
 
-ResourceCount=7
-Resource1=IDR_POPUP_MENU (English (U.S.))
-Resource2=IDR_MENU_MAINFRAME
-Resource3=IDR_MENU_POPUP_TREE_PARENT
-Resource4=IDD_DIALOG_GROUP
+ResourceCount=8
+Resource1=IDR_MENU_MAINFRAME
+Resource2=IDD_DIALOG_GROUP
+Resource3=IDD_DIALOG_WEBSITE
+Resource4=IDR_POPUP_MENU (English (U.S.))
 Resource5=IDR_MENU_POPUP_LIST
 Class7=CGroupDlg
-Resource6=IDR_MENU_POPUP_TREE_CHILD
-Resource7=IDR_MAINFRAME (English (U.S.))
+Resource6=IDR_MENU_POPUP_TREE_PARENT
+Resource7=IDR_MENU_POPUP_TREE_CHILD
+Class8=CWebsiteDlg
+Resource8=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CMainFrame]
 Type=0
 BaseClass=CFrameWnd
 HeaderFile=MainFrm.h
 ImplementationFile=MainFrm.cpp
-LastObject=ID_MENU_ADD_GROUP
+LastObject=CMainFrame
 Filter=T
 VirtualFilter=fWC
 
@@ -66,6 +68,7 @@ Type=0
 BaseClass=CXTPShortcutBarPane
 HeaderFile=ShortcutPaneCalendar.h
 ImplementationFile=ShortcutPaneCalendar.cpp
+Filter=W
 
 [MNU:IDR_POPUP_MENU (English (U.S.))]
 Type=1
@@ -183,4 +186,22 @@ Command1=ID_MENU_SYSTEM_SET
 Command2=ID_MENU_ADD_GROUP
 Command3=ID_MENU_ADD_KEYWORD
 CommandCount=3
+
+[DLG:IDD_DIALOG_WEBSITE]
+Type=1
+Class=CWebsiteDlg
+ControlCount=4
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_STATIC,static,1342308352
+Control4=IDC_EDIT_WEBSITE,edit,1350631552
+
+[CLS:CWebsiteDlg]
+Type=0
+HeaderFile=WebsiteDlg.h
+ImplementationFile=WebsiteDlg.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=CWebsiteDlg
+VirtualFilter=dWC
 
