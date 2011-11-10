@@ -93,6 +93,9 @@ CMainFrame::CMainFrame()
 {
 	m_bClientPane = TRUE;
 	m_pShortcutBarView = NULL;
+
+	m_pItemFolder= NULL;
+	m_pItemCalendar = NULL;
 }
 
 CMainFrame::~CMainFrame()
@@ -190,8 +193,8 @@ void CMainFrame::CreateShortcutBar()
 
 
 	VERIFY(m_paneMail.Create(_T("Mail"), &m_wndShortcutBar));
-	VERIFY(m_paneCalendar.Create(_T("Õ¯÷∑"), &m_wndShortcutBar));
-	VERIFY(m_paneFolders.Create(_T("¥ ª„"), &m_wndShortcutBar));
+	VERIFY(m_paneCalendar.Create(_T("Õ¯÷∑∑÷¿‡"), &m_wndShortcutBar));
+	VERIFY(m_paneFolders.Create(_T("¥ ª„∑÷¿‡"), &m_wndShortcutBar));
 	VERIFY(m_paneContacts.Create(_T("Contacts"), &m_wndShortcutBar));
 
 //	CXTPShortcutBarItem* pItemMail = m_wndShortcutBar.AddItem(ID_SHORTCUT_MAIL, &m_paneMail);
@@ -213,6 +216,9 @@ void CMainFrame::CreateShortcutBar()
 	
 	m_wndShortcutBar.SelectItem(pItemFolder);
 	m_wndShortcutBar.LoadState(_T("ShortcutBar"));
+
+	m_pItemFolder = pItemFolder;
+	m_pItemCalendar = pItemCalendar;
 	
 }
 

@@ -101,34 +101,12 @@ BOOL CShortcutPaneFolders::Create(LPCTSTR lpszCaption, CXTPShortcutBar* pParent)
 		m_wndTreeFolders.Expand(hItem, TVE_EXPAND);
 	}
 
-
-// 	hItemDefault = m_wndTreeFolders.InsertItem (_T("默认分组"), 7, 7);
-// 
-// 	m_wndTreeFolders.InsertItem (_T("汽车"), 2, 2, hItemDefault);
-// 	m_wndTreeFolders.InsertItem (_T("经济"), 2, 2, hItemDefault);
-// 	m_wndTreeFolders.InsertItem (_T("交通"), 2, 2, hItemDefault);
-// 	m_wndTreeFolders.InsertItem (_T("农业"), 2, 2, hItemDefault);
-// 	m_wndTreeFolders.InsertItem (_T("娱乐"), 2, 2, hItemDefault);
-// 	m_wndTreeFolders.InsertItem (_T("教育"), 2, 2, hItemDefault);
-// 	m_wndTreeFolders.InsertItem (_T("法律"), 2, 2, hItemDefault);
-// 	m_wndTreeFolders.InsertItem(_T("电影"), 2, 2, hItemDefault);
-
-// 	HTREEITEM hItemSearch = m_wndTreeFolders.InsertItem (_T("自定义分组"), 1, 1, hItem);
-// 	m_wndTreeFolders.InsertItem (_T("For Follow Up"), 1, 1, hItemSearch);
-// 	m_wndTreeFolders.InsertItem (_T("Large Mail"), 1, 1, hItemSearch);
-// 	m_wndTreeFolders.InsertItem (_T("Unread Mail"), 1, 1, hItemSearch);
-
-//	m_wndTreeFolders.Expand(hItemDefault, TVE_EXPAND);
-
-// 	hItemCustom = m_wndTreeFolders.InsertItem (_T("自定义分组"), 4, 4);
-// 	m_wndTreeFolders.InsertItem (_T("食品"), 1, 1, hItemCustom);
-// 	m_wndTreeFolders.InsertItem (_T("服装"), 1, 1, hItemCustom);
-
 	hItem = m_wndTreeFolders.GetRootItem();
 	m_wndTreeFolders.SetItemState(hItem, TVIS_SELECTED, TVIS_SELECTED);
 	m_wndTreeFolders.EnableMultiSelect(FALSE);
 
-	AddItem(_T("词汇列表"), &m_wndTreeFolders, 115);
+	CXTPShortcutBarPaneItem* pitem = AddItem(_T(""), &m_wndTreeFolders, 115);
+    pitem->ShowCaption(FALSE);
 
 	return TRUE;
 }

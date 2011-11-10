@@ -83,6 +83,9 @@ public:
 
 	CShortcutBarView* m_pShortcutBarView;
 
+	CXTPShortcutBarItem* m_pItemFolder;
+	CXTPShortcutBarItem* m_pItemCalendar;
+
 // Operations
 public:
 	void CreateShortcutBar();
