@@ -37,6 +37,12 @@ public:
 	CShortcutBarDoc* GetDocument();
 	void ShowListContent(int nType, char* szGroupName);
 	void ShowListContent_Website(char* szGroupName);
+
+
+	//////////////////////////////////////////////////////////////////////////
+	void OnMenuEvent_Add();
+	void OnMenuEvent_Del();
+	void OnMenuEvent_Update();
 // Operations
 public:
 	CImageList  m_imageList;

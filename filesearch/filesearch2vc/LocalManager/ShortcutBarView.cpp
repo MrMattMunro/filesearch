@@ -26,6 +26,7 @@
 #include "GroupDlg.h"
 #include "sloCommAgent.h"
 #include "MainFrm.h"
+#include "WebsiteDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -246,6 +247,125 @@ void CShortcutBarView::InitializeListControl()
 	m_flatHeader.FreezeColumn(1);
 }
 
+void CShortcutBarView::OnMenuEvent_Add() 
+{
+	CListCtrl& rList = GetListCtrl();
+	//首先判断选中的是哪个pane
+	CMainFrame* pFrameWnd = (CMainFrame*)GetParentFrame();
+	ASSERT_KINDOF (CMainFrame, pFrameWnd);
+	CXTPShortcutBarItem* pItem = pFrameWnd->m_wndShortcutBar.GetSelectedItem();
+	if( pItem == pFrameWnd->m_pItemFolder)
+	{
+		//选中的是词汇pane
+		CGroupDlg groupdlg;
+		int nRet = groupdlg.DoModal();
+		if (nRet == 1)
+		{
+			int nCount = rList.GetItemCount();
+			rList.InsertItem(nCount, NULL, 0);
+			rList.SetItemText(nCount, 2, groupdlg.m_szGroupName);
+			rList.SetItemText(nCount, 3, sloCommAgent::GetCurTime());
+			//并更新数据库表
+			if( strlen(pFrameWnd->m_paneFolders.m_szTypeName) != 0 )
+			{
+				//选中子节点
+				sloMysqlAgent::GetInstance()->AddKeyword(pFrameWnd->m_paneFolders.m_szTypeName, groupdlg.m_szGroupName);
+			}
+		}	
+	}else
+	{
+		//选中的是网址pane
+		CWebsiteDlg groupdlg;
+		int nRet = groupdlg.DoModal();
+		if (nRet == 1)
+		{
+			int nCount = rList.GetItemCount();
+			rList.InsertItem(nCount, NULL, 0);
+			rList.SetItemText(nCount, 2, groupdlg.m_szGroupName);
+			rList.SetItemText(nCount, 3, sloCommAgent::GetCurTime());
+			//并更新数据库表
+		
+			//选中子节点
+			sloMysqlAgent::GetInstance()->AddWebsite(pFrameWnd->m_paneCalendar.m_szTypeName, groupdlg.m_szGroupName);		
+		}	
+	}
+}
+
+
+void CShortcutBarView::OnMenuEvent_Del() 
+{
+	CListCtrl& rList = GetListCtrl();
+	//首先判断选中的是哪个pane
+	CMainFrame* pFrameWnd = (CMainFrame*)GetParentFrame();
+	ASSERT_KINDOF (CMainFrame, pFrameWnd);
+	if( pFrameWnd->m_wndShortcutBar.GetSelectedItem() == pFrameWnd->m_pItemFolder)
+	{
+		if (6 == MessageBox("您确定删除该条记录？","词汇管理",MB_YESNO | MB_ICONWARNING))
+		{
+			//确定删除	
+			int nItem = rList.GetSelectionMark();
+			CString strDelKeyword = rList.GetItemText(nItem, 2);
+			rList.DeleteItem(nItem);
+			
+			//删除数据库
+			sloMysqlAgent::GetInstance()->DelKeyword(strDelKeyword.GetBuffer(0));		
+		}
+	}else
+	{
+		//选中的是网址pane
+		if (6 == MessageBox("您确定删除该条记录？","网址管理",MB_YESNO | MB_ICONWARNING))
+		{
+			//确定删除	
+			int nItem = rList.GetSelectionMark();
+			CString strDelKeyword = rList.GetItemText(nItem, 2);
+			rList.DeleteItem(nItem);
+			
+			//删除数据库
+			sloMysqlAgent::GetInstance()->DelWebsite(strDelKeyword.GetBuffer(0));		
+		}
+	}
+}
+
+
+void CShortcutBarView::OnMenuEvent_Update() 
+{
+	CListCtrl& rList = GetListCtrl();
+	//首先判断选中的是哪个pane
+	CMainFrame* pFrameWnd = (CMainFrame*)GetParentFrame();
+	ASSERT_KINDOF (CMainFrame, pFrameWnd);
+	if( pFrameWnd->m_wndShortcutBar.GetSelectedItem() == pFrameWnd->m_pItemFolder)
+	{
+		CGroupDlg groupdlg;
+		int nItem = rList.GetSelectionMark();
+		CString strOldKeyword = rList.GetItemText(nItem, 2);
+		groupdlg.SetDefaultValue(strOldKeyword.GetBuffer(0));	
+		int nRet = groupdlg.DoModal();
+		if (nRet == 1)
+		{
+			char* pTime = sloCommAgent::GetCurTime();
+			rList.SetItemText(nItem, 2, groupdlg.m_szGroupName);
+			rList.SetItemText(nItem, 3, pTime);
+			//并更新数据库表
+			sloMysqlAgent::GetInstance()->UpdateKeyword(strOldKeyword.GetBuffer(0), groupdlg.m_szGroupName, pTime);
+		}
+	}else
+	{
+		CWebsiteDlg groupdlg;
+		int nItem = rList.GetSelectionMark();
+		CString strOldKeyword = rList.GetItemText(nItem, 2);
+		groupdlg.SetDefaultValue(strOldKeyword.GetBuffer(0));	
+		int nRet = groupdlg.DoModal();
+		if (nRet == 1)
+		{
+			char* pTime = sloCommAgent::GetCurTime();
+			rList.SetItemText(nItem, 2, groupdlg.m_szGroupName);
+			rList.SetItemText(nItem, 3, pTime);
+			//并更新数据库表
+			sloMysqlAgent::GetInstance()->UpdateWebsite(strOldKeyword.GetBuffer(0), groupdlg.m_szGroupName, pTime);
+		}
+	}
+}
+
 
 void CShortcutBarView::OnContextMenu(CWnd* pWnd, CPoint point) 
 {
@@ -278,24 +398,7 @@ void CShortcutBarView::OnContextMenu(CWnd* pWnd, CPoint point)
 		{
 		case ID_EDIT_ADD:
 			{
-				CGroupDlg groupdlg;
-				int nRet = groupdlg.DoModal();
-				if (nRet == 1)
-				{
-					int nCount = rList.GetItemCount();
-					rList.InsertItem(nCount, NULL, 0);
-					rList.SetItemText(nCount, 2, groupdlg.m_szGroupName);
-					rList.SetItemText(nCount, 3, sloCommAgent::GetCurTime());
-					//并更新数据库表
-					CMainFrame* pFrameWnd = (CMainFrame*)GetParentFrame();
-					ASSERT_KINDOF (CMainFrame, pFrameWnd);
-
-					if( strlen(pFrameWnd->m_paneFolders.m_szTypeName) != 0 )
-					{
-						//选中子节点
-						sloMysqlAgent::GetInstance()->AddKeyword(pFrameWnd->m_paneFolders.m_szTypeName, groupdlg.m_szGroupName);
-					}
-				}
+				OnMenuEvent_Add();
 			}
 			break;		
 		}
@@ -311,57 +414,17 @@ void CShortcutBarView::OnContextMenu(CWnd* pWnd, CPoint point)
 	{
 	case ID_EDIT_ADD:
 		{
-			CGroupDlg groupdlg;
-			int nRet = groupdlg.DoModal();
-			if (nRet == 1)
-			{
-				int nCount = rList.GetItemCount();
-				rList.InsertItem(nCount, NULL, 0);
-				rList.SetItemText(nCount, 2, groupdlg.m_szGroupName);
-				rList.SetItemText(nCount, 3, sloCommAgent::GetCurTime());
-				//并更新数据库表
-				CMainFrame* pFrameWnd = (CMainFrame*)GetParentFrame();
-				ASSERT_KINDOF (CMainFrame, pFrameWnd);
-				
-				if( strlen(pFrameWnd->m_paneFolders.m_szTypeName) != 0 )
-				{
-					//选中子节点
-					sloMysqlAgent::GetInstance()->AddKeyword(pFrameWnd->m_paneFolders.m_szTypeName, groupdlg.m_szGroupName);
-				}
-			}
+			OnMenuEvent_Add();
 		}
 		break;		
 	case ID_EDIT_DEL:
 		{
-			if (6 == MessageBox("您确定删除该条记录？","词汇管理",MB_YESNO | MB_ICONWARNING))
-			{
-				//确定删除
-				CListCtrl& rList = GetListCtrl();	
-				int nItem = rList.GetSelectionMark();
-				CString strDelKeyword = rList.GetItemText(nItem, 2);
-				rList.DeleteItem(nItem);
-
-				//删除数据库
-				sloMysqlAgent::GetInstance()->DelKeyword(strDelKeyword.GetBuffer(0));
-
-			}
+			OnMenuEvent_Del();
 		}
 		break;		
 	case ID_EDIT_MODIFY:		
 		{
-			CGroupDlg groupdlg;
-			int nItem = rList.GetSelectionMark();
-			CString strOldKeyword = rList.GetItemText(nItem, 2);
-			groupdlg.SetDefaultValue(strOldKeyword.GetBuffer(0));	
-			int nRet = groupdlg.DoModal();
-			if (nRet == 1)
-			{
-				char* pTime = sloCommAgent::GetCurTime();
-				rList.SetItemText(nItem, 2, groupdlg.m_szGroupName);
-				rList.SetItemText(nItem, 3, pTime);
-				//并更新数据库表
-				sloMysqlAgent::GetInstance()->UpdateKeyword(strOldKeyword.GetBuffer(0), groupdlg.m_szGroupName, pTime);
-			}
+			OnMenuEvent_Update();
 		}
 		break;
 	}

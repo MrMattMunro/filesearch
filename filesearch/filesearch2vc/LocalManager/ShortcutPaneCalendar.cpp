@@ -73,13 +73,9 @@ BOOL CShortcutPaneCalendar::Create(LPCTSTR lpszCaption, CXTPShortcutBar* pParent
 		hItem = m_wndTreeCalendar.InsertItem (sloMysqlAgent::GetInstance()->m_GroupListWebsite[i].szGroupName, 0, 0);
 	}
 
-// 	m_wndTreeCalendar.InsertItem (_T("技术"), 0, 0);
-// 	m_wndTreeCalendar.InsertItem (_T("新闻"), 0, 0);
-// 	m_wndTreeCalendar.InsertItem (_T("我的草稿"), 0, 0);
 
-	AddItem(_T("网址收藏夹"), &m_wndTreeCalendar, 115);
-
-
+	CXTPShortcutBarPaneItem* pitem = AddItem(_T(""), &m_wndTreeCalendar, 115);
+    pitem->ShowCaption(FALSE);
 
 	return TRUE;
 }

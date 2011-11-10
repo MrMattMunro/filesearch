@@ -95,7 +95,11 @@ public:
 	BOOL GetGroupsFromDB_Website();
 	BOOL GetWebsiteFromDB(int nGroupID);
 	BOOL GetWebsiteFromGroupName(char* szGroupName);
-
+public:
+	//website
+	BOOL AddWebsite(char* szTypeName, char* szKeyName);
+	BOOL DelWebsite(char* szKeyName);
+	BOOL UpdateWebsite(char* szOldKeyName, char* szNewKeyName, char* pTime);
 public:
 	std::vector<KeyWords_Group> m_GroupList;
 	std::vector<KeyWords_Type> m_TypeList;

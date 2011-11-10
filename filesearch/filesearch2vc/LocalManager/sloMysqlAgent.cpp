@@ -691,3 +691,83 @@ BOOL sloMysqlAgent::GetWebsiteFromGroupName(char* szGroupName)
 
 	return GetWebsiteFromDB(nTypeID);	
 }
+
+
+BOOL sloMysqlAgent::AddWebsite(char* szTypeName, char* szKeyName)
+{
+	BOOL bRet = TRUE;
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	int nTypeID = 0;
+	std::string strQuerySQL = "select * from t_website_type where website_type='%s'";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), szTypeName);
+	if (FAILED(hr))
+		return FALSE;
+	
+	int nCount = m_pMySqlDB->GetRowCount();
+	int nFieldCount = m_pMySqlDB->GetFieldCount();
+	if(nCount >= 1 && nFieldCount >= 1)
+	{	
+		
+		bool bSucc = m_pMySqlDB->GetRow();
+		if(bSucc==false)
+			return FALSE;
+		
+		int nIDLen = 0;
+		char* pID = m_pMySqlDB->GetField("Id",&nIDLen);
+		if(pID == NULL && nIDLen <= 1)
+			return FALSE;
+		
+		nTypeID = atoi(pID);
+	}
+	
+	//插入数据库
+	strQuerySQL = "insert into t_website(website,website_type_id) values('%s',%d)";
+	hr = doSqlExe(TRUE, strQuerySQL.c_str(), szKeyName, nTypeID);
+	if (FAILED(hr))
+		bRet = FALSE;	
+	
+	return bRet;
+	
+}
+
+BOOL sloMysqlAgent::DelWebsite(char* szKeyName)
+{
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	//delete from t_website where type_name='%s'
+	BOOL bRet = TRUE;
+	std::string strQuerySQL = "delete from t_website where website='%s'";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), szKeyName);
+	if (FAILED(hr))
+		bRet = FALSE;
+	
+	return bRet;		
+}
+
+
+BOOL sloMysqlAgent::UpdateWebsite(char* szOldKeyName, char* szNewKeyName, char* pTime)
+{
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	//update t_keywords_type set type_name='%s' where type_name='%s'
+	BOOL bRet = TRUE;
+	std::string strQuerySQL = "update t_website set website='%s',date='%s' where website='%s'";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), szNewKeyName, pTime, szOldKeyName);
+	if (FAILED(hr))
+		bRet = FALSE;
+	
+	return bRet;			
+}
