@@ -7,6 +7,7 @@
 #include "DirectoryChangeHandler_Dispatch.h"
 
 extern slLogSendThread		g_LogSendThread;
+extern slXmlAgent		g_xmlFilterAgent;
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -86,28 +87,15 @@ void CDirectoryChangeHandler_Dispatch::On_FileRemoved(const CString & strFileNam
 void CDirectoryChangeHandler_Dispatch::On_FileModified(const CString & strFileName)
 {
  	CString strTmpName = strFileName;
-// 	DWORD dwCurTick = GetTickCount();
-// 
-// 	if ((5000 < (dwCurTick - m_dwModifyCurTick)) || (0 != strFileName.CompareNoCase(m_lastmodify)))
-// 	{ 
-// 		//过滤掉刚刚新建时的编辑
-// 
-// 		if ((2000 > (dwCurTick - m_dwAddCurTick)) && (0 == m_strFileAddName.CompareNoCase(strFileName)))
-// 		{
-// 			m_dwModifyCurTick = dwCurTick;
-// 			return;
-// 		}
+
+	if(false == g_xmlFilterAgent.Filters((char*)strTmpName.GetBuffer(0)))
+	{
 		File_Action_Log filelog;
 		filelog.FileActon = FILE_MODIFYED;
 		memcpy(filelog.szSrcName, strTmpName.GetBuffer(0),strTmpName.GetLength());
 		AddFileLogTime(filelog);
 		g_LogSendThread.AddLog(filelog);
-
-// 		m_lastmodify.Empty();
-// 		m_lastmodify.Format(strFileName); 
-// 	}
-// 	
-//	m_dwModifyCurTick = dwCurTick;	
+	}
 
 	log.Print(LL_DEBUG_INFO, "File Modified!FileName=%s\r\n",strTmpName.GetBuffer(0));
 }

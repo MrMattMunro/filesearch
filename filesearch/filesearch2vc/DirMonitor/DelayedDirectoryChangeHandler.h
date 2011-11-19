@@ -172,6 +172,8 @@ public:
 								eOn_WatchStarted,
 								eOn_WatchStopped
 	};	
+
+	eFunctionToDispatch m_eFunctionToDispatch;
 protected:
 	void PostNotification();
 	
@@ -184,7 +186,7 @@ private:
 	//
 	//
 
-	eFunctionToDispatch m_eFunctionToDispatch;
+//	eFunctionToDispatch m_eFunctionToDispatch;
 	//Notification Data:
 	TCHAR *	m_szFileName1;//<-- is the szFileName parameter to On_FileAdded(),On_FileRemoved,On_FileModified(), and is szOldFileName to On_FileNameChanged(). Is also strDirectoryName to On_ReadDirectoryChangesError(), On_WatchStarted(), and On_WatchStopped()
 	TCHAR *	m_szFileName2;//<-- is the szNewFileName parameter to On_FileNameChanged()

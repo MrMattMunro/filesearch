@@ -232,7 +232,7 @@ void CDirMonitorTestDlg::OnButton3()
 	{
 		return ;
 	}
-	g_fnMonitor_Start_Dir("D:\\test1", 8);
+	g_fnMonitor_Start_Dir("D:\\1", 5);
 }
 
 void CDirMonitorTestDlg::OnClose() 
