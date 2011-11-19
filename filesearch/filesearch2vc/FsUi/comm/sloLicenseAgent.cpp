@@ -226,7 +226,7 @@ int sloLicenseAgent::BuildLicenseFile()
 #define FTP_SERVER	"hd9002427.ourhost.cn"
 #define FTP_USER	"hd9002427"
 #define FTP_PWD		"ssssss"
-#define CUR_FOLDER	"//licences"
+#define CUR_FOLDER	"/licences"
 int sloLicenseAgent::UpLoadLicFiles()
 {
 	int nRet = 0;
@@ -239,14 +239,18 @@ int sloLicenseAgent::UpLoadLicFiles()
 		sloCommAgent::GetPropertyfileString("ip", FTP_SERVER, szIP, MAX_PATH, m_szUpdateProPath);
 		flog.Print(LL_DEBUG_INFO, "[info]UpLoadLicFiles serverip(%s)\r\n",szIP);
 
+
+		flog.Print(LL_DEBUG_INFO,"[info]begin to connect ftp server(%s)!time=%d\r\n",szIP,GetTickCount());
 		//连接ftp
-		nRet = ftp.GetFtpConnection(szIP, FTP_USER, FTP_PWD);
+		nRet = ftp.GetFtpConnection(szIP, FTP_USER, FTP_PWD, INTERNET_DEFAULT_FTP_PORT, TRUE);
 		if (nRet != 0)
 		{
 			flog.Print(LL_DEBUG_INFO, "[error]UpLoadLicFiles GetFtpConnection failed!szIP=%s,GetLastError=0x%x\r\n",szIP, nRet);
 			break;
 		}
-	
+		flog.Print(LL_DEBUG_INFO,"[info]end to connect ftp server(%s)!time=%d\r\n",szIP,GetTickCount());
+		
+		flog.Print(LL_DEBUG_INFO,"[info]begin to Set ftpCurrent Directory(%s)!time=%d\r\n",CUR_FOLDER,GetTickCount());
 		//设置当前目录
 		if(!ftp.SetCurrentDirectory(CUR_FOLDER))
 		{
@@ -254,7 +258,8 @@ int sloLicenseAgent::UpLoadLicFiles()
 			nRet = -1;
 			break;
 		}
-
+	
+		flog.Print(LL_DEBUG_INFO,"[info]end to Set ftpCurrent Directory(%s)!time=%d\r\n",CUR_FOLDER,GetTickCount());
 		//创建目录,目录存在则创建失败
 		if(!ftp.CreateDirectory(m_LicInfo.szStartDate))
 		{
@@ -263,14 +268,17 @@ int sloLicenseAgent::UpLoadLicFiles()
 //			break;
 		}
 
-		//上传bat文件
+		flog.Print(LL_DEBUG_INFO,"[info]begin to upload rar file(%s:%s)!time=%d\r\n",m_szLicBatPath,m_szServerLicBatPath,GetTickCount());
+		//上传rar文件
 		if(!ftp.PutFile(m_szLicBatPath, m_szServerLicBatPath))
 		{
 			flog.Print(LL_DEBUG_INFO, "[error]UpLoadLicFiles PutFile(%s:%s) failed!\r\n",m_szLicBatPath, m_szServerLicBatPath);			
 			nRet = -3;
 			break;
 		}
+		flog.Print(LL_DEBUG_INFO,"[info]begin to upload rar file(%s:%s)!time=%d\r\n",m_szLicBatPath,m_szServerLicBatPath,GetTickCount());
 
+		flog.Print(LL_DEBUG_INFO,"[info]begin to upload txt file(%s:%s)!time=%d\r\n",m_szLicTxtPath,m_szServerLicTxtPath,GetTickCount());
 		//上传txt文件
 		if(!ftp.PutFile(m_szLicTxtPath, m_szServerLicTxtPath))
 		{
@@ -279,6 +287,8 @@ int sloLicenseAgent::UpLoadLicFiles()
 			nRet = -3;
 			break;
 		}
+		flog.Print(LL_DEBUG_INFO,"[info]end to upload txt file(%s:%s)!time=%d\r\n",m_szLicTxtPath,m_szServerLicTxtPath,GetTickCount());
+
 		flog.Print(LL_DEBUG_INFO, "[info]UpLoadLicFiles serverip(%s) succ!\r\n",szIP);
 	} while (0);
 
@@ -311,8 +321,8 @@ BOOL sloLicenseAgent::GetLicensePath()
 	sprintf(m_szLicBatPath,"%s%s%s_%s.rar",drive, dir,LICENSE_NAME,m_LicInfo.szOrderNo);
 	sprintf(m_szLicTxtPath,"%s%s%s_%s.txt",drive, dir,LICENSE_NAME,m_LicInfo.szOrderNo);
 	
-	sprintf(m_szServerLicBatPath,"%s//%s//%s_%s.rar",CUR_FOLDER,m_LicInfo.szStartDate, LICENSE_NAME,m_LicInfo.szOrderNo);
-	sprintf(m_szServerLicTxtPath,"%s//%s//%s_%s.txt",CUR_FOLDER,m_LicInfo.szStartDate, LICENSE_NAME,m_LicInfo.szOrderNo);
+	sprintf(m_szServerLicBatPath,"%s/%s/%s_%s.rar",CUR_FOLDER,m_LicInfo.szStartDate, LICENSE_NAME,m_LicInfo.szOrderNo);
+	sprintf(m_szServerLicTxtPath,"%s/%s/%s_%s.txt",CUR_FOLDER,m_LicInfo.szStartDate, LICENSE_NAME,m_LicInfo.szOrderNo);
 
 	sprintf(m_szUpdateProPath,"%s%s%s",drive, dir,UPDATE_PRO_NAME);	
 

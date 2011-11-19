@@ -6,6 +6,7 @@
 #include "FsUiTestDlg.h"
 //#include "sloCreateIndexAgent.h"
 //#include "sloModifyIndexAgent.h"
+#include "myftpcomm.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -96,6 +97,9 @@ BEGIN_MESSAGE_MAP(CFsUiTestDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON10, OnButton10)
 	ON_WM_CTLCOLOR()
 	ON_BN_CLICKED(IDC_BUTTON11, OnButton11)
+	ON_BN_CLICKED(IDC_BUTTON_BARSER, OnButtonBarser)
+	ON_BN_CLICKED(IDC_BUTTON12, OnButton12)
+	ON_BN_CLICKED(IDC_BUTTON13, OnButton13)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -190,7 +194,7 @@ void CFsUiTestDlg::OnPaint()
 		}
 		pOldPen=dc.SelectObject(&NewPen);
 		dc.MoveTo(50,50);
-		dc.LineTo(200, 50);
+		dc.LineTo(60, 50);
 		dc.SelectObject(pOldPen);
 		CDialog::OnPaint();
 	}
@@ -435,14 +439,166 @@ void FindAllDrivers()
 
 }
 
+// FTP:  124.42.19.247
+// 用户名:  hd9002427
+// 密码:  ssssss
+// 密码从配置文件中获取update.properties，字段ip
+#define FTP_SERVER	"hd9002427.ourhost.cn"
+#define FTP_USER	"hd9002427"
+#define FTP_PWD		"ssssss"
+#define CUR_FOLDER	"/licences"
+#define CUR_DTAE	"20111118"
+#define CUR_FILE	"/licences/20111118"
 
 void CFsUiTestDlg::OnButton2() 
 {
 	// TODO: Add your control notification handler code here
-	//FindAllDrivers();
-//	sloCreateIndexAgent slinfo;
-//	slinfo.EventCreateIndex("c:\\1","*.txt,*.xls");
+	CString strText;
+	GetDlgItemText(IDC_EDIT_PATH, strText.GetBuffer(0), MAX_PATH);
+	
+	char path_buffer[_MAX_PATH];
+	char drive[_MAX_DRIVE];
+	char dir[_MAX_DIR];
+	char fname[_MAX_FNAME];
+	char ext[_MAX_EXT];
+	char szRemotePath[MAX_PATH] = {0};
+	
+	_splitpath( strText.GetBuffer(0), drive, dir, fname, ext );
+	sprintf(szRemotePath, "%s/%s%s",CUR_FILE,fname,ext);
+
+	int nRet = UploadFile(strText.GetBuffer(0), szRemotePath);
+	if (nRet == 0)
+	{
+		MessageBox("上传成功");
+		return ;
+	}
+
 }
+
+int  CFsUiTestDlg::UploadFile(char* pfilename, char* pRemotepath) 
+{
+
+	int nRet = 0;
+	
+	myftpcomm ftp;	
+	do 
+	{
+		//获取服务器FTP的IP	
+		//连接ftp
+		nRet = ftp.GetFtpConnection(FTP_SERVER, FTP_USER, FTP_PWD, INTERNET_DEFAULT_FTP_PORT, TRUE);
+		if (nRet != 0)
+		{
+			MessageBox("GetFtpConnection failed!");
+			break;
+		}
+		//设置当前目录
+		if(!ftp.SetCurrentDirectory(CUR_FOLDER))
+		{
+			nRet = -1;
+			MessageBox("SetCurrentDirectory failed!");
+			break;
+		}
+		
+		//创建目录,目录存在则创建失败
+		if(!ftp.CreateDirectory(CUR_DTAE))
+		{
+			nRet = 0/*-2*/;
+			//			break;
+		}
+		
+		//上传rar文件
+		if(!ftp.PutFile(pfilename, pRemotepath))
+		{
+			MessageBox("PutFile failed!");
+			nRet = -3;
+			break;
+		}
+	} while (0);
+	
+	//关闭连接
+	ftp.Disconnect();
+
+	return nRet;
+
+}
+
+
+typedef BOOL (__stdcall *fnFtp_LogOnToServer)(char* hostname,int hostport,char* username, char* password, char* acct, char* fwhost,char* fwusername, char* fwpassword,int fwport,int logontype);
+typedef BOOL (__stdcall *fnFtp_Command)(char* command);
+typedef BOOL (__stdcall *fnFtp_MoveFile)(char* remotefile, char* localfile,BOOL pasv,BOOL get);
+typedef void (__stdcall *fnFtp_LogOffServer)();
+
+fnFtp_LogOnToServer m_fnFtp_LogOnToServer;
+fnFtp_Command m_fnFtp_Command;
+fnFtp_MoveFile m_fnFtp_MoveFile;
+fnFtp_LogOffServer m_fnFtp_LogOffServer;
+
+HINSTANCE m_hinstance =NULL;
+
+int CFsUiTestDlg::UploadFile2(char* pfilename, char* pRemotepath) 
+{
+
+	int nRet = 0;
+	do 
+	{
+		if (m_hinstance == NULL)
+		{
+			m_hinstance = LoadLibrary("FtpDll.dll");
+			if (m_hinstance == NULL)
+			{
+				MessageBox(" not find FtpDll.dll");
+				nRet = 1 ;
+				break;
+			}
+			m_fnFtp_LogOnToServer = (fnFtp_LogOnToServer)GetProcAddress(m_hinstance, "Ftp_LogOnToServer");
+			m_fnFtp_Command = (fnFtp_Command)GetProcAddress(m_hinstance, "Ftp_Command");
+			m_fnFtp_MoveFile = (fnFtp_MoveFile)GetProcAddress(m_hinstance, "Ftp_MoveFile");
+			m_fnFtp_LogOffServer = (fnFtp_LogOffServer)GetProcAddress(m_hinstance, "Ftp_LogOffServer");	
+			if (m_fnFtp_LogOnToServer == NULL || m_fnFtp_Command == NULL ||
+				m_fnFtp_MoveFile == NULL || m_fnFtp_LogOffServer == NULL)
+			{
+				MessageBox("FtpDll.dll GetProcAddress failed");
+				nRet = 2 ;
+				break;
+			}
+		}
+		if( m_fnFtp_LogOnToServer("hd9002427.ourhost.cn", 21, "hd9002427", "ssssss", "", "", "", "", 1080, 0) == FALSE)	
+//		if( m_fnFtp_LogOnToServer(FTP_SERVER, 21, FTP_USER, FTP_PWD, "", "", "", "", 1080, 0) == FALSE)
+		{
+			DWORD dwRet = GetLastError();
+			MessageBox("LogOnToServer failed");
+			nRet = 3 ;
+			break;
+		}
+		
+		if( m_fnFtp_Command("MKD /licences/20111115") == FALSE)
+		{
+			OutputDebugString("m_fnFtp_Command failed!\r\n");
+		}
+		
+		if( m_fnFtp_MoveFile(pRemotepath,pfilename, FALSE, FALSE) == FALSE)
+		{
+			MessageBox("upload file failed");
+			nRet = 4 ;
+			break;
+		}
+	} while (0);
+
+	if(nRet > 3)
+		m_fnFtp_LogOffServer();
+
+	return nRet;
+	
+}
+
+void CFsUiTestDlg::OnButton12() 
+{
+	// TODO: Add your control notification handler code here
+	
+
+}
+
+
 
 void CFsUiTestDlg::OnButton3() 
 {
@@ -545,3 +701,80 @@ HBRUSH CFsUiTestDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	return hbr;
 }
 
+
+void CFsUiTestDlg::OnButtonBarser() 
+{
+	// TODO: Add your control notification handler code here
+	char szPath[MAX_PATH] = {0};
+	CFileDialog hFileDlg(TRUE,NULL ,
+		szPath,
+		OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST,	
+		TEXT("Text Files (.txt)|*.txt|Excel Files (.xls)|*.xls|All Files (*.*)|*.*||"),
+		NULL);
+	
+	if(hFileDlg.DoModal() == IDOK)
+	{
+		CString strPath;
+		strPath = hFileDlg.GetPathName();
+		strcpy(szPath, strPath.GetBuffer(0));
+		SetDlgItemText(IDC_EDIT_PATH, szPath);
+	}
+}
+
+void CFsUiTestDlg::OnButton13() 
+{
+	// TODO: Add your control notification handler code here
+	CString strText;
+	GetDlgItemText(IDC_EDIT_PATH, strText.GetBuffer(0), MAX_PATH);
+	
+	char path_buffer[_MAX_PATH];
+	char drive[_MAX_DRIVE];
+	char dir[_MAX_DIR];
+	char fname[_MAX_FNAME];
+	char ext[_MAX_EXT];
+	char szRemotePath[MAX_PATH] = {0};
+	
+	_splitpath( strText.GetBuffer(0), drive, dir, fname, ext );
+	sprintf(szRemotePath, "%s/%s%s",CUR_FILE,fname,ext);
+
+	if (m_hinstance == NULL)
+	{
+		m_hinstance = LoadLibrary("FtpDll.dll");
+		if (m_hinstance == NULL)
+		{
+			MessageBox(" not find FtpDll.dll");
+			return ;
+		}
+		m_fnFtp_LogOnToServer = (fnFtp_LogOnToServer)GetProcAddress(m_hinstance, "Ftp_LogOnToServer");
+		m_fnFtp_Command = (fnFtp_Command)GetProcAddress(m_hinstance, "Ftp_Command");
+		m_fnFtp_MoveFile = (fnFtp_MoveFile)GetProcAddress(m_hinstance, "Ftp_MoveFile");
+		m_fnFtp_LogOffServer = (fnFtp_LogOffServer)GetProcAddress(m_hinstance, "Ftp_LogOffServer");	
+		if (m_fnFtp_LogOnToServer == NULL || m_fnFtp_Command == NULL ||
+			m_fnFtp_MoveFile == NULL || m_fnFtp_LogOffServer == NULL)
+		{
+			MessageBox("FtpDll.dll GetProcAddress failed");
+			return ;
+		}
+	}
+	
+	if( m_fnFtp_LogOnToServer("hd9002427.ourhost.cn", 21, "hd9002427", "ssssss", "", "", "", "", 1080, 0) == FALSE)
+	{
+		MessageBox("LogOnToServer failed");
+		return ;
+	}
+	
+	if( m_fnFtp_Command("MKD /licences/20111115") == FALSE)
+	{
+		OutputDebugString("m_fnFtp_Command failed!\r\n");
+	}
+	
+	if( m_fnFtp_MoveFile("/licences/20111115/1.txt","c:\\1.txt", FALSE, FALSE) == FALSE)
+	{
+		MessageBox("upload file failed");
+		return;
+	}
+
+	m_fnFtp_LogOffServer();
+	
+	MessageBox("上传成功");
+}

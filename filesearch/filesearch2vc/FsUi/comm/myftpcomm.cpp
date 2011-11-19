@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
-#include "FsUi.h"
+//#include "FsUi.h"
 #include "myftpcomm.h"
 
 #ifdef _DEBUG
