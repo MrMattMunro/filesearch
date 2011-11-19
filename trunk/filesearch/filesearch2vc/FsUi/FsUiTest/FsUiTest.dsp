@@ -104,6 +104,10 @@ SOURCE=.\FsUiTestDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\comm\myftpcomm.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\comm\sloCommAgent.cpp
 # End Source File
 # Begin Source File

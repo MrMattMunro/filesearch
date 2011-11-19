@@ -16,7 +16,8 @@ class CFsUiTestDlg : public CDialog
 // Construction
 public:
 	CFsUiTestDlg(CWnd* pParent = NULL);	// standard constructor
-
+	int  UploadFile(char* pfilename, char* pRemotepath);
+	int  UploadFile2(char* pfilename, char* pRemotepath);
 // Dialog Data
 	//{{AFX_DATA(CFsUiTestDlg)
 	enum { IDD = IDD_FSUITEST_DIALOG };
@@ -51,6 +52,9 @@ protected:
 	afx_msg void OnButton10();
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnButton11();
+	afx_msg void OnButtonBarser();
+	afx_msg void OnButton12();
+	afx_msg void OnButton13();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
