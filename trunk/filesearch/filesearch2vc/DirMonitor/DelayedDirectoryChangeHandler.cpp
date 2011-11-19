@@ -1077,6 +1077,7 @@ bool CDelayedDirectoryChangeHandler::NotifyClientOfFileChange(CDirChangeNotifica
 
 	DWORD dwFileNameOffset = GetPathOffsetBasedOnFilterFlags(pNot, m_dwFilterFlags);
 
+	BOOL bModifyFileName = FALSE;
 	//
 	//	See if the changed file matches the include or exclude filter
 	//	Only allow notifications for included files 
@@ -1084,80 +1085,87 @@ bool CDelayedDirectoryChangeHandler::NotifyClientOfFileChange(CDirChangeNotifica
 	//
 	if(!(m_dwFilterFlags & CDirectoryChangeWatcher::FILTERS_DONT_USE_FILTERS) )
 	{
-		if (pNot->m_eFunctionToDispatch == CDirChangeNotification::eOn_FileModified)
-		{
-			//过滤掉word临时文件
-			//修改文件名
-			TCHAR *pPos = StrStrA(pNot->m_szFileName1,"~$");
-			if (pPos)
-			{
-				TCHAR szPart[MAX_PATH] = {0};
-				int nSize = strlen(pNot->m_szFileName1);
-				int nPos = pPos - pNot->m_szFileName1;
-				int nSize2 = nSize - nPos - 2;
-
-				memcpy(szPart, pNot->m_szFileName1, nPos);
-				memcpy(szPart+nPos, pNot->m_szFileName1+nPos+2, nSize2);
-				
-				memset(pNot->m_szFileName1, NULL, nSize);
-				memcpy(pNot->m_szFileName1, szPart, strlen(szPart));
-			}
-		}
-
-		//过滤临时目录和临时文件
-		if(true == ExcludeThisNotification(pNot->m_szFileName1/* + dwFileNameOffset*/) )
-		{
-			return false;
-		}
-
-// 		if( false == IncludeThisNotification(pNot->m_szFileName1 + dwFileNameOffset)
-// 		||	true == ExcludeThisNotification(pNot->m_szFileName1/* + dwFileNameOffset*/) )
+//		if (pNot->m_eFunctionToDispatch == CDirChangeNotification::eOn_FileModified)
 // 		{
-// 			return false;
-// 		
-// 			if( pNot->m_eFunctionToDispatch != CDirChangeNotification::eOn_FileNameChanged )
-// 				return false;
-// 			else{
-// 				//Special case for file name change:
-// 				//
-// 				// the old file name didn't pass the include/exclude filter
-// 				// but if the new name passes the include/exclude filter, 
-// 				// we will pass it on to the client...
+// 			//过滤掉word临时文件
+// 			//修改文件名
+// 			TCHAR *pPos = StrStrA(pNot->m_szFileName1,"~$");
+// 			if (pPos)
+// 			{
+// 				TCHAR szPart[MAX_PATH] = {0};
+// 				int nSize = strlen(pNot->m_szFileName1);
+// 				int nPos = pPos - pNot->m_szFileName1;
+// 				int nSize2 = nSize - nPos - 2;
 // 
-// 				if( false == IncludeThisNotification(pNot->m_szFileName2 + dwFileNameOffset) 
-// 				||	true == ExcludeThisNotification(pNot->m_szFileName2 /*+ dwFileNameOffset*/) )
-// 				{
-// 					// the new file name didn't pass the include/exclude filter test either
-// 					// so don't pass the notification on...
-// 					return false;
-// 				}
+// 				memcpy(szPart, pNot->m_szFileName1, nPos);
+// 				memcpy(szPart+nPos, pNot->m_szFileName1+nPos+2, nSize2);
+// 				
+// 				memset(pNot->m_szFileName1, NULL, nSize);
+// 				memcpy(pNot->m_szFileName1, szPart, strlen(szPart));
 // 			}
 // 		}
-// 
-// 		if( pNot->m_eFunctionToDispatch == CDirChangeNotification::eOn_FileNameChanged )
-// 		{
-// 			//Special case for file name change:
-// 			//
-// 			// the old file name didn't pass the include/exclude filter
-// 			// but if the new name passes the include/exclude filter, 
-// 			// we will pass it on to the client...
-// 			
-// 			if( false == IncludeThisNotification(pNot->m_szFileName2 + dwFileNameOffset) 
-// 			||	true == ExcludeThisNotification(pNot->m_szFileName2 /*+ dwFileNameOffset*/) )
-// 			{
-// 				// the new file name didn't pass the include/exclude filter test either
-// 				// so don't pass the notification on...
-// 				return false;
-// 			}			
-// 		}	
-			
-		if (true == ExcludeSearchNotification(pNot->m_szFileName1, (pNot->m_eFunctionToDispatch == CDirChangeNotification::eOn_FileAdded)) )
+
+//		log.Print(LL_DEBUG_INFO, "filename:%s, %d\r\n",pNot->m_szFileName1,pNot->m_eFunctionToDispatch);
+
+		//处理office文档修改日志
+		//office2007   filename->.tmp
+		//office2003  word: filename->.tmp   excel:000000->filename   ppt:.tmp->filename
+		if (pNot->m_eFunctionToDispatch == CDirChangeNotification::eOn_FileNameChanged)
 		{
-			return false;
+			do 
+			{
+				//检查是否为修改文件
+				TCHAR *pPos = StrStrA(pNot->m_szFileName1,".tmp");
+				if (pPos && false == ExcludeSearchNotification(pNot->m_szFileName2))
+				{
+					pNot->m_eFunctionToDispatch = CDirChangeNotification::eOn_FileModified;
+					bModifyFileName = TRUE;
+					log.Print(LL_DEBUG_INFO, "2003 ppt modify\r\n");
+					break;
+				}
+
+				pPos = StrStrA(pNot->m_szFileName2,".tmp");
+				if (pPos && false == ExcludeSearchNotification(pNot->m_szFileName1))
+				{
+					pNot->m_eFunctionToDispatch = CDirChangeNotification::eOn_FileModified;
+					log.Print(LL_DEBUG_INFO, "office 2007 and office 2003 word modify\r\n");
+					break ;
+				}
+
+				char szExt[MAX_PATH] = {0};
+				_splitpath(pNot->m_szFileName1, NULL, NULL, NULL, szExt);
+				if (strlen(szExt) == 0 && false == ExcludeSearchNotification(pNot->m_szFileName2))
+				{
+					pNot->m_eFunctionToDispatch = CDirChangeNotification::eOn_FileModified;
+					bModifyFileName = TRUE;
+					log.Print(LL_DEBUG_INFO, "office 2003 excel modify\r\n");
+					break;
+				}
+
+				//过滤临时目录和临时文件
+				if(true == ExcludeThisNotification(pNot->m_szFileName1/* + dwFileNameOffset*/) )
+				{
+					return false;
+				}
+
+				//手动重命名
+				if(pNot->m_szFileName2 != NULL && true == ExcludeSearchNotification(pNot->m_szFileName2))
+					return false;
+			} while (0);
 		}else
 		{
-			if(pNot->m_szFileName2 != NULL && true == ExcludeSearchNotification(pNot->m_szFileName2))
+			//过滤临时目录和临时文件
+			if(true == ExcludeThisNotification(pNot->m_szFileName1/* + dwFileNameOffset*/) )
+			{
 				return false;
+			}
+			
+			if (true == ExcludeSearchNotification(pNot->m_szFileName1, (pNot->m_eFunctionToDispatch == CDirChangeNotification::eOn_FileAdded)) )
+			{
+				return false;
+			}else
+				if(pNot->m_szFileName2 != NULL && true == ExcludeSearchNotification(pNot->m_szFileName2))
+					return false;
 		}
 	}
 	//
@@ -1175,9 +1183,20 @@ bool CDelayedDirectoryChangeHandler::NotifyClientOfFileChange(CDirChangeNotifica
 	}
 	else
 	{
-		if( m_pRealHandler->On_FilterNotification(pNot->m_eFunctionToDispatch,
-											  pNot->m_szFileName1,
-											  pNot->m_szFileName2) )
+		bool bret = false;
+		if (bModifyFileName)
+		{
+			bret = m_pRealHandler->On_FilterNotification(pNot->m_eFunctionToDispatch,
+											pNot->m_szFileName2,
+											pNot->m_szFileName1);
+		}else
+		{
+			bret = m_pRealHandler->On_FilterNotification(pNot->m_eFunctionToDispatch,
+											pNot->m_szFileName1,
+											pNot->m_szFileName2);
+		}
+
+		if( bret )
 		{
 			return true;
 		}
@@ -1250,7 +1269,7 @@ bool CDelayedDirectoryChangeHandler::ExcludeThisNotification(LPCTSTR szFileName)
 	if (dwLen == 0)
 	{
 		_tcscpy(szTmpPath, szFileName);
-		log.Print(LL_DBERR,"[warn]GetLongPathName org=%s,GetLastError=0x%x\r\n", szFileName, GetLastError());
+		//log.Print(LL_DBERR,"[warn]GetLongPathName org=%s,GetLastError=0x%x\r\n", szFileName, GetLastError());
 	}
 
 	_tcsupr(szTmpPath);

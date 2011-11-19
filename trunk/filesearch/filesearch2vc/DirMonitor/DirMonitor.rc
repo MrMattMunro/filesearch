@@ -66,8 +66,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2011,9,11,1
- PRODUCTVERSION 1,0,0,19
+ FILEVERSION 2011,11,20,1
+ PRODUCTVERSION 1,0,0,20
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -85,14 +85,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "slfile\0"
             VALUE "FileDescription", "DirMonitor DLL\0"
-            VALUE "FileVersion", "2011, 9, 11, 1\0"
+            VALUE "FileVersion", "2011, 11, 20, 1\0"
             VALUE "InternalName", "DirMonitor\0"
             VALUE "LegalCopyright", "∞Ê»®À˘”– (C) 2010\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "DirMonitor.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "DirMonitor Dynamic Link Library\0"
-            VALUE "ProductVersion", "1, 0, 0, 19\0"
+            VALUE "ProductVersion", "1, 0, 0, 20\0"
             VALUE "SpecialBuild", "\0"
         END
     END
