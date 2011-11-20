@@ -258,6 +258,7 @@
 #define IDI_ICON_BASIC_SET_NORMAL       2064
 #define IDC_BUTTON_LICENSE_RESTORE      2065
 #define IDI_ICON_BASIC_SET_DIC          2065
+#define IDC_STATIC_BACK                 2065
 #define IDI_ICON_BASIC_SET_SKIN         2066
 #define IDI_ICON_REGISTER               2067
 #define IDI_ICON_REGISTER_INFO          2068
@@ -275,6 +276,7 @@
 #define IDD_FLOATWND                    2092
 #define IDB_BITMAP_LOGO                 2093
 #define IDR_MENU_FLOATWND               2094
+#define IDB_BITMAP_FASTSEARCHBACK       2095
 #define ID_SHOW                         32771
 #define ID_HIDE                         32772
 #define ID_MENU_NEW_INDEX               32773
@@ -291,9 +293,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        2095
+#define _APS_NEXT_RESOURCE_VALUE        2096
 #define _APS_NEXT_COMMAND_VALUE         32782
-#define _APS_NEXT_CONTROL_VALUE         2064
+#define _APS_NEXT_CONTROL_VALUE         2066
 #define _APS_NEXT_SYMED_VALUE           2000
 #endif
 #endif

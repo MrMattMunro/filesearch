@@ -66,8 +66,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2011,11,5,1
- PRODUCTVERSION 1,0,0,35
+ FILEVERSION 2011,11,20,1
+ PRODUCTVERSION 1,0,0,36
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -85,14 +85,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "slfile\0"
             VALUE "FileDescription", "FsUi DLL\0"
-            VALUE "FileVersion", "2011, 11, 5, 1\0"
+            VALUE "FileVersion", "2011, 11, 20, 1\0"
             VALUE "InternalName", "FsUi\0"
             VALUE "LegalCopyright", "∞Ê»®À˘”– (C) 2011\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "FsUi.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "FsUi Dynamic Link Library\0"
-            VALUE "ProductVersion", "1, 0, 0, 35\0"
+            VALUE "ProductVersion", "1, 0, 0, 36\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -250,6 +250,8 @@ BEGIN
     COMBOBOX        IDC_COMBO_PATH_RECENT,200,328,39,71,CBS_DROPDOWNLIST | 
                     CBS_SORT | WS_VSCROLL | WS_TABSTOP
     GROUPBOX        "",IDC_STATIC,1,304,107,18,NOT WS_VISIBLE
+    CONTROL         2095,IDC_STATIC_BACK,"Static",SS_BITMAP | NOT WS_VISIBLE,
+                    2,1,237,323
 END
 
 IDD_DIALOG_LICENSE DIALOG DISCARDABLE  0, 0, 249, 190
@@ -410,6 +412,7 @@ IDB_BITMAP_THREME_NAME_VISTA_Sliver BITMAP  DISCARDABLE     "res\\skin\\THREME_N
 IDB_BITMAP_THREME_NAME_XP_LUNA_HomeStead BITMAP  DISCARDABLE     "res\\skin\\THREME_NAME_XP_LUNA_HomeStead.bmp"
 IDB_BITMAP_THREME_NAME_XP_LUNA_Metallic BITMAP  DISCARDABLE     "res\\skin\\THREME_NAME_XP_LUNA_Metallic.bmp"
 IDB_BITMAP_LOGO         BITMAP  DISCARDABLE     "res\\logo.bmp"
+IDB_BITMAP_FASTSEARCHBACK BITMAP  DISCARDABLE     "res\\fastsearchback.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //

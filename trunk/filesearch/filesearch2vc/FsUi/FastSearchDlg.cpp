@@ -35,6 +35,7 @@ void CFastSearchDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CFastSearchDlg)
+	DDX_Control(pDX, IDC_STATIC_BACK, m_picBack);
 	DDX_Control(pDX, IDC_EDIT_SEARCH_KEY, m_keyEdit);
 	DDX_Control(pDX, IDC_STATIC_FIND, m_static_find);
 	DDX_Control(pDX, IDC_COMBO_PATH_RECENT, m_BoxListRecent);
@@ -54,9 +55,10 @@ BEGIN_MESSAGE_MAP(CFastSearchDlg, CDialog)
 	ON_WM_ACTIVATE()
 	ON_CBN_SELCHANGE(IDC_COMBO_PATH_RECENT, OnSelchangeComboPathRecent)
 	ON_EN_KILLFOCUS(IDC_EDIT_SEARCH_KEY, OnKillfocusEditSearchKey)
+	ON_EN_SETFOCUS(IDC_EDIT_SEARCH_KEY, OnSetfocusEditSearchKey)
 	ON_MESSAGE(XTPWM_TASKPANEL_NOTIFY, OnTaskPanelNotify)
 	ON_WM_KILLFOCUS()
-	ON_EN_SETFOCUS(IDC_EDIT_SEARCH_KEY, OnSetfocusEditSearchKey)
+	ON_WM_TIMER()
 	//}}AFX_MSG_MAP
 	ON_MESSAGE(WM_PROGRESS_MSG, OnProgressChange)
 
@@ -231,6 +233,8 @@ BOOL CFastSearchDlg::OnInitDialog()
 
 	m_fileopen.Init();
 
+//	m_picBack.ShowWindow(SW_HIDE);
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -331,6 +335,7 @@ void CFastSearchDlg::OnChangeEditSearchKey()
 	
 	// TODO: Add your control notification handler code here
 	//如果获取的值
+/*
 	m_bEditForce = TRUE;
 	CString strKey;
 	GetDlgItemText(IDC_EDIT_SEARCH_KEY, strKey);
@@ -340,6 +345,10 @@ void CFastSearchDlg::OnChangeEditSearchKey()
 	}
 
 	OnEventNotify();
+*/
+
+	KillTimer(1);
+	SetTimer(1, 1000, NULL);
 
 }
 
@@ -360,7 +369,7 @@ void CFastSearchDlg::OnSelchangeComboPathRecent()
 //处理文件检测事件
 void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
 {
-
+//	m_picBack.ShowWindow(SW_SHOW);
 	//清空LinkItem
 	ClearGroupsItems();
 
@@ -380,7 +389,7 @@ void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
 
 	//重新设置group（包含个数）
 	UpdateGroupsCaption();
-
+//	m_picBack.ShowWindow(SW_HIDE);
 }
 
 
@@ -958,4 +967,26 @@ void CFastSearchDlg::OnSetfocusEditSearchKey()
 		OutputDebugString("[slfile]OnSetfocusEditSearchKey");
 		SetDlgItemText(IDC_EDIT_SEARCH_KEY, "");
 	}	
+}
+
+void CFastSearchDlg::OnTimer(UINT nIDEvent) 
+{
+	// TODO: Add your message handler code here and/or call default
+	if (nIDEvent == 1)
+	{
+		m_bEditForce = TRUE;
+		CString strKey;
+		GetDlgItemText(IDC_EDIT_SEARCH_KEY, strKey);
+		if(strKey == g_lag.LoadString("label.searchtip"))
+		{
+			SetDlgItemText(IDC_EDIT_SEARCH_KEY, "");
+		}
+			
+		//m_picBack.ShowWindow(SW_SHOW);
+		OnEventNotify();
+	}
+
+	KillTimer(1);
+
+	//CDialog::OnTimer(nIDEvent);
 }
