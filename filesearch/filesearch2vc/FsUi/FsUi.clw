@@ -4,38 +4,38 @@
 Version=1
 ClassCount=11
 Class1=CFsUiApp
-LastClass=CFloatWnd
+LastClass=CFastSearchDlg
 NewFileInclude2=#include "FsUi.h"
 ResourceCount=18
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
 LastTemplate=CDialog
-Resource1=IDD_DIALOG_ALL_CIHUI
+Resource1=IDD_DIALOG_LICENSE
 Class3=CCustomCiHuiDlg
-Resource2=IDD_DIALOG_SKIN
+Resource2=IDD_DIALOG_MODIFY_INDEX
 Class4=CModifyIndexDlg
 Resource3=IDD_DIALOG_CUSTOM_DICT (Chinese (P.R.C.))
 Class5=CShowAllCiHuiDlg
-Resource4=IDD_FLOATWND
+Resource4=IDD_DIALOG_CUSTOM_DICT
 Class6=CSetAttributeDlg
-Resource5=IDD_DIALOG_MODIFY_INDEX
+Resource5=IDD_DIALOG_FAST_SEARCH
 Class7=CFastSearchDlg
 Class8=CSearchThread
 Resource6=IDD_DIALOG_SKIN (Chinese (P.R.C.))
 Class9=CLicenseDlg
-Resource7=IDD_DIALOG_CUSTOM_DICT
+Resource7=IDD_DIALOG_CREATE_INDEX
 Class10=CSkinDlg
 Resource8=IDD_DIALOG_MODIFY_INDEX (Chinese (P.R.C.))
 Resource9=IDD_DIALOG_ALL_CIHUI (Chinese (P.R.C.))
 Resource10=IDD_DIALOG_LICENSE (Chinese (P.R.C.))
-Resource11=IDD_DIALOG_SET_ATTR
+Resource11=IDD_DIALOG_SKIN
 Resource12=IDD_DIALOG_FAST_SEARCH (Chinese (P.R.C.))
 Resource13=IDD_DIALOG_CREATE_INDEX (Chinese (P.R.C.))
-Resource14=IDD_DIALOG_LICENSE
+Resource14=IDD_FLOATWND
 Resource15=IDD_DIALOG_SET_ATTR (Chinese (P.R.C.))
-Resource16=IDD_DIALOG_FAST_SEARCH
+Resource16=IDD_DIALOG_ALL_CIHUI
 Class11=CFloatWnd
-Resource17=IDD_DIALOG_CREATE_INDEX
+Resource17=IDD_DIALOG_SET_ATTR
 Resource18=IDR_MENU_FLOATWND
 
 [CLS:CFsUiApp]
@@ -185,12 +185,13 @@ VirtualFilter=dWC
 [DLG:IDD_DIALOG_FAST_SEARCH]
 Type=1
 Class=CFastSearchDlg
-ControlCount=5
+ControlCount=6
 Control1=IDC_EDIT_SEARCH_KEY,edit,1350631556
 Control2=IDC_COMBO_PATH,combobox,1344340227
 Control3=IDC_STATIC_FIND,static,1073741838
 Control4=IDC_COMBO_PATH_RECENT,combobox,1344340227
 Control5=IDC_STATIC,button,1073741831
+Control6=IDC_STATIC_BACK,static,1073741838
 
 [CLS:CFastSearchDlg]
 Type=0
@@ -421,7 +422,7 @@ HeaderFile=FloatWnd.h
 ImplementationFile=FloatWnd.cpp
 BaseClass=CDialog
 Filter=W
-LastObject=ID_MENU_TRANS_80
+LastObject=CFloatWnd
 VirtualFilter=dWC
 
 [MNU:IDR_MENU_FLOATWND]

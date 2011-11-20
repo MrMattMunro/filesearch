@@ -430,6 +430,10 @@ SOURCE=.\res\excel.ico
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\fastsearchback.bmp
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\feiqclose.bmp
 # End Source File
 # Begin Source File

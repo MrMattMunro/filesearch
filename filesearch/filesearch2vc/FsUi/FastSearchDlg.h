@@ -30,41 +30,11 @@ class CFastSearchDlg : public CDialog
 public:
 	CFastSearchDlg(CWnd* pParent = NULL);   // standard constructor
 
-	int GetFileID(char* szFileType);
-
-	void SetWinPos();
-	void SetComboxPos(BOOL bRecent);
-	void SetStaticFindPos();
-
-	void OnEventNotify();
-	BOOL CreateTaskPanel();
-
-	void AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<DespInfo> DespList,LPCTSTR lpszTooltip = "", BOOL bShowTextItem = TRUE);
-	void AddToolboxGroup(UINT nID, LPCTSTR lpszCaption, LPCTSTR lpszTooltip = "", int nIconIndex = 0);
-
-	void AddLinkItemEx(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<DespInfo> DespList,LPCTSTR lpszTooltip = "", BOOL bShowTextItem = TRUE);
-
-	void ClearGroupsItems(); 
-
-	void UpdateGroupsCaption(); 
-
-	void OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam);
-
-	void OnProgressChangeRecent(FastItem item);
-
-	CXTPTaskPanel m_wndTaskPanel;
-	sloFastSearchAgent m_agent;
-	sloSetAttrAgent m_setAgent;
-	std::map<int, GroupInfo> m_listMap;
-	sloOpenFileAgent m_fileopen;
-	BOOL m_bDestory;
-	BOOL m_bCommboxRecentStatus;
-	BOOL m_bEditForce;
-
 //	CSearchThread* m_pSearchThread;
 // Dialog Data
 	//{{AFX_DATA(CFastSearchDlg)
 	enum { IDD = IDD_DIALOG_FAST_SEARCH };
+	CStatic	m_picBack;
 	CIconEdit	m_keyEdit;
 	CStatic	m_static_find;
 	CTTComboBox	m_BoxListRecent;
@@ -95,6 +65,7 @@ protected:
 	afx_msg void OnSelchangeComboPathRecent();
 	afx_msg void OnKillfocusEditSearchKey();
 	afx_msg void OnSetfocusEditSearchKey();
+	afx_msg void OnTimer(UINT nIDEvent);
 	//}}AFX_MSG
 	LRESULT OnTaskPanelNotify(WPARAM wParam, LPARAM lParam);
 	DECLARE_MESSAGE_MAP()
@@ -102,6 +73,38 @@ protected:
 
 private:
     CFilenameEdit   m_FilenameEdit;
+public:
+	int GetFileID(char* szFileType);
+	
+	void SetWinPos();
+	void SetComboxPos(BOOL bRecent);
+	void SetStaticFindPos();
+	
+	void OnEventNotify();
+	BOOL CreateTaskPanel();
+	
+	void AddLinkItem(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<DespInfo> DespList,LPCTSTR lpszTooltip = "", BOOL bShowTextItem = TRUE);
+	void AddToolboxGroup(UINT nID, LPCTSTR lpszCaption, LPCTSTR lpszTooltip = "", int nIconIndex = 0);
+	
+	void AddLinkItemEx(UINT nFolderID, UINT nItemID, int nIconIndex, LPCTSTR lpszCaption, std::vector<DespInfo> DespList,LPCTSTR lpszTooltip = "", BOOL bShowTextItem = TRUE);
+	
+	void ClearGroupsItems(); 
+	
+	void UpdateGroupsCaption(); 
+	
+	void OnTaskPanelClickDownEvent(WPARAM wParam, LPARAM lParam);
+	
+	void OnProgressChangeRecent(FastItem item);
+	
+	CXTPTaskPanel m_wndTaskPanel;
+	sloFastSearchAgent m_agent;
+	sloSetAttrAgent m_setAgent;
+	std::map<int, GroupInfo> m_listMap;
+	sloOpenFileAgent m_fileopen;
+	BOOL m_bDestory;
+	BOOL m_bCommboxRecentStatus;
+	BOOL m_bEditForce;
+	CString m_strOldKey;
 };
 
 //{{AFX_INSERT_LOCATION}}
