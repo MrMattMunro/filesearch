@@ -12,12 +12,14 @@ Class1=CLocalAgenterApp
 Class2=CLocalAgenterDlg
 Class3=CAboutDlg
 
-ResourceCount=4
+ResourceCount=6
 Resource1=IDD_DIALOG_GROUP
 Resource2=IDR_MAINFRAME
-Resource3=IDD_ABOUTBOX
+Resource3=IDR_MENU_DROPDOWN
 Class4=CGroupDlg
 Resource4=IDD_LOCALAGENTER_DIALOG
+Resource5=IDD_ABOUTBOX
+Resource6=IDR_MENU_TREE
 
 [CLS:CLocalAgenterApp]
 Type=0
@@ -30,7 +32,7 @@ Type=0
 HeaderFile=LocalAgenterDlg.h
 ImplementationFile=LocalAgenterDlg.cpp
 Filter=D
-LastObject=IDC_REPORTCTRL
+LastObject=CLocalAgenterDlg
 BaseClass=CXTResizeDialog
 VirtualFilter=dWC
 
@@ -52,9 +54,18 @@ Control4=IDOK,button,1342373889
 [DLG:IDD_LOCALAGENTER_DIALOG]
 Type=1
 Class=CLocalAgenterDlg
-ControlCount=2
+ControlCount=11
 Control1=IDC_REPORTCTRL,XTPReport,1342242816
 Control2=IDC_BUTTON_EXPORT,button,1342242816
+Control3=IDC_BUTTON_DELETE,button,1342242816
+Control4=IDC_BUTTON_SET,button,1342242816
+Control5=IDC_STATIC,static,1342308352
+Control6=IDC_COMBO_GROUP,combobox,1344340226
+Control7=IDC_COMBO_TYPE,combobox,1344340226
+Control8=IDC_COMBO_TIME,combobox,1344340226
+Control9=IDC_STATIC,static,1342308352
+Control10=IDC_EDIT_KEYWORD,edit,1350631552
+Control11=IDC_BUTTON_SEARCH,button,1342242816
 
 [DLG:IDD_DIALOG_GROUP]
 Type=1
@@ -72,4 +83,19 @@ BaseClass=CDialog
 Filter=D
 LastObject=CGroupDlg
 VirtualFilter=dWC
+
+[MNU:IDR_MENU_DROPDOWN]
+Type=1
+Class=?
+Command1=ID_DROPDOWNMENU_OPTIONITEM1
+Command2=ID_DROPDOWNMENU_OPTIONITEM2
+CommandCount=2
+
+[MNU:IDR_MENU_TREE]
+Type=1
+Class=?
+Command1=ID_EDIT_ADD
+Command2=ID_EDIT_DEL
+Command3=ID_EDIT_RENAME
+CommandCount=3
 

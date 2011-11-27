@@ -65,9 +65,10 @@ LINK32=link.exe
 # PROP Use_Debug_Libraries 1
 # PROP Output_Dir "Debug"
 # PROP Intermediate_Dir "Debug"
+# PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /Yu"stdafx.h" /FD /GZ /c
-# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "." /I "comm" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Yu"stdafx.h" /FD /GZ /Zm200 /c
+# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "../../../Source" /I "../../AboutDlg" /I "comm" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Yu"stdafx.h" /FD /GZ /Zm200 /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804 /d "_DEBUG" /d "_AFXDLL"
@@ -110,6 +111,10 @@ SOURCE=.\ReportRecord.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ShortcutPaneBase.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ShortcutPaneCalendar.cpp
 # End Source File
 # Begin Source File
@@ -124,6 +129,10 @@ SOURCE=.\sloMysqlAgent.cpp
 
 SOURCE=.\StdAfx.cpp
 # ADD CPP /Yc"stdafx.h"
+# End Source File
+# Begin Source File
+
+SOURCE=.\XTTreeCtrlEx.cpp
 # End Source File
 # End Group
 # Begin Group "Header Files"
@@ -151,6 +160,10 @@ SOURCE=.\Resource.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\ShortcutPaneBase.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\ShortcutPaneCalendar.h
 # End Source File
 # Begin Source File
@@ -165,10 +178,26 @@ SOURCE=.\sloMysqlAgent.h
 
 SOURCE=.\StdAfx.h
 # End Source File
+# Begin Source File
+
+SOURCE=.\XTTreeCtrlEx.h
+# End Source File
 # End Group
 # Begin Group "Resource Files"
 
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
+# Begin Source File
+
+SOURCE=.\res\account_actions24_h.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\copy_to24.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\delete24_h.bmp
+# End Source File
 # Begin Source File
 
 SOURCE=.\res\icon10.ico
@@ -221,6 +250,26 @@ SOURCE=.\res\LocalAgenter.rc2
 
 SOURCE=.\res\PaneIcons.bmp
 # End Source File
+# Begin Source File
+
+SOURCE=.\res\search24_h.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\Shortcuts_big.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\Shortcuts_big_alpha.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\Shortcuts_small.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\Shortcuts_small_alpha.bmp
+# End Source File
 # End Group
 # Begin Group "mysql"
 
@@ -256,6 +305,18 @@ SOURCE=.\comm\sloRegAgent.cpp
 # Begin Source File
 
 SOURCE=.\comm\sloRegAgent.h
+# End Source File
+# End Group
+# Begin Group "comm"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\comm\TTComboBox.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\TTComboBox.h
 # End Source File
 # End Group
 # Begin Source File

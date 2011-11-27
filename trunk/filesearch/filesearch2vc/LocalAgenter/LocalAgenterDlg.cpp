@@ -68,12 +68,19 @@ CLocalAgenterDlg::CLocalAgenterDlg(CWnd* pParent /*=NULL*/)
 	//}}AFX_DATA_INIT
 	// Note that LoadIcon does not require a subsequent DestroyIcon in Win32
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	m_bCommboxAllSel = FALSE;
 }
 
 void CLocalAgenterDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CXTResizeDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CLocalAgenterDlg)
+	DDX_Control(pDX, IDC_BUTTON_SEARCH, m_btnSearch);
+	DDX_Control(pDX, IDC_COMBO_TIME, m_BoxListTime);
+	DDX_Control(pDX, IDC_COMBO_TYPE, m_BoxListType);
+	DDX_Control(pDX, IDC_COMBO_GROUP, m_BoxListGroup);
+	DDX_Control(pDX, IDC_BUTTON_SET, m_btnSet);
+	DDX_Control(pDX, IDC_BUTTON_DELETE, m_btnDelete);
 	DDX_Control(pDX, IDC_BUTTON_EXPORT, m_buttonExport);
 	DDX_Control(pDX, IDC_REPORTCTRL, m_wndReportCtrl);
 	//}}AFX_DATA_MAP
@@ -84,7 +91,14 @@ BEGIN_MESSAGE_MAP(CLocalAgenterDlg, CXTResizeDialog)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_BUTTON_EXPORT, OnButtonExport)
+	ON_BN_CLICKED(IDC_BUTTON_DELETE, OnButtonDelete)
+	ON_BN_CLICKED(IDC_BUTTON_SET, OnButtonSet)
+	ON_CBN_EDITCHANGE(IDC_COMBO_GROUP, OnEditchangeComboGroup)
+	ON_CBN_SELCHANGE(IDC_COMBO_GROUP, OnSelchangeComboGroup)
+	ON_BN_CLICKED(IDC_BUTTON_SEARCH, OnButtonSearch)
 	//}}AFX_MSG_MAP
+	ON_CONTROL_RANGE(CBN_DROPDOWN, IDC_BUTTON_EXPORT, IDC_BUTTON_EXPORT, OnButtonDropDown)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -163,11 +177,45 @@ BOOL CLocalAgenterDlg::OnInitDialog()
 	//////////////////////////////////////////////////////////////////////////
 	//button
 //	m_buttonExport.SetTheme(xtpButtonThemeOffice2007);
-	m_buttonExport.SetIcon(CSize(8,8), AfxGetApp()->LoadIcon(IDI_OUTBOX));
+//	m_buttonExport.SetIcon(CSize(8,8), AfxGetApp()->LoadIcon(IDI_OUTBOX));
+	m_buttonExport.SetBitmap(CSize(24,24), IDB_BITMAP_EXPORT);
 	m_buttonExport.SetFlatStyle(TRUE);
 //	m_buttonExport.SetUseVisualStyle(FALSE);
 //	m_buttonExport.SetTextImageRelation(xtpButtonImageBeforeText);
-	m_buttonExport.SetPushButtonStyle(xtpButtonDropDown);	
+	m_buttonExport.SetPushButtonStyle(xtpButtonSplitDropDown);	
+
+	m_btnDelete.SetBitmap(CSize(24,24), IDB_BITMAP_DELETE);
+	m_btnDelete.SetFlatStyle(TRUE);
+
+	m_btnSet.SetBitmap(CSize(24,24), IDB_BITMAP_SET);
+	m_btnSet.SetFlatStyle(TRUE);
+
+	m_btnSearch.SetBitmap(CSize(24,24), IDB_BITMAP_SEARCH);
+	m_btnSearch.SetFlatStyle(TRUE);
+
+	//////////////////////////////////////////////////////////////////////////
+	//commbox
+
+	m_BoxListGroup.ResetContent(); // Clean up all contents	
+	m_BoxListGroup.InsertString(0, "全部");
+	m_BoxListGroup.InsertString(1, "词汇列表");
+	m_BoxListGroup.InsertString(2, "网址列表");
+	m_BoxListGroup.SetCurSel(0);
+	
+	m_BoxListType.ResetContent(); // Clean up all contents	
+	m_BoxListType.InsertString(0, "默认分组");
+	m_BoxListType.InsertString(1, "自定义分组");
+	m_BoxListType.InsertString(2, "财经网址");
+	m_BoxListType.SetCurSel(0);
+
+	m_BoxListTime.ResetContent(); // Clean up all contents	
+	m_BoxListTime.InsertString(0, "最近一周");
+	m_BoxListTime.InsertString(1, "最近三个月");
+	m_BoxListTime.InsertString(2, "最近一年");
+	m_BoxListTime.InsertString(3, "全部");
+	m_BoxListTime.SetCurSel(0);
+
+	SetComboxPos(TRUE);
 	//////////////////////////////////////////////////////////////////////////
 	m_wndShortcutBar.Create(WS_CHILD|WS_VISIBLE|WS_CLIPCHILDREN|WS_CLIPSIBLINGS, CRect(5, 50, 180, 430),
 		this,  100);
@@ -203,7 +251,7 @@ BOOL CLocalAgenterDlg::OnInitDialog()
 
 	//////////////////////////////////////////////////////////////////////////
 	//
-	m_wndReportCtrl.MoveWindow(CRect(190, 50, 685, 430), TRUE);
+	m_wndReportCtrl.MoveWindow(CRect(190, 50, 770, 430), TRUE);
 
 	m_wndReportCtrl.AddColumn(new CXTPReportColumn(COLUMN_ICON, _T(""), 18));
 	m_wndReportCtrl.AddColumn(new CXTPReportColumn(COLUMN_BUTTON, _T(""), 18));
@@ -327,3 +375,140 @@ void CLocalAgenterDlg::ShowListContent_Website(char* szGroupName)
 
 	m_wndReportCtrl.Populate();
 }
+
+void CLocalAgenterDlg::OnButtonDropDown(UINT nID)
+{
+	// loading a user resource.
+	CMenu menu;
+	menu.LoadMenu(IDR_MENU_DROPDOWN);
+	
+	CMenu* pPopup = menu.GetSubMenu(0);
+	ASSERT(pPopup != NULL);
+	
+	CXTPButton* pButton = DYNAMIC_DOWNCAST(CXTPButton, GetDlgItem(nID));
+	ASSERT(pButton);
+	
+	DWORD dwStyle = pButton->GetPushButtonStyle();
+	ASSERT(pButton->IsDropDownStyle());
+	
+	CXTPWindowRect rect(pButton);
+	
+	int nCmd = TrackPopupMenu(pPopup->GetSafeHmenu(), TPM_LEFTALIGN | TPM_LEFTBUTTON | TPM_VERTICAL |TPM_RETURNCMD,
+		dwStyle == xtpButtonDropDownRight ? rect.right : rect.left, dwStyle == xtpButtonDropDownRight ? rect.top : rect.bottom, 0, m_hWnd, 0);
+	
+	switch(nCmd)
+	{
+	case ID_DROPDOWNMENU_OPTIONITEM1:
+		MessageBox("1");
+		break;
+	case ID_DROPDOWNMENU_OPTIONITEM2:
+		MessageBox("2");
+		break;
+	default:
+		break;
+	}
+	
+
+}
+
+void CLocalAgenterDlg::OnButtonExport() 
+{
+	// TODO: Add your control notification handler code here
+	MessageBox("dcclick");
+}
+
+void CLocalAgenterDlg::OnButtonDelete() 
+{
+	// TODO: Add your control notification handler code here
+	
+}
+
+void CLocalAgenterDlg::OnButtonSet() 
+{
+	// TODO: Add your control notification handler code here
+	
+}
+
+void CLocalAgenterDlg::OnButtonSearch() 
+{
+	// TODO: Add your control notification handler code here
+	
+}
+
+
+void CLocalAgenterDlg::SetComboxPos(BOOL bAll)
+{
+	
+	RECT rcDlgs;
+	m_BoxListGroup.GetWindowRect(&rcDlgs);   //得到对话框的Rect 对话框的大小
+	ScreenToClient(&rcDlgs);             //把屏幕的值转成相应的实际的值 
+
+	RECT rcType;
+	m_BoxListType.GetWindowRect(&rcType);   //得到对话框的Rect 对话框的大小
+	ScreenToClient(&rcType);             //把屏幕的值转成相应的实际的值 
+	int nTypeLen = rcType.right - rcType.left;
+	
+	//cx cy,就是屏幕最右下角的x,y的值 
+	if (m_bCommboxAllSel == TRUE)
+	{
+		//当前状态处于选中【全部】状态
+		if (bAll)
+		{
+			//由【全部】-》【全部】
+			return ;
+		}else
+		{
+			//由【全部】-》【group】
+			m_BoxListGroup.MoveWindow(rcDlgs.left,rcDlgs.top,(rcDlgs.right - rcDlgs.left - nTypeLen),(rcDlgs.bottom - rcDlgs.top),TRUE);   // 
+			m_bCommboxAllSel = FALSE;
+			//隐藏type commbox
+			m_BoxListType.ShowWindow(SW_SHOWNORMAL);
+		}
+	}else{
+		//当前状态处于选中【索引目录】状态
+		if (bAll)
+		{
+			//由【group】-》【全部】
+			m_BoxListGroup.MoveWindow(rcDlgs.left,rcDlgs.top,(rcDlgs.right - rcDlgs.left + nTypeLen),(rcDlgs.bottom - rcDlgs.top),TRUE);   // 
+			m_bCommboxAllSel = TRUE;
+			//显示type commbox
+			m_BoxListType.ShowWindow(SW_HIDE);
+		}else
+		{
+			//由【group】-》【group】
+			return ;
+		}
+	}
+}
+
+#define ALL_NAME	"全部"
+void CLocalAgenterDlg::OnEditchangeComboGroup() 
+{
+	// TODO: Add your control notification handler code here
+	int nIndex = m_BoxListGroup.GetCurSel();		//得到被选中内容索引
+	CString strtemp;						//存放得到的编辑框内容
+	m_BoxListGroup.GetLBText(nIndex,strtemp);	//得到被选中内容的名字
+	
+	if (strcmp(strtemp.GetBuffer(0), ALL_NAME) == 0)
+	{
+		//选中全部
+		SetComboxPos(TRUE);
+	}else
+		SetComboxPos(FALSE);
+}
+
+void CLocalAgenterDlg::OnSelchangeComboGroup() 
+{
+	// TODO: Add your control notification handler code here
+	int nIndex = m_BoxListGroup.GetCurSel();		//得到被选中内容索引
+	CString strtemp;						//存放得到的编辑框内容
+	m_BoxListGroup.GetLBText(nIndex,strtemp);	//得到被选中内容的名字
+	
+	if (strcmp(strtemp.GetBuffer(0), ALL_NAME) == 0)
+	{
+		//选中全部
+		SetComboxPos(TRUE);
+	}else
+		SetComboxPos(FALSE);	
+}
+

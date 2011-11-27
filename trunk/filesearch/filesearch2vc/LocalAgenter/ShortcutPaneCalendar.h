@@ -24,25 +24,29 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
+#include "ShortcutPaneBase.h"
+#include "XTTreeCtrlEx.h"
 
-
-class CShortcutPaneCalendar : public CXTPShortcutBarPane
+class CShortcutPaneCalendar : public CXTPShortcutBarPane, public CShortcutPaneBase
 {
 public:
 	CShortcutPaneCalendar();
 	virtual ~CShortcutPaneCalendar();
 
 	BOOL Create(LPCTSTR lpszCaption, CXTPShortcutBar* pParent);
-
 	void SetParentWnd(LPVOID pParentWnd);
 
+	virtual BOOL RenameItem(CString strNewitem);
+	virtual void SetOlditemText(CString strOlditem);
+
 	CXTMonthCalCtrl m_wndCalendar;
-
-	CXTTreeCtrl m_wndTreeCalendar;
-
+	CXTTreeCtrlEx m_wndTreeCalendar;
 	CImageList m_ilTreeIcons;
+
 	BOOL m_bSelect;
+
 	char m_szTypeName[MAX_PATH];
+	CString m_strItemOld;
 
 	LPVOID m_pParentWnd;
 	//{{AFX_MSG(CShortcutPaneCalendar)
