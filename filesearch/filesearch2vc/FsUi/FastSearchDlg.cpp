@@ -35,6 +35,7 @@ void CFastSearchDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CFastSearchDlg)
+	DDX_Control(pDX, IDC_PROGRESS_FAST_SEARCH, m_pressFastsearch);
 	DDX_Control(pDX, IDC_STATIC_BACK, m_picBack);
 	DDX_Control(pDX, IDC_EDIT_SEARCH_KEY, m_keyEdit);
 	DDX_Control(pDX, IDC_STATIC_FIND, m_static_find);
@@ -370,6 +371,7 @@ void CFastSearchDlg::OnSelchangeComboPathRecent()
 void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
 {
 //	m_picBack.ShowWindow(SW_SHOW);
+	m_wndTaskPanel.ShowWindow(SW_HIDE);
 	//清空LinkItem
 	ClearGroupsItems();
 
@@ -390,6 +392,7 @@ void CFastSearchDlg::OnProgressChange(WPARAM wParam, LPARAM lParam)
 	//重新设置group（包含个数）
 	UpdateGroupsCaption();
 //	m_picBack.ShowWindow(SW_HIDE);
+	m_wndTaskPanel.ShowWindow(SW_SHOW);
 }
 
 
@@ -983,6 +986,7 @@ void CFastSearchDlg::OnTimer(UINT nIDEvent)
 		}
 			
 		//m_picBack.ShowWindow(SW_SHOW);
+
 		OnEventNotify();
 	}
 
