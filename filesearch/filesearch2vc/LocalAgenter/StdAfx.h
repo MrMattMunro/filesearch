@@ -12,6 +12,8 @@
 
 #define VC_EXTRALEAN        // Exclude rarely-used stuff from Windows headers
 
+#define WINVER  0x0500      /* version 5.0 */
+
 #include <afxwin.h>         // MFC core and standard components
 #include <afxext.h>         // MFC extensions
 #include <afxdisp.h>        // MFC Automation classes
@@ -19,7 +21,6 @@
 #ifndef _AFX_NO_AFXCMN_SUPPORT
 #include <afxcmn.h>         // MFC support for Windows Common Controls
 #endif // _AFX_NO_AFXCMN_SUPPORT
-
 
 #include <XTToolkitPro.h>    // Xtreme Toolkit Pro components
 #include "resource.h"

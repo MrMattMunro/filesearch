@@ -94,7 +94,7 @@ BEGIN
     DEFPUSHBUTTON   "确定",IDOK,178,7,50,14,WS_GROUP
 END
 
-IDD_LOCALAGENTER_DIALOG DIALOGEX 0, 0, 464, 313
+IDD_LOCALAGENTER_DIALOG DIALOGEX 0, 0, 517, 313
 STYLE WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
     WS_SYSMENU | WS_THICKFRAME
 EXSTYLE WS_EX_APPWINDOW
@@ -103,7 +103,19 @@ FONT 9, "宋体"
 BEGIN
     CONTROL         "",IDC_REPORTCTRL,"XTPReport",WS_TABSTOP,172,72,248,143,
                     WS_EX_STATICEDGE
-    PUSHBUTTON      "导入与导出",IDC_BUTTON_EXPORT,10,4,82,24
+    PUSHBUTTON      "导入与导出",IDC_BUTTON_EXPORT,2,4,79,24
+    PUSHBUTTON      "删除",IDC_BUTTON_DELETE,82,4,38,24
+    PUSHBUTTON      "设置",IDC_BUTTON_SET,121,4,38,24
+    LTEXT           "查找范围:",IDC_STATIC,167,12,37,8
+    COMBOBOX        IDC_COMBO_GROUP,205,10,52,44,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_TYPE,256,10,45,111,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_TIME,303,10,50,90,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "查找内容:",IDC_STATIC,357,13,37,8
+    EDITTEXT        IDC_EDIT_KEYWORD,395,9,69,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "查找",IDC_BUTTON_SEARCH,466,4,48,24
 END
 
 IDD_DIALOG_GROUP DIALOG DISCARDABLE  0, 0, 227, 38
@@ -193,6 +205,35 @@ IDB_SHORTCUTS_BIG       BITMAP  DISCARDABLE     "res\\Shortcuts_big.bmp"
 IDB_SHORTCUTS_BIG_ALPHA BITMAP  DISCARDABLE     "res\\Shortcuts_big_alpha.bmp"
 IDB_SHORTCUTS_SMALL     BITMAP  DISCARDABLE     "res\\Shortcuts_small.bmp"
 IDB_SHORTCUTS_SMALL_ALPHA BITMAP  DISCARDABLE     "res\\Shortcuts_small_alpha.bmp"
+IDB_BITMAP_EXPORT       BITMAP  DISCARDABLE     "res\\copy_to24.bmp"
+IDB_BITMAP_DELETE       BITMAP  DISCARDABLE     "res\\delete24_h.bmp"
+IDB_BITMAP_SET          BITMAP  DISCARDABLE     "res\\account_actions24_h.bmp"
+IDB_BITMAP_SEARCH       BITMAP  DISCARDABLE     "res\\search24_h.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_DROPDOWN MENU DISCARDABLE 
+BEGIN
+    POPUP "Drop Down Menu"
+    BEGIN
+        MENUITEM "导入记录",                    ID_DROPDOWNMENU_OPTIONITEM1
+        MENUITEM "导出记录",                    ID_DROPDOWNMENU_OPTIONITEM2
+    END
+END
+
+IDR_MENU_TREE MENU DISCARDABLE 
+BEGIN
+    POPUP "tree"
+    BEGIN
+        MENUITEM "增加",                        ID_EDIT_ADD
+        MENUITEM "删除",                        ID_EDIT_DEL
+        MENUITEM "重命名",                      ID_EDIT_RENAME
+    END
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

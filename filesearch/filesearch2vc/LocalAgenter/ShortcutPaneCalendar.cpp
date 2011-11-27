@@ -41,6 +41,8 @@ CShortcutPaneCalendar::CShortcutPaneCalendar()
 	m_bSelect = FALSE;
 	
 	memset(m_szTypeName, NULL, MAX_PATH);
+
+	m_nType = 2;
 }
 
 CShortcutPaneCalendar::~CShortcutPaneCalendar()
@@ -60,12 +62,10 @@ BOOL CShortcutPaneCalendar::Create(LPCTSTR lpszCaption, CXTPShortcutBar* pParent
 
 //	m_wndCalendar.Create(WS_CHILD|WS_VISIBLE|MCS_NOTODAY , CPoint(0, 0), this, 0);
 
-//	AddItem(_T("Calendar"), &m_wndCalendar, 300);
-
-
-	VERIFY(m_wndTreeCalendar.Create(WS_VISIBLE|TVS_HASBUTTONS|TVS_LINESATROOT, CXTPEmptyRect(), this, 0));
+	VERIFY(m_wndTreeCalendar.Create(WS_VISIBLE|TVS_LINESATROOT|TVS_HASBUTTONS|TVS_EDITLABELS |TVS_SHOWSELALWAYS, CXTPEmptyRect(), this, 0));
 
 	m_wndTreeCalendar.SetImageList(&m_ilTreeIcons, TVSIL_NORMAL);
+	m_wndTreeCalendar.SetParentPane(this);
 
 	//读取数据库，获取树基本信息
 	sloMysqlAgent::GetInstance()->GetGroupsFromDB_Website();
@@ -76,7 +76,6 @@ BOOL CShortcutPaneCalendar::Create(LPCTSTR lpszCaption, CXTPShortcutBar* pParent
 	{
 		hItem = m_wndTreeCalendar.InsertItem (sloMysqlAgent::GetInstance()->m_GroupListWebsite[i].szGroupName, 0, 0);
 	}
-
 
 	CXTPShortcutBarPaneItem* pitem = AddItem(_T(""), &m_wndTreeCalendar, 115);
     pitem->ShowCaption(FALSE);
@@ -135,82 +134,72 @@ void CShortcutPaneCalendar::OnSelchanged(NMHDR* /*pNMHDR*/, LRESULT* pResult)
 void CShortcutPaneCalendar::OnContextMenu(CWnd* pWnd, CPoint point) 
 {
 	// TODO: Add your message handler code here
-// 	CPoint pt;
-// 	GetCursorPos(&pt);
-// 	
-// 	UINT uFlags;
-// 	ScreenToClient(&pt);
-// 	
-// 	HTREEITEM hItemSelected = m_wndTreeCalendar.GetSelectedItem();
-// 	if (hItemSelected != NULL && m_bSelect)
-// 	{
-// 		m_bSelect = FALSE;
-// 		CString strItemText = m_wndTreeCalendar.GetItemText(hItemSelected);
-// 
-// 		//如果选中父节点
-// 		CMenu menu;
-// 		VERIFY(menu.LoadMenu(IDR_MENU_POPUP_TREE_CHILD));
-// 		ClientToScreen(&pt);
-// 		int nReturn = CXTPCommandBars::TrackPopupMenu(menu.GetSubMenu(0), TPM_LEFTALIGN|TPM_RETURNCMD|TPM_NONOTIFY, pt.x, pt.y, this);
-// 		
-// 		switch (nReturn)
-// 		{
-// 		case ID_DEL_GROUP:
-// 			//pItem->CopyToClipboard();
-// 			{
-// 				int nRet = MessageBox("您确认删除该分组？","删除分组", MB_YESNO | MB_ICONWARNING);
-// 				if(6 == nRet)
-// 				{
-// 					m_wndTreeCalendar.DeleteItem(hItemSelected);
-// 					//并更新数据库表
-// 					sloMysqlAgent::GetInstance()->DelGroup_Website(strItemText.GetBuffer(0));
-// 				}
-// 				
-// 			}
-// 			break;	
-// 		case ID_MODIFY_GROUP:
-// 			//pItem->CopyToClipboard();
-// 			{
-// 				CGroupDlg groupdlg;
-// 				groupdlg.SetDefaultValue(strItemText.GetBuffer(0));
-// 				int nRet = groupdlg.DoModal();
-// 				if (nRet == 1)
-// 				{
-// 					m_wndTreeCalendar.SetItemText(hItemSelected, groupdlg.m_szGroupName);
-// 					//并写入数据库表
-// 					sloMysqlAgent::GetInstance()->UpdateGroup_Website(strItemText.GetBuffer(0), groupdlg.m_szGroupName);
-// 				}
-// 			}
-// 			break;				
-// 		}
-// 	}
-// 	else
-// 	{
-// 		//选中空白位置，显示增加菜单
-// 		//如果未选中父节点
-// 		CMenu menu;
-// 		VERIFY(menu.LoadMenu(IDR_MENU_POPUP_TREE_PARENT));
-// 		ClientToScreen(&pt);
-// 		int nReturn = CXTPCommandBars::TrackPopupMenu(menu.GetSubMenu(0), TPM_LEFTALIGN|TPM_RETURNCMD|TPM_NONOTIFY, pt.x, pt.y, this);
-// 		
-// 		switch (nReturn)
-// 		{
-// 		case ID_TREE_ADD_TYPE:
-// 			//pItem->CopyToClipboard();
-// 			{
-// 				CGroupDlg groupdlg;
-// 				int nRet = groupdlg.DoModal();
-// 				if (nRet == 1)
-// 				{
-// 					//点击确定
-// 					m_wndTreeCalendar.InsertItem(groupdlg.m_szGroupName, 0, 0);	
-// 
-// 					//并更新数据库表t_keywords_type
-// 					sloMysqlAgent::GetInstance()->AddGroup_Website(groupdlg.m_szGroupName);
-// 				}
-// 			}
-// 			break;		
-// 		}
-// 		return;
-// 	}	
+	CPoint pt;
+	GetCursorPos(&pt);
+	ScreenToClient(&pt);
+	
+	HTREEITEM hItemSelected = m_wndTreeCalendar.GetSelectedItem();
+	if (hItemSelected == NULL || !m_bSelect)
+	{
+		//选中空白位置，不显示菜单
+		return ;
+	}
+
+	m_bSelect = FALSE;
+	CString strItemText = m_wndTreeCalendar.GetItemText(hItemSelected);
+
+	//如果选中父节点
+	CMenu menu;
+	VERIFY(menu.LoadMenu(IDR_MENU_TREE));
+	ClientToScreen(&pt);
+	int nReturn = CXTPCommandBars::TrackPopupMenu(menu.GetSubMenu(0), TPM_LEFTALIGN|TPM_RETURNCMD|TPM_NONOTIFY, pt.x, pt.y, this);
+		
+	switch (nReturn)
+	{
+	case ID_EDIT_ADD:
+		{
+			//新增一节点，然后设置为可编辑
+			HTREEITEM hNewItem = m_wndTreeCalendar.InsertItem("自定义1", 0, 0);
+			//并更新数据库表t_keywords_type
+			sloMysqlAgent::GetInstance()->AddGroup_Website("自定义1");
+			CEdit* pEdit = m_wndTreeCalendar.EditLabel(hNewItem);		
+		}
+		break;	
+	case ID_EDIT_DEL:
+		{
+			int nRet = MessageBox("您确认删除该分组？","删除分组", MB_YESNO | MB_ICONWARNING);
+			if(6 == nRet)
+			{
+				m_wndTreeCalendar.DeleteItem(hItemSelected);
+				//并更新数据库表
+				sloMysqlAgent::GetInstance()->DelGroup_Website(strItemText.GetBuffer(0));
+			}
+		}
+	case ID_EDIT_RENAME:
+		{
+			CEdit* pEdit = m_wndTreeCalendar.EditLabel(hItemSelected);		
+		}
+		break;				
+	}
+}
+
+
+void CShortcutPaneCalendar::SetOlditemText(CString strOlditem)
+{
+	m_strItemOld = strOlditem;
+}
+
+BOOL CShortcutPaneCalendar::RenameItem(CString strNewitem)
+{
+	if (m_strItemOld == strNewitem || m_strItemOld.IsEmpty() || strNewitem.IsEmpty())
+	{
+		return TRUE;
+	}
+
+	//并写入数据库表
+	sloMysqlAgent::GetInstance()->UpdateGroup_Website(m_strItemOld.GetBuffer(0), strNewitem.GetBuffer(0));
+	
+	m_strItemOld.Empty();
+	
+	return TRUE;
 }

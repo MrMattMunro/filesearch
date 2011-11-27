@@ -22,6 +22,7 @@ CGroupDlg::CGroupDlg(CWnd* pParent /*=NULL*/)
 		// NOTE: the ClassWizard will add member initialization here
 
 	//}}AFX_DATA_INIT
+	memset(m_szGroupName, NULL, MAX_PATH);
 }
 
 

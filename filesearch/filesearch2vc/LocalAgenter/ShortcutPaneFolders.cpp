@@ -65,6 +65,8 @@ CShortcutPaneFolders::CShortcutPaneFolders()
 
 	memset(m_szTypeName, NULL, MAX_PATH);
 
+	m_nType = 1;
+
 }
 
 CShortcutPaneFolders::~CShortcutPaneFolders()
@@ -82,10 +84,10 @@ BOOL CShortcutPaneFolders::Create(LPCTSTR lpszCaption, CXTPShortcutBar* pParent)
 	if (!CXTPShortcutBarPane::Create(lpszCaption, pParent))
 		return FALSE;
 
-	VERIFY(m_wndTreeFolders.Create(WS_VISIBLE|TVS_LINESATROOT|TVS_HASBUTTONS , CXTPEmptyRect(), this, 0));
+	VERIFY(m_wndTreeFolders.Create(WS_VISIBLE|TVS_LINESATROOT|TVS_HASBUTTONS|TVS_EDITLABELS |TVS_SHOWSELALWAYS, CXTPEmptyRect(), this, 0));
 
 	m_wndTreeFolders.SetImageList(&m_ilTreeIcons, TVSIL_NORMAL);
-
+	m_wndTreeFolders.SetParentPane(this);
 
 	//读取数据库，获取树基本信息
 	sloMysqlAgent::GetInstance()->GetGroupsFromDB();
@@ -96,6 +98,7 @@ BOOL CShortcutPaneFolders::Create(LPCTSTR lpszCaption, CXTPShortcutBar* pParent)
 	{
 		hItem = m_wndTreeFolders.InsertItem (sloMysqlAgent::GetInstance()->m_GroupList[i].szGroupName, 4, 4);
 		sloMysqlAgent::GetInstance()->GetTypesFromDB(sloMysqlAgent::GetInstance()->m_GroupList[i].nID);
+		m_wndTreeFolders.SetItemState (hItem, TVIS_BOLD, TVIS_BOLD);
 		//获取该分组下得类型个数
 		int nTypeSize = sloMysqlAgent::GetInstance()->m_TypeList.size();
 		for (int j = 0; j < nTypeSize; j++)
@@ -127,89 +130,63 @@ END_MESSAGE_MAP()
 void CShortcutPaneFolders::OnContextMenu(CWnd* pWnd, CPoint point) 
 {
 	// TODO: Add your message handler code here
-// 	CPoint pt;
-// 	GetCursorPos(&pt);
-// 	
-//  	UINT uFlags;
-//  	ScreenToClient(&pt);
-// 
-// 	HTREEITEM hItemSelected = m_wndTreeFolders.GetSelectedItem();
-// 	if (hItemSelected != NULL && m_bSelect)
-// 	{
-// 		m_bSelect = FALSE;
-// 		CString strItemText = m_wndTreeFolders.GetItemText(hItemSelected);
-// 
-// 		HTREEITEM hItemParent = m_wndTreeFolders.GetParentItem(hItemSelected);
-// 		if (hItemParent == NULL)
-// 		{
-// 			//如果未选中父节点
-// 			CMenu menu;
-// 			VERIFY(menu.LoadMenu(IDR_MENU_POPUP_TREE_PARENT));
-// 			ClientToScreen(&pt);
-// 			int nReturn = CXTPCommandBars::TrackPopupMenu(menu.GetSubMenu(0), TPM_LEFTALIGN|TPM_RETURNCMD|TPM_NONOTIFY, pt.x, pt.y, this);
-// 			
-// 			switch (nReturn)
-// 			{
-// 			case ID_TREE_ADD_TYPE:
-// 				//pItem->CopyToClipboard();
-// 
-// 				CGroupDlg groupdlg;
-// 				int nRet = groupdlg.DoModal();
-// 				if (nRet == 1)
-// 				{
-// 					//点击确定
-// 					m_wndTreeFolders.InsertItem(groupdlg.m_szGroupName, 2, 2, hItemSelected);				
-// 					//并更新数据库表t_keywords_type
-// 					sloMysqlAgent::GetInstance()->AddType(strItemText.GetBuffer(0), groupdlg.m_szGroupName);
-// 				}
-// 				break;		
-// 			}
-// 		}else
-// 		{
-// 			//如果选中父节点
-// 			CMenu menu;
-// 			VERIFY(menu.LoadMenu(IDR_MENU_POPUP_TREE_CHILD));
-// 			ClientToScreen(&pt);
-// 			int nReturn = CXTPCommandBars::TrackPopupMenu(menu.GetSubMenu(0), TPM_LEFTALIGN|TPM_RETURNCMD|TPM_NONOTIFY, pt.x, pt.y, this);
-// 			
-// 			switch (nReturn)
-// 			{
-// 			case ID_DEL_GROUP:
-// 				//pItem->CopyToClipboard();
-// 				{
-// 					int nRet = MessageBox("您确认删除该分组？","删除分组", MB_YESNO | MB_ICONWARNING);
-// 					if(6 == nRet)
-// 					{
-// 						m_wndTreeFolders.DeleteItem(hItemSelected);
-// 						//并更新数据库表
-// 						sloMysqlAgent::GetInstance()->DelType(strItemText.GetBuffer(0));
-// 					}
-// 
-// 				}
-// 				break;	
-// 			case ID_MODIFY_GROUP:
-// 				//pItem->CopyToClipboard();
-// 				{
-// 					CGroupDlg groupdlg;
-// 					groupdlg.SetDefaultValue(strItemText.GetBuffer(0));
-//  					int nRet = groupdlg.DoModal();
-// 					if (nRet == 1)
-// 					{
-// 						m_wndTreeFolders.SetItemText(hItemSelected, groupdlg.m_szGroupName);
-// 						//并写入数据库表
-// 						sloMysqlAgent::GetInstance()->UpdateType(strItemText.GetBuffer(0), groupdlg.m_szGroupName);
-// 					}
-// 				}
-// 				break;				
-// 			}
-// 		}
-// 	}
-// 	else
-// 	{
-// 		//选中空白位置，不显示菜单
-// 		return;
-// 	}
+	CPoint pt;
+	GetCursorPos(&pt);
+ 	ScreenToClient(&pt);
 
+	HTREEITEM hItemSelected = m_wndTreeFolders.GetSelectedItem();
+	if (hItemSelected == NULL || !m_bSelect)
+	{
+		//选中空白位置，不显示菜单
+		return ;
+	}
+	
+	m_bSelect = FALSE;
+	
+	HTREEITEM hItemParent = m_wndTreeFolders.GetParentItem(hItemSelected);
+	if (hItemParent == NULL)
+	{
+		//如果未选中父节点
+		return ;
+	}
+
+	CString strItemText = m_wndTreeFolders.GetItemText(hItemSelected);
+	//如果选中子节点
+	CMenu menu;
+	VERIFY(menu.LoadMenu(IDR_MENU_TREE));
+	ClientToScreen(&pt);
+	int nReturn = CXTPCommandBars::TrackPopupMenu(menu.GetSubMenu(0), TPM_LEFTALIGN|TPM_RETURNCMD|TPM_NONOTIFY, pt.x, pt.y, this);
+	
+	switch (nReturn)
+	{
+	case ID_EDIT_ADD:
+		{		
+			//新增一节点，然后设置为可编辑
+			HTREEITEM hNewItem = m_wndTreeFolders.InsertItem("新增1", 1, 1, hItemParent);
+			CString strParentText = m_wndTreeFolders.GetItemText(hItemParent);
+			sloMysqlAgent::GetInstance()->AddType(strParentText.GetBuffer(0), "新增1");
+			CEdit* pEdit = m_wndTreeFolders.EditLabel(hNewItem);			
+		}
+		break;	
+	case ID_EDIT_DEL:
+		{
+			int nRet = MessageBox("您确认删除该分组？","删除分组", MB_YESNO | MB_ICONWARNING);
+			if(6 == nRet)
+			{
+				m_wndTreeFolders.DeleteItem(hItemSelected);
+				//并更新数据库表
+				sloMysqlAgent::GetInstance()->DelType(strItemText.GetBuffer(0));
+			}
+		}
+		break;	
+		
+	case ID_EDIT_RENAME:
+		{
+			CEdit* pEdit = m_wndTreeFolders.EditLabel(hItemSelected);		
+		}
+		break;		
+	}
+	
 }
 
 void CShortcutPaneFolders::OnSize(UINT nType, int cx, int cy)
@@ -219,8 +196,10 @@ void CShortcutPaneFolders::OnSize(UINT nType, int cx, int cy)
 }
 
 
-void CShortcutPaneFolders::OnSelchanged(NMHDR* /*pNMHDR*/, LRESULT* pResult)
+void CShortcutPaneFolders::OnSelchanged(NMHDR* pNMHDR, LRESULT* pResult)
 {
+	NM_TREEVIEW* pNMTreeView = (NM_TREEVIEW*)pNMHDR;
+
 	CLocalAgenterDlg* pDlg = (CLocalAgenterDlg*)m_pParentWnd;
 	// Get the selected tree item and its icon.
 	//	int nImage;
@@ -252,4 +231,24 @@ void CShortcutPaneFolders::OnSelchanged(NMHDR* /*pNMHDR*/, LRESULT* pResult)
 	
 	*pResult = 0;
 	
+}
+
+void CShortcutPaneFolders::SetOlditemText(CString strOlditem)
+{
+	m_strItemOld = strOlditem;
+}
+
+BOOL CShortcutPaneFolders::RenameItem(CString strNewitem)
+{
+	if (m_strItemOld == strNewitem || m_strItemOld.IsEmpty() || strNewitem.IsEmpty())
+	{
+		return TRUE;
+	}
+
+ 	//并写入数据库表
+ 	sloMysqlAgent::GetInstance()->UpdateType(m_strItemOld.GetBuffer(0), strNewitem.GetBuffer(0));
+
+	m_strItemOld.Empty();
+
+	return TRUE;
 }

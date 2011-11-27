@@ -39,14 +39,15 @@ CLocalAgenterApp theApp;
 /////////////////////////////////////////////////////////////////////////////
 // CLocalAgenterApp initialization
 #define SKIN_PATH	"D:\\Program Files\\Codejock Software\\MFC\\Xtreme ToolkitPro v13.2.1\\Bin\\vc60\\Styles\\Office2007.cjstyles"
-
+#define SKIN_TYPE	"LightBlue.ini"
+#define SKIN_TYPE2	"Aqua"
 BOOL CLocalAgenterApp::InitInstance()
 {
 	AfxEnableControlContainer();
 	
 	XTPSkinManager()->SetApplyOptions(XTPSkinManager()->GetApplyOptions() | xtpSkinApplyMetrics);
 	
-	XTPSkinManager()->LoadSkin(SKIN_PATH);
+	XTPSkinManager()->LoadSkin(SKIN_PATH, SKIN_TYPE);
 	// Standard initialization
 	// If you are not using these features and wish to reduce the size
 	//  of your final executable, you should remove from the following

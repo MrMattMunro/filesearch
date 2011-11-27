@@ -12,6 +12,7 @@
 // CLocalAgenterDlg dialog
 #include "ShortcutPaneCalendar.h"
 #include "ShortcutPaneFolders.h"
+#include "TTComboBox.h"
 
 class CLocalAgenterDlg : public CXTResizeDialog
 {
@@ -22,11 +23,20 @@ public:
 	void ShowListContent_Keywords(int nType, char* szGroupName);
 	void ShowListContent_Website(char* szGroupName);
 
+	void SetComboxPos(BOOL bAll);
+
 	CImageList m_ilIcons;
+	BOOL m_bCommboxAllSel;
 // Dialog Data
 	//{{AFX_DATA(CLocalAgenterDlg)
 	enum { IDD = IDD_LOCALAGENTER_DIALOG };
+	CTTComboBox	m_BoxListTime;
+	CTTComboBox	m_BoxListType;
+	CTTComboBox	m_BoxListGroup;
+	CXTPButton	m_btnSet;
+	CXTPButton	m_btnDelete;
 	CXTPButton	m_buttonExport;
+	CXTPButton	m_btnSearch;
 	CXTPReportControl m_wndReportCtrl;
 	//}}AFX_DATA
 
@@ -46,7 +56,14 @@ protected:
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
+	afx_msg void OnButtonExport();
+	afx_msg void OnButtonDelete();
+	afx_msg void OnButtonSet();
+	afx_msg void OnEditchangeComboGroup();
+	afx_msg void OnSelchangeComboGroup();
+	afx_msg void OnButtonSearch();
 	//}}AFX_MSG
+	afx_msg void OnButtonDropDown(UINT nID);
 	DECLARE_MESSAGE_MAP()
 public:
 	CXTPShortcutBar m_wndShortcutBar;
