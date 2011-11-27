@@ -34,6 +34,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CFastSearchDlg)
 	enum { IDD = IDD_DIALOG_FAST_SEARCH };
+	CXTPMarqueeCtrl	m_pressFastsearch;
 	CStatic	m_picBack;
 	CIconEdit	m_keyEdit;
 	CStatic	m_static_find;

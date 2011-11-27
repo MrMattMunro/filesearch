@@ -260,6 +260,7 @@
 #define IDI_ICON_BASIC_SET_DIC          2065
 #define IDC_STATIC_BACK                 2065
 #define IDI_ICON_BASIC_SET_SKIN         2066
+#define IDC_PROGRESS_FAST_SEARCH        2066
 #define IDI_ICON_REGISTER               2067
 #define IDI_ICON_REGISTER_INFO          2068
 #define IDI_ICON_FAST_SEARCH2           2069
@@ -295,7 +296,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        2096
 #define _APS_NEXT_COMMAND_VALUE         32782
-#define _APS_NEXT_CONTROL_VALUE         2066
+#define _APS_NEXT_CONTROL_VALUE         2067
 #define _APS_NEXT_SYMED_VALUE           2000
 #endif
 #endif
