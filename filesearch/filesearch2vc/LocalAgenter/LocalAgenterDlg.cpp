@@ -279,7 +279,7 @@ BOOL CLocalAgenterDlg::OnInitDialog()
 	SetResize(IDC_REPORTCTRL, SZ_TOP_LEFT, SZ_BOTTOM_RIGHT);
 	
 	// Load window placement
-	LoadPlacement(_T("CReportDialogDlg"));
+	LoadPlacement(_T("CLocalAgenterDlg"));
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
