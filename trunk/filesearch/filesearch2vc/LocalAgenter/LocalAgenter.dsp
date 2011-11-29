@@ -132,6 +132,10 @@ SOURCE=.\StdAfx.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\XTPReportControlEx.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\XTTreeCtrlEx.cpp
 # End Source File
 # End Group
@@ -180,6 +184,10 @@ SOURCE=.\StdAfx.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\XTPReportControlEx.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\XTTreeCtrlEx.h
 # End Source File
 # End Group
@@ -193,6 +201,10 @@ SOURCE=.\res\account_actions24_h.bmp
 # Begin Source File
 
 SOURCE=.\res\copy_to24.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\Delete1.ico
 # End Source File
 # Begin Source File
 
@@ -269,6 +281,10 @@ SOURCE=.\res\Shortcuts_small.bmp
 # Begin Source File
 
 SOURCE=.\res\Shortcuts_small_alpha.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\WRITE3.ICO
 # End Source File
 # End Group
 # Begin Group "mysql"

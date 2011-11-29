@@ -13,6 +13,7 @@
 #include "ShortcutPaneCalendar.h"
 #include "ShortcutPaneFolders.h"
 #include "TTComboBox.h"
+#include "XTPReportControlEx.h"
 
 class CLocalAgenterDlg : public CXTResizeDialog
 {
@@ -22,6 +23,7 @@ public:
 
 	void ShowListContent_Keywords(int nType, char* szGroupName);
 	void ShowListContent_Website(char* szGroupName);
+	void ShowListContent_Button(CXTPReportRecord* pRecord);
 
 	void SetComboxPos(BOOL bAll);
 
@@ -37,7 +39,7 @@ public:
 	CXTPButton	m_btnDelete;
 	CXTPButton	m_buttonExport;
 	CXTPButton	m_btnSearch;
-	CXTPReportControl m_wndReportCtrl;
+	CXTPReportControlEx m_wndReportCtrl;
 	//}}AFX_DATA
 
 	// ClassWizard generated virtual function overrides
@@ -45,7 +47,7 @@ public:
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	//}}AFX_VIRTUAL
-
+	afx_msg void OnItemButtonClick(NMHDR * pNotifyStruct, LRESULT*pResult);
 // Implementation
 protected:
 	HICON m_hIcon;
@@ -62,6 +64,7 @@ protected:
 	afx_msg void OnEditchangeComboGroup();
 	afx_msg void OnSelchangeComboGroup();
 	afx_msg void OnButtonSearch();
+	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	//}}AFX_MSG
 	afx_msg void OnButtonDropDown(UINT nID);
 	DECLARE_MESSAGE_MAP()
@@ -71,6 +74,8 @@ public:
 	CShortcutPaneCalendar m_paneCalendar;
 	CShortcutPaneFolders m_paneFolders;
 
+	CXTPShortcutBarItem* m_pItemFolder;
+	CXTPShortcutBarItem* m_pItemCalendar;
 };
 
 //{{AFX_INSERT_LOCATION}}

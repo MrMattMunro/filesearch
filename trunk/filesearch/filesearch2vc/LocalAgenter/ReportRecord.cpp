@@ -21,6 +21,9 @@ CReportRecord::CReportRecord(CString strName, CString strDate)
 	//最前面显示的图标
 	AddItem(new CXTPReportRecordItem());
 	AddItem(new CXTPReportRecordItem());
+	
+	AddItem(new CXTPReportRecordItem());
+	AddItem(new CXTPReportRecordItem());
 
 	AddItem(new CXTPReportRecordItemText(strName));				//学员编号
 	AddItem(new CXTPReportRecordItemText(strDate));			//学员姓名	
