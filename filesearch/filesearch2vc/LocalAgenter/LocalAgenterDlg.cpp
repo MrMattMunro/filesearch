@@ -69,6 +69,8 @@ CLocalAgenterDlg::CLocalAgenterDlg(CWnd* pParent /*=NULL*/)
 	// Note that LoadIcon does not require a subsequent DestroyIcon in Win32
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	m_bCommboxAllSel = FALSE;
+	m_pItemFolder= NULL;
+	m_pItemCalendar = NULL;
 }
 
 void CLocalAgenterDlg::DoDataExchange(CDataExchange* pDX)
@@ -97,8 +99,11 @@ BEGIN_MESSAGE_MAP(CLocalAgenterDlg, CXTResizeDialog)
 	ON_CBN_EDITCHANGE(IDC_COMBO_GROUP, OnEditchangeComboGroup)
 	ON_CBN_SELCHANGE(IDC_COMBO_GROUP, OnSelchangeComboGroup)
 	ON_BN_CLICKED(IDC_BUTTON_SEARCH, OnButtonSearch)
+	ON_WM_CONTEXTMENU()
 	//}}AFX_MSG_MAP
 	ON_CONTROL_RANGE(CBN_DROPDOWN, IDC_BUTTON_EXPORT, IDC_BUTTON_EXPORT, OnButtonDropDown)
+	ON_NOTIFY(XTP_NM_REPORT_ITEMBUTTONCLICK, IDC_REPORTCTRL, OnItemButtonClick)
+
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -128,8 +133,10 @@ END_MESSAGE_MAP()
 
 enum
 {
-	COLUMN_ICON,
-	COLUMN_BUTTON,
+	COLUMN_BUTTON1,
+	COLUMN_BLACK1,
+	COLUMN_BUTTON2,
+	COLUMN_BLACK2,
 	COLUMN_SUBJECT,
 	COLUMN_DATE,
 };
@@ -241,6 +248,9 @@ BOOL CLocalAgenterDlg::OnInitDialog()
 	
 	CXTPShortcutBarItem* pItemCalendar = m_wndShortcutBar.AddItem(ID_SHORTCUT_CALENDAR, &m_paneCalendar);
 	pItemCalendar->SetCaption("网址管理");
+
+	m_pItemFolder = pItemFolder;
+	m_pItemCalendar = pItemCalendar;
 	
 	m_wndShortcutBar.AllowMinimize(TRUE);
 	
@@ -253,28 +263,48 @@ BOOL CLocalAgenterDlg::OnInitDialog()
 	//
 	m_wndReportCtrl.MoveWindow(CRect(190, 50, 770, 430), TRUE);
 
-	m_wndReportCtrl.AddColumn(new CXTPReportColumn(COLUMN_ICON, _T(""), 18));
-	m_wndReportCtrl.AddColumn(new CXTPReportColumn(COLUMN_BUTTON, _T(""), 18));
-	m_wndReportCtrl.AddColumn(new CXTPReportColumn(COLUMN_SUBJECT, _T("名称"), 280));
-	m_wndReportCtrl.AddColumn(new CXTPReportColumn(COLUMN_DATE, _T("时间"), 180));
+	// create the image list used by the report control.
+	if (!m_ilIcons.Create(16,16, ILC_COLOR24 | ILC_MASK, 0, 1))
+		return -1;
+	
+	// report control.
+//	CBitmap bitmap;
+//	VERIFY(bitmap.LoadBitmap(IDB_BITMAP_DELETE));
+//	m_ilIcons.Add(&bitmap, RGB(255, 0, 255));
+	m_ilIcons.Add(AfxGetApp()->LoadIcon(IDI_ICON_DELETE));
+	m_ilIcons.Add(AfxGetApp()->LoadIcon(IDI_ICON_MODIFY));
+	m_wndReportCtrl.SetImageList(&m_ilIcons);
 
+	//只允许【名称】列可编辑
+	CXTPReportColumn* pColumn = new CXTPReportColumn(COLUMN_BUTTON1, _T(""), 18);
+	pColumn->SetEditable(FALSE);
+	m_wndReportCtrl.AddColumn(pColumn);
+	pColumn = new CXTPReportColumn(COLUMN_BLACK1, _T(""), 5);
+	pColumn->SetEditable(FALSE);
+	m_wndReportCtrl.AddColumn(pColumn);
+	pColumn = new CXTPReportColumn(COLUMN_BUTTON2, _T(""), 18);
+	pColumn->SetEditable(FALSE);
+	m_wndReportCtrl.AddColumn(pColumn);
+	pColumn = new CXTPReportColumn(COLUMN_BLACK2, _T(""), 5);
+	pColumn->SetEditable(FALSE);
+	m_wndReportCtrl.AddColumn(pColumn);
+	pColumn = new CXTPReportColumn(COLUMN_SUBJECT, _T("名称"), 280);
+	pColumn->SetEditable(TRUE);
+	m_wndReportCtrl.AddColumn(pColumn);
+	pColumn = new CXTPReportColumn(COLUMN_DATE, _T("时间"), 180);
+	pColumn->SetEditable(FALSE);
+	m_wndReportCtrl.AddColumn(pColumn);
+	
+	m_wndReportCtrl.SetGridStyle(FALSE, xtpReportGridSmallDots);
+	m_wndReportCtrl.SetGridColor(RGB(190,190,190));
 
-	//
-	// define style attributes for the report control.
-	//
-	
-	m_wndReportCtrl.GetColumns()->Find(COLUMN_SUBJECT)->SetTreeColumn(TRUE);
-	
-	//
-	// after columns and data have been added call Populate to 
-	// populate all of the date for the control.
-	//
-	
+	m_wndReportCtrl.AllowEdit(TRUE);
+	m_wndReportCtrl.EditOnDelayClick(TRUE);
+
 	m_wndReportCtrl.Populate();
 	
 	m_wndReportCtrl.EnableDragDrop(_T("ReportDialog"), xtpReportAllowDrag | xtpReportAllowDrop);
-	
-	
+		
 	// Set control resizing.
 	SetResize(IDC_REPORTCTRL, SZ_TOP_LEFT, SZ_BOTTOM_RIGHT);
 	
@@ -352,7 +382,8 @@ void CLocalAgenterDlg::ShowListContent_Keywords(int nType, char* szGroupName)
 	int nCount = sloMysqlAgent::GetInstance()->m_KeywordsList.size();
 	for(int i = 0; i < nCount; i++)
 	{
-		m_wndReportCtrl.AddRecord(new CReportRecord(sloMysqlAgent::GetInstance()->m_KeywordsList[i].szKeyName, sloMysqlAgent::GetInstance()->m_KeywordsList[i].szDate));
+		CXTPReportRecord* pRecord = m_wndReportCtrl.AddRecord(new CReportRecord(sloMysqlAgent::GetInstance()->m_KeywordsList[i].szKeyName, sloMysqlAgent::GetInstance()->m_KeywordsList[i].szDate));
+		ShowListContent_Button(pRecord);
 	}
 
 	m_wndReportCtrl.Populate();
@@ -370,11 +401,42 @@ void CLocalAgenterDlg::ShowListContent_Website(char* szGroupName)
 	int nCount = sloMysqlAgent::GetInstance()->m_WebsiteList.size();
 	for(int i = 0; i < nCount; i++)
 	{
-		m_wndReportCtrl.AddRecord(new CReportRecord(sloMysqlAgent::GetInstance()->m_WebsiteList[i].szSiteName, sloMysqlAgent::GetInstance()->m_WebsiteList[i].szDate));
+		CXTPReportRecord* pRecord = m_wndReportCtrl.AddRecord(new CReportRecord(sloMysqlAgent::GetInstance()->m_WebsiteList[i].szSiteName, sloMysqlAgent::GetInstance()->m_WebsiteList[i].szDate));
+		ShowListContent_Button(pRecord);
 	}
 
 	m_wndReportCtrl.Populate();
 }
+
+void CLocalAgenterDlg::ShowListContent_Button(CXTPReportRecord* pRecord)
+{
+	if (!pRecord)
+		return;
+
+	CXTPReportRecordItem* pItem = pRecord->GetItem(0);
+	if(!pItem)
+		return;
+	CXTPReportRecordItemControl* pButton = pItem->GetItemControls()->AddControl(xtpItemControlTypeButton);
+	if(!pButton)
+		return;
+	pButton->SetAlignment(xtpItemControlLeft);
+	pButton->SetIconIndex(PBS_NORMAL, 0);
+	//pButton->SetIconIndex(PBS_PRESSED, 1);
+	pButton->SetSize(CSize(22, 0));
+
+	CXTPReportRecordItem* pItem2 = pRecord->GetItem(2);
+	if(!pItem2)
+		return;
+	CXTPReportRecordItemControl* pButton2 = pItem2->GetItemControls()->AddControl(xtpItemControlTypeButton);
+	if(!pButton2)
+		return;
+	pButton2->SetAlignment(xtpItemControlLeft);
+	pButton2->SetIconIndex(PBS_NORMAL, 1);
+	pButton2->SetSize(CSize(22, 0));
+		
+
+}
+
 
 void CLocalAgenterDlg::OnButtonDropDown(UINT nID)
 {
@@ -512,3 +574,85 @@ void CLocalAgenterDlg::OnSelchangeComboGroup()
 		SetComboxPos(FALSE);	
 }
 
+
+void CLocalAgenterDlg::OnItemButtonClick(NMHDR * pNotifyStruct, LRESULT*pResult)
+{
+	XTP_NM_REPORTITEMCONTROL* pItemNotify = (XTP_NM_REPORTITEMCONTROL*) pNotifyStruct;
+	if(!(pItemNotify->pRow && pItemNotify->pItem && pItemNotify->pItemControl))
+		return;
+
+	int nColumn = pItemNotify->pColumn->GetIndex();
+	//pItemNotify->pItemControl->GetIndex()
+	switch(nColumn)
+	{
+		// button "delete"
+	case 0 :
+		{
+			//选中
+			m_wndReportCtrl.SetFocusedRow(pItemNotify->pRow);
+
+			CXTPReportRecord* pRecord = pItemNotify->pRow->GetRecord();
+	
+			CXTPReportRecordItemText* pItemText = (CXTPReportRecordItemText*)pRecord->GetItem(4);
+			CString strContent = pItemText->GetValue();
+			//删除数据库记录
+			if(m_wndShortcutBar.GetSelectedItem() == m_pItemFolder)
+			{
+				if (6 == MessageBox("您确定删除该条记录？","词汇管理",MB_YESNO | MB_ICONWARNING))
+				{			
+					//删除数据库
+					sloMysqlAgent::GetInstance()->DelKeyword(strContent.GetBuffer(0));		
+				}else
+					break;
+			}else
+			{
+				//选中的是网址pane
+				if (6 == MessageBox("您确定删除该条记录？","网址管理",MB_YESNO | MB_ICONWARNING))
+				{				
+					//删除数据库
+					sloMysqlAgent::GetInstance()->DelWebsite(strContent.GetBuffer(0));		
+				}else
+					break;
+			}
+
+			//删除行
+			m_wndReportCtrl.RemoveRowEx(pItemNotify->pRow);
+			break;
+		}
+		// button "modify"
+	case 2 :
+		{
+			//选中
+			m_wndReportCtrl.SetFocusedRow(pItemNotify->pRow);	
+			//将这一列值为可编辑		
+			CXTPReportColumn* pColumn = m_wndReportCtrl.GetColumns()->GetAt(4);
+			m_wndReportCtrl.SetFocusedColumn(pColumn);
+
+
+
+			break;
+		}
+	}
+
+	*pResult = (LRESULT)TRUE;
+}
+
+
+
+void CLocalAgenterDlg::OnContextMenu(CWnd* pWnd, CPoint point) 
+{
+	// TODO: Add your message handler code here
+	CPoint pt;
+	GetCursorPos(&pt);
+
+	ScreenToClient(&pt);
+// 	CXTPReportRow* pRow = m_wndReportCtrl.HitTest(pt);
+// 	if (pRow == NULL)
+// 	{
+// 		return ;
+// 	}
+
+	//弹出菜单
+	MessageBox("ab");
+
+}

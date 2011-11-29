@@ -77,6 +77,8 @@ IDI_CALENDAR            ICON    DISCARDABLE     "res\\icon3.ico"
 IDI_CONTACTS            ICON    DISCARDABLE     "res\\icon4.ico"
 IDI_ARCHIVE             ICON    DISCARDABLE     "res\\icon17.ico"
 IDI_MY_DOCUMENTS        ICON    DISCARDABLE     "res\\icon14.ico"
+IDI_ICON_DELETE         ICON    DISCARDABLE     "res\\Delete1.ico"
+IDI_ICON_MODIFY         ICON    DISCARDABLE     "res\\WRITE3.ICO"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -99,7 +101,7 @@ STYLE WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION |
     WS_SYSMENU | WS_THICKFRAME
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "LocalAgenter"
-FONT 9, "ËÎÌו"
+FONT 9, "ËÎÌו", 0, 0, 0x1
 BEGIN
     CONTROL         "",IDC_REPORTCTRL,"XTPReport",WS_TABSTOP,172,72,248,143,
                     WS_EX_STATICEDGE

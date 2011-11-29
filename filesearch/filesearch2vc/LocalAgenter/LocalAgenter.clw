@@ -13,12 +13,12 @@ Class2=CLocalAgenterDlg
 Class3=CAboutDlg
 
 ResourceCount=6
-Resource1=IDD_DIALOG_GROUP
+Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
-Resource3=IDR_MENU_DROPDOWN
+Resource3=IDD_LOCALAGENTER_DIALOG
 Class4=CGroupDlg
-Resource4=IDD_LOCALAGENTER_DIALOG
-Resource5=IDD_ABOUTBOX
+Resource4=IDR_MENU_DROPDOWN
+Resource5=IDD_DIALOG_GROUP
 Resource6=IDR_MENU_TREE
 
 [CLS:CLocalAgenterApp]
@@ -31,7 +31,7 @@ Filter=N
 Type=0
 HeaderFile=LocalAgenterDlg.h
 ImplementationFile=LocalAgenterDlg.cpp
-Filter=D
+Filter=W
 LastObject=CLocalAgenterDlg
 BaseClass=CXTResizeDialog
 VirtualFilter=dWC
