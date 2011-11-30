@@ -25,10 +25,13 @@ public:
 	void ShowListContent_Website(char* szGroupName);
 	void ShowListContent_Button(CXTPReportRecord* pRecord);
 
+	void AddNewRecord(char* szContent);
+
 	void SetComboxPos(BOOL bAll);
 
 	CImageList m_ilIcons;
 	BOOL m_bCommboxAllSel;
+	CString m_strOldContent;
 // Dialog Data
 	//{{AFX_DATA(CLocalAgenterDlg)
 	enum { IDD = IDD_LOCALAGENTER_DIALOG };
@@ -48,6 +51,8 @@ public:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	//}}AFX_VIRTUAL
 	afx_msg void OnItemButtonClick(NMHDR * pNotifyStruct, LRESULT*pResult);
+	afx_msg void OnBeginEdit(NMHDR * pNotifyStruct, LRESULT*pResult);
+	afx_msg void OnValueChanged(NMHDR * pNotifyStruct, LRESULT*pResult);
 // Implementation
 protected:
 	HICON m_hIcon;
