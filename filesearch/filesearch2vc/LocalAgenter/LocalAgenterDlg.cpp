@@ -5,6 +5,8 @@
 #include "LocalAgenter.h"
 #include "LocalAgenterDlg.h"
 #include "ReportRecord.h"
+#include "sloCommAgent.h"
+#include "sloMysqlAgent.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -103,7 +105,8 @@ BEGIN_MESSAGE_MAP(CLocalAgenterDlg, CXTResizeDialog)
 	//}}AFX_MSG_MAP
 	ON_CONTROL_RANGE(CBN_DROPDOWN, IDC_BUTTON_EXPORT, IDC_BUTTON_EXPORT, OnButtonDropDown)
 	ON_NOTIFY(XTP_NM_REPORT_ITEMBUTTONCLICK, IDC_REPORTCTRL, OnItemButtonClick)
-
+	ON_NOTIFY(XTP_NM_REPORT_BEGINEDIT, IDC_REPORTCTRL, OnBeginEdit)
+	ON_NOTIFY(XTP_NM_REPORT_VALUECHANGED, IDC_REPORTCTRL, OnValueChanged)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -278,19 +281,28 @@ BOOL CLocalAgenterDlg::OnInitDialog()
 	//只允许【名称】列可编辑
 	CXTPReportColumn* pColumn = new CXTPReportColumn(COLUMN_BUTTON1, _T(""), 18);
 	pColumn->SetEditable(FALSE);
+	pColumn->EnableResize(FALSE);
 	m_wndReportCtrl.AddColumn(pColumn);
+
 	pColumn = new CXTPReportColumn(COLUMN_BLACK1, _T(""), 5);
 	pColumn->SetEditable(FALSE);
+	pColumn->EnableResize(FALSE);
 	m_wndReportCtrl.AddColumn(pColumn);
+
 	pColumn = new CXTPReportColumn(COLUMN_BUTTON2, _T(""), 18);
 	pColumn->SetEditable(FALSE);
+	pColumn->EnableResize(FALSE);
 	m_wndReportCtrl.AddColumn(pColumn);
+
 	pColumn = new CXTPReportColumn(COLUMN_BLACK2, _T(""), 5);
 	pColumn->SetEditable(FALSE);
+	pColumn->EnableResize(FALSE);
 	m_wndReportCtrl.AddColumn(pColumn);
+
 	pColumn = new CXTPReportColumn(COLUMN_SUBJECT, _T("名称"), 280);
 	pColumn->SetEditable(TRUE);
 	m_wndReportCtrl.AddColumn(pColumn);
+
 	pColumn = new CXTPReportColumn(COLUMN_DATE, _T("时间"), 180);
 	pColumn->SetEditable(FALSE);
 	m_wndReportCtrl.AddColumn(pColumn);
@@ -305,6 +317,7 @@ BOOL CLocalAgenterDlg::OnInitDialog()
 	
 	m_wndReportCtrl.EnableDragDrop(_T("ReportDialog"), xtpReportAllowDrag | xtpReportAllowDrop);
 		
+	m_wndReportCtrl.SetParentDlg(this);
 	// Set control resizing.
 	SetResize(IDC_REPORTCTRL, SZ_TOP_LEFT, SZ_BOTTOM_RIGHT);
 	
@@ -363,6 +376,37 @@ HCURSOR CLocalAgenterDlg::OnQueryDragIcon()
 	return (HCURSOR) m_hIcon;
 }
 
+
+void CLocalAgenterDlg::AddNewRecord(char* szContent)
+{
+	char* pTime = sloCommAgent::GetCurTime();
+	//插入数据库
+	if( m_wndShortcutBar.GetSelectedItem() == m_pItemFolder)
+	{
+		sloMysqlAgent::GetInstance()->AddKeyword(m_paneFolders.m_szTypeName, szContent);
+	}else
+	{
+		//选中的是网址pane
+		sloMysqlAgent::GetInstance()->AddWebsite(m_paneCalendar.m_szTypeName, szContent);		
+	}
+	
+
+	//插入列表中
+	CXTPReportRecord* pRecord = m_wndReportCtrl.AddRecord(new CReportRecord(szContent, pTime));
+	ShowListContent_Button(pRecord);
+	
+	m_wndReportCtrl.Populate();
+	
+	CXTPReportRows* pRows = m_wndReportCtrl.GetRows();
+	int nRowCount = pRows->GetCount();
+	CXTPReportRow* pNewRow = pRows->GetAt(nRowCount - 1);
+
+	m_wndReportCtrl.SetFocusedRow(pNewRow);
+	//将这一列值为可编辑		
+	CXTPReportColumn* pColumn = m_wndReportCtrl.GetColumns()->GetAt(4);
+	m_wndReportCtrl.SetFocusedColumn(pColumn);
+
+}
 
 //ntype 
 // 1 显示组下所有类型的keywords
@@ -628,8 +672,6 @@ void CLocalAgenterDlg::OnItemButtonClick(NMHDR * pNotifyStruct, LRESULT*pResult)
 			CXTPReportColumn* pColumn = m_wndReportCtrl.GetColumns()->GetAt(4);
 			m_wndReportCtrl.SetFocusedColumn(pColumn);
 
-
-
 			break;
 		}
 	}
@@ -638,6 +680,86 @@ void CLocalAgenterDlg::OnItemButtonClick(NMHDR * pNotifyStruct, LRESULT*pResult)
 }
 
 
+void CLocalAgenterDlg::OnBeginEdit(NMHDR * pNotifyStruct, LRESULT*pResult)
+{
+	XTP_NM_REPORTITEMCONTROL* pItemNotify = (XTP_NM_REPORTITEMCONTROL*) pNotifyStruct;
+	if(!(pItemNotify->pRow && pItemNotify->pItem && pItemNotify->pItemControl))
+		return;
+	
+	int nColumn = pItemNotify->pColumn->GetIndex();
+	//pItemNotify->pItemControl->GetIndex()
+	switch(nColumn)
+	{
+		// 更新第四列
+	case 4 :
+		{
+			//选中
+			CXTPReportRecord* pRecord = pItemNotify->pRow->GetRecord();
+			
+			CXTPReportRecordItemText* pItemText = (CXTPReportRecordItemText*)pRecord->GetItem(4);
+			m_strOldContent = pItemText->GetValue();
+			
+			break;
+		}
+	default :
+		{
+
+				
+			break;
+		}
+	}
+	
+	*pResult = (LRESULT)TRUE;
+}
+
+
+
+void CLocalAgenterDlg::OnValueChanged(NMHDR * pNotifyStruct, LRESULT*pResult)
+{
+	XTP_NM_REPORTITEMCONTROL* pItemNotify = (XTP_NM_REPORTITEMCONTROL*) pNotifyStruct;
+	if(!(pItemNotify->pRow && pItemNotify->pItem && pItemNotify->pItemControl))
+		return;
+	
+	int nColumn = pItemNotify->pColumn->GetIndex();
+	//pItemNotify->pItemControl->GetIndex()
+	switch(nColumn)
+	{
+		// 更新第四列
+	case 4 :
+		{
+			//选中
+			CXTPReportRecord* pRecord = pItemNotify->pRow->GetRecord();
+			
+			CXTPReportRecordItemText* pItemText = (CXTPReportRecordItemText*)pRecord->GetItem(4);
+			CString strNewContent = pItemText->GetValue();
+			char* pTime = sloCommAgent::GetCurTime();
+			//更新数据库
+			if( m_wndShortcutBar.GetSelectedItem() == m_pItemFolder)
+			{
+				//并更新数据库表
+				sloMysqlAgent::GetInstance()->UpdateKeyword(m_strOldContent.GetBuffer(0), strNewContent.GetBuffer(0), pTime);
+			}else
+			{
+				//并更新数据库表
+				sloMysqlAgent::GetInstance()->UpdateWebsite(m_strOldContent.GetBuffer(0), strNewContent.GetBuffer(0), pTime);
+			}			
+
+			//更新第5列时间数据
+			CXTPReportRecordItemText* pItemText5 = (CXTPReportRecordItemText*)pRecord->GetItem(5);
+			pItemText5->SetValue(pTime);
+			
+			break;
+		}
+	default :
+		{
+			
+			
+			break;
+		}
+	}
+	
+	*pResult = (LRESULT)TRUE;
+}
 
 void CLocalAgenterDlg::OnContextMenu(CWnd* pWnd, CPoint point) 
 {
