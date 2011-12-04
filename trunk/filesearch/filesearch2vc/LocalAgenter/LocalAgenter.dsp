@@ -42,7 +42,7 @@ RSC=rc.exe
 # PROP Intermediate_Dir "Release"
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /Yu"stdafx.h" /FD /c
-# ADD CPP /nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Yu"stdafx.h" /FD /c
+# ADD CPP /nologo /MD /W3 /GX /O2 /I "../../../Source" /I "../../AboutDlg" /I "comm" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Yu"stdafx.h" /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804 /d "NDEBUG" /d "_AFXDLL"
@@ -91,6 +91,10 @@ LINK32=link.exe
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
+SOURCE=.\CyberDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\GroupDlg.cpp
 # End Source File
 # Begin Source File
@@ -111,6 +115,10 @@ SOURCE=.\ReportRecord.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\SelectTreeCtrl.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ShortcutPaneBase.cpp
 # End Source File
 # Begin Source File
@@ -119,11 +127,19 @@ SOURCE=.\ShortcutPaneCalendar.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ShortcutPaneContacts.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ShortcutPaneFolders.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\sloMysqlAgent.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\StateTreeCtrl.cpp
 # End Source File
 # Begin Source File
 
@@ -136,12 +152,20 @@ SOURCE=.\XTPReportControlEx.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\XTPShortcutBarEx.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\XTTreeCtrlEx.cpp
 # End Source File
 # End Group
 # Begin Group "Header Files"
 
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
+# Begin Source File
+
+SOURCE=.\CyberDlg.h
+# End Source File
 # Begin Source File
 
 SOURCE=.\GroupDlg.h
@@ -164,11 +188,19 @@ SOURCE=.\Resource.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\SelectTreeCtrl.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\ShortcutPaneBase.h
 # End Source File
 # Begin Source File
 
 SOURCE=.\ShortcutPaneCalendar.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ShortcutPaneContacts.h
 # End Source File
 # Begin Source File
 
@@ -180,11 +212,19 @@ SOURCE=.\sloMysqlAgent.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\StateTreeCtrl.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\StdAfx.h
 # End Source File
 # Begin Source File
 
 SOURCE=.\XTPReportControlEx.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\XTPShortcutBarEx.h
 # End Source File
 # Begin Source File
 
@@ -197,6 +237,14 @@ SOURCE=.\XTTreeCtrlEx.h
 # Begin Source File
 
 SOURCE=.\res\account_actions24_h.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\check.cur
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\check_none.cur
 # End Source File
 # Begin Source File
 
@@ -281,6 +329,14 @@ SOURCE=.\res\Shortcuts_small.bmp
 # Begin Source File
 
 SOURCE=.\res\Shortcuts_small_alpha.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\state_images.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\tree_images.bmp
 # End Source File
 # Begin Source File
 

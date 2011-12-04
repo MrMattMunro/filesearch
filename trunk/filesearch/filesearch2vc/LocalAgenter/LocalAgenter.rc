@@ -130,6 +130,40 @@ BEGIN
     PUSHBUTTON      "确定",IDOK,189,8,32,18
 END
 
+IDD_DIALOG_CYBER DIALOG DISCARDABLE  0, 0, 276, 271
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "网络快捕"
+FONT 9, "宋体"
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,87,254,40,15
+    PUSHBUTTON      "取消",IDCANCEL,159,254,40,15
+    EDITTEXT        IDC_EDIT_CYBER_NAME,47,21,194,14,ES_AUTOHSCROLL
+    LTEXT           "名称:",IDC_STATIC,22,23,21,8
+    LTEXT           "1、设置快捕基本信息",IDC_STATIC,11,5,77,8
+    CONTROL         "Tree1",IDC_TREE_KEYWORDS,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | TVS_SHOWSELALWAYS | 
+                    WS_BORDER | WS_TABSTOP,11,81,120,169
+    CONTROL         "Tree1",IDC_TREE_WEBSITE,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | TVS_SHOWSELALWAYS | 
+                    WS_BORDER | WS_TABSTOP,144,81,120,169
+    CONTROL         "",IDC_STATIC,"Static",SS_GRAYFRAME,10,76,252,1
+    CONTROL         "",IDC_STATIC,"Static",SS_GRAYFRAME,10,15,252,1
+    LTEXT           "2、选择词汇、网址",IDC_STATIC,13,65,69,8
+    LTEXT           "频率:",IDC_STATIC,22,43,21,8
+    EDITTEXT        IDC_EDIT_CYBER_FREQUENCY,47,40,42,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "小时",IDC_STATIC,94,43,17,8
+    LTEXT           "链接层次:",IDC_STATIC,144,43,37,8
+    LTEXT           "层",IDC_STATIC,233,43,9,8
+    CONTROL         "Spin1",IDC_SPIN_FREQUENCY,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_ARROWKEYS,84,41,
+                    10,11
+    EDITTEXT        IDC_EDIT_CYBER_LAYER,186,41,42,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    CONTROL         "Spin1",IDC_SPIN_LAYER,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_ARROWKEYS,220,41,11,11
+END
+
 
 #ifndef _MAC
 /////////////////////////////////////////////////////////////////////////////
@@ -211,6 +245,8 @@ IDB_BITMAP_EXPORT       BITMAP  DISCARDABLE     "res\\copy_to24.bmp"
 IDB_BITMAP_DELETE       BITMAP  DISCARDABLE     "res\\delete24_h.bmp"
 IDB_BITMAP_SET          BITMAP  DISCARDABLE     "res\\account_actions24_h.bmp"
 IDB_BITMAP_SEARCH       BITMAP  DISCARDABLE     "res\\search24_h.bmp"
+IDB_STATE_IMAGES        BITMAP  DISCARDABLE     "res\\state_images.bmp"
+IDB_TREE_IMAGES         BITMAP  DISCARDABLE     "res\\tree_images.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -236,6 +272,14 @@ BEGIN
     END
 END
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_CHECK               CURSOR  DISCARDABLE     "res\\check.cur"
+IDC_CHECK_NONE          CURSOR  DISCARDABLE     "res\\check_none.cur"
 
 /////////////////////////////////////////////////////////////////////////////
 //

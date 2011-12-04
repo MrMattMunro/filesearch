@@ -40,7 +40,7 @@ public:
 	DECLARE_MESSAGE_MAP()
 };
 
-
+extern CLocalAgenterApp theApp;
 /////////////////////////////////////////////////////////////////////////////
 
 //{{AFX_INSERT_LOCATION}}

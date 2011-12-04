@@ -23,6 +23,7 @@ CGroupDlg::CGroupDlg(CWnd* pParent /*=NULL*/)
 
 	//}}AFX_DATA_INIT
 	memset(m_szGroupName, NULL, MAX_PATH);
+
 }
 
 
