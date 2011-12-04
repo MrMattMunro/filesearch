@@ -47,7 +47,7 @@ void CXTPShortcutBarEx::OnLButtonDown(UINT nFlags, CPoint point)
 	}else if (pSelectedItem == dlg->m_pItemTasks)
 	{
 		//快捕列表项
-
+		dlg->ShowListContent_Cyber();
 	}
 
 	CXTPShortcutBar::OnLButtonDown(nFlags, point);

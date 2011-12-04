@@ -51,6 +51,20 @@ typedef struct _WebSite
 	char szDate[100];
 }WebSite, *LPWebSite;
 
+//////////////////////////////////////////////////////////////////////////
+//cyber
+typedef struct _Cyber
+{	
+	int nID;
+	char szCyberName[100];
+	char szKeywords[2000];
+	char szWebsite[2000];
+	int  nFrequency;
+	int  nLayer;
+	char szDate[100];
+}Cyber, *LPCyber;
+
+
 class sloMysqlAgent  :public mysqlcomm
 {
 public:
@@ -100,14 +114,24 @@ public:
 	BOOL AddWebsite(char* szTypeName, char* szKeyName);
 	BOOL DelWebsite(char* szKeyName);
 	BOOL UpdateWebsite(char* szOldKeyName, char* szNewKeyName, char* pTime);
+
+public:
+	//cyber
+	BOOL AddCyber(char* szCyberName, char* szKeywords, char* szWebsites, int nFre, int nLayer);
+	BOOL DelCyber(char* szCyberName);
+	BOOL UpdateCyber(char* szOldCyberName, char* szCyberName, char* szKeywords, char* szWebsites, int nFre, int nLayer, char* pTime);
+public:
+	BOOL GetCyberFromDB();
+	void ClearCyberList();
 public:
 	std::vector<KeyWords_Group> m_GroupList;
 	std::vector<KeyWords_Type> m_TypeList;
 	std::vector<KeyWords> m_KeywordsList;
 
-
 	std::vector<WebSite_Group> m_GroupListWebsite;
 	std::vector<WebSite> m_WebsiteList;
+
+	std::vector<Cyber> m_CyberList;
 };
 
 #endif // !defined(AFX_SLOMYSQLAGENT_H__3286BA47_C6E5_424A_8B4E_34DEECE39BD0__INCLUDED_)

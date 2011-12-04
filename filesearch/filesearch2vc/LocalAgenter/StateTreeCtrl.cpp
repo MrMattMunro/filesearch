@@ -177,6 +177,8 @@ BOOL CStateTreeCtrl::ToggleCheckState(HTREEITEM hItem, UINT uFlags)
 			hNextItem = GetNextItem(hNextItem);
 		}
 
+		return TRUE;
+
 	}else
 	{
 		//选择的是子节点

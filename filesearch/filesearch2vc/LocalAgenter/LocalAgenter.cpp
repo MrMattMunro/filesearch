@@ -38,7 +38,9 @@ CLocalAgenterApp theApp;
 
 /////////////////////////////////////////////////////////////////////////////
 // CLocalAgenterApp initialization
-#define SKIN_PATH	"D:\\Program Files\\Codejock Software\\MFC\\Xtreme ToolkitPro v13.2.1\\Bin\\vc60\\Styles\\Office2007.cjstyles"
+//#define SKIN_PATH	"D:\\Program Files\\Codejock Software\\MFC\\Xtreme ToolkitPro v13.2.1\\Bin\\vc60\\Styles\\Office2007.cjstyles"
+#define SKIN_PATH	"C:\\Program Files\\slfile\\client\\Styles\\Office2007.cjstyles"
+
 #define SKIN_TYPE	"LightBlue.ini"
 #define SKIN_TYPE2	"Aqua"
 BOOL CLocalAgenterApp::InitInstance()

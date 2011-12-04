@@ -26,6 +26,7 @@ public:
 
 	void ShowListContent_Keywords(int nType, char* szGroupName);
 	void ShowListContent_Website(char* szGroupName);
+	void ShowListContent_Cyber();
 	void ShowListContent_Button(CXTPReportRecord* pRecord);
 
 	void AddNewRecord(char* szContent);

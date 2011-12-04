@@ -38,6 +38,11 @@ public:
 	CXTTreeCtrlEx m_wndTreeContacts;
 	CImageList m_ilTreeIcons;
 	LPVOID m_pParentWnd;
+
+	//{{AFX_MSG(CShortcutPaneCalendar)
+	afx_msg void OnSelchanged(NMHDR* pNMHDR, LRESULT* pResult);
+	//}}AFX_MSG
+	DECLARE_MESSAGE_MAP()
 };
 
 #endif // !defined(AFX_SHORTCUTPANECONTACTS_H__03BA0B52_DDD8_4E32_BFBA_CC2F6B7CDCEB__INCLUDED_)

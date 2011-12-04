@@ -775,3 +775,140 @@ BOOL sloMysqlAgent::UpdateWebsite(char* szOldKeyName, char* szNewKeyName, char* 
 	
 	return bRet;			
 }
+
+//cyber
+BOOL sloMysqlAgent::AddCyber(char* szCyberName, char* szKeywords, char* szWebsites, int nFre, int nLayer)
+{
+	BOOL bRet = TRUE;
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	//插入数据库
+	std::string strQuerySQL = "insert into t_webspider_task(taskname,word,website,freq,hierarchy) values('%s','%s','%s',%d,%d)";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), szCyberName, szKeywords, szWebsites, nFre, nLayer);
+	if (FAILED(hr))
+		bRet = FALSE;	
+	
+	return bRet;	
+}
+
+BOOL sloMysqlAgent::DelCyber(char* szCyberName)
+{
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	//delete from t_keywords_type where type_name='%s'
+	BOOL bRet = TRUE;
+	std::string strQuerySQL = "delete from t_webspider_task where taskname='%s'";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), szCyberName);
+	if (FAILED(hr))
+		bRet = FALSE;
+	
+	return bRet;	
+}
+
+BOOL sloMysqlAgent::UpdateCyber(char* szOldCyberName,char* szCyberName, char* szKeywords, char* szWebsites, int nFre, int nLayer, char* pTime)
+{
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	//update t_keywords_type set type_name='%s' where type_name='%s'
+	BOOL bRet = TRUE;
+	std::string strQuerySQL = "update t_webspider_task set taskname='%s',word='%s', website='%s',freq=%d,hierarchy=%d,date='%s' where taskname='%s'";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), szCyberName, szKeywords, szWebsites, nFre, nLayer, pTime, szOldCyberName);
+	if (FAILED(hr))
+		bRet = FALSE;
+	
+	return bRet;			
+}
+
+BOOL sloMysqlAgent::GetCyberFromDB()
+{
+	ClearCyberList();
+	
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	std::string strQuerySQL = "select * from t_webspider_task"; 
+	HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str());
+	if (FAILED(hr))
+		return -1;
+	
+	int nCount = m_pMySqlDB->GetRowCount();
+	int nFieldCount = m_pMySqlDB->GetFieldCount();
+	if(nCount >= 1 && nFieldCount >= 1)
+	{	
+		for (int i = 0; i < nCount; i++)
+		{
+			bool bSucc = m_pMySqlDB->GetRow();
+			if(bSucc==false)
+				return FALSE;
+			
+			int nIDLen = 0;
+			char* pID = m_pMySqlDB->GetField("Id",&nIDLen);
+			if(pID == NULL && nIDLen <= 1)
+				return FALSE;
+			
+			int nTasknameLen = 0;
+			char* pTaskName = m_pMySqlDB->GetField("taskname",&nTasknameLen);
+			if(pTaskName == NULL && nTasknameLen <= 1)
+				return FALSE;
+			
+			int nWordLen = 0;
+			char* pWord = m_pMySqlDB->GetField("word",&nWordLen);
+			if(pWord == NULL && nWordLen <= 1)
+				return FALSE;
+
+			int nWebsiteLen = 0;
+			char* pWebsite = m_pMySqlDB->GetField("website",&nWebsiteLen);
+			if(pWebsite == NULL && nWebsiteLen <= 1)
+				return FALSE;
+
+			int nFreqLen = 0;
+			char* pFreq = m_pMySqlDB->GetField("freq",&nFreqLen);
+			if(pFreq == NULL && nFreqLen <= 1)
+				return FALSE;
+
+			int nHierarchyLen = 0;
+			char* pHierarchy = m_pMySqlDB->GetField("hierarchy",&nHierarchyLen);
+			if(pHierarchy == NULL && nHierarchyLen <= 1)
+				return FALSE;
+
+			int nDateLen = 0;
+			char* pDate = m_pMySqlDB->GetField("date",&nDateLen);
+			if(pDate == NULL && nDateLen <= 1)
+				return FALSE;
+			
+			Cyber cyber;
+			memset(&cyber, NULL, sizeof(Cyber));
+			cyber.nID = atoi(pID);
+			strcpy(cyber.szCyberName, pTaskName);
+			strcpy(cyber.szKeywords, pWord);
+			strcpy(cyber.szWebsite, pWebsite);
+			cyber.nFrequency = atoi(pFreq);
+			cyber.nLayer = atoi(pHierarchy);
+
+			strcpy(cyber.szDate, pDate);
+			m_CyberList.push_back(cyber);
+		}
+	}
+	
+	return TRUE;	
+}
+
+void sloMysqlAgent::ClearCyberList()
+{
+	m_CyberList.clear();
+}
