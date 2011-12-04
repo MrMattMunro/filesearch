@@ -12,8 +12,11 @@
 // CLocalAgenterDlg dialog
 #include "ShortcutPaneCalendar.h"
 #include "ShortcutPaneFolders.h"
+#include "ShortcutPaneContacts.h"
+
 #include "TTComboBox.h"
 #include "XTPReportControlEx.h"
+#include "XTPShortcutBarEx.h"
 
 class CLocalAgenterDlg : public CXTResizeDialog
 {
@@ -28,6 +31,11 @@ public:
 	void AddNewRecord(char* szContent);
 
 	void SetComboxPos(BOOL bAll);
+
+	void InitButton();
+	void InitComboBox();
+	void InitShortcutBar();
+	void InitReportCtrl();
 
 	CImageList m_ilIcons;
 	BOOL m_bCommboxAllSel;
@@ -70,17 +78,21 @@ protected:
 	afx_msg void OnSelchangeComboGroup();
 	afx_msg void OnButtonSearch();
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnDestroy();
 	//}}AFX_MSG
 	afx_msg void OnButtonDropDown(UINT nID);
 	DECLARE_MESSAGE_MAP()
 public:
-	CXTPShortcutBar m_wndShortcutBar;
+	CXTPShortcutBarEx m_wndShortcutBar;
 
 	CShortcutPaneCalendar m_paneCalendar;
 	CShortcutPaneFolders m_paneFolders;
+	CShortcutPaneContacts m_paneTasks;
 
 	CXTPShortcutBarItem* m_pItemFolder;
 	CXTPShortcutBarItem* m_pItemCalendar;
+	CXTPShortcutBarItem* m_pItemTasks;
 };
 
 //{{AFX_INSERT_LOCATION}}

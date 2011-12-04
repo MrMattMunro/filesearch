@@ -38,6 +38,11 @@
 #define IDR_MENU_TREE                   150
 #define IDI_ICON_DELETE                 151
 #define IDI_ICON_MODIFY                 152
+#define IDD_DIALOG_CYBER                153
+#define IDB_STATE_IMAGES                154
+#define IDC_CHECK                       155
+#define IDC_CHECK_NONE                  156
+#define IDB_TREE_IMAGES                 157
 #define IDC_EDIT_GROUP_NAME             1000
 #define IDC_REPORTCTRL                  1004
 #define IDC_LIST3                       1005
@@ -49,6 +54,13 @@
 #define IDC_COMBO_TIME                  1011
 #define IDC_EDIT_KEYWORD                1012
 #define IDC_BUTTON_SEARCH               1013
+#define IDC_EDIT_CYBER_NAME             1015
+#define IDC_EDIT_CYBER_FREQUENCY        1016
+#define IDC_TREE_KEYWORDS               1017
+#define IDC_TREE_WEBSITE                1018
+#define IDC_EDIT_CYBER_LAYER            1019
+#define IDC_SPIN_FREQUENCY              1021
+#define IDC_SPIN_LAYER                  1022
 #define ID_DROPDOWNMENU_OPTIONITEM1     32771
 #define ID_DROPDOWNMENU_OPTIONITEM2     32772
 #define ID_EDIT_ADD                     32773
@@ -59,9 +71,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        153
+#define _APS_NEXT_RESOURCE_VALUE        158
 #define _APS_NEXT_COMMAND_VALUE         32776
-#define _APS_NEXT_CONTROL_VALUE         1013
+#define _APS_NEXT_CONTROL_VALUE         1022
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

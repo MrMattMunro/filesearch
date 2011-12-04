@@ -7,6 +7,7 @@
 #include "ReportRecord.h"
 #include "sloCommAgent.h"
 #include "sloMysqlAgent.h"
+#include "CyberDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -102,6 +103,8 @@ BEGIN_MESSAGE_MAP(CLocalAgenterDlg, CXTResizeDialog)
 	ON_CBN_SELCHANGE(IDC_COMBO_GROUP, OnSelchangeComboGroup)
 	ON_BN_CLICKED(IDC_BUTTON_SEARCH, OnButtonSearch)
 	ON_WM_CONTEXTMENU()
+	ON_WM_SIZE()
+	ON_WM_DESTROY()
 	//}}AFX_MSG_MAP
 	ON_CONTROL_RANGE(CBN_DROPDOWN, IDC_BUTTON_EXPORT, IDC_BUTTON_EXPORT, OnButtonDropDown)
 	ON_NOTIFY(XTP_NM_REPORT_ITEMBUTTONCLICK, IDC_REPORTCTRL, OnItemButtonClick)
@@ -185,144 +188,19 @@ BOOL CLocalAgenterDlg::OnInitDialog()
 
 	// TODO: Add extra initialization here
 	//////////////////////////////////////////////////////////////////////////
-	//button
-//	m_buttonExport.SetTheme(xtpButtonThemeOffice2007);
-//	m_buttonExport.SetIcon(CSize(8,8), AfxGetApp()->LoadIcon(IDI_OUTBOX));
-	m_buttonExport.SetBitmap(CSize(24,24), IDB_BITMAP_EXPORT);
-	m_buttonExport.SetFlatStyle(TRUE);
-//	m_buttonExport.SetUseVisualStyle(FALSE);
-//	m_buttonExport.SetTextImageRelation(xtpButtonImageBeforeText);
-	m_buttonExport.SetPushButtonStyle(xtpButtonSplitDropDown);	
-
-	m_btnDelete.SetBitmap(CSize(24,24), IDB_BITMAP_DELETE);
-	m_btnDelete.SetFlatStyle(TRUE);
-
-	m_btnSet.SetBitmap(CSize(24,24), IDB_BITMAP_SET);
-	m_btnSet.SetFlatStyle(TRUE);
-
-	m_btnSearch.SetBitmap(CSize(24,24), IDB_BITMAP_SEARCH);
-	m_btnSearch.SetFlatStyle(TRUE);
+	InitButton();
 
 	//////////////////////////////////////////////////////////////////////////
 	//commbox
+	InitComboBox();
 
-	m_BoxListGroup.ResetContent(); // Clean up all contents	
-	m_BoxListGroup.InsertString(0, "全部");
-	m_BoxListGroup.InsertString(1, "词汇列表");
-	m_BoxListGroup.InsertString(2, "网址列表");
-	m_BoxListGroup.SetCurSel(0);
-	
-	m_BoxListType.ResetContent(); // Clean up all contents	
-	m_BoxListType.InsertString(0, "默认分组");
-	m_BoxListType.InsertString(1, "自定义分组");
-	m_BoxListType.InsertString(2, "财经网址");
-	m_BoxListType.SetCurSel(0);
-
-	m_BoxListTime.ResetContent(); // Clean up all contents	
-	m_BoxListTime.InsertString(0, "最近一周");
-	m_BoxListTime.InsertString(1, "最近三个月");
-	m_BoxListTime.InsertString(2, "最近一年");
-	m_BoxListTime.InsertString(3, "全部");
-	m_BoxListTime.SetCurSel(0);
-
-	SetComboxPos(TRUE);
 	//////////////////////////////////////////////////////////////////////////
-	m_wndShortcutBar.Create(WS_CHILD|WS_VISIBLE|WS_CLIPCHILDREN|WS_CLIPSIBLINGS, CRect(5, 50, 180, 430),
-		this,  100);
-	
-	m_wndShortcutBar.SetOwner(this);
-	m_wndShortcutBar.GetToolTipContext()->SetStyle(xtpToolTipOffice);
-
-	BOOL bUseAlphaIcons = XTPImageManager()->IsAlphaIconsSupported();
-	
-	XTPImageManager()->SetIcons(bUseAlphaIcons ? IDB_SHORTCUTS_SMALL_ALPHA : IDB_SHORTCUTS_SMALL, 
-		shortcuts, sizeof(shortcuts)/sizeof(UINT), CSize(16, 16));
-	
-	XTPImageManager()->SetIcons(bUseAlphaIcons ? IDB_SHORTCUTS_BIG_ALPHA : IDB_SHORTCUTS_BIG, 
-		shortcuts, sizeof(shortcuts)/sizeof(UINT), CSize(24, 24));
-
-	VERIFY(m_paneCalendar.Create(_T("网址分类"), &m_wndShortcutBar));
-	VERIFY(m_paneFolders.Create(_T("词汇分类"), &m_wndShortcutBar));
-	m_paneFolders.SetParentWnd(this);
-	m_paneCalendar.SetParentWnd(this);
-
-	CXTPShortcutBarItem* pItemFolder = m_wndShortcutBar.AddItem(ID_SHORTCUT_FOLDERS, &m_paneFolders);
-	pItemFolder->SetCaption("词汇管理");
-	
-	CXTPShortcutBarItem* pItemCalendar = m_wndShortcutBar.AddItem(ID_SHORTCUT_CALENDAR, &m_paneCalendar);
-	pItemCalendar->SetCaption("网址管理");
-
-	m_pItemFolder = pItemFolder;
-	m_pItemCalendar = pItemCalendar;
-	
-	m_wndShortcutBar.AllowMinimize(TRUE);
-	
-	m_wndShortcutBar.SelectItem(pItemFolder);
-	m_wndShortcutBar.LoadState(_T("ShortcutBar"));
-
-	m_wndShortcutBar.SetTheme(xtpShortcutThemeOffice2007);
+	InitShortcutBar();
 
 	//////////////////////////////////////////////////////////////////////////
 	//
-	m_wndReportCtrl.MoveWindow(CRect(190, 50, 770, 430), TRUE);
+	InitReportCtrl();
 
-	// create the image list used by the report control.
-	if (!m_ilIcons.Create(16,16, ILC_COLOR24 | ILC_MASK, 0, 1))
-		return -1;
-	
-	// report control.
-//	CBitmap bitmap;
-//	VERIFY(bitmap.LoadBitmap(IDB_BITMAP_DELETE));
-//	m_ilIcons.Add(&bitmap, RGB(255, 0, 255));
-	m_ilIcons.Add(AfxGetApp()->LoadIcon(IDI_ICON_DELETE));
-	m_ilIcons.Add(AfxGetApp()->LoadIcon(IDI_ICON_MODIFY));
-	m_wndReportCtrl.SetImageList(&m_ilIcons);
-
-	//只允许【名称】列可编辑
-	CXTPReportColumn* pColumn = new CXTPReportColumn(COLUMN_BUTTON1, _T(""), 18);
-	pColumn->SetEditable(FALSE);
-	pColumn->EnableResize(FALSE);
-	m_wndReportCtrl.AddColumn(pColumn);
-
-	pColumn = new CXTPReportColumn(COLUMN_BLACK1, _T(""), 5);
-	pColumn->SetEditable(FALSE);
-	pColumn->EnableResize(FALSE);
-	m_wndReportCtrl.AddColumn(pColumn);
-
-	pColumn = new CXTPReportColumn(COLUMN_BUTTON2, _T(""), 18);
-	pColumn->SetEditable(FALSE);
-	pColumn->EnableResize(FALSE);
-	m_wndReportCtrl.AddColumn(pColumn);
-
-	pColumn = new CXTPReportColumn(COLUMN_BLACK2, _T(""), 5);
-	pColumn->SetEditable(FALSE);
-	pColumn->EnableResize(FALSE);
-	m_wndReportCtrl.AddColumn(pColumn);
-
-	pColumn = new CXTPReportColumn(COLUMN_SUBJECT, _T("名称"), 280);
-	pColumn->SetEditable(TRUE);
-	m_wndReportCtrl.AddColumn(pColumn);
-
-	pColumn = new CXTPReportColumn(COLUMN_DATE, _T("时间"), 180);
-	pColumn->SetEditable(FALSE);
-	m_wndReportCtrl.AddColumn(pColumn);
-	
-	m_wndReportCtrl.SetGridStyle(FALSE, xtpReportGridSmallDots);
-	m_wndReportCtrl.SetGridColor(RGB(190,190,190));
-
-	m_wndReportCtrl.AllowEdit(TRUE);
-	m_wndReportCtrl.EditOnDelayClick(TRUE);
-
-	m_wndReportCtrl.Populate();
-	
-	m_wndReportCtrl.EnableDragDrop(_T("ReportDialog"), xtpReportAllowDrag | xtpReportAllowDrop);
-		
-	m_wndReportCtrl.SetParentDlg(this);
-	// Set control resizing.
-	SetResize(IDC_REPORTCTRL, SZ_TOP_LEFT, SZ_BOTTOM_RIGHT);
-	
-	// Load window placement
-	LoadPlacement(_T("CLocalAgenterDlg"));
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -376,6 +254,165 @@ HCURSOR CLocalAgenterDlg::OnQueryDragIcon()
 	return (HCURSOR) m_hIcon;
 }
 
+void CLocalAgenterDlg::InitButton()
+{
+	//button
+	//	m_buttonExport.SetTheme(xtpButtonThemeOffice2007);
+	//	m_buttonExport.SetIcon(CSize(8,8), AfxGetApp()->LoadIcon(IDI_OUTBOX));
+	m_buttonExport.SetBitmap(CSize(24,24), IDB_BITMAP_EXPORT);
+	m_buttonExport.SetFlatStyle(TRUE);
+	//	m_buttonExport.SetUseVisualStyle(FALSE);
+	//	m_buttonExport.SetTextImageRelation(xtpButtonImageBeforeText);
+	m_buttonExport.SetPushButtonStyle(xtpButtonSplitDropDown);	
+	
+	m_btnDelete.SetBitmap(CSize(24,24), IDB_BITMAP_DELETE);
+	m_btnDelete.SetFlatStyle(TRUE);
+	
+	m_btnSet.SetBitmap(CSize(24,24), IDB_BITMAP_SET);
+	m_btnSet.SetFlatStyle(TRUE);
+	
+	m_btnSearch.SetBitmap(CSize(24,24), IDB_BITMAP_SEARCH);
+	m_btnSearch.SetFlatStyle(TRUE);
+}
+
+void CLocalAgenterDlg::InitComboBox()
+{
+	m_BoxListGroup.ResetContent(); // Clean up all contents	
+	m_BoxListGroup.InsertString(0, "全部");
+	m_BoxListGroup.InsertString(1, "词汇列表");
+	m_BoxListGroup.InsertString(2, "网址列表");
+	m_BoxListGroup.SetCurSel(0);
+	
+	m_BoxListType.ResetContent(); // Clean up all contents	
+	m_BoxListType.InsertString(0, "默认分组");
+	m_BoxListType.InsertString(1, "自定义分组");
+	m_BoxListType.InsertString(2, "财经网址");
+	m_BoxListType.SetCurSel(0);
+	
+	m_BoxListTime.ResetContent(); // Clean up all contents	
+	m_BoxListTime.InsertString(0, "最近一周");
+	m_BoxListTime.InsertString(1, "最近三个月");
+	m_BoxListTime.InsertString(2, "最近一年");
+	m_BoxListTime.InsertString(3, "全部");
+	m_BoxListTime.SetCurSel(0);
+	
+	SetComboxPos(TRUE);
+	
+}
+
+#define LENGHT_BAR 450
+void CLocalAgenterDlg::InitShortcutBar()
+{
+	m_wndShortcutBar.Create(WS_CHILD|WS_VISIBLE|WS_CLIPCHILDREN|WS_CLIPSIBLINGS, CRect(5, 50, 180, LENGHT_BAR),
+		this,  100);
+	
+	m_wndShortcutBar.SetOwner(this);
+	m_wndShortcutBar.GetToolTipContext()->SetStyle(xtpToolTipOffice);
+	m_wndShortcutBar.SetParentWnd(this);
+	
+	BOOL bUseAlphaIcons = XTPImageManager()->IsAlphaIconsSupported();
+	
+	XTPImageManager()->SetIcons(bUseAlphaIcons ? IDB_SHORTCUTS_SMALL_ALPHA : IDB_SHORTCUTS_SMALL, 
+		shortcuts, sizeof(shortcuts)/sizeof(UINT), CSize(16, 16));
+	
+	XTPImageManager()->SetIcons(bUseAlphaIcons ? IDB_SHORTCUTS_BIG_ALPHA : IDB_SHORTCUTS_BIG, 
+		shortcuts, sizeof(shortcuts)/sizeof(UINT), CSize(24, 24));
+	
+	VERIFY(m_paneFolders.Create(_T("词汇分类"), &m_wndShortcutBar));
+	VERIFY(m_paneCalendar.Create(_T("网址分类"), &m_wndShortcutBar));
+	VERIFY(m_paneTasks.Create(_T("网络快捕"), &m_wndShortcutBar));
+
+	m_paneFolders.SetParentWnd(this);
+	m_paneCalendar.SetParentWnd(this);
+	m_paneTasks.SetParentWnd(this);
+	
+	CXTPShortcutBarItem* pItemFolder = m_wndShortcutBar.AddItem(ID_SHORTCUT_FOLDERS, &m_paneFolders);
+	pItemFolder->SetCaption("词汇管理");
+	
+	CXTPShortcutBarItem* pItemCalendar = m_wndShortcutBar.AddItem(ID_SHORTCUT_CALENDAR, &m_paneCalendar);
+	pItemCalendar->SetCaption("网址管理");
+
+	CXTPShortcutBarItem* pItemTasks = m_wndShortcutBar.AddItem(ID_SHORTCUT_TASKS, &m_paneTasks);
+	pItemTasks->SetCaption("快捕管理");
+
+	m_pItemFolder = pItemFolder;
+	m_pItemCalendar = pItemCalendar;
+	m_pItemTasks = pItemTasks;
+	
+	//m_wndShortcutBar.AllowMinimize(TRUE);
+	
+	m_wndShortcutBar.SelectItem(pItemFolder);
+	m_wndShortcutBar.LoadState(_T("ShortcutBar"));
+	
+	m_wndShortcutBar.SetTheme(xtpShortcutThemeOffice2007);
+
+}
+
+void CLocalAgenterDlg::InitReportCtrl()
+{
+	m_wndReportCtrl.MoveWindow(CRect(190, 50, 770, LENGHT_BAR), TRUE);
+	
+	// create the image list used by the report control.
+	if (!m_ilIcons.Create(16,16, ILC_COLOR24 | ILC_MASK, 0, 1))
+		return ;
+	
+	// report control.
+	//	CBitmap bitmap;
+	//	VERIFY(bitmap.LoadBitmap(IDB_BITMAP_DELETE));
+	//	m_ilIcons.Add(&bitmap, RGB(255, 0, 255));
+	m_ilIcons.Add(AfxGetApp()->LoadIcon(IDI_ICON_DELETE));
+	m_ilIcons.Add(AfxGetApp()->LoadIcon(IDI_ICON_MODIFY));
+	m_wndReportCtrl.SetImageList(&m_ilIcons);
+	
+	//只允许【名称】列可编辑
+	CXTPReportColumn* pColumn = new CXTPReportColumn(COLUMN_BUTTON1, _T(""), 18);
+	pColumn->SetEditable(FALSE);
+	pColumn->EnableResize(FALSE);
+	pColumn->SetAutoSize(FALSE);
+	m_wndReportCtrl.AddColumn(pColumn);
+	
+	pColumn = new CXTPReportColumn(COLUMN_BLACK1, _T(""), 5);
+	pColumn->SetEditable(FALSE);
+	pColumn->EnableResize(FALSE);
+	pColumn->SetAutoSize(FALSE);
+	m_wndReportCtrl.AddColumn(pColumn);
+	
+	pColumn = new CXTPReportColumn(COLUMN_BUTTON2, _T(""), 18);
+	pColumn->SetEditable(FALSE);
+	pColumn->EnableResize(FALSE);
+	pColumn->SetAutoSize(FALSE);
+	m_wndReportCtrl.AddColumn(pColumn);
+	
+	pColumn = new CXTPReportColumn(COLUMN_BLACK2, _T(""), 5);
+	pColumn->SetEditable(FALSE);
+	pColumn->EnableResize(FALSE);
+	m_wndReportCtrl.AddColumn(pColumn);
+	
+	pColumn = new CXTPReportColumn(COLUMN_SUBJECT, _T("名称"), 280);
+	pColumn->SetEditable(TRUE);
+	m_wndReportCtrl.AddColumn(pColumn);
+	
+	pColumn = new CXTPReportColumn(COLUMN_DATE, _T("时间"), 180);
+	pColumn->SetEditable(FALSE);
+	m_wndReportCtrl.AddColumn(pColumn);
+	
+	m_wndReportCtrl.SetGridStyle(FALSE, xtpReportGridSmallDots);
+	m_wndReportCtrl.SetGridColor(RGB(190,190,190));
+	
+	m_wndReportCtrl.AllowEdit(TRUE);
+	m_wndReportCtrl.EditOnDelayClick(TRUE);
+	
+	m_wndReportCtrl.Populate();
+	
+	m_wndReportCtrl.EnableDragDrop(_T("ReportDialog"), xtpReportAllowDrag | xtpReportAllowDrop);
+	
+	m_wndReportCtrl.SetParentDlg(this);
+	// Set control resizing.
+	SetResize(IDC_REPORTCTRL, SZ_TOP_LEFT, SZ_BOTTOM_RIGHT);
+	
+	// Load window placement
+	LoadPlacement(_T("CLocalAgenterDlg"));
+}
 
 void CLocalAgenterDlg::AddNewRecord(char* szContent)
 {
@@ -384,12 +421,35 @@ void CLocalAgenterDlg::AddNewRecord(char* szContent)
 	if( m_wndShortcutBar.GetSelectedItem() == m_pItemFolder)
 	{
 		sloMysqlAgent::GetInstance()->AddKeyword(m_paneFolders.m_szTypeName, szContent);
-	}else
+	}else if (m_wndShortcutBar.GetSelectedItem() == m_pItemCalendar)
 	{
 		//选中的是网址pane
-		sloMysqlAgent::GetInstance()->AddWebsite(m_paneCalendar.m_szTypeName, szContent);		
+		sloMysqlAgent::GetInstance()->AddWebsite(m_paneCalendar.m_szTypeName, szContent);
+	}else if (m_wndShortcutBar.GetSelectedItem() == m_pItemTasks)
+	{
+		//选中网络快捕
+		//
+		CCyberDlg cyber;
+		if(cyber.DoModal() == 1)
+		{	
+			//插入列表中
+			CXTPReportRecord* pRecord = m_wndReportCtrl.AddRecord(new CReportRecord(cyber.m_cyberName.GetBuffer(0), pTime));
+			ShowListContent_Button(pRecord);
+			
+			m_wndReportCtrl.Populate();
+			
+			CXTPReportRows* pRows = m_wndReportCtrl.GetRows();
+			int nRowCount = pRows->GetCount();
+			CXTPReportRow* pNewRow = pRows->GetAt(nRowCount - 1);
+			
+			m_wndReportCtrl.SetFocusedRow(pNewRow);
+			return;
+		}else
+		{
+			//选择取消
+			return ;
+		}
 	}
-	
 
 	//插入列表中
 	CXTPReportRecord* pRecord = m_wndReportCtrl.AddRecord(new CReportRecord(szContent, pTime));
@@ -648,7 +708,7 @@ void CLocalAgenterDlg::OnItemButtonClick(NMHDR * pNotifyStruct, LRESULT*pResult)
 					sloMysqlAgent::GetInstance()->DelKeyword(strContent.GetBuffer(0));		
 				}else
 					break;
-			}else
+			}else if (m_wndShortcutBar.GetSelectedItem() == m_pItemCalendar)
 			{
 				//选中的是网址pane
 				if (6 == MessageBox("您确定删除该条记录？","网址管理",MB_YESNO | MB_ICONWARNING))
@@ -657,6 +717,10 @@ void CLocalAgenterDlg::OnItemButtonClick(NMHDR * pNotifyStruct, LRESULT*pResult)
 					sloMysqlAgent::GetInstance()->DelWebsite(strContent.GetBuffer(0));		
 				}else
 					break;
+			}else if (m_wndShortcutBar.GetSelectedItem() == m_pItemTasks)
+			{
+				//删除快捕任务
+
 			}
 
 			//删除行
@@ -665,12 +729,32 @@ void CLocalAgenterDlg::OnItemButtonClick(NMHDR * pNotifyStruct, LRESULT*pResult)
 		}
 		// button "modify"
 	case 2 :
-		{
-			//选中
-			m_wndReportCtrl.SetFocusedRow(pItemNotify->pRow);	
-			//将这一列值为可编辑		
-			CXTPReportColumn* pColumn = m_wndReportCtrl.GetColumns()->GetAt(4);
-			m_wndReportCtrl.SetFocusedColumn(pColumn);
+		{		
+			//选中		
+			m_wndReportCtrl.SetFocusedRow(pItemNotify->pRow);			
+			if (m_wndShortcutBar.GetSelectedItem() == m_pItemTasks)
+			{
+				CXTPReportRecord* pRecord = pItemNotify->pRow->GetRecord();	
+				CXTPReportRecordItemText* pItemText = (CXTPReportRecordItemText*)pRecord->GetItem(4);
+				CString strContent = pItemText->GetValue();
+				//修改快捕任务，弹出对话框
+				CCyberDlg cyber;
+				cyber.m_cyberName = strContent;
+				if (cyber.DoModal() == 1)
+				{
+					//点击确定
+
+				}else
+				{
+					//点击取消
+
+				}
+			}else{
+	
+				//将这一列值为可编辑		
+				CXTPReportColumn* pColumn = m_wndReportCtrl.GetColumns()->GetAt(4);
+				m_wndReportCtrl.SetFocusedColumn(pColumn);
+			}
 
 			break;
 		}
@@ -764,17 +848,29 @@ void CLocalAgenterDlg::OnValueChanged(NMHDR * pNotifyStruct, LRESULT*pResult)
 void CLocalAgenterDlg::OnContextMenu(CWnd* pWnd, CPoint point) 
 {
 	// TODO: Add your message handler code here
-	CPoint pt;
-	GetCursorPos(&pt);
 
-	ScreenToClient(&pt);
-// 	CXTPReportRow* pRow = m_wndReportCtrl.HitTest(pt);
-// 	if (pRow == NULL)
-// 	{
-// 		return ;
-// 	}
+}
 
-	//弹出菜单
-	MessageBox("ab");
+void CLocalAgenterDlg::OnSize(UINT nType, int cx, int cy) 
+{
+	CXTResizeDialog::OnSize(nType, cx, cy);
 
+	// TODO: Add your message handler code here
+	if (m_wndShortcutBar.m_hWnd)
+	{
+		//根据分辨率来判断
+		CRect rc;
+		m_wndReportCtrl.GetWindowRect(&rc);
+		ScreenToClient(&rc);
+		m_wndShortcutBar.MoveWindow(CRect(5, 50, 180, rc.bottom),TRUE);
+	}
+
+}
+
+void CLocalAgenterDlg::OnDestroy() 
+{
+	CXTResizeDialog::OnDestroy();
+	
+	// TODO: Add your message handler code here
+	m_wndShortcutBar.SaveState(_T("ShortcutBar"));
 }

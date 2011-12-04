@@ -2,24 +2,26 @@
 
 [General Info]
 Version=1
-LastClass=CLocalAgenterDlg
+LastClass=CCyberDlg
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "LocalAgenter.h"
 
-ClassCount=4
+ClassCount=5
 Class1=CLocalAgenterApp
 Class2=CLocalAgenterDlg
 Class3=CAboutDlg
 
-ResourceCount=6
-Resource1=IDR_MENU_DROPDOWN
+ResourceCount=7
+Resource1=IDD_DIALOG_CYBER
 Resource2=IDR_MAINFRAME
-Resource3=IDD_DIALOG_GROUP
+Resource3=IDD_ABOUTBOX
 Class4=CGroupDlg
-Resource4=IDD_LOCALAGENTER_DIALOG
-Resource5=IDD_ABOUTBOX
-Resource6=IDR_MENU_TREE
+Resource4=IDR_MENU_DROPDOWN
+Resource5=IDD_DIALOG_GROUP
+Resource6=IDD_LOCALAGENTER_DIALOG
+Class5=CCyberDlg
+Resource7=IDR_MENU_TREE
 
 [CLS:CLocalAgenterApp]
 Type=0
@@ -32,7 +34,7 @@ Type=0
 HeaderFile=LocalAgenterDlg.h
 ImplementationFile=LocalAgenterDlg.cpp
 Filter=W
-LastObject=CLocalAgenterDlg
+LastObject=IDC_REPORTCTRL
 BaseClass=CXTResizeDialog
 VirtualFilter=dWC
 
@@ -98,4 +100,36 @@ Command1=ID_EDIT_ADD
 Command2=ID_EDIT_DEL
 Command3=ID_EDIT_RENAME
 CommandCount=3
+
+[DLG:IDD_DIALOG_CYBER]
+Type=1
+Class=CCyberDlg
+ControlCount=18
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_EDIT_CYBER_NAME,edit,1350631552
+Control4=IDC_STATIC,static,1342308352
+Control5=IDC_STATIC,static,1342308352
+Control6=IDC_TREE_KEYWORDS,SysTreeView32,1350631463
+Control7=IDC_TREE_WEBSITE,SysTreeView32,1350631463
+Control8=IDC_STATIC,static,1342177288
+Control9=IDC_STATIC,static,1342177288
+Control10=IDC_STATIC,static,1342308352
+Control11=IDC_STATIC,static,1342308352
+Control12=IDC_EDIT_CYBER_FREQUENCY,edit,1350633600
+Control13=IDC_STATIC,static,1342308352
+Control14=IDC_STATIC,static,1342308352
+Control15=IDC_STATIC,static,1342308352
+Control16=IDC_SPIN_FREQUENCY,msctls_updown32,1342177318
+Control17=IDC_EDIT_CYBER_LAYER,edit,1350633600
+Control18=IDC_SPIN_LAYER,msctls_updown32,1342177318
+
+[CLS:CCyberDlg]
+Type=0
+HeaderFile=CyberDlg.h
+ImplementationFile=CyberDlg.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=CCyberDlg
+VirtualFilter=dWC
 
