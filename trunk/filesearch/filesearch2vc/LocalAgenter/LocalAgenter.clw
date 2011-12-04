@@ -13,13 +13,13 @@ Class2=CLocalAgenterDlg
 Class3=CAboutDlg
 
 ResourceCount=7
-Resource1=IDD_DIALOG_CYBER
+Resource1=IDD_LOCALAGENTER_DIALOG
 Resource2=IDR_MAINFRAME
 Resource3=IDD_ABOUTBOX
 Class4=CGroupDlg
 Resource4=IDR_MENU_DROPDOWN
-Resource5=IDD_DIALOG_GROUP
-Resource6=IDD_LOCALAGENTER_DIALOG
+Resource5=IDD_DIALOG_CYBER
+Resource6=IDD_DIALOG_GROUP
 Class5=CCyberDlg
 Resource7=IDR_MENU_TREE
 

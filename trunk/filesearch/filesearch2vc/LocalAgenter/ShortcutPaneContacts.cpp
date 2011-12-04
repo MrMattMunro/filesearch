@@ -21,6 +21,7 @@
 #include "stdafx.h"
 //#include "shortcutbar.h"
 #include "ShortcutPaneContacts.h"
+#include "LocalAgenterDlg.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -48,6 +49,12 @@ CShortcutPaneContacts::~CShortcutPaneContacts()
 
 }
 
+BEGIN_MESSAGE_MAP(CShortcutPaneContacts, CXTPShortcutBarPane)
+//{{AFX_MSG_MAP(CShortcutPaneCalendar)
+	ON_NOTIFY(TVN_SELCHANGED, 0, OnSelchanged)
+//}}AFX_MSG_MAP
+END_MESSAGE_MAP()
+
 BOOL CShortcutPaneContacts::Create(LPCTSTR lpszCaption, CXTPShortcutBar* pParent)
 {
 	if (!CXTPShortcutBarPane::Create(lpszCaption, pParent))
@@ -69,4 +76,24 @@ BOOL CShortcutPaneContacts::Create(LPCTSTR lpszCaption, CXTPShortcutBar* pParent
 void CShortcutPaneContacts::SetParentWnd(LPVOID pParentWnd)
 {
 	m_pParentWnd = pParentWnd;
+}
+
+
+void CShortcutPaneContacts::OnSelchanged(NMHDR* /*pNMHDR*/, LRESULT* pResult)
+{
+	CLocalAgenterDlg* pDlg = (CLocalAgenterDlg*)m_pParentWnd;
+	// Get the selected tree item and its icon.
+	//	int nImage;
+	HTREEITEM htItem = m_wndTreeContacts.GetSelectedItem();
+	if (htItem != NULL)
+	{
+		CString strItemText = m_wndTreeContacts.GetItemText(htItem);
+		m_wndTreeContacts.SelectItem(htItem);	
+		
+		pDlg->ShowListContent_Cyber();
+
+	}
+	
+	*pResult = 0;
+	
 }

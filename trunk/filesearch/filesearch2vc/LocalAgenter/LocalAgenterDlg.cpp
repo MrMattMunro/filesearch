@@ -432,6 +432,11 @@ void CLocalAgenterDlg::AddNewRecord(char* szContent)
 		CCyberDlg cyber;
 		if(cyber.DoModal() == 1)
 		{	
+			//录库
+			int nFreq = atoi(cyber.m_strFrequencyName.GetBuffer(0));
+			int nLayer = atoi(cyber.m_strLayerName.GetBuffer(0));
+			sloMysqlAgent::GetInstance()->AddCyber(cyber.m_cyberName.GetBuffer(0), "", "", nFreq, nLayer);
+
 			//插入列表中
 			CXTPReportRecord* pRecord = m_wndReportCtrl.AddRecord(new CReportRecord(cyber.m_cyberName.GetBuffer(0), pTime));
 			ShowListContent_Button(pRecord);
@@ -510,6 +515,22 @@ void CLocalAgenterDlg::ShowListContent_Website(char* szGroupName)
 	}
 
 	m_wndReportCtrl.Populate();
+}
+
+void CLocalAgenterDlg::ShowListContent_Cyber()
+{
+	sloMysqlAgent::GetInstance()->GetCyberFromDB();
+	
+	//清空列表
+	m_wndReportCtrl.ResetContent();
+	int nCount = sloMysqlAgent::GetInstance()->m_CyberList.size();
+	for(int i = 0; i < nCount; i++)
+	{
+		CXTPReportRecord* pRecord = m_wndReportCtrl.AddRecord(new CReportRecord(sloMysqlAgent::GetInstance()->m_CyberList[i].szCyberName, sloMysqlAgent::GetInstance()->m_CyberList[i].szDate));
+		ShowListContent_Button(pRecord);
+	}
+	
+	m_wndReportCtrl.Populate();	
 }
 
 void CLocalAgenterDlg::ShowListContent_Button(CXTPReportRecord* pRecord)
