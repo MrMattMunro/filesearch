@@ -13,6 +13,8 @@
 #define IDI_MYCODE				107
 #define IDC_MYCODE				109
 #define IDC_MYICON				2
+#define IDC_CHK_TEST		    4
+
 #ifndef IDC_STATIC
 #define IDC_STATIC				-1
 #endif

@@ -11,17 +11,17 @@ DEFINE_XML(IDR_MAIN_DIALOG,				 103, "res\\dlg_main.xml")
 //////////////////////////////////////////////////////////////////////////
 // PNG
 
-DEFINE_PNG(IDP_LITTLE_LOGO,					201,   "res\\little_logo.png")
-DEFINE_PNG(IDP_BIG_LOGO,					202,   "res\\big_logo.png")
+DEFINE_PNG(IDP_LITTLE_LOGO,					201,   "res\\pic\\little_logo.png")
+DEFINE_PNG(IDP_BIG_LOGO,					202,   "res\\pic\\big_logo.png")
 
-DEFINE_PNG(IDC_BTN_CLOSE,					100,	"res\\dlg_btn_close.png")
-DEFINE_PNG(IDC_BTN_MAX,						101,	"res\\dlg_btn_max.png")
-DEFINE_PNG(IDC_BTN_MIN,						102,	"res\\dlg_btn_min.png")
-DEFINE_PNG(IDC_BTN_NORMAL,					103,	"res\\dlg_btn_normal.png")
+DEFINE_PNG(IDC_BTN_CLOSE,					100,	"res\\pic\\dlg_btn_close.png")
+DEFINE_PNG(IDC_BTN_MAX,						101,	"res\\pic\\dlg_btn_max.png")
+DEFINE_PNG(IDC_BTN_MIN,						102,	"res\\pic\\dlg_btn_min.png")
+DEFINE_PNG(IDC_BTN_NORMAL,					103,	"res\\pic\\dlg_btn_normal.png")
 
 
 //////////////////////////////////////////////////////////////////////////
 // BITMAP
 
-DEFINE_BMP(IDB_DLG_HEADER,					501,	"res\\dlg_header.bmp")
-DEFINE_BMP(IDB_DLG_BODY,					502,	"res\\dlg_body.bmp")
+DEFINE_BMP(IDB_DLG_HEADER,					501,	"res\\pic\\dlg_header.bmp")
+DEFINE_BMP(IDB_DLG_BODY,					502,	"res\\pic\\dlg_body.bmp")
