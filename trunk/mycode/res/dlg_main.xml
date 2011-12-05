@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layer title="程序框架" width="800" height="600" appwin="1" resize="1">
+  
+  <header class="dlg_header" width="full" height="30">
+    <img pos="8,8" skin="little_logo"/>
+    <text pos="28,10" class="head_text_title">程序框架</text>
+    <imgbtn id="102" pos="-105,1" tip="最小化" skin="dlg_btn_min"/>
+    <imgbtn id="101" pos="-74,1" tip="最大化" skin="dlg_btn_max"/>
+    <imgbtn id="100" pos="-43,1" tip="关闭" skin="dlg_btn_close"/>
+  </header>
+  
+  <footer class="dlg_footer" width="full" height="4">
+  </footer>
+  
+  <body class="dlg_body" width="full" height="full">
+    <dlg pos="0,0,-0,-0" crbg="FFFFFF">
+      <img pos="100,100" skin="big_logo"/>
+    </dlg>
+  </body>
+
+</layer>
