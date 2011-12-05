@@ -143,7 +143,54 @@ void CCyberDlg::OnOK()
 		return ;
 	}
 
+	CString strKeywords, strWebsite;
+	//遍历树
+	HTREEITEM hNextItem = NULL;
+	hNextItem = m_treeKeywords.GetNextItem(NULL);
+	while(hNextItem!=NULL)
+	{
+		CString strText2 = m_treeKeywords.GetItemText(hNextItem);
+		int nState = m_treeKeywords.GetItemCheck(hNextItem);
+		if (nState == STATE_CHECKED && !m_treeKeywords.ItemHasChildren(hNextItem))
+		{
+			CString strText = m_treeKeywords.GetItemText(hNextItem);
+			strKeywords += strText;
+			strKeywords += ";";
+		}
 
+		hNextItem = m_treeKeywords.GetNextItem(hNextItem);
+	}
+
+	if (strKeywords.GetLength() == 0)
+	{
+		MessageBox("请至少选择一组词汇！");
+		return ;
+	}
+
+
+	hNextItem = m_treeWebsite.GetNextItem(NULL);
+	while(hNextItem!=NULL)
+	{
+		int nState = m_treeWebsite.GetItemCheck(hNextItem);
+		if (nState == STATE_CHECKED && !m_treeWebsite.ItemHasChildren(hNextItem))
+		{
+			CString strText = m_treeWebsite.GetItemText(hNextItem);
+			strWebsite += strText;
+			strWebsite += ";";
+		}
+		
+		hNextItem = m_treeWebsite.GetNextItem(hNextItem);
+	}
+	if (strWebsite.GetLength() == 0)
+	{
+		MessageBox("请至少选择一组网址！");
+		return ;
+	}
+
+	//录库
+	int nFreq = atoi(m_strFrequencyName.GetBuffer(0));
+	int nLayer = atoi(m_strLayerName.GetBuffer(0));
+	sloMysqlAgent::GetInstance()->AddCyber(m_cyberName.GetBuffer(0), strKeywords.GetBuffer(0), strWebsite.GetBuffer(0), nFreq, nLayer);
 
 	CDialog::OnOK();
 }

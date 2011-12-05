@@ -41,6 +41,7 @@ public:
 	CImageList m_ilIcons;
 	BOOL m_bCommboxAllSel;
 	CString m_strOldContent;
+	CXTPReportColumn* m_pColumn4;
 // Dialog Data
 	//{{AFX_DATA(CLocalAgenterDlg)
 	enum { IDD = IDD_LOCALAGENTER_DIALOG };
