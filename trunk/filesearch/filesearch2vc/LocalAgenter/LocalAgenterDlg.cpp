@@ -74,6 +74,7 @@ CLocalAgenterDlg::CLocalAgenterDlg(CWnd* pParent /*=NULL*/)
 	m_bCommboxAllSel = FALSE;
 	m_pItemFolder= NULL;
 	m_pItemCalendar = NULL;
+	m_pColumn4 = NULL;
 }
 
 void CLocalAgenterDlg::DoDataExchange(CDataExchange* pDX)
@@ -388,9 +389,9 @@ void CLocalAgenterDlg::InitReportCtrl()
 	pColumn->EnableResize(FALSE);
 	m_wndReportCtrl.AddColumn(pColumn);
 	
-	pColumn = new CXTPReportColumn(COLUMN_SUBJECT, _T("名称"), 280);
-	pColumn->SetEditable(TRUE);
-	m_wndReportCtrl.AddColumn(pColumn);
+	m_pColumn4 = new CXTPReportColumn(COLUMN_SUBJECT, _T("名称"), 280);
+	m_pColumn4->SetEditable(TRUE);
+	m_wndReportCtrl.AddColumn(m_pColumn4);
 	
 	pColumn = new CXTPReportColumn(COLUMN_DATE, _T("时间"), 180);
 	pColumn->SetEditable(FALSE);
@@ -432,11 +433,6 @@ void CLocalAgenterDlg::AddNewRecord(char* szContent)
 		CCyberDlg cyber;
 		if(cyber.DoModal() == 1)
 		{	
-			//录库
-			int nFreq = atoi(cyber.m_strFrequencyName.GetBuffer(0));
-			int nLayer = atoi(cyber.m_strLayerName.GetBuffer(0));
-			sloMysqlAgent::GetInstance()->AddCyber(cyber.m_cyberName.GetBuffer(0), "", "", nFreq, nLayer);
-
 			//插入列表中
 			CXTPReportRecord* pRecord = m_wndReportCtrl.AddRecord(new CReportRecord(cyber.m_cyberName.GetBuffer(0), pTime));
 			ShowListContent_Button(pRecord);
@@ -495,6 +491,8 @@ void CLocalAgenterDlg::ShowListContent_Keywords(int nType, char* szGroupName)
 		ShowListContent_Button(pRecord);
 	}
 
+	m_pColumn4->SetEditable(TRUE);
+
 	m_wndReportCtrl.Populate();
 }
 
@@ -514,6 +512,7 @@ void CLocalAgenterDlg::ShowListContent_Website(char* szGroupName)
 		ShowListContent_Button(pRecord);
 	}
 
+	m_pColumn4->SetEditable(TRUE);
 	m_wndReportCtrl.Populate();
 }
 
@@ -529,6 +528,9 @@ void CLocalAgenterDlg::ShowListContent_Cyber()
 		CXTPReportRecord* pRecord = m_wndReportCtrl.AddRecord(new CReportRecord(sloMysqlAgent::GetInstance()->m_CyberList[i].szCyberName, sloMysqlAgent::GetInstance()->m_CyberList[i].szDate));
 		ShowListContent_Button(pRecord);
 	}
+
+	//不可编辑
+	m_pColumn4->SetEditable(FALSE);
 	
 	m_wndReportCtrl.Populate();	
 }
