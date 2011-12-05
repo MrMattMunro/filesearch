@@ -2,23 +2,18 @@
 
 #include "bkres/bkres.h"
 #include "atlapp.h"
+#include "resource.h"
 
 class CMainDlg 
 	: public CBkDialogImpl<CMainDlg>
 {
-private:
-	enum enumResIDs
-	{
-		IDC_BTN_CLOSE			= 100,
-		IDC_BTN_MAX				= 101,
-		IDC_BTN_MIN				= 102,
-	};
 
 public:
 	BK_NOTIFY_MAP(IDC_RICHVIEW_WIN)
 		BK_NOTIFY_ID_COMMAND(IDC_BTN_CLOSE, OnClose)
 		BK_NOTIFY_ID_COMMAND(IDC_BTN_MAX, OnMaxWindow)
 		BK_NOTIFY_ID_COMMAND(IDC_BTN_MIN, OnMinWindow)
+	    BK_NOTIFY_ID_COMMAND(IDC_CHK_TEST, OnMyClick)
 	BK_NOTIFY_MAP_END()
 
 
@@ -33,6 +28,7 @@ public:
 	CMainDlg();
 	~CMainDlg();
 
+    LRESULT OnMyClick();
 	LRESULT OnClose();
 	LRESULT OnMaxWindow();
 	LRESULT OnMinWindow();

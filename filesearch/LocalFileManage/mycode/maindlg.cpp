@@ -19,6 +19,14 @@ LRESULT CMainDlg::OnClose()
 	return 0;
 }
 
+
+LRESULT CMainDlg::OnMyClick()
+{
+
+	::MessageBox(0, L"请使用管理员账户运行本软件", 0, 0);
+	return 0;
+}
+
 LRESULT CMainDlg::OnMaxWindow()
 {
 	if (WS_MAXIMIZE == (GetStyle() & WS_MAXIMIZE))

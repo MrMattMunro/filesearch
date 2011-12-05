@@ -219,7 +219,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Resource.h"
+				RelativePath=".\resource.h"
 				>
 			</File>
 			<File
@@ -245,13 +245,17 @@
 				>
 			</File>
 			<File
-				RelativePath=".\res\mycode.ico"
-				>
-			</File>
-			<File
 				RelativePath=".\mycode.rc"
 				>
 			</File>
+			<Filter
+				Name="ico"
+				>
+				<File
+					RelativePath=".\res\mycode.ico"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="XML"
@@ -269,7 +273,27 @@
 				>
 			</File>
 			<File
+				RelativePath=".\res\dlg_body_left.xml"
+				>
+			</File>
+			<File
+				RelativePath=".\res\dlg_body_middle.xml"
+				>
+			</File>
+			<File
+				RelativePath=".\res\dlg_body_right.xml"
+				>
+			</File>
+			<File
+				RelativePath=".\res\dlg_foot.xml"
+				>
+			</File>
+			<File
 				RelativePath=".\res\dlg_main.xml"
+				>
+			</File>
+			<File
+				RelativePath="..\..\XYNetDoctorGUI\XYNetGuard\res\dlg_msgbox.xml"
 				>
 			</File>
 		</Filter>
