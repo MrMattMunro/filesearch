@@ -1,6 +1,6 @@
 ﻿<dlg pos="200,0,-0,-0">
   <dlg pos="1,1,-1,33" class="tab_header_bg">
-    <img pos="20,12" skin="kwssafe" sub="0" id="10411"/>
+    <img pos="20,12" skin="row_title" sub="0" id="10411"/>
     <text id="10771" pos="110,9" font="0204">文档列表</text>
   </dlg>
   <hr pos="0,34,-0,34" crbg="A3BAD2"/>

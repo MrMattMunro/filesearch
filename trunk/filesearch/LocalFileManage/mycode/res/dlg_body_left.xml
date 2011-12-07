@@ -1,14 +1,17 @@
-﻿<dlg id="10200" pos="0,7,200,200">
+﻿<dlg id="10200" pos="0,7,200,500">
 
-  <img  pos="0,0,-0,-0" skin="scan_itemlist_bg" />
-
+  <img  pos="0,0,-0,-0" skin="main_tree_bg" />
+  
+  <hr pos="10,20,-10,20" crbg="A3BAD2" style="dot"/>
+  
   <text id="10203" pos="10,30" font="0000" crtext="000000">目录树</text>
-  <text id="10203" pos="10,50" font="0000" crtext="000000">我的草稿</text>
-  <text id="10204" pos="10,70" font="0000" crtext="000000">已删除</text>
+  <text id="10203" pos="10,60" font="0000" crtext="000000">我的草稿</text>
+  <text id="10204" pos="10,90" font="0000" crtext="000000">已删除</text>
+
+  <hr pos="10,110,-10,110" crbg="A3BAD2" style="dot"/>
   
   <text id="10208" pos="10,120" font="0000" crtext="000000">快速搜索</text>
-  <text id="10208" pos="10,140" font="0000" crtext="000000">通过创建日期</text>
-  <text id="10208" pos="10,160" font="0000" crtext="000000">通过修改日期</text>
+  <text id="10208" pos="10,150" font="0000" crtext="000000">通过创建日期</text>
+  <text id="10208" pos="10,180" font="0000" crtext="000000">通过修改日期</text>
   
-  <imgbtn id="10632" skin="rediagnose" pos="|-61,-52" class="linkimage"/>
 </dlg>

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <layer title="本地文档管理" width="1024" height="768" appwin="1" resize="1">
 
-  <header class="mainhead" width="full" height="75">
+  <header class="mainhead" width="1024" height="60">
     <dlgfile pos="0,0,-0,-0" src="104" />
   </header>
 
