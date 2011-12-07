@@ -1,2 +1,14 @@
-﻿<text pos="0,0,200,-0" class="vcentertext" crtext="FFFFFF" cursor="hand" href="http://code.ijinshan.com/app/XYNetDoctor.rar">本地文档管理系统 0.2 Beta 内测版</text>
-<text pos="-170,0,-0,-0" class="vcentertext" crtext="FFFFFF" tip="加入官方QQ群:2547153" href="http://qun.qq.com/#jointhegroup/gid/134324313">QQ在线支持 官方QQ群:2547153</text>
+﻿<dlg id="10200" pos="0,7,200,200">
+
+  <img  pos="0,0,-0,-0" skin="scan_itemlist_bg" />
+
+  <text id="10203" pos="10,30" font="0000" crtext="000000">目录树</text>
+  <text id="10203" pos="10,50" font="0000" crtext="000000">我的草稿</text>
+  <text id="10204" pos="10,70" font="0000" crtext="000000">已删除</text>
+  
+  <text id="10208" pos="10,120" font="0000" crtext="000000">快速搜索</text>
+  <text id="10208" pos="10,140" font="0000" crtext="000000">通过创建日期</text>
+  <text id="10208" pos="10,160" font="0000" crtext="000000">通过修改日期</text>
+  
+  <imgbtn id="10632" skin="rediagnose" pos="|-61,-52" class="linkimage"/>
+</dlg>

@@ -1,0 +1,5 @@
+﻿<imgbtn id="60000" class="linkimage" skin="feedbackbtn" tip="意见建议" pos="-129,1"/>
+<imgbtn id="60002" class="linkimage" skin="menubtn" tip="更多操作" pos="-108,1"/>
+<imgbtn id="60003" class="linkimage" skin="minbtn" tip="最小化到托盘" pos="-78,1"/>
+<imgbtn id="60001" class="linkimage" skin="closebtn" tip="根据用户配置，退出程序或者最小化到托盘" pos="-48,1"/>
+<img pos="1,1" skin="logo_ad"  href="http://www.slfile.net"/>

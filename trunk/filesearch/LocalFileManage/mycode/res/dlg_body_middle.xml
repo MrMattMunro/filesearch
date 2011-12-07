@@ -1,2 +1,11 @@
-﻿<text pos="0,0,200,-0" class="vcentertext" crtext="FFFFFF" cursor="hand" href="http://code.ijinshan.com/app/XYNetDoctor.rar">本地文档管理系统 0.2 Beta 内测版</text>
-<text pos="-170,0,-0,-0" class="vcentertext" crtext="FFFFFF" tip="加入官方QQ群:2547153" href="http://qun.qq.com/#jointhegroup/gid/134324313">QQ在线支持 官方QQ群:2547153</text>
+﻿<dlg pos="200,0,-0,-0">
+  <dlg pos="1,1,-1,33" class="tab_header_bg">
+    <img pos="20,12" skin="kwssafe" sub="0" id="10411"/>
+    <text id="10771" pos="110,9" font="0204">文档列表</text>
+  </dlg>
+  <hr pos="0,34,-0,34" crbg="A3BAD2"/>
+  <!-- 网卡列表 -->
+  <dlg id="10773" pos="0,33,-0,-0" class="panel">
+    <realwnd id="10874" pos="0,0,-0,-0" ctrlid="10874" />
+  </dlg>
+</dlg>
