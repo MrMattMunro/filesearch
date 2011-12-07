@@ -13,9 +13,12 @@
   
   <class name="tipbg" skin="tipbg"/>
 
-  <class name="mainhead" skin=mainbghead font=0000 crtext=000000 crbg=FBFCFD/>
+
+  <class name="mainhead" skin="mainbghead" font="0000" crtext="000000" crbg="FBFCFD"/>  
   <class name="mainbody" skin="mainbgbody" font="0000" crtext="FFFFFF" crbg="FBFCFD" x-margin="7"/>
   <class name="mainfoot" skin="mainbgfoot" font="0000" crtext="000000" crbg="FBFCFD" x-margin="10" y-margin="1"/>
+  
+  
   <class name="msgboxhead" skin="msgboxhead" font="0000" crtext="000000" crbg="FBFCFD"/>
   <class name="msgboxbody" skin="msgboxbody" font="0000" crtext="000000" crbg="FBFCFD"/>
   <class name="msgboxfoot" skin="msgboxfoot" font="0000" crtext="000000" crbg="FBFCFD"/>

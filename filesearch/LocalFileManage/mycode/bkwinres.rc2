@@ -20,13 +20,17 @@ DEFINE_PNG(IDC_BTN_CLOSE,					100,	"res\\pic\\dlg_btn_close.png")
 DEFINE_PNG(IDC_BTN_MAX,						101,	"res\\pic\\dlg_btn_max.png")
 DEFINE_PNG(IDC_BTN_MIN,						102,	"res\\pic\\dlg_btn_min.png")
 DEFINE_PNG(IDC_BTN_NORMAL,					103,	"res\\pic\\dlg_btn_normal.png")
+DEFINE_PNG(IDC_LOGO_AD,					    104,	"res\\pic\\logo_ad.png")
 
 
 //////////////////////////////////////////////////////////////////////////
 //  BMP 系统主界面 1000-1999
-DEFINE_BMP(IDB_DLG_HEADER,					1000,	"res\\pic\\dlg_header.bmp")
+DEFINE_BMP(IDB_DLG_HEADER,					1000,	"res\\pic\\head_bg.png")
 DEFINE_BMP(IDB_DLG_BODY,					1001,	"res\\pic\\dlg_body.bmp")
 DEFINE_BMP(MAIN_BK_FOOT,					1002,	"res\\pic\\main_bk_foot.bmp")
+DEFINE_BMP(MAIN_TREE_BG,					1003,	"res\\pic\\main_tree_bg.bmp")
+DEFINE_BMP(COMMON_TITLE,					1004,	"res\\pic\\common_title.bmp")
+
 
 //  BMP 导入界面 1200-1300
 

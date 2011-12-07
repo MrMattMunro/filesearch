@@ -1,5 +1,8 @@
-﻿<imgbtn id="60000" class="linkimage" skin="feedbackbtn" tip="意见建议" pos="-129,1"/>
-<imgbtn id="60002" class="linkimage" skin="menubtn" tip="更多操作" pos="-108,1"/>
-<imgbtn id="60003" class="linkimage" skin="minbtn" tip="最小化到托盘" pos="-78,1"/>
-<imgbtn id="60001" class="linkimage" skin="closebtn" tip="根据用户配置，退出程序或者最小化到托盘" pos="-48,1"/>
-<img pos="1,1" skin="logo_ad"  href="http://www.slfile.net"/>
+﻿<text id="60000" crtext="FFFFFF" pos="20,30">文件(F)</text>
+<text id="60000" crtext="FFFFFF"  pos="80,30">查看(V)</text>
+<text id="60000" crtext="FFFFFF" pos="140,30">工具(T)</text>
+<text id="60000" crtext="FFFFFF" pos="200,30">帮助(H)</text>
+
+<imgbtn id="60003" class="linkimage" skin="dlg_btn_min" tip="最大化到托盘" pos="-108,1"/>
+<imgbtn id="60003" class="linkimage" skin="dlg_btn_max" tip="最小化到托盘" pos="-78,1"/>
+<imgbtn id="60001" class="linkimage" skin="dlg_btn_close" tip="根据用户配置，退出程序或者最小化到托盘" pos="-48,1"/>
