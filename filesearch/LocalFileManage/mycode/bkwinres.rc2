@@ -1,19 +1,21 @@
 #pragma once
 
 //////////////////////////////////////////////////////////////////////////
-// XML
-
+// XML 100-199
 DEFINE_XML(IDR_SKIN_DEF,                 100, "res\\def_skin.xml")
 DEFINE_XML(IDR_STYLE_DEF,                101, "res\\def_style.xml")
 DEFINE_XML(IDR_STRING_DEF,               102, "res\\def_string.xml")
 DEFINE_XML(IDR_MAIN_DIALOG,				 103, "res\\dlg_main.xml")
+DEFINE_XML(IDR_MAIN_HEAD_DIALOG,		 104, "res\\dlg_main_head.xml")
+DEFINE_XML(IDR_BODY_LEFT_DIALOG,		 105, "res\\dlg_body_left.xml")
+DEFINE_XML(IDR_BODY_MID_DIALOG,			 106, "res\\dlg_body_middle.xml")
+DEFINE_XML(IDR_BODY_RIGHT_DIALOG,		 107, "res\\dlg_body_right.xml")
+DEFINE_XML(IDR_MAIN_FOOT_DIALOG,		 108, "res\\dlg_main_foot.xml")
+DEFINE_XML(IDR_MSGBOX_DIALOG,		     109, "res\\dlg_msgbox.xml")
+
 
 //////////////////////////////////////////////////////////////////////////
-// PNG
-
-DEFINE_PNG(IDP_LITTLE_LOGO,					201,   "res\\pic\\little_logo.png")
-DEFINE_PNG(IDP_BIG_LOGO,					202,   "res\\pic\\big_logo.png")
-
+// 通用的元素		100-999
 DEFINE_PNG(IDC_BTN_CLOSE,					100,	"res\\pic\\dlg_btn_close.png")
 DEFINE_PNG(IDC_BTN_MAX,						101,	"res\\pic\\dlg_btn_max.png")
 DEFINE_PNG(IDC_BTN_MIN,						102,	"res\\pic\\dlg_btn_min.png")
@@ -21,7 +23,28 @@ DEFINE_PNG(IDC_BTN_NORMAL,					103,	"res\\pic\\dlg_btn_normal.png")
 
 
 //////////////////////////////////////////////////////////////////////////
-// BITMAP
+//  BMP 系统主界面 1000-1999
+DEFINE_BMP(IDB_DLG_HEADER,					1000,	"res\\pic\\dlg_header.bmp")
+DEFINE_BMP(IDB_DLG_BODY,					1001,	"res\\pic\\dlg_body.bmp")
+DEFINE_BMP(MAIN_BK_FOOT,					1002,	"res\\pic\\main_bk_foot.bmp")
 
-DEFINE_BMP(IDB_DLG_HEADER,					501,	"res\\pic\\dlg_header.bmp")
-DEFINE_BMP(IDB_DLG_BODY,					502,	"res\\pic\\dlg_body.bmp")
+//  BMP 导入界面 1200-1300
+
+//  BMP 导出界面 1300 - 1400
+
+//  BMP 提示界面 1500 - 1600
+
+
+//////////////////////////////////////////////////////////////////////////
+// PNG 系统主界面 5000-5200
+DEFINE_PNG(IDP_LITTLE_LOGO,					5000,   "res\\pic\\file_manager.png")
+// PNG 系统主界面 5200-5300
+
+// PNG 导入界面 5200 - 5300
+
+// PNG 导出界面 5300 - 5400
+
+// PNG 提示界面 5500 - 5600
+
+
+

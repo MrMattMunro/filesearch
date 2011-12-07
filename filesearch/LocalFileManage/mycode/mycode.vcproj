@@ -293,6 +293,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\res\dlg_main_head.xml"
+				>
+			</File>
+			<File
 				RelativePath="..\..\XYNetDoctorGUI\XYNetGuard\res\dlg_msgbox.xml"
 				>
 			</File>

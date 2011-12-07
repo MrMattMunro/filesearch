@@ -1,20 +1,41 @@
 ﻿<skins>
-  <imghorzex name="dlg_header" src="501" left="4"/>
-  <imgframe name="dlg_body" src="502" top="4" left="4" crbg="FFFFFF" part="top"/>
-  <imgframe name="dlg_footer" src="502" top="4" left="4" crbg="FFFFFF" part="bottom"/>
+
+  <!-->
+  // 所有PNG和BMP的编号规则：
   
-  <!--<skins-png>-->
-  <png name="little_logo"  src="201"/>
-  <png name="big_logo"     src="202"/>
-  <!--<png name="status_ok"    src="303"/>
-  <png name="status_warn"  src="304"/>
-  <png name="status_ask"   src="305"/>
-  <png name="animation"    src="306" subwidth="45"/>-->
+  // BMP 1000-1999
+  // 系统主界面		1000 - 1200
+  // 导入界面     1200 - 1300
+  // 导出界面			1300 - 1400
+  // 提示界面			1500 - 1600
+  //
+  // PNG 5000-5999
+  // 系统主界面		5000 - 5200
+  // 导入界面     5200 - 5300
+  // 导出界面			5300 - 5400
+  // 提示界面			5500 - 5600
+  </-->
+
+  <!--共通部分-->
+  <png name="little_logo" src="5000"/>
   <png name="dlg_btn_close" src="100" subwidth="42"/>
-  <png name="dlg_btn_max" src="101" subwidth="31"/>  
+  <png name="dlg_btn_max" src="101" subwidth="31"/>
   <png name="dlg_btn_min" src="102" subwidth="31"/>
   <png name="dlg_btn_normal" src="103" subwidth="31"/>
-  <!--</skins-png>-->
+  
+  
+  <!--系统主界面-->
+  <imghorzex name="dlg_header" src="1000" left="4"/>
+  <imgframe name="dlg_body" src="1001" top="4" left="4" crbg="FFFFFF" part="top"/>
+  <imgframe name="dlg_footer" src="1002" top="4" left="4" crbg="FFFFFF" part="bottom"/>
+  
+  <imgframe name="mainbghead" src="1000" top="9" left="7" mode="mask" crbg="FBFCFD"/>
+  <imgframe name="mainbgbody" src="1001" top="9" left="7" mode="mask" crbg="FBFCFD"/>
+  <imghorzex name="mainbgfoot" src="1002" left="2"/>
+  <imgframe name="msgboxhead" src="1000" top="32" left="5" crbg="FBFCFD" part="top"/>
+  <imgframe name="dlgbody" src="1001" top="32" left="5" crbg="FBFCFD" part="middle"/>
+  <imgframe name="dlgfoot" src="1002" top="32" left="5" crbg="FBFCFD" part="bottom"/>
+
 
   <!--</skins-other>-->
   <gradation name="tipbg" from="FFFFFF" to="E4E5F0" direction="vert"/>
