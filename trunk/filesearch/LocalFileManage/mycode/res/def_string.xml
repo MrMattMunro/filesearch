@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <string>
-  <s id="100">名称</s>
-  <s id="101">路径</s>
-  <s id="102">日期</s>
-  <s id="1004">&lt;b&gt;%s&&lt;/b&gt;</s>
+  <s id="0">名称</s>
+  <s id="1">路径</s>
+  <s id="2">日期</s>
+  <s id="3">&lt;b&gt;%s&&lt;/b&gt;</s>
+  
 </string>

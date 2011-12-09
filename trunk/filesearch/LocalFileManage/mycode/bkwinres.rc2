@@ -25,23 +25,28 @@ DEFINE_PNG(IDC_LOGO_AD,					    104,	"res\\pic\\logo_ad.png")
 
 //////////////////////////////////////////////////////////////////////////
 //  BMP 系统主界面 1000-1999
-DEFINE_BMP(IDB_DLG_HEADER,					1000,	"res\\pic\\head_bg.png")
+
 DEFINE_BMP(IDB_DLG_BODY,					1001,	"res\\pic\\dlg_body.bmp")
 DEFINE_BMP(MAIN_BK_FOOT,					1002,	"res\\pic\\main_bk_foot.bmp")
 DEFINE_BMP(MAIN_TREE_BG,					1003,	"res\\pic\\main_tree_bg.bmp")
 DEFINE_BMP(COMMON_TITLE,					1004,	"res\\pic\\common_title.bmp")
-
 
 //  BMP 导入界面 1200-1300
 
 //  BMP 导出界面 1300 - 1400
 
 //  BMP 提示界面 1500 - 1600
+DEFINE_BMP(DLG_HEADER,					1500,	"res\\pic\\dlg_header.bmp")
 
 
 //////////////////////////////////////////////////////////////////////////
 // PNG 系统主界面 5000-5200
 DEFINE_PNG(IDP_LITTLE_LOGO,					5000,   "res\\pic\\file_manager.png")
+DEFINE_PNG(IDB_DLG_HEADER,					5001,	"res\\pic\\head_bg.png")
+DEFINE_PNG(IDB_DIR_CLOSE,					5002,	"res\\pic\\dir_close.png")
+DEFINE_PNG(IDB_DIR_OPEN,					5003,	"res\\pic\\dir_open.png")
+DEFINE_PNG(IDB_HEAD_PG,					    5004,	"res\\pic\\head_bg.png")
+
 // PNG 系统主界面 5200-5300
 
 // PNG 导入界面 5200 - 5300
