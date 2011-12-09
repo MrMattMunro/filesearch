@@ -22,22 +22,25 @@
   <png name="dlg_btn_min" src="102" subwidth="31"/>
   <png name="dlg_btn_normal" src="103" subwidth="31"/>
   <png name="logo_ad" src="104"/>
+ 
   
   
   <!--系统主界面-->
-  <imghorzex name="dlg_header" src="1000" left="4"/>
+  <imghorzex name="dlg_header" src="1500" left="4"/>
   <imgframe name="dlg_body" src="1001" top="4" left="4" crbg="FFFFFF" part="top"/>
   <imgframe name="dlg_footer" src="1002" top="4" left="4" crbg="FFFFFF" part="bottom"/>
-  
-  <imgframe name="mainbghead" src="1000" top="9" left="7" crbg="FBFCFD"/>
   <imgframe name="mainbgbody" src="1001" top="9" left="7" mode="mask" crbg="FBFCFD"/>
   <imghorzex name="mainbgfoot" src="1002" left="2"/>
-  
-  <imgframe name="msgboxhead" src="1000" top="32" left="5" crbg="FBFCFD" part="top"/>
+  <imgframe name="msgboxhead" src="1001" top="32" left="5" crbg="FBFCFD" part="top"/>
   <imgframe name="dlgbody" src="1001" top="32" left="5" crbg="FBFCFD" part="middle"/>
   <imgframe name="dlgfoot" src="1002" top="32" left="5" crbg="FBFCFD" part="bottom"/>
   <imghorzex name="main_tree_bg" src="1003"/>
-  
+
+  <png name="mainbghead" src="5004" top="9" left="7" crbg="FBFCFD"/>
+  <png name="dir_close" src="5002"/>
+  <png name="dir_open" src="5003"/>
+
+
   <!--</skins-other>-->
   <gradation name="tipbg" from="FFFFFF" to="E4E5F0" direction="vert"/>
   <button name="common_btn" border="7D9EBC" bg="FBFCFD" bgup="FEFEFE" bgdown="C6E2FD" bguphover="FEFEFE" bgdownhover="DBEDFE" bguppush="C6E2FD" bgdownpush="FEFEFE"/>

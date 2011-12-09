@@ -1,11 +1,11 @@
-﻿<dlg pos="200,0,-0,-0">
-  <dlg pos="1,1,-1,33" class="tab_header_bg">
-    <img pos="20,12" skin="row_title" sub="0" id="10411"/>
-    <text id="10771" pos="110,9" font="0204">文档列表</text>
+﻿<dlg id="10601" pos="200,0,-0,-0">
+  <dlg id="10602" pos="1,1,-1,33" class="tab_header_bg">
+    <img pos="20,12" skin="row_title" sub="0" id="10603"/>
+    <text id="10604" pos="110,9" font="0204">文档列表</text>
   </dlg>
   <hr pos="0,34,-0,34" crbg="A3BAD2"/>
-  <!-- 网卡列表 -->
-  <dlg id="10773" pos="0,33,-0,-0" class="panel">
-    <realwnd id="10874" pos="0,0,-0,-0" ctrlid="10874" />
+  <!-- 文档列表 -->
+  <dlg id="10605" pos="0,33,-0,-0" class="panel">
+    <realwnd id="10605" pos="0,0,-0,-0" ctrlid="10606" />
   </dlg>
 </dlg>

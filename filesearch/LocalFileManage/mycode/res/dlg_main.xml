@@ -1,7 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<layer title="本地文档管理" width="1024" height="768" appwin="1" resize="1">
 
-  <header class="mainhead" width="1024" height="60">
+<!-->
+  // 所有界面元素id定义规则
+  
+  // 1: 从10000开始,一个XML对应200个元素
+  DEFINE_XML(IDR_MAIN_DIALOG,				   103, "res\\dlg_main.xml")            10000  -  10200 
+  DEFINE_XML(IDR_MAIN_HEAD_DIALOG,		 104, "res\\dlg_main_head.xml")       10201  -  10400 
+  DEFINE_XML(IDR_BODY_LEFT_DIALOG,		 105, "res\\dlg_body_left.xml")       10401  -  10600 
+  DEFINE_XML(IDR_BODY_MID_DIALOG,			 106, "res\\dlg_body_middle.xml")     10601  -  10800 
+  DEFINE_XML(IDR_BODY_RIGHT_DIALOG,		 107, "res\\dlg_body_right.xml")      10801  -  11000 
+  DEFINE_XML(IDR_MAIN_FOOT_DIALOG,		 108, "res\\dlg_main_foot.xml")       11001  -  11200 
+  DEFINE_XML(IDR_MSGBOX_DIALOG,		     109, "res\\dlg_msgbox.xml")          11201  -  11400 
+
+  </-->
+
+<layer title="文档管理" width="1024" height="768" appwin="1" resize="1">
+
+  <header class="mainhead" width="full" height="60">
     <dlgfile pos="0,0,-0,-0" src="104" />
   </header>
 
