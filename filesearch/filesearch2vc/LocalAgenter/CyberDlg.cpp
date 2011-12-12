@@ -71,11 +71,12 @@ BOOL CCyberDlg::OnInitDialog()
 	//读取数据库，获取树基本信息
 	sloMysqlAgent::GetInstance()->GetGroupsFromDB();
 	HTREEITEM hItemState;
-	int nState = STATE_UNCHECKED;
+
 	//获取分组个数
 	int nGroupSize = sloMysqlAgent::GetInstance()->m_GroupList.size();
 	for (int i = 0; i < nGroupSize; i++)
 	{
+		int nState = STATE_UNCHECKED;
 		sloMysqlAgent::GetInstance()->GetTypesFromDB(sloMysqlAgent::GetInstance()->m_GroupList[i].nID);
 
 		//获取该分组下得类型个数
@@ -89,6 +90,11 @@ BOOL CCyberDlg::OnInitDialog()
 			int nCount = sloMysqlAgent::GetInstance()->m_KeywordsList.size();
 			for(int i = 0; i < nCount; i++)
 			{
+				if (m_strKeywords.GetLength() != 0 && m_strKeywords.Find(sloMysqlAgent::GetInstance()->m_KeywordsList[i].szKeyName) != -1)
+				{
+					nState = STATE_CHECKED;
+				}else
+					nState = STATE_UNCHECKED;
 				m_treeKeywords.InsertItemState(sloMysqlAgent::GetInstance()->m_KeywordsList[i].szKeyName, 4, 4, nState, hItemState);
 			}
 		}
@@ -103,6 +109,7 @@ BOOL CCyberDlg::OnInitDialog()
 	nGroupSize = sloMysqlAgent::GetInstance()->m_GroupListWebsite.size();
 	for (i = 0; i < nGroupSize; i++)
 	{
+		int nState = STATE_UNCHECKED;
 		hItemState = m_treeWebsite.InsertItemState (sloMysqlAgent::GetInstance()->m_GroupListWebsite[i].szGroupName, 5, 5, nState);
 		//获取网址列表
 		sloMysqlAgent::GetInstance()->GetWebsiteFromGroupName(sloMysqlAgent::GetInstance()->m_GroupListWebsite[i].szGroupName);
@@ -110,6 +117,11 @@ BOOL CCyberDlg::OnInitDialog()
 		int nCount = sloMysqlAgent::GetInstance()->m_WebsiteList.size();
 		for(int j = 0; j < nCount; j++)
 		{
+			if (m_strWebsite.GetLength() != 0 && m_strWebsite.Find(sloMysqlAgent::GetInstance()->m_WebsiteList[j].szSiteName) != -1)
+			{
+				nState = STATE_CHECKED;
+			}else
+				nState = STATE_UNCHECKED;
 			m_treeWebsite.InsertItemState(sloMysqlAgent::GetInstance()->m_WebsiteList[j].szSiteName, 4, 4, nState, hItemState);
 		}
 	}
@@ -193,4 +205,15 @@ void CCyberDlg::OnOK()
 	sloMysqlAgent::GetInstance()->AddCyber(m_cyberName.GetBuffer(0), strKeywords.GetBuffer(0), strWebsite.GetBuffer(0), nFreq, nLayer);
 
 	CDialog::OnOK();
+}
+
+
+void CCyberDlg::SetKeywords(CString strKeywords)
+{
+	m_strKeywords = strKeywords;
+}
+
+void CCyberDlg::SetWebsite(CString strWebsite)
+{
+	m_strWebsite = strWebsite;
 }

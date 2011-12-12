@@ -8,12 +8,21 @@
 #include "sloCommAgent.h"
 #include "sloMysqlAgent.h"
 #include "CyberDlg.h"
+#include <imagehlp.h>
+#pragma comment(lib, "imagehlp.lib")
+#include "HYResources.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
+
+
+#define ALL_NAME		"全部"
+#define KEYWORD_NAME	"词汇列表"
+#define WEBSITE_NAME	"网址列表"
+#define CYBER_NAME		"快捕任务"
 
 /////////////////////////////////////////////////////////////////////////////
 // CAboutDlg dialog used for App About
@@ -276,25 +285,31 @@ void CLocalAgenterDlg::InitButton()
 	m_btnSearch.SetFlatStyle(TRUE);
 }
 
+
+#define ONE_WEEK	"最近一周"
+#define THREE_MONTH	"最近三个月"
+#define ONE_YEAR	"最近一年"
+
 void CLocalAgenterDlg::InitComboBox()
 {
 	m_BoxListGroup.ResetContent(); // Clean up all contents	
-	m_BoxListGroup.InsertString(0, "全部");
-	m_BoxListGroup.InsertString(1, "词汇列表");
-	m_BoxListGroup.InsertString(2, "网址列表");
+	m_BoxListGroup.InsertString(0, ALL_NAME);
+	m_BoxListGroup.InsertString(1, KEYWORD_NAME);
+	m_BoxListGroup.InsertString(2, WEBSITE_NAME);
+	m_BoxListGroup.InsertString(3, CYBER_NAME);
 	m_BoxListGroup.SetCurSel(0);
 	
-	m_BoxListType.ResetContent(); // Clean up all contents	
-	m_BoxListType.InsertString(0, "默认分组");
-	m_BoxListType.InsertString(1, "自定义分组");
-	m_BoxListType.InsertString(2, "财经网址");
-	m_BoxListType.SetCurSel(0);
+// 	m_BoxListType.ResetContent(); // Clean up all contents	
+// 	m_BoxListType.InsertString(0, "默认分组");
+// 	m_BoxListType.InsertString(1, "自定义分组");
+// 	m_BoxListType.InsertString(2, "财经网址");
+// 	m_BoxListType.SetCurSel(0);
 	
 	m_BoxListTime.ResetContent(); // Clean up all contents	
-	m_BoxListTime.InsertString(0, "最近一周");
-	m_BoxListTime.InsertString(1, "最近三个月");
-	m_BoxListTime.InsertString(2, "最近一年");
-	m_BoxListTime.InsertString(3, "全部");
+	m_BoxListTime.InsertString(0, ONE_WEEK);
+	m_BoxListTime.InsertString(1, THREE_MONTH);
+	m_BoxListTime.InsertString(2, ONE_YEAR);
+	m_BoxListTime.InsertString(3, ALL_NAME);
 	m_BoxListTime.SetCurSel(0);
 	
 	SetComboxPos(TRUE);
@@ -564,6 +579,241 @@ void CLocalAgenterDlg::ShowListContent_Button(CXTPReportRecord* pRecord)
 
 }
 
+#define BACK_DIR_NAME			"slback"
+#define BACK_DIR_KEY			"abc123_"
+#define BACK_TABLE_KEYWORDS			"t_keywords"
+#define BACK_TABLE_KEYWORDS_GROUP	"t_keywords_group"
+#define BACK_TABLE_KEYWORDS_TYPE	"t_keywords_type"
+
+#define BACK_TABLE_WEBSITE			"t_website"
+#define BACK_TABLE_WEBSITE_TYPE		"t_website_type"
+
+#define BACK_TABLE_WEBSPIDER_TASK	"t_webspider_task"
+
+#define FITER_BACK		TEXT("Back Files (.bck)|*.bck|")
+#define BACK_EXT		".bck"
+void CLocalAgenterDlg::BackMysqlData()
+{
+	BOOL bRet = TRUE;
+	char szFile1[MAX_PATH] = {0};
+	char szFile2[MAX_PATH] = {0};
+	char szFile3[MAX_PATH] = {0};
+	char szFile4[MAX_PATH] = {0};
+	char szFile5[MAX_PATH] = {0};
+	char szFile6[MAX_PATH] = {0};
+	do 
+	{
+		char szPath[MAX_PATH] = {0};
+		if( sloCommAgent::DoFileDialog(FALSE, szPath, FITER_BACK, NULL, "sql_back") )
+		{
+			strcat(szPath, BACK_EXT);
+			//导出记录
+			//1 导出每张表到文件中
+			char szBackPath[MAX_PATH] = {0};
+			char szDir[MAX_PATH] = {0};
+			char szDirLong[MAX_PATH] = {0};	
+			GetTempPath(MAX_PATH, szBackPath);
+			GetLongPathName(szBackPath, szDirLong, MAX_PATH);
+			sprintf(szDir, "%s%s", szDirLong, BACK_DIR_NAME);
+			//BOOL bRet = MakeSureDirectoryPathExists(szDir);
+			BOOL bRet = CreateDirectory(szDir, NULL);
+			
+			sprintf(szFile1, "%s\\%s.bck", szDir, BACK_TABLE_KEYWORDS);
+			CString strFile = szFile1;
+			strFile.Replace("\\", "/");
+			bRet = sloMysqlAgent::GetInstance()->BackTables(strFile.GetBuffer(0), BACK_TABLE_KEYWORDS);
+			if (!bRet)
+			{
+				break;
+			}
+
+			sprintf(szFile2, "%s\\%s.bck", szDir, BACK_TABLE_KEYWORDS_GROUP);
+			strFile = szFile2;
+			strFile.Replace("\\", "/");
+			bRet = sloMysqlAgent::GetInstance()->BackTables(strFile.GetBuffer(0), BACK_TABLE_KEYWORDS_GROUP);
+			if (!bRet)
+			{
+				break;
+			}
+
+			sprintf(szFile3, "%s\\%s.bck", szDir, BACK_TABLE_KEYWORDS_TYPE);
+			strFile = szFile3;
+			strFile.Replace("\\", "/");
+			bRet = sloMysqlAgent::GetInstance()->BackTables(strFile.GetBuffer(0), BACK_TABLE_KEYWORDS_TYPE);
+			if (!bRet)
+			{
+				break;
+			}	
+	
+			sprintf(szFile4, "%s\\%s.bck", szDir, BACK_TABLE_WEBSITE);	
+			strFile = szFile4;
+			strFile.Replace("\\", "/");	
+			bRet = sloMysqlAgent::GetInstance()->BackTables(strFile.GetBuffer(0), BACK_TABLE_WEBSITE);
+			if (!bRet)
+			{
+				break;
+			}	
+
+			sprintf(szFile5, "%s\\%s.bck", szDir, BACK_TABLE_WEBSITE_TYPE);
+			strFile = szFile5;
+			strFile.Replace("\\", "/");
+			bRet = sloMysqlAgent::GetInstance()->BackTables(strFile.GetBuffer(0), BACK_TABLE_WEBSITE_TYPE);
+			if (!bRet)
+			{
+				break;
+			}
+
+			sprintf(szFile6, "%s\\%s.bck", szDir, BACK_TABLE_WEBSPIDER_TASK);
+			strFile = szFile6;
+			strFile.Replace("\\", "/");
+			bRet = sloMysqlAgent::GetInstance()->BackTables(strFile.GetBuffer(0), BACK_TABLE_WEBSPIDER_TASK);
+			if (!bRet)
+			{
+				break;
+			}
+			//2 压缩文件夹
+			
+			DWORD dwRet = Compress(szDir, szPath, BACK_DIR_KEY);		
+			if (dwRet)
+			{
+				break;
+			}
+
+		}else
+			return ;
+	} while (0);
+	//3 删除临时的文件
+	if (strlen(szFile1))
+		DeleteFile(szFile1);
+	if (strlen(szFile2))
+		DeleteFile(szFile2);
+	if (strlen(szFile3))
+		DeleteFile(szFile3);
+	if (strlen(szFile4))
+		DeleteFile(szFile4);
+	if (strlen(szFile5))
+		DeleteFile(szFile5);
+	if (strlen(szFile6))
+		DeleteFile(szFile6);
+
+	if (bRet)
+	{
+		MessageBox("备份成功！");
+	}else
+		MessageBox("备份失败！");
+}
+
+//导入记录
+void CLocalAgenterDlg::RestoreMysqlData()
+{
+	BOOL bRet = TRUE;
+	char szFile1[MAX_PATH] = {0};
+	char szFile2[MAX_PATH] = {0};
+	char szFile3[MAX_PATH] = {0};
+	char szFile4[MAX_PATH] = {0};
+	char szFile5[MAX_PATH] = {0};
+	char szFile6[MAX_PATH] = {0};
+	do 
+	{
+		char szPath[MAX_PATH] = {0};
+		if( sloCommAgent::DoFileDialog(TRUE, szPath, FITER_BACK) )
+		{
+			//
+			char szBackPath[MAX_PATH] = {0};
+			char szDir[MAX_PATH] = {0};
+			char szDirLong[MAX_PATH] = {0};	
+			GetTempPath(MAX_PATH, szBackPath);
+			GetLongPathName(szBackPath, szDirLong, MAX_PATH);
+			sprintf(szDir, "%s%s", szDirLong, BACK_DIR_NAME);
+			//删除里面的记录
+
+			sprintf(szFile1, "%s\\%s.bck", szDir, BACK_TABLE_KEYWORDS);
+			sprintf(szFile2, "%s\\%s.bck", szDir, BACK_TABLE_KEYWORDS_GROUP);
+			sprintf(szFile3, "%s\\%s.bck", szDir, BACK_TABLE_KEYWORDS_TYPE);
+			sprintf(szFile4, "%s\\%s.bck", szDir, BACK_TABLE_WEBSITE);	
+			sprintf(szFile5, "%s\\%s.bck", szDir, BACK_TABLE_WEBSITE_TYPE);
+			sprintf(szFile6, "%s\\%s.bck", szDir, BACK_TABLE_WEBSPIDER_TASK);
+			BOOL bRet = CreateDirectory(szDir, NULL);
+			if (!bRet)
+			{
+				// 删除文件
+				DeleteFile(szFile1);
+				DeleteFile(szFile2);
+				DeleteFile(szFile3);
+				DeleteFile(szFile4);
+				DeleteFile(szFile5);
+				DeleteFile(szFile6);			
+			}
+			
+			//解压到临时目录
+			DWORD dwRet = ExtractToDir(szPath, NULL, szDir, BACK_DIR_KEY);		
+			if (dwRet)
+			{
+				bRet = FALSE;
+				break;
+			}			
+			
+			//还原
+			CString strFile = szFile1;
+			strFile.Replace("\\", "/");
+			bRet = sloMysqlAgent::GetInstance()->RestoreTables(strFile.GetBuffer(0), BACK_TABLE_KEYWORDS);
+			if (!bRet)
+				break;	
+			
+			strFile = szFile2;
+			strFile.Replace("\\", "/");
+			bRet = sloMysqlAgent::GetInstance()->RestoreTables(strFile.GetBuffer(0), BACK_TABLE_KEYWORDS_GROUP);
+			if (!bRet)
+				break;	
+			
+			strFile = szFile3;
+			strFile.Replace("\\", "/");
+			bRet = sloMysqlAgent::GetInstance()->RestoreTables(strFile.GetBuffer(0), BACK_TABLE_KEYWORDS_TYPE);
+			if (!bRet)
+				break;
+			
+			strFile = szFile4;
+			strFile.Replace("\\", "/");
+			bRet = sloMysqlAgent::GetInstance()->RestoreTables(strFile.GetBuffer(0), BACK_TABLE_WEBSITE);
+			if (!bRet)
+				break;
+			
+			strFile = szFile5;
+			strFile.Replace("\\", "/");
+			bRet = sloMysqlAgent::GetInstance()->RestoreTables(strFile.GetBuffer(0), BACK_TABLE_WEBSITE_TYPE);
+			if (!bRet)
+				break;
+			
+			strFile = szFile6;
+			strFile.Replace("\\", "/");
+			bRet = sloMysqlAgent::GetInstance()->RestoreTables(strFile.GetBuffer(0), BACK_TABLE_WEBSPIDER_TASK);
+			if (!bRet)
+				break;
+		}else
+			return ;
+	} while (0);
+
+	//3 删除临时的文件
+	if (strlen(szFile1))
+		DeleteFile(szFile1);
+	if (strlen(szFile2))
+		DeleteFile(szFile2);
+	if (strlen(szFile3))
+		DeleteFile(szFile3);
+	if (strlen(szFile4))
+		DeleteFile(szFile4);
+	if (strlen(szFile5))
+		DeleteFile(szFile5);
+	if (strlen(szFile6))
+		DeleteFile(szFile6);
+
+	if (bRet)
+	{
+		MessageBox("还原成功！");
+	}else
+		MessageBox("还原失败！");
+}
+	
 
 void CLocalAgenterDlg::OnButtonDropDown(UINT nID)
 {
@@ -588,10 +838,14 @@ void CLocalAgenterDlg::OnButtonDropDown(UINT nID)
 	switch(nCmd)
 	{
 	case ID_DROPDOWNMENU_OPTIONITEM1:
-		MessageBox("1");
+		{
+			RestoreMysqlData();
+		}
 		break;
 	case ID_DROPDOWNMENU_OPTIONITEM2:
-		MessageBox("2");
+		{
+			BackMysqlData();
+		}
 		break;
 	default:
 		break;
@@ -603,7 +857,7 @@ void CLocalAgenterDlg::OnButtonDropDown(UINT nID)
 void CLocalAgenterDlg::OnButtonExport() 
 {
 	// TODO: Add your control notification handler code here
-	MessageBox("dcclick");
+	BackMysqlData();
 }
 
 void CLocalAgenterDlg::OnButtonDelete() 
@@ -621,7 +875,93 @@ void CLocalAgenterDlg::OnButtonSet()
 void CLocalAgenterDlg::OnButtonSearch() 
 {
 	// TODO: Add your control notification handler code here
+	//
+	char szKey[MAX_PATH] = {0};
+	GetDlgItemText(IDC_EDIT_KEYWORD, szKey, MAX_PATH);
+	//strKey.TrimLeft(" ");
+	if (strlen(szKey) == 0)
+	{
+		return ;
+	}
+
+	int nDays = 0;
+	int nIndex = m_BoxListTime.GetCurSel();		//得到被选中内容索引
+	CString strTime;						//存放得到的编辑框内容
+	m_BoxListTime.GetLBText(nIndex,strTime);	//得到被选中内容的名字
+	if (strTime == ALL_NAME)
+	{
+		nDays = 0;
+	}else if (strTime == ONE_WEEK)
+	{
+		nDays = 7;
+	}else if (strTime == THREE_MONTH)
+	{
+		nDays = 3*30;
+	}else if (strTime == ONE_YEAR)
+	{
+		nDays = 365;
+	}
+
+	nIndex = m_BoxListGroup.GetCurSel();		//得到被选中内容索引
+	CString strGroup;						//存放得到的编辑框内容
+	m_BoxListGroup.GetLBText(nIndex,strGroup);	//得到被选中内容的名字
+	if (strcmp(strGroup.GetBuffer(0), ALL_NAME) == 0)
+	{
+		//清空列表
+		m_wndReportCtrl.ResetContent();
+		//选中全部
+		sloMysqlAgent::GetInstance()->FindKeywordFromDB(szKey, nDays);
+		int nCount = sloMysqlAgent::GetInstance()->m_KeywordsList.size();
+		for(int i = 0; i < nCount; i++)
+		{
+			CXTPReportRecord* pRecord = m_wndReportCtrl.AddRecord(new CReportRecord(sloMysqlAgent::GetInstance()->m_KeywordsList[i].szKeyName, sloMysqlAgent::GetInstance()->m_KeywordsList[i].szDate));
+			ShowListContent_Button(pRecord);
+		}
 	
+		sloMysqlAgent::GetInstance()->FindWebsiteFromDB(szKey, nDays);
+		nCount = sloMysqlAgent::GetInstance()->m_WebsiteList.size();
+		for(i = 0; i < nCount; i++)
+		{
+			CXTPReportRecord* pRecord = m_wndReportCtrl.AddRecord(new CReportRecord(sloMysqlAgent::GetInstance()->m_WebsiteList[i].szSiteName, sloMysqlAgent::GetInstance()->m_WebsiteList[i].szDate));
+			ShowListContent_Button(pRecord);
+		}
+
+		sloMysqlAgent::GetInstance()->FindCyberFromDB(szKey,nDays);
+		nCount = sloMysqlAgent::GetInstance()->m_CyberList.size();
+		for(i = 0; i < nCount; i++)
+		{
+			CXTPReportRecord* pRecord = m_wndReportCtrl.AddRecord(new CReportRecord(sloMysqlAgent::GetInstance()->m_CyberList[i].szCyberName, sloMysqlAgent::GetInstance()->m_CyberList[i].szDate));
+			ShowListContent_Button(pRecord);
+		}
+
+		m_pColumn4->SetEditable(TRUE);
+		
+		m_wndReportCtrl.Populate();
+		
+	}else if (strcmp(strGroup.GetBuffer(0), CYBER_NAME) == 0)
+	{
+		//清空列表
+		m_wndReportCtrl.ResetContent();
+		
+		sloMysqlAgent::GetInstance()->FindCyberFromDB(szKey,nDays);
+		int nCount = sloMysqlAgent::GetInstance()->m_CyberList.size();
+		for(int i = 0; i < nCount; i++)
+		{
+			CXTPReportRecord* pRecord = m_wndReportCtrl.AddRecord(new CReportRecord(sloMysqlAgent::GetInstance()->m_CyberList[i].szCyberName, sloMysqlAgent::GetInstance()->m_CyberList[i].szDate));
+			ShowListContent_Button(pRecord);
+		}
+		
+		m_pColumn4->SetEditable(TRUE);
+		
+		m_wndReportCtrl.Populate();
+	}else if (strcmp(strGroup.GetBuffer(0), KEYWORD_NAME) == 0)
+	{
+					
+	}else if (strcmp(strGroup.GetBuffer(0), WEBSITE_NAME) == 0)
+	{
+
+	}
+
 }
 
 
@@ -670,7 +1010,6 @@ void CLocalAgenterDlg::SetComboxPos(BOOL bAll)
 	}
 }
 
-#define ALL_NAME	"全部"
 void CLocalAgenterDlg::OnEditchangeComboGroup() 
 {
 	// TODO: Add your control notification handler code here
@@ -678,12 +1017,41 @@ void CLocalAgenterDlg::OnEditchangeComboGroup()
 	CString strtemp;						//存放得到的编辑框内容
 	m_BoxListGroup.GetLBText(nIndex,strtemp);	//得到被选中内容的名字
 	
-	if (strcmp(strtemp.GetBuffer(0), ALL_NAME) == 0)
+	if (strcmp(strtemp.GetBuffer(0), ALL_NAME) == 0 ||
+		strcmp(strtemp.GetBuffer(0), CYBER_NAME) == 0 )
 	{
 		//选中全部
 		SetComboxPos(TRUE);
 	}else
+	{
+		if (strcmp(strtemp.GetBuffer(0), KEYWORD_NAME) == 0)
+		{
+			m_BoxListType.ResetContent(); // Clean up all contents	
+			if(sloMysqlAgent::GetInstance()->GetTypesFromDB(0))
+			{
+				int nCount = sloMysqlAgent::GetInstance()->m_TypeList.size();
+				for (int i = 0; i < nCount; i++)
+				{
+					m_BoxListType.InsertString(i, sloMysqlAgent::GetInstance()->m_TypeList[i].szTypeName);
+				}
+				m_BoxListType.SetCurSel(0);
+			}
+
+		}else if (strcmp(strtemp.GetBuffer(0), CYBER_NAME) == 0)
+		{
+			if(sloMysqlAgent::GetInstance()->GetGroupsFromDB_Website())
+			{
+				int nCount = sloMysqlAgent::GetInstance()->m_GroupListWebsite.size();
+				for (int i = 0; i < nCount; i++)
+				{
+					m_BoxListType.InsertString(i, sloMysqlAgent::GetInstance()->m_GroupListWebsite[i].szGroupName);
+				}
+				m_BoxListType.SetCurSel(0);
+			}
+		}
+
 		SetComboxPos(FALSE);
+	}
 }
 
 void CLocalAgenterDlg::OnSelchangeComboGroup() 
@@ -693,12 +1061,42 @@ void CLocalAgenterDlg::OnSelchangeComboGroup()
 	CString strtemp;						//存放得到的编辑框内容
 	m_BoxListGroup.GetLBText(nIndex,strtemp);	//得到被选中内容的名字
 	
-	if (strcmp(strtemp.GetBuffer(0), ALL_NAME) == 0)
+	if (strcmp(strtemp.GetBuffer(0), ALL_NAME) == 0 ||
+		strcmp(strtemp.GetBuffer(0), CYBER_NAME) == 0 )
 	{
 		//选中全部
 		SetComboxPos(TRUE);
 	}else
-		SetComboxPos(FALSE);	
+	{
+		if (strcmp(strtemp.GetBuffer(0), KEYWORD_NAME) == 0)
+		{
+			m_BoxListType.ResetContent(); // Clean up all contents	
+			if(sloMysqlAgent::GetInstance()->GetTypesFromDB(0))
+			{
+				int nCount = sloMysqlAgent::GetInstance()->m_TypeList.size();
+				for (int i = 0; i < nCount; i++)
+				{
+					m_BoxListType.InsertString(i, sloMysqlAgent::GetInstance()->m_TypeList[i].szTypeName);
+				}
+				m_BoxListType.SetCurSel(0);
+			}
+			
+		}else if (strcmp(strtemp.GetBuffer(0), WEBSITE_NAME) == 0)
+		{
+			m_BoxListType.ResetContent(); // Clean up all contents	
+			if(sloMysqlAgent::GetInstance()->GetGroupsFromDB_Website())
+			{
+				int nCount = sloMysqlAgent::GetInstance()->m_GroupListWebsite.size();
+				for (int i = 0; i < nCount; i++)
+				{
+					m_BoxListType.InsertString(i, sloMysqlAgent::GetInstance()->m_GroupListWebsite[i].szGroupName);
+				}
+				m_BoxListType.SetCurSel(0);
+			}
+		}
+		
+		SetComboxPos(FALSE);
+	}
 }
 
 
@@ -760,13 +1158,24 @@ void CLocalAgenterDlg::OnItemButtonClick(NMHDR * pNotifyStruct, LRESULT*pResult)
 				CXTPReportRecord* pRecord = pItemNotify->pRow->GetRecord();	
 				CXTPReportRecordItemText* pItemText = (CXTPReportRecordItemText*)pRecord->GetItem(4);
 				CString strContent = pItemText->GetValue();
+				//根据content查找所有记录
+				sloMysqlAgent::GetInstance()->GetCyberFromDB(strContent);
+
 				//修改快捕任务，弹出对话框
 				CCyberDlg cyber;
 				cyber.m_cyberName = strContent;
+				char szLayer[10] = {0};
+				char szFren[10] =  {0};
+				itoa(sloMysqlAgent::GetInstance()->m_CyberList[0].nLayer, szLayer, 10);
+				cyber.m_strLayerName = szLayer;
+				itoa(sloMysqlAgent::GetInstance()->m_CyberList[0].nFrequency, szFren, 10);
+				cyber.m_strFrequencyName = szFren;
+				cyber.SetKeywords(sloMysqlAgent::GetInstance()->m_CyberList[0].szKeywords);
+				cyber.SetWebsite(sloMysqlAgent::GetInstance()->m_CyberList[0].szWebsite);
 				if (cyber.DoModal() == 1)
 				{
 					//点击确定
-
+					
 				}else
 				{
 					//点击取消

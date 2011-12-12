@@ -80,6 +80,7 @@ public:
 	BOOL GetKeyWordsFromDB(int nGroupID, int nTypeID);
 	BOOL GetKeyWordsFromGroupName(char* szGroupName);
 	BOOL GetKeyWordsFromTypeName(char* szTypeName);
+	BOOL FindKeywordFromDB(char* pKeyword, int nDays = 0, char* pTypeName = NULL);
 public:
 	//type
 	BOOL AddType(char* szGroupName, char* szTypeName);
@@ -109,6 +110,7 @@ public:
 	BOOL GetGroupsFromDB_Website();
 	BOOL GetWebsiteFromDB(int nGroupID);
 	BOOL GetWebsiteFromGroupName(char* szGroupName);
+	BOOL FindWebsiteFromDB(char* pWebsite, int nDays = 0);
 public:
 	//website
 	BOOL AddWebsite(char* szTypeName, char* szKeyName);
@@ -120,9 +122,16 @@ public:
 	BOOL AddCyber(char* szCyberName, char* szKeywords, char* szWebsites, int nFre, int nLayer);
 	BOOL DelCyber(char* szCyberName);
 	BOOL UpdateCyber(char* szOldCyberName, char* szCyberName, char* szKeywords, char* szWebsites, int nFre, int nLayer, char* pTime);
+
 public:
-	BOOL GetCyberFromDB();
+	BOOL GetCyberFromDB(CString strCyberName = "");
+	BOOL FindCyberFromDB(char* pCyber, int nDays = 0);
 	void ClearCyberList();
+
+public:
+	//±¸·Ý»Ö¸´
+	BOOL BackTables(char* pFileName, char* szTableName);
+	BOOL RestoreTables(char* pFileName, char* szTableName);
 public:
 	std::vector<KeyWords_Group> m_GroupList;
 	std::vector<KeyWords_Type> m_TypeList;

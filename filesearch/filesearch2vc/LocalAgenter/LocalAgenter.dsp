@@ -68,7 +68,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /Yu"stdafx.h" /FD /GZ /c
-# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "../../../Source" /I "../../AboutDlg" /I "comm" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Yu"stdafx.h" /FD /GZ /Zm200 /c
+# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "../../../Source" /I "../../AboutDlg" /I "comm" /I "Cabinet" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Yu"stdafx.h" /FD /GZ /Zm200 /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804 /d "_DEBUG" /d "_AFXDLL"
@@ -389,6 +389,83 @@ SOURCE=.\comm\TTComboBox.cpp
 # Begin Source File
 
 SOURCE=.\comm\TTComboBox.h
+# End Source File
+# End Group
+# Begin Group "cab"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Cabinet\Blowfish.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Cabinet\Cache.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Cabinet\Compress.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Cabinet\Error.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Cabinet\Extract.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Cabinet\ExtractMemory.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Cabinet\ExtractResource.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Cabinet\ExtractStream.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Cabinet\ExtractUrl.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Cabinet\FCI.H
+# End Source File
+# Begin Source File
+
+SOURCE=.\Cabinet\FDI.H
+# End Source File
+# Begin Source File
+
+SOURCE=.\Cabinet\File.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\HYResources.cpp
+# ADD CPP /YX
+# End Source File
+# Begin Source File
+
+SOURCE=.\HYResources.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Cabinet\Internet.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Cabinet\Map.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Cabinet\String.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Cabinet\Trace.hpp
 # End Source File
 # End Group
 # Begin Source File
