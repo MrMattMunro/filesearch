@@ -97,10 +97,20 @@ BOOL sloMysqlAgent::GetTypesFromDB(int nGroupID)
 	}
 	
 	int dwMaxID = 0;
-	std::string strQuerySQL = "select * from t_keywords_type where group_id=%d";
-	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), nGroupID);
-	if (FAILED(hr))
-		return -1;
+
+	if (nGroupID == 0)
+	{
+		//获取全部
+		std::string strQuerySQL = "select * from t_keywords_type";
+		HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), nGroupID);
+		if (FAILED(hr))
+			return -1;
+	}else{
+		std::string strQuerySQL = "select * from t_keywords_type where group_id=%d";
+		HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), nGroupID);
+		if (FAILED(hr))
+			return -1;
+	}
 	
 	int nCount = m_pMySqlDB->GetRowCount();
 	int nFieldCount = m_pMySqlDB->GetFieldCount();
@@ -302,6 +312,97 @@ BOOL sloMysqlAgent::GetKeyWordsFromDB(int nGroupID, int nTypeID)
 			if(pKeyName == NULL && nKeyNameLen <= 1)
 				return FALSE;
 
+			int nDateLen = 0;
+			char* pDate = m_pMySqlDB->GetField("date",&nDateLen);
+			if(pDate == NULL && nDateLen <= 1)
+				return FALSE;
+			
+			KeyWords keyword;
+			memset(&keyword, NULL, sizeof(KeyWords_Type));
+			keyword.nID = atoi(pID);
+			keyword.nTypeID = atoi(pTypeID);
+			keyword.nGroupID = 0/*atoi(pGroupID)*/;
+			strcpy(keyword.szKeyName, pKeyName);
+			strcpy(keyword.szDate, pDate);
+			m_KeywordsList.push_back(keyword);
+		}
+	}
+	
+	return TRUE;	
+}
+
+//nDay 0 全部
+BOOL sloMysqlAgent::FindKeywordFromDB(char* pKeyword, int nDays, char* pTypeName = NULL)
+{
+	ClearKeywordsList();
+	
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	if (nDays == 0)
+	{
+		if (pTypeName)
+		{
+			std::string strQuerySQL = "select * from t_keywords"; 
+			HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str());
+			if (FAILED(hr))
+				return -1;		
+		}else
+		{
+			std::string strQuerySQL = "select * from t_keywords"; 
+			HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str());
+			if (FAILED(hr))
+				return -1;
+		}
+
+	}else
+	{
+		//SELECT * FROM t_keywords WHERE TO_DAYS(NOW()) - TO_DAYS(date) <= 30;    //真方便,以前都是自己写的,竟然不知道有这,失败.
+		if (pTypeName)
+		{
+			
+		}else
+		{
+			std::string strQuerySQL = "select * from t_keywords where TO_DAYS(NOW()) - TO_DAYS(date) <= %d"; 
+			HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), nDays);
+			if (FAILED(hr))
+				return -1;
+		}
+	}
+
+	int nCount = m_pMySqlDB->GetRowCount();
+	int nFieldCount = m_pMySqlDB->GetFieldCount();
+	if(nCount >= 1 && nFieldCount >= 1)
+	{	
+		for (int i = 0; i < nCount; i++)
+		{
+			bool bSucc = m_pMySqlDB->GetRow();
+			if(bSucc==false)
+				return FALSE;
+
+			int nKeyNameLen = 0;
+			char* pKeyName = m_pMySqlDB->GetField("key_name",&nKeyNameLen);
+			if(pKeyName == NULL && nKeyNameLen <= 1)
+				return FALSE;
+
+			if (strstr(pKeyName, pKeyword) == NULL)
+			{
+				continue;
+			}
+
+			int nIDLen = 0;
+			char* pID = m_pMySqlDB->GetField("Id",&nIDLen);
+			if(pID == NULL && nIDLen <= 1)
+				return FALSE;
+			
+			int nTypeIDLen = 0;
+			char* pTypeID = m_pMySqlDB->GetField("key_type",&nTypeIDLen);
+			if(pTypeID == NULL && nTypeIDLen <= 1)
+				return FALSE;
+			
 			int nDateLen = 0;
 			char* pDate = m_pMySqlDB->GetField("date",&nDateLen);
 			if(pDate == NULL && nDateLen <= 1)
@@ -550,7 +651,7 @@ BOOL sloMysqlAgent::UpdateGroup_Website(char* szOldGroupName, char* szNewGroupNa
 
 BOOL sloMysqlAgent::GetGroupsFromDB_Website()
 {
-	ClearGroupList();
+	ClearGroupList_Website();
 	
 	//从数据库中获取最大的索引id
 	if (!m_pMySqlDB && !ConnectDB())
@@ -664,6 +765,7 @@ BOOL sloMysqlAgent::GetWebsiteFromDB(int nGroupID)
 
 BOOL sloMysqlAgent::GetWebsiteFromGroupName(char* szGroupName)
 {
+	ClearWebsiteList();
 	//从数据库中获取最大的索引id
 	if (!m_pMySqlDB && !ConnectDB())
 	{
@@ -694,6 +796,78 @@ BOOL sloMysqlAgent::GetWebsiteFromGroupName(char* szGroupName)
 	}
 
 	return GetWebsiteFromDB(nTypeID);	
+}
+
+BOOL sloMysqlAgent::FindWebsiteFromDB(char* pWebsite, int nDays)
+{
+	ClearWebsiteList();
+	
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	if (nDays == 0)
+	{
+		std::string strQuerySQL = "select * from t_website"; 
+		HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str());
+		if (FAILED(hr))
+			return -1;
+	}else
+	{
+		std::string strQuerySQL = "select * from t_website where TO_DAYS(NOW()) - TO_DAYS(date) <= %d"; 
+		HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), nDays);
+		if (FAILED(hr))
+			return -1;
+	}
+
+	int nCount = m_pMySqlDB->GetRowCount();
+	int nFieldCount = m_pMySqlDB->GetFieldCount();
+	if(nCount >= 1 && nFieldCount >= 1)
+	{	
+		for (int i = 0; i < nCount; i++)
+		{
+			bool bSucc = m_pMySqlDB->GetRow();
+			if(bSucc==false)
+				return FALSE;
+
+			int nWebsiteNameLen = 0;
+			char* pWebsiteName = m_pMySqlDB->GetField("website",&nWebsiteNameLen);
+			if(pWebsiteName == NULL && nWebsiteNameLen <= 1)
+				return FALSE;
+
+			if (strstr(pWebsiteName, pWebsite) == NULL)
+			{
+				continue;
+			}
+			
+			int nIDLen = 0;
+			char* pID = m_pMySqlDB->GetField("Id",&nIDLen);
+			if(pID == NULL && nIDLen <= 1)
+				return FALSE;
+			
+			int nTypeIDLen = 0;
+			char* pTypeID = m_pMySqlDB->GetField("website_type_id",&nTypeIDLen);
+			if(pTypeID == NULL && nTypeIDLen <= 1)
+				return FALSE;
+			
+			int nDateLen = 0;
+			char* pDate = m_pMySqlDB->GetField("date",&nDateLen);
+			if(pDate == NULL && nDateLen <= 1)
+				return FALSE;
+			
+			WebSite website;
+			memset(&website, NULL, sizeof(WebSite));
+			website.nID = atoi(pID);
+			website.nTypeID = atoi(pTypeID);
+			strcpy(website.szSiteName, pWebsiteName);
+			strcpy(website.szDate, pDate);
+			m_WebsiteList.push_back(website);
+		}
+	}
+	
+	return TRUE;		
 }
 
 
@@ -831,7 +1005,7 @@ BOOL sloMysqlAgent::UpdateCyber(char* szOldCyberName,char* szCyberName, char* sz
 	return bRet;			
 }
 
-BOOL sloMysqlAgent::GetCyberFromDB()
+BOOL sloMysqlAgent::GetCyberFromDB(CString strCyberName)
 {
 	ClearCyberList();
 	
@@ -841,10 +1015,20 @@ BOOL sloMysqlAgent::GetCyberFromDB()
 		return FALSE;
 	}
 	
-	std::string strQuerySQL = "select * from t_webspider_task"; 
-	HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str());
-	if (FAILED(hr))
-		return -1;
+	
+	if(strCyberName.GetLength())
+	{
+		std::string strQuerySQL = "select * from t_webspider_task where taskname='%s'"; 
+		HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), strCyberName);
+		if (FAILED(hr))
+			return -1;	
+	}else{
+		std::string strQuerySQL = "select * from t_webspider_task"; 
+		HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str());
+		if (FAILED(hr))
+			return -1;
+	}
+
 	
 	int nCount = m_pMySqlDB->GetRowCount();
 	int nFieldCount = m_pMySqlDB->GetFieldCount();
@@ -908,7 +1092,136 @@ BOOL sloMysqlAgent::GetCyberFromDB()
 	return TRUE;	
 }
 
+BOOL sloMysqlAgent::FindCyberFromDB(char* pCyber, int nDays)
+{
+	ClearCyberList();
+	
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	if (nDays == 0)
+	{
+		std::string strQuerySQL = "select * from t_webspider_task"; 
+		HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str());
+		if (FAILED(hr))
+			return -1;
+	}else
+	{
+		std::string strQuerySQL = "select * from t_webspider_task where TO_DAYS(NOW()) - TO_DAYS(date) <= %d"; 
+		HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), nDays);
+		if (FAILED(hr))
+			return -1;
+	}
+
+	int nCount = m_pMySqlDB->GetRowCount();
+	int nFieldCount = m_pMySqlDB->GetFieldCount();
+	if(nCount >= 1 && nFieldCount >= 1)
+	{	
+		for (int i = 0; i < nCount; i++)
+		{
+			bool bSucc = m_pMySqlDB->GetRow();
+			if(bSucc==false)
+				return FALSE;
+
+			int nTasknameLen = 0;
+			char* pTaskName = m_pMySqlDB->GetField("taskname",&nTasknameLen);
+			if(pTaskName == NULL && nTasknameLen <= 1)
+				return FALSE;
+
+			if (strstr(pTaskName, pCyber) == NULL)
+			{
+				continue;
+			}
+			
+			int nIDLen = 0;
+			char* pID = m_pMySqlDB->GetField("Id",&nIDLen);
+			if(pID == NULL && nIDLen <= 1)
+				return FALSE;
+			
+			int nWordLen = 0;
+			char* pWord = m_pMySqlDB->GetField("word",&nWordLen);
+			if(pWord == NULL && nWordLen <= 1)
+				return FALSE;
+			
+			int nWebsiteLen = 0;
+			char* pWebsite = m_pMySqlDB->GetField("website",&nWebsiteLen);
+			if(pWebsite == NULL && nWebsiteLen <= 1)
+				return FALSE;
+			
+			int nFreqLen = 0;
+			char* pFreq = m_pMySqlDB->GetField("freq",&nFreqLen);
+			if(pFreq == NULL && nFreqLen <= 1)
+				return FALSE;
+			
+			int nHierarchyLen = 0;
+			char* pHierarchy = m_pMySqlDB->GetField("hierarchy",&nHierarchyLen);
+			if(pHierarchy == NULL && nHierarchyLen <= 1)
+				return FALSE;
+			
+			int nDateLen = 0;
+			char* pDate = m_pMySqlDB->GetField("date",&nDateLen);
+			if(pDate == NULL && nDateLen <= 1)
+				return FALSE;
+			
+			Cyber cyber;
+			memset(&cyber, NULL, sizeof(Cyber));
+			cyber.nID = atoi(pID);
+			strcpy(cyber.szCyberName, pTaskName);
+			strcpy(cyber.szKeywords, pWord);
+			strcpy(cyber.szWebsite, pWebsite);
+			cyber.nFrequency = atoi(pFreq);
+			cyber.nLayer = atoi(pHierarchy);
+			
+			strcpy(cyber.szDate, pDate);
+			m_CyberList.push_back(cyber);
+		}
+	}
+	
+	return TRUE;	
+}
+
 void sloMysqlAgent::ClearCyberList()
 {
 	m_CyberList.clear();
+}
+
+BOOL sloMysqlAgent::BackTables(char* pFileName, char* szTableName)
+{
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	//SELECT * INTO OUTFILE '/nfs/home/wkwork/portal_summary.bak' FROM stat_zju.portal_summary;
+	
+	BOOL bRet = TRUE;
+	std::string strQuerySQL = "SELECT * INTO OUTFILE '%s' FROM %s";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), pFileName, szTableName);
+	if (FAILED(hr))
+		bRet = FALSE;
+	
+	return bRet;			
+}
+
+BOOL sloMysqlAgent::RestoreTables(char* pFileName, char* szTableName)
+{
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	//LOAD DATA INFILE "/nfs/home/wkwork/micro_portal_summary.bak" REPLACE INTO TABLE micro_portal.micro_portal_summary;
+	
+	BOOL bRet = TRUE;
+	std::string strQuerySQL = "LOAD DATA INFILE '%s' REPLACE INTO TABLE %s";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), pFileName, szTableName);
+	if (FAILED(hr))
+		bRet = FALSE;
+	
+	return bRet;		
 }

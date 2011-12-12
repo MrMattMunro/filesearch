@@ -38,6 +38,9 @@ public:
 	void InitShortcutBar();
 	void InitReportCtrl();
 
+	void BackMysqlData();
+	void RestoreMysqlData();
+
 	CImageList m_ilIcons;
 	BOOL m_bCommboxAllSel;
 	CString m_strOldContent;

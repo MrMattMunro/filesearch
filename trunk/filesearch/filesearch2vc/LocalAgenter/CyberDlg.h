@@ -20,7 +20,13 @@ public:
 	CCyberDlg(CWnd* pParent = NULL);   // standard constructor
 	void SetTreeFocus(CXTTreeCtrl* pTreeFocus);
 
+	void SetKeywords(CString strKeywords);
+	void SetWebsite(CString strWebsite);
+
 	CXTTreeCtrl* m_pTreeFocus;
+
+	CString m_strKeywords;
+	CString m_strWebsite;
 
 // Dialog Data
 	//{{AFX_DATA(CCyberDlg)
