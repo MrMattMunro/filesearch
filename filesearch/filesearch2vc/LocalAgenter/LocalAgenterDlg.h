@@ -41,6 +41,8 @@ public:
 	void BackMysqlData();
 	void RestoreMysqlData();
 
+	void DeleteReportRow(CXTPReportRow* pRow);
+
 	CImageList m_ilIcons;
 	BOOL m_bCommboxAllSel;
 	CString m_strOldContent;
@@ -66,6 +68,7 @@ public:
 	afx_msg void OnItemButtonClick(NMHDR * pNotifyStruct, LRESULT*pResult);
 	afx_msg void OnBeginEdit(NMHDR * pNotifyStruct, LRESULT*pResult);
 	afx_msg void OnValueChanged(NMHDR * pNotifyStruct, LRESULT*pResult);
+	afx_msg void OnReportSelChanged(NMHDR* pNMHDR, LRESULT* /*result*/);
 // Implementation
 protected:
 	HICON m_hIcon;
@@ -98,6 +101,7 @@ public:
 	CXTPShortcutBarItem* m_pItemFolder;
 	CXTPShortcutBarItem* m_pItemCalendar;
 	CXTPShortcutBarItem* m_pItemTasks;
+
 };
 
 //{{AFX_INSERT_LOCATION}}

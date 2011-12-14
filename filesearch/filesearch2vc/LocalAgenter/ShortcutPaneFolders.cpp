@@ -161,10 +161,18 @@ void CShortcutPaneFolders::OnContextMenu(CWnd* pWnd, CPoint point)
 	{
 	case ID_EDIT_ADD:
 		{		
+			char szContent[MAX_PATH] = {0};
+			for (int i = 1; i <= MAX_PATH; i++)
+			{
+				memset(szContent, NULL, MAX_PATH);
+				sprintf(szContent, "新增%d", i);
+				if(sloMysqlAgent::GetInstance()->ExistKeywordType(szContent) == FALSE)
+					break;
+			}
 			//新增一节点，然后设置为可编辑
-			HTREEITEM hNewItem = m_wndTreeFolders.InsertItem("新增1", 1, 1, hItemParent);
+			HTREEITEM hNewItem = m_wndTreeFolders.InsertItem(szContent, 1, 1, hItemParent);
 			CString strParentText = m_wndTreeFolders.GetItemText(hItemParent);
-			sloMysqlAgent::GetInstance()->AddType(strParentText.GetBuffer(0), "新增1");
+			sloMysqlAgent::GetInstance()->AddType(strParentText.GetBuffer(0), szContent);
 			CEdit* pEdit = m_wndTreeFolders.EditLabel(hNewItem);			
 		}
 		break;	
@@ -206,6 +214,7 @@ void CShortcutPaneFolders::OnSelchanged(NMHDR* pNMHDR, LRESULT* pResult)
 	HTREEITEM htItem = m_wndTreeFolders.GetSelectedItem();
 	if (htItem != NULL)
 	{
+		pDlg->m_btnDelete.EnableWindow(FALSE);
 		m_bSelect = TRUE;
 		//		m_wndTreeCtrl.GetItemImage( htItem, nImage, nImage );
 		

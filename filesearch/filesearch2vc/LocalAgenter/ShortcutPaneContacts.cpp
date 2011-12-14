@@ -87,11 +87,12 @@ void CShortcutPaneContacts::OnSelchanged(NMHDR* /*pNMHDR*/, LRESULT* pResult)
 	HTREEITEM htItem = m_wndTreeContacts.GetSelectedItem();
 	if (htItem != NULL)
 	{
+		pDlg->m_btnDelete.EnableWindow(FALSE);
+
 		CString strItemText = m_wndTreeContacts.GetItemText(htItem);
 		m_wndTreeContacts.SelectItem(htItem);	
 		
 		pDlg->ShowListContent_Cyber();
-
 	}
 	
 	*pResult = 0;

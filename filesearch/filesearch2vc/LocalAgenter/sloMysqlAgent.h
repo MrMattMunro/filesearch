@@ -81,6 +81,7 @@ public:
 	BOOL GetKeyWordsFromGroupName(char* szGroupName);
 	BOOL GetKeyWordsFromTypeName(char* szTypeName);
 	BOOL FindKeywordFromDB(char* pKeyword, int nDays = 0, char* pTypeName = NULL);
+	BOOL ExistKeywordType(char* szTypeName);
 public:
 	//type
 	BOOL AddType(char* szGroupName, char* szTypeName);
@@ -110,7 +111,8 @@ public:
 	BOOL GetGroupsFromDB_Website();
 	BOOL GetWebsiteFromDB(int nGroupID);
 	BOOL GetWebsiteFromGroupName(char* szGroupName);
-	BOOL FindWebsiteFromDB(char* pWebsite, int nDays = 0);
+	BOOL FindWebsiteFromDB(char* pWebsite, int nDays = 0, char* pTypeName = NULL);
+	BOOL ExistWebsiteGroup(char* szGroupName);
 public:
 	//website
 	BOOL AddWebsite(char* szTypeName, char* szKeyName);
