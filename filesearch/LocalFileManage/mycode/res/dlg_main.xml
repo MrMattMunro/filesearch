@@ -23,8 +23,8 @@
   <body class="mainbody" width="full" height="full">
     <dlg pos="0,0,-0,-0">
       <dlgfile pos="0,0,-0,-0" src="105" />
-      <dlgfile pos="0,0,-400,-0" src="106" />
-      <dlgfile pos="0,0,-200,-0" src="107" />
+      <dlgfile pos="200,0,-0,-0" src="106" />
+      <dlgfile pos="600,0,-0,-0" src="107" />
     </dlg>
   </body>
 
