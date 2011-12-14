@@ -50,6 +50,8 @@ void CXTPShortcutBarEx::OnLButtonDown(UINT nFlags, CPoint point)
 		dlg->ShowListContent_Cyber();
 	}
 
+	dlg->m_btnDelete.EnableWindow(FALSE);
+
 	CXTPShortcutBar::OnLButtonDown(nFlags, point);
 }
 

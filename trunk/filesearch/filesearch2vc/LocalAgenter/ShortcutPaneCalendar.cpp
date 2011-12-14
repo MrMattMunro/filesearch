@@ -113,6 +113,7 @@ void CShortcutPaneCalendar::OnSelchanged(NMHDR* /*pNMHDR*/, LRESULT* pResult)
 	HTREEITEM htItem = m_wndTreeCalendar.GetSelectedItem();
 	if (htItem != NULL)
 	{
+		pDlg->m_btnDelete.EnableWindow(FALSE);
 		m_bSelect = TRUE;
 		//		m_wndTreeCtrl.GetItemImage( htItem, nImage, nImage );
 		
@@ -158,10 +159,18 @@ void CShortcutPaneCalendar::OnContextMenu(CWnd* pWnd, CPoint point)
 	{
 	case ID_EDIT_ADD:
 		{
+			char szContent[MAX_PATH] = {0};
+			for (int i = 1; i <= MAX_PATH; i++)
+			{
+				memset(szContent, NULL, MAX_PATH);
+				sprintf(szContent, "自定义%d", i);
+				if(sloMysqlAgent::GetInstance()->ExistWebsiteGroup(szContent) == FALSE)
+					break;
+			}
 			//新增一节点，然后设置为可编辑
-			HTREEITEM hNewItem = m_wndTreeCalendar.InsertItem("自定义1", 0, 0);
+			HTREEITEM hNewItem = m_wndTreeCalendar.InsertItem(szContent, 0, 0);
 			//并更新数据库表t_keywords_type
-			sloMysqlAgent::GetInstance()->AddGroup_Website("自定义1");
+			sloMysqlAgent::GetInstance()->AddGroup_Website(szContent);
 			CEdit* pEdit = m_wndTreeCalendar.EditLabel(hNewItem);		
 		}
 		break;	

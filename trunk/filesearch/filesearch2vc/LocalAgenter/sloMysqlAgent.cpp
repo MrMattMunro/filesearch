@@ -86,6 +86,32 @@ BOOL sloMysqlAgent::GetGroupsFromDB()
 	return TRUE;
 }
 
+BOOL sloMysqlAgent::ExistKeywordType(char* szTypeName)
+{
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	int dwMaxID = 0;
+	
+	//获取全部
+	std::string strQuerySQL = "select * from t_keywords_type where type_name='%s'";
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), szTypeName);
+	if (FAILED(hr))
+		return FALSE;
+
+	int nCount = m_pMySqlDB->GetRowCount();
+	int nFieldCount = m_pMySqlDB->GetFieldCount();
+	if(nCount >= 1 && nFieldCount >= 1)
+	{	
+		return TRUE;
+	}
+	
+	return FALSE;	
+}
+
 BOOL sloMysqlAgent::GetTypesFromDB(int nGroupID)
 {
 	ClearTypeList();
@@ -332,7 +358,7 @@ BOOL sloMysqlAgent::GetKeyWordsFromDB(int nGroupID, int nTypeID)
 }
 
 //nDay 0 全部
-BOOL sloMysqlAgent::FindKeywordFromDB(char* pKeyword, int nDays, char* pTypeName = NULL)
+BOOL sloMysqlAgent::FindKeywordFromDB(char* pKeyword, int nDays, char* pTypeName/* = NULL*/)
 {
 	ClearKeywordsList();
 	
@@ -346,10 +372,12 @@ BOOL sloMysqlAgent::FindKeywordFromDB(char* pKeyword, int nDays, char* pTypeName
 	{
 		if (pTypeName)
 		{
-			std::string strQuerySQL = "select * from t_keywords"; 
-			HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str());
+			//联合查询t_keywords和t_keywords_type
+			//select * from t_keywords as A inner join t_keywords_type as B on A.key_type=B.id and B.group_id=%d
+			std::string strQuerySQL = "select * from t_keywords as A inner join t_keywords_type as B on A.key_type=B.id and B.type_name='%s'"; 
+			HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), pTypeName);
 			if (FAILED(hr))
-				return -1;		
+				return -1;	
 		}else
 		{
 			std::string strQuerySQL = "select * from t_keywords"; 
@@ -363,7 +391,10 @@ BOOL sloMysqlAgent::FindKeywordFromDB(char* pKeyword, int nDays, char* pTypeName
 		//SELECT * FROM t_keywords WHERE TO_DAYS(NOW()) - TO_DAYS(date) <= 30;    //真方便,以前都是自己写的,竟然不知道有这,失败.
 		if (pTypeName)
 		{
-			
+			std::string strQuerySQL = "select * from t_keywords as A inner join t_keywords_type as B on A.key_type=B.id and B.type_name='%s' and TO_DAYS(NOW()) - TO_DAYS(A.date) <= %d"; 
+			HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), pTypeName, nDays);
+			if (FAILED(hr))
+				return -1;			
 		}else
 		{
 			std::string strQuerySQL = "select * from t_keywords where TO_DAYS(NOW()) - TO_DAYS(date) <= %d"; 
@@ -695,6 +726,30 @@ BOOL sloMysqlAgent::GetGroupsFromDB_Website()
 	
 	return TRUE;	
 }
+
+BOOL sloMysqlAgent::ExistWebsiteGroup(char* szGroupName)
+{
+	//从数据库中获取最大的索引id
+	if (!m_pMySqlDB && !ConnectDB())
+	{
+		return FALSE;
+	}
+	
+	std::string strQuerySQL = "select * from t_website_type where website_type='%s'"; 
+	HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), szGroupName);
+	if (FAILED(hr))
+		return FALSE;
+	
+	int nCount = m_pMySqlDB->GetRowCount();
+	int nFieldCount = m_pMySqlDB->GetFieldCount();
+	if(nCount >= 1 && nFieldCount >= 1)
+	{	
+		return TRUE;
+	}
+	
+	return FALSE;		
+}
+
 BOOL sloMysqlAgent::GetWebsiteFromDB(int nGroupID)
 {
 	ClearWebsiteList();
@@ -798,7 +853,7 @@ BOOL sloMysqlAgent::GetWebsiteFromGroupName(char* szGroupName)
 	return GetWebsiteFromDB(nTypeID);	
 }
 
-BOOL sloMysqlAgent::FindWebsiteFromDB(char* pWebsite, int nDays)
+BOOL sloMysqlAgent::FindWebsiteFromDB(char* pWebsite, int nDays, char* pTypeName/* = NULL*/)
 {
 	ClearWebsiteList();
 	
@@ -810,16 +865,36 @@ BOOL sloMysqlAgent::FindWebsiteFromDB(char* pWebsite, int nDays)
 	
 	if (nDays == 0)
 	{
-		std::string strQuerySQL = "select * from t_website"; 
-		HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str());
-		if (FAILED(hr))
-			return -1;
+		if (pTypeName)
+		{
+			//select * from t_website as A inner join t_website_type as B on A.website_type_id=B.id and B.website_type='%s'"; 
+
+			std::string strQuerySQL = "select * from t_website as A inner join t_website_type as B on A.website_type_id=B.id and B.website_type='%s'"; 
+			HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), pTypeName);
+			if (FAILED(hr))
+				return -1;
+		}else
+		{
+			std::string strQuerySQL = "select * from t_website"; 
+			HRESULT hr = doSqlExe(FALSE, strQuerySQL.c_str());
+			if (FAILED(hr))
+				return -1;
+		}
 	}else
 	{
-		std::string strQuerySQL = "select * from t_website where TO_DAYS(NOW()) - TO_DAYS(date) <= %d"; 
-		HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), nDays);
-		if (FAILED(hr))
-			return -1;
+		if (pTypeName)
+		{
+			std::string strQuerySQL = "select * from t_website as A inner join t_website_type as B on A.website_type_id=B.id and B.website_type='%s' and TO_DAYS(NOW()) - TO_DAYS(date) <= %d"; 
+			HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), pTypeName, nDays);
+			if (FAILED(hr))
+				return -1;
+		}else
+		{
+			std::string strQuerySQL = "select * from t_website where TO_DAYS(NOW()) - TO_DAYS(date) <= %d"; 
+			HRESULT hr = doSqlExe(TRUE, strQuerySQL.c_str(), nDays);
+			if (FAILED(hr))
+				return -1;
+		}
 	}
 
 	int nCount = m_pMySqlDB->GetRowCount();

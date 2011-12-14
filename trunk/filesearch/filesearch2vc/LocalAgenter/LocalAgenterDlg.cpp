@@ -120,6 +120,7 @@ BEGIN_MESSAGE_MAP(CLocalAgenterDlg, CXTResizeDialog)
 	ON_NOTIFY(XTP_NM_REPORT_ITEMBUTTONCLICK, IDC_REPORTCTRL, OnItemButtonClick)
 	ON_NOTIFY(XTP_NM_REPORT_BEGINEDIT, IDC_REPORTCTRL, OnBeginEdit)
 	ON_NOTIFY(XTP_NM_REPORT_VALUECHANGED, IDC_REPORTCTRL, OnValueChanged)
+	ON_NOTIFY(XTP_NM_REPORT_SELCHANGED, IDC_REPORTCTRL, OnReportSelChanged)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -277,6 +278,7 @@ void CLocalAgenterDlg::InitButton()
 	
 	m_btnDelete.SetBitmap(CSize(24,24), IDB_BITMAP_DELETE);
 	m_btnDelete.SetFlatStyle(TRUE);
+	m_btnDelete.EnableWindow(FALSE);
 	
 	m_btnSet.SetBitmap(CSize(24,24), IDB_BITMAP_SET);
 	m_btnSet.SetFlatStyle(TRUE);
@@ -860,10 +862,51 @@ void CLocalAgenterDlg::OnButtonExport()
 	BackMysqlData();
 }
 
+void CLocalAgenterDlg::DeleteReportRow(CXTPReportRow* pRow) 
+{
+	CXTPReportRecord* pRecord = pRow->GetRecord();
+	
+	CXTPReportRecordItemText* pItemText = (CXTPReportRecordItemText*)pRecord->GetItem(4);
+	CString strContent = pItemText->GetValue();
+	
+	//删除数据库记录
+	if(m_wndShortcutBar.GetSelectedItem() == m_pItemFolder)
+	{
+		if (6 == MessageBox("您确定删除该条记录？","词汇管理",MB_YESNO | MB_ICONWARNING))
+		{			
+			//删除数据库
+			sloMysqlAgent::GetInstance()->DelKeyword(strContent.GetBuffer(0));		
+		}
+	}else if (m_wndShortcutBar.GetSelectedItem() == m_pItemCalendar)
+	{
+		//选中的是网址pane
+		if (6 == MessageBox("您确定删除该条记录？","网址管理",MB_YESNO | MB_ICONWARNING))
+		{				
+			//删除数据库
+			sloMysqlAgent::GetInstance()->DelWebsite(strContent.GetBuffer(0));		
+		}
+	}else if (m_wndShortcutBar.GetSelectedItem() == m_pItemTasks)
+	{
+		//删除快捕任务
+		//选中的是网址pane
+		if (6 == MessageBox("您确定删除该条记录？","网络快捕",MB_YESNO | MB_ICONWARNING))
+		{				
+			//删除数据库
+			sloMysqlAgent::GetInstance()->DelCyber(strContent.GetBuffer(0));		
+		}
+	}
+
+	//删除行
+	m_wndReportCtrl.RemoveRowEx(pRow);
+}
+
 void CLocalAgenterDlg::OnButtonDelete() 
 {
 	// TODO: Add your control notification handler code here
-	
+	CXTPReportRow* pRow = m_wndReportCtrl.GetSelectedRows()->GetAt(0);
+
+	DeleteReportRow(pRow);
+
 }
 
 void CLocalAgenterDlg::OnButtonSet() 
@@ -904,11 +947,20 @@ void CLocalAgenterDlg::OnButtonSearch()
 
 	nIndex = m_BoxListGroup.GetCurSel();		//得到被选中内容索引
 	CString strGroup;						//存放得到的编辑框内容
-	m_BoxListGroup.GetLBText(nIndex,strGroup);	//得到被选中内容的名字
+	if (nIndex != -1)
+		m_BoxListGroup.GetLBText(nIndex,strGroup);	//得到被选中内容的名字
+
+	nIndex = m_BoxListType.GetCurSel();		//得到被选中内容索引
+	CString strType;						//存放得到的编辑框内容
+	if (nIndex != -1)
+		m_BoxListType.GetLBText(nIndex,strType);	//得到被选中内容的名字
+
+	//清空列表
+	m_wndReportCtrl.ResetContent();
+
+	//获取数据
 	if (strcmp(strGroup.GetBuffer(0), ALL_NAME) == 0)
 	{
-		//清空列表
-		m_wndReportCtrl.ResetContent();
 		//选中全部
 		sloMysqlAgent::GetInstance()->FindKeywordFromDB(szKey, nDays);
 		int nCount = sloMysqlAgent::GetInstance()->m_KeywordsList.size();
@@ -934,15 +986,13 @@ void CLocalAgenterDlg::OnButtonSearch()
 			ShowListContent_Button(pRecord);
 		}
 
-		m_pColumn4->SetEditable(TRUE);
-		
-		m_wndReportCtrl.Populate();
-		
 	}else if (strcmp(strGroup.GetBuffer(0), CYBER_NAME) == 0)
-	{
+	{		
+		//选中左边
+		m_wndShortcutBar.SelectItem(m_pItemTasks);
+
 		//清空列表
 		m_wndReportCtrl.ResetContent();
-		
 		sloMysqlAgent::GetInstance()->FindCyberFromDB(szKey,nDays);
 		int nCount = sloMysqlAgent::GetInstance()->m_CyberList.size();
 		for(int i = 0; i < nCount; i++)
@@ -950,17 +1000,49 @@ void CLocalAgenterDlg::OnButtonSearch()
 			CXTPReportRecord* pRecord = m_wndReportCtrl.AddRecord(new CReportRecord(sloMysqlAgent::GetInstance()->m_CyberList[i].szCyberName, sloMysqlAgent::GetInstance()->m_CyberList[i].szDate));
 			ShowListContent_Button(pRecord);
 		}
-		
-		m_pColumn4->SetEditable(TRUE);
-		
-		m_wndReportCtrl.Populate();
 	}else if (strcmp(strGroup.GetBuffer(0), KEYWORD_NAME) == 0)
 	{
-					
+		//选中左边
+		m_wndShortcutBar.SelectItem(m_pItemFolder);
+		HTREEITEM item = m_paneFolders.m_wndTreeFolders.FindItem(strType.GetBuffer(0));
+		if (item)
+		{
+			m_paneFolders.m_wndTreeFolders.SelectItem(item);
+		}
+		//清空列表
+		m_wndReportCtrl.ResetContent();
+
+		sloMysqlAgent::GetInstance()->FindKeywordFromDB(szKey, nDays, strType.GetBuffer(0));
+		int nCount = sloMysqlAgent::GetInstance()->m_KeywordsList.size();
+		for(int i = 0; i < nCount; i++)
+		{
+			CXTPReportRecord* pRecord = m_wndReportCtrl.AddRecord(new CReportRecord(sloMysqlAgent::GetInstance()->m_KeywordsList[i].szKeyName, sloMysqlAgent::GetInstance()->m_KeywordsList[i].szDate));
+			ShowListContent_Button(pRecord);
+		}
+	
 	}else if (strcmp(strGroup.GetBuffer(0), WEBSITE_NAME) == 0)
 	{
+		//选中左边
+		m_wndShortcutBar.SelectItem(m_pItemCalendar);
+		HTREEITEM item = m_paneCalendar.m_wndTreeCalendar.FindItem(strType.GetBuffer(0));
+		if (item)
+		{
+			m_paneCalendar.m_wndTreeCalendar.SelectItem(item);
+		}
+		//清空列表
+		m_wndReportCtrl.ResetContent();
 
+		sloMysqlAgent::GetInstance()->FindWebsiteFromDB(szKey, nDays, strType.GetBuffer(0));
+		int nCount = sloMysqlAgent::GetInstance()->m_WebsiteList.size();
+		for(int i = 0; i < nCount; i++)
+		{
+			CXTPReportRecord* pRecord = m_wndReportCtrl.AddRecord(new CReportRecord(sloMysqlAgent::GetInstance()->m_WebsiteList[i].szSiteName, sloMysqlAgent::GetInstance()->m_WebsiteList[i].szDate));
+			ShowListContent_Button(pRecord);
+		}
 	}
+
+	m_pColumn4->SetEditable(TRUE);	
+	m_wndReportCtrl.Populate();
 
 }
 
@@ -1116,36 +1198,8 @@ void CLocalAgenterDlg::OnItemButtonClick(NMHDR * pNotifyStruct, LRESULT*pResult)
 			//选中
 			m_wndReportCtrl.SetFocusedRow(pItemNotify->pRow);
 
-			CXTPReportRecord* pRecord = pItemNotify->pRow->GetRecord();
-	
-			CXTPReportRecordItemText* pItemText = (CXTPReportRecordItemText*)pRecord->GetItem(4);
-			CString strContent = pItemText->GetValue();
-			//删除数据库记录
-			if(m_wndShortcutBar.GetSelectedItem() == m_pItemFolder)
-			{
-				if (6 == MessageBox("您确定删除该条记录？","词汇管理",MB_YESNO | MB_ICONWARNING))
-				{			
-					//删除数据库
-					sloMysqlAgent::GetInstance()->DelKeyword(strContent.GetBuffer(0));		
-				}else
-					break;
-			}else if (m_wndShortcutBar.GetSelectedItem() == m_pItemCalendar)
-			{
-				//选中的是网址pane
-				if (6 == MessageBox("您确定删除该条记录？","网址管理",MB_YESNO | MB_ICONWARNING))
-				{				
-					//删除数据库
-					sloMysqlAgent::GetInstance()->DelWebsite(strContent.GetBuffer(0));		
-				}else
-					break;
-			}else if (m_wndShortcutBar.GetSelectedItem() == m_pItemTasks)
-			{
-				//删除快捕任务
+			DeleteReportRow(pItemNotify->pRow);
 
-			}
-
-			//删除行
-			m_wndReportCtrl.RemoveRowEx(pItemNotify->pRow);
 			break;
 		}
 		// button "modify"
@@ -1275,6 +1329,13 @@ void CLocalAgenterDlg::OnValueChanged(NMHDR * pNotifyStruct, LRESULT*pResult)
 	}
 	
 	*pResult = (LRESULT)TRUE;
+}
+
+void CLocalAgenterDlg::OnReportSelChanged(NMHDR* pNMHDR, LRESULT* /*result*/)
+{
+    // TODO: Handle command.
+	CXTPReportRow* pRow = m_wndReportCtrl.GetFocusedRow();
+	m_btnDelete.EnableWindow(TRUE);
 }
 
 void CLocalAgenterDlg::OnContextMenu(CWnd* pWnd, CPoint point) 
