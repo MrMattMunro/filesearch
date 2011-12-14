@@ -68,9 +68,75 @@ END
 
 STRINGTABLE
 BEGIN
-   IDC_MYCODE   "MYCODE"
-   IDS_APP_TITLE       "mycode"
+   IDC_LOCALFILEMANGE          "localfile"
+   IDS_APP_TITLE               "localfilemanage"
 END
+
+
+//  FILE菜单
+IDR_FILEMENU MENU 
+BEGIN
+    POPUP "主菜单"
+    BEGIN
+        MENUITEM "导入",                        ID_FILEMENU_IMPORT
+        MENUITEM "导出",                        ID_FILEMENU_EXPORT
+        MENUITEM SEPARATOR
+        MENUITEM "文档另存为",                  ID_FILEMENU_SASEAS
+        MENUITEM "另存到移动设备",              ID_FILEMENU_SASETOMOBILE
+		MENUITEM SEPARATOR
+		MENUITEM "退出",                        ID_FILEMENU_EXIT
+    END
+END
+
+//  VIEW菜单
+IDR_VIEWMENU MENU 
+BEGIN
+    POPUP "主菜单"
+    BEGIN
+        MENUITEM "全屏",                        ID_VIEWMENU_FULLSCREEN
+        MENUITEM "显示/隐藏分类树",             ID_VIEWMENU_SHOWCLASSTREE
+        MENUITEM SEPARATOR
+        POPUP "皮肤"
+        BEGIN
+            MENUITEM "默认",                    ID_VIEWMENU_SKIN_DEFAULT
+            MENUITEM "书香",                    ID_VIEWMENU_SKIN_BOOK
+			MENUITEM "灰色",                    ID_VIEWMENU_SKIN_GRAY
+        END
+
+        MENUITEM "自定义工具栏...",             ID_VIEWMENU_CUSTOMTOOLS
+    END
+END
+
+//  TOOL菜单
+IDR_TOOLMENU MENU
+BEGIN
+    POPUP "主菜单"
+    BEGIN
+        MENUITEM "选项",                        ID_TOOLMENU_OPTION
+        MENUITEM "查看日志文件",                ID_TOOLMENU_VIEWLOG
+        MENUITEM SEPARATOR
+        MENUITEM "插件管理",                    ID_TOOLMENU_PLUGIN
+    END
+END
+
+//  HELP菜单
+IDR_HELPMENU MENU
+BEGIN
+    POPUP "主菜单"
+    BEGIN
+        MENUITEM "用户手册",                    ID_HELPMENU_HELPDOC
+		MENUITEM "个人首页",                    ID_HELPMENU_HOMEPAGE
+		MENUITEM SEPARATOR
+        MENUITEM "邀请朋友",                    ID_HELPMENU_INVITE
+        MENUITEM SEPARATOR
+        MENUITEM "检查新版本",                  ID_HELPMENU_CHECKVERSION
+        MENUITEM SEPARATOR
+		MENUITEM "用户论坛",                    ID_HELPMENU_BBS
+		MENUITEM SEPARATOR
+        MENUITEM "关于",                        ID_HELPMENU_ABOUT
+    END
+END
+
 
 #endif
 /////////////////////////////////////////////////////////////////////////////

@@ -1,7 +1,7 @@
-﻿<text id="10201" crtext="FFFFFF" pos="20,30">文件(F)</text>
-<text id="10202" crtext="FFFFFF"  pos="80,30">查看(V)</text>
-<text id="10203" crtext="FFFFFF" pos="140,30">工具(T)</text>
-<text id="10204" crtext="FFFFFF" pos="200,30">帮助(H)</text>
+﻿<link id="10201" pos="20,30" class="linktextwhite">文件(F)</link>
+<link id="10202" pos="80,30" class="linktextwhite">查看(V)</link>
+<link id="10203" pos="140,30" class="linktextwhite">工具(T)</link>
+<link id="10204" pos="200,30" class="linktextwhite">帮助(H)</link>
 
 <imgbtn id="10205" class="linkimage" skin="dlg_btn_min" tip="最大化到托盘" pos="-108,1"/>
 <imgbtn id="10206" class="linkimage" skin="dlg_btn_max" tip="最小化到托盘" pos="-78,1"/>

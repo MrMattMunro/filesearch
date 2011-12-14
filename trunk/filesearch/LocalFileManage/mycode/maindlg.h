@@ -13,7 +13,10 @@ public:
 		BK_NOTIFY_ID_COMMAND(IDC_BTN_CLOSE, OnClose)
 		BK_NOTIFY_ID_COMMAND(IDC_BTN_MAX, OnMaxWindow)
 		BK_NOTIFY_ID_COMMAND(IDC_BTN_MIN, OnMinWindow)
-	    BK_NOTIFY_ID_COMMAND(IDC_CHK_TEST, OnMyClick)
+		BK_NOTIFY_ID_COMMAND(IDC_MENU_FILE, OnFileMenu)
+	    BK_NOTIFY_ID_COMMAND(IDC_MENU_VIEW, OnViewMenu)
+		BK_NOTIFY_ID_COMMAND(IDC_MENU_TOOL, OnToolMenu)
+		BK_NOTIFY_ID_COMMAND(IDC_MENU_HELP, OnHelpMenu)
 	BK_NOTIFY_MAP_END()
 
 
@@ -28,6 +31,10 @@ public:
 	CMainDlg();
 	~CMainDlg();
 
+	void	OnFileMenu();
+    void	OnViewMenu();
+    void	OnToolMenu();
+	void	OnHelpMenu();
     LRESULT OnMyClick();
 	LRESULT OnClose();
 	LRESULT OnMaxWindow();
