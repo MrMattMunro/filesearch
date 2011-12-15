@@ -876,7 +876,8 @@ void CLocalAgenterDlg::DeleteReportRow(CXTPReportRow* pRow)
 		{			
 			//删除数据库
 			sloMysqlAgent::GetInstance()->DelKeyword(strContent.GetBuffer(0));		
-		}
+		}else
+			return ;
 	}else if (m_wndShortcutBar.GetSelectedItem() == m_pItemCalendar)
 	{
 		//选中的是网址pane
@@ -884,7 +885,8 @@ void CLocalAgenterDlg::DeleteReportRow(CXTPReportRow* pRow)
 		{				
 			//删除数据库
 			sloMysqlAgent::GetInstance()->DelWebsite(strContent.GetBuffer(0));		
-		}
+		}else
+			return ;
 	}else if (m_wndShortcutBar.GetSelectedItem() == m_pItemTasks)
 	{
 		//删除快捕任务
@@ -893,7 +895,8 @@ void CLocalAgenterDlg::DeleteReportRow(CXTPReportRow* pRow)
 		{				
 			//删除数据库
 			sloMysqlAgent::GetInstance()->DelCyber(strContent.GetBuffer(0));		
-		}
+		}else
+			return ;
 	}
 
 	//删除行
@@ -1187,7 +1190,7 @@ void CLocalAgenterDlg::OnItemButtonClick(NMHDR * pNotifyStruct, LRESULT*pResult)
 	XTP_NM_REPORTITEMCONTROL* pItemNotify = (XTP_NM_REPORTITEMCONTROL*) pNotifyStruct;
 	if(!(pItemNotify->pRow && pItemNotify->pItem && pItemNotify->pItemControl))
 		return;
-
+	
 	int nColumn = pItemNotify->pColumn->GetIndex();
 	//pItemNotify->pItemControl->GetIndex()
 	switch(nColumn)
@@ -1197,51 +1200,45 @@ void CLocalAgenterDlg::OnItemButtonClick(NMHDR * pNotifyStruct, LRESULT*pResult)
 		{
 			//选中
 			m_wndReportCtrl.SetFocusedRow(pItemNotify->pRow);
-
+			
 			DeleteReportRow(pItemNotify->pRow);
-
+			
 			break;
 		}
 		// button "modify"
 	case 2 :
-		{		
+		{			
 			//选中		
 			m_wndReportCtrl.SetFocusedRow(pItemNotify->pRow);			
 			if (m_wndShortcutBar.GetSelectedItem() == m_pItemTasks)
 			{
-				CXTPReportRecord* pRecord = pItemNotify->pRow->GetRecord();	
-				CXTPReportRecordItemText* pItemText = (CXTPReportRecordItemText*)pRecord->GetItem(4);
-				CString strContent = pItemText->GetValue();
-				//根据content查找所有记录
-				sloMysqlAgent::GetInstance()->GetCyberFromDB(strContent);
-
-				//修改快捕任务，弹出对话框
-				CCyberDlg cyber;
-				cyber.m_cyberName = strContent;
-				char szLayer[10] = {0};
-				char szFren[10] =  {0};
-				itoa(sloMysqlAgent::GetInstance()->m_CyberList[0].nLayer, szLayer, 10);
-				cyber.m_strLayerName = szLayer;
-				itoa(sloMysqlAgent::GetInstance()->m_CyberList[0].nFrequency, szFren, 10);
-				cyber.m_strFrequencyName = szFren;
-				cyber.SetKeywords(sloMysqlAgent::GetInstance()->m_CyberList[0].szKeywords);
-				cyber.SetWebsite(sloMysqlAgent::GetInstance()->m_CyberList[0].szWebsite);
-				if (cyber.DoModal() == 1)
+				if (6 == MessageBox("您确定编辑该条快捕记录？","快捕管理",MB_YESNO | MB_ICONWARNING))
 				{
-					//点击确定
+					CXTPReportRecord* pRecord = pItemNotify->pRow->GetRecord();	
+					CXTPReportRecordItemText* pItemText = (CXTPReportRecordItemText*)pRecord->GetItem(4);
+					CString strContent = pItemText->GetValue();
+					//根据content查找所有记录
+					sloMysqlAgent::GetInstance()->GetCyberFromDB(strContent);
 					
-				}else
-				{
-					//点击取消
-
+					//修改快捕任务，弹出对话框
+					CCyberDlg cyber;
+					cyber.m_cyberName = strContent;
+					char szLayer[10] = {0};
+					char szFren[10] =  {0};
+					itoa(sloMysqlAgent::GetInstance()->m_CyberList[0].nLayer, szLayer, 10);
+					cyber.m_strLayerName = szLayer;
+					itoa(sloMysqlAgent::GetInstance()->m_CyberList[0].nFrequency, szFren, 10);
+					cyber.m_strFrequencyName = szFren;
+					cyber.SetKeywords(sloMysqlAgent::GetInstance()->m_CyberList[0].szKeywords);
+					cyber.SetWebsite(sloMysqlAgent::GetInstance()->m_CyberList[0].szWebsite);
+					cyber.DoModal();					
 				}
 			}else{
-	
+				
 				//将这一列值为可编辑		
 				CXTPReportColumn* pColumn = m_wndReportCtrl.GetColumns()->GetAt(4);
 				m_wndReportCtrl.SetFocusedColumn(pColumn);
-			}
-
+			}				
 			break;
 		}
 	}
