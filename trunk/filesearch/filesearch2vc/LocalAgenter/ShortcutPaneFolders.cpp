@@ -144,16 +144,17 @@ void CShortcutPaneFolders::OnContextMenu(CWnd* pWnd, CPoint point)
 	m_bSelect = FALSE;
 	
 	HTREEITEM hItemParent = m_wndTreeFolders.GetParentItem(hItemSelected);
-	if (hItemParent == NULL)
-	{
-		//如果未选中父节点
-		return ;
-	}
 
 	CString strItemText = m_wndTreeFolders.GetItemText(hItemSelected);
 	//如果选中子节点
 	CMenu menu;
 	VERIFY(menu.LoadMenu(IDR_MENU_TREE));
+	if (hItemParent == NULL)
+	{
+		//如果未选中父节点,只保留增加
+		menu.GetSubMenu(0)->RemoveMenu(1, MF_BYPOSITION);
+		menu.GetSubMenu(0)->RemoveMenu(1, MF_BYPOSITION);	
+	}
 	ClientToScreen(&pt);
 	int nReturn = CXTPCommandBars::TrackPopupMenu(menu.GetSubMenu(0), TPM_LEFTALIGN|TPM_RETURNCMD|TPM_NONOTIFY, pt.x, pt.y, this);
 	
@@ -169,9 +170,20 @@ void CShortcutPaneFolders::OnContextMenu(CWnd* pWnd, CPoint point)
 				if(sloMysqlAgent::GetInstance()->ExistKeywordType(szContent) == FALSE)
 					break;
 			}
+			
 			//新增一节点，然后设置为可编辑
-			HTREEITEM hNewItem = m_wndTreeFolders.InsertItem(szContent, 1, 1, hItemParent);
-			CString strParentText = m_wndTreeFolders.GetItemText(hItemParent);
+			HTREEITEM hNewItem;
+			CString strParentText;
+			if (hItemParent == NULL)
+			{
+				hNewItem = m_wndTreeFolders.InsertItem(szContent, 1, 1, hItemSelected);
+				strParentText = strItemText;
+			}else
+			{
+				hNewItem = m_wndTreeFolders.InsertItem(szContent, 1, 1, hItemParent);
+				strParentText = m_wndTreeFolders.GetItemText(hItemParent);
+			}
+
 			sloMysqlAgent::GetInstance()->AddType(strParentText.GetBuffer(0), szContent);
 			CEdit* pEdit = m_wndTreeFolders.EditLabel(hNewItem);			
 		}

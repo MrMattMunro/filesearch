@@ -96,6 +96,9 @@ BOOL CCyberDlg::OnInitDialog()
 				}else
 					nState = STATE_UNCHECKED;
 				m_treeKeywords.InsertItemState(sloMysqlAgent::GetInstance()->m_KeywordsList[i].szKeyName, 4, 4, nState, hItemState);
+				
+				if (nState == STATE_CHECKED)	
+					m_treeKeywords.Expand(hItemState, TVE_EXPAND);
 			}
 		}
 		m_treeKeywords.Expand(hItemState, TVE_EXPAND);
@@ -122,7 +125,10 @@ BOOL CCyberDlg::OnInitDialog()
 				nState = STATE_CHECKED;
 			}else
 				nState = STATE_UNCHECKED;
+		
 			m_treeWebsite.InsertItemState(sloMysqlAgent::GetInstance()->m_WebsiteList[j].szSiteName, 4, 4, nState, hItemState);
+			if (nState == STATE_CHECKED)	
+				m_treeWebsite.Expand(hItemState, TVE_EXPAND);
 		}
 	}
 	m_treeWebsite.Expand(hItemState, TVE_EXPAND);
