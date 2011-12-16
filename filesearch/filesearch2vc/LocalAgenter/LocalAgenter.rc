@@ -289,10 +289,10 @@ IDC_CHECK_NONE          CURSOR  DISCARDABLE     "res\\check_none.cur"
 STRINGTABLE DISCARDABLE 
 BEGIN
     IDS_ABOUTBOX            "关于 LocalAgenter(&A)..."
-    ID_SHORTCUT_FOLDERS     "Folder List"
-    ID_SHORTCUT_CALENDAR    "Calendar"
+    ID_SHORTCUT_FOLDERS     "词汇管理"
+    ID_SHORTCUT_CALENDAR    "网址管理"
     ID_SHORTCUT_MAIL        "Mail"
-    ID_SHORTCUT_TASKS       "Tasks"
+    ID_SHORTCUT_TASKS       "网络快捕"
     ID_SHORTCUT_NOTES       "Notes"
     ID_SHORTCUT_CONTACTS    "Contacts"
     ID_SHORTCUT_JOURNAL     "Journal"
