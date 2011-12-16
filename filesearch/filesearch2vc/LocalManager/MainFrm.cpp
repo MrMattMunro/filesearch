@@ -122,15 +122,32 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	pCommandBars->SetMenu(_T("Menu Bar"), IDR_MENU_MAINFRAME/*IDR_MAINFRAME*/);
 
+// 	CXTPToolBar* pStandardBar = (CXTPToolBar*)pCommandBars->Add(_T("Standard"), xtpBarTop);
+// 	if (!pStandardBar ||
+// 		!pStandardBar->LoadToolBar(IDR_MAINFRAME))
+// 	{
+// 		TRACE0("Failed to create toolbar\n");
+// 	}
+// 
+// 	pCommandBars->GetToolTipContext()->SetStyle(xtpToolTipOffice);
 
-	CXTPToolBar* pStandardBar = (CXTPToolBar*)pCommandBars->Add(_T("Standard"), xtpBarTop);
-	if (!pStandardBar ||
-		!pStandardBar->LoadToolBar(IDR_MAINFRAME))
+	CXTPToolBar* pTopBar = (CXTPToolBar*)pCommandBars->Add(_T("top"), xtpBarTop);
+	if (!pTopBar ||
+		!pTopBar->LoadToolBar(IDR_TOOLBAR_TOP))
 	{
 		TRACE0("Failed to create toolbar\n");
 	}
+	pTopBar->SetCustomizeDialogPresent(FALSE);
 
-	pCommandBars->GetToolTipContext()->SetStyle(xtpToolTipOffice);
+	m_listIcon.Create(32, 32, ILC_MASK|ILC_COLOR32, 1, 1);
+	m_listIcon.Add(AfxGetApp()->LoadIcon(IDI_OUTBOX));
+	
+	//pCommandBars->GetImageManager()->SetIcons(IDR_TOOLBAR_TOP, IDR_TOOLBAR_TOP);
+	pCommandBars->GetImageManager()->SetIcons(IDR_TOOLBAR_TOP, m_listIcon);
+
+	CXTPCommandBarsOptions* pOptions = pCommandBars->GetCommandBarsOptions();
+	// Set global icon's size
+	pOptions->bLargeIcons = TRUE;
 
 	// Load the previous state for command bars.
 	LoadCommandBars(_T("CommandBars"));
@@ -448,3 +465,4 @@ void CMainFrame::OnUpdateMenuSystemSet(CCmdUI* pCmdUI)
 	// TODO: Add your command update UI handler code here
 	
 }
+
