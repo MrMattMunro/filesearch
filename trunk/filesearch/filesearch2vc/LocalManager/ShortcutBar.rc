@@ -29,6 +29,7 @@ LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 IDB_ENV                 BITMAP  DISCARDABLE     "res\\env.bmp"
 IDB_HEADER_1            BITMAP  DISCARDABLE     "res\\header_1.bmp"
 IDB_HEADER_3            BITMAP  DISCARDABLE     "res\\header_3.bmp"
+IDR_TOOLBAR_TOP         BITMAP  DISCARDABLE     "res\\toolbar1.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -103,6 +104,15 @@ BEGIN
     EDITTEXT        IDC_EDIT_WEBSITE,42,13,186,16,ES_AUTOHSCROLL
 END
 
+IDD_DIALOG_TOOLBAR DIALOG DISCARDABLE  0, 0, 234, 34
+STYLE WS_POPUP | WS_BORDER
+FONT 9, "宋体"
+BEGIN
+    PUSHBUTTON      "导入和导出",IDC_BUTTON1,10,4,58,25
+    PUSHBUTTON      "修改",IDC_BUTTON2,86,4,42,25
+    PUSHBUTTON      "删除",IDC_BUTTON3,138,4,42,25
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -116,9 +126,34 @@ BEGIN
     BEGIN
         BOTTOMMARGIN, 61
     END
+
+    IDD_DIALOG_TOOLBAR, DIALOG
+    BEGIN
+        RIGHTMARGIN, 188
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_TOOLBAR_TOP TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_BUTTON32801
+    BUTTON      ID_BUTTON32802
+    BUTTON      ID_BUTTON32803
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// PNG
+//
+
+IDR_TOOLBAR_TOP         PNG     DISCARDABLE     "res\\ToolbarLarge.png"
 #endif    // Chinese (P.R.C.) resources
 /////////////////////////////////////////////////////////////////////////////
 
@@ -137,7 +172,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 // Bitmap
 //
 
-IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\mainfram.bmp"
 IDB_SHORTCUTS_SMALL     BITMAP  DISCARDABLE     "res\\Shortcuts_small.bmp"
 IDB_SHORTCUTS_BIG       BITMAP  DISCARDABLE     "res\\Shortcuts_big.bmp"
 IDB_SHORTCUTS_SMALL_ALPHA BITMAP  DISCARDABLE     "res\\Shortcuts_small_alpha.bmp"
@@ -481,6 +516,7 @@ END
 STRINGTABLE DISCARDABLE 
 BEGIN
     AFX_IDS_PREVIEW_CLOSE   "Close print preview mode\nCancel Preview"
+    IDR_PANE_DIALOG         "Dialog"
 END
 
 STRINGTABLE DISCARDABLE 

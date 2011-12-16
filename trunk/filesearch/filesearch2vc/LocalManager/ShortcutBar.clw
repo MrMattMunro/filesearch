@@ -2,13 +2,13 @@
 
 [General Info]
 Version=1
-LastClass=CWebsiteDlg
+LastClass=CMainFrame
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "shortcutbar.h"
 LastPage=0
 
-ClassCount=8
+ClassCount=9
 Class1=CMainFrame
 Class2=CShortcutBarApp
 Class3=CShortcutBarDoc
@@ -16,24 +16,27 @@ Class4=CShortcutBarSplitter
 Class5=CShortcutBarView
 Class6=CShortcutPaneCalendar
 
-ResourceCount=8
-Resource1=IDD_DIALOG_WEBSITE
-Resource2=IDR_POPUP_MENU (English (U.S.))
-Resource3=IDR_MENU_MAINFRAME
-Resource4=IDR_MENU_POPUP_TREE_CHILD
-Resource5=IDR_MENU_POPUP_TREE_PARENT
+ResourceCount=10
+Resource1=IDR_MENU_POPUP_TREE_PARENT
+Resource2=IDD_DIALOG_WEBSITE
+Resource3=IDD_DIALOG_GROUP
+Resource4=IDR_MENU_POPUP_LIST
+Resource5=IDR_MENU_MAINFRAME
 Class7=CGroupDlg
-Resource6=IDD_DIALOG_GROUP
-Resource7=IDR_MENU_POPUP_LIST
+Resource6=IDR_POPUP_MENU (English (U.S.))
+Resource7=IDR_MENU_POPUP_TREE_CHILD
 Class8=CWebsiteDlg
-Resource8=IDR_MAINFRAME (English (U.S.))
+Resource8=IDR_TOOLBAR_TOP
+Class9=CToolbarDlg
+Resource9=IDD_DIALOG_TOOLBAR
+Resource10=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CMainFrame]
 Type=0
 BaseClass=CFrameWnd
 HeaderFile=MainFrm.h
 ImplementationFile=MainFrm.cpp
-LastObject=CMainFrame
+LastObject=ID_EDIT_UNDO
 Filter=T
 VirtualFilter=fWC
 
@@ -123,7 +126,7 @@ CommandCount=24
 
 [ACL:IDR_MAINFRAME (English (U.S.))]
 Type=1
-Class=?
+Class=CMainFrame
 Command1=ID_FILE_NEW
 Command2=ID_FILE_OPEN
 Command3=ID_FILE_SAVE
@@ -204,4 +207,29 @@ BaseClass=CDialog
 Filter=D
 LastObject=CWebsiteDlg
 VirtualFilter=dWC
+
+[DLG:IDD_DIALOG_TOOLBAR]
+Type=1
+Class=CToolbarDlg
+ControlCount=3
+Control1=IDC_BUTTON1,button,1342242816
+Control2=IDC_BUTTON2,button,1342242816
+Control3=IDC_BUTTON3,button,1342242816
+
+[CLS:CToolbarDlg]
+Type=0
+HeaderFile=ToolbarDlg.h
+ImplementationFile=ToolbarDlg.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=CToolbarDlg
+VirtualFilter=dWC
+
+[TB:IDR_TOOLBAR_TOP]
+Type=1
+Class=?
+Command1=ID_BUTTON32801
+Command2=ID_BUTTON32802
+Command3=ID_BUTTON32803
+CommandCount=3
 

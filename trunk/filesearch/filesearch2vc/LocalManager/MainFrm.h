@@ -55,7 +55,6 @@ class CShortcutBarView;
 #include "ShortcutPaneContacts.h"
 
 #include "ShortcutBarSplitter.h"
-
 class CMainFrame : public CXTPFrameWnd
 	, CXTPOffice2007FrameHook
 {
@@ -73,6 +72,8 @@ public:
 
 	CImageList m_ilSmallShortcuts;
 	CImageList m_ilLargeShortcuts;
+
+	CImageList m_listIcon;
 
 	BOOL m_bClientPane;
 
@@ -137,7 +138,6 @@ protected:
 	//}}AFX_MSG
 	afx_msg void OnCustomize();
 	afx_msg LRESULT OnShortcutBarNotify(WPARAM wParam, LPARAM lParam);
-
 	DECLARE_MESSAGE_MAP()
 };
 

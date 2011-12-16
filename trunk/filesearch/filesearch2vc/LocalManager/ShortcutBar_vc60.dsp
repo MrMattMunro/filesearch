@@ -203,6 +203,10 @@ SOURCE=.\StdAfx.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ToolbarDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\WebsiteDlg.cpp
 # End Source File
 # End Group
@@ -260,6 +264,10 @@ SOURCE=.\sloMysqlAgent.h
 # Begin Source File
 
 SOURCE=.\StdAfx.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ToolbarDlg.h
 # End Source File
 # Begin Source File
 
@@ -351,6 +359,10 @@ SOURCE=.\res\icon9.ico
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\mainfram.bmp
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\ShortcutBar.ico
 # End Source File
 # Begin Source File
@@ -385,6 +397,10 @@ SOURCE=.\res\Shortcuts_small_alpha.bmp
 
 SOURCE=.\res\Toolbar.bmp
 # End Source File
+# Begin Source File
+
+SOURCE=.\res\toolbar1.bmp
+# End Source File
 # End Group
 # Begin Group "mysql"
 
@@ -414,5 +430,9 @@ SOURCE=.\comm\sloCommAgent.cpp
 SOURCE=.\comm\sloRegAgent.cpp
 # End Source File
 # End Group
+# Begin Source File
+
+SOURCE=.\res\ToolbarLarge.png
+# End Source File
 # End Target
 # End Project
