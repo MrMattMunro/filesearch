@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "mycode.h"
+#include "filemanage.h"
 #include "maindlg.h"
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,

@@ -3,6 +3,6 @@
 <link id="10203" pos="140,30" class="linktextwhite">工具(T)</link>
 <link id="10204" pos="200,30" class="linktextwhite">帮助(H)</link>
 
-<imgbtn id="10205" class="linkimage" skin="dlg_btn_min" tip="最大化到托盘" pos="-108,1"/>
-<imgbtn id="10206" class="linkimage" skin="dlg_btn_max" tip="最小化到托盘" pos="-78,1"/>
+<imgbtn id="10206" class="linkimage" skin="dlg_btn_min" tip="最小化到托盘" pos="-108,1"/>
+<imgbtn id="10205" class="linkimage" skin="dlg_btn_max" tip="最大化到托盘" pos="-78,1"/>
 <imgbtn id="10207" class="linkimage" skin="dlg_btn_close" tip="根据用户配置，退出程序或者最小化到托盘" pos="-48,1"/>
