@@ -173,11 +173,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\maindlg.cpp"
+				RelativePath=".\filemanage.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\mycode.cpp"
+				RelativePath=".\maindlg.cpp"
 				>
 			</File>
 			<File
@@ -211,11 +211,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\maindlg.h"
+				RelativePath=".\filemanage.h"
 				>
 			</File>
 			<File
-				RelativePath=".\mycode.h"
+				RelativePath=".\maindlg.h"
 				>
 			</File>
 			<File
@@ -245,7 +245,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\mycode.rc"
+				RelativePath=".\filemanage.rc"
 				>
 			</File>
 		</Filter>
