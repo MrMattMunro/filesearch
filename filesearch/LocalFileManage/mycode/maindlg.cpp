@@ -2,6 +2,7 @@
 #include "maindlg.h"
 #include "resource.h"
 
+
 CMainDlg::CMainDlg():CBkDialogImpl<CMainDlg>(IDR_MAIN_DIALOG) // 在这里加载界面框架
 {
 	BkString::Load(IDR_STRING_DEF); // 加载字符串
@@ -43,23 +44,17 @@ LRESULT CMainDlg::OnMinWindow()
 }
 
 // 文件菜单
-void CMainDlg::OnFileMenu()
+void CMainDlg::OnBnClickedPopupMenu()
 {
-	CPoint	pos;
-	CRect	rc;
-	GetClientRect(&rc);
-	ClientToScreen(&rc);
-
-	pos.x = rc.right - 1010;
-	pos.y = rc.top + 50;
-
-	CMenu menuPopup;
-	menuPopup.LoadMenu(IDR_FILEMENU);
-
-	CMenuHandle Menu = menuPopup.GetSubMenu(0);;
 	
-	//ATLVERIFY(GetCursorPos(&pos));
-	Menu.TrackPopupMenu(TPM_LEFTALIGN | TPM_TOPALIGN, pos.x, pos.y, m_hWnd);
+	initFileMenu();
+	if( m_file_wndMenu.IsWindow() )
+	{
+		CRect	rc;
+		GetClientRect(&rc);
+		ClientToScreen(&rc);
+		m_file_wndMenu.PopUp( rc.left, rc.top + 50);
+	}
 }
 
 // 查看菜单

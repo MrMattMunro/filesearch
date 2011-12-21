@@ -219,6 +219,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\menuwnd.h"
+				>
+			</File>
+			<File
 				RelativePath=".\resource.h"
 				>
 			</File>

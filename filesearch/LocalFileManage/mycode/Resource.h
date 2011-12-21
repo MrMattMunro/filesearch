@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by mycode.rc
+// Used by filemanage.rc
 //
 
 #define IDR_MAINFRAME			128
@@ -18,8 +18,14 @@
 #define IDC_LOCALFILEMANGE          10207
 #define IDS_APP_TITLE               10208
 
+#define IDB_MENU_SET                10209
 
 // -------------------以上ID需要整理------------------------
+
+
+// 整体
+#define IDR_APP                         10000
+
 
 //  FILE菜单
 #define IDR_FILEMENU                    10300
@@ -52,6 +58,8 @@
 #define ID_HELPMENU_CHECKVERSION        10322
 #define ID_HELPMENU_BBS                 10323
 #define ID_HELPMENU_ABOUT               10324
+
+
 
 
 // 新对象的下一组默认值
