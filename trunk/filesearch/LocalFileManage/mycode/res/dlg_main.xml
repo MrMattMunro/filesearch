@@ -14,7 +14,7 @@
 
   </-->
 
-<layer title="文档管理" width="1024" height="768" appwin="1" resize="1">
+<layer title="文档管理" width="1024" height="768" id ="10000" appwin="1" resize="1">
 
   <header class="mainhead" width="full" height="60">
     <dlgfile pos="0,0,-0,-0" src="104" />

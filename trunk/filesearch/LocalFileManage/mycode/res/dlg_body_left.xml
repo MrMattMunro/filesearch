@@ -5,7 +5,7 @@
   <hr pos="10,20,-10,20" crbg="A3BAD2" style="dot"/>
 
   <dlg pos="0,7,200,-0" class="panel">
-    <realwnd pos="0,7,200,-0" id="10402" ctrlid="10402" />
+    <realwnd ctrlid="10402" />
   </dlg>
 
   <img id="10403" pos="5,30" skin="dir_open" sub="0"/>
