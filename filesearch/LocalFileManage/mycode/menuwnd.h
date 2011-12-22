@@ -189,6 +189,7 @@ public:
 		return TRUE;
 	}
 
+	// Menu按下时激发的事件
 	LRESULT OnLButtonDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& /*bHandled*/)
 	{
 		int xPos = GET_X_LPARAM(lParam);
@@ -198,6 +199,7 @@ public:
 		HideWnd();
 
 		m_nCurIndex= HitTest( xPos, yPos);
+
 
 		return TRUE;
 	}
@@ -232,15 +234,16 @@ public:
 		return TRUE;
 	}
 
+
 	void DrawBorderNormal( CDCHandle &dc )
 	{
 		CRect rect;
 		GetClientRect( &rect );
 		// 外围边框的颜色
-		CBrush brush( ::CreateSolidBrush(RGB(128, 128, 128)));
+		CBrush brush( ::CreateSolidBrush(RGB(0x00, 0x00, 0x00)));
 		dc.FrameRect( &rect, brush );
 		rect.InflateRect( -1, -1 );
-		dc.FrameRect( rect, (HBRUSH)::GetStockObject(WHITE_BRUSH) );
+		dc.FrameRect( rect, (HBRUSH)::GetStockObject(GRAY_BRUSH) );
 	}
 
 	void DrawItemText( CDCHandle &dc )
@@ -255,13 +258,21 @@ public:
 		COLORREF clrSel;
 		for ( int i = 0; i < m_vecText.size(); i ++ )
 		{
-			if( m_nCurIndex == i )
-				clrSel = dc.SetTextColor( RGB(192, 192, 192) );
-			else
-				clrSel = dc.SetTextColor( RGB(0x00, 0x00, 0x00) );
+			CRect rect;
+			GetClientRect( &rect );
+			rect.right = rect.left + 200;
+			rect.top = yPos - 7;
+
+			if( m_nCurIndex == i ){
+				clrSel = dc.SetTextColor( RGB(0xff, 0xff, 0xff) );
+				dc.FillSolidRect( rect, RGB(128, 128, 128));
+			} else{
+	            clrSel = dc.SetTextColor( RGB(0x00, 0x00, 0x00) );
+			    dc.FillSolidRect( rect, RGB(0xff, 0xff, 0xff));
+			}
+			
 			dc.TextOut( xPos, yPos, m_vecText[i], m_vecText[i].GetLength() );
 			yPos += m_nItemHeight;
-
 			dc.SetTextColor( clrSel );
 		}
 

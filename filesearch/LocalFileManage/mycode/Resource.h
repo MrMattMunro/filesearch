@@ -19,6 +19,7 @@
 #define IDS_APP_TITLE               10208
 
 #define IDB_MENU_SET                10209
+#define IDB_MENU_ABOUT              10210
 
 // -------------------以上ID需要整理------------------------
 

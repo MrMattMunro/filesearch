@@ -28,3 +28,24 @@
 #define IDS_FILEMENU_SASEAS                    211
 #define IDS_FILEMENU_SASETOMOBILE              212
 #define IDS_FILEMENU_EXIT                      213
+// view menu
+#define IDS_VIEWMENU_FULLSCREEN                 220
+#define IDS_VIEWMENU_SHOWCLASSTREE              221
+#define IDS_VIEWMENU_SKIN                       222
+#define IDS_VIEWMENU_SKIN_DEFAULT               223
+#define IDS_VIEWMENU_SKIN_BOOK                  224
+#define IDS_VIEWMENU_SKIN_GRAY                  225
+#define IDS_VIEWMENU_CUSTOMTOOLS                226
+
+// tool menu
+#define IDS_TOOLMENU_OPTION                 236
+#define IDS_TOOLMENU_VIEWLOG                237
+#define IDS_TOOLMENU_PLUGIN                 238
+
+// help menu
+#define IDS_HELPMENU_HELPDOC                 248
+#define IDS_HELPMENU_HOMEPAGE                249
+#define IDS_HELPMENU_INVITE                  250
+#define IDS_HELPMENU_CHECKVERSION            251
+#define IDS_HELPMENU_BBS                     252
+#define IDS_HELPMENU_ABOUT                   253
