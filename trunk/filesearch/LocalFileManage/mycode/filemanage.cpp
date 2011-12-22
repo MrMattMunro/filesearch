@@ -2,6 +2,7 @@
 #include "filemanage.h"
 #include "maindlg.h"
 
+// ³ÌÐòÈë¿Ú
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
                      LPTSTR    lpCmdLine,
@@ -9,5 +10,6 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 {
 	CMainDlg dlg;
 	dlg.DoModal();
+	
 	return 0;
 }

@@ -60,60 +60,40 @@ void CMainDlg::OnBnClickedPopupMenu()
 // 查看菜单
 void CMainDlg::OnViewMenu()
 {
-	CPoint	pos;
-	CRect	rc;
-	GetClientRect(&rc);
-	ClientToScreen(&rc);
 
-	pos.x = rc.right - 950;
-	pos.y = rc.top + 50;
-
-	CMenu menuPopup;
-	menuPopup.LoadMenu(IDR_VIEWMENU);
-
-	CMenuHandle Menu = menuPopup.GetSubMenu(0);;
-	
-	//ATLVERIFY(GetCursorPos(&pos));
-	Menu.TrackPopupMenu(TPM_LEFTALIGN | TPM_TOPALIGN, pos.x, pos.y, m_hWnd);
+	initViewMenu();
+	if( m_view_wndMenu.IsWindow() )
+	{
+		CRect	rc;
+		GetClientRect(&rc);
+		ClientToScreen(&rc);
+		m_view_wndMenu.PopUp( rc.left + 75, rc.top + 50);
+	}
 }
 // 工具菜单
 void CMainDlg::OnToolMenu()
 {
-	CPoint	pos;
-	CRect	rc;
-	GetClientRect(&rc);
-	ClientToScreen(&rc);
-
-	pos.x = rc.right - 890;
-	pos.y = rc.top + 50;
-
-	CMenu menuPopup;
-	menuPopup.LoadMenu(IDR_TOOLMENU);
-
-	CMenuHandle Menu = menuPopup.GetSubMenu(0);;
-	
-	//ATLVERIFY(GetCursorPos(&pos));
-	Menu.TrackPopupMenu(TPM_LEFTALIGN | TPM_TOPALIGN, pos.x, pos.y, m_hWnd);
+	initToolMenu();
+	if( m_tool_wndMenu.IsWindow() )
+	{
+		CRect	rc;
+		GetClientRect(&rc);
+		ClientToScreen(&rc);
+		m_tool_wndMenu.PopUp( rc.left + 135, rc.top + 50);
+	}
 }
 
 // 帮助菜单
 void CMainDlg::OnHelpMenu()
 {
-	CPoint	pos;
-	CRect	rc;
-	GetClientRect(&rc);
-	ClientToScreen(&rc);
-
-	pos.x = rc.right - 830;
-	pos.y = rc.top + 50;
-
-	CMenu menuPopup;
-	menuPopup.LoadMenu(IDR_HELPMENU);
-
-	CMenuHandle Menu = menuPopup.GetSubMenu(0);;
-	
-	//ATLVERIFY(GetCursorPos(&pos));
-	Menu.TrackPopupMenu(TPM_LEFTALIGN | TPM_TOPALIGN, pos.x, pos.y, m_hWnd);
+	initHelpMenu();
+	if( m_help_wndMenu.IsWindow() )
+	{
+		CRect	rc;
+		GetClientRect(&rc);
+		ClientToScreen(&rc);
+		m_help_wndMenu.PopUp( rc.left + 195, rc.top + 50);
+	}
 }
 
 
