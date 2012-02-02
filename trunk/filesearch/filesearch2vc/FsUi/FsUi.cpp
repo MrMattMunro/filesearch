@@ -13,6 +13,8 @@
 
 #include "FloatWnd.h"
 
+#include "AddinSavefileDlg.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -208,6 +210,21 @@ DWORD __stdcall FsLoadFloatWnd(int nShow)
 	return 0;
 }
 
+/*
+  功能：自定义词汇
+*/
+DWORD __stdcall FsShowSavefileDlg(char* pszFileName)
+{
+	AFX_MANAGE_STATE(AfxGetStaticModuleState());
+	CAddinSavefileDlg addindlg;
+	addindlg.SetDcoumentPath(pszFileName);
+	if(IDOK == addindlg.DoModal())
+	{
+		return 0;
+	}
+	
+	return 0;
+}
 
 //////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// 未用  //////////////////////////////////
@@ -219,8 +236,7 @@ DWORD __stdcall FsImportCustomCiHui()
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
 	CCustomCiHuiDlg cihuidlg;
 	if(IDOK == cihuidlg.DoModal())
-	{
-		
+	{		
 		return 0;
 	}
 	

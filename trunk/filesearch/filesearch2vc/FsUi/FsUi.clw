@@ -2,41 +2,43 @@
 
 [General Info]
 Version=1
-ClassCount=11
+ClassCount=12
 Class1=CFsUiApp
-LastClass=CFastSearchDlg
+LastClass=CAddinSavefileDlg
 NewFileInclude2=#include "FsUi.h"
-ResourceCount=18
+ResourceCount=19
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
 LastTemplate=CDialog
-Resource1=IDD_FLOATWND
+Resource1=IDD_DIALOG_SET_ATTR
 Class3=CCustomCiHuiDlg
 Resource2=IDD_DIALOG_MODIFY_INDEX
 Class4=CModifyIndexDlg
 Resource3=IDD_DIALOG_CUSTOM_DICT (Chinese (P.R.C.))
 Class5=CShowAllCiHuiDlg
-Resource4=IDD_DIALOG_CREATE_INDEX
+Resource4=IDD_DIALOG_LICENSE
 Class6=CSetAttributeDlg
-Resource5=IDD_DIALOG_FAST_SEARCH
+Resource5=IDD_DIALOG_CREATE_INDEX
 Class7=CFastSearchDlg
 Class8=CSearchThread
 Resource6=IDD_DIALOG_SKIN (Chinese (P.R.C.))
 Class9=CLicenseDlg
-Resource7=IDD_DIALOG_CUSTOM_DICT
+Resource7=IDD_DIALOG_SAVE_FILE
 Class10=CSkinDlg
 Resource8=IDD_DIALOG_MODIFY_INDEX (Chinese (P.R.C.))
 Resource9=IDD_DIALOG_ALL_CIHUI (Chinese (P.R.C.))
 Resource10=IDD_DIALOG_LICENSE (Chinese (P.R.C.))
-Resource11=IDD_DIALOG_SKIN
+Resource11=IDD_DIALOG_CUSTOM_DICT
 Resource12=IDD_DIALOG_FAST_SEARCH (Chinese (P.R.C.))
 Resource13=IDD_DIALOG_CREATE_INDEX (Chinese (P.R.C.))
-Resource14=IDD_DIALOG_SET_ATTR
+Resource14=IDD_DIALOG_FAST_SEARCH
 Resource15=IDD_DIALOG_SET_ATTR (Chinese (P.R.C.))
-Resource16=IDD_DIALOG_LICENSE
+Resource16=IDD_DIALOG_SKIN
 Class11=CFloatWnd
 Resource17=IDD_DIALOG_ALL_CIHUI
-Resource18=IDR_MENU_FLOATWND
+Resource18=IDD_FLOATWND
+Class12=CAddinSavefileDlg
+Resource19=IDR_MENU_FLOATWND
 
 [CLS:CFsUiApp]
 Type=0
@@ -201,7 +203,7 @@ ImplementationFile=FastSearchDlg.cpp
 BaseClass=CDialog
 Filter=W
 VirtualFilter=dWC
-LastObject=IDC_COMBO_PATH
+LastObject=CFastSearchDlg
 
 [CLS:CSearchThread]
 Type=0
@@ -439,4 +441,25 @@ Command7=ID_MENU_TRANS_40
 Command8=ID_MENU_TRANS_20
 Command9=ID_HIDE
 CommandCount=9
+
+[DLG:IDD_DIALOG_SAVE_FILE]
+Type=1
+Class=CAddinSavefileDlg
+ControlCount=7
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_STATIC,static,1342308352
+Control4=IDC_EDIT_PATH,edit,1350631552
+Control5=IDC_TREE_GROUP,SysTreeView32,1350631431
+Control6=IDC_STATIC,static,1342308352
+Control7=IDC_STATIC,static,1342177287
+
+[CLS:CAddinSavefileDlg]
+Type=0
+HeaderFile=AddinSavefileDlg.h
+ImplementationFile=AddinSavefileDlg.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=IDC_TREE_GROUP
+VirtualFilter=dWC
 
