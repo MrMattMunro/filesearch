@@ -13,3 +13,4 @@ EXPORTS
 	FsSetSheet			@6
 	FsLoadSkin			@7
 	FsLoadFloatWnd		@8
+	FsShowSavefileDlg	@9

@@ -326,6 +326,22 @@ BEGIN
     CONTROL         2093,IDC_LOGO,"Static",SS_BITMAP,63,13,43,43
 END
 
+IDD_DIALOG_SAVE_FILE DIALOG DISCARDABLE  0, 0, 203, 281
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "保存文件"
+FONT 10, "宋体"
+BEGIN
+    DEFPUSHBUTTON   "保存",IDOK,114,262,33,14
+    PUSHBUTTON      "取消",IDCANCEL,154,261,30,14
+    LTEXT           "文件:",IDC_STATIC,8,12,20,8
+    EDITTEXT        IDC_EDIT_PATH,29,9,167,14,ES_AUTOHSCROLL
+    CONTROL         "Tree1",IDC_TREE_GROUP,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | WS_BORDER | WS_TABSTOP,
+                    9,49,187,206
+    LTEXT           "常用文件夹",IDC_STATIC,8,33,38,8
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME,9,43,187,1
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
