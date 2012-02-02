@@ -20,8 +20,8 @@ CCyberDlg::CCyberDlg(CWnd* pParent /*=NULL*/)
 {
 	//{{AFX_DATA_INIT(CCyberDlg)
 	m_cyberName = _T("");
-	m_strLayerName = _T("3");
-	m_strFrequencyName = _T("1");
+	m_strLayerName = _T("2");
+	m_strFrequencyName = _T("4");
 	//}}AFX_DATA_INIT
 	m_pTreeFocus = NULL;
 
@@ -169,7 +169,7 @@ void CCyberDlg::OnOK()
 	{
 		CString strText2 = m_treeKeywords.GetItemText(hNextItem);
 		int nState = m_treeKeywords.GetItemCheck(hNextItem);
-		if (nState == STATE_CHECKED && !m_treeKeywords.ItemHasChildren(hNextItem))
+		if (nState == STATE_CHECKED && m_treeKeywords.GetParentItem(hNextItem))
 		{
 			CString strText = m_treeKeywords.GetItemText(hNextItem);
 			strKeywords += strText;
@@ -185,12 +185,11 @@ void CCyberDlg::OnOK()
 		return ;
 	}
 
-
 	hNextItem = m_treeWebsite.GetNextItem(NULL);
 	while(hNextItem!=NULL)
 	{
 		int nState = m_treeWebsite.GetItemCheck(hNextItem);
-		if (nState == STATE_CHECKED && !m_treeWebsite.ItemHasChildren(hNextItem))
+		if (nState == STATE_CHECKED && m_treeWebsite.GetParentItem(hNextItem))
 		{
 			CString strText = m_treeWebsite.GetItemText(hNextItem);
 			strWebsite += strText;
