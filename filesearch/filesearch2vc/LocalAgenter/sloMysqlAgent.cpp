@@ -368,6 +368,7 @@ BOOL sloMysqlAgent::FindKeywordFromDB(char* pKeyword, int nDays, char* pTypeName
 		return FALSE;
 	}
 	
+	nDays = 0;  //不需要最近 时间段选取 这个功能感觉没有必要，还会使操作变得复杂。
 	if (nDays == 0)
 	{
 		if (pTypeName)
