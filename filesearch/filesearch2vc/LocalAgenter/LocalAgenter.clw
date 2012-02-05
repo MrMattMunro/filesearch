@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CCyberDlg
+LastClass=CLocalAgenterDlg
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "LocalAgenter.h"
@@ -13,11 +13,11 @@ Class2=CLocalAgenterDlg
 Class3=CAboutDlg
 
 ResourceCount=7
-Resource1=IDD_LOCALAGENTER_DIALOG
+Resource1=IDD_DIALOG_CYBER
 Resource2=IDR_MAINFRAME
-Resource3=IDD_DIALOG_CYBER
+Resource3=IDR_MENU_DROPDOWN
 Class4=CGroupDlg
-Resource4=IDR_MENU_DROPDOWN
+Resource4=IDD_LOCALAGENTER_DIALOG
 Resource5=IDD_DIALOG_GROUP
 Resource6=IDD_ABOUTBOX
 Class5=CCyberDlg
@@ -34,7 +34,7 @@ Type=0
 HeaderFile=LocalAgenterDlg.h
 ImplementationFile=LocalAgenterDlg.cpp
 Filter=W
-LastObject=IDC_REPORTCTRL
+LastObject=IDC_EDIT_KEYWORD
 BaseClass=CXTResizeDialog
 VirtualFilter=dWC
 
@@ -67,7 +67,7 @@ Control7=IDC_COMBO_TYPE,combobox,1344340226
 Control8=IDC_COMBO_TIME,combobox,1075904770
 Control9=IDC_STATIC,static,1342308352
 Control10=IDC_EDIT_KEYWORD,edit,1350631552
-Control11=IDC_BUTTON_SEARCH,button,1342242816
+Control11=IDC_BUTTON_SEARCH,button,1342242817
 
 [DLG:IDD_DIALOG_GROUP]
 Type=1

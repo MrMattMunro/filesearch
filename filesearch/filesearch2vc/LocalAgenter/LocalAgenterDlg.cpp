@@ -357,11 +357,11 @@ void CLocalAgenterDlg::InitShortcutBar()
 	m_pItemCalendar = pItemCalendar;
 	m_pItemTasks = pItemTasks;
 	
-	//m_wndShortcutBar.AllowMinimize(TRUE);
-	
 	m_wndShortcutBar.SelectItem(pItemFolder);
 	m_wndShortcutBar.LoadState(_T("ShortcutBar"));
-	
+
+	m_wndShortcutBar.SetExpandedLinesCount(4);	//设置初始状态为扩展的button，而不是最小话
+
 	m_wndShortcutBar.SetTheme(xtpShortcutThemeOffice2007);
 
 }

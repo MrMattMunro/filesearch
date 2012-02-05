@@ -261,6 +261,10 @@ SOURCE=.\res\delete24_h.bmp
 # End Source File
 # Begin Source File
 
+SOURCE=".\res\e-2.ico"
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\icon10.ico
 # End Source File
 # Begin Source File
@@ -338,6 +342,10 @@ SOURCE=.\res\state_images.bmp
 # Begin Source File
 
 SOURCE=.\res\tree_images.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\word.ico
 # End Source File
 # Begin Source File
 

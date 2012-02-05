@@ -79,6 +79,8 @@ IDI_ARCHIVE             ICON    DISCARDABLE     "res\\icon17.ico"
 IDI_MY_DOCUMENTS        ICON    DISCARDABLE     "res\\icon14.ico"
 IDI_ICON_DELETE         ICON    DISCARDABLE     "res\\Delete1.ico"
 IDI_ICON_MODIFY         ICON    DISCARDABLE     "res\\WRITE3.ICO"
+IDI_IE                  ICON    DISCARDABLE     "res\\e-2.ico"
+IDI_ICON_WORD           ICON    DISCARDABLE     "res\\word.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -117,7 +119,7 @@ BEGIN
                     NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
     LTEXT           "查找内容:",IDC_STATIC,314,13,37,8
     EDITTEXT        IDC_EDIT_KEYWORD,352,10,108,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "查找",IDC_BUTTON_SEARCH,465,4,48,24
+    DEFPUSHBUTTON   "查找",IDC_BUTTON_SEARCH,465,4,48,24
 END
 
 IDD_DIALOG_GROUP DIALOG DISCARDABLE  0, 0, 227, 38
@@ -172,8 +174,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,1
- PRODUCTVERSION 1,0,0,1
+ FILEVERSION 1,0,0,414
+ PRODUCTVERSION 2012,2,5,1
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -191,14 +193,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "\0"
             VALUE "FileDescription", "LocalAgenter Microsoft 基础类应用程序\0"
-            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "FileVersion", "1, 0, 0, 414\0"
             VALUE "InternalName", "LocalAgenter\0"
             VALUE "LegalCopyright", "版权所有 (C) 2011\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "LocalAgenter.EXE\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "LocalAgenter 应用程序\0"
-            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "ProductVersion", "2012, 2, 5, 1\0"
             VALUE "SpecialBuild", "\0"
         END
     END

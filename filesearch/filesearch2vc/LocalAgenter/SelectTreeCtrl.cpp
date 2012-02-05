@@ -126,6 +126,15 @@ void CSelectTreeCtrl::PreSubclassWindow()
 
 	m_imageList.Create(16, 16, ILC_COLOR24|ILC_MASK, 8, 1);
 	m_imageList.Add(&bitmap, RGB(0,255,0));
+
+	HICON hIcon = AfxGetApp()->LoadIcon(IDI_IE);	
+	ASSERT(hIcon);	 		
+	m_imageList.Add (hIcon);
+
+	hIcon = AfxGetApp()->LoadIcon(IDI_ICON_WORD);	
+	ASSERT(hIcon);	 		
+	m_imageList.Add (hIcon);
+
 	SetImageList(&m_imageList, TVSIL_NORMAL);
 }
 
