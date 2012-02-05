@@ -121,8 +121,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2011,2,25,1
- PRODUCTVERSION 1,0,0,1
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 2012,2,5,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -140,14 +140,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "\0"
             VALUE "FileDescription", "FsUiTest Microsoft 基础类应用程序\0"
-            VALUE "FileVersion", "2011, 2, 25, 1\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
             VALUE "InternalName", "FsUiTest\0"
             VALUE "LegalCopyright", "版权所有 (C) 2011\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "FsUiTest.EXE\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "FsUiTest 应用程序\0"
-            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "ProductVersion", "2012, 2, 5, 0\0"
             VALUE "SpecialBuild", "\0"
         END
     END
