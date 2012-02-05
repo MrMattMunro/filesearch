@@ -43,6 +43,8 @@
 #define IDC_CHECK                       155
 #define IDC_CHECK_NONE                  156
 #define IDB_TREE_IMAGES                 157
+#define IDI_IE                          158
+#define IDI_ICON_WORD                   159
 #define IDC_EDIT_GROUP_NAME             1000
 #define IDC_REPORTCTRL                  1004
 #define IDC_LIST3                       1005
@@ -71,7 +73,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        158
+#define _APS_NEXT_RESOURCE_VALUE        160
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1022
 #define _APS_NEXT_SYMED_VALUE           101
