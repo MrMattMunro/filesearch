@@ -281,6 +281,7 @@
 #define IDR_MENU_FLOATWND               2094
 #define IDB_BITMAP_FASTSEARCHBACK       2095
 #define IDD_DIALOG_SAVE_FILE            2096
+#define IDB_BITMAP_LOGO64               2099
 #define ID_SHOW                         32771
 #define ID_HIDE                         32772
 #define ID_MENU_NEW_INDEX               32773
@@ -292,13 +293,14 @@
 #define ID_MENU_TRANS_60                32779
 #define ID_MENU_TRANS_40                32780
 #define ID_MENU_TRANS_20                32781
+#define ID_MENU_QUICK_QUERY             32782
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        2097
-#define _APS_NEXT_COMMAND_VALUE         32782
+#define _APS_NEXT_RESOURCE_VALUE        2100
+#define _APS_NEXT_COMMAND_VALUE         32783
 #define _APS_NEXT_CONTROL_VALUE         2069
 #define _APS_NEXT_SYMED_VALUE           2000
 #endif

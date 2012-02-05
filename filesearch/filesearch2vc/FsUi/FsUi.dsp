@@ -482,6 +482,10 @@ SOURCE=.\res\FsUi.rc2
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\fwnd.ico
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\HAND.ICO
 # End Source File
 # Begin Source File
@@ -491,6 +495,14 @@ SOURCE=.\res\html.ico
 # Begin Source File
 
 SOURCE=.\res\logo.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\logo.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\logo64.bmp
 # End Source File
 # Begin Source File
 

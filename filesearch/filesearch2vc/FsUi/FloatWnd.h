@@ -47,6 +47,9 @@ protected:
 	afx_msg void OnMenuTrans40();
 	afx_msg void OnMenuTrans60();
 	afx_msg void OnMenuTrans80();
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLogo();
+	afx_msg void OnMenuQuickQuery();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

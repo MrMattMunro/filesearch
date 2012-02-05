@@ -47,6 +47,9 @@ BEGIN_MESSAGE_MAP(CFloatWnd, CDialog)
 	ON_COMMAND(ID_MENU_TRANS_40, OnMenuTrans40)
 	ON_COMMAND(ID_MENU_TRANS_60, OnMenuTrans60)
 	ON_COMMAND(ID_MENU_TRANS_80, OnMenuTrans80)
+	ON_WM_LBUTTONDOWN()
+	ON_BN_CLICKED(IDC_LOGO, OnLogo)
+	ON_COMMAND(ID_MENU_QUICK_QUERY, OnMenuQuickQuery)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -58,6 +61,7 @@ BOOL CFloatWnd::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
+#if 1
 	CBitmap m_Bitmap;
 	HBITMAP hBitmap = m_Logo.GetBitmap();
 	ASSERT(hBitmap);
@@ -72,13 +76,15 @@ BOOL CFloatWnd::OnInitDialog()
 	CRect rcDlgs;
 	GetWindowRect(rcDlgs);   //得到对话框的Rect 对话框的大小
 	ScreenToClient(rcDlgs);             //把屏幕的值转成相应的实际的值 
-	
+#endif
 	int   cx   =   GetSystemMetrics(   SM_CXSCREEN   );  //获得屏幕的分辨率
 	int   cy   =   GetSystemMetrics(   SM_CYSCREEN   );   
 	
 	int x = cx*0.9;
 	int y = cy*0.1;
 
+//  	int nX = 32;
+// 	int nY = 32;
 	MoveWindow(x,y,nX,nY);	
 	m_Logo.MoveWindow(0,0,nX,nY);
 	//CenterWindow();
@@ -156,8 +162,7 @@ UINT CFloatWnd::OnNcHitTest(CPoint point)
 	UINT nHitTest = CDialog::OnNcHitTest(point);
 	
 	if (nHitTest == HTCLIENT &&
-		::GetAsyncKeyState(MK_LBUTTON) < 0) // 如果鼠标左键按下，GetAsyncKeyState函数的返回值小于0
-		
+		::GetAsyncKeyState(MK_LBUTTON) < 0) // 如果鼠标左键按下，GetAsyncKeyState函数的返回值小于	
 		nHitTest = HTCAPTION;
 	
 	return nHitTest;
@@ -201,4 +206,23 @@ void CFloatWnd::OnMenuTrans80()
 	// TODO: Add your command handler code here
 	int nTransParent = MAX_TRANS_PARENT*0.8;
 	OnUpdateTransparent(nTransParent);		
+}
+
+void CFloatWnd::OnLButtonDown(UINT nFlags, CPoint point) 
+{
+	// TODO: Add your message handler code here and/or call default
+//	FsFastSearch();
+	CDialog::OnLButtonDown(nFlags, point);
+}
+
+void CFloatWnd::OnLogo() 
+{
+	// TODO: Add your control notification handler code here
+//	FsFastSearch();
+}
+
+void CFloatWnd::OnMenuQuickQuery() 
+{
+	// TODO: Add your command handler code here
+	FsFastSearch();	
 }
