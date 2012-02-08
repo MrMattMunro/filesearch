@@ -15,13 +15,14 @@ public:
 	sltFastSearchDlgThread();
 	virtual ~sltFastSearchDlgThread();
 	
-	HRESULT startup();
+	HRESULT startup(int nPos);
 	
 private:
 	virtual int run();
 	
 private:
 	BOOL m_bDlgExist;
+	int m_nPos;
 };
 
 #endif // !defined(AFX_SLTFASTSEARCHDLGTHREAD_H__B36E5228_E548_4D3F_9B8F_A3874609299E__INCLUDED_)

@@ -16,6 +16,7 @@ class CFloatWnd : public CDialog
 public:
 	CFloatWnd(CWnd* pParent = NULL);   // standard constructor
 	void OnUpdateTransparent(int iTransparent);
+	int nTickCount;
 // Dialog Data
 	//{{AFX_DATA(CFloatWnd)
 	enum { IDD = IDD_FLOATWND };
@@ -50,6 +51,7 @@ protected:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnLogo();
 	afx_msg void OnMenuQuickQuery();
+	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

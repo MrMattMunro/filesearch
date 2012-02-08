@@ -50,6 +50,7 @@ BEGIN_MESSAGE_MAP(CFloatWnd, CDialog)
 	ON_WM_LBUTTONDOWN()
 	ON_BN_CLICKED(IDC_LOGO, OnLogo)
 	ON_COMMAND(ID_MENU_QUICK_QUERY, OnMenuQuickQuery)
+	ON_WM_LBUTTONDBLCLK()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -61,6 +62,9 @@ BOOL CFloatWnd::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
+	flog.Print(LL_DEBUG_INFO,"[info]CFloatWnd::OnInitDialog!\r\n");
+
+	nTickCount = GetTickCount();
 #if 1
 	CBitmap m_Bitmap;
 	HBITMAP hBitmap = m_Logo.GetBitmap();
@@ -161,9 +165,22 @@ UINT CFloatWnd::OnNcHitTest(CPoint point)
 	// TODO: Add your message handler code here and/or call default
 	UINT nHitTest = CDialog::OnNcHitTest(point);
 	
+	short keystate = ::GetAsyncKeyState(MK_LBUTTON);
 	if (nHitTest == HTCLIENT &&
 		::GetAsyncKeyState(MK_LBUTTON) < 0) // 如果鼠标左键按下，GetAsyncKeyState函数的返回值小于	
-		nHitTest = HTCAPTION;
+	{
+		int nNextTickCount = GetTickCount();
+		if (nNextTickCount - nTickCount <= 250)
+		{
+			//左键双击
+			//MessageBox("dbclick");
+			FsFastSearchEx();
+		}else
+		{
+			nHitTest = HTCAPTION;
+		}
+		nTickCount = nNextTickCount;
+	}
 	
 	return nHitTest;
 
@@ -225,4 +242,13 @@ void CFloatWnd::OnMenuQuickQuery()
 {
 	// TODO: Add your command handler code here
 	FsFastSearch();	
+}
+
+void CFloatWnd::OnLButtonDblClk(UINT nFlags, CPoint point) 
+{
+	// TODO: Add your message handler code here and/or call default
+//	MessageBox("test");
+//	FsFastSearch();
+
+	CDialog::OnLButtonDblClk(nFlags, point);
 }

@@ -27,6 +27,7 @@ CFastSearchDlg::CFastSearchDlg(CWnd* pParent /*=NULL*/)
 	m_bCommboxRecentStatus = TRUE;
 //	m_pSearchThread = NULL;
 	m_bEditForce = FALSE;
+	m_nPos = 1;
 	//}}AFX_DATA_INIT
 }
 
@@ -78,19 +79,25 @@ void CFastSearchDlg::OnEditchangeComboPath()
 
 void CFastSearchDlg::SetWinPos()
 {
-	CRect rcDlgs;
-	GetWindowRect(rcDlgs);   //得到对话框的Rect 对话框的大小
-	ScreenToClient(rcDlgs);             //把屏幕的值转成相应的实际的值 
-	
-	int   cx   =   GetSystemMetrics(   SM_CXSCREEN   );  //获得屏幕的分辨率
-	int   cy   =   GetSystemMetrics(   SM_CYSCREEN   );   
+	if(m_nPos == 0)
+	{
+		//右下角
+		CRect rcDlgs;
+		GetWindowRect(rcDlgs);   //得到对话框的Rect 对话框的大小
+		ScreenToClient(rcDlgs);             //把屏幕的值转成相应的实际的值 
+		
+		int   cx   =   GetSystemMetrics(   SM_CXSCREEN   );  //获得屏幕的分辨率
+		int   cy   =   GetSystemMetrics(   SM_CYSCREEN   );   
+		
+		//cx cy,就是屏幕最右下角的x,y的值 
+		MoveWindow(cx-rcDlgs.Width(),cy-rcDlgs.Height(),rcDlgs.Width(),rcDlgs.Height(),TRUE);   // 
+		
+		//MoveWindow的参数前两个是对话框的x,y位置  
+		//三四个是对话框的大小 ，最后以个不用管！ 
+		SetWindowPos(&wndTopMost,cx-rcDlgs.Width(),cy-rcDlgs.Height()-30,rcDlgs.Width(),rcDlgs.Height(),SWP_NOSIZE); 
+	}else
+		CenterWindow();
 
-	//cx cy,就是屏幕最右下角的x,y的值 
-	MoveWindow(cx-rcDlgs.Width(),cy-rcDlgs.Height(),rcDlgs.Width(),rcDlgs.Height(),TRUE);   // 
-
-	//MoveWindow的参数前两个是对话框的x,y位置  
-	//三四个是对话框的大小 ，最后以个不用管！ 
-	SetWindowPos(&wndTopMost,cx-rcDlgs.Width(),cy-rcDlgs.Height()-30,rcDlgs.Width(),rcDlgs.Height(),SWP_NOSIZE); 
 }
 
 
@@ -181,10 +188,9 @@ BOOL CFastSearchDlg::OnInitDialog()
 			m_BoxList.AddString(m_agent.m_PathList[i].szPath);
 		}
 	}
-
+	
 	m_BoxList.InsertString(0, g_lag.LoadString("combox.recent"));
 	m_BoxList.InsertString(1,g_lag.LoadString("label.fastserlist"));
-	m_BoxList.SetCurSel(0);
 
 	//初始化话最近文档boxlist
 	m_BoxListRecent.InsertString(0, g_lag.LoadString("combox.recent3day"));
@@ -192,6 +198,16 @@ BOOL CFastSearchDlg::OnInitDialog()
 	m_BoxListRecent.InsertString(2, g_lag.LoadString("combox.recent2week"));
 	m_BoxListRecent.InsertString(3, g_lag.LoadString("combox.recent1mon"));
 	m_BoxListRecent.SetCurSel(0);
+
+	if (m_nPos == 0)
+	{
+		m_BoxList.SetCurSel(0);
+	}else
+	{
+		m_BoxList.SetCurSel(1);
+		SetComboxPos(FALSE);
+	}
+
 
 	CreateTaskPanel();
 

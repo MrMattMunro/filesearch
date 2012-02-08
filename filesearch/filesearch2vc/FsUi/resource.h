@@ -282,6 +282,7 @@
 #define IDB_BITMAP_FASTSEARCHBACK       2095
 #define IDD_DIALOG_SAVE_FILE            2096
 #define IDB_BITMAP_LOGO64               2099
+#define IDB_BITMAP_LOGO2                2100
 #define ID_SHOW                         32771
 #define ID_HIDE                         32772
 #define ID_MENU_NEW_INDEX               32773
@@ -299,7 +300,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        2100
+#define _APS_NEXT_RESOURCE_VALUE        2101
 #define _APS_NEXT_COMMAND_VALUE         32783
 #define _APS_NEXT_CONTROL_VALUE         2069
 #define _APS_NEXT_SYMED_VALUE           2000

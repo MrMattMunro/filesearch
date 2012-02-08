@@ -67,7 +67,7 @@ END
 
 VS_VERSION_INFO VERSIONINFO
  FILEVERSION 1,0,0,415
- PRODUCTVERSION 2012,2,5,0
+ PRODUCTVERSION 2012,2,8,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -92,7 +92,7 @@ BEGIN
             VALUE "OriginalFilename", "FsUi.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "FsUi Dynamic Link Library\0"
-            VALUE "ProductVersion", "2012, 2, 5, 0\0"
+            VALUE "ProductVersion", "2012, 2, 8, 0\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -323,7 +323,7 @@ IDD_FLOATWND DIALOG DISCARDABLE  0, 0, 187, 94
 STYLE WS_POPUP
 FONT 9, "ËÎÌו"
 BEGIN
-    CONTROL         2099,IDC_LOGO,"Static",SS_BITMAP,64,19,20,20
+    CONTROL         2100,IDC_LOGO,"Static",SS_BITMAP,64,19,20,20
 END
 
 IDD_DIALOG_SAVE_FILE DIALOG DISCARDABLE  0, 0, 203, 281
@@ -432,6 +432,7 @@ IDB_BITMAP_THREME_NAME_XP_LUNA_Metallic BITMAP  DISCARDABLE     "res\\skin\\THRE
 IDB_BITMAP_LOGO         BITMAP  DISCARDABLE     "res\\logo.bmp"
 IDB_BITMAP_FASTSEARCHBACK BITMAP  DISCARDABLE     "res\\fastsearchback.bmp"
 IDB_BITMAP_LOGO64       BITMAP  DISCARDABLE     "res\\logo64.bmp"
+IDB_BITMAP_LOGO2        BITMAP  DISCARDABLE     "res\\logo2.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //

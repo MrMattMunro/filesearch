@@ -13,10 +13,10 @@ Class2=CFsUiTestDlg
 Class3=CAboutDlg
 
 ResourceCount=4
-Resource1=IDD_FSUITEST_DIALOG
+Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
 Resource3=IDD_FSUITEST_DIALOG (Chinese (P.R.C.))
-Resource4=IDD_ABOUTBOX
+Resource4=IDD_FSUITEST_DIALOG
 
 [CLS:CFsUiTestApp]
 Type=0

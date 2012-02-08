@@ -14,3 +14,4 @@ EXPORTS
 	FsLoadSkin			@7
 	FsLoadFloatWnd		@8
 	FsShowSavefileDlg	@9
+	FsFastSearchEx		@10

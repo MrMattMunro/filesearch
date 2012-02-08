@@ -106,6 +106,8 @@ public:
 	BOOL m_bCommboxRecentStatus;
 	BOOL m_bEditForce;
 	CString m_strOldKey;
+
+	int m_nPos;  //0 сроб╫г 1 жп╪Д
 };
 
 //{{AFX_INSERT_LOCATION}}
