@@ -27,12 +27,13 @@ sltFastSearchDlgThread::~sltFastSearchDlgThread()
 	join();
 }
 
-HRESULT sltFastSearchDlgThread::startup()
+HRESULT sltFastSearchDlgThread::startup(int nPos)
 {
 	do 
 	{
 		if (m_bDlgExist)
 			break ;
+		m_nPos = nPos;
 		
 		start();
 	} while (0);
@@ -47,6 +48,7 @@ int sltFastSearchDlgThread::run()
 		m_bDlgExist = TRUE;
 		AFX_MANAGE_STATE(AfxGetStaticModuleState());
 		CFastSearchDlg  dlg;
+		dlg.m_nPos = m_nPos;
 		if(IDOK ==  dlg.DoModal())
 		{	
 			break;

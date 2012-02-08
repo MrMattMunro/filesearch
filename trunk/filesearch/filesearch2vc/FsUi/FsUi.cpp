@@ -140,7 +140,20 @@ DWORD __stdcall FsFastSearch()
 	if (sltFastSearchDlgThread::getInstance() == NULL)
 		sltFastSearchDlgThread::newInstance();	
 	
-	sltFastSearchDlgThread::getInstance()->startup();
+	sltFastSearchDlgThread::getInstance()->startup(0);
+	
+	flog.Print(LL_DEBUG_INFO,"[info]Leave FsFastSearch!\r\n");
+	return 0;
+}
+
+DWORD __stdcall FsFastSearchEx()
+{
+	flog.Print(LL_DEBUG_INFO,"[info]Enter FsFastSearch!\r\n");
+	
+	if (sltFastSearchDlgThread::getInstance() == NULL)
+		sltFastSearchDlgThread::newInstance();	
+	
+	sltFastSearchDlgThread::getInstance()->startup(1);
 	
 	flog.Print(LL_DEBUG_INFO,"[info]Leave FsFastSearch!\r\n");
 	return 0;
@@ -185,14 +198,14 @@ CFloatWnd* g_pFloatWnd = NULL;
 */
 DWORD __stdcall FsLoadFloatWnd(int nShow)
 {
-	OutputDebugString("===========Enter in FsLoadFloatWnd!");
-	
+	flog.Print(LL_DEBUG_INFO,"[info]Enter FsLoadFloatWnd!nShow=%d\r\n",nShow);	
 	if(g_pFloatWnd == NULL)
 	{		
 		AFX_MANAGE_STATE(AfxGetStaticModuleState());
 		g_pFloatWnd = new CFloatWnd;
 		if (g_pFloatWnd == NULL)
 		{
+			flog.Print(LL_DEBUG_INFO,"[error]create CFloatWnd object failed!GetLastError=0x%x\r\n",GetLastError());
 			return -1;
 		}
 		g_pFloatWnd->Create(IDD_FLOATWND,NULL);
@@ -206,7 +219,7 @@ DWORD __stdcall FsLoadFloatWnd(int nShow)
 		g_pFloatWnd->ShowWindow(SW_HIDE);
 
 	g_pFloatWnd->OnUpdateTransparent(255);
-
+	flog.Print(LL_DEBUG_INFO,"[info]Leave FsLoadFloatWnd!nShow=%d\r\n",nShow);	
 	return 0;
 }
 

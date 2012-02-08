@@ -21,6 +21,7 @@
 DWORD __stdcall FsCreateIndex();
 DWORD __stdcall FsModifyIndex(int nID);
 DWORD __stdcall FsFastSearch();
+DWORD __stdcall FsFastSearchEx();
 DWORD __stdcall FsSetSheet();
 DWORD __stdcall FsLoadSkin();
 
