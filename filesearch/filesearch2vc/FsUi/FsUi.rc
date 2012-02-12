@@ -342,6 +342,23 @@ BEGIN
     CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME,9,43,187,1
 END
 
+IDD_DIALOG_HOTKEY DIALOG DISCARDABLE  0, 0, 245, 190
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "热键"
+FONT 10, "宋体"
+BEGIN
+    ICON            IDI_ICON_POINT3,IDC_STATIC,7,10,18,20
+    LTEXT           "系统热键",IDC_STATIC_HOTKEY,29,16,37,8
+    LTEXT           "快速检索:",IDC_STATIC_HOTKEY_FAST_SEARCH,38,49,35,8
+    LTEXT           "WEB检索:",IDC_STATIC_HOTKEY_WEB_SEARCH,38,66,32,8
+    LTEXT           "设置系统功能的快捷键，实现一键化式系统，方便，高效。",
+                    IDC_STATIC_HOTKEY_DESC,37,32,194,8
+    CONTROL         "HotKey1",IDC_HOTKEY_FAST_SEARCH,"msctls_hotkey32",
+                    WS_BORDER | WS_TABSTOP,74,46,105,14
+    CONTROL         "HotKey1",IDC_HOTKEY_WEB_SEARCH,"msctls_hotkey32",
+                    WS_BORDER | WS_TABSTOP,74,64,105,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -445,7 +462,7 @@ BEGIN
     BEGIN
         MENUITEM "新建索引(&N)",                ID_MENU_NEW_INDEX
         MENUITEM "系统设置(&S)",                ID_MENU_SYS_SET
-        MENUITEM "快速查询(&K)",                ID_MENU_QUICK_QUERY
+        MENUITEM SEPARATOR
         MENUITEM "Web查询(&Q)",                 ID_MENU_WEB_QUERY
         MENUITEM SEPARATOR
         POPUP "透明度(&T)"

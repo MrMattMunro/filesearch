@@ -76,6 +76,15 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 	pItem->SetItemData((DWORD_PTR)pPage);
 	pPage->m_dwData = (DWORD_PTR)pItem;
 
+	//添加热键item
+	i = 3;
+	pItem = pGroup->AddLinkItem(3, IDI_ICON_BASIC_SET_SKIN);
+	pItem->SetCaption("热键");
+	
+	pPage = m_pSheet->GetPage(3);
+	pItem->SetItemData((DWORD_PTR)pPage);
+	pPage->m_dwData = (DWORD_PTR)pItem;
+
 	//添加注册管理group
 	pGroup = AddGroup(1,IDI_ICON_REGISTER);
 	pGroup->SetCaption(g_lag.LoadString("title.licensemanager"));

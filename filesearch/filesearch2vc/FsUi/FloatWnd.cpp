@@ -49,7 +49,6 @@ BEGIN_MESSAGE_MAP(CFloatWnd, CDialog)
 	ON_COMMAND(ID_MENU_TRANS_80, OnMenuTrans80)
 	ON_WM_LBUTTONDOWN()
 	ON_BN_CLICKED(IDC_LOGO, OnLogo)
-	ON_COMMAND(ID_MENU_QUICK_QUERY, OnMenuQuickQuery)
 	ON_WM_LBUTTONDBLCLK()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
@@ -238,11 +237,6 @@ void CFloatWnd::OnLogo()
 //	FsFastSearch();
 }
 
-void CFloatWnd::OnMenuQuickQuery() 
-{
-	// TODO: Add your command handler code here
-	FsFastSearch();	
-}
 
 void CFloatWnd::OnLButtonDblClk(UINT nFlags, CPoint point) 
 {

@@ -502,6 +502,10 @@ SOURCE=.\res\logo.ico
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\logo2.bmp
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\logo64.bmp
 # End Source File
 # Begin Source File

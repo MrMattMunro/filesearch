@@ -2,43 +2,45 @@
 
 [General Info]
 Version=1
-ClassCount=12
+ClassCount=13
 Class1=CFsUiApp
-LastClass=CFloatWnd
+LastClass=CHotkeyDlg
 NewFileInclude2=#include "FsUi.h"
-ResourceCount=19
+ResourceCount=20
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
 LastTemplate=CDialog
-Resource1=IDD_DIALOG_CUSTOM_DICT
+Resource1=IDD_DIALOG_LICENSE
 Class3=CCustomCiHuiDlg
-Resource2=IDD_DIALOG_MODIFY_INDEX
+Resource2=IDD_FLOATWND
 Class4=CModifyIndexDlg
 Resource3=IDD_DIALOG_CUSTOM_DICT (Chinese (P.R.C.))
 Class5=CShowAllCiHuiDlg
-Resource4=IDD_DIALOG_LICENSE
+Resource4=IDD_DIALOG_ALL_CIHUI
 Class6=CSetAttributeDlg
-Resource5=IDD_DIALOG_SAVE_FILE
+Resource5=IDD_DIALOG_MODIFY_INDEX
 Class7=CFastSearchDlg
 Class8=CSearchThread
 Resource6=IDD_DIALOG_SKIN (Chinese (P.R.C.))
 Class9=CLicenseDlg
-Resource7=IDD_DIALOG_SKIN
+Resource7=IDD_DIALOG_HOTKEY
 Class10=CSkinDlg
 Resource8=IDD_DIALOG_MODIFY_INDEX (Chinese (P.R.C.))
 Resource9=IDD_DIALOG_ALL_CIHUI (Chinese (P.R.C.))
 Resource10=IDD_DIALOG_LICENSE (Chinese (P.R.C.))
-Resource11=IDD_FLOATWND
+Resource11=IDD_DIALOG_FAST_SEARCH
 Resource12=IDD_DIALOG_FAST_SEARCH (Chinese (P.R.C.))
 Resource13=IDD_DIALOG_CREATE_INDEX (Chinese (P.R.C.))
 Resource14=IDD_DIALOG_SET_ATTR
 Resource15=IDD_DIALOG_SET_ATTR (Chinese (P.R.C.))
-Resource16=IDD_DIALOG_FAST_SEARCH
+Resource16=IDD_DIALOG_CREATE_INDEX
 Class11=CFloatWnd
-Resource17=IDD_DIALOG_CREATE_INDEX
-Resource18=IDD_DIALOG_ALL_CIHUI
+Resource17=IDD_DIALOG_SAVE_FILE
+Resource18=IDD_DIALOG_SKIN
 Class12=CAddinSavefileDlg
-Resource19=IDR_MENU_FLOATWND
+Resource19=IDD_DIALOG_CUSTOM_DICT
+Class13=CHotkeyDlg
+Resource20=IDR_MENU_FLOATWND
 
 [CLS:CFsUiApp]
 Type=0
@@ -425,7 +427,7 @@ HeaderFile=FloatWnd.h
 ImplementationFile=FloatWnd.cpp
 BaseClass=CDialog
 Filter=W
-LastObject=ID_HIDE
+LastObject=CFloatWnd
 VirtualFilter=dWC
 
 [MNU:IDR_MENU_FLOATWND]
@@ -433,15 +435,14 @@ Type=1
 Class=?
 Command1=ID_MENU_NEW_INDEX
 Command2=ID_MENU_SYS_SET
-Command3=ID_MENU_QUICK_QUERY
-Command4=ID_MENU_WEB_QUERY
-Command5=ID_MENU_TRANS_100
-Command6=ID_MENU_TRANS_80
-Command7=ID_MENU_TRANS_60
-Command8=ID_MENU_TRANS_40
-Command9=ID_MENU_TRANS_20
-Command10=ID_HIDE
-CommandCount=10
+Command3=ID_MENU_WEB_QUERY
+Command4=ID_MENU_TRANS_100
+Command5=ID_MENU_TRANS_80
+Command6=ID_MENU_TRANS_60
+Command7=ID_MENU_TRANS_40
+Command8=ID_MENU_TRANS_20
+Command9=ID_HIDE
+CommandCount=9
 
 [DLG:IDD_DIALOG_SAVE_FILE]
 Type=1
@@ -462,5 +463,26 @@ ImplementationFile=AddinSavefileDlg.cpp
 BaseClass=CDialog
 Filter=D
 LastObject=CAddinSavefileDlg
+VirtualFilter=dWC
+
+[DLG:IDD_DIALOG_HOTKEY]
+Type=1
+Class=CHotkeyDlg
+ControlCount=7
+Control1=IDC_STATIC,static,1342177283
+Control2=IDC_STATIC_HOTKEY,static,1342308352
+Control3=IDC_STATIC_HOTKEY_FAST_SEARCH,static,1342308352
+Control4=IDC_STATIC_HOTKEY_WEB_SEARCH,static,1342308352
+Control5=IDC_STATIC_HOTKEY_DESC,static,1342308352
+Control6=IDC_HOTKEY_FAST_SEARCH,msctls_hotkey32,1350631424
+Control7=IDC_HOTKEY_WEB_SEARCH,msctls_hotkey32,1350631424
+
+[CLS:CHotkeyDlg]
+Type=0
+HeaderFile=HotkeyDlg.h
+ImplementationFile=HotkeyDlg.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=CHotkeyDlg
 VirtualFilter=dWC
 

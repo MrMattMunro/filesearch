@@ -50,7 +50,6 @@ protected:
 	afx_msg void OnMenuTrans80();
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnLogo();
-	afx_msg void OnMenuQuickQuery();
 	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()

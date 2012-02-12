@@ -10,6 +10,7 @@
 #include "LicenseDlg.h"
 #include "SkinDlg.h"
 #include "PropertyPageTaskPanelNavigator.h"
+#include "HotkeyDlg.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -61,9 +62,11 @@ int sltSetSheetDlgThread::run()
 		CSetAttributeDlg	attrdlg;
 		CLicenseDlg			licdlg;
 		CSkinDlg			skindlg;
+		CHotkeyDlg			hotkeydlg;
 		ps.AddPage(&attrdlg);
 		ps.AddPage(&cihuidlg);
 		ps.AddPage(&skindlg);
+		ps.AddPage(&hotkeydlg);
 		ps.AddPage(&licdlg);
 		
 		ps.SetResizable(FALSE);
