@@ -266,7 +266,13 @@
 #define IDI_ICON_REGISTER_INFO          2068
 #define IDC_TREE_GROUP                  2068
 #define IDI_ICON_FAST_SEARCH2           2069
+#define IDC_STATIC_HOTKEY               2069
 #define IDI_ICON_FAST_SEARCH3           2070
+#define IDC_STATIC_HOTKEY_FAST_SEARCH   2070
+#define IDC_STATIC_HOTKEY_WEB_SEARCH    2071
+#define IDC_STATIC_HOTKEY_DESC          2072
+#define IDC_HOTKEY_FAST_SEARCH          2073
+#define IDC_HOTKEY_WEB_SEARCH           2074
 #define IDI_ICON_POINT2                 2075
 #define IDI_ICON_POINT                  2076
 #define IDI_ICON_POINT3                 2077
@@ -283,6 +289,7 @@
 #define IDD_DIALOG_SAVE_FILE            2096
 #define IDB_BITMAP_LOGO64               2099
 #define IDB_BITMAP_LOGO2                2100
+#define IDD_DIALOG_HOTKEY               2101
 #define ID_SHOW                         32771
 #define ID_HIDE                         32772
 #define ID_MENU_NEW_INDEX               32773
@@ -294,15 +301,14 @@
 #define ID_MENU_TRANS_60                32779
 #define ID_MENU_TRANS_40                32780
 #define ID_MENU_TRANS_20                32781
-#define ID_MENU_QUICK_QUERY             32782
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        2101
+#define _APS_NEXT_RESOURCE_VALUE        2102
 #define _APS_NEXT_COMMAND_VALUE         32783
-#define _APS_NEXT_CONTROL_VALUE         2069
+#define _APS_NEXT_CONTROL_VALUE         2074
 #define _APS_NEXT_SYMED_VALUE           2000
 #endif
 #endif

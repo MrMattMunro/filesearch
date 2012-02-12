@@ -199,9 +199,9 @@ CFloatWnd* g_pFloatWnd = NULL;
 DWORD __stdcall FsLoadFloatWnd(int nShow)
 {
 	flog.Print(LL_DEBUG_INFO,"[info]Enter FsLoadFloatWnd!nShow=%d\r\n",nShow);	
+	AFX_MANAGE_STATE(AfxGetStaticModuleState());
 	if(g_pFloatWnd == NULL)
 	{		
-		AFX_MANAGE_STATE(AfxGetStaticModuleState());
 		g_pFloatWnd = new CFloatWnd;
 		if (g_pFloatWnd == NULL)
 		{
@@ -210,7 +210,6 @@ DWORD __stdcall FsLoadFloatWnd(int nShow)
 		}
 		g_pFloatWnd->Create(IDD_FLOATWND,NULL);
 	}
-
 
 	if (nShow == 1)
 	{
