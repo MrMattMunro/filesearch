@@ -16,6 +16,7 @@ namespace FileUtils {
 bool copyDirectoryFiles(const QDir &fromDir, const QDir &toDir, bool coverFileIfExist);
 bool removeDirectory(QString dirName);
 void deleteDirectory(QFileInfo fileList);
+bool delDirectory(const QDir &fromDir);
 int  loadAllFile(QDir dir, QList<QString> fileList);
 // 目标Copy目录结构
 bool copyDirectory(const QDir &fromDir, const QDir &toDir);

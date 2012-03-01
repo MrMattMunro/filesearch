@@ -426,6 +426,9 @@ void MainWindow::importDlg()
                 QStringList files = rowMapIterator.value();
                 FileUtils::writeFile(datfilepath, files);
             }
+
+            // 清除空目录<既无子文件夹也无files.dat文件>
+            FileUtils::delDirectory(QDir(curPath));
         }
     }
     // 如果没有选中子目录节点

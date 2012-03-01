@@ -108,5 +108,15 @@
         <file>icons/xls.ico</file>
         <file>icons/pptx.ico</file>
         <file>icons/ppt.ico</file>
+        <file>icons/php.ico</file>
+        <file>icons/perl.ico</file>
+        <file>icons/txt.ico</file>
+        <file>icons/rmvb.ico</file>
+        <file>icons/swf.ico</file>
+        <file>icons/flv.ico</file>
+        <file>icons/ini.ico</file>
+        <file>icons/xml.ico</file>
+        <file>icons/cpp.ico</file>
+        <file>icons/png.ico</file>
     </qresource>
 </RCC>
