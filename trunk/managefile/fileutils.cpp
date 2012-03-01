@@ -76,6 +76,32 @@ bool FileUtils::copyDirectory(const QDir &fromDir, const QDir &toDir)
     return true;
 }
 
+// 删除空目录
+bool FileUtils::delDirectory(const QDir &fromDir)
+{
+    QDir sourceDir = fromDir;
+    /** 如果目标目录不存在，则进行创建 */
+    if(!fromDir.exists()){
+        return true;
+    }
+    QFileInfoList fileInfoList = sourceDir.entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot);
+    if(fileInfoList.size() == 0){
+        sourceDir.rmpath(fromDir.absolutePath());
+    }
+    foreach(QFileInfo fileInfo, fileInfoList){
+        if(fileInfo.fileName() == "." || fileInfo.fileName() == ".."){
+             continue;
+        }
+         /** 当为目录时，递归的进行copy */
+        if(fileInfo.isDir()){
+            if(!delDirectory(fileInfo.filePath())){
+                 return false;
+            }
+        }
+    }
+    return true;
+}
+
 bool FileUtils::writeFile(QString filepath, QStringList lines)
 {
 

@@ -26,9 +26,9 @@ ImportDocDialog::ImportDocDialog(QWidget * parent, const QString & basedir,const
         // fileTypeCmb
         fileTypeCmb->clear();
         fileTypeCmb->insertItems(0, QStringList()
-         << QApplication::translate("ImportDocDialog", "All files(*.*)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ImportDocDialog", "All supported files", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ImportDocDialog", "Office files(*.doc,*.docx,*.xls,*.xlsx,*.ppt,*.pptx)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ImportDocDialog", "Pdf files(*.pdf)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ImportDocDialog", "Html files(*.html,*.htm)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ImportDocDialog", "Picture file(*.jpeg,*.jpg,*.png,*.bmp,*.gif)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ImportDocDialog", "Flash files(*.flv,*.swf)", 0, QApplication::UnicodeUTF8)
@@ -51,36 +51,16 @@ ImportDocDialog::ImportDocDialog(QWidget * parent, const QString & basedir,const
         // 新建Model
         model->setColumnCount(1);
 
+        // 设置第一列的宽度
+        int tablewidth = this->previewView->width();
+        this->previewView->setColumnWidth(0, tablewidth * 1);
+
         connect(fileSelBtn, SIGNAL(clicked()), this, SLOT(fileSelBtn_clicked()));
         connect(previewBtn, SIGNAL(clicked()), this, SLOT(previewBtn_clicked()));
         connect(delBtn, SIGNAL(clicked()), this, SLOT(delBtn_clicked()));
 
         connect(buttonBox, SIGNAL(accepted()), this, SLOT(confirmBtn_clicked()));
         connect(buttonBox,SIGNAL(rejected()),this,SLOT(cancelBtn_clicked()));
-
-
-
-//	connect(fileButton, SIGNAL(clicked()), this, SLOT(fileButton_clicked()));
-//	connect(buttonBox, SIGNAL(accepted()), this, SLOT(slotAccepted()));
-//	connect(tabWidget, SIGNAL(currentChanged(int)),
-//			this, SLOT(createPreview(int)));
-//	// csv
-//	connect(pipeRadioButton, SIGNAL(clicked(bool)),
-//			this, SLOT(createPreview(bool)));
-//	connect(commaRadioButton, SIGNAL(clicked(bool)),
-//			this, SLOT(createPreview(bool)));
-//	connect(semicolonRadioButton, SIGNAL(clicked(bool)),
-//			this, SLOT(createPreview(bool)));
-//	connect(tabelatorRadioButton, SIGNAL(clicked(bool)),
-//			this, SLOT(createPreview(bool)));
-//	connect(customRadioButton, SIGNAL(clicked(bool)),
-//			this, SLOT(createPreview(bool)));
-//	connect(customEdit, SIGNAL(textChanged(QString)),
-//			this, SLOT(customEdit_textChanged(QString)));
-//	connect(skipHeaderCheck, SIGNAL(toggled(bool)),
-//			this, SLOT(skipHeaderCheck_toggled(bool)));
-
-        //skipHeaderCheck_toggled(false);
 }
 
 // 选择路径
@@ -115,45 +95,46 @@ void ImportDocDialog::previewBtn_clicked()
    Preferences* p = Preferences::instance();
 
    QStringList filter;
-   // all files
-   if(curIndex == 0){
-       filter << "*.*";
-   }
    // all supported files
-   if(curIndex == 1){
+   if(curIndex == 0){
        filter = p->allsupported();
    }
    // officedoc
-   if(curIndex == 2){
+   if(curIndex == 1){
        filter = p->officedoc();
    }
    // officedoc
-   if(curIndex == 3){
+   if(curIndex == 2){
        filter = p->pdf();
    }
    // htmls files
-   if(curIndex == 4){
+   if(curIndex == 3){
        filter = p->htmls();
    }
    // pics files
-   if(curIndex == 5){
+   if(curIndex == 4){
        filter = p->pics();
    }
    // swfs files
-   if(curIndex == 6){
+   if(curIndex == 5){
        filter = p->swfs();
    }
    // sources files
-   if(curIndex == 7){
+   if(curIndex == 6){
        filter = p->sources();
    }
    // txts files
-   if(curIndex == 8){
+   if(curIndex == 7){
        filter = p->txts();
    }
    // movies files
-   if(curIndex == 9){
+   if(curIndex == 8){
        filter = p->movies();
+   }
+
+   // 单独文件类型
+   if(curIndex > 8){
+      filter << fileTypeCmb->currentText();
    }
 
    // 自定义文件类型
@@ -207,24 +188,16 @@ void ImportDocDialog::previewBtn_clicked()
 int ImportDocDialog::loadFiles(QString parentPath, QStringList filter, QStandardItemModel *model){
     //目录
     QDir dir(parentPath);
-    // 包含
-    dir.setNameFilters(filter);
     if (!dir.exists()) {
         return -1;
     }
-
     // 取到所有的文件和文件名，但是去掉.和..的文件夹（这是QT默认有的）
-    dir.setFilter(QDir::Dirs|QDir::Files|QDir::NoDotAndDotDot);
+    dir.setFilter(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot);
 
     //转化成一个list
-    QFileInfoList list = dir.entryInfoList(filter);
-    if(list.size()< 1 ) {
-        return -1;
-    }
+    QFileInfoList list = dir.entryInfoList();
 
-    int i=0;
-    // 顶层目录
-    do{
+    for(int i = 0; i< list.size(); i++){
         QFileInfo fileInfo = list.at(i);
         QString filepath = fileInfo.filePath();
         //如果是文件夹
@@ -233,13 +206,17 @@ int ImportDocDialog::loadFiles(QString parentPath, QStringList filter, QStandard
             loadFiles(filepath, filter, model);
         }else{
             filepath = QDir::toNativeSeparators(filepath);
-            QStandardItem* item = new QStandardItem(filepath);
-            QList<QStandardItem*> items;
-            items << item;
-            model->appendRow(items);
+            int dotpos = filepath.lastIndexOf(".");
+            QString suffix = filepath.right(filepath.length() - dotpos);
+            suffix = "*" + suffix;
+            if(filter.contains(suffix)){
+                QStandardItem* item = new QStandardItem(filepath);
+                QList<QStandardItem*> items;
+                items << item;
+                model->appendRow(items);
+            }
         }
-        i++;
-    } while(i < list.size());
+    }
 }
 
 //// 删除文件按钮

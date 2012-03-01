@@ -89,6 +89,7 @@ bool MyTableView::eventFilter (QObject* object,QEvent* event)
    }
    return QTableView::eventFilter (object, event);
 }
+
 // 窗口大小调节各列的长度
 void MyTableView::resizeEvent(QResizeEvent * event){
     int tablewidth = this->width();
@@ -113,80 +114,73 @@ void MyTableView::buildDocList(QString filepath)
 
          // 当名称为空时
          if(str.isEmpty()){
-           continue;
+              continue;
          }
          int dotpos = str.lastIndexOf(".");
          int splitpos = str.lastIndexOf(QDir::separator());
          QString filename = str.right(str.length() - splitpos - 1);
-         QString suffix = str.right(str.length() - dotpos);
-         suffix = "*" + suffix;
+         QString icon = str.right(str.length() - dotpos - 1).toLower();
+         QString dotsuffix = str.right(str.length() - dotpos);
+         QString suffix = "*" + dotsuffix;
+
          QList<QStandardItem*> items;
          QStandardItem* item = new QStandardItem();
-         // QStandardItem* iconitem = new QStandardItem();
-         // void insertRow(int row, const QList<QStandardItem*> &items);
+
          if(p->word().contains(suffix, Qt::CaseInsensitive)){
-            item->setIcon(Utils::getIcon("doc.ico"));
+
             // item->setData(str, wordItemType);
             item->setData(filename, Qt::DisplayRole);
             item->setData(str, Qt::ToolTipRole);
          }
          if(p->excel().contains(suffix, Qt::CaseInsensitive)){
-            item->setIcon(Utils::getIcon("xls.ico"));
              // item->setData(str, excelItemType);
             item->setData(filename, Qt::DisplayRole);
             item->setData(str, Qt::ToolTipRole);
          }
          if(p->ppt().contains(suffix, Qt::CaseInsensitive)){
-            item->setIcon(Utils::getIcon("ppt.ico"));
             // item->setData(str, pptItemType);
             item->setData(filename, Qt::DisplayRole);
             item->setData(str, Qt::ToolTipRole);
          }
          if(p->pdf().contains(suffix, Qt::CaseInsensitive)){
-            item->setIcon(Utils::getIcon("doc.ico"));
             // item->setData(str, pdfItemType);
             item->setData(filename, Qt::DisplayRole);
             item->setData(str, Qt::ToolTipRole);
          }
          if(p->htmls().contains(suffix, Qt::CaseInsensitive)){
-            item->setIcon(Utils::getIcon("html.ico"));
             // item->setData(str, htmlItemType);
             item->setData(filename, Qt::DisplayRole);
             item->setData(str, Qt::ToolTipRole);
          }
          if(p->pics().contains(suffix, Qt::CaseInsensitive)){
-            item->setIcon(Utils::getIcon("doc.ico"));
             //item->setData(str, picItemType);
             item->setData(filename, Qt::DisplayRole);
             item->setData(str, Qt::ToolTipRole);
          }
          if(p->swfs().contains(suffix, Qt::CaseInsensitive)){
-            item->setIcon(Utils::getIcon("h.ico"));
             // item->setData(str, swfItemType);
             item->setData(filename, Qt::DisplayRole);
             item->setData(str, Qt::ToolTipRole);
          }
          if(p->sources().contains(suffix, Qt::CaseInsensitive)){
-            item->setIcon(Utils::getIcon("doc.ico"));
             // item->setData(str, sourceItemType);
             item->setData(filename, Qt::DisplayRole);
             item->setData(str, Qt::ToolTipRole);
          }
          if(p->txts().contains(suffix, Qt::CaseInsensitive)){
-            item->setIcon(Utils::getIcon("txt.ico"));
             // item->setData(str, txtItemType);
             item->setData(filename, Qt::DisplayRole);
             item->setData(str, Qt::ToolTipRole);
          }
          if(p->movies().contains(suffix, Qt::CaseInsensitive)){
-            item->setIcon(Utils::getIcon("wmv.ico"));
             // item->setData(str, txtItemType);
             item->setData(filename, Qt::DisplayRole);
             item->setData(str, Qt::ToolTipRole);
          }
 
          if(p->allsupported().contains(suffix, Qt::CaseInsensitive)){
-             // items.append(iconitem);
+             icon = icon.append(".ico");
+             item->setIcon(Utils::getIcon(icon));
              items.append(item);
              themodel->insertRow(var, items);
          }
