@@ -1,9 +1,3 @@
-/*
-For general Sqliteman copyright and licensing information please refer
-to the COPYING file provided with the program. Following this notice may exist
-a copyright and/or license notice that predates the release of Sqliteman
-for which a new license (GPL+exception) is in place.
-*/
 #include <QFileDialog>
 #include <QMessageBox>
 
@@ -13,6 +7,7 @@ for which a new license (GPL+exception) is in place.
 
 #include "importdocdialog.h"
 #include "preferences.h"
+#include "utils.h"
 
 ImportDocDialog::ImportDocDialog(QWidget * parent, const QString & basedir,const QString & dir)
 	: QDialog(parent),
@@ -51,9 +46,8 @@ ImportDocDialog::ImportDocDialog(QWidget * parent, const QString & basedir,const
         // 新建Model
         model->setColumnCount(1);
 
-        // 设置第一列的宽度
-        int tablewidth = this->previewView->width();
-        this->previewView->setColumnWidth(0, tablewidth * 1);
+        this->setWindowIcon(Utils::getIcon("document-import.png"));
+        this->setWindowTitle(tr("Doc Import"));
 
         connect(fileSelBtn, SIGNAL(clicked()), this, SLOT(fileSelBtn_clicked()));
         connect(previewBtn, SIGNAL(clicked()), this, SLOT(previewBtn_clicked()));
@@ -66,11 +60,12 @@ ImportDocDialog::ImportDocDialog(QWidget * parent, const QString & basedir,const
 // 选择路径
 void ImportDocDialog::fileSelBtn_clicked()
 {
-  QString path = QFileDialog::getExistingDirectory(this,"get existing doc directory",
-                                                   "Choose a directory", QFileDialog::ShowDirsOnly);
+  QString path = QFileDialog::getExistingDirectory(this, tr("Select existing doc directory"),
+                                                   tr("Choose a directory"), QFileDialog::ShowDirsOnly);
    if (path.isEmpty()){
         return;
    }
+   path = QDir::toNativeSeparators(path);
    // 设定路径
    fileSelDir->setText(path);
    m_importDir = path;
@@ -156,7 +151,6 @@ void ImportDocDialog::previewBtn_clicked()
 
    // model
    model->clear();
-   model->setHeaderData(0, Qt::Horizontal, tr("The Files waiting for Imported"));
 
    // 是否包含子目录
    if(inclueSubDirCheck->isChecked()){
@@ -181,7 +175,9 @@ void ImportDocDialog::previewBtn_clicked()
    }
 
    previewView->setModel(model);
-   previewView->resizeColumnToContents(0);
+   // 设置第一列的宽度
+   int tablewidth = this->previewView->width();
+   this->previewView->setColumnWidth(0, tablewidth * 1);
 }
 
 //// 根据文件父目录取得递归得到子目录树结构

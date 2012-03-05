@@ -80,6 +80,7 @@ private slots:
     void buildDocList();
 
     void importDlg();
+    void exportDlg();
     void treeItemActivated();
     void treeContextMenuOpened();
     void tableTree_currentItemChanged();

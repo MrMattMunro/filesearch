@@ -46,6 +46,7 @@
 #include "mainwindow.h"
 #include "myTreeList.h"
 #include "importdocdialog.h"
+#include "exportdocdialog.h"
 #include "utils.h"
 #include "fileutils.h"
 
@@ -105,7 +106,7 @@ void MainWindow::initActions()
         // 导出
         exportAction = new QAction(Utils::getIcon("document-export.png"),tr("&Export..."), this);
         exportAction->setShortcut(tr("Ctrl+E"));
-        connect(exportAction, SIGNAL(triggered()), this, SLOT(about()));
+        connect(exportAction, SIGNAL(triggered()), this, SLOT(exportDlg()));
 
         // 另存为
         saveAsAction = new QAction(Utils::getIcon("document-save-as.png"),tr("&Save As..."), this);
@@ -372,7 +373,7 @@ void MainWindow::findClicked()
      //emit findPrevious(text, cs);
 }
 
-// 打开导出界面
+// 打开导入界面
 void MainWindow::importDlg()
 {
     QString curPath = q_myTreeList->getCurPath();
@@ -438,6 +439,34 @@ void MainWindow::importDlg()
     }
 }
 
+// 打开导出界面
+void MainWindow::exportDlg()
+{
+    QString curPath = q_myTreeList->getCurPath();
+    bool hasSelRight = false;
+
+    // 需选中子节点
+    if(!curPath.isEmpty() && curPath != "alldocs" && curPath != "alltags") {
+        hasSelRight = true;
+        ExportDocDialog dlg(this, m_baseDir, q_myTreeList->getCurPath());
+        dlg.exec();
+        if(dlg.update){
+            int row= dlg.model->rowCount();
+            // 取得导出的文件列表
+            for (int var = 0; var < row; ++var) {
+                QStandardItem* temp = dlg.model->item(var);
+                QString filepath = qvariant_cast<QString>(temp->data(Qt::ToolTip));
+                //复制文件本省到写入到导出目录，可能文件很大，需要有进度条。
+            }
+        }
+    }
+    // 如果没有选中子目录节点
+    if(!hasSelRight){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Select an sub directory."), QMessageBox::Yes);
+        return;
+    }
+}
+
 void MainWindow::initUI()
 {
         setWindowTitle(m_appName);
@@ -451,12 +480,13 @@ void MainWindow::initUI()
 
         // 加载分类树
         QString datapath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-        datapath.append("\\slfile");
+        datapath.append(QDir::separator()).append("slfile");
         QDir *dir=new QDir(datapath);
         if(!dir->exists()){
            dir->mkdir(datapath);
         }
         m_baseDir = datapath;
+        m_baseDir = QDir::toNativeSeparators(m_baseDir);
         q_myTreeList = new myTreeList("", this);
         q_myTreeList->setStyleSheet(
                     "QTreeView::branch {image:none;}"
@@ -514,6 +544,7 @@ int MainWindow::loadDirByLay(QString parentPath, int lay, QStandardItem *curItem
         QFileInfo fileInfo = list.at(i);
         QString filename = fileInfo.fileName();
         QString filepath = fileInfo.filePath();
+        filepath = QDir::toNativeSeparators(filepath);
         //如果是文件夹
         bool bisDir = fileInfo.isDir();
         if(bisDir) {

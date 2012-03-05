@@ -32,12 +32,6 @@ MyTableView::MyTableView(QWidget * parent) :QTableView(parent)
     this->setSelectionBehavior(QAbstractItemView::SelectRows);
     this->setMouseTracking(true);//important
 
-//    this->setStyleSheet(
-//                "QTableView{selection-background-color: qlineargradient(x1: 0, y1: 0, x2: 0.5, y2: 0.5,stop: 0 #FF92BB, stop: 1 white);}"
-//                "QTableView::QTableCornerButton::section {background: red;border: 2px outset red;}"
-//                "QTableView::item:hover{background-color:rgb(185, 210, 235);}"
-
-//    );
 }
 
 void MyTableView::leaveEvent ( QEvent * event )

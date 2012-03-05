@@ -2,6 +2,7 @@
 #include <QStandardItem>
 #include <QMessageBox>
 #include <QModelIndex>
+#include <QDir>
 
 
 #include "myTreeList.h"
