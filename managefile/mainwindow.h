@@ -78,6 +78,9 @@ private slots:
     void showChildTree();
     void showToolBar();
     void buildDocList();
+    void helpDoc();
+    void bbs();
+    void homepage();
 
     void importDlg();
     void exportDlg();

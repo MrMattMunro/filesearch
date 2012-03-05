@@ -8,11 +8,12 @@ for which a new license (GPL+exception) is in place.
 #ifndef IMPORTTABLEDIALOG_H
 #define IMPORTTABLEDIALOG_H
 #endif
-
+#include <QProgressDialog>
 #include "ui_exportdocdialog.h"
 
 #include <QStandardItemModel>
 
+// class QProgressDialog;
 
 /*! \brief Import data into table using various importer types.
 \note XML import requires Qt library at least in the 4.3.0 version.
@@ -33,8 +34,11 @@ class ExportDocDialog : public QDialog, public Ui::ExportDocDialog
                 QObject * m_parent;
                 //! Remember the originally requsted name
                 QString m_baseDir;
+                //QProgressDialog * progress;
+                bool cancelled;
 
                 int loadFiles(QString parentPath, QStringList excludeTypeList, QStandardItemModel *model);
+                bool setProgress(int p);
 
 	private slots:
                 void fileSelBtn_clicked();

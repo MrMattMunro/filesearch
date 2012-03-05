@@ -14,6 +14,8 @@ for which a new license (GPL+exception) is in place.
 namespace FileUtils {
 
 bool copyDirectoryFiles(const QDir &fromDir, const QDir &toDir, bool coverFileIfExist);
+// 把目标文件copy到目标目录
+bool copyFileToDir(QString fromFile, QString toDir, bool coverFileIfExist);
 bool removeDirectory(QString dirName);
 void deleteDirectory(QFileInfo fileList);
 bool delDirectory(const QDir &fromDir);

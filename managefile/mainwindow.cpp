@@ -74,8 +74,6 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
      datapath.append("slfile");
      QDir *dir=new QDir(datapath);
 
-     qDebug( "datapaht1 = %x", datapath );
-
      // 如果不存在，则创建slfile目录
      if(!dir->exists()){
         dir->mkdir(datapath);
@@ -164,11 +162,11 @@ void MainWindow::initActions()
         // 用户手册
         userBookAction = new QAction(Utils::getIcon("help_viewer.png"),tr("&Help"), this);
         userBookAction->setShortcut(tr("F2"));
-        connect(userBookAction, SIGNAL(triggered()), this, SLOT(about()));
+        connect(userBookAction, SIGNAL(triggered()), this, SLOT(helpDoc()));
 
         // 个人主页
         homepageAction = new QAction(Utils::getIcon("homepage.png"),tr("&HomePage"), this);
-        connect(homepageAction, SIGNAL(triggered()), this, SLOT(about()));
+        connect(homepageAction, SIGNAL(triggered()), this, SLOT(homepage()));
 
         // 邀请朋友
         inviteAction = new QAction(Utils::getIcon("invite.png"),tr("&Invite Friends..."), this);
@@ -176,7 +174,7 @@ void MainWindow::initActions()
 
         // 论坛
         bbsAction = new QAction(Utils::getIcon("forum.png"),tr("&Forum"), this);
-        connect(bbsAction, SIGNAL(triggered()), this, SLOT(about()));
+        connect(bbsAction, SIGNAL(triggered()), this, SLOT(bbs()));
 
         // 关于
         aboutAction = new QAction(Utils::getIcon("about.png"),tr("&About"), this);
@@ -362,6 +360,24 @@ void MainWindow::initToolbar()
     toolBar->addWidget(findButton);
 }
 
+// 用户手册
+void MainWindow::helpDoc()
+{
+   m_view->load(QUrl("http://www.slfile.net/?page_id=58"));
+}
+
+// 论坛
+void MainWindow::bbs()
+{
+   m_view->load(QUrl("http://www.slfile.net/?post_type=forum"));
+}
+
+// 主页
+void MainWindow::homepage()
+{
+   m_view->load(QUrl("http://www.slfile.net/"));
+}
+
 void MainWindow::enableFindButton(const QString &text)
 {
      findButton->setEnabled(!text.isEmpty());
@@ -451,13 +467,7 @@ void MainWindow::exportDlg()
         ExportDocDialog dlg(this, m_baseDir, q_myTreeList->getCurPath());
         dlg.exec();
         if(dlg.update){
-            int row= dlg.model->rowCount();
-            // 取得导出的文件列表
-            for (int var = 0; var < row; ++var) {
-                QStandardItem* temp = dlg.model->item(var);
-                QString filepath = qvariant_cast<QString>(temp->data(Qt::ToolTip));
-                //复制文件本省到写入到导出目录，可能文件很大，需要有进度条。
-            }
+          // 不做任何操作
         }
     }
     // 如果没有选中子目录节点
@@ -475,7 +485,7 @@ void MainWindow::initUI()
 
         m_view = new QWebView(this);
         m_view->move(-1000, -1000);
-        m_view->page()->mainFrame()->load(QUrl("qrc:/html/videoplayer.html"));
+        m_view->page()->mainFrame()->load(QUrl("http://www.slfile.net"));
 
 
         // 加载分类树
