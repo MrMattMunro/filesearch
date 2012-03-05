@@ -187,16 +187,14 @@ int main(int argc, char *argv[])
       return 0;
     }
 
-
    // …Ë÷√¥∞ø⁄Õº±Í
-   // a.setWindowIcon(Utils::getIcon("sqliteman.png"));
+    app.setWindowIcon(Utils::getIcon("file_manager.png"));
     QTranslator translator;
     translator.load(Utils::getTranslator(cli.localeCode()));
     app.installTranslator(&translator);
 
     MainWindow w;
     w.setLocale(cli.localeCode());
-    w.resize(1024, 768);
 
     w.showMaximized();
    // w.showFullScreen();
@@ -242,12 +240,9 @@ void defaultCrashHandler(int sig)
     if (crashRecursionCounter < 2)
     {
         crashRecursionCounter++;
-        QString sigMsg(QString("\nfileManage crashes due to Signal #%1\n\n\
-All database opened will be rollbacked and closed.\n\n\
-Collect last steps that forced this\n\
-situlation and report it as a bug, please.").arg(sig));
+        QString sigMsg(tr("\nfileManage crashes due to Signal #%1\n\n\All database opened will be rollbacked and closed.\n\n\Collect last steps that forced this\n\situlation and report it as a bug, please.").arg(sig));
         cout << sigMsg << endl;
-        QMessageBox::critical(0, "filemanage", sigMsg);
+        QMessageBox::critical(0, tr("filemanage"), sigMsg);
         alarm(300);
     }
     exit(255);

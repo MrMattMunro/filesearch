@@ -9,7 +9,7 @@ for which a new license (GPL+exception) is in place.
 #define IMPORTTABLEDIALOG_H
 #endif
 
-#include "ui_importdocdialog.h"
+#include "ui_exportdocdialog.h"
 
 #include <QStandardItemModel>
 
@@ -18,22 +18,23 @@ for which a new license (GPL+exception) is in place.
 \note XML import requires Qt library at least in the 4.3.0 version.
 \author Petr Vanek <petr@scribus.info>
 */
-class ImportDocDialog : public QDialog, public Ui::ImportDocDialog
+class ExportDocDialog : public QDialog, public Ui::ExportDocDialog
 {
 	Q_OBJECT
 
 	public:
-                ImportDocDialog(QWidget * parent = 0,const QString & basedir = 0, const QString & dir = 0);
+                ExportDocDialog(QWidget * parent = 0,const QString & basedir = 0, const QString & dir = 0);
                 bool update;
                 QStandardItemModel *model;
 
-                QString m_importDir;
+                QString m_exportDir;
                 QString m_dir;
 	private:
                 QObject * m_parent;
                 //! Remember the originally requsted name
                 QString m_baseDir;
-                int loadFiles(QString parentPath, QStringList filter, QStandardItemModel *model);
+
+                int loadFiles(QString parentPath, QStringList excludeTypeList, QStandardItemModel *model);
 
 	private slots:
                 void fileSelBtn_clicked();

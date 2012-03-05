@@ -17,7 +17,8 @@ SOURCES += main.cpp \
     excuteJavaUtil.cpp \
     mytableview.cpp \
     myitemdelegate.cpp \
-    mystandarditemmodel.cpp
+    mystandarditemmodel.cpp \
+    exportdocdialog.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -30,7 +31,8 @@ HEADERS  += mainwindow.h \
     importdocdialog.h \
     mytableview.h \
     myitemdelegate.h \
-    mystandarditemmodel.h
+    mystandarditemmodel.h \
+    exportdocdialog.h
 
 RESOURCES += \
     managefile.qrc
@@ -38,7 +40,8 @@ RESOURCES += \
 FORMS    += mainwindow.ui \
     preferencesdialog.ui \
     shortcuteditordialog.ui \
-    importdocdialog.ui
+    importdocdialog.ui \
+    exportdocdialog.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -46,6 +49,9 @@ OTHER_FILES += \
     ts/managefile_en.ts \
     ts/managefile_jp.ts \
     ts/managefile_zh_cn.ts
+
+
+
 
 
 
