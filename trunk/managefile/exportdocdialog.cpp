@@ -10,6 +10,8 @@ for which a new license (GPL+exception) is in place.
 #include <QtDebug>
 #include <QDir>
 #include <QStandardItemModel>
+#include <QDesktopServices>
+#include <QUrl>
 
 #include "exportdocdialog.h"
 #include "preferences.h"
@@ -40,6 +42,9 @@ ExportDocDialog::ExportDocDialog(QWidget * parent, const QString & basedir,const
         this->setWindowIcon(Utils::getIcon("document-import.png"));
         this->setWindowTitle(tr("Doc Export"));
 
+        progressBar->hide();
+        pgfilename->hide();
+        cancelled = false;
 
         connect(fileSelBtn, SIGNAL(clicked()), this, SLOT(fileSelBtn_clicked()));
         connect(previewBtn, SIGNAL(clicked()), this, SLOT(previewBtn_clicked()));
@@ -80,7 +85,7 @@ void ExportDocDialog::previewBtn_clicked()
    // 是否包含子目录
    if(inclueSubDirChk->isChecked()){
        loadFiles(m_dir, customexList, model);
-   }else{
+   } else {
        // 是files.dat文件
        QString path = m_dir;
        path.append(QDir::separator()).append("files.dat");
@@ -139,17 +144,17 @@ int ExportDocDialog::loadFiles(QString parentPath, QStringList excludeTypeList, 
 
     for(int i = 0; i< list.size(); i++){
         QFileInfo fileInfo = list.at(i);
-        QString filepath = fileInfo.filePath();
+        QString datfilepath = fileInfo.filePath();
         //如果是文件夹
         bool bisDir = fileInfo.isDir();
         if(bisDir) {
-            loadFiles(filepath, excludeTypeList, model);
+            loadFiles(datfilepath, excludeTypeList, model);
         }else{
             // 是files.dat文件
-            if (filepath.indexOf("files.dat") != -1 ){
-                filepath = QDir::toNativeSeparators(filepath);
+            if (datfilepath.indexOf("files.dat") != -1 ){
+                datfilepath = QDir::toNativeSeparators(datfilepath);
                 // 读取dat文件
-                QStringList files = FileUtils::readFile(filepath);
+                QStringList files = FileUtils::readFile(datfilepath);
                 for (int var = 0; var < files.length(); ++var) {
                     QString file = files.at(var);
                     if(!file.isEmpty()){
@@ -160,10 +165,20 @@ int ExportDocDialog::loadFiles(QString parentPath, QStringList excludeTypeList, 
                         suffix = "*" + suffix;
                         // 排除手动除去文件类型
                         if(!excludeTypeList.contains(suffix)){
-                            QStandardItem* item = new QStandardItem(filepath);
+                           // 取得文件名
+                            QString filename = arr[1].right(arr[1].length() - arr[1].lastIndexOf(QDir::separator()) - 1);
+
+                            // 取得BaseDir
+                            QString tdestDir = datfilepath;
+                            tdestDir = tdestDir.remove("files.dat");
+                            tdestDir = tdestDir.mid(m_baseDir.length() + 1, tdestDir.length());
+
+                            QStandardItem* item = new QStandardItem(tdestDir + filename);
+                            item->setData(arr[1], Qt::ToolTip);
                             QList<QStandardItem*> items;
                             items << item;
                             model->appendRow(items);
+
                         }
                     }
                 }
@@ -194,7 +209,7 @@ void ExportDocDialog::delBtn_clicked(){
     }
 }
 
-//// 确定按钮
+//// 确定按钮 复制文件本省到写入到导出目录，可能文件很大，需要有进度条。
 void ExportDocDialog::confirmBtn_clicked(){
     // 如果没有选择导入目录
     if(m_exportDir.isEmpty()){
@@ -202,12 +217,61 @@ void ExportDocDialog::confirmBtn_clicked(){
         return;
     }
 
+    // 是否创建子文件夹
+    bool isCreateSubDir = createSubDirChk->isChecked();
+
+    // 设置界面元素不可用
+    this->setEnabled(false);
+
+    pgfilename->show();
+    progressBar->show();
+
+    // 目录排序
+    model->sort(0, Qt::DescendingOrder);
+    // 拷贝文件
+    int row= model->rowCount();
+    progressBar->setWindowModality(Qt::WindowModal);
+    progressBar->setRange(0, row);
+     // 取得导出的文件列表
+    for (int var = 0; var < row; ++var) {
+         QStandardItem* temp = model->item(var);
+         QString filepath = qvariant_cast<QString>(temp->data(Qt::ToolTip));
+         QString displayfilepath = qvariant_cast<QString>(temp->data(Qt::DisplayRole));
+         pgfilename->setText(displayfilepath);
+         // 是否创建子文件夹
+         if(isCreateSubDir){
+            QString destDir = m_exportDir + displayfilepath.left(displayfilepath.lastIndexOf(QDir::separator()));
+            // 创建子目录
+            FileUtils::copyFileToDir(filepath, destDir, true);
+         }else{
+            FileUtils::copyFileToDir(filepath, m_exportDir, true);
+         }
+         setProgress(var);
+     }
      update = true;
-     this->close();
+     // 提示导出完成
+     int com = QMessageBox::information(this, tr("Message"), tr("Documents Exported Success!"), QMessageBox::Yes);
+     if (com == QMessageBox::Yes)
+     {
+            this->close();
+            QDesktopServices::openUrl(QUrl("file:///" + m_exportDir));
+            return;
+     }
 }
 
-//// 取消按钮
+// 设置进度条点
+bool ExportDocDialog::setProgress(int p)
+{
+        if (cancelled){
+            return false;
+        }
+        progressBar->setValue(p);
+        return true;
+}
+
+// 取消按钮
 void ExportDocDialog::cancelBtn_clicked(){
+     cancelled = true;
      update = false;
      this->close();
 }

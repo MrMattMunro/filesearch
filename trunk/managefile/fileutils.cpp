@@ -1,15 +1,8 @@
-/*
-For general Sqliteman copyright and licensing information please refer
-to the COPYING file provided with the program. Following this notice may exist
-a copyright and/or license notice that predates the release of Sqliteman
-for which a new license (GPL+exception) is in place.
-*/
-
-#include <QIcon>
-#include <QPixmapCache>
 #include <QDir>
 #include <QTextStream>
 #include <QDebug>
+#include <QFile>
+#include <QDir>
 
 #include "fileutils.h"
 
@@ -46,6 +39,30 @@ bool FileUtils::copyDirectoryFiles(const QDir &fromDir, const QDir &toDir, bool 
             }
         }
     }
+    return true;
+}
+
+// 把目标文件copy到目标目录
+bool FileUtils::copyFileToDir(QString sfromFile, QString toDir, bool coverFileIfExist)
+{
+    QDir *targetDir = new QDir (toDir);
+    QFileInfo *fileInfo = new QFileInfo(sfromFile);
+    /** 如果目标目录不存在，则进行创建 */
+    if(!targetDir->exists()){
+        if(!targetDir->mkpath(targetDir->absolutePath()))
+            return false;
+    }
+
+     /**< 当允许覆盖操作时，将旧文件进行删除操作 */
+    if(coverFileIfExist && targetDir->exists(fileInfo->fileName())){
+        targetDir->remove(fileInfo->fileName());
+    }
+
+    /// 进行文件copy
+    if(!QFile::copy(fileInfo->absoluteFilePath(), toDir.append(QDir::separator()).append(fileInfo->fileName()))){
+        return false;
+    }
+
     return true;
 }
 
@@ -102,6 +119,7 @@ bool FileUtils::delDirectory(const QDir &fromDir)
     return true;
 }
 
+// 写入文件
 bool FileUtils::writeFile(QString filepath, QStringList lines)
 {
 
@@ -118,6 +136,7 @@ bool FileUtils::writeFile(QString filepath, QStringList lines)
      return true;
 }
 
+// 读取文件
 QStringList FileUtils::readFile(QString filepath)
 {
       QStringList lines;
@@ -139,6 +158,7 @@ QStringList FileUtils::readFile(QString filepath)
 
 }
 
+// 删除文件夹
 bool FileUtils::removeDirectory(QString dirName)
 {
     QDir dir(dirName);
@@ -226,10 +246,6 @@ int FileUtils::loadAllFile(QDir dir, QList<QString> fileList){
         if(bisDir) {
             loadAllFile(QDir(fileInfo.filePath()), fileList);
         } else{
-            //bool isDat = fileInfo.fileName().endsWith(".dat");
-            //if (isDat== true) {
-              //  q_myTreeList->addItem(0, fileInfo.fileName());
-            //}
             fileList.append(fileInfo.filePath());
         }//end else
         i++;
