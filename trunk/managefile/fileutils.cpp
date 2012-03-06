@@ -176,13 +176,9 @@ bool FileUtils::removeDirectory(QString dirName)
             tmpdir = dirName + ("/") + fileInfo.fileName();
             removeDirectory(tmpdir);
             dir.rmdir(fileInfo.fileName()); /**< 移除子目录 */
-        }
-        else if(fileInfo.isFile()){
+        } else if(fileInfo.isFile()){
             QFile tmpFile(fileInfo.fileName());
             dir.remove(tmpFile.fileName()); /**< 删除临时文件 */
-        }
-        else{
-            ;
         }
     }
 
@@ -204,7 +200,7 @@ void FileUtils::deleteDirectory(QFileInfo fileList){
         QDir thisDir(dir);
         childCount = thisDir.entryInfoList().count();
         QFileInfoList newFileList = thisDir.entryInfoList();
-        if(childCount>2){
+        if(childCount >2 ){
             for(int i=0;i<childCount;i++){
                 if(newFileList.at(i).fileName().operator ==(".")|newFileList.at(i).fileName().operator ==("..")){
                     continue;
@@ -212,8 +208,8 @@ void FileUtils::deleteDirectory(QFileInfo fileList){
                 deleteDirectory(newFileList.at(i));
             }
         }
-        fileList.absoluteDir().rmpath(fileList.fileName());
-    }else if(fileList.isFile()){
+        fileList.absoluteDir().rmdir(fileList.fileName());
+    } else if(fileList.isFile()){
         fileList.absoluteDir().remove(fileList.fileName());
     }
 }

@@ -47,6 +47,7 @@
 #include "myTreeList.h"
 #include "importdocdialog.h"
 #include "exportdocdialog.h"
+#include "createsubdirdialog.h"
 #include "utils.h"
 #include "fileutils.h"
 
@@ -67,17 +68,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     QWebSettings::setOfflineStorageDefaultQuota(500000);
 
      m_rssModel = new QStandardItemModel(this);
-
-
-     QString datapath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-     datapath.append(QDir::separator());
-     datapath.append("slfile");
-     QDir *dir=new QDir(datapath);
-
-     // 如果不存在，则创建slfile目录
-     if(!dir->exists()){
-        dir->mkdir(datapath);
-     }
+     setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
 // 生成文档列表
@@ -157,7 +148,7 @@ void MainWindow::initActions()
 
         // 显示/隐藏状态栏
         showSatebarAction = new QAction(Utils::getIcon("status_bar.png"),tr("&Show/Hide Status Bar..."), this);
-        connect(showSatebarAction, SIGNAL(triggered()), this, SLOT(showToolBar()));
+        connect(showSatebarAction, SIGNAL(triggered()), this, SLOT(about()));
 
         // 用户手册
         userBookAction = new QAction(Utils::getIcon("help_viewer.png"),tr("&Help"), this);
@@ -219,13 +210,13 @@ void MainWindow::initActions()
 
         //Doc ContextMenu
         makeSubDir = new QAction(tr("&New Sub Dir"), this);
-        connect(makeSubDir, SIGNAL(triggered()), this, SLOT(about()));
+        connect(makeSubDir, SIGNAL(triggered()), this, SLOT(createSubDir()));
         moveToDir= new QAction(tr("&Move To Dir"), this);
         connect(moveToDir, SIGNAL(triggered()), this, SLOT(about()));
         delDir= new QAction(tr("&Delete"), this);
-        connect(delDir, SIGNAL(triggered()), this, SLOT(about()));
+        connect(delDir, SIGNAL(triggered()), this, SLOT(delSubDir()));
         renameDir= new QAction(tr("&Rename"), this);
-        connect(renameDir, SIGNAL(triggered()), this, SLOT(about()));
+        connect(renameDir, SIGNAL(triggered()), this, SLOT(renameSubDir()));
         subDirSort= new QAction(tr("&Sort SubDirs"), this);
         connect(subDirSort, SIGNAL(triggered()), this, SLOT(about()));
         showSubDirDoc= new QAction(tr("&Show docs under subDir"), this);
@@ -237,7 +228,7 @@ void MainWindow::initActions()
 
         //Root ContextMenu
         makeRootDir= new QAction(tr("&New Root Dir"), this);
-        connect(makeRootDir, SIGNAL(triggered()), this, SLOT(about()));
+        connect(makeRootDir, SIGNAL(triggered()), this, SLOT(createRootDir()));
         dirSort= new QAction(tr("&Sort Dir"), this);
         connect(dirSort, SIGNAL(triggered()), this, SLOT(about()));
         protectRootDir= new QAction(tr("&Protect"), this);
@@ -337,7 +328,7 @@ void MainWindow::initStatusbar()
 // 工具栏
 void MainWindow::initToolbar()
 {
-    toolBar = addToolBar(tr("&File"));
+    toolBar = addToolBar(tr("Tool Bar"));
     toolBar->addAction(showClassTreeAction);
     toolBar->addAction(fullScreenAction);
     toolBar->addSeparator();
@@ -446,6 +437,11 @@ void MainWindow::importDlg()
 
             // 清除空目录<既无子文件夹也无files.dat文件>
             FileUtils::delDirectory(QDir(curPath));
+            // 重新加载树节点
+            QStandardItem* curItem = q_myTreeList->getCurItem();
+            q_myTreeList->delSubItems(curItem);
+            QString curPath = q_myTreeList->getCurPath();
+            loadDirByLay(curPath, 1, curItem);
         }
     }
     // 如果没有选中子目录节点
@@ -495,6 +491,7 @@ void MainWindow::initUI()
         if(!dir->exists()){
            dir->mkdir(datapath);
         }
+
         m_baseDir = datapath;
         m_baseDir = QDir::toNativeSeparators(m_baseDir);
         q_myTreeList = new myTreeList("", this);
@@ -561,7 +558,7 @@ int MainWindow::loadDirByLay(QString parentPath, int lay, QStandardItem *curItem
             if(lay == 0){
               q_myTreeList->addItem(lay, filename, filepath, "expander_normal.png");
             }else{
-              q_myTreeList->addItem(curItem, filename, filepath, "expander_normal.png");
+              q_myTreeList->addItemByParentItem(curItem, filename, filepath, "expander_normal.png");
             }
         }
         i++;
@@ -573,22 +570,163 @@ MainWindow::~MainWindow()
 {
 }
 
+// 创建子文件夹
+void MainWindow::createSubDir()
+{
+    QString curPath = q_myTreeList->getCurPath();
+    bool hasSelRight = false;
+
+    // 需选中 总节点和子节点
+    if(!curPath.isEmpty() && curPath != "alltags") {
+        hasSelRight = true;
+        CreateSubDirDialog dlg(this, m_baseDir, q_myTreeList->getCurPath());
+        dlg.exec();
+        if(dlg.update){
+            // 刷新选中的树
+            QString tempPath = curPath;
+            tempPath.append(QDir::separator()).append(dlg.dirName->text());
+
+            QStandardItem* curItem = q_myTreeList->getCurItem();
+            q_myTreeList->addItemByParentItem(curItem, dlg.dirName->text(), tempPath, "expander_normal.png");
+            curItem->setIcon(Utils::getIcon("expander_open.png"));
+            q_myTreeList->expand(q_myTreeList->getCurIndex());
+        }
+    }
+    // 如果没有选中子目录节点
+    if(!hasSelRight){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
+        return;
+    }
+}
+
+// 改变子文件夹名称
+void MainWindow::renameSubDir()
+{
+    QString curPath = q_myTreeList->getCurPath();
+    QStandardItem* curItem = q_myTreeList->getCurItem();
+    QString curTitle = q_myTreeList->getCurTitle();
+    bool hasSelRight = false;
+
+    // 需选中 总节点和子节点
+    if(!curPath.isEmpty() && curPath != "alltags") {
+        hasSelRight = true;
+        bool ok;
+        QString text = QInputDialog::getText(this, m_appName, tr("New Directory name:"), QLineEdit::Normal, curTitle, &ok);
+        if (ok && !text.isEmpty()) {
+                if (text == curTitle){
+                  return;
+                }
+                // 改变树节点
+                curItem->setData(text, Qt::DisplayRole);
+                // 改变目录名称
+                QString newPath = curPath;
+                QDir dir(curPath);
+                newPath = newPath.left(curPath.lastIndexOf(QDir::separator())).append(QDir::separator()).append(text);
+                dir.rename(curPath, newPath);
+        }
+
+    }
+    // 如果没有选中子目录节点
+    if(!hasSelRight){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
+        return;
+    }
+}
+
+// 新建根节点
+void MainWindow::createRootDir()
+{
+    QString curPath = q_myTreeList->getCurPath();
+    bool hasSelRight = false;
+
+    // 需选中 总节点
+    if(curPath == "alldocs") {
+        hasSelRight = true;
+        bool ok;
+        QString text = QInputDialog::getText(this, m_appName, tr("New Roor Directory name:"), QLineEdit::Normal, "", &ok);
+        if (ok && !text.isEmpty()) {
+                if (text == ""){
+                  return;
+                }
+                // 刷新选中的树
+                QString tempPath = m_baseDir;
+                tempPath.append(QDir::separator()).append(text);
+
+                // 新建文件夹
+                QDir *mdir = new QDir(m_baseDir);
+                if(mdir->exists()){
+                    if(!mdir->mkdir(text)){
+                        QMessageBox::warning(this, tr("Error"), tr("Create New Root Directory failed. "), QMessageBox::Yes);
+                        return;
+                    }
+                }
+
+                QStandardItem* curItem = q_myTreeList->getCurItem();
+                q_myTreeList->addItemByParentItem(curItem, text, tempPath, "expander_normal.png");
+                curItem->setIcon(Utils::getIcon("expander_open.png"));
+                q_myTreeList->expand(q_myTreeList->getCurIndex());
+
+        }
+    }
+    // 如果没有选中子目录节点
+    if(!hasSelRight){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
+        return;
+    }
+}
+
+
+
+
 void MainWindow::about()
 {
     QMessageBox::about(this, tr("About %1").arg(windowTitle()), 
                        tr("Local file Manage Version"));
 }
 
+// 删除子文件夹
+void MainWindow::delSubDir()
+{
+
+    QString curPath = q_myTreeList->getCurPath();
+    QString curTitle = q_myTreeList->getCurTitle();
+    QStandardItem* curItem = q_myTreeList->getCurItem();
+    if(!curItem){
+      return;
+    }
+
+    if(!curPath.isEmpty() && curPath != "alltags" && curPath != "alldocs") {
+
+        int ret = QMessageBox::question(this, m_appName,
+                                        tr("Are you sure that delete the directory \"%1\"?").arg(curTitle),
+                                        QMessageBox::Yes, QMessageBox::No);
+
+        if(ret == QMessageBox::Yes){
+            QFileInfo fileinfo(curPath);
+            FileUtils::deleteDirectory(fileinfo);
+            q_myTreeList->delSubItems(curItem);
+            curItem->parent()->removeRow(curItem->row());
+        }
+    }
+}
+
+// 刷新树节点
+void MainWindow::refreshChildTree()
+{
+
+
+}
+
+// 打开树节点
 void MainWindow::showChildTree()
 {
     QString path = q_myTreeList->getCurPath();
+    if(path.isEmpty()){
+      return;
+    }
+
     QStandardItem* curItem = q_myTreeList->getCurItem();
     QModelIndex curIndex = q_myTreeList->getCurIndex();
-    // 判断是否已经打开
-    if(!curItem->hasChildren()){
-       // 没有打开过的情况,加载树
-       loadDirByLay(path, 1, curItem);
-    }
 
     // 设置打开状态
     if(q_myTreeList->isExpanded(curIndex)){
@@ -598,7 +736,17 @@ void MainWindow::showChildTree()
        curItem->setIcon(Utils::getIcon("expander_open.png"));
        q_myTreeList->expand(q_myTreeList->getCurIndex());
     }
+
+    // 不需要加载了
+    if(curItem->hasChildren()){
+       return;
+    }
+
+    if(path != "alldocs" && path != "alltags"){
+        loadDirByLay(path, 1, curItem);
+    }
 }
+
 // 全屏
 void MainWindow::fullScreen()
 {
@@ -646,13 +794,15 @@ void MainWindow::treeItemActivated()
 
         }
 }
+
 // 打开右键菜单
 void MainWindow::treeContextMenuOpened()
 {
         tableTree_currentItemChanged();
         QPoint pos = q_myTreeList->getCurPoint();
-        if (contextMenu->actions().count() != 0)
-                contextMenu->exec(q_myTreeList->viewport()->mapToGlobal(pos));
+        if (contextMenu->actions().count() > 1){
+           contextMenu->exec(q_myTreeList->viewport()->mapToGlobal(pos));
+        }
 }
 // 打开右键菜单
 void MainWindow::tableTree_currentItemChanged()

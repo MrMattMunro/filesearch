@@ -87,6 +87,11 @@ private slots:
     void treeItemActivated();
     void treeContextMenuOpened();
     void tableTree_currentItemChanged();
+    void createSubDir();
+    void refreshChildTree();
+    void delSubDir();
+    void renameSubDir();
+    void createRootDir();
 
 private:
     QActionGroup *m_feedGroup;

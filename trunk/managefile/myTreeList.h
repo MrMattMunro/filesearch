@@ -19,9 +19,10 @@ public:
 	void         setTreeTitle(QString title); //设置tree的名称
 	void         setSubTreeTitle(int subTree,QString title);
         void         addItem(int subTree, QString itemName, QString path, QString icon); //增加item
-        void         addItem(QStandardItem *parenItem, QString itemName,  QString path, QString icon); //增加item
+        void         addItemByParentItem(QStandardItem *parenItem, QString itemName,  QString path, QString icon); //增加item
 	void         addItems(int subTree, QList<QString> nameList);
 	void         delelteItem(int subTree, QString itemName);
+        bool         delSubItems(QStandardItem *parenItem);
 	void         clearTree(int subTree, QString itemName);//清空所有的item
 	void         enableMouse(bool yesOrNo);  //设置鼠标相应
 	bool         getMouseStatus();   //查看是可以使用鼠标
