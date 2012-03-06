@@ -118,5 +118,6 @@
         <file>icons/xml.ico</file>
         <file>icons/cpp.ico</file>
         <file>icons/png.ico</file>
+        <file>icons/folder.ico</file>
     </qresource>
 </RCC>

@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     mytableview.cpp \
     myitemdelegate.cpp \
     mystandarditemmodel.cpp \
-    exportdocdialog.cpp
+    exportdocdialog.cpp \
+    createsubdirdialog.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -32,7 +33,8 @@ HEADERS  += mainwindow.h \
     mytableview.h \
     myitemdelegate.h \
     mystandarditemmodel.h \
-    exportdocdialog.h
+    exportdocdialog.h \
+    createsubdirdialog.h
 
 RESOURCES += \
     managefile.qrc
@@ -41,7 +43,8 @@ FORMS    += mainwindow.ui \
     preferencesdialog.ui \
     shortcuteditordialog.ui \
     importdocdialog.ui \
-    exportdocdialog.ui
+    exportdocdialog.ui \
+    createsubdirdialog.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -49,6 +52,9 @@ OTHER_FILES += \
     ts/managefile_en.ts \
     ts/managefile_jp.ts \
     ts/managefile_zh_cn.ts
+
+
+
 
 
 

@@ -46,21 +46,33 @@ void myTreeList::setSubTreeTitle(int subTree, QString title)
 
 void myTreeList::addItem(int subTree, QString itemName, QString path, QString icon)
 {
-	QStandardItem  *parenItem = model->item(subTree);
-	QStandardItem  *childItem =  new QStandardItem(itemName);
+        QStandardItem  *parenItem = model->item(subTree);
+        QStandardItem  *childItem =  new QStandardItem(itemName);
         childItem->setData(path, Qt::UserRole + 1);
 
         childItem->setIcon(Utils::getIcon(icon));
-	parenItem->appendRow(childItem);
+        parenItem->appendRow(childItem);
 }
 
-void myTreeList::addItem(QStandardItem *parenItem, QString itemName, QString path, QString icon)
+void myTreeList::addItemByParentItem(QStandardItem *parenItem, QString itemName, QString path, QString icon)
 {
         QStandardItem  *childItem =  new QStandardItem(itemName);
         childItem->setData(path, Qt::UserRole + 1);
         childItem->setIcon(Utils::getIcon(icon));
         parenItem->appendRow(childItem);
 }
+
+bool myTreeList::delSubItems(QStandardItem *parenItem)
+{
+    // 清除直接点
+    for(int i = 0; i < parenItem->rowCount(); i++)
+    {
+       parenItem->removeRow (i);
+    }
+
+    return true;
+}
+
 
 void myTreeList::addItems(int subTree, QList<QString> nameList)
 {
