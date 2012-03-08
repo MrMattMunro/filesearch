@@ -14,7 +14,7 @@ class MyTableView:public QTableView
 public:
         MyTableView(QWidget * parent=0);
         virtual ~ MyTableView(){}
-        void buildDocList(QString datpath);
+        void buildDocList(QStringList files);
 
 //        static const int wordItemType = Qt::UserRole + 2;
 //        static const int excelItemType = Qt::UserRole + 3;

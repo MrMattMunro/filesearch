@@ -30,7 +30,12 @@ public:
         QString      getCurPath();   //获取当前鼠标双击的路径
 	QModelIndex  getCurIndex();
         QStandardItem* getCurItem(); // 获取当前双击节点
-        QPoint      getCurPoint();  // 获取当前点击位置
+        QPoint       getCurPoint();  // 获取当前点击位置
+        void         loadDirByLay(QString parentPath, int lay, QStandardItem *curItem);
+        void         delSubTree();   // 删除当前树
+        void         setCurItemByPath(QString path);
+private slots:
+        void         showChildTree();
 signals:
 	//鼠标双击
 	void         LBtnDbClk();

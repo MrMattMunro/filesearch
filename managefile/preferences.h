@@ -40,6 +40,10 @@ class Preferences : public QObject
                 bool isShowToolBar() { return m_isShowToolBar; };
                 void setShowToolBar(bool v) { m_isShowToolBar = v;  };
 
+                bool isShowDocUnderSub() { return m_isShowDocUnderSub; };
+                void setShowDocUnderSub(bool v) { m_isShowDocUnderSub = v;  };
+
+
 		bool nullHighlight() { return m_nullHighlight; };
 		void setNullHighlight(bool v) { m_nullHighlight = v; };
 
@@ -194,6 +198,9 @@ class Preferences : public QObject
                 bool m_isFullScreen;
                 bool m_isShowClassTree;
                 bool m_isShowToolBar;
+                bool m_isShowDocUnderSub;
+
+
 		bool m_checkQtVersion;
 		bool m_nullHighlight;
 		bool m_blobHighlight;
