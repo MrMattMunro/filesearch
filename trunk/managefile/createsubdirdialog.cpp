@@ -14,7 +14,6 @@ for which a new license (GPL+exception) is in place.
 #include <QUrl>
 
 #include "createsubdirdialog.h"
-#include "preferences.h"
 #include "utils.h"
 #include "fileutils.h"
 

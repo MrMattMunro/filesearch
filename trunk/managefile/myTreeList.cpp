@@ -7,6 +7,8 @@
 
 #include "myTreeList.h"
 #include "utils.h"
+#include "fileutils.h"
+
 
 myTreeList::myTreeList(QString title, QWidget *parent) : treeTitle("tree"), QTreeView(parent), numSubTree(2),
     mouseStatus(true), curTitle("title")
@@ -22,8 +24,18 @@ myTreeList::myTreeList(QString title, QWidget *parent) : treeTitle("tree"), QTre
         allTagItem->setIcon(Utils::getIcon("expander_normal.png"));
         allTagItem->setData("alltags", Qt::UserRole + 1);
 
+        // QCSS
+        this->setStyleSheet(
+                    "QTreeView::branch {image:none;}"
+                    "QTreeView::item{height: 25px;}"
+                    "QTreeView::item:hover{background-color:rgb(100,100,100)}"
+                    "QTreeView::item:selected{background-color:rgb(128,128,128)}"
+        );
         model->setItem(0, allDocItem);
         model->setItem(1, allTagItem);
+
+        // 转移到Tree内部实现
+        connect(this, SIGNAL(LBtnDbClk()), this, SLOT(showChildTree()));
 
 	this->setModel(model);
 	this->setAnimated(true);
@@ -162,7 +174,6 @@ void myTreeList::mouseDoubleClickEvent(QMouseEvent *event)
                 curItem = model->itemFromIndex(index);
 
                 curPath = qvariant_cast<QString>(curItem->data());
-
 		curIndex = index;
 		curTitle = index.data().toString();
 
@@ -213,5 +224,121 @@ void myTreeList::mouseReleaseEvent(QMouseEvent *event)
             emit RBtnClk();
     }
 }
+
+//// 根据文件父目录取得子目录树结构
+void myTreeList::loadDirByLay(QString parentPath, int lay, QStandardItem *curItem){
+    //目录
+    QDir dir(parentPath);
+    if (!dir.exists()) {
+        return;
+    }
+    // 取到所有的文件和文件名，但是去掉.和..的文件夹（这是QT默认有的）
+    dir.setFilter(QDir::Dirs|QDir::Files|QDir::NoDotAndDotDot);
+
+    //文件夹优先
+    dir.setSorting(QDir::DirsFirst);
+
+    //转化成一个list
+    QFileInfoList list = dir.entryInfoList();
+    if(list.size()< 1 ) {
+        return;
+    }
+
+    int i=0;
+    // 顶层目录
+    do{
+        QFileInfo fileInfo = list.at(i);
+        QString filename = fileInfo.fileName();
+        QString filepath = fileInfo.filePath();
+        filepath = QDir::toNativeSeparators(filepath);
+        //如果是文件夹
+        bool bisDir = fileInfo.isDir();
+        if(bisDir) {
+            if(lay == 0){
+              addItem(lay, filename, filepath, "expander_normal.png");
+            }else{
+              addItemByParentItem(curItem, filename, filepath, "expander_normal.png");
+            }
+        }
+        i++;
+    } while(i < list.size());
+}
+
+// 打开当前树节点
+void myTreeList::showChildTree()
+{
+    QString path = getCurPath();
+    if(path.isEmpty()){
+      return;
+    }
+
+    QStandardItem* curItem = getCurItem();
+    QModelIndex curIndex = getCurIndex();
+
+    // 设置打开状态
+    if(isExpanded(curIndex)){
+       curItem->setIcon(Utils::getIcon("expander_normal.png"));
+       collapse(getCurIndex());
+    }else{
+       curItem->setIcon(Utils::getIcon("expander_open.png"));
+       expand(getCurIndex());
+    }
+
+    // 先不需要加载了
+    if(curItem->hasChildren()){
+       return;
+    }
+
+    if(path != "alldocs" && path != "alltags"){
+       loadDirByLay(path, 1, curItem);
+    }
+}
+
+// 删除子文件夹
+void myTreeList::delSubTree()
+{
+
+    QString curPath = getCurPath();
+    QString curTitle = getCurTitle();
+    QStandardItem* curItem = getCurItem();
+    if(!curItem){
+       return;
+    }
+
+    if(!curPath.isEmpty() && curPath != "alltags" && curPath != "alldocs") {
+
+        int ret = QMessageBox::question(this, "",
+                                        tr("Are you sure that delete the directory \"%1\"?").arg(curTitle),
+                                        QMessageBox::Yes, QMessageBox::No);
+
+        if(ret == QMessageBox::Yes){
+            QFileInfo fileinfo(curPath);
+            FileUtils::deleteDirectory(fileinfo);
+            delSubItems(curItem);
+            curItem->parent()->removeRow(curItem->row());
+        }
+    }
+}
+
+// 根据CurPath设置当前选定的元素
+void myTreeList::setCurItemByPath(QString path)
+{
+    curPath = "";
+    //Doc树
+    QStandardItem *parenItem = model->item(0);
+    //迭代出所有子节点
+    for(int i = 0; i < parenItem->rowCount(); i++)
+    {
+            QStandardItem *item = parenItem->child(i);
+            QString tcurPath = qvariant_cast<QString>(item->data());
+            if(tcurPath == path){
+                curItem = item;
+                curPath = qvariant_cast<QString>(curItem->data());
+                curIndex = curItem->index();
+                curTitle = curIndex.data().toString();
+            }
+    }
+}
+
 
 

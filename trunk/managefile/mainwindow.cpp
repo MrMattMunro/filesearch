@@ -48,6 +48,7 @@
 #include "importdocdialog.h"
 #include "exportdocdialog.h"
 #include "createsubdirdialog.h"
+#include "movetodirdialog.h"
 #include "utils.h"
 #include "fileutils.h"
 
@@ -80,8 +81,16 @@ void MainWindow::buildDocList()
         return;
     }
 
-    QString datPath = curPath + QDir::separator() + "files.dat";
-    m_doctable->buildDocList(datPath);
+    // 是否显示子文件夹文档
+    QStringList files;
+    if(isShowDocUnderSub){
+        QString datPath = curPath + QDir::separator();
+        files = FileUtils::readAllDatFile(datPath, files);
+    }else{
+        QString datPath = curPath + QDir::separator() + "files.dat";
+        files = FileUtils::readFile(datPath);
+    }
+    m_doctable->buildDocList(files);
 }
 
 // 初始化界面动作
@@ -212,15 +221,22 @@ void MainWindow::initActions()
         makeSubDir = new QAction(tr("&New Sub Dir"), this);
         connect(makeSubDir, SIGNAL(triggered()), this, SLOT(createSubDir()));
         moveToDir= new QAction(tr("&Move To Dir"), this);
-        connect(moveToDir, SIGNAL(triggered()), this, SLOT(about()));
+        connect(moveToDir, SIGNAL(triggered()), this, SLOT(moveDir()));
         delDir= new QAction(tr("&Delete"), this);
         connect(delDir, SIGNAL(triggered()), this, SLOT(delSubDir()));
         renameDir= new QAction(tr("&Rename"), this);
         connect(renameDir, SIGNAL(triggered()), this, SLOT(renameSubDir()));
         subDirSort= new QAction(tr("&Sort SubDirs"), this);
         connect(subDirSort, SIGNAL(triggered()), this, SLOT(about()));
+
         showSubDirDoc= new QAction(tr("&Show docs under subDir"), this);
-        connect(showSubDirDoc, SIGNAL(triggered()), this, SLOT(about()));
+        showSubDirDoc->setCheckable(true);
+
+        Preferences* p = Preferences::instance();
+        showSubDirDoc->setChecked(p->isShowDocUnderSub());
+
+        connect(showSubDirDoc, SIGNAL(triggered()), this, SLOT(setShowSubDirDoc()));
+
         protectDir= new QAction(tr("&Protect"), this);
         connect(protectDir, SIGNAL(triggered()), this, SLOT(about()));
         propOfDir= new QAction(tr("&Properties"), this);
@@ -369,6 +385,15 @@ void MainWindow::homepage()
    m_view->load(QUrl("http://www.slfile.net/"));
 }
 
+// 设置是否显示子文件夹下的文件
+void MainWindow::setShowSubDirDoc()
+{
+    // 反向选择
+    isShowDocUnderSub = showSubDirDoc->isChecked();
+    Preferences* p = Preferences::instance();
+    p->setShowDocUnderSub(isShowDocUnderSub);
+}
+
 void MainWindow::enableFindButton(const QString &text)
 {
      findButton->setEnabled(!text.isEmpty());
@@ -441,7 +466,7 @@ void MainWindow::importDlg()
             QStandardItem* curItem = q_myTreeList->getCurItem();
             q_myTreeList->delSubItems(curItem);
             QString curPath = q_myTreeList->getCurPath();
-            loadDirByLay(curPath, 1, curItem);
+            q_myTreeList->loadDirByLay(curPath, 1, curItem);
         }
     }
     // 如果没有选中子目录节点
@@ -485,40 +510,22 @@ void MainWindow::initUI()
 
 
         // 加载分类树
-        QString datapath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-        datapath.append(QDir::separator()).append("slfile");
-        QDir *dir=new QDir(datapath);
-        if(!dir->exists()){
-           dir->mkdir(datapath);
-        }
-
-        m_baseDir = datapath;
+        m_baseDir = Utils::getLocatePath();
         m_baseDir = QDir::toNativeSeparators(m_baseDir);
         q_myTreeList = new myTreeList("", this);
-        q_myTreeList->setStyleSheet(
-                    "QTreeView::branch {image:none;}"
-                    "QTreeView::item{height: 25px;}"
-                    "QTreeView::item:hover{background-color:rgb(100,100,100)}"
-                    "QTreeView::item:selected{background-color:rgb(128,128,128)}"
-        );
 
-        loadDirByLay(datapath, 0, 0);
+        q_myTreeList->loadDirByLay(m_baseDir, 0, 0);
         q_myTreeList->enableMouse(true);
 
         m_doctable = new MyTableView(this);
 
-        m_doctable->setStyleSheet(
-                    "QTableView{selection-background-color: qlineargradient(x1: 0, y1: 0, x2: 0.5, y2: 0.5,stop: 0 #FF92BB, stop: 1 white);}"
-                    "QTableView::QTableCornerButton::section {background: red;border: 2px outset red;}"
-                    "QTableView::item:hover{background-color:rgb(128, 128, 128)}"
 
-        );
 
         splitter->addWidget(q_myTreeList);
         splitter->addWidget(m_doctable);
         splitter->addWidget(m_view);
 
-        connect(q_myTreeList, SIGNAL(LBtnDbClk()), this, SLOT(showChildTree()));
+        // connect(q_myTreeList, SIGNAL(LBtnDbClk()), this, SLOT(showChildTree()));
         connect(q_myTreeList, SIGNAL(RBtnClk()), this, SLOT(treeContextMenuOpened()));
         connect(q_myTreeList, SIGNAL(LBtnClk()), this, SLOT(buildDocList()));
 
@@ -526,44 +533,44 @@ void MainWindow::initUI()
 }
 
 
-//// 根据文件父目录取得子目录树结构
-int MainWindow::loadDirByLay(QString parentPath, int lay, QStandardItem *curItem){
-    //目录
-    QDir dir(parentPath);
-    if (!dir.exists()) {
-        return -1;
-    }
-    // 取到所有的文件和文件名，但是去掉.和..的文件夹（这是QT默认有的）
-    dir.setFilter(QDir::Dirs|QDir::Files|QDir::NoDotAndDotDot);
+////// 根据文件父目录取得子目录树结构
+//int MainWindow::loadDirByLay(QString parentPath, int lay, QStandardItem *curItem){
+//    //目录
+//    QDir dir(parentPath);
+//    if (!dir.exists()) {
+//        return -1;
+//    }
+//    // 取到所有的文件和文件名，但是去掉.和..的文件夹（这是QT默认有的）
+//    dir.setFilter(QDir::Dirs|QDir::Files|QDir::NoDotAndDotDot);
 
-    //文件夹优先
-    dir.setSorting(QDir::DirsFirst);
+//    //文件夹优先
+//    dir.setSorting(QDir::DirsFirst);
 
-    //转化成一个list
-    QFileInfoList list = dir.entryInfoList();
-    if(list.size()< 1 ) {
-        return -1;
-    }
+//    //转化成一个list
+//    QFileInfoList list = dir.entryInfoList();
+//    if(list.size()< 1 ) {
+//        return -1;
+//    }
 
-    int i=0;
-    // 顶层目录
-    do{
-        QFileInfo fileInfo = list.at(i);
-        QString filename = fileInfo.fileName();
-        QString filepath = fileInfo.filePath();
-        filepath = QDir::toNativeSeparators(filepath);
-        //如果是文件夹
-        bool bisDir = fileInfo.isDir();
-        if(bisDir) {
-            if(lay == 0){
-              q_myTreeList->addItem(lay, filename, filepath, "expander_normal.png");
-            }else{
-              q_myTreeList->addItemByParentItem(curItem, filename, filepath, "expander_normal.png");
-            }
-        }
-        i++;
-    } while(i < list.size());
-}
+//    int i=0;
+//    // 顶层目录
+//    do{
+//        QFileInfo fileInfo = list.at(i);
+//        QString filename = fileInfo.fileName();
+//        QString filepath = fileInfo.filePath();
+//        filepath = QDir::toNativeSeparators(filepath);
+//        //如果是文件夹
+//        bool bisDir = fileInfo.isDir();
+//        if(bisDir) {
+//            if(lay == 0){
+//              q_myTreeList->addItem(lay, filename, filepath, "expander_normal.png");
+//            }else{
+//              q_myTreeList->addItemByParentItem(curItem, filename, filepath, "expander_normal.png");
+//            }
+//        }
+//        i++;
+//    } while(i < list.size());
+//}
 
 
 MainWindow::~MainWindow()
@@ -598,6 +605,47 @@ void MainWindow::createSubDir()
         return;
     }
 }
+
+// 移动文件夹
+void MainWindow::moveDir()
+{
+    QString curPath = q_myTreeList->getCurPath();
+    QStandardItem* curItem = q_myTreeList->getCurItem();
+    bool hasSelRight = false;
+
+    // 需选中 文件 子节点
+    if(!curPath.isEmpty() && curPath != "alltags" && curPath != "alldocs") {
+        hasSelRight = true;
+        MoveToDirDialog dlg(this, m_baseDir, q_myTreeList->getCurPath());
+        dlg.exec();
+        if(dlg.update){
+              // 取得子界面选中的path
+              QString mselDir = dlg.m_curPath;
+              // 删除主界面选中的节点
+              curItem->parent()->removeRow(curItem->row());
+
+
+              // 设置主界面的节点 (子界面新建文件夹情况下不成功)
+              q_myTreeList->setCurItemByPath(mselDir);
+
+              QString curPath = q_myTreeList->getCurPath();
+              if(!curPath.isEmpty()){
+                  QStandardItem* curItem = q_myTreeList->getCurItem();
+                  QString temp = dlg.m_seldir;
+                  temp = temp.right(temp.length() - temp.lastIndexOf(QDir::separator()) - 1);
+                  q_myTreeList->addItemByParentItem(curItem, temp, dlg.m_seldir, "expander_normal.png");
+                  curItem->setIcon(Utils::getIcon("expander_open.png"));
+                  q_myTreeList->expand(q_myTreeList->getCurIndex());
+              }
+        }
+    }
+    // 如果没有选中子目录节点
+    if(!hasSelRight){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
+        return;
+    }
+}
+
 
 // 改变子文件夹名称
 void MainWindow::renameSubDir()
@@ -687,64 +735,7 @@ void MainWindow::about()
 // 删除子文件夹
 void MainWindow::delSubDir()
 {
-
-    QString curPath = q_myTreeList->getCurPath();
-    QString curTitle = q_myTreeList->getCurTitle();
-    QStandardItem* curItem = q_myTreeList->getCurItem();
-    if(!curItem){
-      return;
-    }
-
-    if(!curPath.isEmpty() && curPath != "alltags" && curPath != "alldocs") {
-
-        int ret = QMessageBox::question(this, m_appName,
-                                        tr("Are you sure that delete the directory \"%1\"?").arg(curTitle),
-                                        QMessageBox::Yes, QMessageBox::No);
-
-        if(ret == QMessageBox::Yes){
-            QFileInfo fileinfo(curPath);
-            FileUtils::deleteDirectory(fileinfo);
-            q_myTreeList->delSubItems(curItem);
-            curItem->parent()->removeRow(curItem->row());
-        }
-    }
-}
-
-// 刷新树节点
-void MainWindow::refreshChildTree()
-{
-
-
-}
-
-// 打开树节点
-void MainWindow::showChildTree()
-{
-    QString path = q_myTreeList->getCurPath();
-    if(path.isEmpty()){
-      return;
-    }
-
-    QStandardItem* curItem = q_myTreeList->getCurItem();
-    QModelIndex curIndex = q_myTreeList->getCurIndex();
-
-    // 设置打开状态
-    if(q_myTreeList->isExpanded(curIndex)){
-       curItem->setIcon(Utils::getIcon("expander_normal.png"));
-       q_myTreeList->collapse(q_myTreeList->getCurIndex());
-    }else{
-       curItem->setIcon(Utils::getIcon("expander_open.png"));
-       q_myTreeList->expand(q_myTreeList->getCurIndex());
-    }
-
-    // 不需要加载了
-    if(curItem->hasChildren()){
-       return;
-    }
-
-    if(path != "alldocs" && path != "alltags"){
-        loadDirByLay(path, 1, curItem);
-    }
+    q_myTreeList->delSubTree();
 }
 
 // 全屏

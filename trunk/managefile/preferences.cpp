@@ -24,6 +24,8 @@ Preferences::Preferences(QObject *parent)
         m_isFullScreen = s.value("isFullScreen", true).toBool();
         m_isShowClassTree = s.value("isShowClassTree", true).toBool();
         m_isShowToolBar = s.value("isShowToolBar", true).toBool();
+        m_isShowDocUnderSub = s.value("isShowDocUnderSub", true).toBool();
+
 
 	//
 	m_nullHighlight = s.value("prefs/nullCheckBox", true).toBool();
@@ -96,6 +98,7 @@ Preferences::~Preferences()
         settings.setValue("isFullScreen", m_isFullScreen);
         settings.setValue("isShowClassTree", m_isShowClassTree);
         settings.setValue("isShowToolBar", m_isShowToolBar);
+        settings.setValue("isShowDocUnderSub", m_isShowDocUnderSub);
 
 	// lnf
 	settings.setValue("prefs/languageComboBox", m_GUItranslator);

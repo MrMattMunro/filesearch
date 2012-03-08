@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     myitemdelegate.cpp \
     mystandarditemmodel.cpp \
     exportdocdialog.cpp \
-    createsubdirdialog.cpp
+    createsubdirdialog.cpp \
+    movetodirdialog.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -34,7 +35,8 @@ HEADERS  += mainwindow.h \
     myitemdelegate.h \
     mystandarditemmodel.h \
     exportdocdialog.h \
-    createsubdirdialog.h
+    createsubdirdialog.h \
+    movetodirdialog.h
 
 RESOURCES += \
     managefile.qrc
@@ -44,7 +46,8 @@ FORMS    += mainwindow.ui \
     shortcuteditordialog.ui \
     importdocdialog.ui \
     exportdocdialog.ui \
-    createsubdirdialog.ui
+    createsubdirdialog.ui \
+    movetodirdialog.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -52,6 +55,9 @@ OTHER_FILES += \
     ts/managefile_en.ts \
     ts/managefile_jp.ts \
     ts/managefile_zh_cn.ts
+
+
+
 
 
 

@@ -26,6 +26,12 @@ MyTableView::MyTableView(QWidget * parent) :QTableView(parent)
     horizontalHeader()->setMouseTracking (true);
     horizontalHeader ()->installEventFilter (this);
 
+    this->setStyleSheet(
+                "QTableView{selection-background-color: qlineargradient(x1: 0, y1: 0, x2: 0.5, y2: 0.5,stop: 0 #FF92BB, stop: 1 white);}"
+                "QTableView::QTableCornerButton::section {background: red;border: 2px outset red;}"
+                "QTableView::item:hover{background-color:rgb(128, 128, 128)}"
+
+    );
     this->resizeColumnsToContents();
     this->resizeRowsToContents();
     this->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -90,11 +96,10 @@ void MyTableView::resizeEvent(QResizeEvent * event){
     this->setColumnWidth(0, tablewidth * 1);
 }
 
-void MyTableView::buildDocList(QString filepath)
+void MyTableView::buildDocList(QStringList files)
 {
     Preferences* p = Preferences::instance();
     themodel->clear();
-    QStringList files = FileUtils::readFile(filepath);
     qDebug("buildDocList start");
 
     themodel->setRowCount(files.size());

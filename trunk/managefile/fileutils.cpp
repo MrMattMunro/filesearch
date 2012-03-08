@@ -26,15 +26,13 @@ bool FileUtils::copyDirectoryFiles(const QDir &fromDir, const QDir &toDir, bool 
                                    targetDir.filePath(fileInfo.fileName()),
                                    coverFileIfExist))
                 return false;
-        }
-        else{            /**< 当允许覆盖操作时，将旧文件进行删除操作 */
+        }else{            /**< 当允许覆盖操作时，将旧文件进行删除操作 */
             if(coverFileIfExist && targetDir.exists(fileInfo.fileName())){
                 targetDir.remove(fileInfo.fileName());
             }
 
             /// 进行文件copy
-            if(!QFile::copy(fileInfo.filePath(),
-                            targetDir.filePath(fileInfo.fileName()))){
+            if(!QFile::copy(fileInfo.filePath(), targetDir.filePath(fileInfo.fileName()))){
                 return false;
             }
         }
@@ -146,16 +144,36 @@ QStringList FileUtils::readFile(QString filepath)
       }
 
       QTextStream stream( &file );
-      int n = 1;
       QString line;
       while ( !stream.atEnd() ) {
           line = stream.readLine(); // 不包括“\n”的一行文本
-          printf( "%3d: %s\n", n++, line);
           lines << line;
       }
       file.close();
       return lines;
 
+}
+
+// 读取目录下所有的文件
+QStringList FileUtils::readAllDatFile(QString filepath, QStringList lines)
+{
+      QDir dir(filepath);
+      if(!dir.exists()){
+          return QStringList();
+      }
+
+      QFileInfoList fileInfoList = dir.entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot);
+
+      foreach(QFileInfo fileInfo, fileInfoList){
+          if(fileInfo.isDir()){
+              QString dir = fileInfo.filePath();
+              lines.append(readAllDatFile(dir, lines));
+          } else if(fileInfo.isFile()){
+              QString dir = fileInfo.filePath();
+              lines.append(readFile(dir));
+          }
+      }
+      return lines;
 }
 
 // 删除文件夹
@@ -201,7 +219,7 @@ void FileUtils::deleteDirectory(QFileInfo fileList){
         childCount = thisDir.entryInfoList().count();
         QFileInfoList newFileList = thisDir.entryInfoList();
         if(childCount >2 ){
-            for(int i=0;i<childCount;i++){
+            for(int i=0; i < childCount; i++){
                 if(newFileList.at(i).fileName().operator ==(".")|newFileList.at(i).fileName().operator ==("..")){
                     continue;
                 }

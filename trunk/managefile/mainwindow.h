@@ -65,7 +65,6 @@ public:
         QString titleFilter;
     };
     FeedInfo currentFeedInfo() const;
-    int loadDirByLay(QString parentPath, int lay, QStandardItem *curItem);
 
 private slots:
     void about();
@@ -75,7 +74,6 @@ private slots:
     void findClicked();
     void fullScreen();
     void showClassTree();
-    void showChildTree();
     void showToolBar();
     void buildDocList();
     void helpDoc();
@@ -88,10 +86,11 @@ private slots:
     void treeContextMenuOpened();
     void tableTree_currentItemChanged();
     void createSubDir();
-    void refreshChildTree();
     void delSubDir();
     void renameSubDir();
     void createRootDir();
+    void moveDir();
+    void setShowSubDirDoc();
 
 private:
     QActionGroup *m_feedGroup;
@@ -101,6 +100,7 @@ private:
     QString m_appName;
     QString m_lang;
     QString m_baseDir;
+    bool isShowDocUnderSub;
 
     void populateFeedsMenu();
 

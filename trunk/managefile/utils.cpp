@@ -8,6 +8,7 @@ for which a new license (GPL+exception) is in place.
 #include <QIcon>
 #include <QPixmapCache>
 #include <QDir>
+#include <QDesktopServices>
 
 #include "utils.h"
 
@@ -54,4 +55,16 @@ bool Utils::updateObjectTree(const QString & sql)
 		return true;
 	return false;
 }
+
+QString Utils::getLocatePath()
+{
+    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    locpath.append(QDir::separator()).append("slfile");
+    QDir *dir=new QDir(locpath);
+    if(!dir->exists()){
+       dir->mkdir(locpath);
+    }
+    return locpath;
+}
+
 
