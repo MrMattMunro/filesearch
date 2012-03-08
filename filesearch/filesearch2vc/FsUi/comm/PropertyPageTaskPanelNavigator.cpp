@@ -78,8 +78,8 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 
 	//添加热键item
 	i = 3;
-	pItem = pGroup->AddLinkItem(3, IDI_ICON_BASIC_SET_SKIN);
-	pItem->SetCaption("热键");
+	pItem = pGroup->AddLinkItem(3, IDI_ICON_HOTKEY);
+	pItem->SetCaption(g_lag.LoadString("title.hotkey"));
 	
 	pPage = m_pSheet->GetPage(3);
 	pItem->SetItemData((DWORD_PTR)pPage);
@@ -90,11 +90,10 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 	pGroup->SetCaption(g_lag.LoadString("title.licensemanager"));
 
 	//添加注册信息item
-	i = 2;
 	pItem = pGroup->AddLinkItem(0, IDI_ICON_REGISTER_INFO);
 	pItem->SetCaption(g_lag.LoadString("title.licenseinfo"));
 	
-	pPage = m_pSheet->GetPage(3);
+	pPage = m_pSheet->GetPage(4);
 	pItem->SetItemData((DWORD_PTR)pPage);
 	pPage->m_dwData = (DWORD_PTR)pItem;
 
@@ -115,7 +114,7 @@ BOOL CPropertyPageTaskPanelNavigator::Create()
 	GetImageManager()->SetIcon(IDI_ICON_REGISTER, IDI_ICON_REGISTER);
 	GetImageManager()->SetIcon(IDI_ICON_REGISTER_INFO, IDI_ICON_REGISTER_INFO);	
 	GetImageManager()->SetIcon(IDI_ICON_BASIC_SET_SKIN, IDI_ICON_BASIC_SET_SKIN);
-
+	GetImageManager()->SetIcon(IDI_ICON_HOTKEY, IDI_ICON_HOTKEY);
 //	SetGroupIconSize( CSize(16, 24));
 	SetGroupIconSize( CSize(24, 48));
 

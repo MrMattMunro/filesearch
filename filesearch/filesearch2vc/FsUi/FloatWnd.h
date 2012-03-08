@@ -9,6 +9,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CFloatWnd dialog
+#include "sloHotkeyAgent.h"
 
 class CFloatWnd : public CDialog
 {
@@ -16,7 +17,9 @@ class CFloatWnd : public CDialog
 public:
 	CFloatWnd(CWnd* pParent = NULL);   // standard constructor
 	void OnUpdateTransparent(int iTransparent);
+	void RegHotKey();
 	int nTickCount;
+	sloHotkeyAgent m_hotkey;
 // Dialog Data
 	//{{AFX_DATA(CFloatWnd)
 	enum { IDD = IDD_FLOATWND };
@@ -51,6 +54,7 @@ protected:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnLogo();
 	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
+	afx_msg LRESULT OnHotKey(WPARAM wp,LPARAM lp);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

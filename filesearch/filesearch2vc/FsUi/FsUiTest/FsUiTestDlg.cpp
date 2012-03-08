@@ -100,6 +100,7 @@ BEGIN_MESSAGE_MAP(CFsUiTestDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON_BARSER, OnButtonBarser)
 	ON_BN_CLICKED(IDC_BUTTON12, OnButton12)
 	ON_BN_CLICKED(IDC_BUTTON13, OnButton13)
+	ON_BN_CLICKED(IDC_BUTTON14, OnButton14)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -385,6 +386,15 @@ void CFsUiTestDlg::OnButton11()
 	g_fnFsLoadFloatWnd(1);
 }
 
+void CFsUiTestDlg::OnButton14() 
+{
+	// TODO: Add your control notification handler code here
+	if (g_fnFsLoadFloatWnd)
+	{
+		g_fnFsLoadFloatWnd(0);
+	}
+	
+}
 void GetDrvSpaceInfo(char* pDisk) 
 {
 	
@@ -778,3 +788,4 @@ void CFsUiTestDlg::OnButton13()
 	
 	MessageBox("上传成功");
 }
+

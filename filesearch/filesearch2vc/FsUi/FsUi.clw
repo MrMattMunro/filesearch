@@ -4,41 +4,41 @@
 Version=1
 ClassCount=13
 Class1=CFsUiApp
-LastClass=CHotkeyDlg
+LastClass=CLicenseDlg
 NewFileInclude2=#include "FsUi.h"
 ResourceCount=20
 NewFileInclude1=#include "stdafx.h"
 Class2=CCreateIndexDlg
 LastTemplate=CDialog
-Resource1=IDD_DIALOG_LICENSE
+Resource1=IDD_DIALOG_SKIN
 Class3=CCustomCiHuiDlg
 Resource2=IDD_FLOATWND
 Class4=CModifyIndexDlg
 Resource3=IDD_DIALOG_CUSTOM_DICT (Chinese (P.R.C.))
 Class5=CShowAllCiHuiDlg
-Resource4=IDD_DIALOG_ALL_CIHUI
+Resource4=IDD_DIALOG_LICENSE
 Class6=CSetAttributeDlg
 Resource5=IDD_DIALOG_MODIFY_INDEX
 Class7=CFastSearchDlg
 Class8=CSearchThread
 Resource6=IDD_DIALOG_SKIN (Chinese (P.R.C.))
 Class9=CLicenseDlg
-Resource7=IDD_DIALOG_HOTKEY
+Resource7=IDD_DIALOG_CREATE_INDEX
 Class10=CSkinDlg
 Resource8=IDD_DIALOG_MODIFY_INDEX (Chinese (P.R.C.))
 Resource9=IDD_DIALOG_ALL_CIHUI (Chinese (P.R.C.))
 Resource10=IDD_DIALOG_LICENSE (Chinese (P.R.C.))
-Resource11=IDD_DIALOG_FAST_SEARCH
+Resource11=IDD_DIALOG_SAVE_FILE
 Resource12=IDD_DIALOG_FAST_SEARCH (Chinese (P.R.C.))
 Resource13=IDD_DIALOG_CREATE_INDEX (Chinese (P.R.C.))
-Resource14=IDD_DIALOG_SET_ATTR
+Resource14=IDD_DIALOG_FAST_SEARCH
 Resource15=IDD_DIALOG_SET_ATTR (Chinese (P.R.C.))
-Resource16=IDD_DIALOG_CREATE_INDEX
+Resource16=IDD_DIALOG_SET_ATTR
 Class11=CFloatWnd
-Resource17=IDD_DIALOG_SAVE_FILE
-Resource18=IDD_DIALOG_SKIN
+Resource17=IDD_DIALOG_CUSTOM_DICT
+Resource18=IDD_DIALOG_HOTKEY
 Class12=CAddinSavefileDlg
-Resource19=IDD_DIALOG_CUSTOM_DICT
+Resource19=IDD_DIALOG_ALL_CIHUI
 Class13=CHotkeyDlg
 Resource20=IDR_MENU_FLOATWND
 
@@ -253,7 +253,7 @@ HeaderFile=LicenseDlg.h
 ImplementationFile=LicenseDlg.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=CLicenseDlg
+LastObject=IDC_EDIT_NUM
 VirtualFilter=dWC
 
 [DLG:IDD_DIALOG_SKIN]
@@ -468,7 +468,7 @@ VirtualFilter=dWC
 [DLG:IDD_DIALOG_HOTKEY]
 Type=1
 Class=CHotkeyDlg
-ControlCount=7
+ControlCount=8
 Control1=IDC_STATIC,static,1342177283
 Control2=IDC_STATIC_HOTKEY,static,1342308352
 Control3=IDC_STATIC_HOTKEY_FAST_SEARCH,static,1342308352
@@ -476,6 +476,7 @@ Control4=IDC_STATIC_HOTKEY_WEB_SEARCH,static,1342308352
 Control5=IDC_STATIC_HOTKEY_DESC,static,1342308352
 Control6=IDC_HOTKEY_FAST_SEARCH,msctls_hotkey32,1350631424
 Control7=IDC_HOTKEY_WEB_SEARCH,msctls_hotkey32,1350631424
+Control8=IDC_BUTTON_SET_HOTKEY,button,1342242816
 
 [CLS:CHotkeyDlg]
 Type=0
@@ -483,6 +484,6 @@ HeaderFile=HotkeyDlg.h
 ImplementationFile=HotkeyDlg.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=CHotkeyDlg
+LastObject=IDC_HOTKEY_FAST_SEARCH
 VirtualFilter=dWC
 

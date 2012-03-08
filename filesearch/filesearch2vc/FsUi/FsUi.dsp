@@ -125,6 +125,10 @@ SOURCE=.\FsUi.rc
 # End Source File
 # Begin Source File
 
+SOURCE=.\HotkeyDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\comm\IconEdit.cpp
 # End Source File
 # Begin Source File
@@ -189,6 +193,10 @@ SOURCE=.\comm\sloFilterAgent.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\sloHotkeyAgent.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\comm\sloLanguageAgent.cpp
 # End Source File
 # Begin Source File
@@ -218,6 +226,10 @@ SOURCE=.\comm\sloSkinAgent.cpp
 # Begin Source File
 
 SOURCE=.\comm\sltFastSearchThread.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\sltLoadwndThread.cpp
 # End Source File
 # Begin Source File
 
@@ -255,6 +267,10 @@ SOURCE=.\FloatWnd.h
 # Begin Source File
 
 SOURCE=.\FsUi.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\HotkeyDlg.h
 # End Source File
 # Begin Source File
 
@@ -322,6 +338,10 @@ SOURCE=.\comm\sloFilterAgent.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\sloHotkeyAgent.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\comm\sloLanguageAgent.h
 # End Source File
 # Begin Source File
@@ -354,6 +374,10 @@ SOURCE=.\comm\sltFastSearchThread.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\sltLoadwndThread.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\StdAfx.h
 # End Source File
 # Begin Source File
@@ -371,6 +395,10 @@ SOURCE=.\res\icons\point\addon.ico
 # Begin Source File
 
 SOURCE=.\res\AlphaFind.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\icons\hotkey\ARROW6A.ICO
 # End Source File
 # Begin Source File
 
@@ -411,6 +439,10 @@ SOURCE=.\res\Bookshelf.ico
 # Begin Source File
 
 SOURCE=.\res\cancel16.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\cursor1.cur
 # End Source File
 # Begin Source File
 
@@ -490,7 +522,19 @@ SOURCE=.\res\HAND.ICO
 # End Source File
 # Begin Source File
 
+SOURCE=.\res\icons\hotkey\hotkey2_48.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\icons\hotkey\hotkey_32.ico
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\html.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\res\icons\hotkey\Key5.ico
 # End Source File
 # Begin Source File
 

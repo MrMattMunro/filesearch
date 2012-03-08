@@ -50,6 +50,7 @@ BEGIN_MESSAGE_MAP(CFloatWnd, CDialog)
 	ON_WM_LBUTTONDOWN()
 	ON_BN_CLICKED(IDC_LOGO, OnLogo)
 	ON_WM_LBUTTONDBLCLK()
+	ON_MESSAGE(WM_HOTKEY,OnHotKey)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -62,6 +63,7 @@ BOOL CFloatWnd::OnInitDialog()
 	
 	// TODO: Add extra initialization here
 	flog.Print(LL_DEBUG_INFO,"[info]CFloatWnd::OnInitDialog!\r\n");
+
 
 	nTickCount = GetTickCount();
 #if 1
@@ -97,12 +99,43 @@ BOOL CFloatWnd::OnInitDialog()
 	
 	//加入WS_EX_LAYERED扩展属性
 	SetWindowLong(m_hWnd,GWL_EXSTYLE,GetWindowLong(this->GetSafeHwnd(),GWL_EXSTYLE)^0x80000);
-	
+	ModifyStyleEx(WS_EX_APPWINDOW,WS_EX_TOOLWINDOW, SWP_DRAWFRAME);
+
+	RegHotKey();
+
+	OnUpdateTransparent(255);
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
 
-
+void CFloatWnd::RegHotKey()
+{
+	//获取系统热键值，并注册
+	//从配置文件中获取hotkey，显示到界面
+	WORD vk1= 0, sk1 = 0;
+	WORD vk2= 0, sk2 = 0;
+	m_hotkey.GetHotkey("fasts", vk1, sk1);
+	m_hotkey.GetHotkey("webs", vk2, sk2);	
+	
+	UINT fs1 = 0;
+	if (sk1 & HOTKEYF_ALT)	    fs1|= MOD_ALT;
+	if (sk1 & HOTKEYF_CONTROL)   fs1|= MOD_CONTROL;
+	if (sk1 & HOTKEYF_SHIFT) 	fs1|= MOD_SHIFT; 	
+	if(!::RegisterHotKey(m_hWnd, 1, fs1, vk1))
+	{
+		MessageBox("快速查询的快捷键冲突，请重新设置快捷键!");
+	}
+	UINT fs2 = 0;
+	if (sk2 & HOTKEYF_ALT)	    fs2|= MOD_ALT;
+	if (sk2 & HOTKEYF_CONTROL)   fs2|= MOD_CONTROL;
+	if (sk2 & HOTKEYF_SHIFT) 	fs2|= MOD_SHIFT; 	
+	if(!::RegisterHotKey(m_hWnd, 2, fs2, vk2))
+	{
+		MessageBox("web查询的快捷键冲突，请重新设置快捷键!");	
+	}	
+	
+}
 
 void CFloatWnd::OnUpdateTransparent(int iTransparent)
 {
@@ -126,8 +159,13 @@ void CFloatWnd::OnRButtonUp(UINT nFlags, CPoint point)
 	// TODO: Add your message handler code here and/or call default
 	CMenu m_Right;
 	m_Right.LoadMenu(IDR_MENU_FLOATWND);
-	CMenu *pSub = m_Right.GetSubMenu(0);
 	
+	CMenu *pSub = m_Right.GetSubMenu(0);
+	pSub->ModifyMenu(ID_MENU_NEW_INDEX,MF_BYCOMMAND,ID_MENU_NEW_INDEX, g_lag.LoadString("menu.newindex"));
+	pSub->ModifyMenu(ID_MENU_SYS_SET,MF_BYCOMMAND,ID_MENU_SYS_SET, g_lag.LoadString("menu.sysseting"));
+	pSub->ModifyMenu(ID_MENU_WEB_QUERY,MF_BYCOMMAND,ID_MENU_WEB_QUERY, g_lag.LoadString("menu.webs"));
+	pSub->ModifyMenu(ID_HIDE,MF_BYCOMMAND,ID_HIDE, g_lag.LoadString("menu.hide"));
+
 	ClientToScreen(&point);
 	pSub->TrackPopupMenu(TPM_LEFTALIGN,point.x,point.y,this,NULL);
 	
@@ -245,4 +283,21 @@ void CFloatWnd::OnLButtonDblClk(UINT nFlags, CPoint point)
 //	FsFastSearch();
 
 	CDialog::OnLButtonDblClk(nFlags, point);
+}
+
+LRESULT CFloatWnd::OnHotKey(WPARAM wp,LPARAM lp)   //热键处理函数
+{
+	switch(wp)
+	{
+	case 1:
+		FsFastSearchEx();
+		break;
+		
+	case 2:	 
+		//处理菜单【更多...】消息 http://localhost:6666/slfile/load
+		ShellExecute(NULL, "open", "http://localhost:6666/slfile/load", NULL, NULL,SW_SHOWNORMAL); 
+		break;
+	}
+	
+	return 0;
 }
