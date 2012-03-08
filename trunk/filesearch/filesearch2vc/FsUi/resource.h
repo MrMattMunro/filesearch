@@ -274,6 +274,7 @@
 #define IDC_HOTKEY_FAST_SEARCH          2073
 #define IDC_HOTKEY_WEB_SEARCH           2074
 #define IDI_ICON_POINT2                 2075
+#define IDC_BUTTON_SET_HOTKEY           2075
 #define IDI_ICON_POINT                  2076
 #define IDI_ICON_POINT3                 2077
 #define IDB_BITMAP_THREME_NAME_2007_Aqua 2078
@@ -290,6 +291,10 @@
 #define IDB_BITMAP_LOGO64               2099
 #define IDB_BITMAP_LOGO2                2100
 #define IDD_DIALOG_HOTKEY               2101
+#define IDI_ICON_HOTKEY2                2103
+#define IDI_ICON_HOTKEY3                2104
+#define IDI_ICON_HOTKEY                 2105
+#define IDC_CURSOR1                     2106
 #define ID_SHOW                         32771
 #define ID_HIDE                         32772
 #define ID_MENU_NEW_INDEX               32773
@@ -306,9 +311,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        2102
+#define _APS_NEXT_RESOURCE_VALUE        2107
 #define _APS_NEXT_COMMAND_VALUE         32783
-#define _APS_NEXT_CONTROL_VALUE         2074
+#define _APS_NEXT_CONTROL_VALUE         2076
 #define _APS_NEXT_SYMED_VALUE           2000
 #endif
 #endif

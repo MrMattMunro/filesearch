@@ -67,7 +67,7 @@ END
 
 VS_VERSION_INFO VERSIONINFO
  FILEVERSION 1,0,0,415
- PRODUCTVERSION 2012,2,8,0
+ PRODUCTVERSION 2012,2,17,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -92,7 +92,7 @@ BEGIN
             VALUE "OriginalFilename", "FsUi.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "FsUi Dynamic Link Library\0"
-            VALUE "ProductVersion", "2012, 2, 8, 0\0"
+            VALUE "ProductVersion", "2012, 2, 17, 0\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -347,16 +347,17 @@ STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "热键"
 FONT 10, "宋体"
 BEGIN
-    ICON            IDI_ICON_POINT3,IDC_STATIC,7,10,18,20
-    LTEXT           "系统热键",IDC_STATIC_HOTKEY,29,16,37,8
-    LTEXT           "快速检索:",IDC_STATIC_HOTKEY_FAST_SEARCH,38,49,35,8
-    LTEXT           "WEB检索:",IDC_STATIC_HOTKEY_WEB_SEARCH,38,66,32,8
+    ICON            IDI_ICON_POINT3,IDC_STATIC,7,9,18,20
+    LTEXT           "系统热键",IDC_STATIC_HOTKEY,29,15,37,12
+    LTEXT           "快速检索:",IDC_STATIC_HOTKEY_FAST_SEARCH,38,51,35,8
+    LTEXT           "WEB检索:",IDC_STATIC_HOTKEY_WEB_SEARCH,38,68,32,8
     LTEXT           "设置系统功能的快捷键，实现一键化式系统，方便，高效。",
                     IDC_STATIC_HOTKEY_DESC,37,32,194,8
     CONTROL         "HotKey1",IDC_HOTKEY_FAST_SEARCH,"msctls_hotkey32",
-                    WS_BORDER | WS_TABSTOP,74,46,105,14
+                    WS_BORDER | WS_TABSTOP,74,48,105,14
     CONTROL         "HotKey1",IDC_HOTKEY_WEB_SEARCH,"msctls_hotkey32",
-                    WS_BORDER | WS_TABSTOP,74,64,105,14
+                    WS_BORDER | WS_TABSTOP,74,66,105,14
+    PUSHBUTTON      "设置",IDC_BUTTON_SET_HOTKEY,191,46,40,33
 END
 
 
@@ -421,6 +422,9 @@ IDI_ICON_FAST_SEARCH3   ICON    DISCARDABLE     "res\\icons\\search\\Search6.ico
 IDI_ICON_POINT2         ICON    DISCARDABLE     "res\\icons\\point\\ARW05RT.ICO"
 IDI_ICON_POINT          ICON    DISCARDABLE     "res\\icons\\point\\ARW03RT.ICO"
 IDI_ICON_POINT3         ICON    DISCARDABLE     "res\\icons\\point\\TRFFC02.ICO"
+IDI_ICON_HOTKEY2        ICON    DISCARDABLE     "res\\icons\\hotkey\\Key5.ico"
+IDI_ICON_HOTKEY3        ICON    DISCARDABLE     "res\\icons\\hotkey\\hotkey2_48.ico"
+IDI_ICON_HOTKEY         ICON    DISCARDABLE     "res\\icons\\hotkey\\ARROW6A.ICO"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -460,7 +464,7 @@ IDR_MENU_FLOATWND MENU DISCARDABLE
 BEGIN
     POPUP "右键菜单(&R)"
     BEGIN
-        MENUITEM "新建索引(&N)",                ID_MENU_NEW_INDEX
+        MENUITEM "新建文档索引(&N)",            ID_MENU_NEW_INDEX
         MENUITEM "系统设置(&S)",                ID_MENU_SYS_SET
         MENUITEM SEPARATOR
         MENUITEM "Web查询(&Q)",                 ID_MENU_WEB_QUERY
@@ -474,10 +478,17 @@ BEGIN
             MENUITEM "20%",                         ID_MENU_TRANS_20
         END
         MENUITEM SEPARATOR
-        MENUITEM "隐藏(&S)",                    ID_HIDE
+        MENUITEM "隐藏(&H)",                    ID_HIDE
     END
 END
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_CURSOR1             CURSOR  DISCARDABLE     "res\\cursor1.cur"
 
 /////////////////////////////////////////////////////////////////////////////
 //

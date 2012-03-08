@@ -14,6 +14,7 @@
 #include "FloatWnd.h"
 
 #include "AddinSavefileDlg.h"
+#include "sltLoadwndThread.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -189,19 +190,21 @@ DWORD __stdcall FsLoadSkin()
 }
 
 
-CFloatWnd* g_pFloatWnd = NULL;
+//CFloatWnd* g_pFloatWnd = NULL;
 /*
   功能：加载FloatWnd
   nshow:
        1 : show
 	   0 : hide
 */
+/*
 DWORD __stdcall FsLoadFloatWnd(int nShow)
 {
 	flog.Print(LL_DEBUG_INFO,"[info]Enter FsLoadFloatWnd!nShow=%d\r\n",nShow);	
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
 	if(g_pFloatWnd == NULL)
-	{		
+	{
+		flog.Print(LL_DEBUG_INFO,"[info]FsLoadFloatWnd new CFloatWnd!nShow=%d\r\n",nShow);		
 		g_pFloatWnd = new CFloatWnd;
 		if (g_pFloatWnd == NULL)
 		{
@@ -209,6 +212,7 @@ DWORD __stdcall FsLoadFloatWnd(int nShow)
 			return -1;
 		}
 		g_pFloatWnd->Create(IDD_FLOATWND,NULL);
+		g_pFloatWnd->ShowWindow(SW_SHOW);
 	}
 
 	if (nShow == 1)
@@ -221,9 +225,31 @@ DWORD __stdcall FsLoadFloatWnd(int nShow)
 	flog.Print(LL_DEBUG_INFO,"[info]Leave FsLoadFloatWnd!nShow=%d\r\n",nShow);	
 	return 0;
 }
+*/
+
+DWORD __stdcall FsLoadFloatWnd(int nShow)
+{
+	flog.Print(LL_DEBUG_INFO,"[info]Enter FsLoadFloatWnd!nShow=%d\r\n",nShow);	
+	AFX_MANAGE_STATE(AfxGetStaticModuleState());
+
+	if (sltLoadwndThread::getInstance() == NULL)
+	{
+		sltLoadwndThread::newInstance();
+		sltLoadwndThread::getInstance()->startup(nShow);
+	}
+	
+	if (nShow == 1)
+	{
+		sltLoadwndThread::getInstance()->ShowWnd(TRUE);
+	}else
+		sltLoadwndThread::getInstance()->ShowWnd(FALSE);
+
+	flog.Print(LL_DEBUG_INFO,"[info]Leave FsLoadFloatWnd!nShow=%d\r\n",nShow);	
+	return 0;
+}
 
 /*
-  功能：自定义词汇
+功能：自定义词汇
 */
 DWORD __stdcall FsShowSavefileDlg(char* pszFileName)
 {
