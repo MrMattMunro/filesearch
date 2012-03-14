@@ -47,7 +47,7 @@ ImportDocDialog::ImportDocDialog(QWidget * parent, const QString & basedir,const
         model->setColumnCount(1);
 
         this->setWindowIcon(Utils::getIcon("document-import.png"));
-        this->setWindowTitle(tr("Doc Import"));
+        this->setWindowTitle(tr("Document Import"));
 
         connect(fileSelBtn, SIGNAL(clicked()), this, SLOT(fileSelBtn_clicked()));
         connect(previewBtn, SIGNAL(clicked()), this, SLOT(previewBtn_clicked()));

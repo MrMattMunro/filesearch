@@ -50,7 +50,7 @@ MoveToDirDialog::MoveToDirDialog(QWidget * parent, const QString & basedir,const
         verticalLayout_2->addWidget(q_myTreeList);
 
         this->setWindowIcon(Utils::getIcon("folder.ico"));
-        this->setWindowTitle(tr("Create New Sub Directory"));
+        this->setWindowTitle(tr("Move the Sub Directory"));
 
         connect(buttonBox, SIGNAL(accepted()), this, SLOT(confirmBtn_clicked()));
         connect(buttonBox,SIGNAL(rejected()),this,SLOT(cancelBtn_clicked()));

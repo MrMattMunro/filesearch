@@ -49,6 +49,7 @@
 #include "exportdocdialog.h"
 #include "createsubdirdialog.h"
 #include "movetodirdialog.h"
+#include "propofdirdialog.h"
 #include "utils.h"
 #include "fileutils.h"
 
@@ -240,7 +241,7 @@ void MainWindow::initActions()
         protectDir= new QAction(tr("&Protect"), this);
         connect(protectDir, SIGNAL(triggered()), this, SLOT(about()));
         propOfDir= new QAction(tr("&Properties"), this);
-        connect(propOfDir, SIGNAL(triggered()), this, SLOT(about()));
+        connect(propOfDir, SIGNAL(triggered()), this, SLOT(properties()));
 
         //Root ContextMenu
         makeRootDir= new QAction(tr("&New Root Dir"), this);
@@ -497,6 +498,30 @@ void MainWindow::exportDlg()
         return;
     }
 }
+
+// 查看文件夹属性
+void MainWindow::properties()
+{
+    QString curPath = q_myTreeList->getCurPath();
+    bool hasSelRight = false;
+
+    // 需选中子节点
+    if(!curPath.isEmpty() && curPath != "alltags") {
+        hasSelRight = true;
+        PropOfDirDialog dlg(this, m_baseDir, q_myTreeList->getCurPath());
+        dlg.exec();
+        if(dlg.update){
+          // 不做任何操作
+        }
+    }
+    // 如果没有选中子目录节点
+    if(!hasSelRight){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
+        return;
+    }
+}
+
+
 
 void MainWindow::initUI()
 {
