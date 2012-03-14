@@ -91,6 +91,7 @@ private slots:
     void createRootDir();
     void moveDir();
     void setShowSubDirDoc();
+    void properties();
 
 private:
     QActionGroup *m_feedGroup;

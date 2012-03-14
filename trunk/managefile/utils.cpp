@@ -67,4 +67,16 @@ QString Utils::getLocatePath()
     return locpath;
 }
 
+// 根据目录path取得最底层目录名
+QString Utils::getDirNameByPath(const QString & path)
+{
+    QString temp = path;
+    temp = temp.right(temp.length() - temp.lastIndexOf(QDir::separator()) - 1);
+    return temp;
+}
+
+
+
+
+
 

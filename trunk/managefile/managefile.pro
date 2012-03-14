@@ -20,7 +20,12 @@ SOURCES += main.cpp \
     mystandarditemmodel.cpp \
     exportdocdialog.cpp \
     createsubdirdialog.cpp \
-    movetodirdialog.cpp
+    movetodirdialog.cpp \
+    propofdirdialog.cpp \
+    tabwidget.cpp \
+    toolbarsearch.cpp \
+    webview.cpp \
+    browsermainwindow.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -36,7 +41,12 @@ HEADERS  += mainwindow.h \
     mystandarditemmodel.h \
     exportdocdialog.h \
     createsubdirdialog.h \
-    movetodirdialog.h
+    movetodirdialog.h \
+    propofdirdialog.h \
+    browsermainwindow.h \
+    tabwidget.h \
+    toolbarsearch.h \
+    webview.h
 
 RESOURCES += \
     managefile.qrc
@@ -47,7 +57,8 @@ FORMS    += mainwindow.ui \
     importdocdialog.ui \
     exportdocdialog.ui \
     createsubdirdialog.ui \
-    movetodirdialog.ui
+    movetodirdialog.ui \
+    propofdirdialog.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -55,6 +66,11 @@ OTHER_FILES += \
     ts/managefile_en.ts \
     ts/managefile_jp.ts \
     ts/managefile_zh_cn.ts
+
+
+
+
+
 
 
 
