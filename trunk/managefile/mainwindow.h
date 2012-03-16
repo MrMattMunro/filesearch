@@ -46,6 +46,15 @@
 #include <QtWebKit/QWebView>
 #include <mytreelist.h>
 #include <mytableview.h>
+#include <browser/tabwidget.h>
+#include <browser/toolbarsearch.h>
+#include <browser/bookmarks.h>
+#include <browser/chasewidget.h>
+#include <browser/autosaver.h>
+#include <browser/webview.h>
+#include <browser/downloadmanager.h>
+#include <browser/networkaccessmanager.h>
+#include <browser/settings.h>
 
 //#include "ui_mainwindow.h"
 
@@ -56,15 +65,12 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = 0, Qt::WFlags flags = 0);
     ~MainWindow();
+    QSize sizeHint() const;
 
-    struct FeedInfo {
-        QString name;
-        QUrl uri;
-        QString query;
-        QString embedDiv;
-        QString titleFilter;
-    };
-    FeedInfo currentFeedInfo() const;
+    TabWidget *tabWidget() const;
+    WebView *currentTab() const;
+    QByteArray saveState(bool withTabs = true) const;
+    bool restoreState(const QByteArray &state);
 
 private slots:
     void about();
@@ -93,6 +99,62 @@ private slots:
     void setShowSubDirDoc();
     void properties();
 
+    void loadPage(const QString &url);
+    void slotHome();
+
+
+    // browser
+    void save();
+
+    void slotLoadProgress(int);
+    void slotUpdateStatusbar(const QString &string);
+    void slotUpdateWindowTitle(const QString &title = QString());
+
+    void loadUrl(const QUrl &url);
+    void slotPreferences();
+
+    void slotFileNew();
+    void slotFileOpen();
+    void slotFilePrintPreview();
+    void slotFilePrint();
+    void slotPrivateBrowsing();
+    void slotFileSaveAs();
+    void slotEditFind();
+    void slotEditFindNext();
+    void slotEditFindPrevious();
+    void slotShowBookmarksDialog();
+    void slotAddBookmark();
+    void slotViewZoomIn();
+    void slotViewZoomOut();
+    void slotViewResetZoom();
+    void slotViewZoomTextOnly(bool enable);
+    void slotViewToolbar();
+    void slotViewBookmarksBar();
+    void slotViewStatusbar();
+    void slotViewPageSource();
+    void slotViewFullScreen(bool enable);
+
+    void slotWebSearch();
+    void slotToggleInspector(bool enable);
+    void slotAboutApplication();
+    void slotDownloadManager();
+    void slotSelectLineEdit();
+
+    void slotAboutToShowBackMenu();
+    void slotAboutToShowForwardMenu();
+    void slotAboutToShowWindowMenu();
+    void slotOpenActionUrl(QAction *action);
+    void slotShowWindow();
+    void slotSwapFocus();
+
+    void printRequested(QWebFrame *frame);
+    void geometryChangeRequested(const QRect &geometry);
+    void updateToolbarActionText(bool visible);
+    void updateBookmarksToolbarActionText(bool visible);
+
+protected:
+    void closeEvent(QCloseEvent *event);
+
 private:
     QActionGroup *m_feedGroup;
     QModelIndex m_loadingIndex;
@@ -109,7 +171,6 @@ private:
     //Ui::MainWindow ui;
     QSplitter * splitter;
     QToolBar *toolBar;
-    QWebView *m_view;
     MyTableView *m_doctable;
     myTreeList *q_myTreeList;
 
@@ -174,7 +235,7 @@ private:
     //Root Tag ContextMenu
     QAction *makeTag;
 
-    QStatusBar *statusBar;
+    //QStatusBar *statusBar;
     QMenu *menu_View;
     QMenu *menu_skin;
     QMenu *menu_language;
@@ -183,29 +244,48 @@ private:
     QMenu *menu_Tool;
     QMenu *contextMenu;
 
-    QStandardItemModel *m_rssModel;
-
     void addDoc(const QString & name);
     void initUI();
     void initActions();
     void initMenus();
     void initStatusbar();
     void initToolbar();
+    void initBrowser();
 
-    enum {
-        TitleRole = Qt::UserRole + 1,
-        AuthorRole,
-        DescriptionRole,
-        SubTitleRole,
-        PageLinkRole,
-        DownloadRole,
-        PublishedDateRole,
-        DurationRole,
-        SearchRole
-    };
+    // browser
+    void loadDefaultState();
+    void setupMenu();
+    void setupToolBar();
+    void updateStatusbarActionText(bool visible);
+
+    QToolBar *m_navigationBar;
+    ToolbarSearch *m_toolbarSearch;
+    BookmarksToolBar *m_bookmarksToolbar;
+    ChaseWidget *m_chaseWidget;
+    TabWidget *m_tabWidget;
+    AutoSaver *m_autoSaver;
+
+    QAction *m_historyBack;
+    QMenu *m_historyBackMenu;
+    QAction *m_historyForward;
+    QMenu *m_historyForwardMenu;
+    QMenu *m_windowMenu;
+
+    QAction *m_stop;
+    QAction *m_reload;
+    QAction *m_stopReload;
+    QAction *m_viewToolbar;
+    QAction *m_viewBookmarkBar;
+    QAction *m_viewStatusbar;
+    QAction *m_restoreLastSession;
+    QAction *m_addBookmark;
+
+    QIcon m_reloadIcon;
+    QIcon m_stopIcon;
+
+    QString m_lastSearch;
+
 };
-
-Q_DECLARE_METATYPE(MainWindow::FeedInfo);
 
 #endif // MAINWINDOW_H
 

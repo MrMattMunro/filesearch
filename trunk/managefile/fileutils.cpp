@@ -3,6 +3,11 @@
 #include <QDebug>
 #include <QFile>
 #include <QDir>
+#include <QDesktopServices>
+#include <QUrl>
+#include <browser/webview.h>
+#include <QAxObject>
+#include <QAxWidget>
 
 #include "fileutils.h"
 
@@ -265,3 +270,105 @@ int FileUtils::loadAllFile(QDir dir, QList<QString> fileList){
         i++;
     } while(i < list.size());
 }
+
+// 打开文件
+int FileUtils::openFile(const QString &filepath){
+    // 打开文件
+    QDir file(filepath);
+    if (filepath.isEmpty() || !file.exists()) {
+        return -1;
+    }
+
+    // QDesktopServices::openUrl(QUrl("file:////Users/Biao/Desktop/1.mp4"));
+    QDesktopServices::openUrl(QUrl::fromLocalFile(filepath));
+
+}
+
+// webView打开文本文件
+int FileUtils::openTxtFile(const QString &filepath, WebView &webview){
+    // 打开文件
+    QFile file(filepath);
+    if(!file.exists()){
+      return -1;
+    }
+    QTextStream ts(&file);
+    webview->setHtml(te.readAll());
+}
+
+// webView打开Excel文件
+int FileUtils::openExcelFile(const QString &filepath, WebView &webview){
+
+    QAxObject* excel = new QAxObject( "Excel.Application", 0 );
+    QAxObject* workbooks = excel->querySubObject( "Workbooks" );
+    QAxObject* workbook = workbooks->querySubObject( "Open(const QString&)", exchange->getFilename() );
+    QAxObject* sheets = workbook->querySubObject( "Worksheets" );
+
+    QList<QVariantList> data;	//Data list from excel, each QVariantList is worksheet row
+
+    //worksheets count
+    int count = sheets->dynamicCall("Count()").toInt();
+
+    for (int i=1; i<=count; i++) //cycle through sheets
+    {
+            //sheet pointer
+            QAxObject* sheet = sheets->querySubObject( "Item( int )", i );
+
+            QAxObject* rows = sheet->querySubObject( "Rows" );
+            int rowCount = rows->dynamicCall( "Count()" ).toInt(); //unfortunately, always returns 255, so you have to check somehow validity of cell values
+            QAxObject* columns = sheet->querySubObject( "Columns" );
+            int columnCount = columns->dynamicCall( "Count()" ).toInt(); //similarly, always returns 65535
+
+            //One of possible ways to get column count
+            int currentColumnCount = 0;
+            for (int col=1; col<columnCount; col++)
+            {
+                    QAxObject* cell = sheet->querySubObject( "Cells( int, int )", COLUMN_COUNT_ROW, col );
+                    QVariant value = cell->dynamicCall( "Value()" );
+                    if (value.toString().isEmpty()){
+                      break;
+                    } else{
+                       currentColumnCount = col;
+                    }
+
+            }
+            columnCount = currentColumnCount;
+
+            //sheet->dynamicCall( "Calculate()" ); //maybe somewhen it's necessary, but i've found out that cell values are calculated without calling this function. maybe it must be called just to recalculate
+
+            for (int row=1; row <= rowCount; row++)
+            {
+                    QVariantList dataRow;
+                    bool isEmpty = true;	//when all the cells of row are empty, it means that file is at end (of course, it maybe not right for different excel files. it's just criteria to calculate somehow row count for my file)
+                    for (int column=1; column <= columnCount; column++)
+                    {
+                            QAxObject* cell = sheet->querySubObject( "Cells( int, int )", row, column );
+                            QVariant value = cell->dynamicCall( "Value()" );
+                            if (!value.toString().isEmpty() && isEmpty)
+                                    isEmpty = false;
+                            dataRow.append(value);
+                    }
+                    if (isEmpty) //criteria to get out of cycle
+                            break;
+                    data->append(dataRow);
+            }
+    }
+
+    workbook->dynamicCall("Close()");
+    excel->dynamicCall("Quit()");
+}
+
+// webView打开Excel文件
+int FileUtils::openWordFile(const QString &filepath){
+
+        QAxWidget *wordActive = new QAxWidget;
+        wordActive->setControl("Word.Application");
+        QAxObject* newFile = wordActive->querySubObject("Open(const QString&)", filepath);
+
+}
+
+
+
+
+
+
+

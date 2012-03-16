@@ -27,6 +27,7 @@ bool copyDirectory(const QDir &fromDir, const QDir &toDir);
 bool writeFile(QString filepath, QStringList lines);
 QStringList readFile(QString filepath);
 QStringList readAllDatFile(QString dirpath,  QStringList lines);
+int openFile(const QString &filepath);
 };
 
 #endif

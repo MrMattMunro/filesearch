@@ -66,6 +66,7 @@ public:
     BrowserMainWindow(QWidget *parent = 0, Qt::WindowFlags flags = 0);
     ~BrowserMainWindow();
     QSize sizeHint() const;
+    QString m_lastSearch;
 
 public:
     TabWidget *tabWidget() const;
@@ -161,7 +162,7 @@ private:
     QIcon m_reloadIcon;
     QIcon m_stopIcon;
 
-    QString m_lastSearch;
+
 };
 
 #endif // BROWSERMAINWINDOW_H
