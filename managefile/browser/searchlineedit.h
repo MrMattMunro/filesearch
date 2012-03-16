@@ -39,81 +39,65 @@
 **
 ****************************************************************************/
 
-#ifndef WEBVIEW_H
-#define WEBVIEW_H
+#ifndef SEARCHLINEEDIT_H
+#define SEARCHLINEEDIT_H
 
-#include <QtWebKit/QWebView>
+#include "urllineedit.h"
+
+#include <QtGui/QLineEdit>
+#include <QtGui/QAbstractButton>
 
 QT_BEGIN_NAMESPACE
-class QAuthenticator;
-class QMouseEvent;
-class QNetworkProxy;
-class QNetworkReply;
-class QSslError;
+class QMenu;
 QT_END_NAMESPACE
 
-class BrowserMainWindow;
-class WebPage : public QWebPage {
+class SearchButton;
+
+/*
+    Clear button on the right hand side of the search widget.
+    Hidden by default
+    "A circle with an X in it"
+ */
+class ClearButton : public QAbstractButton
+{
     Q_OBJECT
+
+public:
+    ClearButton(QWidget *parent = 0);
+    void paintEvent(QPaintEvent *event);
+
+public slots:
+    void textChanged(const QString &text);
+};
+
+
+class SearchLineEdit : public ExLineEdit
+{
+    Q_OBJECT
+    Q_PROPERTY(QString inactiveText READ inactiveText WRITE setInactiveText)
 
 signals:
-    void loadingUrl(const QUrl &url);
+    void textChanged(const QString &text);
 
 public:
-    WebPage(QObject *parent = 0);
-    BrowserMainWindow *mainWindow();
+    SearchLineEdit(QWidget *parent = 0);
+
+    QString inactiveText() const;
+    void setInactiveText(const QString &text);
+
+    QMenu *menu() const;
+    void setMenu(QMenu *menu);
 
 protected:
-    bool acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest &request, NavigationType type);
-    QWebPage *createWindow(QWebPage::WebWindowType type);
-#if !defined(QT_NO_UITOOLS)
-    QObject *createPlugin(const QString &classId, const QUrl &url, const QStringList &paramNames, const QStringList &paramValues);
-#endif
-
-private slots:
-    void handleUnsupportedContent(QNetworkReply *reply);
+    void resizeEvent(QResizeEvent *event);
+    void paintEvent(QPaintEvent *event);
 
 private:
-    friend class WebView;
+    void updateGeometries();
 
-    // set the webview mousepressedevent
-    Qt::KeyboardModifiers m_keyboardModifiers;
-    Qt::MouseButtons m_pressedButtons;
-    bool m_openInNewTab;
-    QUrl m_loadingUrl;
+    SearchButton *m_searchButton;
+    QString m_inactiveText;
 };
 
-class WebView : public QWebView {
-    Q_OBJECT
+#endif // SEARCHLINEEDIT_H
 
-public:
-    WebView(QWidget *parent = 0);
-    WebPage *webPage() const { return m_page; }
-
-    void loadUrl(const QUrl &url);
-    QUrl url() const;
-
-    QString lastStatusBarText() const;
-    inline int progress() const { return m_progress; }
-
-protected:
-    void mousePressEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent *event);
-    void contextMenuEvent(QContextMenuEvent *event);
-    void wheelEvent(QWheelEvent *event);
-
-private slots:
-    void setProgress(int progress);
-    void loadFinished();
-    void setStatusBarText(const QString &string);
-    void downloadRequested(const QNetworkRequest &request);
-    void openLinkInNewTab();
-
-private:
-    QString m_statusBarText;
-    QUrl m_initialUrl;
-    int m_progress;
-    WebPage *m_page;
-};
-
-#endif

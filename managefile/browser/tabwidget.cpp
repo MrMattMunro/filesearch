@@ -41,10 +41,10 @@
 
 #include "tabwidget.h"
 
-//#include "browserapplication.h"
+#include "browserapplication.h"
 #include "browsermainwindow.h"
-//#include "history.h"
-//#include "urllineedit.h"
+#include "history.h"
+#include "urllineedit.h"
 #include "webview.h"
 
 #include <QtGui/QClipboard>
@@ -56,8 +56,6 @@
 #include <QtGui/QStackedWidget>
 #include <QtGui/QStyle>
 #include <QtGui/QToolButton>
-#include <QLineEdit>
-
 
 #include <QtCore/QDebug>
 
@@ -79,8 +77,7 @@ TabBar::TabBar(QWidget *parent)
         connect(shortCut, SIGNAL(activated()), this, SLOT(selectTabAction()));
     }
     setTabsClosable(true);
-    connect(this, SIGNAL(tabCloseRequested(int)),
-            this, SIGNAL(closeTab(int)));
+    connect(this, SIGNAL(tabCloseRequested(int)), this, SIGNAL(closeTab(int)));
     setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
     setMovable(true);
 }
@@ -163,9 +160,9 @@ void TabBar::mouseMoveEvent(QMouseEvent *event)
     if (event->buttons() == Qt::LeftButton) {
         int diffX = event->pos().x() - m_dragStartPos.x();
         int diffY = event->pos().y() - m_dragStartPos.y();
-//       if ((event->pos() - m_dragStartPos).manhattanLength() > QApplication::startDragDistance()
-//                     && diffX < 3 && diffX > -3 && diffY < -10) {
-       if (diffX < 3 && diffX > -3 && diffY < -10) {
+        if ((event->pos() - m_dragStartPos).manhattanLength() > QApplication::startDragDistance()
+            && diffX < 3 && diffX > -3
+            && diffY < -10) {
             QDrag *drag = new QDrag(this);
             QMimeData *mimeData = new QMimeData;
             QList<QUrl> urls;
@@ -177,7 +174,7 @@ void TabBar::mouseMoveEvent(QMouseEvent *event)
             mimeData->setData(QLatin1String("action"), "tab-reordering");
             drag->setMimeData(mimeData);
             drag->exec();
-       }
+        }
     }
     QTabBar::mouseMoveEvent(event);
 }
