@@ -1,0 +1,66 @@
+// SLabelWordAddin.idl : IDL source for SLabelWordAddin.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (SLabelWordAddin.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(0B2B77D9-5CB4-4644-A4BC-75476DF8B8F6),
+		dual,
+		helpstring("ISLabelAddin Interface"),
+		pointer_default(unique)
+	]
+	interface ISLabelAddin : IDispatch
+	{
+		[id(1), helpstring("method SaveFile")] HRESULT SaveFile();
+		[id(2), helpstring("method OpenFile")] HRESULT OpenFile();
+	};
+/*	
+	[
+		object,
+		uuid(AA2510E4-0E85-4234-9583-0D3A510F113A),
+		dual,
+		helpstring("IAddinUtil Interface"),
+		pointer_default(unique)
+	]
+	interface IAddinUtil : IDispatch
+	{
+
+		[id(1), helpstring("method OpenFile")] HRESULT OpenFile();
+// Begin 解决保存自动恢复文件弹出因filename而延迟的对话框 [10/20/2010 wfhaha]
+		[id(2), helpstring("method SaveFile")] HRESULT SaveFile();
+// End 解决保存自动恢复文件弹出因filename而延迟的对话框 [10/20/2010 wfhaha]
+ 	};
+*/
+[
+	uuid(4F933095-694D-485E-8127-F76989CC65D0),
+	version(1.0),
+	helpstring("SLabelWordAddin 1.0 Type Library")
+]
+library SLABELWORDADDINLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(91B76388-AC6A-4022-8DFD-2A24A61F83AB),
+		helpstring("SLabelAddin Class")
+	]
+	coclass SLabelAddin
+	{
+		[default] interface ISLabelAddin;
+	};
+/*	
+	[
+		uuid(AD1DEF8D-1CED-4266-86B7-F4A4CFC32106),
+		helpstring("AddinUtil Class")
+	]
+	coclass AddinUtil
+	{
+		[default] interface IAddinUtil;
+	};
+*/
+};

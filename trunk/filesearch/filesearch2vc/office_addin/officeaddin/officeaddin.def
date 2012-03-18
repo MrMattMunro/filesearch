@@ -1,0 +1,8 @@
+; officeaddin.def : Declares the module parameters for the DLL.
+
+LIBRARY      "officeaddin"
+DESCRIPTION  'officeaddin Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here
+	FsShowSavefileDlg		@1
