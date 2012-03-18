@@ -1,0 +1,52 @@
+HKCR
+{
+	fsui.Connect.1 = s 'SLabelAddin Class'
+	{
+		CLSID = s '{60235315-A517-419C-9EE3-D104139BF8FB}'
+	}
+	fsui.Connect = s 'SLabelAddin Class'
+	{
+		CLSID = s '{60235315-A517-419C-9EE3-D104139BF8FB}'
+		CurVer = s 'fsui.Connect.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {60235315-A517-419C-9EE3-D104139BF8FB} = s 'SLabelAddin Class'
+		{
+			ProgID = s 'fsui.Connect.1'
+			VersionIndependentProgID = s 'fsui.Connect'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{94B05323-22B7-4A65-95B3-AC76FF813A91}'
+		}
+	}
+}
+
+HKCU
+{
+	Software
+	{
+		Microsoft
+		{
+			Office
+			{
+				Excel
+				{
+					Addins
+					{
+						'fsui.Connect'
+						{ 
+							val FriendlyName = s 'fsui excel'
+							val Description = s 'Excel Custom Addin'
+							val LoadBehavior = d '00000003'
+							val CommandLineSafe = d '00000001'
+						}
+					}
+				}
+			}
+		}
+	}
+}

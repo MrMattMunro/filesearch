@@ -1,0 +1,53 @@
+// SLabelPPTAddin.idl : IDL source for SLabelPPTAddin.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (SLabelPPTAddin.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(B8E19A3D-224E-4AC6-A127-A203C20FF89B),
+		dual,
+		helpstring("ISLabelAddin Interface"),
+		pointer_default(unique)
+	]
+	interface ISLabelAddin : IDispatch
+	{
+		[id(1), helpstring("method OnCut")] HRESULT OnCut(IDispatch *Ctrl, VARIANT *CancelDefault);
+		[id(2), helpstring("method OnCopy")] HRESULT OnCopy(IDispatch *Ctrl, VARIANT *CancelDefault);
+		[id(3), helpstring("method OnPaste")] HRESULT OnPaste(IDispatch *Ctrl, VARIANT *CancelDefault);
+	};
+	
+// 	[
+// 		object,
+// 		uuid(C34F321E-DEE0-47CB-AFA8-F3F93A45C57C),
+// 		dual,
+// 		helpstring("IAddinUtil Interface"),
+// 		pointer_default(unique)
+// 	]
+// 	interface IAddinUtil : IDispatch
+// 	{
+// 		[id(1), helpstring("method OpenFile")] HRESULT OpenFile();
+// 	};
+
+[
+	uuid(E67BAB76-F9ED-4187-872F-C7F4A3278EF6),
+	version(1.0),
+	helpstring("SLabelPPTAddin 1.0 Type Library")
+]
+library SLABELPPTADDINLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(A1EC2E4F-D9A8-4EEC-8613-05542C22DECE),
+		helpstring("SLabelAddin Class")
+	]
+	coclass SLabelAddin
+	{
+		[default] interface ISLabelAddin;
+	};
+};

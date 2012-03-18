@@ -1,0 +1,42 @@
+// SLabelExcelAddin.idl : IDL source for SLabelExcelAddin.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (SLabelExcelAddin.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(DCA92446-D03F-4B54-B9EB-23CAA178009E),
+		dual,
+		helpstring("ISLabelAddin Interface"),
+		pointer_default(unique)
+	]
+	interface ISLabelAddin : IDispatch
+	{
+		[id(2), helpstring("method OnOpen")] HRESULT OnOpen(IDispatch *Ctrl, VARIANT *CancelDefault);
+		[id(3), helpstring("method OnCut")] HRESULT OnCut(IDispatch *Ctrl, VARIANT *CancelDefault);
+		[id(4), helpstring("method OnCopy")] HRESULT OnCopy(IDispatch *Ctrl, VARIANT *CancelDefault);
+		[id(5), helpstring("method OnPaste")] HRESULT OnPaste(IDispatch *Ctrl, VARIANT *CancelDefault);
+	};
+
+[
+	uuid(94B05323-22B7-4A65-95B3-AC76FF813A91),
+	version(1.0),
+	helpstring("SLabelExcelAddin 1.0 Type Library")
+]
+library SLABELEXCELADDINLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(60235315-A517-419C-9EE3-D104139BF8FB),
+		helpstring("SLabelAddin Class")
+	]
+	coclass SLabelAddin
+	{
+		[default] interface ISLabelAddin;
+	};
+};

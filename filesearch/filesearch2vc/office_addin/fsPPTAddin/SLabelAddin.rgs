@@ -1,0 +1,52 @@
+HKCR
+{
+	fsui.Connect.1 = s 'SLabelAddin Class'
+	{
+		CLSID = s '{A1EC2E4F-D9A8-4EEC-8613-05542C22DECE}'
+	}
+	fsui.Connect = s 'SLabelAddin Class'
+	{
+		CLSID = s '{A1EC2E4F-D9A8-4EEC-8613-05542C22DECE}'
+		CurVer = s 'SLabelPPTAddin.SLabelAddin.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {A1EC2E4F-D9A8-4EEC-8613-05542C22DECE} = s 'SLabelAddin Class'
+		{
+			ProgID = s 'fsui.Connect.1'
+			VersionIndependentProgID = s 'fsui.Connect'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{E67BAB76-F9ED-4187-872F-C7F4A3278EF6}'
+		}
+	}
+}
+
+HKCU
+{
+	Software
+	{
+		Microsoft
+		{
+			Office
+			{ 
+				PowerPoint
+				{
+					Addins
+					{
+						'fsui.Connect.1'
+						{ 
+							val FriendlyName = s 'fsui ppt'
+							val Description = s 'PowerPoint Custom Addin'
+							val LoadBehavior = d '00000003'
+							val CommandLineSafe = d '00000001'
+						}
+					}
+				}
+			}
+		}
+	}
+}
