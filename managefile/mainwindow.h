@@ -72,12 +72,21 @@ public:
     QByteArray saveState(bool withTabs = true) const;
     bool restoreState(const QByteArray &state);
 
+    enum SearchSet {
+        ALLDOC = 1,
+        CURRENTDIR = 2,
+        CURRENTDIRINCLUESUB = 3,
+        ALLTEXT = 4,
+        DOCNAMEONLY = 5,
+        WEBSEARCH = 6,
+        OPTION = 7,
+        SAVETOFASTSEARCH = 8
+    };
+
 private slots:
     void about();
     void aboutQt();
     void clearHistory();
-    void enableFindButton(const QString & name);
-    void findClicked();
     void fullScreen();
     void showClassTree();
     void showToolBar();
@@ -151,6 +160,8 @@ private slots:
     void geometryChangeRequested(const QRect &geometry);
     void updateToolbarActionText(bool visible);
     void updateBookmarksToolbarActionText(bool visible);
+    void slotShowSearchSetMenu();
+    //void resizeSpace();
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -173,11 +184,10 @@ private:
     QToolBar *toolBar;
     MyTableView *m_doctable;
     myTreeList *q_myTreeList;
+    // ¿Õ°×ÇøÓò
+    QWidget *sapcewidget;
 
-    QLabel *label;
-    QLineEdit *lineEdit;
-    QPushButton *findButton;
-
+    QAction *m_searchSetAction;
 
     QAction *importAction;
     QAction *exportAction;
@@ -270,6 +280,7 @@ private:
     QAction *m_historyForward;
     QMenu *m_historyForwardMenu;
     QMenu *m_windowMenu;
+    QMenu *m_searchSetMenu;
 
     QAction *m_stop;
     QAction *m_reload;

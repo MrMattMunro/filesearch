@@ -9,6 +9,7 @@ for which a new license (GPL+exception) is in place.
 #define FILEUTILS_H
 
 #include <QFileInfo>
+#include <browser/webview.h>
 
 //! Various helper functions
 namespace FileUtils {
@@ -28,6 +29,9 @@ bool writeFile(QString filepath, QStringList lines);
 QStringList readFile(QString filepath);
 QStringList readAllDatFile(QString dirpath,  QStringList lines);
 int openFile(const QString &filepath);
+int openTxtFile(const QString &filepath, WebView &webview);
+int readExcelFile(const QString &filepath);
+int openWordFile(const QString &filepath);
 };
 
 #endif

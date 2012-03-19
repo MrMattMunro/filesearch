@@ -224,8 +224,9 @@ void SearchLineEdit::setInactiveText(const QString &text)
 
 void SearchLineEdit::setMenu(QMenu *menu)
 {
-    if (m_searchButton->m_menu)
-        m_searchButton->m_menu->deleteLater();
+    if (m_searchButton->m_menu){
+      m_searchButton->m_menu->deleteLater();
+    }
     m_searchButton->m_menu = menu;
     updateGeometries();
 }
