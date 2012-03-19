@@ -63,7 +63,6 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     , m_historyForward(0)
     , m_stop(0)
     , m_reload(0)
-
 {
     initUI();
     initActions();
@@ -72,6 +71,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     initToolbar();
     initBrowser();
 
+    m_appName = tr("Local File Manage");
     setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
@@ -96,9 +96,83 @@ void MainWindow::buildDocList()
     m_doctable->buildDocList(files);
 }
 
+// 搜索界面设置Menu
+void MainWindow::slotShowSearchSetMenu()
+{
+    if(m_searchSetMenu->children().length() > 2){
+      return;
+    }
+
+    // 设置Menu
+    QAction *action1 = new QAction(this);
+    action1->setData(ALLDOC);
+    action1->setCheckable(true);
+    action1->setText(tr("ALL Documents"));
+
+    // 设置Menu
+    QAction *action2 = new QAction(this);
+    action2->setData(CURRENTDIR);
+    action2->setCheckable(true);
+    action2->setText(tr("Current Directory"));
+
+    // 设置Menu
+    QAction *action3 = new QAction(this);
+    action3->setData(CURRENTDIRINCLUESUB);
+    action3->setCheckable(true);
+    action3->setText(tr("Current Directory(Include Sub Directory)"));
+
+    // 设置Menu
+    QAction *action4 = new QAction(this);
+    action4->setData(ALLTEXT);
+    action4->setCheckable(true);
+    action4->setText(tr("ALL Text"));
+
+    QAction *action5 = new QAction(this);
+    action5->setData(DOCNAMEONLY);
+    action5->setCheckable(true);
+    action5->setText(tr("Document Name Only"));
+
+    QAction *action6 = new QAction(this);
+    action6->setData(WEBSEARCH);
+    action6->setCheckable(true);
+    action6->setText(tr("Web Search"));
+
+    QAction *action7 = new QAction(this);
+    action7->setData(OPTION);
+    action7->setCheckable(true);
+    action7->setText(tr("Option"));
+
+    QAction *action8 = new QAction(this);
+    action8->setData(SAVETOFASTSEARCH);
+    action8->setCheckable(true);
+    action8->setText(tr("Save To Fast Search"));
+
+    m_searchSetMenu->addAction(action1);
+    m_searchSetMenu->addAction(action2);
+    m_searchSetMenu->addAction(action3);
+    m_searchSetMenu->addSeparator();
+    m_searchSetMenu->addAction(action4);
+    m_searchSetMenu->addAction(action5);
+    m_searchSetMenu->addSeparator();
+    m_searchSetMenu->addAction(action6);
+    m_searchSetMenu->addSeparator();
+    m_searchSetMenu->addAction(action7);
+    m_searchSetMenu->addAction(action8);
+}
+
 // 初始化界面动作
 void MainWindow::initActions()
 {
+
+        // 设置搜索面板
+        m_searchSetAction = new QAction(tr("Search"), this);
+        m_searchSetAction->setIconVisibleInMenu(false);
+        m_searchSetMenu = new QMenu(this);
+        m_searchSetAction->setMenu(m_searchSetMenu);
+        connect(m_searchSetMenu, SIGNAL(aboutToShow()), this, SLOT(slotShowSearchSetMenu()));
+        connect(m_searchSetMenu, SIGNAL(triggered(QAction*)),this, SLOT(slotOpenActionUrl(QAction*)));
+
+
         // 导入
         importAction = new QAction(Utils::getIcon("document-import.png"),tr("&Import..."), this);
         importAction->setShortcut(tr("Ctrl+I"));
@@ -400,6 +474,8 @@ void MainWindow::initBrowser()
             m_tabWidget, SLOT(newTab()));
 #endif
 
+//    // 改变m_tabwiget大小时
+//    connect(m_doctable, SIGNAL(resize(QResizeEvent *event)), this, SLOT(resizeSpace()));
 
     slotUpdateWindowTitle();
     loadDefaultState();
@@ -408,6 +484,13 @@ void MainWindow::initBrowser()
     int size = m_tabWidget->lineEditStack()->sizeHint().height();
     m_navigationBar->setIconSize(QSize(size, size));
 }
+
+
+//// 调节空白区域大小
+//void MainWindow::resizeSpace()
+//{
+//     sapcewidget->setMinimumWidth(m_doctable->width()*1.2);
+//}
 
 // 状态栏
 void MainWindow::initStatusbar()
@@ -423,41 +506,48 @@ void MainWindow::initToolbar()
     toolBar->addAction(showClassTreeAction);
     toolBar->addAction(fullScreenAction);
     toolBar->addSeparator();
+    toolBar->addAction(homepageAction);
+    toolBar->addAction(inviteAction);
+    toolBar->addAction(bbsAction);
+    toolBar->addSeparator();
 
+    // 空白区域
+    QWidget *twidget = new QWidget(this);
+    twidget->setMinimumWidth(this->geometry().width() * 0.1);
+    toolBar->addWidget(twidget);
 
-    label = new QLabel(tr("Find &what:"));
-    lineEdit = new QLineEdit;
-    label->setBuddy(lineEdit);
+    m_toolbarSearch = new ToolbarSearch();
+    connect(m_toolbarSearch, SIGNAL(search(QUrl)), SLOT(loadUrl(QUrl)));
 
-    lineEdit->setMaximumWidth(120);
-    findButton = new QPushButton(tr("&Search"));
-    findButton->setDefault(true);
-    findButton->setEnabled(false);
+    toolBar->addWidget(m_toolbarSearch);
+    toolBar->addAction(m_searchSetAction);
 
-    connect(lineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(enableFindButton(const QString&)));
-    connect(findButton, SIGNAL(clicked()), this, SLOT(findClicked()));
-
-    toolBar->addWidget(label);
-    toolBar->addWidget(lineEdit);
-    toolBar->addWidget(findButton);
+    // 空白区域
+    sapcewidget = new QWidget(this);
+    sapcewidget->setMinimumWidth(m_doctable->width()*1.2);
+    toolBar->addWidget(sapcewidget);
 }
 
 // 用户手册
 void MainWindow::helpDoc()
 {
-   //m_view->load(QUrl("http://www.slfile.net/?page_id=58"));
+     m_tabWidget->newTab();
+     loadUrl(QUrl("http://www.slfile.net/?page_id=58"));
 }
 
 // 论坛
 void MainWindow::bbs()
 {
-  // m_view->load(QUrl("http://www.slfile.net/?post_type=forum"));
+    m_tabWidget->newTab();
+    loadUrl(QUrl("http://www.slfile.net/?post_type=forum"));
+
 }
 
 // 主页
 void MainWindow::homepage()
 {
-   //m_view->load(QUrl("http://www.slfile.net/"));
+    m_tabWidget->newTab();
+    loadUrl(QUrl("http://www.slfile.net/"));
 }
 
 // 设置是否显示子文件夹下的文件
@@ -467,17 +557,6 @@ void MainWindow::setShowSubDirDoc()
     isShowDocUnderSub = showSubDirDoc->isChecked();
     Preferences* p = Preferences::instance();
     p->setShowDocUnderSub(isShowDocUnderSub);
-}
-
-void MainWindow::enableFindButton(const QString &text)
-{
-     findButton->setEnabled(!text.isEmpty());
-}
-
-void MainWindow::findClicked()
-{
-     QString text = lineEdit->text();
-     //emit findPrevious(text, cs);
 }
 
 // 打开导入界面
@@ -602,16 +681,6 @@ void MainWindow::initUI()
         setWindowTitle(m_appName);
 
         splitter = new QSplitter(this);
-
-//        m_view = new QWebView(this);
-//        m_view->move(-1000, -1000);
-//        m_view->page()->mainFrame()->load(QUrl("http://www.slfile.net"));
-
-
-       // BrowserMainWindow *browser = new BrowserMainWindow();
-        //browser->show();
-
-
         // 加载分类树
         m_baseDir = Utils::getLocatePath();
         m_baseDir = QDir::toNativeSeparators(m_baseDir);
@@ -622,13 +691,8 @@ void MainWindow::initUI()
 
         m_doctable = new MyTableView(this);
 
-
-
         splitter->addWidget(q_myTreeList);
         splitter->addWidget(m_doctable);
-//        splitter->addWidget(m_view);
-
-        // splitter->addWidget(browser);
 
         // connect(q_myTreeList, SIGNAL(LBtnDbClk()), this, SLOT(showChildTree()));
         connect(q_myTreeList, SIGNAL(RBtnClk()), this, SLOT(treeContextMenuOpened()));
@@ -636,46 +700,6 @@ void MainWindow::initUI()
 
         setCentralWidget(splitter);
 }
-
-
-////// 根据文件父目录取得子目录树结构
-//int MainWindow::loadDirByLay(QString parentPath, int lay, QStandardItem *curItem){
-//    //目录
-//    QDir dir(parentPath);
-//    if (!dir.exists()) {
-//        return -1;
-//    }
-//    // 取到所有的文件和文件名，但是去掉.和..的文件夹（这是QT默认有的）
-//    dir.setFilter(QDir::Dirs|QDir::Files|QDir::NoDotAndDotDot);
-
-//    //文件夹优先
-//    dir.setSorting(QDir::DirsFirst);
-
-//    //转化成一个list
-//    QFileInfoList list = dir.entryInfoList();
-//    if(list.size()< 1 ) {
-//        return -1;
-//    }
-
-//    int i=0;
-//    // 顶层目录
-//    do{
-//        QFileInfo fileInfo = list.at(i);
-//        QString filename = fileInfo.fileName();
-//        QString filepath = fileInfo.filePath();
-//        filepath = QDir::toNativeSeparators(filepath);
-//        //如果是文件夹
-//        bool bisDir = fileInfo.isDir();
-//        if(bisDir) {
-//            if(lay == 0){
-//              q_myTreeList->addItem(lay, filename, filepath, "expander_normal.png");
-//            }else{
-//              q_myTreeList->addItemByParentItem(curItem, filename, filepath, "expander_normal.png");
-//            }
-//        }
-//        i++;
-//    } while(i < list.size());
-//}
 
 MainWindow::~MainWindow()
 {
@@ -1108,12 +1132,10 @@ void MainWindow::setupToolBar()
 
     m_navigationBar->addWidget(m_tabWidget->lineEditStack());
 
-    m_toolbarSearch = new ToolbarSearch(m_navigationBar);
-    m_navigationBar->addWidget(m_toolbarSearch);
-    connect(m_toolbarSearch, SIGNAL(search(QUrl)), SLOT(loadUrl(QUrl)));
-
     m_chaseWidget = new ChaseWidget(this);
     m_navigationBar->addWidget(m_chaseWidget);
+
+
 }
 
 void MainWindow::slotShowBookmarksDialog()
@@ -1565,15 +1587,32 @@ void MainWindow::slotShowWindow()
         }
     }
 }
-
+// 搜索设置
 void MainWindow::slotOpenActionUrl(QAction *action)
 {
     int offset = action->data().toInt();
-    QWebHistory *history = currentTab()->history();
-    if (offset < 0)
-        history->goToItem(history->backItems(-1*offset).first()); // back
-    else if (offset > 0)
-        history->goToItem(history->forwardItems(history->count() - offset + 1).back()); // forward
+
+    if(action->isChecked()){
+       action->setChecked(true);
+    }else{
+       action->setChecked(false);
+    }
+
+    switch (offset) {
+        case ALLDOC:
+
+        case CURRENTDIR:
+
+        case CURRENTDIRINCLUESUB:
+
+        case ALLTEXT:
+
+        case DOCNAMEONLY:
+        case OPTION:
+
+        case SAVETOFASTSEARCH:
+          ;
+    }
  }
 
 void MainWindow::geometryChangeRequested(const QRect &geometry)

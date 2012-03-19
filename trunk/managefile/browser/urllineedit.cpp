@@ -67,7 +67,7 @@ ExLineEdit::ExLineEdit(QWidget *parent)
 {
     setFocusPolicy(m_lineEdit->focusPolicy());
     setAttribute(Qt::WA_InputMethodEnabled);
-    setSizePolicy(m_lineEdit->sizePolicy());
+    // setSizePolicy(m_lineEdit->sizePolicy());
     setBackgroundRole(m_lineEdit->backgroundRole());
     setMouseTracking(true);
     setAcceptDrops(true);
@@ -125,8 +125,7 @@ void ExLineEdit::updateGeometries()
     m_lineEdit->setGeometry(m_leftWidget->x() + m_leftWidget->width(),        0,
                             width - clearButtonWidth - m_leftWidget->width(), this->height());
 
-    m_clearButton->setGeometry(this->width() - clearButtonWidth, 0,
-                               clearButtonWidth, this->height());
+    m_clearButton->setGeometry(this->width() - clearButtonWidth, 0,  clearButtonWidth, this->height());
 }
 
 void ExLineEdit::initStyleOption(QStyleOptionFrameV2 *option) const

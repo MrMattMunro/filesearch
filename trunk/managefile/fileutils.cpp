@@ -291,17 +291,25 @@ int FileUtils::openTxtFile(const QString &filepath, WebView &webview){
     if(!file.exists()){
       return -1;
     }
-    QTextStream ts(&file);
-    webview->setHtml(te.readAll());
+    QTextStream te(&file);
+    webview.setHtml(te.readAll());
 }
 
-// webView打开Excel文件
-int FileUtils::openExcelFile(const QString &filepath, WebView &webview){
+// webView打开并读取Excel文件
+int FileUtils::readExcelFile(const QString &filepath){
+
+    // 文件不存在
+    QFile file(filepath);
+    if(!file.exists()){
+        return -1;
+    }
 
     QAxObject* excel = new QAxObject( "Excel.Application", 0 );
     QAxObject* workbooks = excel->querySubObject( "Workbooks" );
-    QAxObject* workbook = workbooks->querySubObject( "Open(const QString&)", exchange->getFilename() );
+    QAxObject* workbook = workbooks->querySubObject( "Open(const QString&)", filepath);
     QAxObject* sheets = workbook->querySubObject( "Worksheets" );
+
+    // excel.querySubObject("ActiveWorkBook");
 
     QList<QVariantList> data;	//Data list from excel, each QVariantList is worksheet row
 
@@ -322,7 +330,7 @@ int FileUtils::openExcelFile(const QString &filepath, WebView &webview){
             int currentColumnCount = 0;
             for (int col=1; col<columnCount; col++)
             {
-                    QAxObject* cell = sheet->querySubObject( "Cells( int, int )", COLUMN_COUNT_ROW, col );
+                    QAxObject* cell = sheet->querySubObject( "Cells( int, int )", currentColumnCount, col );
                     QVariant value = cell->dynamicCall( "Value()" );
                     if (value.toString().isEmpty()){
                       break;
@@ -349,20 +357,42 @@ int FileUtils::openExcelFile(const QString &filepath, WebView &webview){
                     }
                     if (isEmpty) //criteria to get out of cycle
                             break;
-                    data->append(dataRow);
+                    data.append(dataRow);
             }
     }
 
     workbook->dynamicCall("Close()");
     excel->dynamicCall("Quit()");
+
+    return 0;
 }
 
 // webView打开Excel文件
 int FileUtils::openWordFile(const QString &filepath){
 
-        QAxWidget *wordActive = new QAxWidget;
-        wordActive->setControl("Word.Application");
-        QAxObject* newFile = wordActive->querySubObject("Open(const QString&)", filepath);
+       // 文件不存在
+       QFile file(filepath);
+       if(!file.exists()){
+            return -1;
+       }
+
+
+//    QAxWidget *wordActive = new QAxWidget;
+//    wordActive->setControl("Word.Application");
+//    QAxObject* newFile = wordActive->querySubObject("Open(const QString&)", filepath);
+
+       QAxWidget word("Word.Application");
+       word.setProperty("Visible", true);
+
+       QAxObject * documents = word.querySubObject("Documents");
+       documents->dynamicCall("Add (void)");
+       QAxObject * document = word.querySubObject("ActiveDocument");
+       document->dynamicCall("SaveAs (const QString&)", QString("e:/test/docbyqt.doc"));
+       document->dynamicCall("Close (boolean)", false);
+       word.dynamicCall("Quit (void)");
+
+
+      // QAxWidget AxApplication = new QAxWidget(QString::fromUtf8("c:\\temp\\xxx.doc"),0);
 
 }
 

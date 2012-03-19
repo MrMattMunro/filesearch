@@ -3,6 +3,7 @@ QT       += network webkit xml xmlpatterns
 TARGET = managefile
 TEMPLATE = app
 
+CONFIG+=qaxcontainer
 
 SOURCES += main.cpp \
         mainwindow.cpp \
