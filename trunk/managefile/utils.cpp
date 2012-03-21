@@ -9,7 +9,7 @@ for which a new license (GPL+exception) is in place.
 #include <QPixmapCache>
 #include <QDir>
 #include <QDesktopServices>
-
+#include <QApplication>
 #include "utils.h"
 
 #define ICON_DIR ":/icons"
@@ -75,6 +75,27 @@ QString Utils::getDirNameByPath(const QString & path)
     return temp;
 }
 
+QDir Utils::directoryOf(const QString & subdir)
+{
+
+    QDir dir(QApplication::applicationDirPath());
+    #if defined(Q_OS_WIN)
+        if (dir.dirName().toLower() == "debug"
+                || dir.dirName().toLower() == "release"
+                || dir.dirName().toLower() == "bin"){
+            dir.cdUp();
+        }
+
+    #elif defined(Q_OS_MAC)
+        if (dir.dirName() == "MacOS") {
+            dir.cdUp();
+            dir.cdUp();
+            dir.cdUp();
+        }
+    #endif
+    dir.cd(subdir);
+    return dir;
+}
 
 
 

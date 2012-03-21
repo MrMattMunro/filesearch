@@ -1,7 +1,8 @@
-QT       += network webkit xml xmlpatterns
-
+QT       += network webkit xml xmlpatterns sql
 TARGET = managefile
 TEMPLATE = app
+
+LIBS += C:\QtWorksapce\managefile\lib\sqlite3.lib
 
 CONFIG+=qaxcontainer
 
@@ -40,7 +41,8 @@ SOURCES += main.cpp \
     browser/browsermainwindow.cpp \
     browser/browserapplication.cpp \
     browser/bookmarks.cpp \
-    browser/autosaver.cpp
+    browser/autosaver.cpp \
+    db/database.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -75,7 +77,9 @@ HEADERS  += mainwindow.h \
     browser/browsermainwindow.h \
     browser/browserapplication.h \
     browser/bookmarks.h \
-    browser/autosaver.h
+    browser/autosaver.h \
+    db/sqlite3.h \
+    db/database.h
 
 RESOURCES += \
     managefile.qrc
@@ -105,7 +109,29 @@ OTHER_FILES += \
     ts/managefile_en.ts \
     ts/managefile_jp.ts \
     ts/managefile_zh_cn.ts \
-    browser/Info_mac.plist
+    browser/Info_mac.plist \
+    lib/sqlite3.lib \
+    lib/sqlite3.exp \
+    lib/sqlite3.dll \
+    lib/sqlite3.def \
+    sql/mf_tag_group.sql \
+    sql/mf_tag.sql \
+    sql/mf_document_tag.sql \
+    sql/mf_document_relate.sql \
+    sql/mf_document_param.sql \
+    sql/mf_document.sql \
+    sql/mf_deleted_guid.sql
+
+
+
+
+
+
+
+
+
+
+
 
 
 
