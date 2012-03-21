@@ -26,6 +26,9 @@
 #include "mainwindow.h"
 #include "preferences.h"
 #include "utils.h"
+#include "db/database.h"
+#include "fileutils.h"
+#include <QDebug>
 
 
 #define ARG_VERSION "--version"
@@ -38,6 +41,7 @@
 #define ARG_AVAILLANG_SHORT "-la"
 #define FILEMANAGE_VERSION "1.0"
 #define endl QString("\n")
+#define DATABASE "MF"
 
 #ifndef WIN32
 void initCrashHandler();
@@ -187,11 +191,56 @@ int main(int argc, char *argv[])
       return 0;
     }
 
+    QApplication::addLibraryPath("./lib");
+    qDebug() << "my library path : " << app.libraryPaths();
+    QLibrary sqlib("sqlite3.dll");
+    sqlib.load();
+    qDebug() << "my library loaded" << sqlib.isLoaded();
+
+    // 设置数据库文件
+    QString dbpath = Utils::getLocatePath().append(QDir::separator()).append("db");
+    QDir *dir=new QDir(dbpath);
+    if(!dir->exists()){
+       dir->mkdir(dbpath);
+    }
+    QString dbfilepath = dbpath.append(QDir::separator()).append(DATABASE);
+    QFile *dirfile=new QFile(dbfilepath);
+    if(!dirfile->exists()){
+      dirfile->open( QIODevice::WriteOnly );
+      dirfile->close();
+    }
+
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(DATABASE);
+
    // 设置窗口图标
     app.setWindowIcon(Utils::getIcon("file_manager.png"));
     QTranslator translator;
     translator.load(Utils::getTranslator(cli.localeCode()));
     app.installTranslator(&translator);
+
+    //QString QCoreApplication::applicationDirPath () [static]
+
+    // 打开连接db
+
+//    Database::sessionName(DATABASE);
+//    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", DATABASE);
+//    db.setDatabaseName(DATABASE);
+//    if(!db.open())
+//    {
+//            QMessageBox::critical(0, "", "Unable to open or create file. It is probably not a database");
+//            return -1;
+//    }
+
+
+    // 初始化数据库
+    Database::execSqlFile("mf_deleted_guid.sql");
+    Database::execSqlFile("mf_document.sql");
+    Database::execSqlFile("mf_document_param.sql");
+    Database::execSqlFile("mf_document_relate.sql");
+    Database::execSqlFile("mf_document_tag.sql");
+    Database::execSqlFile("mf_document_tag.sql");
+    Database::execSqlFile("mf_tag_group.sql");
 
     MainWindow w;
     w.setLocale(cli.localeCode());

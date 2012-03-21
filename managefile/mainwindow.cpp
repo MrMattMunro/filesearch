@@ -71,6 +71,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     initToolbar();
     initBrowser();
 
+
     m_appName = tr("Local File Manage");
     setContextMenuPolicy(Qt::CustomContextMenu);
 }

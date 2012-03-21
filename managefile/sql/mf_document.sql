@@ -1,4 +1,4 @@
-create table WIZ_DOCUMENT
+create table MF_DOCUMENT
 (
    DOCUMENT_GUID                  char(36)                       not null,
    DOCUMENT_TITLE                 varchar(768)                   not null,
@@ -27,6 +27,6 @@ create table WIZ_DOCUMENT
    DOCUMENT_DATA_MD5              char(32),
    DT_PARAM_MODIFIED              char(19),
    DOCUMENT_PARAM_MD5             char(32),
-   WIZ_VERSION                    int64,
+   MF_VERSION                    int64,
    primary key (DOCUMENT_GUID)
 )

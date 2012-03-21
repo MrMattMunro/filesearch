@@ -1,4 +1,4 @@
-create table WIZ_DELETED_GUID
+create table MF_DELETED_GUID
 (
    DELETED_GUID                   char(36)                       not null,
    GUID_TYPE                      int                            not null,

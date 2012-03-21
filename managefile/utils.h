@@ -8,7 +8,9 @@ for which a new license (GPL+exception) is in place.
 #ifndef UTILS_H
 #define UTILS_H
 #include <QString>
-
+#include <QDir>
+#include <QIcon>
+#include <QPixmap>
 
 //! Various helper functions
 namespace Utils {
@@ -24,6 +26,7 @@ QString getTranslator(const QString & localeName);
 bool updateObjectTree(const QString & sql);
 QString getLocatePath();
 QString getDirNameByPath(const QString & path);
+QDir directoryOf(const QString & subdir);
 
 };
 

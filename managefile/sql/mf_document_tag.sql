@@ -1,4 +1,4 @@
-create table WIZ_DOCUMENT_TAG
+create table MF_DOCUMENT_TAG
 (
    DOCUMENT_GUID                  char(36)                       not null,
    TAG_GUID                       char(36)                       not null,
