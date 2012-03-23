@@ -1,4 +1,4 @@
-create table MF_DELETED_GUID
+CREATE TABLE IF NOT EXISTS MF_DELETED_GUID
 (
    DELETED_GUID                   char(36)                       not null,
    GUID_TYPE                      int                            not null,

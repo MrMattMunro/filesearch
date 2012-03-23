@@ -14,14 +14,12 @@ for which a new license (GPL+exception) is in place.
 #include <QFont>
 #include <QVariant>
 
-
 class Preferences : public QObject
 {
-	Q_OBJECT
-
-	public:
-		Preferences(QObject *parent = 0);
-		~Preferences();
+Q_OBJECT
+        public:
+                Preferences(QObject *parent = 0);
+                ~Preferences();
 
 		static Preferences* instance();
 		static void deleteInstance();

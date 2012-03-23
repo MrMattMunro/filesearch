@@ -1,4 +1,4 @@
-create table MF_DOCUMENT_RELATED
+CREATE TABLE IF NOT EXISTS MF_DOCUMENT_RELATED
 (
    RELATED_GUID                   char(36)                       not null,
    DOCUMENT_GUID                  varchar(36)                    not null,

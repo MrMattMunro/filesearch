@@ -42,7 +42,9 @@ SOURCES += main.cpp \
     browser/browserapplication.cpp \
     browser/bookmarks.cpp \
     browser/autosaver.cpp \
-    db/database.cpp
+    db/database.cpp \
+    db/tagdao.cpp \
+    createtagdialog.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -79,7 +81,9 @@ HEADERS  += mainwindow.h \
     browser/bookmarks.h \
     browser/autosaver.h \
     db/sqlite3.h \
-    db/database.h
+    db/database.h \
+    db/tagdao.h \
+    createtagdialog.h
 
 RESOURCES += \
     managefile.qrc
@@ -101,7 +105,8 @@ FORMS    += mainwindow.ui \
     browser/cookiesexceptions.ui \
     browser/cookies.ui \
     browser/bookmarks.ui \
-    browser/addbookmarkdialog.ui
+    browser/addbookmarkdialog.ui \
+    createtagdialog.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -121,6 +126,13 @@ OTHER_FILES += \
     sql/mf_document_param.sql \
     sql/mf_document.sql \
     sql/mf_deleted_guid.sql
+
+
+
+
+
+
+
 
 
 

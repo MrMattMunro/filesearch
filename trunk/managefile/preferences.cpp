@@ -9,9 +9,7 @@ for which a new license (GPL+exception) is in place.
 
 #include "preferences.h"
 
-
 Preferences* Preferences::_instance = 0;
-
 
 Preferences::Preferences(QObject *parent)
  : QObject(parent)

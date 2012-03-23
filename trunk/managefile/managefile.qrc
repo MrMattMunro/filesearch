@@ -119,12 +119,5 @@
         <file>icons/cpp.ico</file>
         <file>icons/png.ico</file>
         <file>icons/folder.ico</file>
-        <file>sql/mf_deleted_guid.sql</file>
-        <file>sql/mf_document.sql</file>
-        <file>sql/mf_document_param.sql</file>
-        <file>sql/mf_document_relate.sql</file>
-        <file>sql/mf_document_tag.sql</file>
-        <file>sql/mf_tag.sql</file>
-        <file>sql/mf_tag_group.sql</file>
     </qresource>
 </RCC>
