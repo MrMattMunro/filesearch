@@ -18,18 +18,17 @@ for which a new license (GPL+exception) is in place.
 
 #include "database.h"
 #include "preferences.h"
-#include "shell.h"
 #include "utils.h"
 
 #define SQL_DIR ":/sql"
-#define SESSION_NAME "mf"
+#define SESSION_NAME "MF"
 
 void Database::exception(const QString & message)
 {
 	QMessageBox::critical(0, tr("SQL Error"), message);
 }
 
-bool Database::execSqlFile(QString sqlfile)
+QString Database::getSql(QString sqlfile)
 {
     QFile file(Utils::directoryOf("sql").absoluteFilePath(sqlfile));
     qDebug() << "sql dir" << Utils::directoryOf("sql");
@@ -39,14 +38,18 @@ bool Database::execSqlFile(QString sqlfile)
     if(!file.exists()){
       return -1;
     }
-    QTextStream te(&file);
-    QString sql;
-    while(te.atEnd()){
-       qDebug() << "tmp::" << te.readLine();
-       sql = sql.append(te.readLine());
+    if(!file.open(QIODevice::ReadOnly|QIODevice::Text))
+    {
+        qDebug()<<"Open file failure!";
+        return -1;
     }
-    qDebug() << "sql::" << sql;
-    return execSql(sql);
+    QTextStream fs(&file);
+    QString fileContent (fs.readAll());
+
+    qDebug()<<"The content of file is \n"<<fileContent;
+
+    return fileContent;
+
 }
 
 bool Database::execSql(QString statement)
@@ -93,33 +96,44 @@ bool Database::dropTable(const QString & table, const QString & schema)
 	return true;
 }
 
-FieldList Database::tableFields(const QString & table, const QString & schema)
+QSqlQuery Database::execSelect(const QString & sql)
 {
-	FieldList fields;
-	QString sql(QString("PRAGMA \"%1\".TABLE_INFO(\"%2\");").arg(schema).arg(table));
-	QSqlQuery query(sql, QSqlDatabase::database(SESSION_NAME));
+        QSqlQuery query(sql, QSqlDatabase::database(SESSION_NAME));
 	if (query.lastError().isValid())
 	{
-		exception(tr("Error while getting the fileds of %1: %2.").arg(table).arg(query.lastError().text()));
-		return fields;
+                exception(tr("Error while Excute: %1: %2.").arg(sql).arg(query.lastError().text()));
+                return query;
 	}
+        return query;
+}
 
-	while (query.next())
-	{
-		DatabaseTableField field;
-		field.cid = query.value(0).toInt();
-		field.name = query.value(1).toString();
-		field.type = query.value(2).toString();
-		if (field.type.isNull() || field.type.isEmpty())
-			field.type = "NULL";
-		field.notnull = query.value(3).toBool();
-		field.defval = query.value(4).toString();
-		field.pk = query.value(5).toBool();
-		field.comment = "";
-		fields.append(field);
-	}
+FieldList Database::tableFields(const QString & table, const QString & schema)
+{
+        FieldList fields;
+        QString sql(QString("PRAGMA \"%1\".TABLE_INFO(\"%2\");").arg(schema).arg(table));
+        QSqlQuery query(sql, QSqlDatabase::database(SESSION_NAME));
+        if (query.lastError().isValid())
+        {
+                exception(tr("Error while getting the fileds of %1: %2.").arg(table).arg(query.lastError().text()));
+                return fields;
+        }
 
-	return fields;
+        while (query.next())
+        {
+                DatabaseTableField field;
+                field.cid = query.value(0).toInt();
+                field.name = query.value(1).toString();
+                field.type = query.value(2).toString();
+                if (field.type.isNull() || field.type.isEmpty())
+                        field.type = "NULL";
+                field.notnull = query.value(3).toBool();
+                field.defval = query.value(4).toString();
+                field.pk = query.value(5).toBool();
+                field.comment = "";
+                fields.append(field);
+        }
+
+        return fields;
 }
 
 QStringList Database::indexFields(const QString & index, const QString &schema)

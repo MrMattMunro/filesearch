@@ -109,6 +109,7 @@ private slots:
     void properties();
 
     void loadPage(const QString &url);
+    void newTag();
     void slotHome();
 
 

@@ -1,4 +1,4 @@
-create table MF_TAG
+CREATE TABLE IF NOT EXISTS MF_TAG
 (
    TAG_GUID                       char(36)                       not null,
    TAG_GROUP_GUID                 char(36),

@@ -50,6 +50,7 @@
 #include "createsubdirdialog.h"
 #include "movetodirdialog.h"
 #include "propofdirdialog.h"
+#include "createtagdialog.h"
 #include "browser/browsermainwindow.h"
 #include "browser/browserapplication.h"
 #include "utils.h"
@@ -348,7 +349,7 @@ void MainWindow::initActions()
 
         //Root Tag ContextMenu
         makeTag= new QAction(tr("&New Tag"), this);
-        connect(makeTag, SIGNAL(triggered()), this, SLOT(about()));
+        connect(makeTag, SIGNAL(triggered()), this, SLOT(newTag()));
 }
 
 void MainWindow::initMenus()
@@ -854,8 +855,45 @@ void MainWindow::createRootDir()
     }
 }
 
+// 新建根标签
+void MainWindow::newTag()
+{
+    QString curPath = q_myTreeList->getCurPath();
+    QStandardItem* curItem = q_myTreeList->getCurItem();
+    bool hasSelRight = false;
 
+    // 需选中 标签 节点
+    if(curPath == "alltags" ||
+            (curPath.indexOf(QDir::separator()) == -1 && curPath != "alldocs")) {
+        hasSelRight = true;
+        // curPath 用于判断根节点和子节点
+        // getCurPath 用于存UuId
+        CreateTagDialog dlg(this, curPath);
+        dlg.exec();
+        if(dlg.update){
+              // 取得子界面生成Tag的UuId
+              QString mselDir = dlg.m_newTagUuId;
+              // 删除主界面选中的节点
+              curItem->parent()->removeRow(curItem->row());
 
+              // 设置主界面的节点 (子界面新建文件夹情况下不成功)
+              q_myTreeList->setCurItemByPath(mselDir);
+
+              QString curPath = q_myTreeList->getCurPath();
+              if(!curPath.isEmpty()){
+                  QStandardItem* curItem = q_myTreeList->getCurItem();
+                  q_myTreeList->addItemByParentItem(curItem,  dlg.m_tagname, dlg.m_newTagUuId, "expander_normal.png");
+                  curItem->setIcon(Utils::getIcon("expander_open.png"));
+                  q_myTreeList->expand(q_myTreeList->getCurIndex());
+              }
+        }
+    }
+    // 如果没有选中子目录节点
+    if(!hasSelRight){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
+        return;
+    }
+}
 
 void MainWindow::about()
 {

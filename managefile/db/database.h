@@ -14,8 +14,7 @@ for which a new license (GPL+exception) is in place.
 
 #include "sqlite3.h"
 
-
-#define SESSION_NAME "sqliteman-db"
+#define SESSION_NAME "MF"
 
 /*! \brief This struct is a sqlite3 table column representation.
 Something like a system catalogue item */
@@ -77,7 +76,7 @@ class Database
 		*/
 		static DbObjects getSysObjects(const QString & schema = "main");
 
-		/*! \brief Gather "SYS indexes".
+                /*! \brief Gather "SYS indcs".
 		System indexes are indexes created internally for UNIQUE constraints.
 		\param table a table name.
 		\param schema a string with "attached db" name
@@ -91,8 +90,11 @@ class Database
 		             already. */
 		static bool execSql(QString statement);
 
+                // 执行查询
+                static QSqlQuery execSelect(const QString & sql);
 
-                static bool execSqlFile(QString sqlfile);
+                // 取得Sql文件
+                static QString getSql(QString sqlfile);
 
 		/*! \brief Create a session name for the new DB connection.
 		\param schema a schema name.

@@ -1,4 +1,4 @@
-create table MF_DOCUMENT
+CREATE TABLE IF NOT EXISTS MF_DOCUMENT
 (
    DOCUMENT_GUID                  char(36)                       not null,
    DOCUMENT_TITLE                 varchar(768)                   not null,

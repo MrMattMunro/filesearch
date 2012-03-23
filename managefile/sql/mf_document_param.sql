@@ -1,4 +1,4 @@
-create table MF_DOCUMENT_PARAM
+CREATE TABLE IF NOT EXISTS MF_DOCUMENT_PARAM
 (
    DOCUMENT_GUID                  char(36)                       not null,
    PARAM_NAME                     varchar(50)                    not null,

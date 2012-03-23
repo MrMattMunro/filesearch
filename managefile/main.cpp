@@ -191,6 +191,7 @@ int main(int argc, char *argv[])
       return 0;
     }
 
+    // 加载数据库驱动
     QApplication::addLibraryPath("./lib");
     qDebug() << "my library path : " << app.libraryPaths();
     QLibrary sqlib("sqlite3.dll");
@@ -210,9 +211,6 @@ int main(int argc, char *argv[])
       dirfile->close();
     }
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(DATABASE);
-
    // 设置窗口图标
     app.setWindowIcon(Utils::getIcon("file_manager.png"));
     QTranslator translator;
@@ -222,31 +220,28 @@ int main(int argc, char *argv[])
     //QString QCoreApplication::applicationDirPath () [static]
 
     // 打开连接db
-
-//    Database::sessionName(DATABASE);
-//    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", DATABASE);
-//    db.setDatabaseName(DATABASE);
-//    if(!db.open())
-//    {
-//            QMessageBox::critical(0, "", "Unable to open or create file. It is probably not a database");
-//            return -1;
-//    }
+    Database::sessionName(DATABASE);
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", DATABASE);
+    db.setDatabaseName(dbfilepath);
+    if(!db.open())
+    {
+            QMessageBox::critical(0, "", "Unable to open or create file. It is probably not a database");
+            return -1;
+    }
 
 
     // 初始化数据库
-    Database::execSqlFile("mf_deleted_guid.sql");
-    Database::execSqlFile("mf_document.sql");
-    Database::execSqlFile("mf_document_param.sql");
-    Database::execSqlFile("mf_document_relate.sql");
-    Database::execSqlFile("mf_document_tag.sql");
-    Database::execSqlFile("mf_document_tag.sql");
-    Database::execSqlFile("mf_tag_group.sql");
+    Database::execSql(Database::getSql("mf_deleted_guid.sql"));
+    Database::execSql(Database::getSql("mf_document.sql"));
+    Database::execSql(Database::getSql("mf_document_param.sql"));
+    Database::execSql(Database::getSql("mf_document_relate.sql"));
+    Database::execSql(Database::getSql("mf_document_tag.sql"));
+    Database::execSql(Database::getSql("mf_tag.sql"));
 
     MainWindow w;
     w.setLocale(cli.localeCode());
 
     w.showMaximized();
-   // w.showFullScreen();
     return app.exec();
 }
 
