@@ -33,7 +33,8 @@ public:
         QPoint       getCurPoint();  // 获取当前点击位置
         void         loadDirByLay(QString parentPath, int lay, QStandardItem *curItem);
         void         delSubTree();   // 删除当前树
-        void         setCurItemByPath(QString path);
+        void         setCurItemByPath(QString path); // 根据CurPath设置当前选定的元素
+        void         loadTagByParent(QString tagUuId, QStandardItem *curItem);
 private slots:
         void         showChildTree();
 signals:

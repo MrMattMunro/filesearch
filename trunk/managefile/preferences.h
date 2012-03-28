@@ -41,6 +41,9 @@ Q_OBJECT
                 bool isShowDocUnderSub() { return m_isShowDocUnderSub; };
                 void setShowDocUnderSub(bool v) { m_isShowDocUnderSub = v;  };
 
+                bool isShowDocUnderSubTag() { return m_isShowDocUnderSubTag; };
+                void setShowDocUnderSubTag(bool v) { m_isShowDocUnderSubTag = v;  };
+
 
 		bool nullHighlight() { return m_nullHighlight; };
 		void setNullHighlight(bool v) { m_nullHighlight = v; };
@@ -197,6 +200,7 @@ Q_OBJECT
                 bool m_isShowClassTree;
                 bool m_isShowToolBar;
                 bool m_isShowDocUnderSub;
+                bool m_isShowDocUnderSubTag;
 
 
 		bool m_checkQtVersion;

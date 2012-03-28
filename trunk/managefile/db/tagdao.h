@@ -19,9 +19,9 @@ class TagDao
             Q_DECLARE_TR_FUNCTIONS(TagDao)
         public:
                 // ≤Â»Î±Í«©
-                static bool insertTag(const Tag & tag);
+                static bool insertTag(Tag tag);
                 static bool updateTag(Tag tag);
-                static QList<Tag> selectTagsbyGroup(const QString & groupUuid);
+                static QList<Tag> selectTagsbyParent(const QString & groupUuid);
 
         private:
                 static void exception(const QString & message);

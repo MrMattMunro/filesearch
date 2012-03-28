@@ -8,6 +8,7 @@
 #include "myTreeList.h"
 #include "utils.h"
 #include "fileutils.h"
+#include "db/tagdao.h"
 
 
 myTreeList::myTreeList(QString title, QWidget *parent) : treeTitle("tree"), QTreeView(parent), numSubTree(2),
@@ -160,7 +161,6 @@ QString myTreeList::getCurPath()
 {
         return curPath;
 }
-
 QPoint myTreeList::getCurPoint(){
       return curPoint;
 }
@@ -264,6 +264,21 @@ void myTreeList::loadDirByLay(QString parentPath, int lay, QStandardItem *curIte
     } while(i < list.size());
 }
 
+// 根据标签来判断
+void myTreeList::loadTagByParent(QString tagUuId, QStandardItem *curItem){
+    // 不需要判断tagUuId
+    // QString tagUuIds = new QString(tagUuId);
+    QList<Tag> tags = TagDao::selectTagsbyParent(tagUuId);
+
+    //迭代出所有子节点
+    for(int i = 0; i < tags.count(); i++)
+    {
+            Tag tag = tags.at(i);
+            addItemByParentItem(curItem, tag.TAG_NAME, tag.TAG_GUID, "expander_normal.png");
+    }
+}
+
+
 // 打开当前树节点
 void myTreeList::showChildTree()
 {
@@ -291,6 +306,14 @@ void myTreeList::showChildTree()
 
     if(path != "alldocs" && path != "alltags"){
        loadDirByLay(path, 1, curItem);
+    }
+
+    // 判断是否选中 标签 节点
+    if(path == "alltags" || (path != "alldoc" && path.indexOf(QDir::separator()) == -1 )){
+        if(path == "alltags"){
+           path = "";
+        }
+       loadTagByParent(path, curItem);
     }
 }
 
@@ -324,8 +347,14 @@ void myTreeList::delSubTree()
 void myTreeList::setCurItemByPath(QString path)
 {
     curPath = "";
+    QStandardItem *parenItem;
     //Doc树
-    QStandardItem *parenItem = model->item(0);
+    if(path == "alldocs" || path.indexOf(QDir::separator()) != -1 ){
+         parenItem = model->item(0);
+    }else{
+         parenItem = model->item(1);
+    }
+
     //迭代出所有子节点
     for(int i = 0; i < parenItem->rowCount(); i++)
     {
@@ -339,6 +368,4 @@ void myTreeList::setCurItemByPath(QString path)
             }
     }
 }
-
-
 

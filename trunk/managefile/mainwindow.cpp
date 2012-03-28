@@ -308,7 +308,7 @@ void MainWindow::initActions()
         subDirSort= new QAction(tr("&Sort SubDirs"), this);
         connect(subDirSort, SIGNAL(triggered()), this, SLOT(about()));
 
-        showSubDirDoc= new QAction(tr("&Show docs under subDir"), this);
+        showSubDirDoc= new QAction(tr("&Show docs under sub Dir"), this);
         showSubDirDoc->setCheckable(true);
 
         Preferences* p = Preferences::instance();
@@ -333,7 +333,7 @@ void MainWindow::initActions()
 
         //Tag ContextMenu
         makeSubTag= new QAction(tr("&New Sub Tag"), this);
-        connect(makeSubTag, SIGNAL(triggered()), this, SLOT(about()));
+        connect(makeSubTag, SIGNAL(triggered()), this, SLOT(newTag()));
         moveToTag= new QAction(tr("&Move to Tag"), this);
         connect(moveToTag, SIGNAL(triggered()), this, SLOT(about()));
         moveToRootTag= new QAction(tr("&Move to Root Tag"), this);
@@ -342,8 +342,12 @@ void MainWindow::initActions()
         connect(delTag, SIGNAL(triggered()), this, SLOT(about()));
         renameTag= new QAction(tr("&Rename"), this);
         connect(renameTag, SIGNAL(triggered()), this, SLOT(about()));
-        showSubDirTag= new QAction(tr("&Show docs under subDir"), this);
-        connect(showSubDirTag, SIGNAL(triggered()), this, SLOT(about()));
+        showSubDirTag= new QAction(tr("&Show docs under sub Tag"), this);
+        showSubDirTag->setCheckable(true);
+        connect(showSubDirTag, SIGNAL(triggered()), this, SLOT(setShowSubTagDoc()));
+
+        showSubDirTag->setChecked(p->isShowDocUnderSubTag());
+
         propOfTag= new QAction(tr("&Properties"), this);
         connect(propOfTag, SIGNAL(triggered()), this, SLOT(about()));
 
@@ -407,7 +411,7 @@ void MainWindow::initMenus()
         // 右键
         contextMenu = new QMenu(this);
         contextMenu->setStyleSheet(
-                    "QMenu::item{height: 20px;}"
+                    "QMenu::item{height: 25px}"
                     "QMenu::item:hover{background-color:rgb(100,100,100)}"
                     "QMenu::item:selected{background-color:rgb(128,128,128)}"
         );
@@ -559,6 +563,15 @@ void MainWindow::setShowSubDirDoc()
     isShowDocUnderSub = showSubDirDoc->isChecked();
     Preferences* p = Preferences::instance();
     p->setShowDocUnderSub(isShowDocUnderSub);
+}
+
+// 设置是否显示子标签下的文件
+void MainWindow::setShowSubTagDoc()
+{
+    // 反向选择
+    isShowDocUnderTag = showSubDirTag->isChecked();
+    Preferences* p = Preferences::instance();
+    p->setShowDocUnderSubTag(isShowDocUnderTag);
 }
 
 // 打开导入界面
@@ -872,20 +885,19 @@ void MainWindow::newTag()
         dlg.exec();
         if(dlg.update){
               // 取得子界面生成Tag的UuId
-              QString mselDir = dlg.m_newTagUuId;
-              // 删除主界面选中的节点
-              curItem->parent()->removeRow(curItem->row());
+            //  QString uuId = dlg.m_newTagUuId;
 
-              // 设置主界面的节点 (子界面新建文件夹情况下不成功)
-              q_myTreeList->setCurItemByPath(mselDir);
+              // 删除标签树子节点
+//              if(curPath != "alltags"){
+//                 curItem->parent()->removeRow(curItem->row());
+//                 // 设置主界面的节点 (子界面新建文件夹情况下不成功)
+//                 q_myTreeList->setCurItemByPath(uuId);
+//              }
 
-              QString curPath = q_myTreeList->getCurPath();
-              if(!curPath.isEmpty()){
-                  QStandardItem* curItem = q_myTreeList->getCurItem();
-                  q_myTreeList->addItemByParentItem(curItem,  dlg.m_tagname, dlg.m_newTagUuId, "expander_normal.png");
-                  curItem->setIcon(Utils::getIcon("expander_open.png"));
-                  q_myTreeList->expand(q_myTreeList->getCurIndex());
-              }
+              QStandardItem* curItem = q_myTreeList->getCurItem();
+              q_myTreeList->addItemByParentItem(curItem,  dlg.m_tagname, dlg.m_newTagUuId, "expander_normal.png");
+              curItem->setIcon(Utils::getIcon("expander_open.png"));
+              q_myTreeList->expand(q_myTreeList->getCurIndex());
         }
     }
     // 如果没有选中子目录节点
@@ -968,8 +980,8 @@ void MainWindow::treeContextMenuOpened()
 void MainWindow::tableTree_currentItemChanged()
 {
         contextMenu->clear();
-
         QString tcurPath = q_myTreeList->getCurPath();
+
         // 如果选择Root
         if(tcurPath == "alldocs"){
             contextMenu->addAction(makeRootDir);
@@ -986,7 +998,7 @@ void MainWindow::tableTree_currentItemChanged()
             contextMenu->addAction(showSubDirTag);
             contextMenu->addAction(propOfTag);
             contextMenu->addSeparator();
-        }  else if(tcurPath == "tag"){
+        }  else if(tcurPath.indexOf(QDir::separator()) == -1){
             contextMenu->addAction(makeSubTag);
             contextMenu->addSeparator();
             contextMenu->addAction(moveToTag);
