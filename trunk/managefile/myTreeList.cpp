@@ -320,26 +320,15 @@ void myTreeList::showChildTree()
 // É¾³ý×ÓÎÄ¼þ¼Ð
 void myTreeList::delSubTree()
 {
-
     QString curPath = getCurPath();
-    QString curTitle = getCurTitle();
     QStandardItem* curItem = getCurItem();
     if(!curItem){
        return;
     }
 
-    if(!curPath.isEmpty() && curPath != "alltags" && curPath != "alldocs") {
-
-        int ret = QMessageBox::question(this, "",
-                                        tr("Are you sure that delete the directory \"%1\"?").arg(curTitle),
-                                        QMessageBox::Yes, QMessageBox::No);
-
-        if(ret == QMessageBox::Yes){
-            QFileInfo fileinfo(curPath);
-            FileUtils::deleteDirectory(fileinfo);
-            delSubItems(curItem);
-            curItem->parent()->removeRow(curItem->row());
-        }
+    if(!curPath.isEmpty() && curPath != "alltags" && curPath != "alldocs") { 
+        delSubItems(curItem);
+        curItem->parent()->removeRow(curItem->row());
     }
 }
 

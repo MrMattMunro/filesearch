@@ -13,7 +13,7 @@ class PropOfDirDialog : public QDialog, public Ui::PropOfDirDialog
 
                 QString m_exportDir;
                 QString m_dir;
-	private:
+        private:
                 QObject * m_parent;
                 QString m_baseDir;
 
