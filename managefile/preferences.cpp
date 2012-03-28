@@ -23,7 +23,7 @@ Preferences::Preferences(QObject *parent)
         m_isShowClassTree = s.value("isShowClassTree", true).toBool();
         m_isShowToolBar = s.value("isShowToolBar", true).toBool();
         m_isShowDocUnderSub = s.value("isShowDocUnderSub", true).toBool();
-
+        m_isShowDocUnderSubTag = s.value("isShowDocUnderSubTag", true).toBool();
 
 	//
 	m_nullHighlight = s.value("prefs/nullCheckBox", true).toBool();
@@ -97,6 +97,7 @@ Preferences::~Preferences()
         settings.setValue("isShowClassTree", m_isShowClassTree);
         settings.setValue("isShowToolBar", m_isShowToolBar);
         settings.setValue("isShowDocUnderSub", m_isShowDocUnderSub);
+        settings.setValue("isShowDocUnderSubTag", m_isShowDocUnderSubTag);
 
 	// lnf
 	settings.setValue("prefs/languageComboBox", m_GUItranslator);

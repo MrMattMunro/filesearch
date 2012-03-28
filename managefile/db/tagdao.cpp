@@ -21,15 +21,15 @@ void TagDao::exception(const QString & message)
         QMessageBox::critical(0, tr("SQL Error"), message);
 }
 // 插入标签
-bool TagDao::insertTag(const Tag & tag)
+bool TagDao::insertTag(Tag tag)
 {
     QString sql = Database::getSql("mf_insert_tag.sql");
-    //sql = sql.arg(tag.TAG_GUID,tag.TAG_GROUP_GUID,tag.TAG_NAME,tag.TAG_DESCRIPTION, tag.MF_VERSION);
+    sql = sql.arg(tag.TAG_GUID,tag.TAG_GROUP_GUID,tag.TAG_NAME,tag.TAG_DESCRIPTION, QString::number(tag.MF_VERSION));
     return Database::execSql(sql);
 }
 
 // 根据父标签取得子标签
-QList<Tag> TagDao::selectTagsbyGroup(const QString & groupUuid)
+QList<Tag> TagDao::selectTagsbyParent(const QString & groupUuid)
 {
     QString sql = Database::getSql("mf_select_tag_group.sql");
     sql = sql.arg(groupUuid);

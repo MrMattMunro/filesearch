@@ -12,10 +12,11 @@ for which a new license (GPL+exception) is in place.
 #include <QStandardItemModel>
 #include <QDesktopServices>
 #include <QUrl>
-
+#include <QUuid>
 #include "createtagdialog.h"
 #include "utils.h"
 #include "fileutils.h"
+#include "db/tagdao.h"
 
 CreateTagDialog::CreateTagDialog(QWidget * parent, const QString & parentUuid)
         : QDialog(parent),
@@ -37,10 +38,30 @@ CreateTagDialog::CreateTagDialog(QWidget * parent, const QString & parentUuid)
         connect(buttonBox,SIGNAL(rejected()),this,SLOT(cancelBtn_clicked()));
 }
 
-// 创建子文件夹
+// 创建标签
 void CreateTagDialog::confirmBtn_clicked(){
-    update = false;
-    this->close();
+    // 插入数据库
+    QString groupUUid;
+    if(m_parentTagUuId == "alltags"){
+        groupUUid = "";
+    }else{
+        groupUUid = m_parentTagUuId;
+    }
+    QUuid uuid = QUuid::createUuid();
+    Tag tag;
+    tag.TAG_GUID = uuid.toString();
+    m_newTagUuId = tag.TAG_GUID;
+    tag.TAG_GROUP_GUID = groupUUid;
+    tag.TAG_NAME = tagName->text();
+    m_tagname = tag.TAG_NAME;
+    tag.TAG_DESCRIPTION = desp->toPlainText();
+    tag.MF_VERSION = 0;
+
+    bool success  = TagDao::insertTag(tag);
+    if(success){
+        update = true;
+        this->close();
+    }
 }
 
 // 取消按钮

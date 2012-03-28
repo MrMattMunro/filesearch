@@ -106,6 +106,7 @@ private slots:
     void createRootDir();
     void moveDir();
     void setShowSubDirDoc();
+    void setShowSubTagDoc();
     void properties();
 
     void loadPage(const QString &url);
@@ -176,6 +177,7 @@ private:
     QString m_lang;
     QString m_baseDir;
     bool isShowDocUnderSub;
+    bool isShowDocUnderTag;
 
     void populateFeedsMenu();
 
