@@ -50,11 +50,13 @@
 #include "createsubdirdialog.h"
 #include "movetodirdialog.h"
 #include "propofdirdialog.h"
+#include "propoftagdialog.h"
 #include "createtagdialog.h"
 #include "browser/browsermainwindow.h"
 #include "browser/browserapplication.h"
 #include "utils.h"
 #include "fileutils.h"
+#include "db/tagdao.h"
 
 MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     : QMainWindow(parent, flags)
@@ -339,9 +341,9 @@ void MainWindow::initActions()
         moveToRootTag= new QAction(tr("&Move to Root Tag"), this);
         connect(moveToRootTag, SIGNAL(triggered()), this, SLOT(about()));
         delTag= new QAction(tr("&Delete"), this);
-        connect(delTag, SIGNAL(triggered()), this, SLOT(about()));
+        connect(delTag, SIGNAL(triggered()), this, SLOT(deleteTag()));
         renameTag= new QAction(tr("&Rename"), this);
-        connect(renameTag, SIGNAL(triggered()), this, SLOT(about()));
+        connect(renameTag, SIGNAL(triggered()), this, SLOT(renameSubTag()));
         showSubDirTag= new QAction(tr("&Show docs under sub Tag"), this);
         showSubDirTag->setCheckable(true);
         connect(showSubDirTag, SIGNAL(triggered()), this, SLOT(setShowSubTagDoc()));
@@ -349,7 +351,7 @@ void MainWindow::initActions()
         showSubDirTag->setChecked(p->isShowDocUnderSubTag());
 
         propOfTag= new QAction(tr("&Properties"), this);
-        connect(propOfTag, SIGNAL(triggered()), this, SLOT(about()));
+        connect(propOfTag, SIGNAL(triggered()), this, SLOT(showPropOfTag()));
 
         //Root Tag ContextMenu
         makeTag= new QAction(tr("&New Tag"), this);
@@ -872,7 +874,6 @@ void MainWindow::createRootDir()
 void MainWindow::newTag()
 {
     QString curPath = q_myTreeList->getCurPath();
-    QStandardItem* curItem = q_myTreeList->getCurItem();
     bool hasSelRight = false;
 
     // 需选中 标签 节点
@@ -884,20 +885,112 @@ void MainWindow::newTag()
         CreateTagDialog dlg(this, curPath);
         dlg.exec();
         if(dlg.update){
-              // 取得子界面生成Tag的UuId
-            //  QString uuId = dlg.m_newTagUuId;
-
-              // 删除标签树子节点
-//              if(curPath != "alltags"){
-//                 curItem->parent()->removeRow(curItem->row());
-//                 // 设置主界面的节点 (子界面新建文件夹情况下不成功)
-//                 q_myTreeList->setCurItemByPath(uuId);
-//              }
-
               QStandardItem* curItem = q_myTreeList->getCurItem();
               q_myTreeList->addItemByParentItem(curItem,  dlg.m_tagname, dlg.m_newTagUuId, "expander_normal.png");
               curItem->setIcon(Utils::getIcon("expander_open.png"));
               q_myTreeList->expand(q_myTreeList->getCurIndex());
+        }
+    }
+    // 如果没有选中子目录节点
+    if(!hasSelRight){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
+        return;
+    }
+}
+
+// 删除标签
+void MainWindow::deleteTag()
+{
+    QString curPath = q_myTreeList->getCurPath();
+    bool hasSelRight = false;
+    QString title = q_myTreeList->getCurTitle();
+
+    // 需选中 标签 节点
+    if(curPath != "alltags" && (curPath.indexOf(QDir::separator()) == -1 && curPath != "alldocs")) {
+        hasSelRight = true;
+        int ret = QMessageBox::warning(this, QString(),
+                           tr("Are you sure you want to delete the %1 tag?").arg(title),
+                           QMessageBox::Yes | QMessageBox::No,
+                           QMessageBox::No);
+
+        if (ret == QMessageBox::No) {
+            return;
+        }
+        if(ret == QMessageBox::Yes){
+          q_myTreeList->delSubTree();
+          // 删除Tag
+          TagDao::deleteTag(curPath);
+        }
+    }
+    // 如果没有选中子目录节点
+    if(!hasSelRight){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Select an Sub Tag."), QMessageBox::Yes);
+        return;
+    }
+}
+
+// 改变子标签名称
+void MainWindow::renameSubTag()
+{
+    QString curPath = q_myTreeList->getCurPath();
+    QStandardItem* curItem = q_myTreeList->getCurItem();
+    QString curTitle = q_myTreeList->getCurTitle();
+
+    bool hasSelRight = false;
+
+    // 需选中 总节点和子节点
+    if(!curPath.isEmpty() && curPath != "alltags"  && curPath != "alldocs" &&
+            curPath.indexOf(QDir::separator()) == -1) {
+        hasSelRight = true;
+        bool ok;
+        QString text = QInputDialog::getText(this, m_appName, tr("New Tag name:"), QLineEdit::Normal, curTitle, &ok);
+        if (ok && !text.isEmpty()) {
+                if (text == curTitle){
+                  return;
+                }
+                // 改变树节点
+                curItem->setData(text, Qt::DisplayRole);
+                // 改变标签名称
+                // 删除Tag
+                Tag tag;
+                tag.TAG_GUID = curPath;
+                tag.TAG_NAME = text;
+                TagDao::updateTag(tag);
+        }
+
+    }
+    // 如果没有选中子目录节点
+    if(!hasSelRight){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
+        return;
+    }
+}
+
+// 显示标签参数
+void MainWindow::showPropOfTag()
+{
+    QString curPath = q_myTreeList->getCurPath();
+    bool hasSelRight = false;
+
+    // 需选中 标签 节点
+    if(curPath == "alltags" ||
+            (curPath.indexOf(QDir::separator()) == -1 && curPath != "alldocs")) {
+        QString tagname = q_myTreeList->getCurTitle();
+        QStandardItem*  curItem = q_myTreeList->getCurItem();
+        Tag tag = TagDao::selectTag(curPath);
+        hasSelRight = true;
+        // curPath 用于判断根节点和子节点
+        // getCurPath 用于存UuId
+        PropOfTagDialog dlg(this, tag.TAG_GUID, tagname, tag.TAG_DESCRIPTION);
+        dlg.exec();
+        if(dlg.update){
+            if (dlg.m_tagname.isEmpty()){
+              // 提示出错
+              return;
+            }
+            // 改变树节点
+            curItem->setData(dlg.m_tagname, Qt::DisplayRole);
+
         }
     }
     // 如果没有选中子目录节点
@@ -916,7 +1009,20 @@ void MainWindow::about()
 // 删除子文件夹
 void MainWindow::delSubDir()
 {
-    q_myTreeList->delSubTree();
+    QString curTitle = q_myTreeList->getCurTitle();
+    QString curPath = q_myTreeList->getCurPath();
+    int ret = QMessageBox::question(this, "",
+                                    tr("Are you sure that delete the directory \"%1\"?").arg(curTitle),
+                                    QMessageBox::Yes, QMessageBox::No);
+    if(ret == QMessageBox::Yes){
+       q_myTreeList->delSubTree();
+       QFileInfo fileinfo(curPath);
+       FileUtils::deleteDirectory(fileinfo);
+    }
+
+    if(ret == QMessageBox::No){
+       return;
+    }
 }
 
 // 全屏

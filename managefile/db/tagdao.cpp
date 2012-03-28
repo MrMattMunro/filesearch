@@ -27,6 +27,13 @@ bool TagDao::insertTag(Tag tag)
     sql = sql.arg(tag.TAG_GUID,tag.TAG_GROUP_GUID,tag.TAG_NAME,tag.TAG_DESCRIPTION, QString::number(tag.MF_VERSION));
     return Database::execSql(sql);
 }
+// 删除标签
+bool TagDao::deleteTag(QString tagUuId)
+{
+    QString sql = Database::getSql("mf_delete_tag.sql");
+    sql = sql.arg(tagUuId);
+    return Database::execSql(sql);
+}
 
 // 根据父标签取得子标签
 QList<Tag> TagDao::selectTagsbyParent(const QString & groupUuid)
@@ -48,19 +55,50 @@ QList<Tag> TagDao::selectTagsbyParent(const QString & groupUuid)
     return returnList;
 }
 
+// 根据标签uuId获取标签
+Tag TagDao::selectTag(const QString & uuid)
+{
+    QString sql = Database::getSql("mf_select_tag_uuid.sql");
+    sql = sql.arg(uuid);
+    QSqlQuery query = Database::execSelect(sql);
+
+    while (query.next()){
+            Tag field;
+            field.TAG_GUID = query.value(0).toString();
+            field.TAG_NAME = query.value(1).toString();
+            field.TAG_GROUP_GUID = query.value(2).toString();
+            field.TAG_DESCRIPTION = query.value(3).toString();
+            field.DT_MODIFIED = query.value(4).toChar();
+            field.MF_VERSION = query.value(5).toInt();
+            return field;
+    }
+}
+
 // 更新子标签
 bool TagDao::updateTag(Tag tag){
 
-//    UPDATE TABLE
-//        MF_TAG
-//    SET TAG_NAME=%1
-//        AND TAG_DESCRIPTION=%2
-//        AND TAG_GROUP_GUID=%3
-//        AND MF_VERSION=%4
-//        AND DT_MODIFIED=datetime(CURRENT_TIMESTAMP,'localtime')
-//    WHERE TAG_GUID=%5
+    // 取得数据库原来的
+    Tag orgTag = selectTag(tag.TAG_GUID);
 
+    QString tagname = orgTag.TAG_NAME;
+    QString taggroupuuid = orgTag.TAG_GROUP_GUID;
+    QString tagdesp = orgTag.TAG_DESCRIPTION;
+    int tagversion = orgTag.MF_VERSION;
+
+    if(! tag.TAG_NAME.isEmpty()){
+       tagname = tag.TAG_NAME;
+    }
+    if(! tag.TAG_GROUP_GUID.isEmpty()){
+       taggroupuuid = tag.TAG_GROUP_GUID;
+    }
+    if(! tag.TAG_DESCRIPTION.isEmpty()){
+       tagdesp = tag.TAG_DESCRIPTION;
+    }
+
+    if(tag.MF_VERSION != 0){
+       tagversion = tag.MF_VERSION;
+    }
     QString sql = Database::getSql("mf_update_tag.sql");
-    //sql = sql.arg(tag.TAG_NAME,tag.TAG_DESCRIPTION,tag.TAG_GROUP_GUID, tag.MF_VERSION, tag.TAG_GUID);
+    sql = sql.arg(tagname, taggroupuuid, tagdesp, QString::number(tagversion), tag.TAG_GUID);
     return Database::execSql(sql);
 }

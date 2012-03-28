@@ -111,6 +111,9 @@ private slots:
 
     void loadPage(const QString &url);
     void newTag();
+    void deleteTag();
+    void showPropOfTag();
+    void renameSubTag();
     void slotHome();
 
 

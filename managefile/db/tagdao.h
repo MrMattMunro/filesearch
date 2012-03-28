@@ -21,6 +21,8 @@ class TagDao
                 // ≤Â»Î±Í«©
                 static bool insertTag(Tag tag);
                 static bool updateTag(Tag tag);
+                static bool deleteTag(QString tagUuId);
+                static Tag selectTag(const QString & uuid);
                 static QList<Tag> selectTagsbyParent(const QString & groupUuid);
 
         private:
