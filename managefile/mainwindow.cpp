@@ -49,6 +49,7 @@
 #include "exportdocdialog.h"
 #include "createsubdirdialog.h"
 #include "movetodirdialog.h"
+#include "movetotagdialog.h"
 #include "propofdirdialog.h"
 #include "propoftagdialog.h"
 #include "createtagdialog.h"
@@ -337,9 +338,9 @@ void MainWindow::initActions()
         makeSubTag= new QAction(tr("&New Sub Tag"), this);
         connect(makeSubTag, SIGNAL(triggered()), this, SLOT(newTag()));
         moveToTag= new QAction(tr("&Move to Tag"), this);
-        connect(moveToTag, SIGNAL(triggered()), this, SLOT(about()));
+        connect(moveToTag, SIGNAL(triggered()), this, SLOT(movetoTag()));
         moveToRootTag= new QAction(tr("&Move to Root Tag"), this);
-        connect(moveToRootTag, SIGNAL(triggered()), this, SLOT(about()));
+        connect(moveToRootTag, SIGNAL(triggered()), this, SLOT(moveToRoot()));
         delTag= new QAction(tr("&Delete"), this);
         connect(delTag, SIGNAL(triggered()), this, SLOT(deleteTag()));
         renameTag= new QAction(tr("&Rename"), this);
@@ -701,7 +702,7 @@ void MainWindow::initUI()
         // 加载分类树
         m_baseDir = Utils::getLocatePath();
         m_baseDir = QDir::toNativeSeparators(m_baseDir);
-        q_myTreeList = new myTreeList("", this);
+        q_myTreeList = new myTreeList("all", this);
 
         q_myTreeList->loadDirByLay(m_baseDir, 0, 0);
         q_myTreeList->enableMouse(true);
@@ -996,6 +997,71 @@ void MainWindow::showPropOfTag()
     // 如果没有选中子目录节点
     if(!hasSelRight){
         QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
+        return;
+    }
+}
+
+void MainWindow:: moveToRoot(){
+
+    QString curPath = q_myTreeList->getCurPath();
+    bool hasSelRight = false;
+
+    // 需选中 标签 节点
+    if(curPath == "alltags" ||
+            (curPath.indexOf(QDir::separator()) == -1 && curPath != "alldocs")) {
+        Tag tag = TagDao::selectTag(curPath);
+        hasSelRight = true;
+        tag.TAG_GROUP_GUID = "";
+        TagDao::updateTag(tag);
+        // 重新load的标签树
+        // 删除当前的节点
+        q_myTreeList->delSubTree();
+
+        // 设置主界面节点
+        q_myTreeList->addItem(1, tag.TAG_NAME, tag.TAG_GUID, "expander_normal.png");
+
+    }
+    // 如果没有选中子目录节点
+    if(!hasSelRight){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Select an Tag."), QMessageBox::Yes);
+        return;
+    }
+}
+
+// 移动标签
+void MainWindow::movetoTag()
+{
+    QString curPath = q_myTreeList->getCurPath();
+    QStandardItem* curItem = q_myTreeList->getCurItem();
+    QString curTitle = q_myTreeList->getCurTitle();
+    bool hasSelRight = false;
+
+    // 需选中 文件 子节点
+    if(curPath != "alltags" &&
+            (curPath.indexOf(QDir::separator()) == -1 && curPath != "alldocs")) {
+        hasSelRight = true;
+        MoveToTagDialog dlg(this, curPath);
+        dlg.exec();
+        if(dlg.update){
+              // 取得子界面选中的path
+              QString mselUuId = dlg.m_selUuId;
+              // 删除主界面选中的节点
+              curItem->parent()->removeRow(curItem->row());
+
+              // 设置主界面的节点 (子界面新建文件夹情况下不成功)
+              q_myTreeList->setCurItemByPath(mselUuId);
+              QString curPath = q_myTreeList->getCurPath();
+              if(!curPath.isEmpty()){
+                  QStandardItem* curItem = q_myTreeList->getCurItem();
+                  q_myTreeList->addItemByParentItem(curItem, curTitle, mselUuId, "expander_normal.png");
+                  curItem->setIcon(Utils::getIcon("expander_open.png"));
+                  q_myTreeList->expand(q_myTreeList->getCurIndex());
+              }
+        }
+    }
+    // 如果没有选中子标签节点
+    if(!hasSelRight){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Select an sub tag."), QMessageBox::Yes);
         return;
     }
 }

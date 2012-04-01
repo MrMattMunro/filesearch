@@ -88,9 +88,8 @@ bool TagDao::updateTag(Tag tag){
     if(! tag.TAG_NAME.isEmpty()){
        tagname = tag.TAG_NAME;
     }
-    if(! tag.TAG_GROUP_GUID.isEmpty()){
-       taggroupuuid = tag.TAG_GROUP_GUID;
-    }
+    // 移动到顶级标签
+    taggroupuuid = tag.TAG_GROUP_GUID;
     if(! tag.TAG_DESCRIPTION.isEmpty()){
        tagdesp = tag.TAG_DESCRIPTION;
     }

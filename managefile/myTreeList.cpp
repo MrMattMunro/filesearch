@@ -17,6 +17,7 @@ myTreeList::myTreeList(QString title, QWidget *parent) : treeTitle("tree"), QTre
 	//默认两个子树的树形结构
         model = new QStandardItemModel(1,1);
         model->setHeaderData(0, Qt::Horizontal, title);
+
         QStandardItem  *allDocItem = new QStandardItem(tr("AllDocs"));
         allDocItem->setIcon(Utils::getIcon("expander_normal.png"));
         allDocItem->setData("alldocs", Qt::UserRole + 1);
@@ -32,8 +33,19 @@ myTreeList::myTreeList(QString title, QWidget *parent) : treeTitle("tree"), QTre
                     "QTreeView::item:hover{background-color:rgb(100,100,100)}"
                     "QTreeView::item:selected{background-color:rgb(128,128,128)}"
         );
-        model->setItem(0, allDocItem);
-        model->setItem(1, allTagItem);
+        if(title == "all"){
+            model->setItem(0, allDocItem);
+            model->setItem(1, allTagItem);
+        }
+
+        if(title == "tag"){
+            model->setItem(0, allTagItem);
+        }
+
+        if(title == "doc"){
+            model->setItem(0, allDocItem);
+        }
+
 
         // 转移到Tree内部实现
         connect(this, SIGNAL(LBtnDbClk()), this, SLOT(showChildTree()));

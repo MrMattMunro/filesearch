@@ -114,6 +114,8 @@ private slots:
     void deleteTag();
     void showPropOfTag();
     void renameSubTag();
+    void moveToRoot();
+    void movetoTag();
     void slotHome();
 
 

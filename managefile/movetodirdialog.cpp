@@ -33,7 +33,7 @@ MoveToDirDialog::MoveToDirDialog(QWidget * parent, const QString & basedir,const
         tdestDir = tdestDir.remove(0, m_baseDir.length());
         sourceDir->setText(tdestDir);
 
-        q_myTreeList = new myTreeList("", this);
+        q_myTreeList = new myTreeList("doc", this);
         q_myTreeList->setStyleSheet(
                     "QTreeView::branch {image:none;}"
                     "QTreeView::item{height: 25px;}"
