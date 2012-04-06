@@ -118,7 +118,7 @@ private slots:
     void movetoTag();
     void slotHome();
 
-
+    void customToolBar();
     // browser
     void save();
 

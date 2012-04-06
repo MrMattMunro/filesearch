@@ -119,5 +119,6 @@
         <file>icons/cpp.ico</file>
         <file>icons/png.ico</file>
         <file>icons/folder.ico</file>
+        <file>icons/defaulttoolbar.png</file>
     </qresource>
 </RCC>

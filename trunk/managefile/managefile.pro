@@ -46,7 +46,9 @@ SOURCES += main.cpp \
     db/tagdao.cpp \
     createtagdialog.cpp \
     propoftagdialog.cpp \
-    movetotagdialog.cpp
+    movetotagdialog.cpp \
+    mylistwidget.cpp \
+    customtooldialog.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -87,7 +89,9 @@ HEADERS  += mainwindow.h \
     db/tagdao.h \
     createtagdialog.h \
     propoftagdialog.h \
-    movetotagdialog.h
+    movetotagdialog.h \
+    mylistwidget.h \
+    customtooldialog.h
 
 RESOURCES += \
     managefile.qrc
@@ -112,7 +116,8 @@ FORMS    += mainwindow.ui \
     browser/addbookmarkdialog.ui \
     createtagdialog.ui \
     propoftagdialog.ui \
-    movetotagdialog.ui
+    movetotagdialog.ui \
+    customtooldialog.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -132,6 +137,11 @@ OTHER_FILES += \
     sql/mf_document_param.sql \
     sql/mf_document.sql \
     sql/mf_deleted_guid.sql
+
+
+
+
+
 
 
 

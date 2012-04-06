@@ -50,6 +50,7 @@
 #include "createsubdirdialog.h"
 #include "movetodirdialog.h"
 #include "movetotagdialog.h"
+#include "customtooldialog.h"
 #include "propofdirdialog.h"
 #include "propoftagdialog.h"
 #include "createtagdialog.h"
@@ -231,7 +232,7 @@ void MainWindow::initActions()
 
         // 自定义工具栏
         customToolbarAction = new QAction(Utils::getIcon("toolbar.png"),tr("&Setting ToolBar"), this);
-        connect(customToolbarAction, SIGNAL(triggered()), this, SLOT(about()));
+        connect(customToolbarAction, SIGNAL(triggered()), this, SLOT(customToolBar()));
 
         // 显示/隐藏工具栏
         showToolbarAction = new QAction(Utils::getIcon("status_bar.png"),tr("&Show/Hide Tool Bar"), this);
@@ -513,7 +514,6 @@ void MainWindow::initToolbar()
 {
     toolBar = addToolBar(tr("Tool Bar"));
     toolBar->addAction(showClassTreeAction);
-    toolBar->addAction(fullScreenAction);
     toolBar->addSeparator();
     toolBar->addAction(homepageAction);
     toolBar->addAction(inviteAction);
@@ -530,6 +530,8 @@ void MainWindow::initToolbar()
 
     toolBar->addWidget(m_toolbarSearch);
     toolBar->addAction(m_searchSetAction);
+    toolBar->addSeparator();
+    toolBar->addAction(fullScreenAction);
 
     // 空白区域
     sapcewidget = new QWidget(this);
@@ -1063,6 +1065,20 @@ void MainWindow::movetoTag()
     if(!hasSelRight){
         QMessageBox::warning(this, tr("Warning"), tr("Please Select an sub tag."), QMessageBox::Yes);
         return;
+    }
+}
+
+// 自定义工具栏
+void MainWindow::customToolBar()
+{
+    CustomToolDialog dlg(this);
+    dlg.exec();
+    if(dlg.update){
+
+        // 写入Setting数据
+
+        // 调整显示
+
     }
 }
 
