@@ -391,15 +391,15 @@ void BrowserMainWindow::setupMenu()
     connect(m_historyHome, SIGNAL(triggered()), this, SLOT(slotHome()));
     m_historyHome->setShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_H));
 
-    m_restoreLastSession = new QAction(tr("Restore Last Session"), this);
-    connect(m_restoreLastSession, SIGNAL(triggered()), BrowserApplication::instance(), SLOT(restoreLastSession()));
-    m_restoreLastSession->setEnabled(BrowserApplication::instance()->canRestoreSession());
+//    m_restoreLastSession = new QAction(tr("Restore Last Session"), this);
+//    connect(m_restoreLastSession, SIGNAL(triggered()), BrowserApplication::instance(), SLOT(restoreLastSession()));
+//    m_restoreLastSession->setEnabled(BrowserApplication::instance()->canRestoreSession());
 
     historyActions.append(m_historyBack);
     historyActions.append(m_historyForward);
     historyActions.append(m_historyHome);
     historyActions.append(m_tabWidget->recentlyClosedTabsAction());
-    historyActions.append(m_restoreLastSession);
+    // historyActions.append(m_restoreLastSession);
     historyMenu->setInitialActions(historyActions);
 
     // Bookmarks
