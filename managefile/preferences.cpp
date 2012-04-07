@@ -18,6 +18,7 @@ Preferences::Preferences(QObject *parent)
 // 	f.setPointSize(sqlFontSize());
 
         QSettings s("slfile.cn", "filemanage");
+        s.clear();
 	m_checkQtVersion = s.value("checkQtVersion", true).toBool();
         m_isFullScreen = s.value("isFullScreen", true).toBool();
         m_isShowClassTree = s.value("isShowClassTree", true).toBool();
@@ -25,6 +26,10 @@ Preferences::Preferences(QObject *parent)
         m_isShowDocUnderSub = s.value("isShowDocUnderSub", true).toBool();
         m_isShowDocUnderSubTag = s.value("isShowDocUnderSubTag", true).toBool();
 
+        m_seltoolbaritemlist = s.value("selToolbarItemList", QStringList()).toStringList();
+        m_waittoolbaritemlist = s.value("waitToolbarItemList", QStringList()).toStringList();
+        m_defaulttoolbaritemlist = s.value("defaultToolbarItemList", QStringList()).toStringList();
+        m_defaultwaittoolbaritemlist = s.value("defaultWaitToolbarItemList", QStringList()).toStringList();
 	//
 	m_nullHighlight = s.value("prefs/nullCheckBox", true).toBool();
 	m_blobHighlight = s.value("prefs/blobCheckBox", true).toBool();
@@ -60,9 +65,9 @@ Preferences::Preferences(QObject *parent)
 	m_exportHeaders = s.value("dataExport/headers", true).toBool();
 	m_exportEncoding = s.value("dataExport/encoding", "UTF-8").toString();
 	m_exportEol = s.value("dataExport/eol", 0).toInt();
-    // extensions
-    m_allowExtensionLoading = s.value("extensions/allowLoading", true).toBool();
-    m_extensionList = s.value("extensions/list", QStringList()).toStringList();
+        // extensions
+        m_allowExtensionLoading = s.value("extensions/allowLoading", true).toBool();
+        m_extensionList = s.value("extensions/list", QStringList()).toStringList();
 
         // 分散每个文件类型
         m_allsupported << "*.doc" << "*.docx" << "*.xls" << "*.xlsx" << "*.ppt" << "*.pptx"
@@ -87,6 +92,16 @@ Preferences::Preferences(QObject *parent)
         m_txts << "*.txt" << "*.ini" << "*.bar" << "*.inf";
         m_movies << "*.rm" << "*.rmvb" << "*.avi" << "*.mpg" << "*.mlv" << "*.mpe" << "*.mpeg" << "*.m2v";
 
+        // 初始化
+        m_defaulttoolbaritemlist << "view_tree.png" << "view_fullscreen.png" << "homepage.png" << "invite.png" << "forum.png";
+        m_defaultwaittoolbaritemlist << "document-savetomobi.png" << "document-import.png" << "document-export.png" << "plugin.png";
+        if(m_seltoolbaritemlist.size() == 0){
+            m_seltoolbaritemlist  << "view_tree.png" << "view_fullscreen.png" << "homepage.png" << "invite.png" << "forum.png";
+        }
+        if(m_waittoolbaritemlist.size() == 0){
+           m_waittoolbaritemlist << "document-savetomobi.png" << "document-import.png" << "document-export.png" << "plugin.png";
+        }
+
 }
 
 Preferences::~Preferences()
@@ -98,6 +113,11 @@ Preferences::~Preferences()
         settings.setValue("isShowToolBar", m_isShowToolBar);
         settings.setValue("isShowDocUnderSub", m_isShowDocUnderSub);
         settings.setValue("isShowDocUnderSubTag", m_isShowDocUnderSubTag);
+
+        settings.setValue("selToolbarItemList", m_seltoolbaritemlist);
+        settings.setValue("waitToolbarItemList", m_waittoolbaritemlist);
+        settings.setValue("defaultToolbarItemList", m_defaulttoolbaritemlist);
+        settings.setValue("defaultWaitToolbarItemList", m_defaultwaittoolbaritemlist);
 
 	// lnf
 	settings.setValue("prefs/languageComboBox", m_GUItranslator);
@@ -139,9 +159,9 @@ Preferences::~Preferences()
 	settings.setValue("dataExport/headers", m_exportHeaders);
 	settings.setValue("dataExport/encoding", m_exportEncoding);
 	settings.setValue("dataExport/eol", m_exportEol);
-    // extensions
-    settings.setValue("extensions/allowLoading", m_allowExtensionLoading);
-    settings.setValue("extensions/list", m_extensionList);
+        // extensions
+        settings.setValue("extensions/allowLoading", m_allowExtensionLoading);
+        settings.setValue("extensions/list", m_extensionList);
 }
 
 Preferences* Preferences::instance()

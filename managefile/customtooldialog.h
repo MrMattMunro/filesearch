@@ -54,9 +54,9 @@ class ToolBar : public QToolBar
                                 ToolButton *button = new ToolButton(this);
                                 button->setText(pieceData);
                                 addWidget(button);
-                                } else {
-                                    event->ignore();
-                                }
+                        } else {
+                                 event->ignore();
+                       }
                 }
 };
 
@@ -67,16 +67,19 @@ class CustomToolDialog : public QDialog, public Ui::CustomToolDialog
 	public:
                 CustomToolDialog(QWidget * parent = 0);
                 bool update;
-                QString m_tagUuId;
-                QString m_tagname;
-                QString m_desp;
+                QStringList waitItems;
+                QStringList sellItems;
 
+                QListWidgetItem* getToolbarItemByText(const QString & text);
 	private:
                 QObject * m_parent;
 
 	private slots:
                 void confirmBtn_clicked();
-
+                void cancelBtn_clicked();
+        protected:
+                bool eventFilter(QObject *obj, QEvent *ev);
         signals:
+
 
 };

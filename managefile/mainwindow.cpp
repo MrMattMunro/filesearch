@@ -178,7 +178,6 @@ void MainWindow::initActions()
         connect(m_searchSetMenu, SIGNAL(aboutToShow()), this, SLOT(slotShowSearchSetMenu()));
         connect(m_searchSetMenu, SIGNAL(triggered(QAction*)),this, SLOT(slotOpenActionUrl(QAction*)));
 
-
         // 导入
         importAction = new QAction(Utils::getIcon("document-import.png"),tr("&Import..."), this);
         importAction->setShortcut(tr("Ctrl+I"));
@@ -512,13 +511,23 @@ void MainWindow::initStatusbar()
 // 工具栏
 void MainWindow::initToolbar()
 {
+    // 读取preferences
+    Preferences* p = Preferences::instance();
+    QStringList waitItems = p->getWaitToolbarItemList();
+    QStringList selItems = p->getSelToolbarItemList();
+
     toolBar = addToolBar(tr("Tool Bar"));
-    toolBar->addAction(showClassTreeAction);
-    toolBar->addSeparator();
-    toolBar->addAction(homepageAction);
-    toolBar->addAction(inviteAction);
-    toolBar->addAction(bbsAction);
-    toolBar->addSeparator();
+    if(selItems.length() != 0){
+        upateToolBar(waitItems, selItems);
+    }else{
+        // 默认状态下
+        toolBar->addAction(showClassTreeAction);
+        toolBar->addSeparator();
+        toolBar->addAction(homepageAction);
+        toolBar->addAction(inviteAction);
+        toolBar->addAction(bbsAction);
+        toolBar->addSeparator();
+    }
 
     // 空白区域
     QWidget *twidget = new QWidget(this);
@@ -694,8 +703,6 @@ void MainWindow::properties()
     }
 }
 
-
-
 void MainWindow::initUI()
 {
         setWindowTitle(m_appName);
@@ -718,6 +725,9 @@ void MainWindow::initUI()
         connect(q_myTreeList, SIGNAL(RBtnClk()), this, SLOT(treeContextMenuOpened()));
         connect(q_myTreeList, SIGNAL(LBtnClk()), this, SLOT(buildDocList()));
 
+        connect(m_doctable, SIGNAL(RBtnClk()), this, SLOT(tableContextMenuOpened()));
+        //connect(m_doctable, SIGNAL(LBtnClk()), this, SLOT(openDoc()));
+
         setCentralWidget(splitter);
 }
 
@@ -725,6 +735,7 @@ MainWindow::~MainWindow()
 {
     m_autoSaver->changeOccurred();
     m_autoSaver->saveIfNeccessary();
+    Preferences::deleteInstance();
 }
 
 // 创建子文件夹
@@ -1074,12 +1085,116 @@ void MainWindow::customToolBar()
     CustomToolDialog dlg(this);
     dlg.exec();
     if(dlg.update){
-
-        // 写入Setting数据
-
-        // 调整显示
-
+        // 更新工具栏
+        upateToolBar(dlg.waitItems, dlg.sellItems);
     }
+}
+// 更新工具栏
+void MainWindow::upateToolBar(QStringList waitItems, QStringList selItems)
+{
+
+    QList<QAction*> actions = toolBar->actions();
+
+    // 分类树
+    if(selItems.contains("view_tree.png") && ! waitItems.contains("view_tree.png")){
+        if(!actions.contains(showClassTreeAction)){
+             toolBar->addAction(showClassTreeAction);
+        }
+    }
+    if(! selItems.contains("view_tree.png") && waitItems.contains("view_tree.png")){
+         if(actions.contains(showClassTreeAction)){
+             toolBar->removeAction(showClassTreeAction);
+         }
+    }
+    // 全屏
+    if(selItems.contains("view_fullscreen.png") && ! waitItems.contains("view_fullscreen.png")){
+          if(!actions.contains(fullScreenAction)){
+               toolBar->addAction(fullScreenAction);
+          }
+    }
+    if(! selItems.contains("view_fullscreen.png") && waitItems.contains("view_fullscreen.png")){
+          if(actions.contains(fullScreenAction)){
+            toolBar->removeAction(fullScreenAction);
+          }
+    }
+    // 个人主页
+    if(selItems.contains("homepage.png") && ! waitItems.contains("homepage.png")){
+          if(!actions.contains(homepageAction)){
+             toolBar->addAction(homepageAction);
+          }
+    }
+    if(! selItems.contains("homepage.png") && waitItems.contains("homepage.png")){
+          if(actions.contains(homepageAction)){
+             toolBar->removeAction(homepageAction);
+          }
+    }
+    // 邀请朋友
+    if(selItems.contains("invite.png") && ! waitItems.contains("invite.png")){
+          if(!actions.contains(inviteAction)){
+             toolBar->addAction(inviteAction);
+          }
+    }
+    if(! selItems.contains("invite.png") && waitItems.contains("invite.png")){
+         if(actions.contains(inviteAction)){
+             toolBar->removeAction(inviteAction);
+         }
+    }
+    // 论坛
+    if(selItems.contains("forum.png") && ! waitItems.contains("forum.png")){
+         if(!actions.contains(bbsAction)){
+             toolBar->addAction(bbsAction);
+         }
+    }
+    if(!selItems.contains("forum.png") && waitItems.contains("forum.png")){
+          if(actions.contains(bbsAction)){
+              toolBar->removeAction(bbsAction);
+          }
+    }
+    // 另存到移动设备
+    if(selItems.contains("document-savetomobi.png") && ! waitItems.contains("document-savetomobi.png")){
+            if(!actions.contains(saveToMobiAction)){
+               toolBar->addAction(saveToMobiAction);
+            }
+    }
+    if(! selItems.contains("document-savetomobi.png") && waitItems.contains("document-savetomobi.png")){
+           if(actions.contains(saveToMobiAction)){
+               toolBar->removeAction(saveToMobiAction);
+           }
+    }
+    //  导入
+    if(selItems.contains("document-import.png") && ! waitItems.contains("document-import.png")){
+          if(!actions.contains(importAction)){
+             toolBar->addAction(importAction);
+          }
+    }
+    if(! selItems.contains("document-import.png") && waitItems.contains("document-import.png")){
+          if(actions.contains(importAction)){
+             toolBar->removeAction(importAction);
+          }
+    }
+    //  导出
+    if(selItems.contains("document-export.png") && ! waitItems.contains("document-export.png")){
+           if(!actions.contains(exportAction)){
+              toolBar->addAction(exportAction);
+           }
+    }
+    if(! selItems.contains("document-export.png") && waitItems.contains("document-export.png")){
+           if(actions.contains(exportAction)){
+             toolBar->removeAction(exportAction);
+           }
+    }
+    // 插件管理
+    if(selItems.contains("plugin.png") && ! waitItems.contains("plugin.png")){
+         if(!actions.contains(pluginAction)){
+               toolBar->addAction(pluginAction);
+          }
+    }
+    if(! selItems.contains("plugin.png") && waitItems.contains("plugin.png")){
+         if(actions.contains(pluginAction)){
+             toolBar->removeAction(pluginAction);
+          }
+    }
+    toolBar->update();
 }
 
 void MainWindow::about()
@@ -1215,6 +1330,29 @@ void MainWindow::tableTree_currentItemChanged()
         return;
 }
 
+// 打开右键菜单
+void MainWindow::tableContextMenuOpened()
+{
+    // 右键表菜单
+    tablecontextMenu->addAction(makeSubDir);
+    tablecontextMenu->addSeparator();
+    tablecontextMenu->addAction(moveToDir);
+    tablecontextMenu->addAction(delDir);
+    tablecontextMenu->addAction(renameDir);
+    tablecontextMenu->addSeparator();
+    tablecontextMenu->addAction(subDirSort);
+    tablecontextMenu->addSeparator();
+    tablecontextMenu->addAction(showSubDirDoc);
+    tablecontextMenu->addAction(subDirSort);
+    tablecontextMenu->addAction(protectDir);
+    tablecontextMenu->addAction(subDirSort);
+    tablecontextMenu->addAction(propOfDir);
+
+    QPoint pos = m_doctable->getCurPoint();
+    if (tablecontextMenu->actions().count() > 1){
+       tablecontextMenu->exec(m_doctable->viewport()->mapToGlobal(pos));
+    }
+}
 
 void MainWindow::aboutQt()
 {

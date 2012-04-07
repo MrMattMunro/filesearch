@@ -8,8 +8,7 @@ MyListWidget::MyListWidget(QWidget * parent): QWidget(parent)
     listWidget->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
     listWidget->setViewMode(QListView::IconMode);
 
-    QObject::connect(listWidget, SIGNAL(itemSelectionChanged ()),
-            this, SLOT(on_itemSelectionChanged() ));
+    // QObject::connect(listWidget, SIGNAL(itemSelectionChanged ()), this, SLOT(on_itemSelectionChanged() ));
 
     QVBoxLayout *vLayout = new QVBoxLayout;
     vLayout->addWidget(fileName);
@@ -30,10 +29,15 @@ void MyListWidget::addItem(QListWidgetItem *item)
     listWidget->update();
 }
 
+QList<QListWidgetItem*> MyListWidget::getAllItems()
+{
+    return listWidget->getAllItems();
+}
+
 void MyListWidget::on_itemSelectionChanged()
 {
-    QListWidgetItem *currentItem = listWidget->currentItem();
-    QString fileName = currentItem->data(Qt::UserRole).toString();
+//    QListWidgetItem *currentItem = listWidget->currentItem();
+//    QString fileName = currentItem->data(Qt::UserRole).toString();
 
 //    FileThread *ft = new FileThread(fileName);
 //    ft->start(QThread::HighPriority);

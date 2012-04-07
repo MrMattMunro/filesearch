@@ -99,6 +99,7 @@ private slots:
     void exportDlg();
     void treeItemActivated();
     void treeContextMenuOpened();
+    void tableContextMenuOpened();
     void tableTree_currentItemChanged();
     void createSubDir();
     void delSubDir();
@@ -261,6 +262,7 @@ private:
     QMenu *menu_Help;
     QMenu *menu_Tool;
     QMenu *contextMenu;
+    QMenu *tablecontextMenu;
 
     void addDoc(const QString & name);
     void initUI();
@@ -268,6 +270,7 @@ private:
     void initMenus();
     void initStatusbar();
     void initToolbar();
+    void upateToolBar(QStringList waitItems, QStringList selItems);
     void initBrowser();
 
     // browser

@@ -44,6 +44,17 @@ Q_OBJECT
                 bool isShowDocUnderSubTag() { return m_isShowDocUnderSubTag; };
                 void setShowDocUnderSubTag(bool v) { m_isShowDocUnderSubTag = v;  };
 
+                QStringList getSelToolbarItemList() { return m_seltoolbaritemlist; };
+                void setSelToolbarItemList(QStringList v) { m_seltoolbaritemlist = v;  };
+
+                QStringList getWaitToolbarItemList() { return m_waittoolbaritemlist; };
+                void setWaitToolbarItemList(QStringList v) { m_waittoolbaritemlist = v;  };
+
+                QStringList getDefaultToolbarItemList() { return m_defaulttoolbaritemlist; };
+                void setDefaulttoolbaritemlist(QStringList v) { m_defaulttoolbaritemlist = v;  };
+
+                QStringList getDefaultWaitToolbarItemList() { return m_defaultwaittoolbaritemlist; };
+                void setDefaultWaittoolbaritemlist(QStringList v) { m_defaultwaittoolbaritemlist = v;  };
 
 		bool nullHighlight() { return m_nullHighlight; };
 		void setNullHighlight(bool v) { m_nullHighlight = v; };
@@ -201,7 +212,10 @@ Q_OBJECT
                 bool m_isShowToolBar;
                 bool m_isShowDocUnderSub;
                 bool m_isShowDocUnderSubTag;
-
+                QStringList m_seltoolbaritemlist;
+                QStringList m_waittoolbaritemlist;
+                QStringList m_defaulttoolbaritemlist;
+                QStringList m_defaultwaittoolbaritemlist;
 
 		bool m_checkQtVersion;
 		bool m_nullHighlight;
