@@ -10,6 +10,8 @@ for which a new license (GPL+exception) is in place.
 #include <QDir>
 #include <QDesktopServices>
 #include <QApplication>
+#include <QListWidgetItem>
+#include <QObject>
 #include "utils.h"
 
 #define ICON_DIR ":/icons"

@@ -11,6 +11,7 @@ for which a new license (GPL+exception) is in place.
 #include <QDir>
 #include <QIcon>
 #include <QPixmap>
+#include <QListWidgetItem>
 
 //! Various helper functions
 namespace Utils {

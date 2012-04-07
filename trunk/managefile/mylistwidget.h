@@ -8,6 +8,9 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QDragEnterEvent>
+#include <QDragEnterEvent>
+#include <QDebug>
+#include "utils.h"
 
 class ListWidget : public QListWidget
 {
@@ -43,8 +46,16 @@ public:
                 if (event->mimeData()->hasFormat("bla/x-something")) {
                         event->accept();
                         event->setDropAction(Qt::MoveAction);
-                        QByteArray pieceData = event->mimeData()->data("bla/x-something");
-                        addItem(pieceData);
+                        QByteArray txt = event->mimeData()->data("bla/x-something");
+                        QByteArray icon = event->mimeData()->data("bla/n-something");
+                        QListWidgetItem *temp = new QListWidgetItem();
+                        temp->setIcon(Utils::getIcon(icon));
+                        temp->setText(txt);
+                        temp->setData(Qt::UserRole, icon);
+                        qDebug() << "--------------------";
+                        qDebug() << "Item icon:: " << icon;
+                        qDebug() << "Item text:: " << txt;
+                        addItem(temp);
                 } else
                         event->ignore();
         }
@@ -54,13 +65,27 @@ public:
                 QListWidgetItem *item = currentItem();
                 QMimeData *mimeData = new QMimeData;
                 QByteArray ba = item->text().toLatin1().data();
+                QString iconname = item->data(Qt::UserRole).toString();
+                QByteArray iconbyte = iconname.toLatin1().data();
                 QString theText = "bla/x-something";
+                QString name = "bla/n-something";
                 mimeData->setData(theText, ba);
+                mimeData->setData(name, iconbyte);
                 QDrag *drag = new QDrag(this);
                 drag->setMimeData(mimeData);
-                if (drag->exec(Qt::MoveAction) == Qt::MoveAction)
-                        delete takeItem(row(item));
+                if (drag->exec(Qt::MoveAction) == Qt::MoveAction){
+                   delete takeItem(row(item));
+                }
         }
+
+        QList<QListWidgetItem*> getAllItems()
+        {
+           QList<QListWidgetItem*> allitems;
+           foreach(QListWidgetItem* listItem, findItems("*", Qt::MatchWildcard)){
+              allitems.append(listItem);
+           }
+           return allitems;
+       }
 };
 
 
@@ -72,6 +97,7 @@ public:
     MyListWidget(QWidget * parent);
     void setFileName(QString text);
     void addItem(QListWidgetItem *item);
+    QList<QListWidgetItem*> getAllItems();
 
     ListWidget *listWidget;
     QLabel *fileName;

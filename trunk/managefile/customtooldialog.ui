@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>648</width>
-    <height>449</height>
+    <width>723</width>
+    <height>453</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,15 +17,15 @@
    <property name="geometry">
     <rect>
      <x>8</x>
-     <y>9</y>
-     <width>631</width>
-     <height>201</height>
+     <y>150</y>
+     <width>701</width>
+     <height>171</height>
     </rect>
    </property>
    <property name="minimumSize">
     <size>
      <width>0</width>
-     <height>30</height>
+     <height>0</height>
     </size>
    </property>
    <property name="maximumSize">
@@ -41,9 +41,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>20</y>
-      <width>611</width>
-      <height>171</height>
+      <y>0</y>
+      <width>671</width>
+      <height>151</height>
      </rect>
     </property>
    </widget>
@@ -52,9 +52,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>310</y>
-     <width>631</width>
-     <height>65</height>
+     <y>340</y>
+     <width>701</width>
+     <height>61</height>
     </rect>
    </property>
    <property name="maximumSize">
@@ -69,9 +69,9 @@
    <widget class="QLabel" name="defaultTool">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>10</x>
       <y>20</y>
-      <width>561</width>
+      <width>591</width>
       <height>41</height>
      </rect>
     </property>
@@ -83,8 +83,8 @@
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>480</x>
-     <y>410</y>
+     <x>550</x>
+     <y>420</y>
      <width>156</width>
      <height>23</height>
     </rect>
@@ -103,10 +103,22 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>220</y>
-     <width>631</width>
-     <height>81</height>
+     <y>30</y>
+     <width>701</width>
+     <height>111</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
    </property>
    <property name="acceptDrops">
     <bool>false</bool>
@@ -118,10 +130,22 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>20</y>
-      <width>611</width>
-      <height>51</height>
+      <y>-10</y>
+      <width>671</width>
+      <height>111</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
     </property>
    </widget>
   </widget>

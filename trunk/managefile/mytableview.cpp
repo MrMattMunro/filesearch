@@ -14,7 +14,7 @@
 
 static int n_orow;
 
-MyTableView::MyTableView(QWidget * parent) :QTableView(parent)
+MyTableView::MyTableView(QWidget * parent) :QTableView(parent), mouseStatus(true)
 {
     delegate = new MyItemDelegate(parent);
     themodel = new MyStandardItemModel(parent);
@@ -40,7 +40,7 @@ MyTableView::MyTableView(QWidget * parent) :QTableView(parent)
 
 }
 
-void MyTableView::leaveEvent ( QEvent * event )
+void MyTableView::leaveEvent (QEvent * event )
 {
         MyStandardItemModel *m = (MyStandardItemModel *)model();
         m->setHoverRow(-1);
@@ -103,7 +103,6 @@ void MyTableView::buildDocList(QStringList files)
     qDebug("buildDocList start");
 
     themodel->setRowCount(files.size());
-
     themodel->setColumnCount(1);
 
     for (int var = 0; var < files.size(); ++var) {
@@ -194,6 +193,7 @@ void MyTableView::mouseMoveEvent(QMouseEvent * event)
 {
     // ¸Ä±äÑÕÉ«
     int nrow = indexAt(event->pos()).row();
+    curPoint = event->pos();
     updateRow(nrow);
 
     int column=this->columnAt(event->x());
@@ -205,4 +205,52 @@ void MyTableView::mouseMoveEvent(QMouseEvent * event)
     }
 }
 
+// ×ó¼üË«»÷
+void MyTableView::mouseDoubleClickEvent(QMouseEvent *event)
+{
+
+        if(true == mouseStatus && Qt::LeftButton == event->button())
+        {
+                QModelIndex  index = this->currentIndex();
+                QStandardItem *curItem = themodel->itemFromIndex(index);
+
+                QString curPath = qvariant_cast<QString>(curItem->data());
+//                curIndex = index;
+//                curTitle = index.data().toString();
+
+                emit LBtn_DbClk();
+        }
+}
+// ÓÒ¼üµ¥»÷
+void MyTableView::mousePressEvent(QMouseEvent *event)
+{
+
+        // ×ó¼üÍË³ö
+        if( Qt::LeftButton == event->button()){
+          return;
+        }
+
+        if(true == mouseStatus )
+        {
+            QModelIndex  index = this->currentIndex();
+            QStandardItem *curItem = themodel->itemFromIndex(index);
+
+            QString curPath = qvariant_cast<QString>(curItem->data());
+            curPoint = event->pos();
+            emit RBtn_Clk();
+        }
+}
+
+QPoint MyTableView::getCurPoint(){
+    return curPoint;
+}
+void MyTableView::enableMouse(bool yesOrNo)
+{
+        mouseStatus = yesOrNo;
+}
+
+bool MyTableView::getMouseStatus()
+{
+        return mouseStatus;
+}
 
