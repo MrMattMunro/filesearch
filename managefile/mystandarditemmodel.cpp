@@ -14,7 +14,7 @@ QVariant MyStandardItemModel::data( const QModelIndex & index, int role) const
     if (Qt::BackgroundColorRole == role)
      {
          if (index.row() == hoverRow){
-                return 	QBrush(QColor(185, 210, 235));
+             return QBrush(QColor(185, 210, 235));
          }
      }
 
@@ -27,7 +27,10 @@ QVariant MyStandardItemModel::data( const QModelIndex & index, int role) const
 }
 
 // ¼ÇÂ¼onhoveRow
-void MyStandardItemModel::setHoverRow(int row) {hoverRow = row;}
+void MyStandardItemModel::setHoverRow(int row) {
+    hoverRow = row;
+
+}
 
 QVariant MyStandardItemModel::headerData(int section,
                                          Qt::Orientation orientation,

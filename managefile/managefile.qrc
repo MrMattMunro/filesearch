@@ -120,5 +120,7 @@
         <file>icons/png.ico</file>
         <file>icons/folder.ico</file>
         <file>icons/defaulttoolbar.png</file>
+        <file>icons/vip.png</file>
+        <file>browser/htmls/notfound.html</file>
     </qresource>
 </RCC>

@@ -99,7 +99,6 @@ private slots:
     void exportDlg();
     void treeItemActivated();
     void treeContextMenuOpened();
-    void tableContextMenuOpened();
     void tableTree_currentItemChanged();
     void createSubDir();
     void delSubDir();
@@ -120,7 +119,10 @@ private slots:
     void slotHome();
 
     void customToolBar();
-    // browser
+    // doc table start
+    void openDocInTab();
+    // doc table end
+    // browser start
     void save();
 
     void slotLoadProgress(int);
@@ -170,6 +172,7 @@ private slots:
     void updateBookmarksToolbarActionText(bool visible);
     void slotShowSearchSetMenu();
     //void resizeSpace();
+    //browser end
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -182,20 +185,16 @@ private:
     QString m_appName;
     QString m_lang;
     QString m_baseDir;
+    // 是否显示文件夹下文件
     bool isShowDocUnderSub;
     bool isShowDocUnderTag;
 
-    void populateFeedsMenu();
-
-
-    //Ui::MainWindow ui;
     QSplitter * splitter;
     QToolBar *toolBar;
     MyTableView *m_doctable;
     myTreeList *q_myTreeList;
     // 空白区域
     QWidget *sapcewidget;
-
     QAction *m_searchSetAction;
 
     QAction *importAction;
@@ -270,10 +269,11 @@ private:
     void initMenus();
     void initStatusbar();
     void initToolbar();
+    void initDocTableActions();
     void upateToolBar(QStringList waitItems, QStringList selItems);
     void initBrowser();
 
-    // browser
+    // browser start
     void loadDefaultState();
     void setupMenu();
     void setupToolBar();
@@ -306,6 +306,7 @@ private:
     QIcon m_stopIcon;
 
     QString m_lastSearch;
+    // browser end
 
 };
 

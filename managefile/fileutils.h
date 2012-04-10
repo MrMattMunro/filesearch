@@ -10,6 +10,8 @@ for which a new license (GPL+exception) is in place.
 
 #include <QFileInfo>
 #include <browser/webview.h>
+#include <QAxObject>
+#include <QAxWidget>
 
 //! Various helper functions
 namespace FileUtils {
@@ -31,7 +33,9 @@ QStringList readAllDatFile(QString dirpath,  QStringList lines);
 int openFile(const QString &filepath);
 int openTxtFile(const QString &filepath, WebView &webview);
 int readExcelFile(const QString &filepath);
-int openWordFile(const QString &filepath);
+int newWordFile(const QString &filepath);
+QAxWidget* openWordFile(const QString &filepath);
+
 };
 
 #endif

@@ -684,6 +684,11 @@ void TabWidget::loadUrlInCurrentTab(const QUrl &url)
     }
 }
 
+void TabWidget::loadDocInCurrentTab(const QString &filepath)
+{
+
+}
+
 void TabWidget::nextTab()
 {
     int next = currentIndex() + 1;
