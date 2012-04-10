@@ -4,7 +4,7 @@
 
 #include<QItemDelegate>
 
-class MyItemDelegate:public QItemDelegate
+class MyItemDelegate: public QItemDelegate
 {
 public:
         MyItemDelegate(QObject * parent=0);

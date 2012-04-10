@@ -721,12 +721,11 @@ void MainWindow::initUI()
         splitter->addWidget(q_myTreeList);
         splitter->addWidget(m_doctable);
 
-        // connect(q_myTreeList, SIGNAL(LBtnDbClk()), this, SLOT(showChildTree()));
         connect(q_myTreeList, SIGNAL(RBtnClk()), this, SLOT(treeContextMenuOpened()));
         connect(q_myTreeList, SIGNAL(LBtnClk()), this, SLOT(buildDocList()));
 
-        connect(m_doctable, SIGNAL(RBtnClk()), this, SLOT(tableContextMenuOpened()));
-        //connect(m_doctable, SIGNAL(LBtnClk()), this, SLOT(openDoc()));
+        // 后期需要调用主界面的动作
+        connect(m_doctable, SIGNAL(LBtnDbClk()), this, SLOT(openDocInTab()));
 
         setCentralWidget(splitter);
 }
@@ -1330,29 +1329,6 @@ void MainWindow::tableTree_currentItemChanged()
         return;
 }
 
-// 打开右键菜单
-void MainWindow::tableContextMenuOpened()
-{
-    // 右键表菜单
-    tablecontextMenu->addAction(makeSubDir);
-    tablecontextMenu->addSeparator();
-    tablecontextMenu->addAction(moveToDir);
-    tablecontextMenu->addAction(delDir);
-    tablecontextMenu->addAction(renameDir);
-    tablecontextMenu->addSeparator();
-    tablecontextMenu->addAction(subDirSort);
-    tablecontextMenu->addSeparator();
-    tablecontextMenu->addAction(showSubDirDoc);
-    tablecontextMenu->addAction(subDirSort);
-    tablecontextMenu->addAction(protectDir);
-    tablecontextMenu->addAction(subDirSort);
-    tablecontextMenu->addAction(propOfDir);
-
-    QPoint pos = m_doctable->getCurPoint();
-    if (tablecontextMenu->actions().count() > 1){
-       tablecontextMenu->exec(m_doctable->viewport()->mapToGlobal(pos));
-    }
-}
 
 void MainWindow::aboutQt()
 {
@@ -1964,6 +1940,7 @@ void MainWindow::slotShowWindow()
         }
     }
 }
+
 // 搜索设置
 void MainWindow::slotOpenActionUrl(QAction *action)
 {
@@ -1996,5 +1973,22 @@ void MainWindow::geometryChangeRequested(const QRect &geometry)
 {
     setGeometry(geometry);
 }
+// 以tab页打开Doc
+void MainWindow::openDocInTab()
+{
+    m_tabWidget->newTab();
+    QString filepath = m_doctable->getCurFilePath();
+
+    if (!currentTab() ){
+       return;
+    }
+
+    openWordFile
+    m_tabWidget->currentLineEdit()->setText(QString::fromUtf8(filepath));
+
+    m_tabWidget->loadUrlInCurrentTab(url);
+    loadUrl(QUrl());
+}
+
 
 

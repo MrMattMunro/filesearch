@@ -367,8 +367,26 @@ int FileUtils::readExcelFile(const QString &filepath){
     return 0;
 }
 
-// webView打开Excel文件
-int FileUtils::openWordFile(const QString &filepath){
+// 新建Word文档
+int FileUtils::newWordFile(const QString &filepath){
+       // 文件不存在
+       QFile file(filepath);
+       if(!file.exists()){
+            return -1;
+       }
+       QAxWidget word("Word.Application");
+       word.setProperty("Visible", true);
+       QAxObject * documents = word.querySubObject("Documents");
+       documents->dynamicCall("Add (void)");
+       QAxObject * document = word.querySubObject("ActiveDocument");
+       document->dynamicCall("SaveAs (const QString&)", QString(filepath));
+       document->dynamicCall("Close (boolean)", false);
+       word.dynamicCall("Quit (void)");
+
+}
+
+// 打开Word文档
+QAxWidget* FileUtils::openWordFile(const QString &filepath){
 
        // 文件不存在
        QFile file(filepath);
@@ -376,25 +394,26 @@ int FileUtils::openWordFile(const QString &filepath){
             return -1;
        }
 
-
-//    QAxWidget *wordActive = new QAxWidget;
-//    wordActive->setControl("Word.Application");
-//    QAxObject* newFile = wordActive->querySubObject("Open(const QString&)", filepath);
-
-       QAxWidget word("Word.Application");
-       word.setProperty("Visible", true);
-
-       QAxObject * documents = word.querySubObject("Documents");
-       documents->dynamicCall("Add (void)");
-       QAxObject * document = word.querySubObject("ActiveDocument");
-       document->dynamicCall("SaveAs (const QString&)", QString("e:/test/docbyqt.doc"));
-       document->dynamicCall("Close (boolean)", false);
-       word.dynamicCall("Quit (void)");
-
-
-      // QAxWidget AxApplication = new QAxWidget(QString::fromUtf8("c:\\temp\\xxx.doc"),0);
-
+      QAxWidget *wordActive = new QAxWidget;
+      wordActive->setControl("Word.Application");
+      wordActive.setProperty("Visible", true);
+      wordActive->querySubObject("Open(const QString&)", filepath);
+      return wordActive;
 }
+
+// 取得文件后缀名
+QString FileUtils::suffix(const QString &filepath){
+    // 文件不存在
+    QFile file(filepath);
+    if(!file.exists()){
+         return -1;
+    }
+
+    QFileInfo temDir(filepath);
+    // 扩展名
+    return temDir.suffix();
+}
+
 
 
 
