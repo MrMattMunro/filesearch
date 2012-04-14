@@ -117,7 +117,8 @@ FORMS    += mainwindow.ui \
     createtagdialog.ui \
     propoftagdialog.ui \
     movetotagdialog.ui \
-    customtooldialog.ui
+    customtooldialog.ui \
+    testUI.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -136,7 +137,66 @@ OTHER_FILES += \
     sql/mf_document_relate.sql \
     sql/mf_document_param.sql \
     sql/mf_document.sql \
-    sql/mf_deleted_guid.sql
+    sql/mf_deleted_guid.sql \
+    docview/½Ó¿Ú½Å±¾.js \
+    docview/viewdoc.htm \
+    docview/ole32.dll \
+    docview/dsoframer.ocx \
+    docview/jquery/plugin/jquery.query.js \
+    docview/jquery/plugin/jquery.pagination.js \
+    docview/jquery/plugin/jquery.blockUI.js \
+    docview/jquery/js/jquery-ui-1.8.16.custom.min.js \
+    docview/jquery/js/jquery-1.6.2.min.js \
+    docview/jquery/development-bundle/themes/base/jquery.ui.theme.css \
+    docview/jquery/development-bundle/themes/base/jquery.ui.tabs.css \
+    docview/jquery/development-bundle/themes/base/jquery.ui.slider.css \
+    docview/jquery/development-bundle/themes/base/jquery.ui.selectable.css \
+    docview/jquery/development-bundle/themes/base/jquery.ui.resizable.css \
+    docview/jquery/development-bundle/themes/base/jquery.ui.progressbar.css \
+    docview/jquery/development-bundle/themes/base/jquery.ui.dialog.css \
+    docview/jquery/development-bundle/themes/base/jquery.ui.datepicker.css \
+    docview/jquery/development-bundle/themes/base/jquery.ui.core.css \
+    docview/jquery/development-bundle/themes/base/jquery.ui.button.css \
+    docview/jquery/development-bundle/themes/base/jquery.ui.base.css \
+    docview/jquery/development-bundle/themes/base/jquery.ui.autocomplete.css \
+    docview/jquery/development-bundle/themes/base/jquery.ui.all.css \
+    docview/jquery/development-bundle/themes/base/jquery.ui.accordion.css \
+    docview/jquery/development-bundle/themes/base/images/ui-icons_cd0a0a_256x240.png \
+    docview/jquery/development-bundle/themes/base/images/ui-icons_888888_256x240.png \
+    docview/jquery/development-bundle/themes/base/images/ui-icons_454545_256x240.png \
+    docview/jquery/development-bundle/themes/base/images/ui-icons_222222_256x240.png \
+    docview/jquery/development-bundle/themes/base/images/ui-icons_2e83ff_256x240.png \
+    docview/jquery/development-bundle/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png \
+    docview/jquery/development-bundle/themes/base/images/ui-bg_glass_95_fef1ec_1x400.png \
+    docview/jquery/development-bundle/themes/base/images/ui-bg_glass_75_e6e6e6_1x400.png \
+    docview/jquery/development-bundle/themes/base/images/ui-bg_glass_75_dadada_1x400.png \
+    docview/jquery/development-bundle/themes/base/images/ui-bg_glass_65_ffffff_1x400.png \
+    docview/jquery/development-bundle/themes/base/images/ui-bg_glass_55_fbf9ee_1x400.png \
+    docview/jquery/development-bundle/themes/base/images/ui-bg_flat_75_ffffff_40x100.png \
+    docview/jquery/development-bundle/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png \
+    docview/jquery/css/ui-darkness/images/ui-icons_ffffff_256x240.png \
+    docview/jquery/css/ui-darkness/images/ui-icons_cccccc_256x240.png \
+    docview/jquery/css/ui-darkness/images/ui-icons_a83300_256x240.png \
+    docview/jquery/css/ui-darkness/images/ui-icons_222222_256x240.png \
+    docview/jquery/css/ui-darkness/images/ui-icons_4b8e0b_256x240.png \
+    docview/jquery/css/ui-darkness/images/ui-bg_inset-soft_30_f58400_1x100.png \
+    docview/jquery/css/ui-darkness/images/ui-bg_inset-soft_25_000000_1x100.png \
+    docview/jquery/css/ui-darkness/images/ui-bg_highlight-soft_80_eeeeee_1x100.png \
+    docview/jquery/css/ui-darkness/images/ui-bg_gloss-wave_25_333333_500x100.png \
+    docview/jquery/css/ui-darkness/images/ui-bg_glass_40_ffc73d_1x400.png \
+    docview/jquery/css/ui-darkness/images/ui-bg_glass_40_0078a3_1x400.png \
+    docview/jquery/css/ui-darkness/images/ui-bg_glass_20_555555_1x400.png \
+    docview/jquery/css/ui-darkness/images/ui-bg_flat_50_5c5c5c_40x100.png \
+    docview/jquery/css/ui-darkness/images/ui-bg_flat_30_cccccc_40x100.png \
+    docview/jquery/css/ui-darkness/jquery-ui-1.8.16.custom.css
+
+
+
+
+
+
+
+
 
 
 

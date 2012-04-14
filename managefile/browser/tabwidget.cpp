@@ -46,6 +46,9 @@
 #include "history.h"
 #include "urllineedit.h"
 #include "webview.h"
+#include "utils.h"
+#include "fileutils.h"
+#include "preferences.h";
 
 #include <QtGui/QClipboard>
 #include <QtGui/QCompleter>
@@ -56,6 +59,8 @@
 #include <QtGui/QStackedWidget>
 #include <QtGui/QStyle>
 #include <QtGui/QToolButton>
+#include <QAxWidget>
+
 
 #include <QtCore/QDebug>
 
@@ -371,6 +376,10 @@ WebView *TabWidget::currentWebView() const
 {
     return webView(currentIndex());
 }
+QAxWidget *TabWidget::currentDocView(QString filepath) const
+{
+    return docView(currentIndex(), filepath);
+}
 
 QLineEdit *TabWidget::lineEdit(int index) const
 {
@@ -394,6 +403,25 @@ WebView *TabWidget::webView(int index) const
             that->closeTab(0);
             that->setUpdatesEnabled(true);
             return currentWebView();
+        }
+    }
+    return 0;
+}
+
+QAxWidget *TabWidget::docView(int index, QString filepath) const
+{
+    QWidget *widget = this->widget(index);
+    if (QAxWidget *docView = qobject_cast<QAxWidget*>(widget)) {
+        return docView;
+    } else {
+        // optimization to delay creating the first webview
+        if (count() == 1) {
+            TabWidget *that = const_cast<TabWidget*>(this);
+            that->setUpdatesEnabled(false);
+            that->newDocTab(false, filepath);
+            that->closeTab(0);
+            that->setUpdatesEnabled(true);
+            return currentDocView(filepath);
         }
     }
     return 0;
@@ -480,6 +508,109 @@ WebView *TabWidget::newTab(bool makeCurrent)
         currentChanged(currentIndex());
     emit tabsChanged();
     return webView;
+}
+
+QAxWidget *TabWidget::newDocTab(bool makeCurrent, QString filepath)
+{
+    // line edit
+    UrlLineEdit *urlLineEdit = new UrlLineEdit;
+    QLineEdit *lineEdit = urlLineEdit->lineEdit();
+    if (!m_lineEditCompleter && count() > 0) {
+        HistoryCompletionModel *completionModel = new HistoryCompletionModel(this);
+        completionModel->setSourceModel(BrowserApplication::historyManager()->historyFilterModel());
+        m_lineEditCompleter = new QCompleter(completionModel, this);
+        // Should this be in Qt by default?
+        QAbstractItemView *popup = m_lineEditCompleter->popup();
+        QListView *listView = qobject_cast<QListView*>(popup);
+        if (listView)
+            listView->setUniformItemSizes(true);
+    }
+    lineEdit->setCompleter(m_lineEditCompleter);
+    connect(lineEdit, SIGNAL(returnPressed()), this, SLOT(lineEditReturnPressed()));
+    m_lineEdits->addWidget(urlLineEdit);
+    m_lineEdits->setSizePolicy(lineEdit->sizePolicy());
+
+    // optimization to delay creating the more expensive WebView, history, etc
+    if (count() == 0) {
+        QWidget *emptyWidget = new QWidget;
+        QPalette p = emptyWidget->palette();
+        p.setColor(QPalette::Window, palette().color(QPalette::Base));
+        emptyWidget->setPalette(p);
+        emptyWidget->setAutoFillBackground(true);
+        disconnect(this, SIGNAL(currentChanged(int)),
+            this, SLOT(currentChanged(int)));
+        addTab(emptyWidget, tr("(Untitled)"));
+        connect(this, SIGNAL(currentChanged(int)),
+            this, SLOT(currentChanged(int)));
+        currentChanged(currentIndex());
+        return 0;
+    }
+
+    // webview
+    filepath = QDir::fromNativeSeparators(filepath);
+    QAxWidget* oaxWidget = getDocWidget(filepath);
+    QFileInfo fileinfo(filepath);
+    addTab(oaxWidget, fileinfo.fileName());
+
+    if (makeCurrent){
+        setCurrentWidget(oaxWidget);
+    }
+
+
+    if (count() == 1){
+       currentChanged(currentIndex());
+    }
+
+    emit tabsChanged();
+    return oaxWidget;
+}
+// 取得文档Widget
+QAxWidget* TabWidget::getDocWidget(QString filepath)
+{
+    QString suffer = FileUtils::suffix(filepath);
+    QFileInfo fileinfo(filepath);
+
+    QString isExisted = fileinfo.exists()? "1" : "0";
+    Preferences* p = Preferences::instance();
+
+    QAxWidget* myWebBrowser = new QAxWidget();
+    // 打开Office文档
+    if(p->officedoc().contains(suffer) || p->htmls().contains(suffer)  ){
+        // 设置IE控件
+        myWebBrowser->setControl(QString::fromUtf8("{8856F961-340A-11D0-A96B-00C04FD705A2}"));
+        myWebBrowser->setObjectName(QString::fromUtf8("WebBrowser"));
+        myWebBrowser->setFocusPolicy(Qt::StrongFocus);
+        QDir pathDir = Utils::directoryOf("docview");
+        QString path = pathDir.absolutePath();
+        path.append(QDir::separator());
+        path.append("viewdoc.htm");
+        path.append("?path=");
+        path.append(filepath);
+        path.append("&isExisted=");
+        path.append(isExisted);
+
+        myWebBrowser->dynamicCall("Navigate(const QString&)", path);
+    }
+
+    // 打开pdf文档 TODO
+    if(p->pdf().contains(suffer)){
+        // 设置pdf控件
+        myWebBrowser->setControl(QString::fromUtf8("{8856F961-340A-11D0-A96B-00C04FD705A2}"));
+        myWebBrowser->setObjectName(QString::fromUtf8("WebBrowser"));
+        myWebBrowser->setFocusPolicy(Qt::StrongFocus);
+        QDir pathDir = Utils::directoryOf("docview");
+        QString path = pathDir.absolutePath();
+        path.append(QDir::separator());
+        path.append("viewdoc.htm");
+        path.append("?path=");
+        path.append(filepath);
+        path.append("?isExisted=");
+        path.append(isExisted);
+
+        myWebBrowser->dynamicCall("Navigate(const QString&)", path);
+    }
+
+    return myWebBrowser;
 }
 
 void TabWidget::reloadAllTabs()
@@ -684,9 +815,10 @@ void TabWidget::loadUrlInCurrentTab(const QUrl &url)
     }
 }
 
-void TabWidget::loadDocInCurrentTab(const QString &filepath)
-{
-
+// 打开文档的tab
+void TabWidget::loadDocInCurrentTab(QString filepath)
+{  
+    currentDocView(filepath);
 }
 
 void TabWidget::nextTab()

@@ -6,6 +6,7 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <browser/webview.h>
+#include <preferences.h>
 #include <QAxObject>
 #include <QAxWidget>
 
@@ -385,21 +386,22 @@ int FileUtils::newWordFile(const QString &filepath){
 
 }
 
-// 打开Word文档
-QAxWidget* FileUtils::openWordFile(const QString &filepath){
+//// 打开Office文档
+//QAxWidget FileUtils::openOfficeFileInTab(const QString &filepath){
+//      // 文件不存在
+//      QAxWidget wordActive("Word.Application");
+//      QAxObject* word = wordActive.querySubObject("ActiveDocument");
 
-       // 文件不存在
-       QFile file(filepath);
-       if(!file.exists()){
-            return -1;
-       }
-
-      QAxWidget *wordActive = new QAxWidget;
-      wordActive->setControl("Word.Application");
-      wordActive.setProperty("Visible", true);
-      wordActive->querySubObject("Open(const QString&)", filepath);
-      return wordActive;
-}
+//      // 读取preferences
+//      Preferences* p = Preferences::instance();
+//      QStringList wordtypes = p->word();
+//      QString suffixname =  suffix(filepath);
+//      if(wordtypes.contains(suffixname)){
+//         word->dynamicCall("SetVisible(bool)", true );
+//         word->querySubObject("Open(const QString&)", QString(filepath));
+//         return wordActive;
+//      }
+//}
 
 // 取得文件后缀名
 QString FileUtils::suffix(const QString &filepath){
@@ -411,7 +413,7 @@ QString FileUtils::suffix(const QString &filepath){
 
     QFileInfo temDir(filepath);
     // 扩展名
-    return temDir.suffix();
+    return "*." + temDir.suffix();
 }
 
 

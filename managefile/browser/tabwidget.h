@@ -45,6 +45,7 @@
 #include <QtGui/QTabBar>
 
 #include <QtGui/QShortcut>
+#include <QAxWidget>
 /*
     Tab bar with a few more features such as a context menu and shortcuts
  */
@@ -172,6 +173,12 @@ public:
     QLineEdit *lineEdit(int index) const;
     int webViewIndex(WebView *webView) const;
 
+    QAxWidget *currentDocView(QString filepath) const;
+    QAxWidget *docView(int index, QString filepath) const;
+
+    // office
+    QAxWidget *getDocWidget(QString filepath);
+
     QByteArray saveState() const;
     bool restoreState(const QByteArray &state);
 
@@ -182,7 +189,10 @@ protected:
 
 public slots:
     void loadUrlInCurrentTab(const QUrl &url);
+    // 打开文档的tab
+    void loadDocInCurrentTab(QString filepath);
     WebView *newTab(bool makeCurrent = true);
+    QAxWidget *newDocTab(bool makeCurrent, QString filepath);
     void cloneTab(int index = -1);
     void closeTab(int index = -1);
     void closeOtherTabs(int index);

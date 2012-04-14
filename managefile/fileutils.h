@@ -34,7 +34,7 @@ int openFile(const QString &filepath);
 int openTxtFile(const QString &filepath, WebView &webview);
 int readExcelFile(const QString &filepath);
 int newWordFile(const QString &filepath);
-QAxWidget* openWordFile(const QString &filepath);
+QString suffix(const QString &filepath);
 
 };
 

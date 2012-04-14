@@ -1976,19 +1976,16 @@ void MainWindow::geometryChangeRequested(const QRect &geometry)
 // ÒÔtabÒ³´ò¿ªDoc
 void MainWindow::openDocInTab()
 {
-    m_tabWidget->newTab();
     QString filepath = m_doctable->getCurFilePath();
+//    if (!currentTab() ){
+//       return;
+//    }
 
-    if (!currentTab() ){
-       return;
-    }
-
-    openWordFile
-    m_tabWidget->currentLineEdit()->setText(QString::fromUtf8(filepath));
-
-    m_tabWidget->loadUrlInCurrentTab(url);
-    loadUrl(QUrl());
+    m_tabWidget->currentLineEdit()->setText(filepath);
+    m_tabWidget->newDocTab(true, filepath);
+    m_tabWidget->loadDocInCurrentTab(filepath);
 }
+
 
 
 
