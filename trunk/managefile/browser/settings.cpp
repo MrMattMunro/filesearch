@@ -115,7 +115,9 @@ void SettingsDialog::loadFromSettings()
     settings.endGroup();
 
     settings.beginGroup(QLatin1String("general"));
-    openLinksIn->setCurrentIndex(settings.value(QLatin1String("openLinksIn"), openLinksIn->currentIndex()).toInt());
+    // openLinksIn->setCurrentIndex(settings.value(QLatin1String("openLinksIn"), openLinksIn->currentIndex()).toInt());
+    // open in an tab window
+    openLinksIn->setCurrentIndex(0);
 
     settings.endGroup();
 
@@ -191,7 +193,8 @@ void SettingsDialog::saveToSettings()
     settings.endGroup();
 
     settings.beginGroup(QLatin1String("general"));
-    settings.setValue(QLatin1String("openLinksIn"), openLinksIn->currentIndex());
+    // settings.setValue(QLatin1String("openLinksIn"), openLinksIn->currentIndex());
+    settings.setValue(QLatin1String("openLinksIn"), 0);
     settings.endGroup();
 
     settings.beginGroup(QLatin1String("history"));

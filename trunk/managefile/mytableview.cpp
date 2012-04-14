@@ -357,7 +357,8 @@ void MyTableView::mouseDoubleClickEvent(QMouseEvent *event)
 
         if(true == mouseStatus && Qt::LeftButton == event->button())
         {
-                QModelIndex  index = this->currentIndex();
+                curPoint = event->pos();
+                QModelIndex  index = indexAt(curPoint);
                 QStandardItem *curItem = themodel->itemFromIndex(index);
                 curPath = qvariant_cast<QString>(curItem->data(Qt::ToolTipRole));
                 emit LBtnDbClk();

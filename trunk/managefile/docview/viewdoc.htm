@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>DSOframer接口演示说明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<script type="text/javascript" src="./jquery/js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="./jquery/js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="./jquery/plugin/jquery.blockUI.js"></script>
+<script type="text/javascript" src="./jquery/plugin/jquery.pagination.js"></script>
+<script type="text/javascript" src="./jquery/plugin/jquery.query.js"></script>
+ <SCRIPT ID=clientEventHandlersJS LANGUAGE=javascript>
+<!--
+ 
+function command_onclick() {
+ 	eval(document.all.commandtext.value);
+ }
+
+function FramerControl1_NotifyCtrlReady() {
+	alert("事件 NotifyCtrlReady 触发 ");
+}
+
+//-->
+</SCRIPT>
+ 
+<SCRIPT LANGUAGE=javascript FOR=FramerControl1 EVENT=NotifyCtrlReady>
+<!--
+ FramerControl1_NotifyCtrlReady()
+//-->
+</SCRIPT>
+</head>
+ 
+<body>
+ 
+<TABLE bgColor=#0000FF border=0 cellPadding=4 cellSpacing=1 width=98%>
+  <TR bgColor=#e5ecf9>
+    <TD align="center" bgcolor="#e5ecf9"><div align="left"><font color="#000000">DSOFramer接口演示</font> </div></TD>
+  </TR>
+  <FORM action="#" method="post" name="form1" >
+  <TR bgColor=#ffffff>
+    <TD bgcolor="#ffffff"><div align="left">从 接口脚本 中复制到下面，然后点击“执行”按钮，系统就会自动执行此 JavaScript 脚本： 
+          <textarea style="WIDTH: 900px; HEIGHT: 100px" name=commandtext cols=28></textarea>
+    </div></TD>
+    </TR>
+  <TR bgColor=#ffffff>
+    <TD align=center><div align="left">
+      <INPUT type=button value=执行 name="command" LANGUAGE=javascript onclick="return command_onclick()">
+    </div></TD>
+  </TR>
+  <TR bgColor=#ffffff >
+    <TD width="100%" height="100%" align=center >
+<OBJECT classid="clsid:00460182-9E5E-11D5-B7C8-B8269041DD57"  id=FramerControl1 style="LEFT: 0px; TOP: 0px; WIDTH: 100%; HEIGHT: 750px" VIEWASTEXT>
+	<PARAM NAME="_ExtentX" VALUE="6350">
+	<PARAM NAME="_ExtentY" VALUE="6350">
+	<PARAM NAME="BorderColor" VALUE="-2147483632">
+	<PARAM NAME="BackColor" VALUE="-2147483643">
+	<PARAM NAME="ForeColor" VALUE="-2147483640">
+	<PARAM NAME="TitlebarColor" VALUE="-2147483635">
+	<PARAM NAME="TitlebarTextColor" VALUE="-2147483634">
+	<PARAM NAME="BorderStyle" VALUE="1">
+	<PARAM NAME="Titlebar" VALUE="1">
+	<PARAM NAME="Toolbars" VALUE="1">
+	<PARAM NAME="Menubar" VALUE="1"></OBJECT>
+</TD>
+  </TR>
+</FORM></TABLE>
+</body>
+</html> 

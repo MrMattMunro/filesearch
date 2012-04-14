@@ -231,10 +231,11 @@ int main(int argc, char *argv[])
 
 
     // 初始化数据库
-    Database::execSql(Database::getSql("mf_deleted_guid.sql"));
+    Database::execSql(Database::getSql("mf_document_related.sql"));
+    Database::execSql(Database::getSql("mf_dir.sql"));
+    Database::execSql(Database::getSql("mf_document_note.sql"));
     Database::execSql(Database::getSql("mf_document.sql"));
-    Database::execSql(Database::getSql("mf_document_param.sql"));
-    Database::execSql(Database::getSql("mf_document_relate.sql"));
+    Database::execSql(Database::getSql("mf_document_related.sql"));
     Database::execSql(Database::getSql("mf_document_tag.sql"));
     Database::execSql(Database::getSql("mf_tag.sql"));
 
