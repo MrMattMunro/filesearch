@@ -79,7 +79,7 @@ Preferences::Preferences(QObject *parent)
                      << "*.txt" << "*.ini" << "*.bar" << "*.inf"
                      << "*.rm" << "*.rmvb" << "*.avi" << "*.mpg" << "*.mlv" << "*.mpe" << "*.mpeg" << "*.m2v";
 
-        m_officedoc << "*.doc" << "*.docx" << "*.xls" << "*.xlsx" << "*.ppt" << "*.pptx";
+        m_officedoc << "*.doc" << "*.docx" << "*.xls" << "*.xlsx" << "*.ppt" << "*.pptx" << "*.msg";
         m_word << "*.doc" << "*.docx";
         m_excel <<"*.xls" << "*.xlsx";
         m_ppt << "*.ppt" << "*.pptx";

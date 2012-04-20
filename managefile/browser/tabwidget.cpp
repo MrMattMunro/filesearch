@@ -556,7 +556,6 @@ QAxWidget *TabWidget::newDocTab(bool makeCurrent, QString filepath)
         setCurrentWidget(oaxWidget);
     }
 
-
     if (count() == 1){
        currentChanged(currentIndex());
     }

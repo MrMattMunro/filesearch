@@ -7,17 +7,20 @@
 #include<QMenu>
 #include<QMessageBox>
 #include<QDesktopServices>
+#include<QProcess>
+#include<QDebug>
 
 #include"mytableview.h"
 #include"fileUtils.h"
 #include "preferences.h"
 #include "utils.h"
-
-#ifndef NDEBUG
-#include<QDebug>
-#endif
+#include "exportconvertdialog.h"
+#include "docnotedialog.h"
+#include "Common.h"
+#include "QSettings"
 
 static int n_orow;
+static int n_selrow;
 
 MyTableView::MyTableView(QWidget * parent) : QTableView(parent), mouseStatus(true)
 {
@@ -43,6 +46,9 @@ MyTableView::MyTableView(QWidget * parent) : QTableView(parent), mouseStatus(tru
     this->setMouseTracking(true);//important
     this->setContextMenuPolicy(Qt::CustomContextMenu);
     this->setAcceptDrops(true);
+
+    QDesktopServices::setUrlHandler( "mailto", this, "mailTo" );
+
     initActions();
 }
 
@@ -59,19 +65,19 @@ void MyTableView::initActions ()
 
     // 以资源管理器打开
     openInSysExploreAction = new QAction(tr("&Open in System Explorer"), this);
-    connect(openInSysExploreAction, SIGNAL(triggered()), this, SLOT(about()));
+    connect(openInSysExploreAction, SIGNAL(triggered()), this, SLOT(openInSysExplore()));
 
     // 导出
     exportDocAction = new QAction(tr("&Export.."), this);
-    connect(exportDocAction, SIGNAL(triggered()), this, SLOT(about()));
+    connect(exportDocAction, SIGNAL(triggered()), this, SLOT(exportConvert()));
 
     // 以附件形式发送邮件
     emailAsAttachAction = new QAction(tr("&Send Email As Attachment"), this);
-    connect(emailAsAttachAction, SIGNAL(triggered()), this, SLOT(about()));
+    connect(emailAsAttachAction, SIGNAL(triggered()), this, SLOT(sendMail()));
 
     // 文档笔记
     noteOfDocAction = new QAction(tr("&Notes"), this);
-    connect(noteOfDocAction, SIGNAL(triggered()), this, SLOT(about()));
+    connect(noteOfDocAction, SIGNAL(triggered()), this, SLOT(notes()));
 
     // 关联文档
     relatedDocAction = new QAction(tr("&Related Documents"), this);
@@ -192,12 +198,13 @@ void MyTableView::leaveEvent (QEvent * event )
 
         }
         n_orow = -1;
+        n_selrow = -1;
 }
 
 // 更新行
 void MyTableView::updateRow(int row)
 {
-        if (row == n_orow){
+        if (row == n_orow || row == n_selrow){
            return;
         }
         MyStandardItemModel *m = (MyStandardItemModel *)model();
@@ -376,7 +383,12 @@ void MyTableView::mousePressEvent(QMouseEvent *event)
         if(true == mouseStatus )
         {
             curPoint = event->pos();
+
             QModelIndex  index = indexAt(curPoint);
+            // 改变颜色
+            int nrow = index.row();
+            n_selrow = nrow;
+
             QStandardItem *curItem = themodel->itemFromIndex(index);
             curPath = qvariant_cast<QString>(curItem->data(Qt::ToolTipRole));
             tableContextMenuOpened();
@@ -403,6 +415,11 @@ bool MyTableView::getMouseStatus()
 // 以系统工具打开
 void MyTableView::openInSys()
 {
+    QFileInfo fileInfo(curPath);
+    if(!fileInfo.exists()){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Confirm The original file  has Deleted Or Moved. "), QMessageBox::Yes);
+        return;
+    }
     QDesktopServices::openUrl ( QUrl::fromLocalFile(curPath) );
 }
 // 主界面Tab页打开
@@ -410,6 +427,135 @@ void MyTableView::openInTab()
 {
     // 相当于双击
     emit LBtnDbClk();
+}
+
+// 在资源管理器中打开
+void MyTableView::openInSysExplore()
+{
+    // 无需要 判断文件是否存在
+    QFileInfo fileInfo(curPath);
+    if(!fileInfo.exists()){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Confirm The original file  has Deleted Or Moved. "), QMessageBox::Yes);
+    }
+
+    QString path = fileInfo.absolutePath();
+    QDesktopServices::openUrl(QUrl("file:///" + path));
+}
+
+// 显示导出转换文档界面
+void MyTableView::exportConvert()
+{
+    bool hasSelRight = false;
+    // 需选中文档
+    if(!curPath.isEmpty()) {
+        hasSelRight = true;
+        ExportConvertDialog dlg(this, curPath);
+        dlg.exec();
+        if(dlg.update){
+          // 不做任何操作
+        }
+    }
+    // 如果没有选中子目录节点
+    if(!hasSelRight){
+        QMessageBox::warning(0, tr("Warning"), tr("Please Select an Document."), QMessageBox::Yes);
+        return;
+    }
+}
+
+// 显示导出转换文档界面
+void MyTableView::sendMail()
+{
+
+    QFileInfo fileInfo(curPath);
+    if(!fileInfo.exists()){
+        QMessageBox::critical(this, tr("Error"), tr("Please Confirm The original file  has Deleted Or Moved. "), QMessageBox::Yes);
+        return;
+    }
+
+//    Common* com = new Common();
+//    QString mailcontent = "mailto:";
+//    mailcontent.append("test@tom.com");
+//    mailcontent.append("&subject=");
+//    mailcontent.append(fileInfo.fileName());
+//    mailcontent.append("&body=");
+//    mailcontent.append(fileInfo.fileName() + tr("\n\nReview this document please."));
+//    mailcontent.append("&attachment=");
+//    mailcontent.append(curPath);
+
+    // com->mailTo(QUrl(mailcontent, QUrl::TolerantMode));
+    // QProcess::execute("7z", QStringList() << "e" << "C:\\docxTest\\1\\1.zip"  << "-oC:\\docxTest\\1\\unzip\\");
+
+//    QString mail = QSettings( "HKEY_CURRENT_USER\\Software\\Clients\\Mail",
+//            QSettings::NativeFormat ).value( "." ).toString();
+
+//    QProcess* foo= new QProcess( this );
+//    foo->setProcessChannelMode(QProcess::MergedChannels);
+//    foo->setEnvironment( QProcess::systemEnvironment() );
+//    foo->start( "outlook" );
+
+//    if( !foo->waitForFinished() ) {
+//        qDebug() << QDir( foo->workingDirectory() ).entryList();
+//        qDebug() << "Fail:" << foo->errorString();
+//        qDebug() << "Exit = " << foo->exitCode();
+//    } else {
+//        qDebug() << "Output:" << foo->readAll();
+//    }
+
+
+    QString regPath = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Office\\";
+    QStringList officeverList;
+    officeverList << "14.0";
+    officeverList << "12.0";
+    officeverList << "11.0";
+    officeverList << "10.0";
+    officeverList << "9.0";
+    officeverList << "8.0";
+    QString outLookPath;
+    for (int var = 0; var < officeverList.length(); ++var) {
+        QString version = officeverList.at(var);
+        QString temp = regPath + version + "\\Outlook\\InstallRoot\\";
+        QSettings *settings = new QSettings(temp, QSettings::NativeFormat);
+        outLookPath = settings->value("Path", "").toString();
+        QFileInfo outPath(outLookPath);
+        if(outPath.exists()){
+            break;
+        }
+    }
+
+    QString program = outLookPath + "\\OUTLOOK.EXE";
+    QStringList arguments;
+    arguments.append("/a");
+    arguments.append(curPath);
+    QProcess *myProcess = new QProcess(this);
+    myProcess->start(program, arguments);
+
+
+    // 去掉所有符号
+//    >     QString s = "{a fishy string?}";
+//    >     QByteArray ba = QUrl::toPercentEncoding(s, QByteArray(),
+//    > s.toLatin1());
+//    >     qDebug() << ba;
+
+}
+
+// 显示出文档笔记
+void MyTableView::notes()
+{
+    bool hasSelRight = false;
+    // 需选中文档
+    if(!curPath.isEmpty()) {
+        hasSelRight = true;
+        DocNoteDialog dlg(this, curPath);
+        dlg.exec();
+        if(dlg.update){
+          // 不做任何操作
+        }
+    }
+    // 如果没有选中子目录节点
+    if(!hasSelRight){
+        QMessageBox::warning(0, tr("Warning"), tr("Please Select an Document."), QMessageBox::Yes);
+        return;
+    }
 }
 
 // 打开右键菜单
@@ -420,6 +566,11 @@ void MyTableView::tableContextMenuOpened()
        cmenu->exec(this->viewport()->mapToGlobal(pos));
     }
 }
+
+
+
+
+
 
 
 
