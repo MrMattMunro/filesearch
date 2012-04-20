@@ -1977,9 +1977,6 @@ void MainWindow::geometryChangeRequested(const QRect &geometry)
 void MainWindow::openDocInTab()
 {
     QString filepath = m_doctable->getCurFilePath();
-//    if (!currentTab() ){
-//       return;
-//    }
 
     m_tabWidget->currentLineEdit()->setText(filepath);
     m_tabWidget->newDocTab(true, filepath);

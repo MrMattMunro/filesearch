@@ -406,14 +406,9 @@ int FileUtils::newWordFile(const QString &filepath){
 // 取得文件后缀名
 QString FileUtils::suffix(const QString &filepath){
     // 文件不存在
-    QFile file(filepath);
-    if(!file.exists()){
-         return -1;
-    }
-
-    QFileInfo temDir(filepath);
-    // 扩展名
-    return "*." + temDir.suffix();
+    int dotpos = filepath.lastIndexOf(".");
+    QString dotsuffix = filepath.right(filepath.length() - dotpos);
+    return "*" + dotsuffix;
 }
 
 

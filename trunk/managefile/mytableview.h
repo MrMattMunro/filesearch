@@ -16,6 +16,7 @@
 #include "myitemdelegate.h"
 #include "mystandarditemmodel.h"
 
+
 class MyTableView : public QTableView
 {
 Q_OBJECT
@@ -45,6 +46,10 @@ signals:
 private slots:
        void openInSys();
        void openInTab();
+       void openInSysExplore();
+       void exportConvert();
+       void sendMail();
+       void notes();
 
 private:
         MyItemDelegate * delegate;
