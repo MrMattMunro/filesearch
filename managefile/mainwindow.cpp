@@ -59,6 +59,10 @@
 #include "utils.h"
 #include "fileutils.h"
 #include "db/tagdao.h"
+#include "noteeditor.h"
+
+
+extern NoteEditor    *noteEditor;
 
 MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     : QMainWindow(parent, flags)
@@ -357,6 +361,7 @@ void MainWindow::initActions()
         //Root Tag ContextMenu
         makeTag= new QAction(tr("&New Tag"), this);
         connect(makeTag, SIGNAL(triggered()), this, SLOT(newTag()));
+
 }
 
 void MainWindow::initMenus()
@@ -726,6 +731,21 @@ void MainWindow::initUI()
 
         // 后期需要调用主界面的动作
         connect(m_doctable, SIGNAL(LBtnDbClk()), this, SLOT(openDocInTab()));
+        connect(m_doctable, SIGNAL(shownotes()), this, SLOT(windowToggleNoteEditor()));
+
+        // Dock widgets ///////////////////////////////////////////////
+        //QDockWidget *dw;
+        //if (settings.value("/satellite/noteeditor/isDockWindow",true).toBool())
+        //{
+            noteEditorDW = new QDockWidget(tr("Note Editor"), this);
+            noteEditorDW->setWidget (noteEditor);
+            noteEditorDW->setObjectName ("NoteEditor");
+            addDockWidget(Qt::RightDockWidgetArea, noteEditorDW);
+            noteEditorDW->hide();
+        //} else{
+          //  noteEditorDW=NULL;
+        //}
+
 
         setCentralWidget(splitter);
 }
@@ -1973,6 +1993,29 @@ void MainWindow::geometryChangeRequested(const QRect &geometry)
 {
     setGeometry(geometry);
 }
+
+void MainWindow::windowToggleNoteEditor()
+{
+    if (noteEditor->isVisible() )
+        windowHideNoteEditor();
+    else
+        windowShowNoteEditor();
+}
+
+void MainWindow::windowShowNoteEditor()
+{
+    //noteEditor->setShowWithMain(true);
+    noteEditorDW->show();
+    //actionViewToggleNoteEditor->setChecked (true);
+}
+
+void MainWindow::windowHideNoteEditor()
+{
+    //noteEditor->setShowWithMain(false);
+    noteEditorDW->hide();
+    //actionViewToggleNoteEditor->setChecked (false);
+}
+
 // 以tab页打开Doc
 void MainWindow::openDocInTab()
 {

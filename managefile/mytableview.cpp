@@ -545,11 +545,12 @@ void MyTableView::notes()
     // 需选中文档
     if(!curPath.isEmpty()) {
         hasSelRight = true;
-        DocNoteDialog dlg(this, curPath);
-        dlg.exec();
-        if(dlg.update){
-          // 不做任何操作
-        }
+//        DocNoteDialog dlg(this, curPath);
+//        dlg.exec();
+          emit shownotes();
+//        if(dlg.update){
+//          // 不做任何操作
+//        }
     }
     // 如果没有选中子目录节点
     if(!hasSelRight){

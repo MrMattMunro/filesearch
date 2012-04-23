@@ -122,5 +122,23 @@
         <file>icons/defaulttoolbar.png</file>
         <file>icons/vip.png</file>
         <file>browser/htmls/notfound.html</file>
+        <file>icons/formatvarfont.png</file>
+        <file>icons/text_block.png</file>
+        <file>icons/text_bold.png</file>
+        <file>icons/text_italic.png</file>
+        <file>icons/text_left.png</file>
+        <file>icons/text_right.png</file>
+        <file>icons/text_sub.png</file>
+        <file>icons/text_super.png</file>
+        <file>icons/text_under.png</file>
+        <file>icons/treeeditor.png</file>
+        <file>icons/undo.png</file>
+        <file>icons/edittrash.png</file>
+        <file>icons/fileopen.png</file>
+        <file>icons/fileprint.png</file>
+        <file>icons/filesave.png</file>
+        <file>icons/filesaveas.png</file>
+        <file>icons/formatfixedfont.png</file>
+        <file>icons/text_center.png</file>
     </qresource>
 </RCC>

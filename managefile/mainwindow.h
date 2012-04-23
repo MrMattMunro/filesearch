@@ -174,6 +174,10 @@ private slots:
     //void resizeSpace();
     //browser end
 
+    void windowToggleNoteEditor();
+    void windowShowNoteEditor();
+    void windowHideNoteEditor();
+
 protected:
     void closeEvent(QCloseEvent *event);
 
@@ -307,6 +311,8 @@ private:
 
     QString m_lastSearch;
     // browser end
+
+    QDockWidget *noteEditorDW;
 
 };
 

@@ -51,7 +51,11 @@ SOURCES += main.cpp \
     customtooldialog.cpp \
     exportconvertdialog.cpp \
     Common.cpp \
-    docnotedialog.cpp
+    docnotedialog.cpp \
+    noteobj.cpp \
+    noteeditor.cpp \
+    texteditor.cpp \
+    xmlobj.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -97,7 +101,11 @@ HEADERS  += mainwindow.h \
     customtooldialog.h \
     exportconvertdialog.h \
     Common.h \
-    docnotedialog.h
+    docnotedialog.h \
+    noteeditor.h \
+    noteobj.h \
+    texteditor.h \
+    xmlobj.h
 
 RESOURCES += \
     managefile.qrc
@@ -197,6 +205,12 @@ OTHER_FILES += \
     docview/jquery/css/ui-darkness/images/ui-bg_flat_50_5c5c5c_40x100.png \
     docview/jquery/css/ui-darkness/images/ui-bg_flat_30_cccccc_40x100.png \
     docview/jquery/css/ui-darkness/jquery-ui-1.8.16.custom.css
+
+
+
+
+
+
 
 
 
