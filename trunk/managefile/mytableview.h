@@ -42,7 +42,7 @@ protected:
 signals:
         //Êó±êË«»÷
         void         LBtnDbClk();
-
+        void         shownotes();
 private slots:
        void openInSys();
        void openInTab();

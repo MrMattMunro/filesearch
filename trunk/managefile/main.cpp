@@ -28,7 +28,9 @@
 #include "utils.h"
 #include "db/database.h"
 #include "fileutils.h"
+#include "noteeditor.h"
 #include <QDebug>
+NoteEditor    *noteEditor;	// used in Constr. of LinkableMapObj
 
 
 #define ARG_VERSION "--version"
@@ -218,6 +220,10 @@ int main(int argc, char *argv[])
     app.installTranslator(&translator);
 
     //QString QCoreApplication::applicationDirPath () [static]
+
+    // Initialize window of NoteEditor
+    noteEditor = new NoteEditor();
+    //noteEditor->setWindowIcon (QPixmap (iconPath+ "vym-editor.png"));
 
     // 打开连接db
     Database::sessionName(DATABASE);
