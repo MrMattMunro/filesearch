@@ -15,7 +15,7 @@
 #include "preferences.h"
 #include "utils.h"
 #include "exportconvertdialog.h"
-#include "docnotedialog.h"
+#include "notesdialog.h"
 #include "Common.h"
 #include "QSettings"
 
@@ -544,13 +544,13 @@ void MyTableView::notes()
     bool hasSelRight = false;
     // 需选中文档
     if(!curPath.isEmpty()) {
-        hasSelRight = true;
-//        DocNoteDialog dlg(this, curPath);
-//        dlg.exec();
-          emit shownotes();
-//        if(dlg.update){
-//          // 不做任何操作
-//        }
+        hasSelRight = true;    
+        NotesDialog notesdlg(this, curPath);
+        notesdlg.exec();
+          // emit shownotes();
+         if(notesdlg.update){
+          // 不做任何操作
+        }
     }
     // 如果没有选中子目录节点
     if(!hasSelRight){
@@ -568,6 +568,11 @@ void MyTableView::tableContextMenuOpened()
     }
 }
 
+// 打开主界面Notes
+void MyTableView::showMainNotes()
+{
+    emit shownotes();
+}
 
 
 

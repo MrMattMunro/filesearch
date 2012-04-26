@@ -5,11 +5,11 @@
 #include <QDir>
 #include <QStandardItemModel>
 
-#include "docnotedialog.h"
+#include "docnoteinfodialog.h"
 #include "preferences.h"
 #include "utils.h"
 
-DocNoteDialog::DocNoteDialog(QWidget * parent,const QString & dir)
+DocNoteInfoDialog::DocNoteInfoDialog(QWidget * parent,const QString & dir)
 	: QDialog(parent),
 	  m_parent(parent),
           m_dir(dir),update(false)
@@ -36,13 +36,13 @@ DocNoteDialog::DocNoteDialog(QWidget * parent,const QString & dir)
 
 
 //// 确定按钮
-void DocNoteDialog::confirmBtn_clicked(){
+void DocNoteInfoDialog::confirmBtn_clicked(){
      update = true;
      this->close();
 }
 
 //// 取消按钮
-void DocNoteDialog::cancelBtn_clicked(){
+void DocNoteInfoDialog::cancelBtn_clicked(){
      update = false;
      this->close();
 }

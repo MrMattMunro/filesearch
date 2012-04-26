@@ -61,8 +61,7 @@
 #include "db/tagdao.h"
 #include "noteeditor.h"
 
-
-extern NoteEditor    *noteEditor;
+extern NoteEditor *noteEditor;
 
 MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     : QMainWindow(parent, flags)
@@ -731,7 +730,7 @@ void MainWindow::initUI()
 
         // 后期需要调用主界面的动作
         connect(m_doctable, SIGNAL(LBtnDbClk()), this, SLOT(openDocInTab()));
-        connect(m_doctable, SIGNAL(shownotes()), this, SLOT(windowToggleNoteEditor()));
+        connect(m_doctable, SIGNAL(showAddNoteWidget()), this, SLOT(windowToggleNoteEditor()));
 
         // Dock widgets ///////////////////////////////////////////////
         //QDockWidget *dw;
@@ -741,7 +740,7 @@ void MainWindow::initUI()
             noteEditorDW->setWidget (noteEditor);
             noteEditorDW->setObjectName ("NoteEditor");
             addDockWidget(Qt::RightDockWidgetArea, noteEditorDW);
-            noteEditorDW->hide();
+            // noteEditorDW->hide();
         //} else{
           //  noteEditorDW=NULL;
         //}
