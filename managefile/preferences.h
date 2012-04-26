@@ -56,6 +56,13 @@ Q_OBJECT
                 QStringList getDefaultWaitToolbarItemList() { return m_defaultwaittoolbaritemlist; };
                 void setDefaultWaittoolbaritemlist(QStringList v) { m_defaultwaittoolbaritemlist = v;  };
 
+                QString getNoteDocUid() { return m_notedocuid; };
+                void setNoteDocUid(QString v) { m_notedocuid = v; };
+
+                QString getSelNoteUid() { return m_selnoteuid; };
+                void setSelNoteUid(QString v) { m_selnoteuid = v; };
+
+
 		bool nullHighlight() { return m_nullHighlight; };
 		void setNullHighlight(bool v) { m_nullHighlight = v; };
 
@@ -216,6 +223,8 @@ Q_OBJECT
                 QStringList m_waittoolbaritemlist;
                 QStringList m_defaulttoolbaritemlist;
                 QStringList m_defaultwaittoolbaritemlist;
+                QString m_notedocuid;
+                QString m_selnoteuid;
 
 		bool m_checkQtVersion;
 		bool m_nullHighlight;

@@ -9,7 +9,7 @@ for which a new license (GPL+exception) is in place.
 #define IMPORTTABLEDIALOG_H
 #endif
 
-#include "ui_docnotedialog.h"
+#include "ui_docnoteinfodialog.h"
 
 #include <QStandardItemModel>
 
@@ -18,12 +18,12 @@ for which a new license (GPL+exception) is in place.
 \note XML import requires Qt library at least in the 4.3.0 version.
 \author Petr Vanek <petr@scribus.info>
 */
-class DocNoteDialog : public QDialog, public Ui::DocNoteDialog
+class DocNoteInfoDialog : public QDialog, public Ui::DocNoteInfoDialog
 {
 	Q_OBJECT
 
 	public:
-                DocNoteDialog(QWidget * parent = 0, const QString & dir = 0);
+                DocNoteInfoDialog(QWidget * parent = 0, const QString & dir = 0);
                 bool update;
                 QStandardItemModel *model;
                 QString m_dir;

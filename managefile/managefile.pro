@@ -51,11 +51,14 @@ SOURCES += main.cpp \
     customtooldialog.cpp \
     exportconvertdialog.cpp \
     Common.cpp \
-    docnotedialog.cpp \
     noteobj.cpp \
     noteeditor.cpp \
     texteditor.cpp \
-    xmlobj.cpp
+    xmlobj.cpp \
+    docnoteinfodialog.cpp \
+    notesdialog.cpp \
+    db/notedao.cpp \
+    db/dirdao.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -101,11 +104,14 @@ HEADERS  += mainwindow.h \
     customtooldialog.h \
     exportconvertdialog.h \
     Common.h \
-    docnotedialog.h \
     noteeditor.h \
     noteobj.h \
     texteditor.h \
-    xmlobj.h
+    xmlobj.h \
+    docnoteinfodialog.h \
+    notesdialog.h \
+    db/notedao.h \
+    db/dirdao.h
 
 RESOURCES += \
     managefile.qrc
@@ -134,7 +140,8 @@ FORMS    += mainwindow.ui \
     customtooldialog.ui \
     testUI.ui \
     exportconvertdialog.ui \
-    docnotedialog.ui
+    docnoteinfodialog.ui \
+    notesdialog.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -205,6 +212,19 @@ OTHER_FILES += \
     docview/jquery/css/ui-darkness/images/ui-bg_flat_50_5c5c5c_40x100.png \
     docview/jquery/css/ui-darkness/images/ui-bg_flat_30_cccccc_40x100.png \
     docview/jquery/css/ui-darkness/jquery-ui-1.8.16.custom.css
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -244,6 +244,7 @@ int main(int argc, char *argv[])
     Database::execSql(Database::getSql("mf_document_related.sql"));
     Database::execSql(Database::getSql("mf_document_tag.sql"));
     Database::execSql(Database::getSql("mf_tag.sql"));
+    Database::execSql(Database::getSql("mf_accout.sql"));
 
     MainWindow w;
     w.setLocale(cli.localeCode());

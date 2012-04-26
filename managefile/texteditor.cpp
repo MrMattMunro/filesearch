@@ -5,6 +5,7 @@
 #include "noteobj.h"	//Still needed for ascii conversion
 // #include "settings.h"
 #include "utils.h"
+#include "db/notedao.h"
 
 int statusbarTime;
 
@@ -27,7 +28,7 @@ TextEditor::TextEditor()
 
     e = new QTextEdit( this);
     e->setFocus();
-//  e->setTextFormat(Qt::RichText);	// default
+    // e->setTextFormat(Qt::RichText);	// default
     e->setTabStopWidth (20);		// unit is pixel
     e->setTextColor (Qt::black);
     e->setAutoFillBackground (true);
@@ -55,6 +56,9 @@ TextEditor::TextEditor()
     setInactive();
 
     // Load Settings
+    resize (QSize(450,600));
+
+
     /*
     resize (settings.value ( "/satellite/noteeditor/geometry/size", QSize(450,600)).toSize());
     move   (settings.value ( "/satellite/noteeditor/geometry/pos", QPoint (250,50)).toPoint());
@@ -81,6 +85,9 @@ TextEditor::TextEditor()
     }
     */
     filenameHint="";
+
+    // add
+    setText("");
 
     // Restore position of toolbars
     //restoreState (settings.value("/satellite/noteeditor/state",0).toByteArray());
@@ -257,7 +264,7 @@ void TextEditor::setupFileActions()
     actionFileLoad=a;
 
     fileMenu->addSeparator();
-    a = new QAction(Utils::getPixmap("filesave.png" ), tr( "&Export..." ),this);
+    a = new QAction(Utils::getPixmap("filesave.png" ), tr( "&Save..." ),this);
     a->setShortcut( Qt::CTRL + Qt::Key_S );
     a->setShortcutContext (Qt::WidgetShortcut);
     connect( a, SIGNAL( activated() ), this, SLOT( textSave() ) );
@@ -642,18 +649,19 @@ void TextEditor::textSaveAs()	//FIXME-3 Use WarningDialog
 
 void TextEditor::textSave()
 {
+    // save to db
     if ( filename.isEmpty() )
     {
         textSaveAs();
         return;
     }
 
+    //NoteDao::insertNote();
     QString text = e->toHtml(); //FIXME-3 or plaintext? check...
     QFile f( filename );
     if ( !f.open( QIODevice::WriteOnly ) )
     {
-        statusBar()->showMessage( QString("Could not write to %1").arg(filename),
-                      statusbarTime );
+        statusBar()->showMessage( QString("Could not write to %1").arg(filename), statusbarTime );
         return;
     }
 

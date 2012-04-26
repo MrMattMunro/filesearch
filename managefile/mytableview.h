@@ -15,6 +15,7 @@
 
 #include "myitemdelegate.h"
 #include "mystandarditemmodel.h"
+#include "notesdialog.h"
 
 
 class MyTableView : public QTableView
@@ -50,6 +51,7 @@ private slots:
        void exportConvert();
        void sendMail();
        void notes();
+       void showMainNotes();
 
 private:
         MyItemDelegate * delegate;

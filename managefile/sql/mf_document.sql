@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS MF_DOCUMENT
 (
    DOCUMENT_GUID                  char(36)                       not null,
    DOCUMENT_TITLE                 varchar(768)                   not null,
+   DIR_GUID                       char(36),                       
    DOCUMENT_LOCATION              varchar(768),
    DOCUMENT_NAME                  varchar(300),
    DOCUMENT_SEO                   varchar(300),
