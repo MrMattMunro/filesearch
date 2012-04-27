@@ -25,7 +25,7 @@ bool DirDao::insertDir(Dir dir)
 {
     QString sql = Database::getSql("mf_insert_dir.sql");
     sql = sql.arg(dir.DIR_GUID, dir.DIR_PARENT_UUID, dir.DIR_NAME, dir.DIR_DESCRIPTION, dir.DIR_ICON,
-                   QString::number(dir.DIR_ORDER), QString::number(Dir.MF_VERSION));
+                   QString::number(dir.DIR_ORDER), QString::number(dir.MF_VERSION));
     return Database::execSql(sql);
 }
 // É¾³ýÎÄ¼þ¼Ð
@@ -47,13 +47,12 @@ QList<Dir> DirDao::selectDirsbyParent(const QString & groupUuid)
     while (query.next()){
             Dir field;
             field.DIR_GUID = query.value(0).toString();
-            field.DIR_PARENT_UUID = query.value(1).toString();
-            field.DIR_NAME = query.value(2).toString();
-            field.DIR_DESCRIPTION = query.value(3).toString();
-            field.DIR_ICON = query.value(4).toString();
-            field.DIR_ORDER = query.value(5).toInt();
-            field.DT_MODIFIED = query.value(6).toChar();
-            field.MF_VERSION = query.value(7).toInt();
+            field.DIR_NAME = query.value(1).toString();
+            field.DIR_DESCRIPTION = query.value(2).toString();
+            field.DIR_ICON = query.value(3).toString();
+            field.DIR_ORDER = query.value(4).toInt();
+            field.DT_MODIFIED = query.value(5).toChar();
+            field.MF_VERSION = query.value(6).toInt();
             returnList.append(field);
     }
     return returnList;
@@ -92,7 +91,6 @@ bool DirDao::updateDir(Dir dir){
     QString dirdesp = orgDir.DIR_DESCRIPTION;
     QString diricon = orgDir.DIR_ICON;
     int dirorder = orgDir.DIR_ORDER;
-    QString modified = orgDir.DT_MODIFIED;
     int version = orgDir.MF_VERSION;
 
     if(! dir.DIR_PARENT_UUID.isEmpty()){
@@ -115,15 +113,11 @@ bool DirDao::updateDir(Dir dir){
        dirorder = dir.DIR_ORDER;
     }
 
-    if(! dir.modified.isEmpty()){
-       modified = dir.modified;
-    }
-
     if(dir.MF_VERSION != 0){
        version = dir.MF_VERSION;
     }
 
     QString sql = Database::getSql("mf_update_dir.sql");
-    sql = sql.arg(dirparentuuid, dirname, dirdesp, diricon, dirorder, modified, version, dir.DIR_GUID);
+    sql = sql.arg(dirparentuuid, dirname, dirdesp, diricon, QString::number(dirorder), QString::number(version), dir.DIR_GUID);
     return Database::execSql(sql);
 }
