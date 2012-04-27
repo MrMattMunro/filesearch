@@ -21,10 +21,12 @@ void NoteDao::exception(const QString & message)
         QMessageBox::critical(0, tr("SQL Error"), message);
 }
 // 插入备注
-bool NoteDao::insertNote(Note Note)
+bool NoteDao::insertNote(Note note)
 {
-    QString sql = Database::getSql("mf_insert_Note.sql");
-//    sql = sql.arg(Note.NOTE_GUID,Note.Note_GROUP_GUID,Note.Note_NAME,Note.Note_DESCRIPTION, QString::number(Note.MF_VERSION));
+
+    QString sql = Database::getSql("mf_insert_note.sql");
+    sql = sql.arg(note.NOTE_GUID, note.DOCUMENT_GUID, note.NOTE_CONTENT, note.NOTE_OWNER
+                  , QString::number(note.PAGE), note.SHEETPAGE,  QString::number(note.ROW),  QString::number(note.COLUMN));
     return Database::execSql(sql);
 }
 // 删除备注
@@ -68,7 +70,7 @@ QList<Note> NoteDao::selectNotesbyDocUuId(const QString & docUuid)
 // 根据备注uuId获取备注
 Note NoteDao::selectNote(const QString & uuid)
 {
-    QString sql = Database::getSql("mf_select_Note_uuid.sql");
+    QString sql = Database::getSql("mf_select_note_uuid.sql");
     sql = sql.arg(uuid);
     QSqlQuery query = Database::execSelect(sql);
 
@@ -86,32 +88,52 @@ Note NoteDao::selectNote(const QString & uuid)
     }
 }
 
-// 更新子备注
+// 更新备注
 bool NoteDao::updateNote(Note note){
 
     // 取得数据库原来的
     Note orgNote = selectNote(note.NOTE_GUID);
 
-//    QString Notename = orgNote.Note_NAME;
-//    QString Notegroupuuid = orgNote.Note_GROUP_GUID;
-//    QString Notedesp = orgNote.Note_DESCRIPTION;
-//    int Noteversion = orgNote.MF_VERSION;
+    QString docUuId = orgNote.DOCUMENT_GUID;
+    QString noteContent = orgNote.NOTE_CONTENT;
+    QString noteOwner = orgNote.NOTE_OWNER;
+    int page = orgNote.PAGE;
+    QString sheetpage = orgNote.SHEETPAGE;
+    int row = orgNote.ROW;
+    int column = orgNote.COLUMN;
 
-//    if(! Note.Note_NAME.isEmpty()){
-//       Notename = Note.Note_NAME;
-//    }
-//    // 移动到顶级备注
-//    Notegroupuuid = Note.Note_GROUP_GUID;
-//    if(! Note.Note_DESCRIPTION.isEmpty()){
-//       Notedesp = Note.Note_DESCRIPTION;
-//    }
+    if(! note.DOCUMENT_GUID.isEmpty()){
+       docUuId = note.DOCUMENT_GUID;
+    }
 
-//    if(Note.MF_VERSION != 0){
-//       Noteversion = Note.MF_VERSION;
-//    }
-//    QString sql = Database::getSql("mf_update_Note.sql");
-//    sql = sql.arg(Notename, Notegroupuuid, Notedesp, QString::number(Noteversion), Note.Note_GUID);
-//    return Database::execSql(sql);
+    if(! note.NOTE_CONTENT.isEmpty()){
+       noteContent = note.NOTE_CONTENT;
+    }
+
+    if(! note.DOCUMENT_GUID.isEmpty()){
+       noteOwner = note.DOCUMENT_GUID;
+    }
+
+    if(note.PAGE != 0){
+       page = note.PAGE;
+    }
+
+    if(! note.SHEETPAGE.isEmpty()){
+       sheetpage = note.SHEETPAGE;
+    }
+
+    if(note.ROW != 0){
+       row = note.ROW;
+    }
+
+    if(note.COLUMN != 0){
+       column = note.COLUMN;
+    }
+
+    QString sql = Database::getSql("mf_update_note.sql");
+    sql = sql.arg(docUuId, noteContent, noteOwner, QString::number(page),
+                  sheetpage, QString::number(row), QString::number(column), note.NOTE_GUID);
+    return Database::execSql(sql);
 
       return true;
 }

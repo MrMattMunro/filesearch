@@ -58,7 +58,8 @@ SOURCES += main.cpp \
     docnoteinfodialog.cpp \
     notesdialog.cpp \
     db/notedao.cpp \
-    db/dirdao.cpp
+    db/dirdao.cpp \
+    db/docdao.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -111,7 +112,8 @@ HEADERS  += mainwindow.h \
     docnoteinfodialog.h \
     notesdialog.h \
     db/notedao.h \
-    db/dirdao.h
+    db/dirdao.h \
+    db/docdao.h
 
 RESOURCES += \
     managefile.qrc
@@ -212,6 +214,8 @@ OTHER_FILES += \
     docview/jquery/css/ui-darkness/images/ui-bg_flat_50_5c5c5c_40x100.png \
     docview/jquery/css/ui-darkness/images/ui-bg_flat_30_cccccc_40x100.png \
     docview/jquery/css/ui-darkness/jquery-ui-1.8.16.custom.css
+
+
 
 
 
