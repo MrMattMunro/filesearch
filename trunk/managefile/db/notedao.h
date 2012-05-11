@@ -14,7 +14,7 @@ typedef struct
         QString SHEETPAGE;
         int ROW;
         int COLUMN;
-        QChar  DT_MODIFIED;
+        QString  DT_MODIFIED;
 }Note;
 
 class NoteDao

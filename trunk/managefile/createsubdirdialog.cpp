@@ -8,6 +8,7 @@ for which a new license (GPL+exception) is in place.
 #include <QMessageBox>
 
 #include <QtDebug>
+#include <QUuid>
 #include <QDir>
 #include <QStandardItemModel>
 #include <QDesktopServices>
@@ -16,20 +17,20 @@ for which a new license (GPL+exception) is in place.
 #include "createsubdirdialog.h"
 #include "utils.h"
 #include "fileutils.h"
+#include "printerwidget.h"
+#include "db/dirdao.h"
 
-CreateSubDirDialog::CreateSubDirDialog(QWidget * parent, const QString & basedir,const QString & dir)
+CreateSubDirDialog::CreateSubDirDialog(QWidget * parent, const QString & curUuid,const QString & dir)
 	: QDialog(parent),
 	  m_parent(parent),
-          m_baseDir(basedir),
+          m_curUuid(curUuid),
           m_dir(dir),update(false)
 {
 	setupUi(this);
 
         // Set UI
         // 设置目标目录
-        QString tdestDir = m_dir;
-        tdestDir = tdestDir.remove(0, m_baseDir.length());
-        destDir->setText(tdestDir);
+        destDir->setText(m_dir);
 
         this->setWindowIcon(Utils::getIcon("folder.ico"));
         this->setWindowTitle(tr("Create New Sub Directory"));
@@ -46,24 +47,28 @@ void CreateSubDirDialog::confirmBtn_clicked(){
         QMessageBox::warning(this, tr("Warning"), tr("Please Input Directory Name: "), QMessageBox::Yes);
         return;
     }
-    //
-    /** 如果目标目录不存在，则进行创建 */
-    QDir *mdir = new QDir(m_dir);
-    if(mdir->exists()){
-        if(!mdir->mkdir(dirname)){
-            QMessageBox::warning(this, tr("Error"), tr("Create New Directory failed. "), QMessageBox::Yes);
-            return;
-        }else{
-            update = true;
-            this->close();
-        }
-    }
+
+    // 新建文件夹
+    Dir dir;
+    dir.DIR_GUID = QUuid::createUuid();
+    m_newUuid = dir.DIR_GUID ;
+    dir.DIR_ICON = "folder.ico";
+    dir.DIR_NAME = dirname;
+    dir.DIR_PARENT_UUID = m_curUuid;
+    DirDao::insertDir(dir);
+    update = true;
+    this->close();
+
 }
 
 // 取消按钮
 void CreateSubDirDialog::cancelBtn_clicked(){
-     update = false;
-     this->close();
+
+    PrinterWidget diew = new PrinterWidget(this);
+    diew.printer();
+
+//     update = false;
+//     this->close();
 }
 
 

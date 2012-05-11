@@ -198,18 +198,18 @@ bool DocDao::updateDoc(Doc doc){
     QString docKeyWord = orgDoc.DOCUMENT_KEYWORDS;
     QString docType = orgDoc.DOCUMENT_TYPE;
     QString docOwer = orgDoc.DOCUMENT_OWNER;
-    QChar created = orgDoc.DT_CREATED;
-    QChar modified = orgDoc.DT_MODIFIED;
-    QChar accessed = orgDoc.DT_ACCESSED;
+    QString created = orgDoc.DT_CREATED;
+    QString modified = orgDoc.DT_MODIFIED;
+    QString accessed = orgDoc.DT_ACCESSED;
     QString iconIdx = orgDoc.DOCUMENT_ICON_INDEX;
     int docSync = orgDoc.DOCUMENT_SYNC;
     QString docProtect = orgDoc.DOCUMENT_PROTECT;
-    QChar docEncode = orgDoc.DOCUMENT_ENCODE;
+    QString docEncode = orgDoc.DOCUMENT_ENCODE;
     int readCount = orgDoc.DOCUMENT_READ_COUNT;
     int relateCount = orgDoc.DOCUMENT_RELATE_COUNT;
-    QChar idexFlg = orgDoc.DOCUMENT_INDEXFLG;
-    QChar operFlg = orgDoc.DOCUMENT_OPERFLG;
-    QChar delFlg = orgDoc.DELETE_FLAG;
+    QString idexFlg = orgDoc.DOCUMENT_INDEXFLG;
+    QString operFlg = orgDoc.DOCUMENT_OPERFLG;
+    QString delFlg = orgDoc.DELETE_FLAG;
     int version = orgDoc.MF_VERSION;
 
     if(! doc.DOCUMENT_TITLE.isEmpty()){

@@ -17,18 +17,18 @@ typedef struct
         QString DOCUMENT_KEYWORDS;
         QString DOCUMENT_TYPE;
         QString DOCUMENT_OWNER;
-        QChar DT_CREATED;
-        QChar DT_MODIFIED;
-        QChar DT_ACCESSED;
+        QString DT_CREATED;
+        QString DT_MODIFIED;
+        QString DT_ACCESSED;
         int DOCUMENT_ICON_INDEX;
         int DOCUMENT_SYNC;
         QString DOCUMENT_PROTECT;
-        QChar DOCUMENT_ENCODE;
+        QString DOCUMENT_ENCODE;
         int DOCUMENT_READ_COUNT;
         int DOCUMENT_RELATE_COUNT;
-        QChar DOCUMENT_INDEXFLG;
-        QChar DOCUMENT_OPERFLG;
-        QChar DELETE_FLAG;
+        QString DOCUMENT_INDEXFLG;
+        QString DOCUMENT_OPERFLG;
+        QString DELETE_FLAG;
         int MF_VERSION;
 }Doc;
 

@@ -1,18 +1,18 @@
-#include "myitemdelegate.h"
+#include "mytabledelegate.h"
 #include "utils.h"
 #include <QDebug>
 #include <QPainter>
 #include <QEvent>
 
 
-MyItemDelegate::MyItemDelegate(QObject * parent) :QItemDelegate(parent)
+MyTableDelegate::MyTableDelegate(QObject * parent) :QItemDelegate(parent)
 {
 //    docPixmap = QPixmap(":/doc.ico");
 //    pdfPixmap = QPixmap(":/pdf.ico");
 
 }
 
-void MyItemDelegate::paint(QPainter * painter,
+void MyTableDelegate::paint(QPainter * painter,
                            const QStyleOptionViewItem & option,
                            const QModelIndex & index) const
 {
@@ -56,7 +56,7 @@ void MyItemDelegate::paint(QPainter * painter,
     qDebug("paint end");
 }
 
-bool MyItemDelegate::editorEvent(QEvent * event, QAbstractItemModel * model,
+bool MyTableDelegate::editorEvent(QEvent * event, QAbstractItemModel * model,
                                  const QStyleOptionViewItem & /*option*/,
                                  const QModelIndex & index)
 {

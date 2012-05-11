@@ -1,6 +1,6 @@
 #include <QProgressDialog>
 #include "ui_movetodirdialog.h"
-#include "myTreeList.h"
+#include "mytreeview.h"
 
 #include <QStandardItemModel>
 
@@ -9,15 +9,17 @@ class MoveToDirDialog : public QDialog, public Ui::MoveToDirDialog
 	Q_OBJECT
 
 	public:
-                MoveToDirDialog(QWidget * parent = 0,const QString & basedir = 0, const QString & dir = 0);
+                MoveToDirDialog(QWidget * parent = 0,const QString & curUuid = 0, const QString & dir = 0);
                 bool update;
                 QString m_dir;
-                QString m_curPath;
+
+                QString m_curUuid;
+                QString m_toUuid;
                 QString m_seldir;
 	private:
                 QObject * m_parent;
-                QString m_baseDir;
-                myTreeList *q_myTreeList;
+
+                MyTreeView *q_myTreeList;
 
 	private slots:
                 void confirmBtn_clicked();

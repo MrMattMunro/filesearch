@@ -1,7 +1,7 @@
 //QTreeView的扩展类
 
-#ifndef _MY_TREELIST_H_
-#define _MY_TREELIST_H_
+#ifndef _MY_TREEVIEW_H_
+#define _MY_TREEVIEW_H_
 
 #include <QApplication>
 #include <QTreeView>
@@ -10,16 +10,19 @@
 #include <QStandardItem>
 #include <QMouseEvent>
 
-class myTreeList : public QTreeView
+#include "mytreedelegate.h"
+#include "mytreeitemmodel.h"
+
+class MyTreeView : public QTreeView
 {
 Q_OBJECT
 public:
-        myTreeList(QString title = NULL, QWidget *parent = 0);
-	~myTreeList();
+        MyTreeView(QString title = NULL, QWidget *parent = 0);
+        ~MyTreeView();
 	void         setTreeTitle(QString title); //设置tree的名称
 	void         setSubTreeTitle(int subTree,QString title);
         void         addItem(int subTree, QString itemName, QString path, QString icon); //增加item
-        void         addItemByParentItem(QStandardItem *parenItem, QString itemName,  QString path, QString icon); //增加item
+        void         addItemByParentItem(QStandardItem *parenItem, QString itemName, QString uid, QString type, QString icon); //增加item
 	void         addItems(int subTree, QList<QString> nameList);
 	void         delelteItem(int subTree, QString itemName);
         bool         delSubItems(QStandardItem *parenItem);
@@ -31,9 +34,11 @@ public:
 	QModelIndex  getCurIndex();
         QStandardItem* getCurItem(); // 获取当前双击节点
         QPoint       getCurPoint();  // 获取当前点击位置
-        void         loadDirByLay(QString parentPath, int lay, QStandardItem *curItem);
+        QString      getCurUuid();   // 获取当前UuId
+        QString      getCurType();   // 获取当前节点类型
+        void         loadDirs(QString diruId, QStandardItem *curItem);
         void         delSubTree();   // 删除当前树
-        void         setCurItemByPath(QString path); // 根据CurPath设置当前选定的元素
+        void         setCurItemByUuid(QString uuId, QString type); // 根据CurUuuid设置当前选定的元素
         void         loadTagByParent(QString tagUuId, QStandardItem *curItem);
 private slots:
         void         showChildTree();
@@ -48,6 +53,7 @@ protected:
 	void         mouseDoubleClickEvent(QMouseEvent *event);
         // void         mousePressEvent(QMouseEvent *event);
         void         mouseReleaseEvent(QMouseEvent *event);
+        void         dropEvent(QDropEvent *event);
         //void         mouseDoubleClickEvent(QMouseEvent *event);
         //void         mouseMoveEvent(QMouseEvent *event);
         //void         keyPressEvent(QKeyEvent *event);
@@ -60,10 +66,14 @@ private:
 	QString               treeTitle;
 	QString               curTitle; //当前鼠标双击选的名称
         QString               curPath;  //当前鼠标双击的路径
+        QString               curUuId;  //当前UuId
+        QString               curType;  //当前节点类型
 	QModelIndex           curIndex;
         QStandardItem*        curItem;
         QStandardItemModel    *model;
         QPoint                curPoint;
+        MyTreeDelegate * delegate;
+        MyTreeItemModel * themodel;
 
 };
 

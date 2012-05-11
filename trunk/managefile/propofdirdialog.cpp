@@ -16,18 +16,20 @@ for which a new license (GPL+exception) is in place.
 #include "propofdirdialog.h"
 #include "utils.h"
 #include "fileutils.h"
+#include "db/dirdao.h"
 
-PropOfDirDialog::PropOfDirDialog(QWidget * parent, const QString & basedir,const QString & dir)
+PropOfDirDialog::PropOfDirDialog(QWidget * parent, const QString & curUuid, const QString & dir)
 	: QDialog(parent),
           m_parent(parent),
-          m_baseDir(basedir),
+          m_curUuid(curUuid),
           m_dir(dir),update(false)
 {
         setupUi(this);
 
         // Set UI
         // 设置目标目录名称
-        dirName->setText(Utils::getDirNameByPath(m_dir));
+        Dir tmpdir = DirDao::selectDir(m_curUuid);
+        dirName->setText(tmpdir.DIR_NAME);
         location->setText(m_dir);
 
         this->setWindowIcon(Utils::getIcon("folder.ico"));
