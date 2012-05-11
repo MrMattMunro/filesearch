@@ -16,6 +16,7 @@ for which a new license (GPL+exception) is in place.
 #include "movetotagdialog.h"
 #include "preferences.h"
 #include "utils.h"
+#include "mytreeview.h"
 #include "fileutils.h"
 #include "db/tagdao.h"
 
@@ -28,7 +29,7 @@ MoveToTagDialog::MoveToTagDialog(QWidget * parent, const QString & uuId)
 {
 	setupUi(this);
 
-        q_myTreeList = new myTreeList("tag", this);
+        q_myTreeList = new MyTreeView("tag", this);
         q_myTreeList->setStyleSheet(
                     "QTreeView::branch {image:none;}"
                     "QTreeView::item{height: 25px;}"
@@ -53,7 +54,7 @@ MoveToTagDialog::MoveToTagDialog(QWidget * parent, const QString & uuId)
 // 开始更新Tag
 void MoveToTagDialog::confirmBtn_clicked(){
     // 没有改变Path
-    QString uuId = q_myTreeList->getCurPath();
+    QString uuId = q_myTreeList->getCurUuid();
     m_selUuId = uuId;
     if(m_uuId == uuId){
         QMessageBox::warning(this, tr("Warning"), tr("Please Select the other Tag"), QMessageBox::Yes);

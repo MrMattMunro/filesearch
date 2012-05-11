@@ -1,6 +1,6 @@
 #include <QProgressDialog>
 #include "ui_movetotagdialog.h"
-#include "myTreeList.h"
+#include "mytreeview.h"
 
 #include <QStandardItemModel>
 
@@ -15,7 +15,7 @@ class MoveToTagDialog : public QDialog, public Ui::MoveToTagDialog
                 QString m_selUuId;
 	private:
                 QObject * m_parent;
-                myTreeList *q_myTreeList;
+                MyTreeView *q_myTreeList;
 
 	private slots:
                 void confirmBtn_clicked();

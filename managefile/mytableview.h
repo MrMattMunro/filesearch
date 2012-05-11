@@ -13,9 +13,10 @@
 #include <QMouseEvent>
 
 
-#include "myitemdelegate.h"
-#include "mystandarditemmodel.h"
+#include "mytabledelegate.h"
+#include "mytableitemmodel.h"
 #include "notesdialog.h"
+#include "db/docdao.h"
 
 
 class MyTableView : public QTableView
@@ -24,8 +25,9 @@ Q_OBJECT
 public:
         MyTableView(QWidget * parent=0);
         ~MyTableView(){}
-        void buildDocList(QStringList files);
+        void buildDocList(QList<Doc> doclist);
         QPoint getCurPoint();               // 取得当前鼠标点击位置
+        QString getCurUuid();
         void    enableMouse(bool yesOrNo);  //设置鼠标相应
         bool    getMouseStatus();   //查看是可以使用鼠标
         QString getCurFilePath();   // 取得选择文件路径
@@ -36,6 +38,7 @@ protected:
         void  wheelEvent(QWheelEvent * event );
         bool  eventFilter(QObject* object,QEvent* event);
         void  mouseMoveEvent(QMouseEvent * event);
+
         void  resizeEvent(QResizeEvent * event);
 
         void  mouseDoubleClickEvent(QMouseEvent *event);
@@ -44,6 +47,7 @@ signals:
         //鼠标双击
         void         LBtnDbClk();
         void         shownotes();
+        void         showAddNoteWidget();
 private slots:
        void openInSys();
        void openInTab();
@@ -52,13 +56,15 @@ private slots:
        void sendMail();
        void notes();
        void showMainNotes();
+       void showMainAddNoteWidget();
 
 private:
-        MyItemDelegate * delegate;
-        MyStandardItemModel * themodel;
+        MyTableDelegate * delegate;
+        MyTableItemModel * model;
         bool    mouseStatus;
         QPoint  curPoint;
         QString  curPath;
+        QString  curUuid;
 
         // doc table menu start
         QMenu *cmenu;
@@ -93,6 +99,8 @@ private:
         QAction *jpg2pdfAction;
         QAction *ppt2jpgAction;
         // doc table menu end
+
+        NotesDialog *m_notesdlg;
 
         void tableContextMenuOpened();
         void initActions();

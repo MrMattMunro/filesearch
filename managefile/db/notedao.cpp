@@ -55,13 +55,14 @@ QList<Note> NoteDao::selectNotesbyDocUuId(const QString & docUuid)
     while (query.next()){
             Note field;
             field.NOTE_GUID = query.value(0).toString();
-            field.NOTE_CONTENT = query.value(1).toString();
-            field.NOTE_OWNER = query.value(2).toString();
-            field.PAGE = query.value(3).toInt();
-            field.SHEETPAGE = query.value(4).toString();
-            field.ROW = query.value(5).toInt();
-            field.COLUMN = query.value(6).toInt();
-            field.DT_MODIFIED = query.value(7).toChar();
+            field.DOCUMENT_GUID = query.value(1).toString();
+            field.NOTE_CONTENT = query.value(2).toString();
+            field.NOTE_OWNER = query.value(3).toString();
+            field.PAGE = query.value(4).toInt();
+            field.SHEETPAGE = query.value(5).toString();
+            field.ROW = query.value(6).toInt();
+            field.COLUMN = query.value(7).toInt();
+            field.DT_MODIFIED = query.value(8).toString();
             returnList.append(field);
     }
     return returnList;
@@ -77,13 +78,14 @@ Note NoteDao::selectNote(const QString & uuid)
     while (query.next()){
             Note field;
             field.NOTE_GUID = query.value(0).toString();
-            field.NOTE_CONTENT = query.value(1).toString();
-            field.NOTE_OWNER = query.value(2).toString();
-            field.PAGE = query.value(3).toInt();
-            field.SHEETPAGE = query.value(4).toString();
-            field.ROW = query.value(5).toInt();
-            field.COLUMN = query.value(6).toInt();
-            field.DT_MODIFIED = query.value(7).toChar();
+            field.DOCUMENT_GUID = query.value(1).toString();
+            field.NOTE_CONTENT = query.value(2).toString();
+            field.NOTE_OWNER = query.value(3).toString();
+            field.PAGE = query.value(4).toInt();
+            field.SHEETPAGE = query.value(5).toString();
+            field.ROW = query.value(6).toInt();
+            field.COLUMN = query.value(7).toInt();
+            field.DT_MODIFIED = query.value(8).toString();
             return field;
     }
 }
@@ -110,8 +112,8 @@ bool NoteDao::updateNote(Note note){
        noteContent = note.NOTE_CONTENT;
     }
 
-    if(! note.DOCUMENT_GUID.isEmpty()){
-       noteOwner = note.DOCUMENT_GUID;
+    if(! note.NOTE_OWNER.isEmpty()){
+       noteOwner = note.NOTE_OWNER;
     }
 
     if(note.PAGE != 0){

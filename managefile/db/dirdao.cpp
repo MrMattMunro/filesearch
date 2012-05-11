@@ -58,6 +58,22 @@ QList<Dir> DirDao::selectDirsbyParent(const QString & groupUuid)
     return returnList;
 }
 
+// 递归迭代父目录取得所有层级子目录
+void DirDao::selectAllSubDirbyDir(QList<Dir> & selDirList, const QString & dirUuid){
+
+    QList<Dir> tmpList = DirDao::selectDirsbyParent(dirUuid);
+    selDirList.append(tmpList);
+    if(tmpList.size() > 0){
+        do
+        {
+            Dir first = (Dir)tmpList.takeFirst();
+            selectAllSubDirbyDir(selDirList, first.DIR_GUID);
+
+        }while(tmpList.size() != 0);
+    }
+}
+
+
 // 根据标签uuId获取标签
 Dir DirDao::selectDir(const QString & uuid)
 {
@@ -121,3 +137,11 @@ bool DirDao::updateDir(Dir dir){
     sql = sql.arg(dirparentuuid, dirname, dirdesp, diricon, QString::number(dirorder), QString::number(version), dir.DIR_GUID);
     return Database::execSql(sql);
 }
+
+//void DirDao::clearSelDirList(){
+//    selDirList.clear();
+//}
+
+//QList<Dir> DirDao::getSelDirList(){
+//  return selDirList;
+//}

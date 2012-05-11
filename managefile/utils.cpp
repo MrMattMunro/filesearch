@@ -69,6 +69,66 @@ QString Utils::getLocatePath()
     return locpath;
 }
 
+QString Utils::getLocateNotesPath()
+{
+    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    locpath.append(QDir::separator()).append("slfile");
+    locpath.append(QDir::separator()).append("note");
+    QDir *dir=new QDir(locpath);
+    if(!dir->exists()){
+       dir->mkdir(locpath);
+    }
+    return locpath;
+}
+
+QString Utils::getLocateIndexPath()
+{
+    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    locpath.append(QDir::separator()).append("slfile");
+    locpath.append(QDir::separator()).append("index");
+    QDir *dir=new QDir(locpath);
+    if(!dir->exists()){
+       dir->mkdir(locpath);
+    }
+    return locpath;
+}
+
+QString Utils::getLocateDbPath()
+{
+    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    locpath.append(QDir::separator()).append("slfile");
+    locpath.append(QDir::separator()).append("db");
+    QDir *dir=new QDir(locpath);
+    if(!dir->exists()){
+       dir->mkdir(locpath);
+    }
+    return locpath;
+}
+
+QString Utils::getSavePagePath()
+{
+    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    locpath.append(QDir::separator()).append("slfile");
+    locpath.append(QDir::separator()).append("page");
+    QDir *dir=new QDir(locpath);
+    if(!dir->exists()){
+       dir->mkdir(locpath);
+    }
+    return locpath;
+}
+
+QString Utils::getSaveDocPath()
+{
+    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    locpath.append(QDir::separator()).append("slfile");
+    locpath.append(QDir::separator()).append("doc");
+    QDir *dir=new QDir(locpath);
+    if(!dir->exists()){
+       dir->mkdir(locpath);
+    }
+    return locpath;
+}
+
 // 根据目录path取得最底层目录名
 QString Utils::getDirNameByPath(const QString & path)
 {

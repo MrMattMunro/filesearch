@@ -8,14 +8,14 @@ class CreateSubDirDialog : public QDialog, public Ui::CreateSubDirDialog
 	Q_OBJECT
 
 	public:
-                CreateSubDirDialog(QWidget * parent = 0,const QString & basedir = 0, const QString & dir = 0);
+                CreateSubDirDialog(QWidget * parent = 0,const QString & curUuid = 0, const QString & dir = 0);
                 bool update;
 
-                QString m_exportDir;
-                QString m_dir;
+                QString m_newUuid;
 	private:
                 QObject * m_parent;
-                QString m_baseDir;
+                QString m_curUuid;
+                QString m_dir;
 
 	private slots:
                 void confirmBtn_clicked();

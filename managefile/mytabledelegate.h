@@ -1,14 +1,14 @@
-#ifndef MYITEMDELEGATE_H
-#define MYITEMDELEGATE_H
+#ifndef MYTABLEDELEGATE_H
+#define MYTABLEDELEGATE_H
 #endif
 
 #include<QItemDelegate>
 
-class MyItemDelegate: public QItemDelegate
+class MyTableDelegate: public QItemDelegate
 {
 public:
-        MyItemDelegate(QObject * parent=0);
-        virtual ~ MyItemDelegate(){}
+        MyTableDelegate(QObject * parent=0);
+        virtual ~ MyTableDelegate(){}
 
         void paint(QPainter * painter,
                 const QStyleOptionViewItem & option,

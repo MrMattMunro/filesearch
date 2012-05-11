@@ -6,6 +6,7 @@
 // #include "settings.h"
 #include "utils.h"
 #include "db/notedao.h"
+#include "preferences.h"
 
 int statusbarTime;
 
@@ -124,6 +125,9 @@ void TextEditor::reset()
     actionAlignSuperScript->setChecked (false);
     actionAlignLeft->setChecked (true);
     e->setAlignment( Qt::AlignLeft );
+
+    //add
+    filename = "";
 }
 
 bool TextEditor::isEmpty()
@@ -649,16 +653,37 @@ void TextEditor::textSaveAs()	//FIXME-3 Use WarningDialog
 
 void TextEditor::textSave()
 {
-    // save to db
-    if ( filename.isEmpty() )
-    {
-        textSaveAs();
-        return;
+    QString notesPath = Utils::getLocateNotesPath();
+    Preferences* p = Preferences::instance();
+    if(filename.isEmpty()){
+        filename = notesPath.append(QDir::separator());
+        noteuuId = QUuid::createUuid().toString();
+        filename.append(noteuuId);
+        filename.append(".html");
+        // 插入note表
+        Note note;
+        note.NOTE_GUID = noteuuId;
+        QString m_docUuid = p->getNoteDocUid();
+        note.DOCUMENT_GUID = m_docUuid;
+        note.NOTE_CONTENT = e->toPlainText();
+        NoteDao::insertNote(note);
+    }else{
+        // 更新note表
+        QString selNoteUid = p->getSelNoteUid();
+        if(!selNoteUid.isEmpty()){
+           noteuuId = selNoteUid;
+        }
+        Note note;
+        note.NOTE_GUID = noteuuId;
+        QString m_docUuid = p->getNoteDocUid();
+        note.DOCUMENT_GUID = m_docUuid;
+        note.NOTE_CONTENT = e->toPlainText();
+        NoteDao::updateNote(note);
     }
 
-    //NoteDao::insertNote();
     QString text = e->toHtml(); //FIXME-3 or plaintext? check...
     QFile f( filename );
+
     if ( !f.open( QIODevice::WriteOnly ) )
     {
         statusBar()->showMessage( QString("Could not write to %1").arg(filename), statusbarTime );

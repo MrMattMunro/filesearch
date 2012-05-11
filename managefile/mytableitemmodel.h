@@ -4,15 +4,16 @@
 
 #include<QStandardItemModel>
 
-class MyStandardItemModel:public QStandardItemModel
+class MyTableItemModel:public QStandardItemModel
 {
 public:
-        MyStandardItemModel(QObject * parent=0)
+        MyTableItemModel(QObject * parent=0)
                 :QStandardItemModel(parent){}
-        virtual ~ MyStandardItemModel(){}
+        virtual ~ MyTableItemModel(){}
 
         QVariant data(const QModelIndex & index,
                 int role=Qt::DisplayRole) const;
+        bool setData(const QModelIndex &index, const QVariant &value, int role);
         QVariant headerData(int section,
                 Qt::Orientation orientation,
                 int role=Qt::DisplayRole) const;

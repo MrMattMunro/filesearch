@@ -44,7 +44,7 @@
 #include <QtGui/QTableWidget>
 #include <QtGui/QWidget>
 #include <QtWebKit/QWebView>
-#include <mytreelist.h>
+#include <mytreeview.h>
 #include <mytableview.h>
 #include <browser/tabwidget.h>
 #include <browser/toolbarsearch.h>
@@ -176,7 +176,6 @@ private slots:
 
     void windowToggleNoteEditor();
     void windowShowNoteEditor();
-    void windowHideNoteEditor();
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -196,7 +195,7 @@ private:
     QSplitter * splitter;
     QToolBar *toolBar;
     MyTableView *m_doctable;
-    myTreeList *q_myTreeList;
+    MyTreeView *q_myTreeList;
     // ¿Õ°×ÇøÓò
     QWidget *sapcewidget;
     QAction *m_searchSetAction;

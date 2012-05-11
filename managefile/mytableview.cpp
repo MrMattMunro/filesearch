@@ -17,6 +17,8 @@
 #include "exportconvertdialog.h"
 #include "notesdialog.h"
 #include "Common.h"
+#include "mytreeitemmodel.h"
+#include "db/docdao.h"
 #include "QSettings"
 
 static int n_orow;
@@ -24,28 +26,23 @@ static int n_selrow;
 
 MyTableView::MyTableView(QWidget * parent) : QTableView(parent), mouseStatus(true)
 {
-    delegate = new MyItemDelegate(parent);
-    themodel = new MyStandardItemModel(parent);
+    delegate = new MyTableDelegate(parent);
+    model = new MyTableItemModel(parent);
 
-    this->setModel(themodel);
+    this->setModel(model);
     this->setItemDelegate(delegate);
 
     horizontalHeader()->setMouseTracking (true);
     horizontalHeader ()->installEventFilter (this);
 
-    this->setStyleSheet(
-                "QTableView{selection-background-color: qlineargradient(x1: 0, y1: 0, x2: 0.5, y2: 0.5,stop: 0 #FF92BB, stop: 1 white);}"
-                "QTableView::QTableCornerButton::section {background: red;border: 2px outset red;}"
-                "QTableView::item:hover{background-color:rgb(128, 128, 128)}"
-
-    );
     this->resizeColumnsToContents();
     this->resizeRowsToContents();
     this->setEditTriggers(QAbstractItemView::NoEditTriggers);
     this->setSelectionBehavior(QAbstractItemView::SelectRows);
-    this->setMouseTracking(true);//important
+    this->setMouseTracking(true);
     this->setContextMenuPolicy(Qt::CustomContextMenu);
     this->setAcceptDrops(true);
+    this->setShowGrid(false);
 
     QDesktopServices::setUrlHandler( "mailto", this, "mailTo" );
 
@@ -187,16 +184,17 @@ void MyTableView::initActions ()
 }
 
 // 鼠标移开事件
-void MyTableView::leaveEvent (QEvent * event )
+void MyTableView::leaveEvent (QEvent * event)
 {
-        MyStandardItemModel *m = (MyStandardItemModel *)model();
-        m->setHoverRow(-1);
-        int columnCount = m->columnCount();
+
+        model->setHoverRow(-1);
+        int columnCount = model->columnCount();
         for (int i = columnCount - 1; i >= 0; i--)
         {
-                update(model()->index(n_orow, i));
-
+              QModelIndex index = model->index(n_orow, i);
+              update(index);
         }
+
         n_orow = -1;
         n_selrow = -1;
 }
@@ -205,16 +203,15 @@ void MyTableView::leaveEvent (QEvent * event )
 void MyTableView::updateRow(int row)
 {
         if (row == n_orow || row == n_selrow){
-           return;
+            return;
         }
-        MyStandardItemModel *m = (MyStandardItemModel *)model();
-        m->setHoverRow(row);
-        int columnCount = model()->columnCount();
+        model->setHoverRow(row);
+        int columnCount = model->columnCount();
         for (int i = columnCount - 1; i >= 0; i--)
         {
 
-                update(model()->index(n_orow, i));
-                update(model()->index(row, i));
+                update(model->index(n_orow, i));
+                update(model->index(row, i));
 
         }
         n_orow = row;
@@ -246,37 +243,30 @@ void MyTableView::resizeEvent(QResizeEvent * event){
     this->setColumnWidth(0, tablewidth * 1);
 }
 
-void MyTableView::buildDocList(QStringList files)
+void MyTableView::buildDocList(QList<Doc> doclist)
 {
     Preferences* p = Preferences::instance();
-    themodel->clear();
+    model->clear();
     qDebug("buildDocList start");
 
-    themodel->setRowCount(files.size());
-    themodel->setColumnCount(1);
+    model->setColumnCount(1);
 
-    for (int var = 0; var < files.size(); ++var) {
-         QString str = files.at(var);
-         QStringList tempArr = str.split(",");
-         if(tempArr.length() != 2){
-           continue;
-         }
-         str = tempArr.at(1);
+    for (int var = 0; var < doclist.size(); ++var) {
+         Doc doc = doclist.at(var);
+         QString str = doc.DOCUMENT_LOCATION;
+         QString docUuid = doc.DOCUMENT_GUID;
 
-         // 当名称为空时
-         if(str.isEmpty()){
-              continue;
-         }
-         int dotpos = str.lastIndexOf(".");
-         int splitpos = str.lastIndexOf(QDir::separator());
-         QString filename = str.right(str.length() - splitpos - 1);
-         QString icon = str.right(str.length() - dotpos - 1).toLower();
-         QString dotsuffix = str.right(str.length() - dotpos);
+         QString filename = doc.DOCUMENT_NAME;
+         int dotpos = filename.lastIndexOf(".");
+
+         QString icon = filename.right(filename.length() - dotpos - 1).toLower();
+         QString dotsuffix = filename.right(filename.length() - dotpos);
          QString suffix = "*" + dotsuffix;
 
          QList<QStandardItem*> items;
          QStandardItem* item = new QStandardItem();
 
+         item->setData(docUuid, Qt::UserRole + 1);
          if(p->word().contains(suffix, Qt::CaseInsensitive)){
 
             // item->setData(str, wordItemType);
@@ -331,9 +321,9 @@ void MyTableView::buildDocList(QStringList files)
 
          if(p->allsupported().contains(suffix, Qt::CaseInsensitive)){
              icon = icon.append(".ico");
-             item->setIcon(Utils::getIcon(icon));
+             item->setData(icon,  Qt::DecorationRole);
              items.append(item);
-             themodel->insertRow(var, items);
+             model->appendRow(items);
          }
     }
     // 设置各列比例,使其占满全行
@@ -349,13 +339,21 @@ void MyTableView::mouseMoveEvent(QMouseEvent * event)
     curPoint = event->pos();
     updateRow(nrow);
 
-    int column=this->columnAt(event->x());
-    int row=this->rowAt(event->y());
-    if(column==0 && row!=-1){
+    int column= this->columnAt(event->x());
+    int row = this->rowAt(event->y());
+    if(column == 0 && row != -1){
         this->setCursor(Qt::PointingHandCursor);
     } else {
         this->setCursor(Qt::ArrowCursor);
     }
+
+    // 改变白颜色
+    QModelIndex index = indexAt(event->pos());
+    QStandardItem * selrange = model->itemFromIndex(index);
+    if(selrange){
+        selrange->setData(QBrush(QColor(255, 255, 255)), Qt::BackgroundRole);
+    }
+
 }
 
 // 左键双击
@@ -366,8 +364,10 @@ void MyTableView::mouseDoubleClickEvent(QMouseEvent *event)
         {
                 curPoint = event->pos();
                 QModelIndex  index = indexAt(curPoint);
-                QStandardItem *curItem = themodel->itemFromIndex(index);
+                QStandardItem *curItem = model->itemFromIndex(index);
                 curPath = qvariant_cast<QString>(curItem->data(Qt::ToolTipRole));
+                curUuid = qvariant_cast<QString>(curItem->data(Qt::UserRole + 1));
+
                 emit LBtnDbClk();
         }
 }
@@ -383,20 +383,20 @@ void MyTableView::mousePressEvent(QMouseEvent *event)
         if(true == mouseStatus )
         {
             curPoint = event->pos();
-
             QModelIndex  index = indexAt(curPoint);
-            // 改变颜色
-            int nrow = index.row();
-            n_selrow = nrow;
-
-            QStandardItem *curItem = themodel->itemFromIndex(index);
+            QStandardItem *curItem = model->itemFromIndex(index);
             curPath = qvariant_cast<QString>(curItem->data(Qt::ToolTipRole));
+            curUuid = qvariant_cast<QString>(curItem->data(Qt::UserRole + 1));
             tableContextMenuOpened();
         }
 }
 
 QPoint MyTableView::getCurPoint(){
     return curPoint;
+}
+
+QString MyTableView::getCurUuid(){
+    return curUuid;
 }
 
 QString MyTableView::getCurFilePath(){
@@ -541,14 +541,19 @@ void MyTableView::sendMail()
 // 显示出文档笔记
 void MyTableView::notes()
 {
+    // 传递选择的docUuid
+    Preferences* p = Preferences::instance();
+    p->setNoteDocUid(curUuid);
+
+    m_notesdlg = new NotesDialog(this);
+    connect(m_notesdlg, SIGNAL(showAddNoteWidget()), this, SLOT(showMainAddNoteWidget()));
+
     bool hasSelRight = false;
     // 需选中文档
     if(!curPath.isEmpty()) {
-        hasSelRight = true;    
-        NotesDialog notesdlg(this, curPath);
-        notesdlg.exec();
-          // emit shownotes();
-         if(notesdlg.update){
+        hasSelRight = true;
+        m_notesdlg->exec();
+        if(m_notesdlg->update){
           // 不做任何操作
         }
     }
@@ -559,12 +564,25 @@ void MyTableView::notes()
     }
 }
 
+
+// 显示出文档笔记
+void MyTableView::showMainAddNoteWidget()
+{
+    emit showAddNoteWidget();
+}
+
 // 打开右键菜单
 void MyTableView::tableContextMenuOpened()
 {
     QPoint pos = getCurPoint();
+
     if (cmenu->actions().count() > 0){
-       cmenu->exec(this->viewport()->mapToGlobal(pos));
+        // 改变颜色
+        QModelIndex  index = indexAt(pos);
+        QStandardItem * selrange = model->itemFromIndex(index);
+        selrange->setData(QBrush(QColor(185, 210, 235)), Qt::BackgroundRole);
+
+        cmenu->exec(this->viewport()->mapToGlobal(pos));
     }
 }
 
@@ -573,11 +591,6 @@ void MyTableView::showMainNotes()
 {
     emit shownotes();
 }
-
-
-
-
-
 
 
 

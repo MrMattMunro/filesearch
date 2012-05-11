@@ -2,7 +2,8 @@ QT       += network webkit xml xmlpatterns sql
 TARGET = managefile
 TEMPLATE = app
 
-LIBS += C:\QtWorksapce\managefile\lib\sqlite3.lib
+LIBS += C:\QtWorksapce\managefile\lib\sqlite3.lib  \
+         C:\QtSDK\Symbian\tools\sbs\win32\mingw\lib\libwinspool.a
 
 CONFIG+=qaxcontainer
 
@@ -11,13 +12,10 @@ SOURCES += main.cpp \
     preferences.cpp \
     utils.cpp \
     extensionmodel.cpp \
-    myTreeList.cpp \
     fileutils.cpp \
     importdocdialog.cpp \
     excuteJavaUtil.cpp \
     mytableview.cpp \
-    myitemdelegate.cpp \
-    mystandarditemmodel.cpp \
     exportdocdialog.cpp \
     createsubdirdialog.cpp \
     movetodirdialog.cpp \
@@ -59,13 +57,18 @@ SOURCES += main.cpp \
     notesdialog.cpp \
     db/notedao.cpp \
     db/dirdao.cpp \
-    db/docdao.cpp
+    db/docdao.cpp \
+    mytabledelegate.cpp \
+    mytreeitemmodel.cpp \
+    mytreedelegate.cpp \
+    mytableitemmodel.cpp \
+    mytreeview.cpp \
+    printerwidget.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
     utils.h \
     extensionmodel.h \
-    myTreeList.h \
     fileutils.h \
     importdocdialog.h \
     mytableview.h \
@@ -113,7 +116,13 @@ HEADERS  += mainwindow.h \
     notesdialog.h \
     db/notedao.h \
     db/dirdao.h \
-    db/docdao.h
+    db/docdao.h \
+    mytreeitemmodel.h \
+    mytreedelegate.h \
+    mytableitemmodel.h \
+    mytabledelegate.h \
+    mytreeview.h \
+    printerwidget.h
 
 RESOURCES += \
     managefile.qrc
@@ -143,7 +152,8 @@ FORMS    += mainwindow.ui \
     testUI.ui \
     exportconvertdialog.ui \
     docnoteinfodialog.ui \
-    notesdialog.ui
+    notesdialog.ui \
+    printerwidget.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -214,6 +224,22 @@ OTHER_FILES += \
     docview/jquery/css/ui-darkness/images/ui-bg_flat_50_5c5c5c_40x100.png \
     docview/jquery/css/ui-darkness/images/ui-bg_flat_30_cccccc_40x100.png \
     docview/jquery/css/ui-darkness/jquery-ui-1.8.16.custom.css
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

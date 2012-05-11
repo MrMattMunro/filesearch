@@ -80,6 +80,7 @@ protected:
     QPoint lastPos;	    // save last position of window
     QString filename;
     QString filenameHint;
+    QString noteuuId;
 
     QBrush emptyPaper;	    // setting the background color
     QBrush filledPaper;	    // depending on the state
