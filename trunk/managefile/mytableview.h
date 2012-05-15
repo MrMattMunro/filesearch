@@ -16,6 +16,8 @@
 #include "mytabledelegate.h"
 #include "mytableitemmodel.h"
 #include "notesdialog.h"
+#include "relatedocdialog.h"
+#include "doctagsdialog.h"
 #include "db/docdao.h"
 
 
@@ -31,6 +33,7 @@ public:
         void    enableMouse(bool yesOrNo);  //设置鼠标相应
         bool    getMouseStatus();   //查看是可以使用鼠标
         QString getCurFilePath();   // 取得选择文件路径
+        void showNoteDialog();   // 打开显示Dlg
 
 protected:
         void  leaveEvent (QEvent * event );
@@ -48,6 +51,7 @@ signals:
         void         LBtnDbClk();
         void         shownotes();
         void         showAddNoteWidget();
+        void         hideNoteWidget();
 private slots:
        void openInSys();
        void openInTab();
@@ -55,8 +59,11 @@ private slots:
        void exportConvert();
        void sendMail();
        void notes();
+       void relateDocs();
+       void docTags();
        void showMainNotes();
        void showMainAddNoteWidget();
+       void hideMainAddNoteWidget();
 
 private:
         MyTableDelegate * delegate;
@@ -101,6 +108,8 @@ private:
         // doc table menu end
 
         NotesDialog *m_notesdlg;
+        RelateDocDialog *m_relatedocdlg;
+        DocTagsDialog *m_doctagsdlg;
 
         void tableContextMenuOpened();
         void initActions();

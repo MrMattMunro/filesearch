@@ -48,10 +48,12 @@ public:
                         event->setDropAction(Qt::MoveAction);
                         QByteArray txt = event->mimeData()->data("bla/x-something");
                         QByteArray icon = event->mimeData()->data("bla/n-something");
+                        QByteArray uuid = event->mimeData()->data("bla/o-something");
                         QListWidgetItem *temp = new QListWidgetItem();
                         temp->setIcon(Utils::getIcon(icon));
                         temp->setText(txt);
                         temp->setData(Qt::UserRole, icon);
+                        temp->setData(Qt::UserRole + 1, uuid);
                         qDebug() << "--------------------";
                         qDebug() << "Item icon:: " << icon;
                         qDebug() << "Item text:: " << txt;
@@ -64,13 +66,18 @@ public:
         {
                 QListWidgetItem *item = currentItem();
                 QMimeData *mimeData = new QMimeData;
-                QByteArray ba = item->text().toLatin1().data();
+                QByteArray ba = item->text().toUtf8().data();
                 QString iconname = item->data(Qt::UserRole).toString();
+                QString key = item->data(Qt::UserRole + 1).toString();
+
                 QByteArray iconbyte = iconname.toLatin1().data();
+                QByteArray keybyte = key.toLatin1().data();
                 QString theText = "bla/x-something";
                 QString name = "bla/n-something";
+                QString uuid = "bla/o-something";
                 mimeData->setData(theText, ba);
                 mimeData->setData(name, iconbyte);
+                mimeData->setData(uuid, keybyte);
                 QDrag *drag = new QDrag(this);
                 drag->setMimeData(mimeData);
                 if (drag->exec(Qt::MoveAction) == Qt::MoveAction){

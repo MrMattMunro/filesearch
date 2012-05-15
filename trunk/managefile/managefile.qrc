@@ -143,5 +143,7 @@
         <file>icons/tag.ico</file>
         <file>icons/tags.ico</file>
         <file>icons/basket.ico</file>
+        <file>icons/notes.png</file>
+        <file>icons/note.png</file>
     </qresource>
 </RCC>

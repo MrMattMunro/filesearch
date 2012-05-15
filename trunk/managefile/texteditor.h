@@ -5,6 +5,8 @@
 
 enum EditorState {inactiveEditor,emptyEditor,filledEditor};
 
+#include <notesdialog.h>
+
 class TextEditor :public QMainWindow
 {    Q_OBJECT
 public:
@@ -41,12 +43,14 @@ public slots:
     void setText(const QString &);  // set Text (by MapEditor)
     void setInactive();		    // Nothing can be entered
     void editCopyAll();
-
+    void showSelf();
+    void hideSelf();
 signals:
     void textHasChanged();
     void windowClosed();
     void fontFamilyHasChanged();
     void fontSizeHasChanged();
+    void showMainNotes();
     
 private slots:
     void textLoad();
@@ -74,6 +78,8 @@ private slots:
     void verticalAlignmentChanged(QTextCharFormat::VerticalAlignment);
     void updateActions();
     void setState (EditorState);
+
+    void showNotes ();
 
 protected:
     QTextEdit *e;
@@ -120,6 +126,8 @@ protected:
     *actionAlignCenter,
     *actionAlignRight,
     *actionAlignJustify;
+
+     NotesDialog *m_notesdlg;
 };
 
 #endif

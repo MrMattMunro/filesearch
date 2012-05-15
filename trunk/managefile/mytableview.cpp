@@ -15,7 +15,9 @@
 #include "preferences.h"
 #include "utils.h"
 #include "exportconvertdialog.h"
+#include "relatedocdialog.h"
 #include "notesdialog.h"
+#include "doctagsdialog.h"
 #include "Common.h"
 #include "mytreeitemmodel.h"
 #include "db/docdao.h"
@@ -78,11 +80,11 @@ void MyTableView::initActions ()
 
     // 关联文档
     relatedDocAction = new QAction(tr("&Related Documents"), this);
-    connect(relatedDocAction, SIGNAL(triggered()), this, SLOT(about()));
+    connect(relatedDocAction, SIGNAL(triggered()), this, SLOT(relateDocs()));
 
     // 标签
     tagAction = new QAction(tr("&Tags"), this);
-    connect(tagAction, SIGNAL(triggered()), this, SLOT(about()));
+    connect(tagAction, SIGNAL(triggered()), this, SLOT(docTags()));
 
     // 删除
     deleteAction = new QAction(tr("&Delete(Move to the Wastebasket)"), this);
@@ -385,9 +387,11 @@ void MyTableView::mousePressEvent(QMouseEvent *event)
             curPoint = event->pos();
             QModelIndex  index = indexAt(curPoint);
             QStandardItem *curItem = model->itemFromIndex(index);
-            curPath = qvariant_cast<QString>(curItem->data(Qt::ToolTipRole));
-            curUuid = qvariant_cast<QString>(curItem->data(Qt::UserRole + 1));
-            tableContextMenuOpened();
+            if(curItem){
+                curPath = qvariant_cast<QString>(curItem->data(Qt::ToolTipRole));
+                curUuid = qvariant_cast<QString>(curItem->data(Qt::UserRole + 1));
+                tableContextMenuOpened();
+            }
         }
 }
 
@@ -543,10 +547,11 @@ void MyTableView::notes()
 {
     // 传递选择的docUuid
     Preferences* p = Preferences::instance();
-    p->setNoteDocUid(curUuid);
+    p->setSelDocUid(curUuid);
 
     m_notesdlg = new NotesDialog(this);
     connect(m_notesdlg, SIGNAL(showAddNoteWidget()), this, SLOT(showMainAddNoteWidget()));
+    connect(m_notesdlg, SIGNAL(closeNoteWidget()), this, SLOT(hideMainAddNoteWidget()));
 
     bool hasSelRight = false;
     // 需选中文档
@@ -564,11 +569,74 @@ void MyTableView::notes()
     }
 }
 
+// 显示Notes
+void MyTableView::showNoteDialog()
+{
+    notes();
+}
 
 // 显示出文档笔记
 void MyTableView::showMainAddNoteWidget()
 {
     emit showAddNoteWidget();
+}
+
+// 隐藏文档笔记
+void MyTableView::hideMainAddNoteWidget()
+{
+    if(m_notesdlg->needCloseNoteWiget){
+          emit hideNoteWidget();
+    }
+}
+
+// 显示出关联文档
+void MyTableView::relateDocs()
+{
+    // 传递选择的docUuid
+    Preferences* p = Preferences::instance();
+    p->setSelDocUid(curUuid);
+
+    m_relatedocdlg = new RelateDocDialog(this);
+
+    bool hasSelRight = false;
+    // 需选中文档
+    if(!curPath.isEmpty()) {
+        hasSelRight = true;
+        m_relatedocdlg->exec();
+        if(m_relatedocdlg->update){
+          // 不做任何操作
+        }
+    }
+    // 如果没有选中子目录节点
+    if(!hasSelRight){
+        QMessageBox::warning(0, tr("Warning"), tr("Please Select an Document."), QMessageBox::Yes);
+        return;
+    }
+}
+
+// 显示出文档Tag
+void MyTableView::docTags()
+{
+    // 传递选择的docUuid
+    Preferences* p = Preferences::instance();
+    p->setSelDocUid(curUuid);
+
+    m_doctagsdlg = new DocTagsDialog(this);
+
+    bool hasSelRight = false;
+    // 需选中文档
+    if(!curPath.isEmpty()) {
+        hasSelRight = true;
+        m_doctagsdlg->exec();
+        if(m_doctagsdlg->update){
+          // 不做任何操作
+        }
+    }
+    // 如果没有选中子目录节点
+    if(!hasSelRight){
+        QMessageBox::warning(0, tr("Warning"), tr("Please Select an Document."), QMessageBox::Yes);
+        return;
+    }
 }
 
 // 打开右键菜单

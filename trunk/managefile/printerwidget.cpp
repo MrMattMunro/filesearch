@@ -34,9 +34,13 @@ void PrinterWidget::printer()
         long dwCount = lpData.length();
 
         QStringList sl;
-        sl.append(tr("^XA^FO10,100^BY3^BCN,100,Y,N,N^FDAB123456^FS^XZ"));
-        sl.append(tr("^XA^FO10,100^BY3^BCN,100,Y,N,N^FDCD123456^FS^XZ"));
-        sl.append(tr("^XA^FO10,100^BY3^BCN,100,Y,N,N^FDEF123456^FS^XZ"));
+//        sl.append(tr("^XA^FO10,100^BY3^BCN,100,Y,N,N^FDAB123456^FS^XZ"));
+//        sl.append(tr("^XA^FO10,100^BY3^BCN,100,Y,N,N^FDCD123456^FS^XZ"));
+//        sl.append(tr("^XA^FO10,100^BY3^BCN,100,Y,N,N^FDEF123456^FS^XZ"));
+
+        sl.append(tr("rfgggggg"));
+        sl.append(tr("sdffffffffff"));
+        sl.append(tr("sdfffffffffffffffffff"));
         if(RawDataToPrinter(printerName,&sl)==true)
         {
             qDebug() << "OK";
@@ -149,7 +153,7 @@ bool RawDataToPrinter(QString printerName, QStringList *barcode)
         return false;
     }
 
-    szPrinterName = (char*)printerName.toLocal8Bit().data();
+    szPrinterName = (char*)printerName.toLocal8Bit().constData();
 
     //获取打印机的handle
     if(!OpenPrinterA(szPrinterName,&hPrinter,NULL))
@@ -181,7 +185,7 @@ bool RawDataToPrinter(QString printerName, QStringList *barcode)
     {
         //发送数据到打印机
         dwCount = str.toLocal8Bit().length();
-        if(!WritePrinter(hPrinter,(unsigned char *)str.toLocal8Bit().data(),dwCount,&dwBytesWritten))
+        if(!WritePrinter(hPrinter,(unsigned char *)str.toLocal8Bit().data(), dwCount,&dwBytesWritten))
         {
             EndPagePrinter(hPrinter);
             EndDocPrinter(hPrinter);

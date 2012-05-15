@@ -20,7 +20,7 @@ class NotesDialog : public QDialog, public Ui::NotesDialog
                 QStandardItemModel *model;
                 QString m_docUuid;
                 QString m_docPath;
-                QString curNoteuuid;
+                bool needCloseNoteWiget;
                 QModelIndex selIndex;
 	private:
                 void intNotes();
@@ -32,4 +32,5 @@ class NotesDialog : public QDialog, public Ui::NotesDialog
                 void contextMenuRequested(const QPoint &position);
         signals:
                 void showAddNoteWidget();
+                void closeNoteWidget();
 };

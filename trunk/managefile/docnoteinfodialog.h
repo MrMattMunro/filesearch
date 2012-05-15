@@ -10,7 +10,6 @@ for which a new license (GPL+exception) is in place.
 #endif
 
 #include "ui_docnoteinfodialog.h"
-
 #include <QStandardItemModel>
 
 

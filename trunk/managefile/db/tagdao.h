@@ -24,6 +24,7 @@ class TagDao
                 static bool deleteTag(QString tagUuId);
                 static Tag selectTag(const QString & uuid);
                 static QList<Tag> selectTagsbyParent(const QString & groupUuid);
+                static QList<Tag> selectAllTags();
 
         private:
                 static void exception(const QString & message);

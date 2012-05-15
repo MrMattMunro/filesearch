@@ -56,8 +56,8 @@ Q_OBJECT
                 QStringList getDefaultWaitToolbarItemList() { return m_defaultwaittoolbaritemlist; };
                 void setDefaultWaittoolbaritemlist(QStringList v) { m_defaultwaittoolbaritemlist = v;  };
 
-                QString getNoteDocUid() { return m_notedocuid; };
-                void setNoteDocUid(QString v) { m_notedocuid = v; };
+                QString getSelDocUid() { return m_notedocuid; };
+                void setSelDocUid(QString v) { m_notedocuid = v; };
 
                 QString getSelNoteUid() { return m_selnoteuid; };
                 void setSelNoteUid(QString v) { m_selnoteuid = v; };
