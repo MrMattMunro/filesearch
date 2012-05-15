@@ -176,6 +176,8 @@ private slots:
 
     void windowToggleNoteEditor();
     void windowShowNoteEditor();
+    void windowHideNoteEditor();
+    void shownotes();
 
 protected:
     void closeEvent(QCloseEvent *event);

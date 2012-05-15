@@ -31,7 +31,7 @@ NotesDialog::NotesDialog(QWidget * parent): QDialog(parent),  update(false)
 
         // 传递选择的docUuid
         Preferences* p = Preferences::instance();
-        m_docUuid = p->getNoteDocUid();
+        m_docUuid = p->getSelDocUid();
 
         if(! m_docUuid.isEmpty()){
             Doc doc = DocDao::selectDoc(m_docUuid);
@@ -39,7 +39,7 @@ NotesDialog::NotesDialog(QWidget * parent): QDialog(parent),  update(false)
             this->setWindowTitle(doc.DOCUMENT_NAME);
         }
 
-        this->setWindowIcon(Utils::getIcon("document-import.png"));
+        this->setWindowIcon(Utils::getIcon("notes.png"));
 
         setContextMenuPolicy(Qt::CustomContextMenu);
         connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuRequested(QPoint)));
@@ -74,9 +74,9 @@ void NotesDialog::addNote()
 // 删除备注
 void NotesDialog::deleteNote()
 {
+    needCloseNoteWiget = false;
     int ret = QMessageBox::question(this, "", tr("Are you sure that delete the note ?"),
                                     QMessageBox::Yes, QMessageBox::No);
-
     if(ret == QMessageBox::Yes){
 
         QItemSelectionModel *selections = notesView->selectionModel();
@@ -85,6 +85,8 @@ void NotesDialog::deleteNote()
         // 删除文件
         QString notespath = Utils::getLocateNotesPath();
 
+        Preferences* p = Preferences::instance();
+
         foreach (QModelIndex index, selected)
         {
             rowMap.insert(index.row(), 0);
@@ -92,6 +94,9 @@ void NotesDialog::deleteNote()
             QStandardItem* item = model->item(index.row(), 5);
             QString noteuuid = qvariant_cast<QString>(item->data(Qt::DisplayRole));
             NoteDao::deleteNote(noteuuid);
+            if(noteuuid == p->getSelNoteUid()){
+              needCloseNoteWiget = true;
+            }
 
             noteuuid.append(".html");
             noteuuid.prepend(QDir::separator());
@@ -112,9 +117,8 @@ void NotesDialog::deleteNote()
         }
     }
 
-    // 清空SelNoteUid
-    Preferences* p = Preferences::instance();
-    p->setSelNoteUid("");
+    // 去关闭Note< 删除的Uuid正好是打开的Uuid>
+    emit closeNoteWidget();
 
     if(ret == QMessageBox::No){
        return;
@@ -143,32 +147,42 @@ void NotesDialog::editNote()
 // 删除所有备注
 void NotesDialog::deleteAllNote()
 {
-    if(!m_docUuid.isEmpty()){
-        //删除Note文件
-        QList<Note> notes = NoteDao::selectNotesbyDocUuId(m_docUuid);
-        // 列出子目录文件
-        QString notespath = Utils::getLocateNotesPath();
-        for (int var = 0; var < notes.length(); ++var) {
-                 Note note = notes.at(var);
-                 QString uuid = note.NOTE_GUID;
-                 uuid.append(".html");
-                 uuid.prepend(QDir::separator());
-                 QFileInfo file(uuid.prepend(notespath));
-                 if(file.exists()){
-                     FileUtils::deleteDirectory(file);
-                 }
-        }
-        // 删除Notes
-        NoteDao::deleteNoteByDoc(m_docUuid);
-        model->clear();
-    }
+    int ret = QMessageBox::question(this, "", tr("Are you sure that delete All the notes ?"),
+                                    QMessageBox::Yes, QMessageBox::No);
+    if(ret == QMessageBox::Yes){
+            if(!m_docUuid.isEmpty()){
+                //删除Note文件
+                QList<Note> notes = NoteDao::selectNotesbyDocUuId(m_docUuid);
+                // 列出子目录文件
+                QString notespath = Utils::getLocateNotesPath();
+                for (int var = 0; var < notes.length(); ++var) {
+                         Note note = notes.at(var);
+                         QString uuid = note.NOTE_GUID;
+                         uuid.append(".html");
+                         uuid.prepend(QDir::separator());
+                         QFileInfo file(uuid.prepend(notespath));
+                         if(file.exists()){
+                             FileUtils::deleteDirectory(file);
+                         }
+                }
+                // 删除Notes
+                NoteDao::deleteNoteByDoc(m_docUuid);
+                model->clear();
+            }
+     }
+     if(ret == QMessageBox::No){
+           return;
+      }
+     // 去关闭Note
+     needCloseNoteWiget = true;
+     emit closeNoteWidget();
 }
 
 // 确定按钮
 void NotesDialog::intNotes(){
 
     Preferences* p = Preferences::instance();
-    m_docUuid = p->getNoteDocUid();
+    m_docUuid = p->getSelDocUid();
 
     QList<Note> notes = NoteDao::selectNotesbyDocUuId(m_docUuid);
 

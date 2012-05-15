@@ -779,6 +779,7 @@ void MainWindow::initUI()
         // 后期需要调用主界面的动作
         connect(m_doctable, SIGNAL(LBtnDbClk()), this, SLOT(openDocInTab()));
         connect(m_doctable, SIGNAL(showAddNoteWidget()), this, SLOT(windowToggleNoteEditor()));
+        connect(m_doctable, SIGNAL(hideNoteWidget()), this, SLOT(windowHideNoteEditor()));
 
         // Dock widgets ///////////////////////////////////////////////
         //QDockWidget *dw;
@@ -790,6 +791,9 @@ void MainWindow::initUI()
             addDockWidget(Qt::RightDockWidgetArea, noteEditorDW);
             noteEditorDW->hide();
             noteEditor->setShowWithMain(true);
+            // 从Note编辑界面打开Note
+            connect(noteEditor, SIGNAL(showMainNotes()), this, SLOT(shownotes()));
+
         //} else{
           //  noteEditorDW=NULL;
         //}
@@ -797,6 +801,11 @@ void MainWindow::initUI()
 
         setCentralWidget(splitter);
 }
+
+void MainWindow::shownotes(){
+    m_doctable->showNoteDialog();
+}
+
 
 MainWindow::~MainWindow()
 {
@@ -2040,15 +2049,30 @@ void MainWindow::windowToggleNoteEditor()
 {
     // 改变NoteEditor的属性
     Preferences* p = Preferences::instance();
-    QString docUuid = p->getNoteDocUid();
+    QString docUuid = p->getSelDocUid();
 
     Doc doc = DocDao::selectDoc(docUuid);
     noteEditorDW->setWindowTitle(doc.DOCUMENT_NAME);
+    noteEditorDW->setWindowIcon(Utils::getIcon("note.png"));
 
     QString selNoteUid = p->getSelNoteUid();
     // 如果为空则是 清空Reset
     if(selNoteUid.isEmpty()){
        noteEditor->reset();
+    }else{
+        QString notesPath = Utils::getLocateNotesPath();
+        QString filename = notesPath.append(QDir::separator());
+        filename.append(QDir::separator());
+        filename.append(selNoteUid);
+        filename.append(".html");
+        // load noteUuid
+        QFile f( filename );
+        if ( !f.open( QIODevice::ReadOnly ) ){
+              return;
+        }
+        QTextStream ts( &f );
+        noteEditor->setText(ts.readAll());
+        noteEditor->setFilename(filename);
     }
     windowShowNoteEditor();
 }
@@ -2058,6 +2082,13 @@ void MainWindow::windowShowNoteEditor()
     noteEditor->setShowWithMain(true);
     noteEditor->show();
     noteEditorDW->show();
+}
+
+void MainWindow::windowHideNoteEditor()
+{
+    noteEditor->setShowWithMain(false);
+    noteEditor->hide();
+    noteEditorDW->hide();
 }
 
 

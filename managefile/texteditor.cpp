@@ -301,6 +301,49 @@ void TextEditor::setupFileActions()
     tb->addAction (a);
     actionFileDeleteAll=a;
 
+    fileMenu->addSeparator();
+
+    // 显示该笔记本所有Note
+    a = new QAction( Utils::getPixmap("notes.png"), tr( "&All notes" ), this);
+    connect( a, SIGNAL( activated() ), this, SLOT( showNotes() ) );
+    tb->addSeparator();
+    tb->addAction (a);
+    tb->addSeparator();
+
+}
+
+void TextEditor::showNotes()
+{
+    emit showMainNotes();
+//    m_notesdlg = new NotesDialog(this);
+//    connect(m_notesdlg, SIGNAL(showAddNoteWidget()), this, SLOT(showSelf()));
+//    connect(m_notesdlg, SIGNAL(closeNoteWidget()), this, SLOT(hideSelf()));
+
+//    bool hasSelRight = false;
+//    // 需选中文档
+//    if(!filename.isEmpty()) {
+//        hasSelRight = true;
+//        m_notesdlg->exec();
+//        if(m_notesdlg->update){
+//          // 不做任何操作
+//        }
+//    }
+//    // 如果没有选中子目录节点
+//    if(!hasSelRight){
+//        QMessageBox::warning(0, tr("Warning"), tr("Please Select an Document."), QMessageBox::Yes);
+//        return;
+//    }
+}
+
+void TextEditor::showSelf()
+{
+    this->show();
+    this->parentWidget()->show();
+}
+void TextEditor::hideSelf()
+{
+    this->hide();
+    this->parentWidget()->hide();
 }
 
 void TextEditor::setupEditActions()
@@ -663,7 +706,11 @@ void TextEditor::textSave()
         // 插入note表
         Note note;
         note.NOTE_GUID = noteuuId;
-        QString m_docUuid = p->getNoteDocUid();
+        // 加入docUuid 主要判断NotesDialog删除某一标注后后,再编辑保存该标注，
+        //解决方法：直接关闭该窗体
+        p->setSelNoteUid(noteuuId);
+
+        QString m_docUuid = p->getSelDocUid();
         note.DOCUMENT_GUID = m_docUuid;
         note.NOTE_CONTENT = e->toPlainText();
         NoteDao::insertNote(note);
@@ -675,7 +722,7 @@ void TextEditor::textSave()
         }
         Note note;
         note.NOTE_GUID = noteuuId;
-        QString m_docUuid = p->getNoteDocUid();
+        QString m_docUuid = p->getSelDocUid();
         note.DOCUMENT_GUID = m_docUuid;
         note.NOTE_CONTENT = e->toPlainText();
         NoteDao::updateNote(note);

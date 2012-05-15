@@ -74,6 +74,25 @@ Tag TagDao::selectTag(const QString & uuid)
     }
 }
 
+// 取得所有标签
+QList<Tag> TagDao::selectAllTags()
+{
+    QString sql = "SELECT TAG_GUID,TAG_NAME,TAG_GROUP_GUID,TAG_DESCRIPTION,DT_MODIFIED,MF_VERSION FROM MF_TAG ";
+    QSqlQuery query = Database::execSelect(sql);
+    QList<Tag> returnList;
+    while (query.next()){
+            Tag field;
+            field.TAG_GUID = query.value(0).toString();
+            field.TAG_NAME = query.value(1).toString();
+            field.TAG_GROUP_GUID = query.value(2).toString();
+            field.TAG_DESCRIPTION = query.value(3).toString();
+            field.DT_MODIFIED = query.value(4).toChar();
+            field.MF_VERSION = query.value(5).toInt();
+            returnList.append(field);
+    }
+    return returnList;
+}
+
 // 更新子标签
 bool TagDao::updateTag(Tag tag){
 
