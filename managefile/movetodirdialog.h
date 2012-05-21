@@ -18,7 +18,6 @@ class MoveToDirDialog : public QDialog, public Ui::MoveToDirDialog
                 QString m_seldir;
 	private:
                 QObject * m_parent;
-
                 MyTreeView *q_myTreeList;
 
 	private slots:

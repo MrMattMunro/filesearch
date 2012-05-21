@@ -164,7 +164,7 @@ void MyTreeView::delelteItem(int subTree, QString itemName)
 	}
 }
 
-void MyTreeView::clearTree(int subTree, QString itemName)
+void MyTreeView::clearTree(int subTree)
 {
 	QStandardItem  *parenItem = model->item(subTree);
 	int   i = 0;
@@ -413,4 +413,12 @@ void MyTreeView::dropEvent(QDropEvent *event)
         event->accept();
     }
 }
+// ÖØÐÂ¼ÓÔØTagÊ÷
+void MyTreeView::reloadTagTree()
+{
+       clearTree(1);
+       QStandardItem *allTagItem = model->item(1,0);
+       loadTagByParent("", allTagItem);
+}
+
 
