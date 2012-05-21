@@ -65,6 +65,7 @@ DocTagsDialog::DocTagsDialog(QWidget * parent): QDialog(parent), update(false)
 
         connect(buttonBox, SIGNAL(accepted()), this, SLOT(confirmBtn_clicked()));
         connect(buttonBox,SIGNAL(rejected()),this,SLOT(cancelBtn_clicked()));
+        connect(addTagBtn,SIGNAL(clicked()),this,SLOT(addNewTag()));
 }
 
 // 确定
@@ -91,44 +92,29 @@ void DocTagsDialog::cancelBtn_clicked(){
      update = false;
      this->close();
 }
-// 设置默认工具栏
-bool DocTagsDialog::eventFilter(QObject *obj, QEvent *event)
-{
-//    if (obj == defaultTool) {
-//        if (event->type() == QEvent::MouseButtonPress) {
 
-//            int ret = QMessageBox::question(this, "",
-//                                            tr("Are you sure that set the toolbar to default status"),
-//                                            QMessageBox::Yes, QMessageBox::No);
-//            if(ret == QMessageBox::Yes){
-//                Preferences* p = Preferences::instance();
-//                QStringList defaultselitems = p->getDefaultToolbarItemList();
-//                QStringList defaultWaititems = p->getDefaultWaitToolbarItemList();
-//                waitItems.clear();
-//                sellItems.clear();
-//                sellItems.append(defaultselitems);
-//                waitItems.append(defaultWaititems);
+// 增加新的标签
+void DocTagsDialog::addNewTag(){
+     // 标签名称
+     QString tagname = newtag->text();
+     Tag tag;
+     tag.TAG_GUID = QUuid::createUuid().toString();
+     tag.TAG_NAME = tagname;
+     // 标签
+     TagDao::insertTag(tag);
 
-//                p->setSelToolbarItemList(sellItems);
-//                p->setWaitToolbarItemList(waitItems);
-//                update = true;
-//                this->close();
-//            }
-//            if(ret == QMessageBox::No){
-//                return false;
-//            }
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    } else {
-//        // pass the event on to the parent class
-//        return CustomToolDialog::eventFilter(obj, event);
-//    }
+     // 更新Item在所有tag里
+     QListWidgetItem *item = new QListWidgetItem;
+     item->setIcon(Utils::getIcon("tag.ico"));
+     item->setText(tagname);
+     item->setData(Qt::UserRole, "tag.ico");
+     item->setData(Qt::UserRole + 1, tag.TAG_GUID);
+     items->addItem(item);
 
-    return "";
+     // 通知父界面加入一个Tag
+     emit reloadTagTree();
+
 }
-
 
 
 

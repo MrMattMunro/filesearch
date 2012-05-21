@@ -21,6 +21,7 @@
 #include "Common.h"
 #include "mytreeitemmodel.h"
 #include "db/docdao.h"
+#include "printerwidget.h"
 #include "QSettings"
 
 static int n_orow;
@@ -104,7 +105,7 @@ void MyTableView::initActions ()
 
     // 打印
     printAction = new QAction(tr("&Print"), this);
-    connect(printAction, SIGNAL(triggered()), this, SLOT(about()));
+    connect(printAction, SIGNAL(triggered()), this, SLOT(print()));
 
     // 高级
    advancedAction = new QAction(Utils::getIcon("vip.png"),tr("&Advanced"), this);
@@ -145,10 +146,10 @@ void MyTableView::initActions ()
 
    // 移动到文件夹
    moveToDirAction = new QAction(tr("&Move to..."), this);
-   connect(moveToDirAction, SIGNAL(triggered()), this, SLOT(about()));
+   connect(moveToDirAction, SIGNAL(triggered()), this, SLOT(moveToDir()));
    // 复制到文件夹
    copyToDirAction = new QAction(tr("&Copy to..."), this);
-   connect(copyToDirAction, SIGNAL(triggered()), this, SLOT(about()));
+   connect(copyToDirAction, SIGNAL(triggered()), this, SLOT(copyToDir()));
    // 选项
    optionOfDocTableAction = new QAction(tr("&Option"), this);
    connect(optionOfDocTableAction, SIGNAL(triggered()), this, SLOT(about()));
@@ -623,6 +624,8 @@ void MyTableView::docTags()
 
     m_doctagsdlg = new DocTagsDialog(this);
 
+    connect(m_doctagsdlg, SIGNAL(reloadTagTree()), this, SLOT(reloadMainTagTree()));
+
     bool hasSelRight = false;
     // 需选中文档
     if(!curPath.isEmpty()) {
@@ -659,6 +662,91 @@ void MyTableView::showMainNotes()
 {
     emit shownotes();
 }
+
+// 通知主界面重新Load标签树
+void MyTableView::reloadMainTagTree()
+{
+    emit reloadTagTree();
+}
+
+// TODO 选中全部文件
+void MyTableView::selectAllDoc()
+{
+//    model->fetchMore();
+
+//    model->rowCount();
+
+//    model->canFetchMore()
+    //QStandardItem * selrange = model->itemFromIndex(index);
+    //selrange->setData(QBrush(QColor(185, 210, 235)), Qt::BackgroundRole);
+
+}
+
+// 打印选中文件
+void MyTableView::print()
+{
+    PrinterWidget diew = new PrinterWidget(this);
+    diew.printer();
+}
+
+// 移动到文件夹
+void MyTableView::moveToDir()
+{
+
+    MoveToDirDialog dlg(this, curUuid, curPath);
+    dlg.exec();
+    if(dlg.update){
+          // 取得子界面选中的path
+          QString toDirUuid = dlg.m_toUuid;
+          // 删除主界面选中的节点
+          model->removeRow(curItem->row());
+
+          // 设置主界面的节点 (子界面新建文件夹情况下不成功)
+          q_myTreeList->setCurItemByUuid(toDirUuid, curType);
+
+          QStandardItem* curItem = q_myTreeList->getCurItem();
+          q_myTreeList->addItemByParentItem(curItem, curTitle, curUuid, "doc", "folder.ico");
+          q_myTreeList->expand(q_myTreeList->getCurIndex());
+    }
+}
+
+// 拷贝到文件夹
+void MyTableView::copyToDir()
+{
+    QString curType = q_myTreeList->getCurType();
+    QString curUuid = q_myTreeList->getCurUuid();
+    QString curTitle = q_myTreeList->getCurTitle();
+    QStandardItem* curItem = q_myTreeList->getCurItem();
+    bool hasSelRight = false;
+
+    // 需选中 文件 子节点
+    if(curType == "doc") {
+        hasSelRight = true;
+        MoveToDirDialog dlg(this, curUuid, q_myTreeList->getCurPath());
+        dlg.exec();
+        if(dlg.update){
+              // 取得子界面选中的path
+              QString toDirUuid = dlg.m_toUuid;
+              // 删除主界面选中的节点
+              curItem->parent()->removeRow(curItem->row());
+
+              // 设置主界面的节点 (子界面新建文件夹情况下不成功)
+              q_myTreeList->setCurItemByUuid(toDirUuid, curType);
+
+              QStandardItem* curItem = q_myTreeList->getCurItem();
+              q_myTreeList->addItemByParentItem(curItem, curTitle, curUuid, "doc", "folder.ico");
+              q_myTreeList->expand(q_myTreeList->getCurIndex());
+        }
+    }
+    // 如果没有选中子目录节点
+    if(!hasSelRight){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
+        return;
+    }
+}
+
+
+
 
 
 

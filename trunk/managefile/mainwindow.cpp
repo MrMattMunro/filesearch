@@ -780,6 +780,8 @@ void MainWindow::initUI()
         connect(m_doctable, SIGNAL(LBtnDbClk()), this, SLOT(openDocInTab()));
         connect(m_doctable, SIGNAL(showAddNoteWidget()), this, SLOT(windowToggleNoteEditor()));
         connect(m_doctable, SIGNAL(hideNoteWidget()), this, SLOT(windowHideNoteEditor()));
+        connect(m_doctable, SIGNAL(reloadTagTree()), q_myTreeList, SLOT(reloadTagTree()));
+
 
         // Dock widgets ///////////////////////////////////////////////
         //QDockWidget *dw;

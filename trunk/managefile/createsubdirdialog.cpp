@@ -63,12 +63,8 @@ void CreateSubDirDialog::confirmBtn_clicked(){
 
 // È¡Ïû°´Å¥
 void CreateSubDirDialog::cancelBtn_clicked(){
-
-    PrinterWidget diew = new PrinterWidget(this);
-    diew.printer();
-
-//     update = false;
-//     this->close();
+     update = false;
+     this->close();
 }
 
 

@@ -10,6 +10,7 @@
 #include <QDragEnterEvent>
 #include <QDragEnterEvent>
 #include <QDebug>
+#include <QTextCodec>
 #include "utils.h"
 
 class ListWidget : public QListWidget
@@ -51,7 +52,10 @@ public:
                         QByteArray uuid = event->mimeData()->data("bla/o-something");
                         QListWidgetItem *temp = new QListWidgetItem();
                         temp->setIcon(Utils::getIcon(icon));
-                        temp->setText(txt);
+                        QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+                        QString string = codec->toUnicode(txt);
+
+                        temp->setText(string);
                         temp->setData(Qt::UserRole, icon);
                         temp->setData(Qt::UserRole + 1, uuid);
                         qDebug() << "--------------------";
@@ -66,16 +70,19 @@ public:
         {
                 QListWidgetItem *item = currentItem();
                 QMimeData *mimeData = new QMimeData;
-                QByteArray ba = item->text().toUtf8().data();
+
+                QByteArray ch = item->text().toUtf8();
+
                 QString iconname = item->data(Qt::UserRole).toString();
                 QString key = item->data(Qt::UserRole + 1).toString();
 
                 QByteArray iconbyte = iconname.toLatin1().data();
                 QByteArray keybyte = key.toLatin1().data();
+                // QByteArray textbyte = ba.toLatin1().data();
                 QString theText = "bla/x-something";
                 QString name = "bla/n-something";
                 QString uuid = "bla/o-something";
-                mimeData->setData(theText, ba);
+                mimeData->setData(theText, ch);
                 mimeData->setData(name, iconbyte);
                 mimeData->setData(uuid, keybyte);
                 QDrag *drag = new QDrag(this);

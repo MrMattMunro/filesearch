@@ -20,9 +20,10 @@ class DocTagsDialog : public QDialog, public Ui::DocTagsDialog
 	private slots:
                 void confirmBtn_clicked();
                 void cancelBtn_clicked();
+                void addNewTag();
         protected:
-                bool eventFilter(QObject *obj, QEvent *ev);
-        signals:
 
+        signals:
+                void reloadTagTree();
 
 };

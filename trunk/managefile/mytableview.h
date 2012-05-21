@@ -52,6 +52,7 @@ signals:
         void         shownotes();
         void         showAddNoteWidget();
         void         hideNoteWidget();
+        void         reloadTagTree();
 private slots:
        void openInSys();
        void openInTab();
@@ -64,6 +65,13 @@ private slots:
        void showMainNotes();
        void showMainAddNoteWidget();
        void hideMainAddNoteWidget();
+       void reloadMainTagTree();
+       void selectAllDoc();
+       void print();
+       void moveToDir();
+       void copyToDir();
+
+
 
 private:
         MyTableDelegate * delegate;
