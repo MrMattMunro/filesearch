@@ -67,7 +67,8 @@ SOURCES += main.cpp \
     relatedocdialog.cpp \
     db/relatedocdao.cpp \
     doctagsdialog.cpp \
-    db/doctagdao.cpp
+    db/doctagdao.cpp \
+    doctodirdialog.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -130,7 +131,8 @@ HEADERS  += mainwindow.h \
     relatedocdialog.h \
     db/relatedocdao.h \
     doctagsdialog.h \
-    db/doctagdao.h
+    db/doctagdao.h \
+    doctodirdialog.h
 
 RESOURCES += \
     managefile.qrc
@@ -163,7 +165,8 @@ FORMS    += mainwindow.ui \
     notesdialog.ui \
     printerwidget.ui \
     relatedocdialog.ui \
-    doctagsdialog.ui
+    doctagsdialog.ui \
+    doctodirdialog.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -234,6 +237,9 @@ OTHER_FILES += \
     docview/jquery/css/ui-darkness/images/ui-bg_flat_50_5c5c5c_40x100.png \
     docview/jquery/css/ui-darkness/images/ui-bg_flat_30_cccccc_40x100.png \
     docview/jquery/css/ui-darkness/jquery-ui-1.8.16.custom.css
+
+
+
 
 
 

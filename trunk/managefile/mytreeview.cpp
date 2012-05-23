@@ -77,6 +77,9 @@ MyTreeView::MyTreeView(QString title, QWidget *parent) : treeTitle("tree"), QTre
         // 转移到Tree内部实现
         connect(this, SIGNAL(LBtnDbClk()), this, SLOT(showChildTree()));
 
+        connect(this->selectionModel(), SIGNAL(currentChanged(const QModelIndex &current,const QModelIndex &previous)),
+                this, SLOT(currentItemChanged(const QModelIndex &current,const QModelIndex &previous)));
+
         this->setAnimated(true);
         this->setColumnWidth(0,160);
 
@@ -243,6 +246,10 @@ void MyTreeView::mouseDoubleClickEvent(QMouseEvent *event)
 	{
                 curPoint = event->pos();
                 curIndex = indexAt(curPoint);
+
+                preRow = curIndex.row();
+                preColumn = curIndex.column();
+
                 curItem = model->itemFromIndex(curIndex);
                 curTitle = curIndex.data().toString();
                 curUuId =  qvariant_cast<QString>(curItem->data(Qt::UserRole + 1));
@@ -285,6 +292,9 @@ void MyTreeView::mouseReleaseEvent(QMouseEvent *event)
     {
             curPoint = event->pos();
             curIndex= indexAt(curPoint);
+            preRow = curIndex.row();
+            preColumn = curIndex.column();
+
             curItem = model->itemFromIndex(curIndex);
             curTitle = curIndex.data().toString();
             curUuId =  qvariant_cast<QString>(curItem->data(Qt::UserRole + 1));
@@ -327,10 +337,14 @@ void MyTreeView::loadTagByParent(QString tagUuId, QStandardItem *curItem){
 // 打开当前树节点
 void MyTreeView::showChildTree()
 {
+
     QString curUId = getCurUuid();
     QStandardItem* curItem = getCurItem();
     QModelIndex curIndex = getCurIndex();
+
     QString type = qvariant_cast<QString>(curItem->data(Qt::UserRole + 2));
+
+    curItem->setData(QBrush(QColor(150,150,150)), Qt::BackgroundRole);
 
     // 设置打开状态
     if(isExpanded(curIndex)){
@@ -411,6 +425,25 @@ void MyTreeView::dropEvent(QDropEvent *event)
         // 接受
         event->setDropAction(Qt::MoveAction);
         event->accept();
+    }
+}
+// 改变时间
+void  MyTreeView::currentItemChanged(const QModelIndex &current, const QModelIndex &previous){
+
+    if (!current.isValid()|| !previous.isValid()){
+        return;
+    }
+     // 改变Item背景颜色，表示选中状态
+    QStandardItem* preItem = model->itemFromIndex(previous);
+    qDebug("currentChanged");
+    if(preItem){
+         qDebug("change preItem");
+       preItem->setData(QBrush(QColor(255,255,255)), Qt::BackgroundRole);
+    }
+    QStandardItem* currentItem = model->itemFromIndex(current);
+    if(currentItem){
+           qDebug("change preItem");
+       currentItem->setData(QBrush(QColor(150,150,150)), Qt::BackgroundRole);
     }
 }
 // 重新加载Tag树

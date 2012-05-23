@@ -8,9 +8,15 @@
 #include <windows.h>
 #include <winspool.h>
 #include <QMessageBox>
+#include <QTextDocument>
+#include <QFile>
 
-BOOL RawDataToPrinter(LPSTR szPrinterName, LPBYTE lpData, DWORD dwCount);
+#define BUF_LEN 1024
+
+BOOL RawDataToPrinter(QString szPrinterName, QString lpData, DWORD dwCount);
 bool RawDataToPrinter(QString printerName,QStringList *barcode);
+
+// ( QString szPrinterName, QString lpData, DWORD dwCount)
 
 PrinterWidget::PrinterWidget(QWidget * parent): QDialog(parent),
       m_parent(parent)
@@ -31,7 +37,7 @@ void PrinterWidget::printer()
 
         QString printerName = printer.printerName();
         QString lpData = tr("^XA^FO10,100^BY3^BCN,100,Y,N,N^FDDD123456^FS^XZ");
-        long dwCount = lpData.length();
+//        long dwCount = lpData.length();
 
         QStringList sl;
 //        sl.append(tr("^XA^FO10,100^BY3^BCN,100,Y,N,N^FDAB123456^FS^XZ"));
@@ -41,13 +47,50 @@ void PrinterWidget::printer()
         sl.append(tr("rfgggggg"));
         sl.append(tr("sdffffffffff"));
         sl.append(tr("sdfffffffffffffffffff"));
-        if(RawDataToPrinter(printerName,&sl)==true)
+
+        QFile file("D:\\aaa.doc");
+        file.open(QIODevice::ReadOnly);
+        QDataStream ds(&file);
+        ds.setVersion(QDataStream::Qt_4_6);
+
+        ds.setByteOrder(QDataStream::LittleEndian);// QDataStream::BigEndian
+
+
+        QByteArray rawdata;
+        int dwCount;
+
+        char* buff=new char [BUF_LEN];
+
+        //文件不为空
+        while (!ds.atEnd())
+        {
+            int nReadBytes = ds.readRawData(buff, BUF_LEN);
+            rawdata.append(buff, nReadBytes);
+            dwCount = dwCount + nReadBytes;
+        }
+
+        file.close();
+
+        qDebug() << "dwCount::" + dwCount;
+        qDebug() << "rawdata::" + rawdata;
+
+        QString dd(rawdata);
+
+        if(RawDataToPrinter(printerName, dd, (DWORD)dwCount))
         {
             qDebug() << "OK";
         }else
         {
             qDebug() << "NO";
         }
+
+//        if(RawDataToPrinter(printerName, &sl)==true)
+//        {
+//            qDebug() << "OK";
+//        }else
+//        {
+//            qDebug() << "NO";
+//        }
 
         /*if(RawDataToPrinter((char*)printerName.toLocal8Bit().data(),(unsigned char*)lpData.toLocal8Bit().data(),dwCount) == true)
         {
@@ -60,7 +103,7 @@ void PrinterWidget::printer()
     delete dlg;
 }
 
-BOOL RawDataToPrinter(LPSTR szPrinterName, LPBYTE lpData, DWORD dwCount)
+BOOL RawDataToPrinter(QString szPrinterName, QString lpData, DWORD dwCount)
 {
     HANDLE     hPrinter;
     DOC_INFO_1A DocInfo;
@@ -68,10 +111,16 @@ BOOL RawDataToPrinter(LPSTR szPrinterName, LPBYTE lpData, DWORD dwCount)
     DWORD      dwBytesWritten;
 
 // Need a handle to the printer.
-    if(!OpenPrinterA(szPrinterName,&hPrinter,NULL))
-    {
-        return FALSE;
+    //获取打印机的handle
+    bool ok;
+    ok = OpenPrinterW((LPWSTR)szPrinterName.utf16(),(LPHANDLE)&hPrinter,0);
+    if(!ok){
+        ok = OpenPrinterA((LPSTR)szPrinterName.toLatin1().data(), (LPHANDLE)&hPrinter, 0);
     }
+    if(!ok){
+       qDebug() << "QWin32PrintEngine::initialize: OpenPrinter failed";
+    }
+
 
 // Fill in the structure with info about this "document."
     DocInfo.pDocName = "BarCode";
@@ -94,7 +143,7 @@ BOOL RawDataToPrinter(LPSTR szPrinterName, LPBYTE lpData, DWORD dwCount)
     }
 
 // Send the data to the printer.
-    if(!WritePrinter(hPrinter,lpData,dwCount,&dwBytesWritten))
+    if(!WritePrinter(hPrinter, (unsigned char *)lpData.toLocal8Bit().data(), dwCount, &dwBytesWritten))
     {
         EndPagePrinter(hPrinter);
         EndDocPrinter(hPrinter);
@@ -102,13 +151,13 @@ BOOL RawDataToPrinter(LPSTR szPrinterName, LPBYTE lpData, DWORD dwCount)
         return FALSE;
     }
 
-    if(!WritePrinter(hPrinter,lpData,dwCount,&dwBytesWritten))
-    {
-        EndPagePrinter(hPrinter);
-        EndDocPrinter(hPrinter);
-        ClosePrinter(hPrinter);
-        return FALSE;
-    }
+//    if(!WritePrinter(hPrinter, (unsigned char *)lpData.toLocal8Bit().data(), dwCount, &dwBytesWritten))
+//    {
+//        EndPagePrinter(hPrinter);
+//        EndDocPrinter(hPrinter);
+//        ClosePrinter(hPrinter);
+//        return FALSE;
+//    }
 
 // End the page.
     if(!EndPagePrinter(hPrinter))
@@ -128,15 +177,15 @@ BOOL RawDataToPrinter(LPSTR szPrinterName, LPBYTE lpData, DWORD dwCount)
 // Tidy up the printer handle.
     ClosePrinter(hPrinter);
 
-// Check to see if correct number of bytes were written.
-    if(dwBytesWritten != dwCount)
-    {
-        QMessageBox::warning(0,QObject::tr("打印"),QObject::tr("打印输出数据与输入数据大小不相符"),QObject::tr("确定(&E)"));
-        return FALSE;
-    }else
-    {
-        return TRUE;
-    }
+//// Check to see if correct number of bytes were written.
+//    if(dwBytesWritten != dwCount)
+//    {
+//        QMessageBox::warning(0,QObject::tr("打印"),QObject::tr("打印输出数据与输入数据大小不相符"),QObject::tr("确定(&E)"));
+//        return FALSE;
+//    }else
+//    {
+//        return TRUE;
+//    }
 }
 
 bool RawDataToPrinter(QString printerName, QStringList *barcode)
@@ -145,7 +194,6 @@ bool RawDataToPrinter(QString printerName, QStringList *barcode)
     DOC_INFO_1A DocInfo;
     DWORD dwJob;
     DWORD dwBytesWritten;
-    LPSTR szPrinterName;
     long dwCount;
 
     if(!(barcode->length() >0))
@@ -153,12 +201,14 @@ bool RawDataToPrinter(QString printerName, QStringList *barcode)
         return false;
     }
 
-    szPrinterName = (char*)printerName.toLocal8Bit().constData();
-
     //获取打印机的handle
-    if(!OpenPrinterA(szPrinterName,&hPrinter,NULL))
-    {
-        return false;
+    bool ok;
+    ok = OpenPrinterW((LPWSTR)printerName.utf16(),(LPHANDLE)&hPrinter,0);
+    if(!ok){
+        ok = OpenPrinterA((LPSTR)printerName.toLatin1().data(), (LPHANDLE)&hPrinter, 0);
+    }
+    if(!ok){
+       qDebug() << "QWin32PrintEngine::initialize: OpenPrinter failed";
     }
 
     //填充打印文档的DOC_INFO_1A
@@ -222,3 +272,46 @@ bool RawDataToPrinter(QString printerName, QStringList *barcode)
     ClosePrinter(hPrinter);
     return true;
 }
+
+//void printHtml(QString htmlPath)
+//{
+//    QFile file(htmlPath);
+//    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)){
+//        return;
+//    }
+
+//    QString htmlContent;
+//    QTextStream in(&file);
+//    in >> htmlContent;
+
+//    QTextDocument *document = new QTextDocument();
+//    document->setHtml(htmlContent);
+
+//    QPrinter printer;
+//    QPrintDialog *dialog = new QPrintDialog(&printer, this);
+//    if (dialog->exec() != QDialog::Accepted){
+//        return;
+//    }
+
+//    document->print(&printer);
+//    delete document;
+//}
+
+//void printTxt(QString txtFilePath)
+//{
+//    QFile txtFileOut(txtFilePath);
+
+//    txtFileOut.open(QFile::ReadOnly | QFile::Text);
+//    QTextStream txtFileIn(&txtFileOut);
+//    QString txtFileToQString(txtFileIn.readAll());
+//    QTextDocument *document = new QTextDocument(txtFileToQString);
+
+//    QPrinter printer;
+
+//    QPrintDialog *dlg = new QPrintDialog(&printer, this);
+//    if (dlg->exec() != QDialog::Accepted){
+//        return;
+//    }
+//    document->print(&printer);
+//    delete document;
+//}

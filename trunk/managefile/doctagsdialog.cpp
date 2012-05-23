@@ -24,8 +24,8 @@ DocTagsDialog::DocTagsDialog(QWidget * parent): QDialog(parent), update(false)
 {
 	setupUi(this);
         // Set UI
-        this->setWindowIcon(Utils::getIcon("tool.ico"));
-        this->setWindowTitle(tr("Custom the tool bar"));
+        this->setWindowIcon(Utils::getIcon("tags.ico"));
+        this->setWindowTitle(tr("Add tag to the Document"));
 
         // “——°‘ÒToolbar
         Preferences* p = Preferences::instance();

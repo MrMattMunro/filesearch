@@ -15,6 +15,7 @@
 #include "preferences.h"
 #include "utils.h"
 #include "exportconvertdialog.h"
+#include "doctodirdialog.h"
 #include "relatedocdialog.h"
 #include "notesdialog.h"
 #include "doctagsdialog.h"
@@ -101,7 +102,7 @@ void MyTableView::initActions ()
 
     // 全选
     selectAllAction = new QAction(tr("&Select All"), this);
-    connect(selectAllAction, SIGNAL(triggered()), this, SLOT(about()));
+    connect(selectAllAction, SIGNAL(triggered()), this, SLOT(selectAllDoc()));
 
     // 打印
     printAction = new QAction(tr("&Print"), this);
@@ -367,7 +368,7 @@ void MyTableView::mouseDoubleClickEvent(QMouseEvent *event)
         {
                 curPoint = event->pos();
                 QModelIndex  index = indexAt(curPoint);
-                QStandardItem *curItem = model->itemFromIndex(index);
+                curItem = model->itemFromIndex(index);
                 curPath = qvariant_cast<QString>(curItem->data(Qt::ToolTipRole));
                 curUuid = qvariant_cast<QString>(curItem->data(Qt::UserRole + 1));
 
@@ -387,7 +388,7 @@ void MyTableView::mousePressEvent(QMouseEvent *event)
         {
             curPoint = event->pos();
             QModelIndex  index = indexAt(curPoint);
-            QStandardItem *curItem = model->itemFromIndex(index);
+            curItem = model->itemFromIndex(index);
             if(curItem){
                 curPath = qvariant_cast<QString>(curItem->data(Qt::ToolTipRole));
                 curUuid = qvariant_cast<QString>(curItem->data(Qt::UserRole + 1));
@@ -693,55 +694,21 @@ void MyTableView::print()
 void MyTableView::moveToDir()
 {
 
-    MoveToDirDialog dlg(this, curUuid, curPath);
+    DocToDirDialog dlg(this, curPath, curUuid, false);
     dlg.exec();
     if(dlg.update){
-          // 取得子界面选中的path
-          QString toDirUuid = dlg.m_toUuid;
           // 删除主界面选中的节点
           model->removeRow(curItem->row());
-
-          // 设置主界面的节点 (子界面新建文件夹情况下不成功)
-          q_myTreeList->setCurItemByUuid(toDirUuid, curType);
-
-          QStandardItem* curItem = q_myTreeList->getCurItem();
-          q_myTreeList->addItemByParentItem(curItem, curTitle, curUuid, "doc", "folder.ico");
-          q_myTreeList->expand(q_myTreeList->getCurIndex());
     }
 }
 
 // 拷贝到文件夹
 void MyTableView::copyToDir()
 {
-    QString curType = q_myTreeList->getCurType();
-    QString curUuid = q_myTreeList->getCurUuid();
-    QString curTitle = q_myTreeList->getCurTitle();
-    QStandardItem* curItem = q_myTreeList->getCurItem();
-    bool hasSelRight = false;
-
-    // 需选中 文件 子节点
-    if(curType == "doc") {
-        hasSelRight = true;
-        MoveToDirDialog dlg(this, curUuid, q_myTreeList->getCurPath());
-        dlg.exec();
-        if(dlg.update){
-              // 取得子界面选中的path
-              QString toDirUuid = dlg.m_toUuid;
-              // 删除主界面选中的节点
-              curItem->parent()->removeRow(curItem->row());
-
-              // 设置主界面的节点 (子界面新建文件夹情况下不成功)
-              q_myTreeList->setCurItemByUuid(toDirUuid, curType);
-
-              QStandardItem* curItem = q_myTreeList->getCurItem();
-              q_myTreeList->addItemByParentItem(curItem, curTitle, curUuid, "doc", "folder.ico");
-              q_myTreeList->expand(q_myTreeList->getCurIndex());
-        }
-    }
-    // 如果没有选中子目录节点
-    if(!hasSelRight){
-        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
-        return;
+    DocToDirDialog dlg(this, curPath, curUuid, true);
+    dlg.exec();
+    if(dlg.update){
+        // do nothing
     }
 }
 
