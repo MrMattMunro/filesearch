@@ -4,8 +4,7 @@
 
 QVariant MyTableItemModel::data(const QModelIndex & index, int role) const
 {
-    qDebug ("data start");
-    int column=index.column();
+    int column= index.column();
 
     if(role == Qt::DisplayRole){
        return QStandardItemModel::data(index, role);
@@ -29,7 +28,6 @@ QVariant MyTableItemModel::data(const QModelIndex & index, int role) const
          return Utils::getIcon(icon);
     }
 
-    qDebug ("data end");
     return QStandardItemModel::data(index,  role);
 }
 

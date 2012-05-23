@@ -27,6 +27,25 @@ Q_OBJECT
 public:
         MyTableView(QWidget * parent=0);
         ~MyTableView(){}
+        enum TableOptionSet {
+            ONE_ROW = 1,
+            TWO_ROWS = 2,
+            SHOW_NOTES = 3
+        };
+
+        enum SecondRowOptionSet {
+            CREATE_DATE = 1,
+            MODIFIED_DATE = 2,
+            ACCESS_DATE = 3,
+            SIZE = 4,
+            AUTHOR = 5,
+            READ_COUNT = 6,
+            RELATED_COUNT = 7,
+            TAGS = 8,
+            URL = 9
+        };
+
+
         void buildDocList(QList<Doc> doclist);
         QPoint getCurPoint();               // 取得当前鼠标点击位置
         QString getCurUuid();
@@ -34,6 +53,10 @@ public:
         bool    getMouseStatus();   //查看是可以使用鼠标
         QString getCurFilePath();   // 取得选择文件路径
         void showNoteDialog();   // 打开显示Dlg
+        void secondRowSetMenu();
+
+        QMenu *option_submenu;
+        QMenu *m_secondRowSetMenu;
 
 protected:
         void  leaveEvent (QEvent * event );
@@ -70,8 +93,9 @@ private slots:
        void print();
        void moveToDir();
        void copyToDir();
-
-
+       void delDoc();
+       void slotShowSecondRowContent(QAction *action);
+       void slotShowTableOption(QAction *action);
 
 private:
         MyTableDelegate * delegate;
@@ -107,7 +131,13 @@ private:
 
         QAction *moveToDirAction;
         QAction *copyToDirAction;
+
         QAction *optionOfDocTableAction;
+        QAction *oneRowAction;
+        QAction *twoRowAction;
+        QAction *twoRowOptionAction;
+        QAction *showNotesAction;
+
         QAction *propAction;
 
         QAction *office2pdfAction;

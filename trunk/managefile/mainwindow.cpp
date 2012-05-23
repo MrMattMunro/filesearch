@@ -61,6 +61,7 @@
 #include "db/tagdao.h"
 #include "db/dirdao.h"
 #include "db/docdao.h"
+#include "db/doctagdao.h"
 #include "noteeditor.h"
 
 extern NoteEditor *noteEditor;
@@ -91,25 +92,50 @@ void MainWindow::buildDocList()
 {
     QString curUuid = q_myTreeList->getCurUuid();
     QString curType = q_myTreeList->getCurType();
-    if(curType != "doc" ){
+    if(curType != "doc" && curType != "basket" && curType != "tag" ){
+        return;
+    }
+    // 是否显示子文件夹文档
+    QList<Doc> docs;
+
+    // 显示所有垃圾桶的文件
+    if(curType == "basket" ){
+        docs = DocDao::selectDocsByDelFlg("1");
+        m_doctable->buildDocList(docs);
         return;
     }
 
-    // 是否显示子文件夹文档
-    QList<Doc> docs;
+    // 显示Tag下所有的文件
+    if(curType == "tag" ){
+        if(isShowDocUnderSub){
+              // 取得所有子标签
+              QList<Tag> tags ;
+              TagDao::selectAllSubTagbyTag(tags, curUuid);
+              // 根据文件夹取得所有文件
+              for(int i = 0 ; i< tags.size(); i ++){
+                 Tag tag = tags.at(i);
+                 docs.append(DocDao::selectDocsByTag(tag));
+              }
+        }else{
+            Tag tag;
+            tag.TAG_GUID = curUuid;
+            docs = DocDao::selectDocsByTag(tag);
+        }
+        m_doctable->buildDocList(docs);
+        return;
+    }
+
     if(isShowDocUnderSub){
           // 取得所有文件夹
           QList<Dir> dirs ;
-          //DirDao::clearSelDirList();
           DirDao::selectAllSubDirbyDir(dirs, curUuid);
-          //QList<Dir> dirs = DirDao::getSelDirList();
           // 根据文件夹取得所有文件
           for(int i = 0 ; i< dirs.size(); i ++){
              Dir dir = dirs.at(i);
-             docs.append(DocDao::selectDocsbyDir(dir.DIR_GUID));
+             docs.append(DocDao::selectDocsbyDir(dir.DIR_GUID, "0"));
           }
     }else{
-         docs = DocDao::selectDocsbyDir(curUuid);
+         docs = DocDao::selectDocsbyDir(curUuid,  "0");
     }
     m_doctable->buildDocList(docs);
 }

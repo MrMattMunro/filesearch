@@ -25,6 +25,8 @@ class TagDao
                 static Tag selectTag(const QString & uuid);
                 static QList<Tag> selectTagsbyParent(const QString & groupUuid);
                 static QList<Tag> selectAllTags();
+                // 递归迭代子标签取得所有层级子标签
+                static void selectAllSubTagbyTag(QList<Tag> & selTagList, const QString & tagUuid);
 
         private:
                 static void exception(const QString & message);

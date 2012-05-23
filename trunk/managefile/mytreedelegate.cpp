@@ -18,7 +18,6 @@ void MyTreeDelegate::paint(QPainter * painter,
                            const QStyleOptionViewItem & option,
                            const QModelIndex & index) const
 {
-    qDebug("paint start");
     // 正常数据
     if(index.column() !=  0 || index.column() ==  0 ){
         QStyledItemDelegate::paint(painter, option, index);
