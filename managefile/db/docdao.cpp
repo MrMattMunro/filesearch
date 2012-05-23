@@ -13,6 +13,7 @@
 
 #include "db/database.h"
 #include "db/docdao.h"
+#include "db/tagdao.h"
 #include "db/sqlite3.h"
 
 // 异常情况
@@ -57,37 +58,90 @@ bool DocDao::deleteDoc(QString DocUuId)
     return Database::execSql(sql);
 }
 
-// 根据文件夹下所有文档
-QList<Doc> DocDao::selectDocsbyDir(const QString & dirUuid)
+// 根据删除Flg取得文档列表
+QList<Doc> DocDao::selectDocsByDelFlg(const QString & delFlg)
 {
-    QString sql = Database::getSql("mf_select_docs_dir.sql");
-    sql = sql.arg(dirUuid);
+    QString sql = Database::getSql("mf_select_docs_delflg.sql");
+    sql = sql.arg(delFlg);
     QSqlQuery query = Database::execSelect(sql);
 
-//    DOCUMENT_GUID,
-//          DOCUMENT_TITLE,
-//          DIR_GUID,
-//          DOCUMENT_LOCATION,
-//          DOCUMENT_NAME,
-//          DOCUMENT_SEO,
-//          DOCUMENT_URL,
-//          DOCUMENT_AUTHOR,
-//          DOCUMENT_KEYWORDS,
-//          DOCUMENT_TYPE,
-//          DOCUMENT_OWNER,
-//          DT_CREATED,
-//          DT_MODIFIED,
-//          DT_ACCESSED,
-//          DOCUMENT_ICON_INDEX,
-//          DOCUMENT_SYNC,
-//          DOCUMENT_PROTECT,
-//          DOCUMENT_ENCODE,
-//          DOCUMENT_READ_COUNT,
-//          DOCUMENT_RELATE_COUNT,
-//          DOCUMENT_INDEXFLG,
-//          DOCUMENT_OPERFLG,
-//          DELETE_FLAG,
-//          MF_VERSION
+    QList<Doc> returnList;
+    while (query.next()){
+            Doc field;
+            field.DOCUMENT_GUID = query.value(0).toString();
+            field.DOCUMENT_TITLE = query.value(1).toString();
+            field.DIR_GUID = query.value(2).toString();
+            field.DOCUMENT_LOCATION = query.value(3).toString();
+            field.DOCUMENT_NAME = query.value(4).toString();
+            field.DOCUMENT_SEO = query.value(5).toString();
+            field.DOCUMENT_URL = query.value(6).toString();
+            field.DOCUMENT_AUTHOR = query.value(7).toString();
+            field.DOCUMENT_KEYWORDS = query.value(8).toString();
+            field.DOCUMENT_TYPE = query.value(9).toString();
+            field.DOCUMENT_OWNER = query.value(10).toString();
+            field.DT_CREATED = query.value(11).toString();
+            field.DT_MODIFIED = query.value(12).toString();
+            field.DT_ACCESSED = query.value(13).toString();
+            field.DOCUMENT_ICON_INDEX = query.value(14).toInt();
+            field.DOCUMENT_SYNC = query.value(15).toInt();
+            field.DOCUMENT_PROTECT = query.value(16).toString();
+            field.DOCUMENT_ENCODE = query.value(17).toString();
+            field.DOCUMENT_READ_COUNT = query.value(18).toInt();
+            field.DOCUMENT_RELATE_COUNT = query.value(19).toInt();
+            field.DOCUMENT_INDEXFLG = query.value(20).toString();
+            field.DOCUMENT_OPERFLG = query.value(21).toString();
+            field.DELETE_FLAG = query.value(22).toString();
+            field.MF_VERSION = query.value(23).toInt();
+            returnList.append(field);
+    }
+    return returnList;
+}
+
+// 根据文件夹下所有文档
+QList<Doc> DocDao::selectDocsbyDir(const QString & dirUuid, const QString & delFlg)
+{
+    QString sql = Database::getSql("mf_select_docs_dir.sql");
+    sql = sql.arg(dirUuid, delFlg);
+    QSqlQuery query = Database::execSelect(sql);
+
+    QList<Doc> returnList;
+    while (query.next()){
+            Doc field;
+            field.DOCUMENT_GUID = query.value(0).toString();
+            field.DOCUMENT_TITLE = query.value(1).toString();
+            field.DIR_GUID = query.value(2).toString();
+            field.DOCUMENT_LOCATION = query.value(3).toString();
+            field.DOCUMENT_NAME = query.value(4).toString();
+            field.DOCUMENT_SEO = query.value(5).toString();
+            field.DOCUMENT_URL = query.value(6).toString();
+            field.DOCUMENT_AUTHOR = query.value(7).toString();
+            field.DOCUMENT_KEYWORDS = query.value(8).toString();
+            field.DOCUMENT_TYPE = query.value(9).toString();
+            field.DOCUMENT_OWNER = query.value(10).toString();
+            field.DT_CREATED = query.value(11).toString();
+            field.DT_MODIFIED = query.value(12).toString();
+            field.DT_ACCESSED = query.value(13).toString();
+            field.DOCUMENT_ICON_INDEX = query.value(14).toInt();
+            field.DOCUMENT_SYNC = query.value(15).toInt();
+            field.DOCUMENT_PROTECT = query.value(16).toString();
+            field.DOCUMENT_ENCODE = query.value(17).toString();
+            field.DOCUMENT_READ_COUNT = query.value(18).toInt();
+            field.DOCUMENT_RELATE_COUNT = query.value(19).toInt();
+            field.DOCUMENT_INDEXFLG = query.value(20).toString();
+            field.DOCUMENT_OPERFLG = query.value(21).toString();
+            field.DELETE_FLAG = query.value(22).toString();
+            field.MF_VERSION = query.value(23).toInt();
+            returnList.append(field);
+    }
+    return returnList;
+}
+
+
+QList<Doc> DocDao::selectDocsByTag(const Tag & tag){
+
+    QString sql = Database::getSql("mf_select_docs_tag.sql");
+    sql = sql.arg(tag.TAG_GUID);
+    QSqlQuery query = Database::execSelect(sql);
 
     QList<Doc> returnList;
     while (query.next()){
@@ -307,3 +361,4 @@ bool DocDao::updateDoc(Doc doc){
 
     return Database::execSql(sql);
 }
+

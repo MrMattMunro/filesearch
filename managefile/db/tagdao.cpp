@@ -55,6 +55,21 @@ QList<Tag> TagDao::selectTagsbyParent(const QString & groupUuid)
     return returnList;
 }
 
+// 递归迭代子标签取得所有层级子标签
+void TagDao::selectAllSubTagbyTag(QList<Tag> & selTagList, const QString & tagUuid){
+
+    QList<Tag> tmpList = selectTagsbyParent(tagUuid);
+    selTagList.append(tmpList);
+    if(tmpList.size() > 0){
+        do
+        {
+            Tag first = (Tag)tmpList.takeFirst();
+            selectAllSubTagbyTag(selTagList, first.TAG_GUID);
+
+        }while(tmpList.size() != 0);
+    }
+}
+
 // 根据标签uuId获取标签
 Tag TagDao::selectTag(const QString & uuid)
 {

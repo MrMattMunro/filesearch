@@ -3,6 +3,7 @@
 
 #include <QCoreApplication>
 #include <QList>
+#include <db/tagdao.h>
 
 typedef struct
 {
@@ -36,12 +37,13 @@ class DocDao
 {
             Q_DECLARE_TR_FUNCTIONS(DocDao)
         public:
-                // ≤Â»Î±Í«©
                 static bool insertDoc(Doc doc);
                 static bool updateDoc(Doc doc);
                 static bool deleteDoc(QString docUuId);
                 static Doc selectDoc(const QString & docUuId);
-                static QList<Doc> selectDocsbyDir(const QString & dirUuid);
+                static QList<Doc> selectDocsbyDir(const QString & dirUuid,  const QString & delFlg);
+                static QList<Doc> selectDocsByDelFlg(const QString & delFlg);
+                static QList<Doc> selectDocsByTag(const Tag & tag);
 
         private:
                 static void exception(const QString & message);

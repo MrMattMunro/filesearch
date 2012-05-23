@@ -16,13 +16,18 @@ void MyTableDelegate::paint(QPainter * painter,
                            const QStyleOptionViewItem & option,
                            const QModelIndex & index) const
 {
-    qDebug("paint start");
-    // 正常数据
-    if(index.column() !=  0 || index.column() ==  0 ){
-        QItemDelegate::paint(painter, option, index);
-        return;
-    }
+
+
+//    // 正常数据
+//    if(index.column() !=  0 || index.column() ==  0 ){
+//        QItemDelegate::paint(painter, option, index);
+//        return;
+//    }
+
     // 图片
+    int row = index.row();
+    int column = index.column();
+
     const QAbstractItemModel * model= index.model();
     QMap<int, QVariant> valuemap = model->itemData(index);
 
@@ -30,30 +35,32 @@ void MyTableDelegate::paint(QPainter * painter,
     QList<int> keys = valuemap.keys();
 
     if(keys.size() <= 0 || values.size() <= 0 ){
-      return;
+        return;
     }
 
-    QVariant path = values.at(0);
-    int key = keys.at(0);
-
-//    // 自绘表格
-     QIcon star  = Utils::getIcon("doc.ico");
-////    if(key == MyTableView.wordItemType ){
-////        //star = docPixmap;
-////    }
-////    if(key == MyTableView.pdfItemType ){
-////        //star = pdfPixmap;
-////    }
+    QString filename = qvariant_cast<QString> (values.at(0));
+    QString ico = qvariant_cast<QString> (values.at(1));
+    QString path = qvariant_cast<QString> (values.at(2));
+    QString uuId = qvariant_cast<QString> (values.at(3));
 
 
+    QIcon icon = Utils::getIcon(ico);
     int width=16;
     int height=16;
-    QRect rect=option.rect;
-    int x=rect.x() + rect.width()/2-width/2;
-    int y=rect.y() + rect.height()/2-height/2;
+    QRect rect= option.rect;
+    // int x= rect.x() + rect.width()/2-width/2;
+    int y= rect.y() + rect.height()/2-height/2;
 
-    painter->drawPixmap(x, y, star.pixmap(16,16, QIcon.Normal, QIcon.Off));
-    qDebug("paint end");
+    //painter->drawPixmap(0, y, icon.pixmap(16,16, QIcon.Normal, QIcon.Off));
+
+    //绘制文本
+    QBrush b(QColor(197,229,239));
+    painter->setPen(QColor(51,102,205));
+//    painter->setBrush(b);
+    painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, path);
+
+    QItemDelegate::paint(painter, option, index);
+    return;
 }
 
 bool MyTableDelegate::editorEvent(QEvent * event, QAbstractItemModel * model,

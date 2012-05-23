@@ -48,12 +48,18 @@ MyTableView::MyTableView(QWidget * parent) : QTableView(parent), mouseStatus(tru
     this->setAcceptDrops(true);
     this->setShowGrid(false);
 
+
+    // QCSS
+    this->setStyleSheet(
+         "QTableView::item{height: 60px;}"
+    );
+
     QDesktopServices::setUrlHandler( "mailto", this, "mailTo" );
 
     initActions();
 }
 
-// 鼠标移开事件
+// Action 数据
 void MyTableView::initActions ()
 {
     // 系统默认打开
@@ -90,7 +96,7 @@ void MyTableView::initActions ()
 
     // 删除
     deleteAction = new QAction(tr("&Delete(Move to the Wastebasket)"), this);
-    connect(deleteAction, SIGNAL(triggered()), this, SLOT(about()));
+    connect(deleteAction, SIGNAL(triggered()), this, SLOT(delDoc()));
 
     // 加密
     encodeAction = new QAction(Utils::getIcon("vip.png"), tr("&Encrypt"), this);
@@ -151,9 +157,35 @@ void MyTableView::initActions ()
    // 复制到文件夹
    copyToDirAction = new QAction(tr("&Copy to..."), this);
    connect(copyToDirAction, SIGNAL(triggered()), this, SLOT(copyToDir()));
-   // 选项
+   // 选项 <选择第一行 以及第二行的内容>
    optionOfDocTableAction = new QAction(tr("&Option"), this);
    connect(optionOfDocTableAction, SIGNAL(triggered()), this, SLOT(about()));
+   option_submenu = new QMenu(this);
+   optionOfDocTableAction->setMenu(option_submenu);
+
+   oneRowAction = new QAction(tr("&One Row"), this);
+   oneRowAction->setData(ONE_ROW);
+   oneRowAction->setCheckable(true);
+   twoRowAction = new QAction(tr("&Two Rows"), this);
+   twoRowAction->setData(TWO_ROWS);
+   twoRowAction->setCheckable(true);
+   twoRowOptionAction = new QAction(tr("&The second Row's Option"), this);
+   showNotesAction = new QAction(tr("&Show notes of Document on Tooltip"), this);
+   showNotesAction->setData(SHOW_NOTES);
+   showNotesAction->setCheckable(true);
+
+   option_submenu->addAction(oneRowAction);
+   option_submenu->addAction(twoRowAction);
+   option_submenu->addSeparator();
+   option_submenu->addAction(twoRowOptionAction);
+   option_submenu->addSeparator();
+   option_submenu->addAction(showNotesAction);
+   connect(option_submenu, SIGNAL(triggered(QAction*)), this, SLOT(slotShowTableOption(QAction*)));
+   // 设定第二行的内容Menu
+   secondRowSetMenu();
+   twoRowOptionAction->setMenu(m_secondRowSetMenu);
+   connect(m_secondRowSetMenu, SIGNAL(triggered(QAction*)), this, SLOT(slotShowSecondRowContent(QAction*)));
+
    // 属性
    propAction = new QAction(tr("&Properties"), this);
    connect(propAction, SIGNAL(triggered()), this, SLOT(about()));
@@ -643,6 +675,57 @@ void MyTableView::docTags()
     }
 }
 
+// 删除文档(多选删除)
+void MyTableView::delDoc()
+{
+    // 传递选择的docUuid
+    Preferences* p = Preferences::instance();
+    p->setSelDocUid(curUuid);
+
+    int ret = QMessageBox::question(this, "", tr("Are you sure that delete the document ?"),
+                                    QMessageBox::Yes, QMessageBox::No);
+    if(ret == QMessageBox::Yes){
+            if(!curUuid.isEmpty()){
+                 // 保证右键选择的删除
+                Doc doc;
+                doc.DOCUMENT_GUID = curUuid;
+                doc.DELETE_FLAG = "1";
+                DocDao::updateDoc(doc);
+                model->removeRow(currentIndex().row());
+
+                // 选中的逻辑删除
+                QItemSelectionModel *selections = this->selectionModel();
+                QModelIndexList selected = selections->selectedIndexes();
+                QMap<int, int> rowMap;
+
+                foreach (QModelIndex index, selected)
+                {
+                    QStandardItem* item = model->itemFromIndex(index);
+                    QString  docUuid = qvariant_cast<QString>(item->data(Qt::UserRole + 1));
+                    Doc doc;
+                    doc.DOCUMENT_GUID = docUuid;
+                    doc.DELETE_FLAG = "1";
+                    DocDao::updateDoc(doc);
+
+                    rowMap.insert(index.row(), 0);
+                }
+
+                int rowToDel;
+                QMapIterator<int, int> rowMapIterator(rowMap);
+                rowMapIterator.toBack();
+                while (rowMapIterator.hasPrevious())
+                {
+                    rowMapIterator.previous();
+                    rowToDel = rowMapIterator.key();
+                    model->removeRow(rowToDel);
+                }
+            }
+     }
+    if(ret == QMessageBox::No){
+           return;
+    }
+}
+
 // 打开右键菜单
 void MyTableView::tableContextMenuOpened()
 {
@@ -712,6 +795,132 @@ void MyTableView::copyToDir()
     }
 }
 
+// 设定表单第二项选项项目
+void MyTableView::secondRowSetMenu()
+{
+    m_secondRowSetMenu = new QMenu(this);
+    // 设置Menu
+    QAction *action1 = new QAction(this);
+    action1->setData(CREATE_DATE);
+    action1->setCheckable(true);
+    action1->setText(tr("Create Date"));
+
+    // 设置Menu
+    QAction *action2 = new QAction(this);
+    action2->setData(MODIFIED_DATE);
+    action2->setCheckable(true);
+    action2->setText(tr("Modified Date"));
+
+    // 设置Menu
+    QAction *action3 = new QAction(this);
+    action3->setData(ACCESS_DATE);
+    action3->setCheckable(true);
+    action3->setText(tr("Accessed Date"));
+
+    // 设置Menu
+    QAction *action4 = new QAction(this);
+    action4->setData(SIZE);
+    action4->setCheckable(true);
+    action4->setText(tr("Size"));
+
+    QAction *action5 = new QAction(this);
+    action5->setData(AUTHOR);
+    action5->setCheckable(true);
+    action5->setText(tr("Author"));
+
+    QAction *action6 = new QAction(this);
+    action6->setData(READ_COUNT);
+    action6->setCheckable(true);
+    action6->setText(tr("Read Count"));
+
+    QAction *action7 = new QAction(this);
+    action7->setData(RELATED_COUNT);
+    action7->setCheckable(true);
+    action7->setText(tr("Related Count"));
+
+    QAction *action8 = new QAction(this);
+    action8->setData(TAGS);
+    action8->setCheckable(true);
+    action8->setText(tr("Tags"));
+
+    QAction *action9 = new QAction(this);
+    action9->setData(URL);
+    action9->setCheckable(true);
+    action9->setText(tr("URL"));
+
+    m_secondRowSetMenu->addAction(action1);
+    m_secondRowSetMenu->addAction(action2);
+    m_secondRowSetMenu->addAction(action3);
+    m_secondRowSetMenu->addAction(action4);
+    m_secondRowSetMenu->addAction(action5);
+    m_secondRowSetMenu->addAction(action6);
+    m_secondRowSetMenu->addAction(action7);
+    m_secondRowSetMenu->addAction(action8);
+    m_secondRowSetMenu->addAction(action9);
+}
+
+// 设定表单第二项选项项目
+void MyTableView::slotShowSecondRowContent(QAction* action)
+{
+    qDebug("slotShowSecondRowContent start");
+    QList<QAction*> actionList = m_secondRowSetMenu->actions();
+    QAction* tmpaction;
+    foreach(tmpaction, actionList){
+        tmpaction->setChecked(false);
+    }
+    action->setChecked(true);
+
+    int offset = action->data().toInt();
+
+    // 表示第二行显示
+    switch (offset) {
+        case CREATE_DATE:
+
+        case MODIFIED_DATE:
+
+        case ACCESS_DATE:
+
+        case SIZE:
+
+        case AUTHOR:
+        case READ_COUNT:
+
+        case RELATED_COUNT:
+        case TAGS:
+        case URL:
+
+          ;
+    }
+}
+
+// 设定表单选项Menu
+void MyTableView::slotShowTableOption(QAction* action)
+{
+    qDebug("slotShowTableOption");
+
+    int offset = action->data().toInt();
+
+    // 设定其他的项目
+    if(offset == ONE_ROW){
+       twoRowAction->setChecked(!oneRowAction->isChecked());
+    }
+    // 设定其他的项目
+    if(offset == TWO_ROWS){
+       oneRowAction->setChecked(!twoRowAction->isChecked());
+    }
+
+    // 表示第二行显示
+    switch (offset) {
+        case ONE_ROW:
+
+        case TWO_ROWS:
+
+        case SHOW_NOTES:
+
+
+          ;
+    }
+}
 
 
 
