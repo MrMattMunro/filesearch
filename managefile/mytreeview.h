@@ -43,6 +43,7 @@ public:
 private slots:
         void         showChildTree();
         void         reloadTagTree();
+        void         currentItemChanged(const QModelIndex &current, const QModelIndex &previous);
 signals:
 	//鼠标双击
 	void         LBtnDbClk();
@@ -55,6 +56,7 @@ protected:
         // void         mousePressEvent(QMouseEvent *event);
         void         mouseReleaseEvent(QMouseEvent *event);
         void         dropEvent(QDropEvent *event);
+
         //void         mouseDoubleClickEvent(QMouseEvent *event);
         //void         mouseMoveEvent(QMouseEvent *event);
         //void         keyPressEvent(QKeyEvent *event);
@@ -69,8 +71,11 @@ private:
         QString               curPath;  //当前鼠标双击的路径
         QString               curUuId;  //当前UuId
         QString               curType;  //当前节点类型
-	QModelIndex           curIndex;
+        QModelIndex           curIndex;
         QStandardItem*        curItem;
+        QStandardItem         preItem;
+        int                   preRow;
+        int                   preColumn;
         QStandardItemModel    *model;
         QPoint                curPoint;
         MyTreeDelegate * delegate;

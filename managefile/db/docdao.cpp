@@ -103,18 +103,18 @@ QList<Doc> DocDao::selectDocsbyDir(const QString & dirUuid)
             field.DOCUMENT_KEYWORDS = query.value(8).toString();
             field.DOCUMENT_TYPE = query.value(9).toString();
             field.DOCUMENT_OWNER = query.value(10).toString();
-            field.DT_CREATED = query.value(11).toChar();
-            field.DT_MODIFIED = query.value(12).toChar();
-            field.DT_ACCESSED = query.value(13).toChar();
+            field.DT_CREATED = query.value(11).toString();
+            field.DT_MODIFIED = query.value(12).toString();
+            field.DT_ACCESSED = query.value(13).toString();
             field.DOCUMENT_ICON_INDEX = query.value(14).toInt();
             field.DOCUMENT_SYNC = query.value(15).toInt();
             field.DOCUMENT_PROTECT = query.value(16).toString();
-            field.DOCUMENT_ENCODE = query.value(17).toChar();
+            field.DOCUMENT_ENCODE = query.value(17).toString();
             field.DOCUMENT_READ_COUNT = query.value(18).toInt();
             field.DOCUMENT_RELATE_COUNT = query.value(19).toInt();
-            field.DOCUMENT_INDEXFLG = query.value(20).toChar();
-            field.DOCUMENT_OPERFLG = query.value(21).toChar();
-            field.DELETE_FLAG = query.value(22).toChar();
+            field.DOCUMENT_INDEXFLG = query.value(20).toString();
+            field.DOCUMENT_OPERFLG = query.value(21).toString();
+            field.DELETE_FLAG = query.value(22).toString();
             field.MF_VERSION = query.value(23).toInt();
             returnList.append(field);
     }
@@ -141,18 +141,18 @@ Doc DocDao::selectDoc(const QString & uuid)
             field.DOCUMENT_KEYWORDS = query.value(8).toString();
             field.DOCUMENT_TYPE = query.value(9).toString();
             field.DOCUMENT_OWNER = query.value(10).toString();
-            field.DT_CREATED = query.value(11).toChar();
-            field.DT_MODIFIED = query.value(12).toChar();
-            field.DT_ACCESSED = query.value(13).toChar();
+            field.DT_CREATED = query.value(11).toString();
+            field.DT_MODIFIED = query.value(12).toString();
+            field.DT_ACCESSED = query.value(13).toString();
             field.DOCUMENT_ICON_INDEX = query.value(14).toInt();
             field.DOCUMENT_SYNC = query.value(15).toInt();
             field.DOCUMENT_PROTECT = query.value(16).toString();
-            field.DOCUMENT_ENCODE = query.value(17).toChar();
+            field.DOCUMENT_ENCODE = query.value(17).toString();
             field.DOCUMENT_READ_COUNT = query.value(18).toInt();
             field.DOCUMENT_RELATE_COUNT = query.value(19).toInt();
-            field.DOCUMENT_INDEXFLG = query.value(20).toChar();
-            field.DOCUMENT_OPERFLG = query.value(21).toChar();
-            field.DELETE_FLAG = query.value(22).toChar();
+            field.DOCUMENT_INDEXFLG = query.value(20).toString();
+            field.DOCUMENT_OPERFLG = query.value(21).toString();
+            field.DELETE_FLAG = query.value(22).toString();
             field.MF_VERSION = query.value(23).toInt();
             return field;
     }
@@ -201,7 +201,7 @@ bool DocDao::updateDoc(Doc doc){
     QString created = orgDoc.DT_CREATED;
     QString modified = orgDoc.DT_MODIFIED;
     QString accessed = orgDoc.DT_ACCESSED;
-    QString iconIdx = orgDoc.DOCUMENT_ICON_INDEX;
+    int iconIdx = orgDoc.DOCUMENT_ICON_INDEX;
     int docSync = orgDoc.DOCUMENT_SYNC;
     QString docProtect = orgDoc.DOCUMENT_PROTECT;
     QString docEncode = orgDoc.DOCUMENT_ENCODE;
@@ -216,7 +216,7 @@ bool DocDao::updateDoc(Doc doc){
        docTitle = doc.DOCUMENT_TITLE;
     }
     if(! doc.DIR_GUID.isEmpty()){
-       dirUuId = doc.DOCUMENT_TITLE;
+       dirUuId = doc.DIR_GUID;
     }
     if(! doc.DOCUMENT_LOCATION.isEmpty()){
        docLocation = doc.DOCUMENT_LOCATION;
@@ -242,13 +242,13 @@ bool DocDao::updateDoc(Doc doc){
     if(! doc.DOCUMENT_OWNER.isEmpty()){
        docOwer = doc.DOCUMENT_OWNER;
     }
-    if(! doc.DT_CREATED.isNull()){
+    if(! doc.DT_CREATED.isEmpty()){
        created = doc.DT_CREATED;
     }
-    if(! doc.DT_MODIFIED.isNull()){
+    if(! doc.DT_MODIFIED.isEmpty()){
        modified = doc.DT_MODIFIED;
     }
-    if(! doc.DT_ACCESSED.isNull()){
+    if(! doc.DT_ACCESSED.isEmpty()){
        accessed = doc.DT_ACCESSED;
     }
     if(doc.DOCUMENT_ICON_INDEX != 0){
@@ -260,7 +260,7 @@ bool DocDao::updateDoc(Doc doc){
     if(! doc.DOCUMENT_PROTECT.isEmpty()){
        docProtect = doc.DOCUMENT_PROTECT;
     }
-    if(! doc.DOCUMENT_ENCODE.isNull()){
+    if(! doc.DOCUMENT_ENCODE.isEmpty()){
        docEncode = doc.DOCUMENT_ENCODE;
     }
     if(doc.DOCUMENT_READ_COUNT != 0 ){
@@ -269,13 +269,13 @@ bool DocDao::updateDoc(Doc doc){
     if(doc.DOCUMENT_RELATE_COUNT != 0 ){
        relateCount = doc.DOCUMENT_RELATE_COUNT;
     }
-    if(! doc.DOCUMENT_INDEXFLG.isNull()){
+    if(! doc.DOCUMENT_INDEXFLG.isEmpty()){
        idexFlg = doc.DOCUMENT_INDEXFLG;
     }
-    if(! doc.DOCUMENT_OPERFLG.isNull()){
+    if(! doc.DOCUMENT_OPERFLG.isEmpty()){
        operFlg = doc.DOCUMENT_OPERFLG;
     }
-    if(! doc.DELETE_FLAG.isNull()){
+    if(! doc.DELETE_FLAG.isEmpty()){
        delFlg = doc.DELETE_FLAG;
     }
     if(doc.MF_VERSION != 0 ){
@@ -285,10 +285,11 @@ bool DocDao::updateDoc(Doc doc){
     QString sql_1 = Database::getSql("mf_update_doc_1.sql");
     QString sql_2 = Database::getSql("mf_update_doc_2.sql");
     QString sql_3 = Database::getSql("mf_update_doc_3.sql");
+
     sql_1 = sql_1.arg(docTitle, dirUuId, docLocation, docName, docSeo, docUrl, docAuthor,
                   docKeyWord, docType);
 
-    sql_2 = sql_2.arg(docOwer, created, modified, accessed, iconIdx, QString::number(docSync),
+    sql_2 = sql_2.arg(docOwer, created, modified, accessed, QString::number(iconIdx), QString::number(docSync),
                   docProtect, docEncode, QString::number(readCount));
 
     sql_3 = sql_3.arg(QString::number(relateCount), idexFlg, operFlg,
@@ -299,6 +300,10 @@ bool DocDao::updateDoc(Doc doc){
     sql.append(sql_1);
     sql.append(sql_2);
     sql.append(sql_3);
+
+    qDebug() << "sql1::" << sql_1;
+    qDebug() << "sql_2::" << sql_2;
+    qDebug() << "sql_3::" << sql_3;
 
     return Database::execSql(sql);
 }

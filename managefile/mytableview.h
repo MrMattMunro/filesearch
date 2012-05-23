@@ -80,6 +80,7 @@ private:
         QPoint  curPoint;
         QString  curPath;
         QString  curUuid;
+        QStandardItem *curItem;
 
         // doc table menu start
         QMenu *cmenu;
