@@ -45,15 +45,10 @@
 #include "preferences.h"
 #include "mainwindow.h"
 #include "mytreeview.h"
-#include "importdocdialog.h"
-#include "exportdocdialog.h"
-#include "createsubdirdialog.h"
-#include "movetodirdialog.h"
-#include "movetotagdialog.h"
+
 #include "customtooldialog.h"
-#include "propofdirdialog.h"
-#include "propoftagdialog.h"
-#include "createtagdialog.h"
+
+
 #include "browser/browsermainwindow.h"
 #include "browser/browserapplication.h"
 #include "utils.h"
@@ -95,18 +90,33 @@ void MainWindow::buildDocList()
     if(curType != "doc" && curType != "basket" && curType != "tag" ){
         return;
     }
+
+    // 显示Tag下所有的文件
+    Preferences* p = Preferences::instance();
+    bool isShowDocUnderSub = p->isShowDocUnderSub();
+
     // 是否显示子文件夹文档
     QList<Doc> docs;
-
     // 显示所有垃圾桶的文件
     if(curType == "basket" ){
-        docs = DocDao::selectDocsByDelFlg("1");
+        if(isShowDocUnderSub){
+              // 取得所有文件夹
+              QList<Dir> dirs ;
+              DirDao::selectAllSubDirbyDir(dirs, curUuid, "1");
+              // 根据文件夹取得所有文件
+              for(int i = 0 ; i< dirs.size(); i ++){
+                 Dir dir = dirs.at(i);
+                 docs.append(DocDao::selectDocsbyDir(dir.DIR_GUID, "1"));
+              }
+        }else{
+             docs = DocDao::selectDocsbyDir(curUuid,  "1");
+        }
         m_doctable->buildDocList(docs);
         return;
     }
 
-    // 显示Tag下所有的文件
     if(curType == "tag" ){
+        // 传递选择的docUuid
         if(isShowDocUnderSub){
               // 取得所有子标签
               QList<Tag> tags ;
@@ -125,19 +135,21 @@ void MainWindow::buildDocList()
         return;
     }
 
-    if(isShowDocUnderSub){
-          // 取得所有文件夹
-          QList<Dir> dirs ;
-          DirDao::selectAllSubDirbyDir(dirs, curUuid);
-          // 根据文件夹取得所有文件
-          for(int i = 0 ; i< dirs.size(); i ++){
-             Dir dir = dirs.at(i);
-             docs.append(DocDao::selectDocsbyDir(dir.DIR_GUID, "0"));
-          }
-    }else{
-         docs = DocDao::selectDocsbyDir(curUuid,  "0");
-    }
-    m_doctable->buildDocList(docs);
+    if(curType == "doc" ){
+        if(isShowDocUnderSub){
+              // 取得所有文件夹
+              QList<Dir> dirs ;
+              DirDao::selectAllSubDirbyDir(dirs, curUuid, "0");
+              // 根据文件夹取得所有文件
+              for(int i = 0 ; i< dirs.size(); i ++){
+                 Dir dir = dirs.at(i);
+                 docs.append(DocDao::selectDocsbyDir(dir.DIR_GUID, "0"));
+              }
+        }else{
+             docs = DocDao::selectDocsbyDir(curUuid,  "0");
+        }
+        m_doctable->buildDocList(docs);
+   }
 }
 
 // 搜索界面设置Menu
@@ -337,65 +349,6 @@ void MainWindow::initActions()
         connect(jpAction, SIGNAL(triggered()), this, SLOT(about()));
 
 
-        //Doc ContextMenu
-        makeSubDir = new QAction(tr("&New Sub Dir"), this);
-        connect(makeSubDir, SIGNAL(triggered()), this, SLOT(createSubDir()));
-        moveToDir= new QAction(tr("&Move To Dir"), this);
-        connect(moveToDir, SIGNAL(triggered()), this, SLOT(moveDir()));
-        delDir= new QAction(tr("&Delete"), this);
-        connect(delDir, SIGNAL(triggered()), this, SLOT(delSubDir()));
-        renameDir= new QAction(tr("&Rename"), this);
-        connect(renameDir, SIGNAL(triggered()), this, SLOT(renameSubDir()));
-        subDirSort= new QAction(tr("&Sort SubDirs"), this);
-        connect(subDirSort, SIGNAL(triggered()), this, SLOT(about()));
-
-        showSubDirDoc= new QAction(tr("&Show docs under sub Dir"), this);
-        showSubDirDoc->setCheckable(true);
-
-        Preferences* p = Preferences::instance();
-        showSubDirDoc->setChecked(p->isShowDocUnderSub());
-
-        connect(showSubDirDoc, SIGNAL(triggered()), this, SLOT(setShowSubDirDoc()));
-
-        protectDir= new QAction(tr("&Protect"), this);
-        connect(protectDir, SIGNAL(triggered()), this, SLOT(about()));
-        propOfDir= new QAction(tr("&Properties"), this);
-        connect(propOfDir, SIGNAL(triggered()), this, SLOT(properties()));
-
-        //Root ContextMenu
-        makeRootDir= new QAction(tr("&New Root Dir"), this);
-        connect(makeRootDir, SIGNAL(triggered()), this, SLOT(createRootDir()));
-        dirSort= new QAction(tr("&Sort Dir"), this);
-        connect(dirSort, SIGNAL(triggered()), this, SLOT(about()));
-        protectRootDir= new QAction(tr("&Protect"), this);
-        connect(protectRootDir, SIGNAL(triggered()), this, SLOT(about()));
-        optionOfDir= new QAction(tr("&Option"), this);
-        connect(optionOfDir, SIGNAL(triggered()), this, SLOT(about()));
-
-        //Tag ContextMenu
-        makeSubTag= new QAction(tr("&New Sub Tag"), this);
-        connect(makeSubTag, SIGNAL(triggered()), this, SLOT(newTag()));
-        moveToTag= new QAction(tr("&Move to Tag"), this);
-        connect(moveToTag, SIGNAL(triggered()), this, SLOT(movetoTag()));
-        moveToRootTag= new QAction(tr("&Move to Root Tag"), this);
-        connect(moveToRootTag, SIGNAL(triggered()), this, SLOT(moveToRoot()));
-        delTag= new QAction(tr("&Delete"), this);
-        connect(delTag, SIGNAL(triggered()), this, SLOT(deleteTag()));
-        renameTag= new QAction(tr("&Rename"), this);
-        connect(renameTag, SIGNAL(triggered()), this, SLOT(renameSubTag()));
-        showSubDirTag= new QAction(tr("&Show docs under sub Tag"), this);
-        showSubDirTag->setCheckable(true);
-        connect(showSubDirTag, SIGNAL(triggered()), this, SLOT(setShowSubTagDoc()));
-
-        showSubDirTag->setChecked(p->isShowDocUnderSubTag());
-
-        propOfTag= new QAction(tr("&Properties"), this);
-        connect(propOfTag, SIGNAL(triggered()), this, SLOT(showPropOfTag()));
-
-        //Root Tag ContextMenu
-        makeTag= new QAction(tr("&New Tag"), this);
-        connect(makeTag, SIGNAL(triggered()), this, SLOT(newTag()));
-
 }
 
 void MainWindow::initMenus()
@@ -450,14 +403,7 @@ void MainWindow::initMenus()
         menu_Help->addAction(aboutAction);
         menu_Help->addSeparator();
 
-        // 右键
-        contextMenu = new QMenu(this);
-        contextMenu->setStyleSheet(
-                    "QMenu::item{height: 25px}"
-                    "QMenu::item:hover{background-color:rgb(100,100,100)}"
-                    "QMenu::item:selected{background-color:rgb(128,128,128)}"
-        );
-        contextMenu->hide();
+
 }
 
 // 初始化浏览器
@@ -609,177 +555,6 @@ void MainWindow::homepage()
     loadUrl(QUrl("http://www.slfile.net/"));
 }
 
-// 设置是否显示子文件夹下的文件
-void MainWindow::setShowSubDirDoc()
-{
-    // 反向选择
-    isShowDocUnderSub = showSubDirDoc->isChecked();
-    Preferences* p = Preferences::instance();
-    p->setShowDocUnderSub(isShowDocUnderSub);
-}
-
-// 设置是否显示子标签下的文件
-void MainWindow::setShowSubTagDoc()
-{
-    // 反向选择
-    isShowDocUnderTag = showSubDirTag->isChecked();
-    Preferences* p = Preferences::instance();
-    p->setShowDocUnderSubTag(isShowDocUnderTag);
-}
-
-// 打开导入界面
-void MainWindow::importDlg()
-{
-    QString curType = q_myTreeList->getCurType();
-    bool hasSelRight = false;
-
-    // 需选中子节点
-    if(!curType.isEmpty() && curType != "alldocs" && curType != "alltags") {
-        hasSelRight = true;
-        ImportDocDialog dlg(this, m_baseDir, q_myTreeList->getCurPath());
-        dlg.exec();
-        if(dlg.update){
-            int row= dlg.model->rowCount();
-            // 存储每一层文件夹名 <1, dirList>
-            QMap<int, QStringList> writeMap;
-
-           QString parentUuId;
-            for (int var = 0; var < row; ++var) {
-
-                QStandardItem* temp = dlg.model->item(var);
-                QString path = temp->text();
-
-                QString filepath = path.left(path.lastIndexOf(QDir::separator()));
-                filepath = filepath.replace("\"","");
-
-                // 设置目标目录
-                QString destDir = filepath.remove(0, dlg.m_importDir.length());
-                QStringList dirs = destDir.split(QDir::separator());
-
-                // 建立目录
-                for (int i = 0; i < dirs.length(); ++i) {
-                    // 插入文档
-                    if(i = dirs.length() - 1){
-                        QUuid docUuid = QUuid::createUuid();
-                        QFileInfo fileinfo(path);
-                        Doc doc;
-                        doc.DOCUMENT_GUID = docUuid;
-                        doc.DOCUMENT_TITLE = fileinfo.fileName();
-                        // 父目录
-                        if(parentUuId.isEmpty()){
-                           // 选择树节点UuId
-
-                        }
-
-                        doc.DIR_GUID = parentUuId;
-                        doc.DOCUMENT_LOCATION = path;
-                        doc.DOCUMENT_NAME = fileinfo.fileName();
-                        doc.DOCUMENT_SEO = "";
-                        doc.DOCUMENT_URL = "";
-                        doc.DOCUMENT_AUTHOR = fileinfo.owner();
-                        doc.DOCUMENT_KEYWORDS = "";
-                        doc.DOCUMENT_TYPE = "";
-                        doc.DOCUMENT_OWNER = fileinfo.owner();
-                        doc.DT_CREATED = fileinfo.created().toString("yyyy-MM-dd hh:mm:ss");
-                        doc.DT_MODIFIED = fileinfo.lastModified().toString("yyyy-MM-dd hh:mm:ss");
-                        doc.DT_ACCESSED = fileinfo.lastRead().toString("yyyy-MM-dd hh:mm:ss");
-                        doc.DOCUMENT_ICON_INDEX = 0;
-                        doc.DOCUMENT_SYNC = 0;
-                        doc.DOCUMENT_PROTECT = "";
-                        doc.DOCUMENT_ENCODE= "0";
-                        doc.DOCUMENT_READ_COUNT = 0;
-                        doc.DOCUMENT_RELATE_COUNT = 0;
-                        doc.DOCUMENT_INDEXFLG = "0";
-                        doc.DOCUMENT_OPERFLG = "";
-                        doc.DELETE_FLAG = "0";
-                        doc.MF_VERSION = 0;
-
-                        DocDao::insertDoc(doc);
-                    }
-
-                      QString tmpDir = dirs.at(i);
-                      if(tmpDir.isEmpty()){
-                          continue;
-                      }
-
-                      QStringList exitedDirs = writeMap[i];
-                      if(exitedDirs.contains(tmpDir)){
-                           continue;
-                      } else {
-                          QUuid uuid = QUuid::createUuid();
-                          Dir dir;
-                          dir.DIR_GUID = uuid;
-                          dir.DIR_NAME = tmpDir;
-                          dir.DIR_PARENT_UUID = parentUuId;
-                          dir.DIR_ORDER = var;
-                          dir.MF_VERSION = 1;
-
-                          DirDao::insertDir(dir);
-                          exitedDirs.append(tmpDir);
-                          writeMap.insert(i, exitedDirs);
-                          parentUuId = uuid;
-                      }
-                }
-            }
-
-            // 重新加载树节点
-            QStandardItem* curItem = q_myTreeList->getCurItem();
-            q_myTreeList->delSubItems(curItem);
-            QString uuId = q_myTreeList->getCurUuid();
-            q_myTreeList->loadDirs(uuId, curItem);
-        }
-    }
-    // 如果没有选中子目录节点
-    if(!hasSelRight){
-        QMessageBox::warning(this, tr("Warning"), tr("Please Select an sub directory."), QMessageBox::Yes);
-        return;
-    }
-}
-
-// 打开导出界面
-void MainWindow::exportDlg()
-{
-    QString curType = q_myTreeList->getCurType();
-    bool hasSelRight = false;
-
-    // 需选中子节点
-    if(!curType.isEmpty() && curType != "alldocs" && curType != "alltags") {
-        hasSelRight = true;
-        ExportDocDialog dlg(this, m_baseDir, q_myTreeList->getCurPath());
-        dlg.exec();
-        if(dlg.update){
-          // 不做任何操作
-        }
-    }
-    // 如果没有选中子目录节点
-    if(!hasSelRight){
-        QMessageBox::warning(this, tr("Warning"), tr("Please Select an sub directory."), QMessageBox::Yes);
-        return;
-    }
-}
-
-// 查看文件夹属性
-void MainWindow::properties()
-{
-    QString curType = q_myTreeList->getCurType();
-    QString curTitle = q_myTreeList->getCurTitle();
-    bool hasSelRight = false;
-
-    // 需选中子节点
-    if(curType == "doc") {
-        hasSelRight = true;
-        PropOfDirDialog dlg(this, curTitle, q_myTreeList->getCurPath());
-        dlg.exec();
-        if(dlg.update){
-          // 不做任何操作
-        }
-    }
-    // 如果没有选中子目录节点
-    if(!hasSelRight){
-        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
-        return;
-    }
-}
 
 void MainWindow::initUI()
 {
@@ -799,7 +574,6 @@ void MainWindow::initUI()
         splitter->addWidget(q_myTreeList);
         splitter->addWidget(m_doctable);
 
-        connect(q_myTreeList, SIGNAL(RBtnClk()), this, SLOT(treeContextMenuOpened()));
         connect(q_myTreeList, SIGNAL(LBtnClk()), this, SLOT(buildDocList()));
 
         // 后期需要调用主界面的动作
@@ -842,338 +616,6 @@ MainWindow::~MainWindow()
     Preferences::deleteInstance();
 }
 
-// 创建子文件夹
-void MainWindow::createSubDir()
-{
-    QString curType = q_myTreeList->getCurType();
-    QString curUuid = q_myTreeList->getCurUuid();
-    bool hasSelRight = false;
-
-    // 需选中 总节点和子节点
-    if(curType == "doc") {
-        hasSelRight = true;
-        CreateSubDirDialog dlg(this, curUuid, q_myTreeList->getCurPath());
-        dlg.exec();
-        if(dlg.update){
-            // 刷新选中的树
-            QStandardItem* curItem = q_myTreeList->getCurItem();
-            q_myTreeList->addItemByParentItem(curItem, dlg.dirName->text(), dlg.m_newUuid, "doc", "folder.ico");
-            q_myTreeList->expand(q_myTreeList->getCurIndex());
-        }
-    }
-    // 如果没有选中子目录节点
-    if(!hasSelRight){
-        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
-        return;
-    }
-}
-
-// 移动文件夹
-void MainWindow::moveDir()
-{
-    QString curType = q_myTreeList->getCurType();
-    QString curUuid = q_myTreeList->getCurUuid();
-    QString curTitle = q_myTreeList->getCurTitle();
-    QStandardItem* curItem = q_myTreeList->getCurItem();
-    bool hasSelRight = false;
-
-    // 需选中 文件 子节点
-    if(curType == "doc") {
-        hasSelRight = true;
-        MoveToDirDialog dlg(this, curUuid, q_myTreeList->getCurPath());
-        dlg.exec();
-        if(dlg.update){
-              // 取得子界面选中的path
-              QString toDirUuid = dlg.m_toUuid;
-              // 删除主界面选中的节点
-              curItem->parent()->removeRow(curItem->row());
-
-              // 设置主界面的节点 (子界面新建文件夹情况下不成功)
-              q_myTreeList->setCurItemByUuid(toDirUuid, curType);
-
-              QStandardItem* curItem = q_myTreeList->getCurItem();
-              q_myTreeList->addItemByParentItem(curItem, curTitle, curUuid, "doc", "folder.ico");
-              q_myTreeList->expand(q_myTreeList->getCurIndex());
-        }
-    }
-    // 如果没有选中子目录节点
-    if(!hasSelRight){
-        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
-        return;
-    }
-}
-
-
-// 改变子文件夹名称
-void MainWindow::renameSubDir()
-{
-    QString curType = q_myTreeList->getCurType();
-    QStandardItem* curItem = q_myTreeList->getCurItem();
-    QString curTitle = q_myTreeList->getCurTitle();
-    bool hasSelRight = false;
-
-    // 需选中 总节点和子节点
-    if(!curType.isEmpty() && curType != "alltags") {
-        hasSelRight = true;
-        bool ok;
-        QString text = QInputDialog::getText(this, m_appName, tr("New Directory name:"), QLineEdit::Normal, curTitle, &ok);
-        if (ok && !text.isEmpty()) {
-                if (text == curTitle){
-                  return;
-                }
-                // 改变树节点
-                curItem->setData(text, Qt::DisplayRole);
-                // 改变目录名称
-                Dir dir;
-                dir.DIR_GUID = q_myTreeList->getCurUuid();
-                dir.DIR_NAME = text;
-                DirDao::updateDir(dir);
-        }
-    }
-    // 如果没有选中子目录节点
-    if(!hasSelRight){
-        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
-        return;
-    }
-}
-
-// 新建根节点
-void MainWindow::createRootDir()
-{
-    QString curType = q_myTreeList->getCurType();
-    bool hasSelRight = false;
-
-    // 需选中 总节点
-    if(curType == "alldocs") {
-        hasSelRight = true;
-        bool ok;
-        QString text = QInputDialog::getText(this, m_appName, tr("New Roor Directory name:"), QLineEdit::Normal, "", &ok);
-        if (ok && !text.isEmpty()) {
-                if (text == ""){
-                  return;
-                }
-                // 刷新选中的树
-                QString tempPath = m_baseDir;
-                tempPath.append(QDir::separator()).append(text);
-
-                // 新建文件夹
-                QDir *mdir = new QDir(m_baseDir);
-                if(mdir->exists()){
-                    if(!mdir->mkdir(text)){
-                        QMessageBox::warning(this, tr("Error"), tr("Create New Root Directory failed. "), QMessageBox::Yes);
-                        return;
-                    }
-                }
-
-                QStandardItem* curItem = q_myTreeList->getCurItem();
-                q_myTreeList->addItemByParentItem(curItem, text, tempPath, "doc", "folder.ico");
-                curItem->setIcon(Utils::getIcon("expander_open.png"));
-                q_myTreeList->expand(q_myTreeList->getCurIndex());
-
-        }
-    }
-    // 如果没有选中子目录节点
-    if(!hasSelRight){
-        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
-        return;
-    }
-}
-
-// 新建根标签
-void MainWindow::newTag()
-{
-    QString curType = q_myTreeList->getCurType();
-    bool hasSelRight = false;
-
-    // 需选中 标签 节点
-    if(curType == "alltags" || curType == "tag") {
-        hasSelRight = true;
-        // curPath 用于判断根节点和子节点
-        CreateTagDialog dlg(this, q_myTreeList->getCurPath());
-        dlg.exec();
-        if(dlg.update){
-              QStandardItem* curItem = q_myTreeList->getCurItem();
-              q_myTreeList->addItemByParentItem(curItem,  dlg.m_tagname, dlg.m_newTagUuId, "tag", "tag.ico");
-              curItem->setIcon(Utils::getIcon("expander_open.png"));
-              q_myTreeList->expand(q_myTreeList->getCurIndex());
-        }
-    }
-    // 如果没有选中子目录节点
-    if(!hasSelRight){
-        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
-        return;
-    }
-}
-
-// 删除标签
-void MainWindow::deleteTag()
-{
-    QString curType = q_myTreeList->getCurType();
-    bool hasSelRight = false;
-    QString title = q_myTreeList->getCurTitle();
-    QString curUuId = q_myTreeList->getCurUuid();
-
-    // 需选中 标签 节点
-    if(curType == "tag") {
-        hasSelRight = true;
-        int ret = QMessageBox::warning(this, QString(),
-                           tr("Are you sure you want to delete the %1 tag?").arg(title),
-                           QMessageBox::Yes | QMessageBox::No,
-                           QMessageBox::No);
-
-        if (ret == QMessageBox::No) {
-            return;
-        }
-        if(ret == QMessageBox::Yes){
-          q_myTreeList->delSubTree();
-          // 删除Tag
-          TagDao::deleteTag(curUuId);
-        }
-    }
-    // 如果没有选中子目录节点
-    if(!hasSelRight){
-        QMessageBox::warning(this, tr("Warning"), tr("Please Select an Sub Tag."), QMessageBox::Yes);
-        return;
-    }
-}
-
-// 改变子标签名称
-void MainWindow::renameSubTag()
-{
-    QString curType = q_myTreeList->getCurType();
-    QStandardItem* curItem = q_myTreeList->getCurItem();
-    QString curTitle = q_myTreeList->getCurTitle();
-    QString curUuId = q_myTreeList->getCurUuid();
-
-    bool hasSelRight = false;
-
-    // 需选中 总节点和子节点
-    if(curType == "tag") {
-        hasSelRight = true;
-        bool ok;
-        QString text = QInputDialog::getText(this, m_appName, tr("New Tag name:"), QLineEdit::Normal, curTitle, &ok);
-        if (ok && !text.isEmpty()) {
-                if (text == curTitle){
-                  return;
-                }
-                // 改变树节点
-                curItem->setData(text, Qt::DisplayRole);
-                // 改变标签名称
-                // 删除Tag
-                Tag tag;
-                tag.TAG_GUID = curUuId;
-                tag.TAG_NAME = text;
-                TagDao::updateTag(tag);
-        }
-
-    }
-    // 如果没有选中子目录节点
-    if(!hasSelRight){
-        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
-        return;
-    }
-}
-
-// 显示标签参数
-void MainWindow::showPropOfTag()
-{
-    QString curType = q_myTreeList->getCurType();
-    bool hasSelRight = false;
-
-    // 需选中 标签 节点
-    if(curType == "tag") {
-        QString tagname = q_myTreeList->getCurTitle();
-        QStandardItem*  curItem = q_myTreeList->getCurItem();
-        QString curUuId = q_myTreeList->getCurUuid();
-        Tag tag = TagDao::selectTag(curUuId);
-        hasSelRight = true;
-        // curPath 用于判断根节点和子节点
-        // getCurPath 用于存UuId
-        PropOfTagDialog dlg(this, tag.TAG_GUID, tagname, tag.TAG_DESCRIPTION);
-        dlg.exec();
-        if(dlg.update){
-            if (dlg.m_tagname.isEmpty()){
-              // 提示出错
-              return;
-            }
-            // 改变树节点
-            curItem->setData(dlg.m_tagname, Qt::DisplayRole);
-
-        }
-    }
-    // 如果没有选中子目录节点
-    if(!hasSelRight){
-        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
-        return;
-    }
-}
-
-void MainWindow:: moveToRoot(){
-
-    QString curType = q_myTreeList->getCurType();
-    bool hasSelRight = false;
-
-    // 需选中 标签 节点
-    if(curType == "tag" ) {
-        QString curUuid = q_myTreeList->getCurUuid();
-        Tag tag = TagDao::selectTag(curUuid);
-        hasSelRight = true;
-        tag.TAG_GROUP_GUID = "";
-        TagDao::updateTag(tag);
-        // 重新load的标签树
-        // 删除当前的节点
-        q_myTreeList->delSubTree();
-
-        // 设置主界面节点
-        q_myTreeList->addItem(1, tag.TAG_NAME, tag.TAG_GUID, "expander_normal.png");
-
-    }
-    // 如果没有选中子目录节点
-    if(!hasSelRight){
-        QMessageBox::warning(this, tr("Warning"), tr("Please Select an Tag."), QMessageBox::Yes);
-        return;
-    }
-}
-
-// 移动标签
-void MainWindow::movetoTag()
-{
-    QString curType = q_myTreeList->getCurType();
-    QStandardItem* curItem = q_myTreeList->getCurItem();
-    QString curTitle = q_myTreeList->getCurTitle();
-    QString curPath = q_myTreeList->getCurPath();
-    QString curUuId = q_myTreeList->getCurUuid();
-    bool hasSelRight = false;
-
-    // 需选中 文件 子节点
-    if(curType == "tag") {
-        hasSelRight = true;
-        MoveToTagDialog dlg(this, curPath);
-        dlg.exec();
-        if(dlg.update){
-              // 取得子界面选中的path
-              QString mselUuId = dlg.m_selUuId;
-              // 删除主界面选中的节点
-              curItem->parent()->removeRow(curItem->row());
-
-              // 设置主界面的节点 (子界面新建文件夹情况下不成功)
-              q_myTreeList->setCurItemByUuid(curUuId,  curType);
-
-              QString curPath = q_myTreeList->getCurPath();
-              if(!curPath.isEmpty()){
-                  QStandardItem* curItem = q_myTreeList->getCurItem();
-                  q_myTreeList->addItemByParentItem(curItem, curTitle, mselUuId, "tag", "tag.ico");
-                  curItem->setIcon(Utils::getIcon("expander_open.png"));
-                  q_myTreeList->expand(q_myTreeList->getCurIndex());
-              }
-        }
-    }
-    // 如果没有选中子标签节点
-    if(!hasSelRight){
-        QMessageBox::warning(this, tr("Warning"), tr("Please Select an sub tag."), QMessageBox::Yes);
-        return;
-    }
-}
 
 // 自定义工具栏
 void MainWindow::customToolBar()
@@ -1299,23 +741,6 @@ void MainWindow::about()
                        tr("Sorry, The function is under construction..."));
 }
 
-// 删除子文件夹
-void MainWindow::delSubDir()
-{
-    QString curTitle = q_myTreeList->getCurTitle();
-    QString curUuid = q_myTreeList->getCurUuid();
-    int ret = QMessageBox::question(this, "",
-                                    tr("Are you sure that delete the directory \"%1\"?").arg(curTitle),
-                                    QMessageBox::Yes, QMessageBox::No);
-    if(ret == QMessageBox::Yes){
-       q_myTreeList->delSubTree();
-       DirDao::deleteDir(curUuid);
-    }
-
-    if(ret == QMessageBox::No){
-       return;
-    }
-}
 
 // 全屏
 void MainWindow::fullScreen()
@@ -1352,82 +777,17 @@ void MainWindow::showToolBar()
        toolBar->hide();
     }
 }
-// 当树节点被选中
-void MainWindow::treeItemActivated()
+// 打开导入界面
+void MainWindow::importDlg()
 {
-        QString curPath = q_myTreeList->getCurPath();
-        // 如果
-        if(curPath == "alldocs" ||curPath == "alltags"){
-          // 表内显示所有文档
-
-        } else{
-
-        }
+    q_myTreeList->showImportDlg();
 }
 
-// 打开右键菜单
-void MainWindow::treeContextMenuOpened()
+// 打开导出界面
+void MainWindow::exportDlg()
 {
-        tableTree_currentItemChanged();
-        QPoint pos = q_myTreeList->getCurPoint();
-        if (contextMenu->actions().count() > 1){
-           contextMenu->exec(q_myTreeList->viewport()->mapToGlobal(pos));
-        }
+   q_myTreeList->showExportDlg();
 }
-// 打开右键菜单
-void MainWindow::tableTree_currentItemChanged()
-{
-        contextMenu->clear();
-        QString type = q_myTreeList->getCurType();
-
-        // 如果选择Root
-        if(type == "alldocs"){
-            contextMenu->addAction(makeRootDir);
-            contextMenu->addSeparator();
-            contextMenu->addAction(dirSort);
-            contextMenu->addSeparator();
-            contextMenu->addAction(protectRootDir);
-            contextMenu->addSeparator();
-            contextMenu->addAction(optionOfDir);
-        } else if(type == "alltags"){
-            //Tag ContextMenu
-            contextMenu->addAction(makeTag);
-            contextMenu->addSeparator();
-            contextMenu->addAction(showSubDirTag);
-            contextMenu->addAction(propOfTag);
-            contextMenu->addSeparator();
-        }  else if(type == "tag"){
-            contextMenu->addAction(makeSubTag);
-            contextMenu->addSeparator();
-            contextMenu->addAction(moveToTag);
-            contextMenu->addAction(moveToRootTag);
-            contextMenu->addAction(delTag);
-            contextMenu->addAction(renameTag);
-            contextMenu->addSeparator();
-            contextMenu->addAction(showSubDirTag);
-            contextMenu->addSeparator();
-            contextMenu->addAction(propOfTag);
-       }  else if(type == "doc"){
-            contextMenu->addAction(makeSubDir);
-            contextMenu->addSeparator();
-            contextMenu->addAction(moveToDir);
-            contextMenu->addAction(delDir);
-            contextMenu->addAction(renameDir);
-            contextMenu->addSeparator();
-            contextMenu->addAction(subDirSort);
-            contextMenu->addSeparator();
-            contextMenu->addAction(showSubDirDoc);
-            contextMenu->addAction(subDirSort);
-            contextMenu->addAction(protectDir);
-            contextMenu->addAction(subDirSort);
-            contextMenu->addAction(propOfDir);
-        }  else if(type == "basket"){
-
-
-        }
-        return;
-}
-
 
 void MainWindow::aboutQt()
 {

@@ -41,7 +41,6 @@ QVariant MyTreeItemModel::headerData(int section,
                                          int role) const
 {
 
-    return "";
 //    if(section==0 && orientation==Qt::Horizontal){
 
 //        if(role==Qt::DecorationRole){
@@ -54,7 +53,7 @@ QVariant MyTreeItemModel::headerData(int section,
 //          return tr("love");
 //        }
 //    }
-//    return QStandardItemModel::headerData(section, orientation, role);
+     return QStandardItemModel::headerData(section, orientation, role);
 }
 
 bool MyTreeItemModel::setData(const QModelIndex &index, const QVariant &value, int role)

@@ -19,6 +19,8 @@ class DocTagDao
                 static bool insertDocTag(DocTag docTag);
                 static bool deleteDocTag(DocTag docTag);
                 static bool deleteDocTagByDoc(QString docUuId);
+                // ÓÃTagUuId É¾³ýÎÄµµ±êÇ©
+                static bool deleteDocTagByTag(QString taguid);
                 static QList<Tag> selectTagsbyDocUuId(const QString & docUuid);
 
         private:

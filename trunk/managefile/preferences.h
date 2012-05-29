@@ -62,6 +62,15 @@ Q_OBJECT
                 QString getSelNoteUid() { return m_selnoteuid; };
                 void setSelNoteUid(QString v) { m_selnoteuid = v; };
 
+                QString getTableSelMode() { return m_tableselmode; };
+                void setTableSelMode(QString v) { m_tableselmode = v; };
+
+                bool isShowNotesOnTips() { return m_isShowNotesOnTips; };
+                void setShowNotesOnTips(bool v) { m_isShowNotesOnTips = v;  };
+
+                QString getTableSelField() { return m_tableselfield; };
+                void setTableSelField(QString v) { m_tableselfield = v; };
+
 
 		bool nullHighlight() { return m_nullHighlight; };
 		void setNullHighlight(bool v) { m_nullHighlight = v; };
@@ -225,6 +234,9 @@ Q_OBJECT
                 QStringList m_defaultwaittoolbaritemlist;
                 QString m_notedocuid;
                 QString m_selnoteuid;
+                QString m_tableselmode;
+                bool m_isShowNotesOnTips;
+                QString m_tableselfield;
 
 		bool m_checkQtVersion;
 		bool m_nullHighlight;

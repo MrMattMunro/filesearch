@@ -20,16 +20,16 @@ for which a new license (GPL+exception) is in place.
 #include "db/doctagdao.h"
 #include "db/tagdao.h"
 
-DocTagsDialog::DocTagsDialog(QWidget * parent): QDialog(parent), update(false)
+DocTagsDialog::DocTagsDialog(QWidget * parent, const QString & docUuid)
+        : QDialog(parent),
+        m_parent(parent),
+        m_selDocUuId(docUuid),
+        update(false)
 {
 	setupUi(this);
         // Set UI
         this->setWindowIcon(Utils::getIcon("tags.ico"));
         this->setWindowTitle(tr("Add tag to the Document"));
-
-        // 已选择Toolbar
-        Preferences* p = Preferences::instance();
-        m_selDocUuId = p->getSelDocUid();
 
         // 现有的tag
         QList<QString> selUuIds;

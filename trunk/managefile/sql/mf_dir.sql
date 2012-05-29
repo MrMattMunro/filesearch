@@ -5,8 +5,9 @@ CREATE TABLE IF NOT EXISTS MF_DIR
    DIR_NAME                       varchar(150),
    DIR_DESCRIPTION                varchar(600),
    DIR_ICON		          varchar(100),
-   DIR_ORDER                      int,
+   DIR_ORDER                      int                          default 0,
    DT_MODIFIED                    char(19),  
-   MF_VERSION                     int64,
+   MF_VERSION                     int64                        default 0,
+   DELETE_FLAG                    char(1)                      default '0',
    primary key (DIR_GUID)
 )

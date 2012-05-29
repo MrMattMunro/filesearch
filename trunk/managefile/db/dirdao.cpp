@@ -25,22 +25,40 @@ bool DirDao::insertDir(Dir dir)
 {
     QString sql = Database::getSql("mf_insert_dir.sql");
     sql = sql.arg(dir.DIR_GUID, dir.DIR_PARENT_UUID, dir.DIR_NAME, dir.DIR_DESCRIPTION, dir.DIR_ICON,
-                   QString::number(dir.DIR_ORDER), QString::number(dir.MF_VERSION));
+                   QString::number(dir.DIR_ORDER), QString::number(dir.MF_VERSION), dir.DELETE_FLAG);
     return Database::execSql(sql);
 }
 // 删除文件夹
 bool DirDao::deleteDir(QString dirUuId)
 {
     QString sql = Database::getSql("mf_delete_dir.sql");
-    sql = sql.arg(dirUuId);
+    sql = sql.arg("1", dirUuId);
+    return Database::execSql(sql);
+}
+// 升级文件夹为根文件夹
+bool DirDao::updateToRootDir(QString dirUuId)
+{
+    QString sql;
+    sql.append("UPDATE MF_DIR SET DIR_PARENT_UUID=''  WHERE DIR_GUID='");
+    sql.append(dirUuId);
+    sql.append("'");
+    return Database::execSql(sql);
+}
+// 恢复文件夹
+bool DirDao::restoreDir(QString dirUuId)
+{
+    QString sql = Database::getSql("mf_delete_dir.sql");
+    sql = sql.arg("0", dirUuId);
     return Database::execSql(sql);
 }
 
 // 根据父目录取得子目录
-QList<Dir> DirDao::selectDirsbyParent(const QString & groupUuid)
+QList<Dir> DirDao::selectDirsbyParent(QString groupUuid, QString delFlg)
 {
     QString sql = Database::getSql("mf_select_dir_parent.sql");
-    sql = sql.arg(groupUuid);
+    sql = sql.arg(groupUuid, delFlg);
+
+
     QSqlQuery query = Database::execSelect(sql);
 
     QList<Dir> returnList;
@@ -51,28 +69,46 @@ QList<Dir> DirDao::selectDirsbyParent(const QString & groupUuid)
             field.DIR_DESCRIPTION = query.value(2).toString();
             field.DIR_ICON = query.value(3).toString();
             field.DIR_ORDER = query.value(4).toInt();
-            field.DT_MODIFIED = query.value(5).toChar();
+            field.DT_MODIFIED = query.value(5).toString();
             field.MF_VERSION = query.value(6).toInt();
+            field.DELETE_FLAG = query.value(7).toString();
             returnList.append(field);
     }
     return returnList;
 }
 
 // 递归迭代父目录取得所有层级子目录
-void DirDao::selectAllSubDirbyDir(QList<Dir> & selDirList, const QString & dirUuid){
+void DirDao::selectAllSubDirbyDir(QList<Dir> & selDirList, QString dirUuid, QString delFlg){
 
-    QList<Dir> tmpList = DirDao::selectDirsbyParent(dirUuid);
+    QList<Dir> tmpList = DirDao::selectDirsbyParent(dirUuid, delFlg);
     selDirList.append(tmpList);
     if(tmpList.size() > 0){
         do
         {
             Dir first = (Dir)tmpList.takeFirst();
-            selectAllSubDirbyDir(selDirList, first.DIR_GUID);
+            selectAllSubDirbyDir(selDirList, first.DIR_GUID, delFlg);
 
         }while(tmpList.size() != 0);
     }
 }
 
+// 递归迭代目录取得所有层级父目录
+void DirDao::selectAllParentDirbyDir(QList<Dir> & parentDirList, QString dirUuid){
+
+    Dir tempDir = DirDao::selectDir(dirUuid);
+
+    parentDirList.append(tempDir);
+    if(tempDir.DIR_PARENT_UUID != ""){
+       selectAllParentDirbyDir(parentDirList, tempDir.DIR_PARENT_UUID);
+    }
+}
+
+// 物理删除文件夹
+bool DirDao::physicalDelDir(){
+    QString sql;
+    sql.append("DELETE FROM MF_DIR WHERE DELETE_FLAG='1'");
+    return Database::execSql(sql);
+}
 
 // 根据标签uuId获取标签
 Dir DirDao::selectDir(const QString & uuid)
@@ -89,8 +125,9 @@ Dir DirDao::selectDir(const QString & uuid)
             field.DIR_DESCRIPTION = query.value(3).toString();
             field.DIR_ICON = query.value(4).toString();
             field.DIR_ORDER = query.value(5).toInt();
-            field.DT_MODIFIED = query.value(6).toChar();
+            field.DT_MODIFIED = query.value(6).toString();
             field.MF_VERSION = query.value(7).toInt();
+            field.DELETE_FLAG = query.value(8).toString();
             return field;
     }
 }
@@ -108,6 +145,7 @@ bool DirDao::updateDir(Dir dir){
     QString diricon = orgDir.DIR_ICON;
     int dirorder = orgDir.DIR_ORDER;
     int version = orgDir.MF_VERSION;
+    QString delflg = orgDir.DELETE_FLAG;
 
     if(! dir.DIR_PARENT_UUID.isEmpty()){
        dirparentuuid = dir.DIR_DESCRIPTION;
@@ -133,8 +171,12 @@ bool DirDao::updateDir(Dir dir){
        version = dir.MF_VERSION;
     }
 
+    if(dir.DELETE_FLAG != 0){
+       delflg = dir.DELETE_FLAG;
+    }
+
     QString sql = Database::getSql("mf_update_dir.sql");
-    sql = sql.arg(dirparentuuid, dirname, dirdesp, diricon, QString::number(dirorder), QString::number(version), dir.DIR_GUID);
+    sql = sql.arg(dirparentuuid, dirname, dirdesp, diricon, QString::number(dirorder), QString::number(version), delflg, dir.DIR_GUID);
     return Database::execSql(sql);
 }
 

@@ -23,17 +23,19 @@ class ImportDocDialog : public QDialog, public Ui::ImportDocDialog
 	Q_OBJECT
 
 	public:
-                ImportDocDialog(QWidget * parent = 0,const QString & basedir = 0, const QString & dir = 0);
+                ImportDocDialog(QWidget * parent = 0, const QString & baseUuid = 0, const QString & basedir = 0);
                 bool update;
                 QStandardItemModel *model;
 
                 QString m_importDir;
-                QString m_dir;
 	private:
                 QObject * m_parent;
-                //! Remember the originally requsted name
                 QString m_baseDir;
+                QString m_baseUuid;
                 int loadFiles(QString parentPath, QStringList filter, QStandardItemModel *model);
+                //QProgressDialog * progress;
+                bool cancelled;
+                bool setProgress(int p);
 
 	private slots:
                 void fileSelBtn_clicked();

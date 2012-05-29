@@ -9,13 +9,14 @@ class DocTagsDialog : public QDialog, public Ui::DocTagsDialog
 	Q_OBJECT
 
 	public:
-                DocTagsDialog(QWidget * parent = 0);
+                DocTagsDialog(QWidget * parent = 0, const QString & docUuid = 0);
                 bool update;
                 QStringList waitItems;
                 QStringList sellItems;
+                QString  m_selDocUuId;
 	private:
                 QObject * m_parent;
-                QString  m_selDocUuId;
+
 
 	private slots:
                 void confirmBtn_clicked();

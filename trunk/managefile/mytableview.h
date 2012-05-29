@@ -18,8 +18,41 @@
 #include "notesdialog.h"
 #include "relatedocdialog.h"
 #include "doctagsdialog.h"
+#include "propofdocdialog.h"
 #include "db/docdao.h"
 
+enum DOC_FIELD {
+    DOC_CREATE_DATE = Qt::UserRole + 1,
+    DOC_MODIFIED_DATE = Qt::UserRole + 2,
+    DOC_ACCESS_DATE = Qt::UserRole + 3,
+    DOC_SIZE = Qt::UserRole +  4,
+    DOC_AUTHOR = Qt::UserRole + 5,
+    DOC_READ_COUNT = Qt::UserRole + 6,
+    DOC_RELATED_COUNT = Qt::UserRole +  7,
+    DOC_TAGS = Qt::UserRole +  8,
+    DOC_URL = Qt::UserRole + 9,
+    DOC_LOCATION = Qt::UserRole + 10,
+    DOC_NOTES = Qt::UserRole + 11
+};
+
+enum TableOptionSet {
+    ONE_ROW = 1,
+    TWO_ROWS = 2
+};
+
+enum SecondRowOptionSet {
+    CREATE_DATE = 1,
+    MODIFIED_DATE = 2,
+    ACCESS_DATE = 3,
+    SIZE = 4,
+    AUTHOR = 5,
+    READ_COUNT = 6,
+    RELATED_COUNT = 7,
+    TAGS = 8,
+    URL = 9,
+    LOCATION = 10,
+    NOTES = 11
+};
 
 class MyTableView : public QTableView
 {
@@ -27,24 +60,6 @@ Q_OBJECT
 public:
         MyTableView(QWidget * parent=0);
         ~MyTableView(){}
-        enum TableOptionSet {
-            ONE_ROW = 1,
-            TWO_ROWS = 2,
-            SHOW_NOTES = 3
-        };
-
-        enum SecondRowOptionSet {
-            CREATE_DATE = 1,
-            MODIFIED_DATE = 2,
-            ACCESS_DATE = 3,
-            SIZE = 4,
-            AUTHOR = 5,
-            READ_COUNT = 6,
-            RELATED_COUNT = 7,
-            TAGS = 8,
-            URL = 9
-        };
-
 
         void buildDocList(QList<Doc> doclist);
         QPoint getCurPoint();               // 取得当前鼠标点击位置
@@ -55,20 +70,15 @@ public:
         void showNoteDialog();   // 打开显示Dlg
         void secondRowSetMenu();
 
+
         QMenu *option_submenu;
         QMenu *m_secondRowSetMenu;
 
 protected:
-        void  leaveEvent (QEvent * event );
-        void  updateRow(int row);
-        void  wheelEvent(QWheelEvent * event );
-        bool  eventFilter(QObject* object,QEvent* event);
-        void  mouseMoveEvent(QMouseEvent * event);
-
         void  resizeEvent(QResizeEvent * event);
-
         void  mouseDoubleClickEvent(QMouseEvent *event);
         void  mousePressEvent(QMouseEvent *event);
+        void  changeColor(int row);     //鼠标移动事件
 signals:
         //鼠标双击
         void         LBtnDbClk();
@@ -95,7 +105,13 @@ private slots:
        void copyToDir();
        void delDoc();
        void slotShowSecondRowContent(QAction *action);
+       // 设定表单第二项选项项目
+       void updateSecRow(int type);
        void slotShowTableOption(QAction *action);
+       void showToolTip(const QModelIndex &index);
+       void propOfDoc();
+       // 显示文档属性
+       QString getAvailableField(Doc doc);
 
 private:
         MyTableDelegate * delegate;
@@ -149,6 +165,7 @@ private:
         NotesDialog *m_notesdlg;
         RelateDocDialog *m_relatedocdlg;
         DocTagsDialog *m_doctagsdlg;
+        PropOfDocDialog *m_propOfdocdlg;
 
         void tableContextMenuOpened();
         void initActions();

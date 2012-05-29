@@ -20,6 +20,8 @@ class RelateDocDao
                 static bool deleteRelateDoc(RelateDoc reldoc);
                 static QList<RelateDoc> selectRelateDocs(const QString & docUuid);
                 static QList<RelateDoc> selectRelatedDocsByRel(const QString & relDocUuid);
+                // 删除某个文档的所有关联
+                static bool deleteRelateDocByDocUuId(const QString & docUuid);
 
         private:
                 static void exception(const QString & message);

@@ -4,10 +4,10 @@ CREATE TABLE IF NOT EXISTS MF_DOCUMENT_NOTE
    DOCUMENT_GUID                  char(36)                       not null,
    NOTE_CONTENT                   varchar(768)                   not null,
    NOTE_OWNER                     char(36)                       not null,
-   PAGE                           int,
+   PAGE                           int                            default 0,
    SHEETPAGE                      varchar(150),
-   ROW                            int,
-   COLUMN                         int,
+   ROW                            int                            default 0,
+   COLUMN                         int                            default 0,
    DT_MODIFIED                    char(19),
    primary key (NOTE_GUID)
 )

@@ -35,6 +35,18 @@ bool RelateDocDao::deleteRelateDoc(RelateDoc reldoc)
     sql = sql.arg(reldoc.DOCUMENT_GUID, reldoc.RELATED_DOCUMENT_GUID);
     return Database::execSql(sql);
 }
+
+// 删除某个文档的所有关联
+bool RelateDocDao::deleteRelateDocByDocUuId(const QString & docUuid)
+{
+    QString sql;
+    sql.append("DELETE FROM MF_DOCUMENT_RELATED WHERE DOCUMENT_GUID='");
+    sql.append(docUuid);
+    sql.append("'");
+
+    return Database::execSql(sql);
+}
+
 // 根据Docuuid取得关联文档
 QList<RelateDoc> RelateDocDao::selectRelateDocs(const QString & docUuid)
 {
