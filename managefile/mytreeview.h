@@ -19,6 +19,11 @@ Q_OBJECT
 public:
         MyTreeView(QString title = NULL, QWidget *parent = 0);
         ~MyTreeView();
+        enum TREE_FIELD {
+            UUID = Qt::UserRole + 1,
+            NODE_TYPE = Qt::UserRole + 2
+
+        };
 	void         setTreeTitle(QString title); //设置tree的名称
 	void         setSubTreeTitle(int subTree,QString title);
         void         addItem(int subTree, QString itemName, QString path, QString icon); //增加item
@@ -40,22 +45,53 @@ public:
         void         delSubTree();   // 删除当前树
         void         setCurItemByUuid(QString uuId, QString type); // 根据CurUuuid设置当前选定的元素
         void         loadTagByParent(QString tagUuId, QStandardItem *curItem);
+        //// 根据文件父目录取得子目录树结构
+        void         loadDelDirs(QString dirUuId,  QStandardItem *curItem);
+        void         showImportDlg();
+        void         showExportDlg();
+
 private slots:
         void         showChildTree();
         void         reloadTagTree();
         void         currentItemChanged(const QModelIndex &current, const QModelIndex &previous);
+        void         tableTree_currentItemChanged();
+
+        void importDlg();
+        void exportDlg();
+
+        void createSubDir();
+        void delSubDir();
+        void renameSubDir();
+        void createRootDir();
+        void moveDir();
+        void setShowSubDirDoc();
+        void setShowSubTagDoc();
+        void properties();
+
+        void newTag();
+        void deleteTag();
+        void showPropOfTag();
+        void renameSubTag();
+        void moveToRoot();
+        void movetoTag();
+
+        void dropBasket();
+
 signals:
 	//鼠标双击
 	void         LBtnDbClk();
         //鼠标单击
         void         LBtnClk();
-        //选中某个Item
-        void         RBtnClk();
+//        //选中某个Item
+//        void         RBtnClk();
 protected:
 	void         mouseDoubleClickEvent(QMouseEvent *event);
-        // void         mousePressEvent(QMouseEvent *event);
-        void         mouseReleaseEvent(QMouseEvent *event);
+     //    void         mousePressEvent(QMouseEvent *event);
+   //    void         mouseReleaseEvent(QMouseEvent *event);
         void         dropEvent(QDropEvent *event);
+        void         mousePressEvent(QMouseEvent *event);
+        // 只需改变颜色
+        void         changeColor();
 
         //void         mouseDoubleClickEvent(QMouseEvent *event);
         //void         mouseMoveEvent(QMouseEvent *event);
@@ -73,13 +109,57 @@ private:
         QString               curType;  //当前节点类型
         QModelIndex           curIndex;
         QStandardItem*        curItem;
-        QStandardItem         preItem;
-        int                   preRow;
-        int                   preColumn;
         QStandardItemModel    *model;
         QPoint                curPoint;
         MyTreeDelegate * delegate;
         MyTreeItemModel * themodel;
+
+        // 是否显示文件夹下文件
+        bool isShowDocUnderSub;
+        bool isShowDocUnderTag;
+        QString m_appName;
+        QString m_baseDir;
+
+        //Doc ContextMenu
+        QAction *makeSubDir;
+        QAction *moveToDir;
+
+        QAction *delDir;
+        QAction *renameDir;
+
+        QAction *importDir;
+        QAction *exportDir;
+
+        QAction *subDirSort;
+        QAction *showSubDirDoc;
+        QAction *protectDir;
+        QAction *propOfDir;
+
+        //Root ContextMenu
+        QAction *makeRootDir;
+        QAction *dirSort;
+        QAction *protectRootDir;
+        QAction *optionOfDir;
+
+        //Tag ContextMenu
+        QAction *makeSubTag;
+        QAction *moveToTag;
+        QAction *moveToRootTag;
+        QAction *delTag;
+        QAction *renameTag;
+        QAction *showSubDirTag;
+        QAction *propOfTag;
+
+        //Root Tag ContextMenu
+        QAction *makeTag;
+
+        //Root Basket ContextMenu
+        QAction *clearBasket;
+
+        QMenu *contextMenu;
+
+        void treeContextMenuOpened();
+        void initActions();
 
 };
 

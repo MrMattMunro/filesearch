@@ -94,29 +94,12 @@ private slots:
     void helpDoc();
     void bbs();
     void homepage();
+    void loadPage(const QString &url);
+
+    void slotHome();
 
     void importDlg();
     void exportDlg();
-    void treeItemActivated();
-    void treeContextMenuOpened();
-    void tableTree_currentItemChanged();
-    void createSubDir();
-    void delSubDir();
-    void renameSubDir();
-    void createRootDir();
-    void moveDir();
-    void setShowSubDirDoc();
-    void setShowSubTagDoc();
-    void properties();
-
-    void loadPage(const QString &url);
-    void newTag();
-    void deleteTag();
-    void showPropOfTag();
-    void renameSubTag();
-    void moveToRoot();
-    void movetoTag();
-    void slotHome();
 
     void customToolBar();
     // doc table start
@@ -190,9 +173,6 @@ private:
     QString m_appName;
     QString m_lang;
     QString m_baseDir;
-    // 是否显示文件夹下文件
-    bool isShowDocUnderSub;
-    bool isShowDocUnderTag;
 
     QSplitter * splitter;
     QToolBar *toolBar;
@@ -230,34 +210,6 @@ private:
     QAction *enAction;
     QAction *jpAction;
 
-    //Doc ContextMenu
-    QAction *makeSubDir;
-    QAction *moveToDir;
-    QAction *delDir;
-    QAction *renameDir;
-    QAction *subDirSort;
-    QAction *showSubDirDoc;
-    QAction *protectDir;
-    QAction *propOfDir;
-
-    //Root ContextMenu
-    QAction *makeRootDir;
-    QAction *dirSort;
-    QAction *protectRootDir;
-    QAction *optionOfDir;
-
-    //Tag ContextMenu
-    QAction *makeSubTag;
-    QAction *moveToTag;
-    QAction *moveToRootTag;
-    QAction *delTag;
-    QAction *renameTag;
-    QAction *showSubDirTag;
-    QAction *propOfTag;
-
-    //Root Tag ContextMenu
-    QAction *makeTag;
-
     //QStatusBar *statusBar;
     QMenu *menu_View;
     QMenu *menu_skin;
@@ -265,8 +217,7 @@ private:
     QMenu *menu_File;
     QMenu *menu_Help;
     QMenu *menu_Tool;
-    QMenu *contextMenu;
-    QMenu *tablecontextMenu;
+
 
     void addDoc(const QString & name);
     void initUI();

@@ -24,7 +24,7 @@ void TagDao::exception(const QString & message)
 bool TagDao::insertTag(Tag tag)
 {
     QString sql = Database::getSql("mf_insert_tag.sql");
-    sql = sql.arg(tag.TAG_GUID,tag.TAG_GROUP_GUID,tag.TAG_NAME,tag.TAG_DESCRIPTION, QString::number(tag.MF_VERSION));
+    sql = sql.arg(tag.TAG_GUID, tag.TAG_GROUP_GUID, tag.TAG_NAME, tag.TAG_DESCRIPTION, QString::number(tag.MF_VERSION));
     return Database::execSql(sql);
 }
 // É¾³ý±êÇ©

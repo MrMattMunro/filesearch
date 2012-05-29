@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef MYTABLEDELEGATE_H
 #define MYTABLEDELEGATE_H
 #endif

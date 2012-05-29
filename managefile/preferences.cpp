@@ -31,8 +31,14 @@ Preferences::Preferences(QObject *parent)
         m_defaulttoolbaritemlist = s.value("defaultToolbarItemList", QStringList()).toStringList();
         m_defaultwaittoolbaritemlist = s.value("defaultWaitToolbarItemList", QStringList()).toStringList();
 
+
         m_notedocuid = s.value("notes/selDocUid", QString()).toString();
         m_selnoteuid = s.value("notes/selNoteUid", QString()).toString();
+
+        m_tableselmode = s.value("table/selMode", QString()).toString();
+        m_isShowNotesOnTips = s.value("table/showNotesOnTips", true).toBool();
+        m_tableselfield = s.value("table/selField", QString()).toString();
+
 	//
 	m_nullHighlight = s.value("prefs/nullCheckBox", true).toBool();
 	m_blobHighlight = s.value("prefs/blobCheckBox", true).toBool();
@@ -124,6 +130,10 @@ Preferences::~Preferences()
 
         settings.setValue("notes/selDocUid", m_notedocuid);
         settings.setValue("notes/selNoteUid", m_selnoteuid);
+
+        settings.setValue("table/selMode", m_tableselmode);
+        settings.setValue("table/showNotesOnTips", m_isShowNotesOnTips);
+        settings.setValue("table/selField", m_tableselfield);
 
 	// lnf
 	settings.setValue("prefs/languageComboBox", m_GUItranslator);

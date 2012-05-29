@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef MYSTANDARDITEMMODEL_H
 #define MYSTANDARDITEMMODEL_H
 #endif
@@ -17,10 +19,10 @@ public:
         QVariant headerData(int section,
                 Qt::Orientation orientation,
                 int role=Qt::DisplayRole) const;
-        void setHoverRow(int row);
+//        bool removeRows(int position, int rows, const QModelIndex &parent);
+//        bool insertRows(int position, int rows, const QModelIndex &parent);
 
 private:
-        int hoverRow;
 
 };
 

@@ -98,6 +98,7 @@ bool Database::dropTable(const QString & table, const QString & schema)
 
 QSqlQuery Database::execSelect(const QString & sql)
 {
+        qDebug() << "query sql" << sql;
         QSqlQuery query(sql, QSqlDatabase::database(SESSION_NAME));
 	if (query.lastError().isValid())
 	{

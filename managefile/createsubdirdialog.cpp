@@ -55,6 +55,9 @@ void CreateSubDirDialog::confirmBtn_clicked(){
     dir.DIR_ICON = "folder.ico";
     dir.DIR_NAME = dirname;
     dir.DIR_PARENT_UUID = m_curUuid;
+    dir.DIR_ORDER = 0;
+    dir.DELETE_FLAG = '0';
+    dir.MF_VERSION = 0;
     DirDao::insertDir(dir);
     update = true;
     this->close();

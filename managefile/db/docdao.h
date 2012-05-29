@@ -40,10 +40,17 @@ class DocDao
                 static bool insertDoc(Doc doc);
                 static bool updateDoc(Doc doc);
                 static bool deleteDoc(QString docUuId);
+                static bool deleteDocByDirUid(QString dirUuId);
+                // 恢复文件夹下的文档
+                static bool restoreDocByDirUuid(QString dirUuId);
+
+                // 恢复文档
+                bool restoreDoc(QString docUuId);
                 static Doc selectDoc(const QString & docUuId);
                 static QList<Doc> selectDocsbyDir(const QString & dirUuid,  const QString & delFlg);
                 static QList<Doc> selectDocsByDelFlg(const QString & delFlg);
                 static QList<Doc> selectDocsByTag(const Tag & tag);
+                static bool physicalDelDoc();
 
         private:
                 static void exception(const QString & message);

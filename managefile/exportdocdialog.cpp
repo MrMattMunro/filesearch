@@ -32,7 +32,7 @@ ExportDocDialog::ExportDocDialog(QWidget * parent, const QString & basedir,const
         // 设置目标目录
         QString tdestDir = m_dir;
         tdestDir = tdestDir.remove(0, m_baseDir.length());
-        destDir->setText(tdestDir);
+        destDir->setText(dir);
 
         // 列表
         model = new QStandardItemModel();

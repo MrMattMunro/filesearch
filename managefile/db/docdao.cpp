@@ -51,10 +51,37 @@ bool DocDao::insertDoc(Doc doc)
     return Database::execSql(sql);
 }
 // 删除文档
-bool DocDao::deleteDoc(QString DocUuId)
+bool DocDao::deleteDoc(QString docUuId)
 {
     QString sql = Database::getSql("mf_delete_doc.sql");
-    sql = sql.arg(DocUuId);
+    sql = sql.arg("1", docUuId);
+    return Database::execSql(sql);
+}
+// 恢复文档
+bool DocDao::restoreDoc(QString docUuId)
+{
+    QString sql = Database::getSql("mf_delete_doc.sql");
+    sql = sql.arg("0", docUuId);
+    return Database::execSql(sql);
+}
+// 删除文件夹下的文档
+bool DocDao::deleteDocByDirUid(QString dirUuId)
+{
+    QString sql = Database::getSql("mf_delete_doc_dir.sql");
+    sql = sql.arg("1", dirUuId);
+    return Database::execSql(sql);
+}
+// 恢复文件夹下的文档
+bool DocDao::restoreDocByDirUuid(QString dirUuId)
+{
+    QString sql = Database::getSql("mf_delete_doc_dir.sql");
+    sql = sql.arg("0", dirUuId);
+    return Database::execSql(sql);
+}
+// 物理删除文件
+bool DocDao:: physicalDelDoc(){
+    QString sql;
+    sql.append("DELETE FROM MF_DOCUMENT WHERE DELETE_FLAG='1'");
     return Database::execSql(sql);
 }
 

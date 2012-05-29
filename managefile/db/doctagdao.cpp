@@ -34,6 +34,14 @@ bool DocTagDao::deleteDocTag(DocTag docTag)
     sql = sql.arg(docTag.DOCUMENT_GUID, docTag.TAG_GUID);
     return Database::execSql(sql);
 }
+// 用TagUuId 删除文档标签
+bool DocTagDao::deleteDocTagByTag(QString taguid)
+{
+    QString sql = Database::getSql("mf_delete_doctag_tag.sql");
+    sql = sql.arg(taguid);
+    return Database::execSql(sql);
+}
+
 // 删除某个文档所有标签
 bool DocTagDao::deleteDocTagByDoc(QString docUuId)
 {

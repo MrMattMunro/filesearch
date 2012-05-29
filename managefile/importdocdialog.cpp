@@ -3,17 +3,21 @@
 
 #include <QtDebug>
 #include <QDir>
+#include <QUuid>
 #include <QStandardItemModel>
+#include <QDateTime>
 
 #include "importdocdialog.h"
 #include "preferences.h"
 #include "utils.h"
+#include "db/docdao.h"
+#include "db/dirdao.h"
 
-ImportDocDialog::ImportDocDialog(QWidget * parent, const QString & basedir,const QString & dir)
+ImportDocDialog::ImportDocDialog(QWidget * parent, const QString & baseUuid, const QString & basedir)
 	: QDialog(parent),
 	  m_parent(parent),
-          m_baseDir(basedir),
-          m_dir(dir),update(false)
+          m_baseUuid(baseUuid),
+          m_baseDir(basedir), update(false)
 {
 	setupUi(this);
         inclueSubDirCheck->setChecked(true);
@@ -38,8 +42,7 @@ ImportDocDialog::ImportDocDialog(QWidget * parent, const QString & basedir,const
 
         // Set UI
         // 设置目标目录
-        QString tdestDir = m_dir.remove(0, m_baseDir.length());
-        destDir->setText(tdestDir);
+        destDir->setText(m_baseDir);
 
         // 列表
         model = new QStandardItemModel();
@@ -49,12 +52,17 @@ ImportDocDialog::ImportDocDialog(QWidget * parent, const QString & basedir,const
         this->setWindowIcon(Utils::getIcon("document-import.png"));
         this->setWindowTitle(tr("Document Import"));
 
+        progressBar->hide();
+        pgfilename->hide();
+        cancelled = false;
+
         connect(fileSelBtn, SIGNAL(clicked()), this, SLOT(fileSelBtn_clicked()));
         connect(previewBtn, SIGNAL(clicked()), this, SLOT(previewBtn_clicked()));
         connect(delBtn, SIGNAL(clicked()), this, SLOT(delBtn_clicked()));
 
         connect(buttonBox, SIGNAL(accepted()), this, SLOT(confirmBtn_clicked()));
         connect(buttonBox,SIGNAL(rejected()),this,SLOT(cancelBtn_clicked()));
+
 }
 
 // 选择路径
@@ -237,16 +245,126 @@ void ImportDocDialog::delBtn_clicked(){
     }
 }
 
-//// 确定按钮
-void ImportDocDialog::confirmBtn_clicked(){
-     update = true;
-     this->close();
+// 设置进度条点
+bool ImportDocDialog::setProgress(int p)
+{
+        if (cancelled){
+            return false;
+        }
+        progressBar->setValue(p);
+        return true;
 }
 
-//// 取消按钮
+// 确定按钮
+void ImportDocDialog::confirmBtn_clicked(){
+
+    // 设置button disable
+    buttonBox->setDisabled(true);
+    fileSelBtn->setDisabled(true);
+    previewBtn->setDisabled(true);
+    delBtn->setDisabled(true);
+
+    int row= model->rowCount();
+    // 存储每一层文件夹名 <1, dirList>
+    QMap<int, QStringList> writeMap;
+
+    pgfilename->show();
+    progressBar->show();
+
+    progressBar->setWindowModality(Qt::WindowModal);
+    progressBar->setRange(0, row);
+
+    QString parentUuId = m_baseUuid;
+    for (int var = 0; var < row; ++var) {
+
+        QStandardItem* temp = model->item(var);
+        QString path = temp->text();
+        pgfilename->setText(path);
+
+        QString filepath = path.left(path.lastIndexOf(QDir::separator()));
+        filepath = filepath.replace("\"","");
+
+        // 设置目标目录
+        QString destDir = filepath.remove(0, m_importDir.length());
+        QStringList dirs = destDir.split(QDir::separator());
+
+        // 建立目录
+        for (int i = 0; i < dirs.length(); ++i) {
+            // 插入文档
+            if(i = dirs.length() - 1){
+                QUuid docUuid = QUuid::createUuid();
+                QFileInfo fileinfo(path);
+                Doc doc;
+                doc.DOCUMENT_GUID = docUuid;
+                doc.DOCUMENT_TITLE = fileinfo.fileName();
+                // 父目录
+                if(parentUuId.isEmpty()){
+                   // 选择树节点UuId
+                }
+
+                doc.DIR_GUID = parentUuId;
+                doc.DOCUMENT_LOCATION = path;
+                doc.DOCUMENT_NAME = fileinfo.fileName();
+                doc.DOCUMENT_SEO = "";
+                doc.DOCUMENT_URL = "";
+                doc.DOCUMENT_AUTHOR = fileinfo.owner();
+                doc.DOCUMENT_KEYWORDS = "";
+                doc.DOCUMENT_TYPE = "";
+                doc.DOCUMENT_OWNER = fileinfo.owner();
+                doc.DT_CREATED = fileinfo.created().toString("yyyy-MM-dd hh:mm:ss");
+                doc.DT_MODIFIED = fileinfo.lastModified().toString("yyyy-MM-dd hh:mm:ss");
+                doc.DT_ACCESSED = fileinfo.lastRead().toString("yyyy-MM-dd hh:mm:ss");
+                doc.DOCUMENT_ICON_INDEX = 0;
+                doc.DOCUMENT_SYNC = 0;
+                doc.DOCUMENT_PROTECT = "";
+                doc.DOCUMENT_ENCODE= "0";
+                doc.DOCUMENT_READ_COUNT = 0;
+                doc.DOCUMENT_RELATE_COUNT = 0;
+                doc.DOCUMENT_INDEXFLG = "0";
+                doc.DOCUMENT_OPERFLG = "";
+                doc.DELETE_FLAG = "0";
+                doc.MF_VERSION = 0;
+
+                DocDao::insertDoc(doc);
+            }
+
+              QString tmpDir = dirs.at(i);
+              if(tmpDir.isEmpty()){
+                  continue;
+              }
+
+              QStringList exitedDirs = writeMap[i];
+              if(exitedDirs.contains(tmpDir)){
+                   continue;
+              } else {
+                  QUuid uuid = QUuid::createUuid();
+                  Dir dir;
+                  dir.DIR_GUID = uuid;
+                  dir.DIR_NAME = tmpDir;
+                  dir.DIR_PARENT_UUID = parentUuId;
+                  dir.DIR_ICON = "folder.ico";
+                  dir.DIR_ORDER = 0;
+                  dir.DELETE_FLAG = '0';
+                  dir.MF_VERSION = 0;
+
+                  DirDao::insertDir(dir);
+                  exitedDirs.append(tmpDir);
+                  writeMap.insert(i, exitedDirs);
+                  parentUuId = uuid;
+              }
+        }
+        setProgress(var);
+    }
+
+    update = true;
+    this->close();
+}
+
+// 取消按钮
 void ImportDocDialog::cancelBtn_clicked(){
-     update = false;
-     this->close();
+    cancelled = true;
+    update = false;
+    this->close();
 }
 
 

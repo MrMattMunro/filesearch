@@ -1,10 +1,9 @@
 #include "mytabledelegate.h"
 #include "utils.h"
+#include "mytableview.h"
 #include <QDebug>
 #include <QPainter>
 #include <QEvent>
-
-
 MyTableDelegate::MyTableDelegate(QObject * parent) :QItemDelegate(parent)
 {
 //    docPixmap = QPixmap(":/doc.ico");
@@ -18,46 +17,128 @@ void MyTableDelegate::paint(QPainter * painter,
 {
 
 
-//    // 正常数据
-//    if(index.column() !=  0 || index.column() ==  0 ){
-//        QItemDelegate::paint(painter, option, index);
-//        return;
-//    }
+    // 正常数据
+    if(index.column() ==  0){
+        QItemDelegate::paint(painter, option, index);
+        return;
+    }
 
-    // 图片
+   // qDebug("MyTableDelegate paint start");
+
     int row = index.row();
     int column = index.column();
 
     const QAbstractItemModel * model= index.model();
     QMap<int, QVariant> valuemap = model->itemData(index);
 
-    QList<QVariant> values = valuemap.values();
-    QList<int> keys = valuemap.keys();
+//    QList<QVariant> values = valuemap.values();
+//    QList<int> keys = valuemap.keys();
 
-    if(keys.size() <= 0 || values.size() <= 0 ){
+    // ICON
+    int y = (row -1) * 40;
+    if(column = 1){
+        QItemDelegate::paint(painter, option, index);
         return;
     }
 
-    QString filename = qvariant_cast<QString> (values.at(0));
-    QString ico = qvariant_cast<QString> (values.at(1));
-    QString path = qvariant_cast<QString> (values.at(2));
-    QString uuId = qvariant_cast<QString> (values.at(3));
+    QFont pathfont("Arial",8, QFont::Light,true);
+    QFont namefont("Arial", 12, QFont::Black, true);
+    if(column = 2){
+        painter->setFont(namefont);
+        QString createdate = qvariant_cast<QString> (valuemap.value(Qt::DisplayRole));
+        painter->setPen(QColor(0,0,0));
+        painter->drawText(QRectF(20, y, 300, 15),Qt::AlignLeft, createdate);
+        return;
+    }
 
 
-    QIcon icon = Utils::getIcon(ico);
-    int width=16;
-    int height=16;
-    QRect rect= option.rect;
-    // int x= rect.x() + rect.width()/2-width/2;
-    int y= rect.y() + rect.height()/2-height/2;
+//    QRect rect= option.rect;
+//    int y = rect.y() + rect.height()/2;
 
-    //painter->drawPixmap(0, y, icon.pixmap(16,16, QIcon.Normal, QIcon.Off));
 
-    //绘制文本
-    QBrush b(QColor(197,229,239));
-    painter->setPen(QColor(51,102,205));
-//    painter->setBrush(b);
-    painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, path);
+
+
+
+
+   // qDebug() << row;
+    //qDebug() << column;
+
+//    //qDebug("MyTableDelegate paint start 1 end");
+//    if(keys.size() <= 0 || values.size() <= 0 ){
+//        return;
+//    }
+//    //qDebug("MyTableDelegate paint start 2 end");
+//    int key;
+
+
+//    if(valuemap.contains(DOC_ICON)){
+//        QString temp = qvariant_cast<QString> (valuemap.value(DOC_ICON));
+//        QIcon icon = Utils::getIcon(temp);
+//        painter->drawPixmap(0, y, icon.pixmap(16,16, QIcon.Normal, QIcon.Off));
+//    }
+//    if(valuemap.contains(DOC_NAME)){
+//        painter->setFont(namefont);
+//        QString createdate = qvariant_cast<QString> (valuemap.value(DOC_NAME));
+//        painter->setPen(QColor(0,0,0));
+//        painter->drawText(QRectF(20, y, 300, 15),Qt::AlignLeft, createdate);
+//    }
+//    if(valuemap.contains(DOC_LOCATION)){
+//        painter->setFont(pathfont);
+//        QString createdate = qvariant_cast<QString> (valuemap.value(DOC_LOCATION));
+//        painter->setPen(QColor(51,102,205));
+//        painter->drawText(QRectF(0, y + 15 ,600, 15),Qt::AlignLeft, createdate);
+//    }
+
+
+//        if(key = DOC_NOTES ){
+//            QString createdate = qvariant_cast<QString> (valuemap.value(key));
+//            painter->setPen(QColor(51,102,205));
+//            painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, createdate);
+//        }
+
+//        if(key = DOC_CREATE_DATE ){
+//            QString createdate = qvariant_cast<QString> (valuemap.value(key));
+//            painter->setPen(QColor(51,102,205));
+//            painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, createdate);
+//        }
+//        if(key = DOC_MODIFIED_DATE ){
+//            QString modifydate = qvariant_cast<QString> (valuemap.value(key));
+//            painter->setPen(QColor(51,102,205));
+//            painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, modifydate);
+//        }
+//        if(key = DOC_ACCESS_DATE ){
+//            QString accessdate = qvariant_cast<QString> (valuemap.value(key));
+//            painter->setPen(QColor(51,102,205));
+//            painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, accessdate);
+//        }
+//        if(key = DOC_SIZE ){
+//           QString size = qvariant_cast<QString> (valuemap.value(key));
+//           painter->setPen(QColor(51,102,205));
+//           painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, size);
+//        }
+//        if(key = DOC_AUTHOR ){
+//           QString author = qvariant_cast<QString> (valuemap.value(key));
+//           painter->setPen(QColor(51,102,205));
+//           painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, author);
+//        }
+//        if(key = DOC_READ_COUNT ){
+//           QString readcount = qvariant_cast<QString> (valuemap.value(key));
+//           painter->setPen(QColor(51,102,205));
+//           painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, readcount);
+//        }
+//        if(key = DOC_RELATED_COUNT ){
+//           QString relatecount = qvariant_cast<QString> (valuemap.value(key));
+//           painter->setPen(QColor(51,102,205));
+//           painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, relatecount);
+//        }
+//        if(key = DOC_TAGS ){
+//           QString tags = qvariant_cast<QString> (valuemap.value(key));
+//           painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, tags);
+//        }
+//        if(key = DOC_URL ){
+//           QString url = qvariant_cast<QString> (valuemap.value(key));
+//           painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, url);
+//        }
 
     QItemDelegate::paint(painter, option, index);
     return;

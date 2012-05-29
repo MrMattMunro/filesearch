@@ -145,5 +145,6 @@
         <file>icons/basket.ico</file>
         <file>icons/notes.png</file>
         <file>icons/note.png</file>
+        <file>icons/sql.ico</file>
     </qresource>
 </RCC>
