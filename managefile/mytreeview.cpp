@@ -29,6 +29,7 @@
 #include "propofdirdialog.h"
 #include "propoftagdialog.h"
 #include "createtagdialog.h"
+#include "sortsubdirsdialog.h"
 
 static  QModelIndex preindex;
 
@@ -110,7 +111,6 @@ MyTreeView::MyTreeView(QString title, QWidget *parent) : treeTitle("tree"), QTre
         this->setAcceptDrops(true);
 
         m_appName = tr("File Manage");
-        m_baseDir = Utils::getLocatePath();
 
         initActions();
 }
@@ -138,7 +138,7 @@ void MyTreeView::initActions (){
     connect(exportDir, SIGNAL(triggered()), this, SLOT(exportDlg()));
 
     subDirSort= new QAction(tr("&Sort SubDirs"), this);
-    connect(subDirSort, SIGNAL(triggered()), this, SLOT(about()));
+    connect(subDirSort, SIGNAL(triggered()), this, SLOT(sortSubDirs()));
 
     showSubDirDoc= new QAction(tr("&Show docs under sub Dir"), this);
     showSubDirDoc->setCheckable(true);
@@ -148,7 +148,7 @@ void MyTreeView::initActions (){
 
     connect(showSubDirDoc, SIGNAL(triggered()), this, SLOT(setShowSubDirDoc()));
 
-    protectDir= new QAction(tr("&Protect"), this);
+    protectDir= new QAction(Utils::getIcon("vip.png"), tr("&Protect"), this);
     connect(protectDir, SIGNAL(triggered()), this, SLOT(about()));
     propOfDir= new QAction(tr("&Properties"), this);
     connect(propOfDir, SIGNAL(triggered()), this, SLOT(properties()));
@@ -157,7 +157,7 @@ void MyTreeView::initActions (){
     makeRootDir= new QAction(tr("&New Root Dir"), this);
     connect(makeRootDir, SIGNAL(triggered()), this, SLOT(createRootDir()));
     dirSort= new QAction(tr("&Sort Dir"), this);
-    connect(dirSort, SIGNAL(triggered()), this, SLOT(about()));
+    connect(dirSort, SIGNAL(triggered()), this, SLOT(sortSubDirs()));
     protectRootDir= new QAction(tr("&Protect"), this);
     connect(protectRootDir, SIGNAL(triggered()), this, SLOT(about()));
     optionOfDir= new QAction(tr("&Option"), this);
@@ -209,8 +209,6 @@ void MyTreeView::mousePressEvent(QMouseEvent *event)
             curPoint = event->pos();
             curIndex = indexAt(curPoint);
 
-
-
             curItem = model->itemFromIndex(curIndex);
             if(curItem){
                 changeColor();
@@ -225,12 +223,10 @@ void MyTreeView::mousePressEvent(QMouseEvent *event)
         // 右键显示菜单
         if(true == mouseStatus )
         {
+            curPoint = event->pos();
+            curIndex = indexAt(curPoint);
+            curItem = model->itemFromIndex(curIndex);
             if(curItem){
-
-                curPoint = event->pos();
-                curIndex = indexAt(curPoint);
-                curItem = model->itemFromIndex(curIndex);
-
                 changeColor();
                 curTitle = curIndex.data().toString();
                 curUuId =  qvariant_cast<QString>(curItem->data(UUID));
@@ -365,8 +361,13 @@ bool MyTreeView::delSubItems(QStandardItem *parenItem)
     // 清除直接点
     for(int i = 0; i < parenItem->rowCount(); i++)
     {
-       parenItem->removeRow (i);
+        for(int j = 0; j < parenItem->columnCount(); j++)
+        {
+            model->removeRow(i, parenItem->index());
+            model->removeColumn(j, parenItem->index());
+        }
     }
+    parenItem->setRowCount(0);
     return true;
 }
 
@@ -701,6 +702,7 @@ void MyTreeView::setCurItemByUuid(QString uuId, QString type){
                 curUuId = qvariant_cast<QString>(item->data(UUID));
                 curIndex = item->index();
                 curTitle = item->data().toString();
+                break;
             }
     }
 }
@@ -782,7 +784,6 @@ void MyTreeView::importDlg()
         ImportDocDialog dlg(this, uuId, getCurPath());
         dlg.exec();
         if(dlg.update){
-
             // 重新加载树节点
             QStandardItem* curItem = getCurItem();
             delSubItems(curItem);
@@ -805,7 +806,7 @@ void MyTreeView::exportDlg()
     // 需选中子节点
     if(!curType.isEmpty() && curType != "alldocs" && curType != "alltags") {
         hasSelRight = true;
-        ExportDocDialog dlg(this, m_baseDir, getCurPath());
+        ExportDocDialog dlg(this, curUuId, getCurPath(), curType);
         dlg.exec();
         if(dlg.update){
           // 不做任何操作
@@ -822,13 +823,12 @@ void MyTreeView::exportDlg()
 void MyTreeView::properties()
 {
     QString curType = getCurType();
-    QString curTitle = getCurTitle();
     bool hasSelRight = false;
 
     // 需选中子节点
     if(curType == "doc") {
         hasSelRight = true;
-        PropOfDirDialog dlg(this, curTitle, getCurPath());
+        PropOfDirDialog dlg(this, curUuId, getCurPath());
         dlg.exec();
         if(dlg.update){
           // 不做任何操作
@@ -929,6 +929,32 @@ void MyTreeView::renameSubDir()
                 dir.MF_VERSION = 0;
                 dir.DIR_ORDER = 0;
                 DirDao::updateDir(dir);
+        }
+    }
+    // 如果没有选中子目录节点
+    if(!hasSelRight){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Select an directory."), QMessageBox::Yes);
+        return;
+    }
+}
+
+// 子文件夹排序
+void MyTreeView::sortSubDirs()
+{
+    QString curType = getCurType();
+    QString curUuid = getCurUuid();
+    bool hasSelRight = false;
+
+    // 需选中 总节点和子节点
+    if(curType == "doc") {
+        hasSelRight = true;
+        SortSubDirsDialog dlg(this, curUuid, getCurPath());
+        dlg.exec();
+        if(dlg.update){
+            // 刷新选中的树
+            setCurItemByUuid(curUuid, curType);
+            delSubItems(curItem);
+            //showChildTree();
         }
     }
     // 如果没有选中子目录节点

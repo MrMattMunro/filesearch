@@ -64,6 +64,7 @@ private slots:
         void renameSubDir();
         void createRootDir();
         void moveDir();
+        void sortSubDirs();
         void setShowSubDirDoc();
         void setShowSubTagDoc();
         void properties();
@@ -118,7 +119,6 @@ private:
         bool isShowDocUnderSub;
         bool isShowDocUnderTag;
         QString m_appName;
-        QString m_baseDir;
 
         //Doc ContextMenu
         QAction *makeSubDir;

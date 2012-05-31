@@ -50,8 +50,7 @@ enum SecondRowOptionSet {
     RELATED_COUNT = 7,
     TAGS = 8,
     URL = 9,
-    LOCATION = 10,
-    NOTES = 11
+    LOCATION = 10
 };
 
 class MyTableView : public QTableView
@@ -106,12 +105,15 @@ private slots:
        void delDoc();
        void slotShowSecondRowContent(QAction *action);
        // 设定表单第二项选项项目
-       void updateSecRow(int type);
+       void updateSecRow(QList<int> types);
+       // 设定表单选项Menu
+       QString getTagNames(int row);
        void slotShowTableOption(QAction *action);
        void showToolTip(const QModelIndex &index);
        void propOfDoc();
        // 显示文档属性
        QString getAvailableField(Doc doc);
+       void setShowNotesTips();
 
 private:
         MyTableDelegate * delegate;

@@ -24,16 +24,16 @@ class ExportDocDialog : public QDialog, public Ui::ExportDocDialog
 	Q_OBJECT
 
 	public:
-                ExportDocDialog(QWidget * parent = 0,const QString & basedir = 0, const QString & dir = 0);
+                ExportDocDialog(QWidget * parent = 0,const QString & dirUuid = 0, const QString & dir = 0, const QString & type = 0);
                 bool update;
                 QStandardItemModel *model;
 
+                QString m_type;
+                QString m_dirUuid;
                 QString m_exportDir;
                 QString m_dir;
 	private:
                 QObject * m_parent;
-                //! Remember the originally requsted name
-                QString m_baseDir;
                 //QProgressDialog * progress;
                 bool cancelled;
 

@@ -68,8 +68,8 @@ Q_OBJECT
                 bool isShowNotesOnTips() { return m_isShowNotesOnTips; };
                 void setShowNotesOnTips(bool v) { m_isShowNotesOnTips = v;  };
 
-                QString getTableSelField() { return m_tableselfield; };
-                void setTableSelField(QString v) { m_tableselfield = v; };
+                QStringList getTableSelField() { return m_tableselfield; };
+                void setTableSelField(QStringList v) { m_tableselfield = v; };
 
 
 		bool nullHighlight() { return m_nullHighlight; };
@@ -236,7 +236,7 @@ Q_OBJECT
                 QString m_selnoteuid;
                 QString m_tableselmode;
                 bool m_isShowNotesOnTips;
-                QString m_tableselfield;
+                QStringList m_tableselfield;
 
 		bool m_checkQtVersion;
 		bool m_nullHighlight;

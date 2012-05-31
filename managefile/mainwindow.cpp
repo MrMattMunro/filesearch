@@ -108,6 +108,10 @@ void MainWindow::buildDocList()
                  Dir dir = dirs.at(i);
                  docs.append(DocDao::selectDocsbyDir(dir.DIR_GUID, "1"));
               }
+              // 取不到被删除的文件夹时,平行地取出所有文件
+              if(dirs.size() == 0){
+                  docs = DocDao::selectDocsByDelFlg("1");
+              }
         }else{
              docs = DocDao::selectDocsbyDir(curUuid,  "1");
         }

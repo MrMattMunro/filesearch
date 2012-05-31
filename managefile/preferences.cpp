@@ -37,7 +37,7 @@ Preferences::Preferences(QObject *parent)
 
         m_tableselmode = s.value("table/selMode", QString()).toString();
         m_isShowNotesOnTips = s.value("table/showNotesOnTips", true).toBool();
-        m_tableselfield = s.value("table/selField", QString()).toString();
+        m_tableselfield = s.value("table/selField", QStringList()).toStringList();
 
 	//
 	m_nullHighlight = s.value("prefs/nullCheckBox", true).toBool();
@@ -152,7 +152,7 @@ Preferences::~Preferences()
 	settings.setValue("prefs/cropColumnsCheckBox", m_cropColumns);
 	// sql editor
 	settings.setValue("prefs/sqleditor/font", m_sqlFont);
-    settings.setValue("prefs/sqleditor/fontSize", m_sqlFontSize);
+        settings.setValue("prefs/sqleditor/fontSize", m_sqlFontSize);
 	settings.setValue("prefs/sqleditor/useActiveHighlightCheckBox", m_activeHighlighting);
 	settings.setValue("prefs/sqleditor/activeHighlightButton", m_activeHighlightColor);
 	settings.setValue("prefs/sqleditor/useTextWidthMarkCheckBox", m_textWidthMark);
