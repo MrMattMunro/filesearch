@@ -147,7 +147,6 @@ FORMS    += mainwindow.ui \
     exportdocdialog.ui \
     createsubdirdialog.ui \
     movetodirdialog.ui \
-    propofdirdialog.ui \
     history.ui \
     browser/settings.ui \
     browser/proxy.ui \
@@ -171,8 +170,9 @@ FORMS    += mainwindow.ui \
     relatedocdialog.ui \
     doctagsdialog.ui \
     doctodirdialog.ui \
-    propofdocdialog.ui \
-    sortsubdirsdialog.ui
+    sortsubdirsdialog.ui \
+    propofdirdialog.ui \
+    propofdocdialog.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -243,6 +243,12 @@ OTHER_FILES += \
     docview/jquery/css/ui-darkness/images/ui-bg_flat_50_5c5c5c_40x100.png \
     docview/jquery/css/ui-darkness/images/ui-bg_flat_30_cccccc_40x100.png \
     docview/jquery/css/ui-darkness/jquery-ui-1.8.16.custom.css
+
+
+
+
+
+
 
 
 
