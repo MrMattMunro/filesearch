@@ -1,25 +1,25 @@
-#include <QProgressDialog>
+#ifndef PropOfDirDialog_H
+#define PropOfDirDialog_H
+
+#include <QDialog>
+#include <QStandardItemModel>
 #include "ui_propofdirdialog.h"
 
-#include <QStandardItemModel>
-
-class PropOfDirDialog : public QDialog, public Ui::PropOfDirDialog
+class PropOfDirDialog: public QDialog, public Ui::PropOfDirDialog
 {
-	Q_OBJECT
+        Q_OBJECT
+    public:
+        PropOfDirDialog (QWidget *parent=0, const QString & dirUuid = 0);
 
-	public:
-                PropOfDirDialog(QWidget * parent = 0,const QString & curUuid = 0, const QString & dir = 0);
-                bool update;
+        bool update;
+        QString m_curUuid;
+        QStandardItemModel *model;
+    private:
+        QObject * m_parent;
 
-                QString m_curUuid;
-                QString m_dir;
-        private:
-                QObject * m_parent;
-
-	private slots:
-                void confirmBtn_clicked();
-                void cancelBtn_clicked();
-
-        signals:
-
+    private slots:
+        void closeBtn_clicked();
+        void applyBtn_clicked();
 };
+
+#endif // 

@@ -23,7 +23,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="basic">
       <attribute name="title">
@@ -103,7 +103,7 @@
      </widget>
      <widget class="QWidget" name="time">
       <attribute name="title">
-       <string>Times</string>
+       <string>Protect</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_6">
        <item row="0" column="0">
@@ -185,7 +185,7 @@
      </widget>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>Other</string>
+       <string>Synchronous</string>
       </attribute>
       <widget class="QGroupBox" name="groupBox_6">
        <property name="geometry">

@@ -1,55 +1,105 @@
-/*
-For general Sqliteman copyright and licensing information please refer
-to the COPYING file provided with the program. Following this notice may exist
-a copyright and/or license notice that predates the release of Sqliteman
-for which a new license (GPL+exception) is in place.
-*/
-#include <QFileDialog>
-#include <QMessageBox>
+#include "PropOfDirDialog.h"
 
-#include <QtDebug>
 #include <QDir>
-#include <QStandardItemModel>
-#include <QDesktopServices>
-#include <QUrl>
-
-#include "propofdirdialog.h"
-#include "utils.h"
-#include "fileutils.h"
+#include "db/docdao.h"
 #include "db/dirdao.h"
+#include "db/relatedocdao.h"
+#include "utils.h"
 
-PropOfDirDialog::PropOfDirDialog(QWidget * parent, const QString & curUuid, const QString & dir)
-	: QDialog(parent),
-          m_parent(parent),
-          m_curUuid(curUuid),
-          m_dir(dir),update(false)
+PropOfDirDialog::PropOfDirDialog (QWidget *parent, const QString & curUuid)
+    : QDialog(parent), m_curUuid(curUuid),update(false)
 {
-        setupUi(this);
+    setupUi (this);
 
-        // Set UI
-        // 设置目标目录名称
-        Dir tmpdir = DirDao::selectDir(m_curUuid);
-        dirName->setText(tmpdir.DIR_NAME);
-        location->setText(m_dir);
+    // 取得当前文档
+    Dir dir = DirDao::selectDir(m_curUuid);
 
-        this->setWindowIcon(Utils::getIcon("folder.ico"));
-        this->setWindowTitle(tr("Properties Of Directory"));
+    setWindowTitle (dir.DIR_NAME +" - " +tr ("Property Editor","Window caption"));
 
-        connect(buttonBox, SIGNAL(accepted()), this, SLOT(confirmBtn_clicked()));
-        connect(buttonBox,SIGNAL(rejected()),this,SLOT(cancelBtn_clicked()));
+
+    // 设置基本信息
+    name->setText(dir.DIR_NAME);
+    uuid->setText(dir.DIR_GUID);
+    icon->setIcon(Utils::getIcon(dir.DIR_ICON));
+
+    // 取得当前路径
+    QList<Dir> dirList;
+    DirDao::selectAllParentDirbyDir(dirList, m_curUuid);
+
+    QString slocation;
+    slocation.append(QDir::separator());
+    for (int var = dirList.length() - 1; var >= 0 ; --var) {
+        Dir dir = dirList.at(var);
+        slocation.append(dir.DIR_NAME);
+        slocation.append(QDir::separator());
+    }
+    location->setText(slocation);
+    desp->setText(dir.DIR_DESCRIPTION);
+
+    // 设置保护
+    QList<Dir> selDirList;
+    DirDao::selectAllSubDirbyDir(selDirList, m_curUuid, "0");
+    DirDao::selectAllSubDirbyDir(selDirList, m_curUuid, "1");
+    dirCount->setText(QString::number(selDirList.size()));
+
+    Dir tempDir;
+    int ifileCount;
+    int ifileSize;
+    foreach(tempDir, selDirList){
+        QList<Doc> docs = DocDao::selectDocsbyDir(tempDir.DIR_GUID, "0");
+        QList<Doc> deldocs = DocDao::selectDocsbyDir(tempDir.DIR_GUID, "1");
+        ifileCount = docs.size() + deldocs.size();
+        Doc doc;
+        foreach(doc, docs){
+            // 计算size K
+            QFileInfo file(doc.DOCUMENT_LOCATION);
+            ifileSize = ifileSize + file.size();
+        }
+        foreach(doc, deldocs){
+            // 计算size K
+            QFileInfo file(doc.DOCUMENT_LOCATION);
+            ifileSize = ifileSize + file.size();
+        }
+
+
+    }
+    fileCount->setText(QString::number(ifileCount));
+    fileSize->setText(QString::number(ifileSize/1024).append(" K"));
+
+    // 密码
+    // MD5解密
+    if(isProtect->isChecked()){
+        orgpwd->setText("");
+        pwd->setText("");
+        repwd->setText("");
+    }
+
+    // 设置同步
+    localVer->setText(QString::number(dir.MF_VERSION));
+
+    // 从服务器上取出，对比Version来比较版本 利用新的来同步
+    // remoteVer->setText();
+    connect(closeBtn,SIGNAL(clicked()),this, SLOT(closeBtn_clicked()));
+    connect(applyBtn,SIGNAL(clicked()),this, SLOT(applyBtn_clicked()));
+
+    // 默认选中第一个tab
+    tabWidget->setCurrentIndex(0);
+
 }
+// 更新数据项
+void PropOfDirDialog::applyBtn_clicked()
+{
+     Dir dir;
+     DirDao::updateDir(dir);
 
-// 创建子文件夹
-void PropOfDirDialog::confirmBtn_clicked(){
-    update = false;
-    this->close();
-}
-
-// 取消按钮
-void PropOfDirDialog::cancelBtn_clicked(){
-     update = false;
+     update = true;
      this->close();
 }
 
 
+void PropOfDirDialog::closeBtn_clicked()
+{
+    update = true;
+    this->close();
+}
 

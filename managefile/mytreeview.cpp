@@ -828,7 +828,7 @@ void MyTreeView::properties()
     // 需选中子节点
     if(curType == "doc") {
         hasSelRight = true;
-        PropOfDirDialog dlg(this, curUuId, getCurPath());
+        PropOfDirDialog dlg(this, curUuId);
         dlg.exec();
         if(dlg.update){
           // 不做任何操作
