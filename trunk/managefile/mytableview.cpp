@@ -24,6 +24,7 @@
 #include "Common.h"
 #include "mytreeitemmodel.h"
 #include "db/docdao.h"
+#include "db/doctagdao.h"
 #include "db/notedao.h"
 #include "printerwidget.h"
 #include "QSettings"
@@ -48,7 +49,7 @@ MyTableView::MyTableView(QWidget * parent) : QTableView(parent), mouseStatus(tru
     this->setMouseTracking(true);
     this->setContextMenuPolicy(Qt::CustomContextMenu);
     this->setAcceptDrops(true);
-    this->setShowGrid(true);
+    this->setShowGrid(false);
 
     // 可以设置第一行 选择排序控件
     // this->setItemDelegateForRow();
@@ -81,6 +82,9 @@ MyTableView::MyTableView(QWidget * parent) : QTableView(parent), mouseStatus(tru
 //    QDesktopServices::setUrlHandler( "mailto", this, "mailTo" );
 
     initActions();
+    model->setColumnCount(3);
+    this->setModel(model);
+
 }
 
 // Action 数据
@@ -175,6 +179,9 @@ void MyTableView::initActions ()
    menu_ad->addAction(pformatChangeAction);
 
 
+
+   Preferences* p = Preferences::instance();
+
    // 移动到文件夹
    moveToDirAction = new QAction(tr("&Move to..."), this);
    connect(moveToDirAction, SIGNAL(triggered()), this, SLOT(moveToDir()));
@@ -186,16 +193,19 @@ void MyTableView::initActions ()
    connect(optionOfDocTableAction, SIGNAL(triggered()), this, SLOT(about()));
    option_submenu = new QMenu(this);
    optionOfDocTableAction->setMenu(option_submenu);
-
+   QString selModel = p->getTableSelMode();
    oneRowAction = new QAction(tr("&One Row"), this);
    oneRowAction->setData(ONE_ROW);
+   oneRowAction->setChecked(selModel.toInt() == ONE_ROW);
    oneRowAction->setCheckable(true);
    twoRowAction = new QAction(tr("&Two Rows"), this);
    twoRowAction->setData(TWO_ROWS);
    twoRowAction->setCheckable(true);
+   twoRowAction->setChecked(selModel.toInt() == TWO_ROWS);
    twoRowOptionAction = new QAction(tr("&The second Row's Option"), this);
    showNotesAction = new QAction(tr("&Show notes of Document on Tooltip"), this);
    showNotesAction->setCheckable(true);
+   connect(showNotesAction, SIGNAL(triggered()), this, SLOT(setShowNotesTips()));
 
    option_submenu->addAction(oneRowAction);
    option_submenu->addAction(twoRowAction);
@@ -260,17 +270,11 @@ void MyTableView::buildDocList(QList<Doc> doclist)
 {
     Preferences* p = Preferences::instance();
 
-    delete model;
+    model->clear();
+//    delete model;
     qDebug("buildDocList start");
 
-    model = new MyTableItemModel();
-    model->setColumnCount(3);
-    this->hideColumn(0);
-
-    // 设置各列比例,使其占满全行
-    int tablewidth = this->width();
-    this->setColumnWidth(1, 20);
-    this->setColumnWidth(2, tablewidth);
+//    model = new MyTableItemModel();
 
     // 取得选择模式
     QString selModel = p->getTableSelMode();
@@ -278,7 +282,6 @@ void MyTableView::buildDocList(QList<Doc> doclist)
 
     for (int var = 0; var < doclist.size(); ++var) {
          Doc doc = doclist.at(var);
-         QString str = doc.DOCUMENT_LOCATION;
          QString docUuid = doc.DOCUMENT_GUID;
 
          QString filename = doc.DOCUMENT_NAME;
@@ -356,9 +359,10 @@ void MyTableView::buildDocList(QList<Doc> doclist)
                 item = new QStandardItem();
                 item->setBackground(QBrush(QColor(255, 255, 255)));
                 item->setTextAlignment(Qt::AlignLeft);
-                item->setFont(QFont( "Times", 10,  QFont::Normal ));
+                item->setFont(QFont( "Times", 11,  QFont::Normal ));
                 item->setData(filename, Qt::DisplayRole);
                 items.append(item);
+                item->setData(doc.DOCUMENT_LOCATION, DOC_LOCATION);
 
                 item = new QStandardItem();
                 item->setData(docUuid, Qt::UserRole);
@@ -371,8 +375,10 @@ void MyTableView::buildDocList(QList<Doc> doclist)
                 // 动态的第二项
                 item = new QStandardItem();
                 item->setData(getAvailableField(doc), Qt::DisplayRole);
+                item->setFont(QFont( "Times", 8,  QFont::Light ));
                 item->setTextAlignment(Qt::AlignTop);
                 secitems.append(item);
+
                 // 在第二个动态项中加入所有其他数据
                 item->setData(doc.DT_CREATED , DOC_CREATE_DATE);
                 item->setData(doc.DT_MODIFIED, DOC_MODIFIED_DATE);
@@ -383,13 +389,9 @@ void MyTableView::buildDocList(QList<Doc> doclist)
                 item->setData(doc.DOCUMENT_AUTHOR, DOC_AUTHOR);
                 item->setData(doc.DOCUMENT_READ_COUNT, DOC_READ_COUNT);
                 item->setData(doc.DOCUMENT_RELATE_COUNT, DOC_RELATED_COUNT);
-                // 取得Tags <延后加载>
-                // item->setData(doc.DT_CREATED, DOC_TAGS);
 
                 item->setData(doc.DOCUMENT_URL, DOC_URL);
                 item->setData(doc.DOCUMENT_LOCATION, DOC_LOCATION);
-                // 取得Notes <延后加载>
-                // item->setData(doc.DT_CREATED, DOC_NOTES);
              }
 
              if(p->allsupported().contains(suffix, Qt::CaseInsensitive)){
@@ -411,7 +413,6 @@ void MyTableView::buildDocList(QList<Doc> doclist)
 //       this->setRowHeight(i, 20);
 //    }
 
-    this->hideColumn(0);
 
     // 恢复QTableView的为未合并前的样子
 //    for (int i = 0; i < model->rowCount(); ++i) {
@@ -422,7 +423,12 @@ void MyTableView::buildDocList(QList<Doc> doclist)
 
 
 
-    this->setModel(model);
+    this->hideColumn(0);
+
+    // 设置各列比例,使其占满全行
+    int tablewidth = this->width();
+    this->setColumnWidth(1, 20);
+    this->setColumnWidth(2, tablewidth);
 
     qDebug("buildDocList end");
 }
@@ -433,9 +439,12 @@ void MyTableView::showToolTip(const QModelIndex &index)
     if (!index.isValid()) {
        return;
     }
-    Preferences p = Preferences::instance();
-    bool isShowNotes = p.isShowNotesOnTips();
+    Preferences* p = Preferences::instance();
+    bool isShowNotes = p->isShowNotesOnTips();
     if(isShowNotes){
+       int row = index.row();
+       QStandardItem *uuidItem = model->item(row, 0);
+       curUuid = qvariant_cast<QString>(uuidItem->data(Qt::UserRole));
        if(! curUuid.isEmpty()){
             QString tips;
             QList<Note> list = NoteDao::selectNotesbyDocUuId(curUuid);
@@ -458,11 +467,17 @@ void MyTableView::mouseDoubleClickEvent(QMouseEvent *event)
                 curPoint = event->pos();
                 QModelIndex  index = indexAt(curPoint);
                 curItem = model->itemFromIndex(index);
-                curPath = qvariant_cast<QString>(curItem->data(Qt::DisplayRole));
-
                 int row = index.row();
+
+                QStandardItem *pathItem = model->item(row, 2);
+                if(pathItem){
+                    curPath = qvariant_cast<QString>(pathItem->data(DOC_LOCATION));
+                }
+
                 QStandardItem *uuidItem = model->item(row, 0);
-                curUuid = qvariant_cast<QString>(uuidItem->data(Qt::UserRole));
+                if(uuidItem){
+                     curUuid = qvariant_cast<QString>(uuidItem->data(Qt::UserRole));
+                }
 
                 changeColor(row);
                 emit LBtnDbClk();
@@ -474,12 +489,19 @@ void MyTableView::mousePressEvent(QMouseEvent *event)
 
         curPoint = event->pos();
         QModelIndex  index = indexAt(curPoint);
-        curItem = model->itemFromIndex(index);
-        curPath = qvariant_cast<QString>(curItem->data(Qt::DisplayRole));
-
         int row = index.row();
+
+        curItem = model->itemFromIndex(index);
+
+        QStandardItem *pathItem = model->item(row, 2);
+        if(pathItem){
+            curPath = qvariant_cast<QString>(pathItem->data(DOC_LOCATION));
+        }
+
         QStandardItem *uuidItem = model->item(row, 0);
-        curUuid = qvariant_cast<QString>(uuidItem->data(Qt::UserRole));
+        if(uuidItem){
+             curUuid = qvariant_cast<QString>(uuidItem->data(Qt::UserRole));
+        }
         // 左键退出
         if( Qt::LeftButton == event->button()){  
             changeColor(row);
@@ -509,8 +531,8 @@ void MyTableView::changeColor(int curRow){
        firstRow = preRow;
        secRow = firstRow + 1;
     }else{
-        firstRow = preRow;
-        secRow = firstRow - 1;
+        secRow = preRow;
+        firstRow = secRow - 1;
     }
 
     for(int i = 0; i< columnCount; i ++){
@@ -528,8 +550,8 @@ void MyTableView::changeColor(int curRow){
        firstRow = curRow;
        secRow = firstRow + 1;
     }else{
-        firstRow = curRow;
-        secRow = firstRow - 1;
+        secRow = curRow;
+        firstRow = secRow - 1;
     }
     for(int i = 0; i< columnCount; i ++){
         QStandardItem *item = model->item(firstRow, i);
@@ -806,7 +828,7 @@ void MyTableView::delDoc()
                 DocDao::updateDoc(doc);
 
                 model->removeRow(firstRow);
-                model->removeRow(secRow);
+                model->removeRow(firstRow);
 
                 // 选中的逻辑删除
                 QItemSelectionModel *selections = this->selectionModel();
@@ -907,54 +929,69 @@ void MyTableView::copyToDir()
 void MyTableView::secondRowSetMenu()
 {
     m_secondRowSetMenu = new QMenu(this);
-    // 设置Menu
+
+    Preferences* p = Preferences::instance();
+    QStringList selFields = p->getTableSelField();
+
     QAction *action1 = new QAction(this);
     action1->setData(CREATE_DATE);
     action1->setCheckable(true);
     action1->setText(tr("Create Date"));
+    action1->setChecked(selFields.contains(QString::number(CREATE_DATE)));
 
-    // 设置Menu
     QAction *action2 = new QAction(this);
     action2->setData(MODIFIED_DATE);
     action2->setCheckable(true);
     action2->setText(tr("Modified Date"));
+    action2->setChecked(selFields.contains(QString::number(MODIFIED_DATE)));
 
-    // 设置Menu
     QAction *action3 = new QAction(this);
     action3->setData(ACCESS_DATE);
     action3->setCheckable(true);
     action3->setText(tr("Accessed Date"));
+    action3->setChecked(selFields.contains(QString::number(ACCESS_DATE)));
 
-    // 设置Menu
     QAction *action4 = new QAction(this);
     action4->setData(SIZE);
     action4->setCheckable(true);
     action4->setText(tr("Size"));
+    action4->setChecked(selFields.contains(QString::number(SIZE)));
 
     QAction *action5 = new QAction(this);
     action5->setData(AUTHOR);
     action5->setCheckable(true);
     action5->setText(tr("Author"));
+    action5->setChecked(selFields.contains(QString::number(AUTHOR)));
 
     QAction *action6 = new QAction(this);
     action6->setData(READ_COUNT);
     action6->setCheckable(true);
     action6->setText(tr("Read Count"));
+    action6->setChecked(selFields.contains(QString::number(READ_COUNT)));
 
     QAction *action7 = new QAction(this);
     action7->setData(RELATED_COUNT);
     action7->setCheckable(true);
     action7->setText(tr("Related Count"));
+    action7->setChecked(selFields.contains(QString::number(RELATED_COUNT)));
 
     QAction *action8 = new QAction(this);
     action8->setData(TAGS);
     action8->setCheckable(true);
     action8->setText(tr("Tags"));
+    action8->setChecked(selFields.contains(QString::number(TAGS)));
 
     QAction *action9 = new QAction(this);
     action9->setData(URL);
     action9->setCheckable(true);
     action9->setText(tr("URL"));
+    action9->setChecked(selFields.contains(QString::number(URL)));
+
+    QAction *action10 = new QAction(this);
+    action10->setData(LOCATION);
+    action10->setCheckable(true);
+    action10->setText(tr("Location"));
+    action10->setChecked(selFields.contains(QString::number(LOCATION)));
 
     m_secondRowSetMenu->addAction(action1);
     m_secondRowSetMenu->addAction(action2);
@@ -965,6 +1002,8 @@ void MyTableView::secondRowSetMenu()
     m_secondRowSetMenu->addAction(action7);
     m_secondRowSetMenu->addAction(action8);
     m_secondRowSetMenu->addAction(action9);
+    m_secondRowSetMenu->addAction(action10);
+
 }
 
 // 设定表单第二项选项项目
@@ -972,65 +1011,87 @@ void MyTableView::slotShowSecondRowContent(QAction* action)
 {
     QList<QAction*> actionList = m_secondRowSetMenu->actions();
     QAction* tmpaction;
+    QList<int> selField;
+    QStringList selFields;
     foreach(tmpaction, actionList){
-        tmpaction->setChecked(false);
+        if(tmpaction->isChecked()){
+            selField.append(tmpaction->data().toInt());
+            selFields.append(tmpaction->data().toString());
+        }
     }
-    action->setChecked(true);
 
-    int offset = action->data().toInt();
-    updateSecRow(offset);
+    Preferences* p = Preferences::instance();
+    p->setTableSelField(selFields);
+
+    updateSecRow(selField);
 }
 
 // 设定表单第二项选项项目
-void MyTableView::updateSecRow(int type)
+void MyTableView::updateSecRow(QList<int> types)
 {
     int rowCount = model->rowCount();
     for(int i = 0; i< rowCount; i++){
-
         if(i%2 == 1){
             QModelIndex index = model->index(i, 2);
             QStandardItem *item = model->itemFromIndex(index);
-            QString temp;
+
+            QString temp = "";
             // 表示第二行显示
-            switch (type) {
-                case CREATE_DATE:
-                   temp =  qvariant_cast<QString>(model->data(index, DOC_CREATE_DATE));
-                   break;
-                case MODIFIED_DATE:
-                   temp =  qvariant_cast<QString>(model->data(index, DOC_MODIFIED_DATE));
-                   break;
-                case ACCESS_DATE:
-                   temp =  qvariant_cast<QString>(model->data(index, DOC_ACCESS_DATE));
-                   break;
-                case SIZE:
-                   temp =  qvariant_cast<QString>(model->data(index, DOC_SIZE));
-                    break;
-                case AUTHOR:
-                   temp =  qvariant_cast<QString>(model->data(index, DOC_AUTHOR));
-                   break;
-                case READ_COUNT:
-                   temp =  qvariant_cast<QString>(model->data(index, DOC_READ_COUNT));
-                    break;
-                case RELATED_COUNT:
-                   temp =  qvariant_cast<QString>(model->data(index, DOC_RELATED_COUNT));
-                   break;
-                case TAGS:
-                   temp =  qvariant_cast<QString>(model->data(index, DOC_TAGS));
-                   break;
-                case URL:
-                   temp =  qvariant_cast<QString>(model->data(index, DOC_URL));
-                   break;
-                case LOCATION:
-                   temp =  qvariant_cast<QString>(model->data(index, DOC_LOCATION));
-                   break;
-                case NOTES:
-                   temp =  qvariant_cast<QString>(model->data(index, DOC_NOTES));
-                   break;
-                 ;
+            int type;
+            foreach(type, types){
+                switch (type) {
+                    case CREATE_DATE:
+                       temp.append(qvariant_cast<QString>(model->data(index, DOC_CREATE_DATE)));
+                       break;
+                    case MODIFIED_DATE:
+                       temp.append(qvariant_cast<QString>(model->data(index, DOC_MODIFIED_DATE)));
+                       break;
+                    case ACCESS_DATE:
+                       temp.append(qvariant_cast<QString>(model->data(index, DOC_ACCESS_DATE)));
+                       break;
+                    case SIZE:
+                       temp.append(qvariant_cast<QString>(model->data(index, DOC_SIZE)));
+                        break;
+                    case AUTHOR:
+                       temp.append(qvariant_cast<QString>(model->data(index, DOC_AUTHOR)));
+                       break;
+                    case READ_COUNT:
+                       temp.append(qvariant_cast<QString>(model->data(index, DOC_READ_COUNT)));
+                        break;
+                    case RELATED_COUNT:
+                       temp.append( qvariant_cast<QString>(model->data(index, DOC_RELATED_COUNT)));
+                       break;
+                    case TAGS:
+                       temp.append(getTagNames(i));
+                       break;
+                    case URL:
+                       temp.append(qvariant_cast<QString>(model->data(index, DOC_URL)));
+                       break;
+                    case LOCATION:
+                       temp.append(qvariant_cast<QString>(model->data(index, DOC_LOCATION)));
+                       break;
+                     ;
+                 }
+                temp.append(" ");
             }
             item->setData(temp, Qt::DisplayRole);
         }
     }
+}
+// 设定表单选项Menu
+QString MyTableView::getTagNames(int row)
+{
+    QModelIndex uuIdindex = model->index(row, 0);
+    QStandardItem *uuIditem = model->itemFromIndex(uuIdindex);
+    QString docuuid = qvariant_cast<QString>(uuIditem->data(Qt::UserRole));
+    QList<Tag> sellitems = DocTagDao::selectTagsbyDocUuId(docuuid);
+    QString temp;
+    for (int var = 0; var < sellitems.length(); ++var) {
+        Tag tag = sellitems.at(var);
+        temp.append(tag.TAG_NAME);
+        temp.append("/");
+    }
+    return temp;
 }
 
 // 设定表单选项Menu
@@ -1038,16 +1099,28 @@ void MyTableView::slotShowTableOption(QAction* action)
 {
     int offset = action->data().toInt();
 
-    Preferences p = Preferences::instance();
+    Preferences* p = Preferences::instance();
     // 设定其他的项目
     if(offset == 1){
        twoRowAction->setChecked(!oneRowAction->isChecked());
-       p.setTableSelMode(QString::number(ONE_ROW));
+       p->setTableSelMode(QString::number(ONE_ROW));
+       int rowCount = model->rowCount();
+       for(int i = 0; i< rowCount; i++){
+           if(i%2 == 1){
+              this->hideRow(i);
+           }
+       }
     }
     // 设定其他的项目
     if(offset == 2){
        oneRowAction->setChecked(!twoRowAction->isChecked());
-       p.setTableSelMode(QString::number(TWO_ROWS));
+       p->setTableSelMode(QString::number(TWO_ROWS));
+       int rowCount = model->rowCount();
+       for(int i = 0; i< rowCount; i++){
+           if(i%2 == 1){
+              this->showRow(i);
+           }
+       }
     }
 }
 
@@ -1072,45 +1145,66 @@ void MyTableView::propOfDoc()
     }
 }
 
+// 设置是否在文档上面显示NotesTips
+void MyTableView::setShowNotesTips()
+{
+    Preferences* p = Preferences::instance();
+    p->setShowNotesOnTips(showNotesAction->isChecked());
+}
+
 // 显示文档属性
 QString MyTableView::getAvailableField(Doc doc)
 {
-    Preferences p = Preferences::instance();
-    QString field = p.getTableSelField();
-    int selFied = field.toInt();
+    Preferences* p = Preferences::instance();
+    QStringList fields = p->getTableSelField();
+    QString field;
+    QString temp;
+    foreach (field, fields) {
+        int selFied = field.toInt();
+        if(selFied == CREATE_DATE){
+           temp.append(doc.DT_CREATED);
+        }
+        if(selFied == MODIFIED_DATE){
+           temp.append(doc.DT_MODIFIED);
+        }
+        if(selFied == ACCESS_DATE){
+           temp.append(doc.DT_ACCESSED);
+        }
+        if(selFied == SIZE){
+           // 计算size K
+           QFileInfo file(doc.DOCUMENT_LOCATION);
+           temp.append(QString::number(file.size() / 1000));
+        }
+        if(selFied == AUTHOR){
+           temp.append(doc.DOCUMENT_AUTHOR);
+        }
+        if(selFied == READ_COUNT){
+           temp.append(doc.DOCUMENT_READ_COUNT);
+        }
+        if(selFied == RELATED_COUNT){
+           temp.append(doc.DOCUMENT_RELATE_COUNT);
+        }
+        if(selFied == TAGS){
+           // 取得Tags
+            QList<Tag> sellitems = DocTagDao::selectTagsbyDocUuId(doc.DOCUMENT_GUID);
+            QString tags;
+            for (int var = 0; var < sellitems.length(); ++var) {
+                Tag tag = sellitems.at(var);
+                tags.append(tag.TAG_NAME);
+                tags.append("/");
+            }
+            temp.append(tags);
+        }
+        if(selFied == URL){
+           temp.append(doc.DOCUMENT_URL);
+        }
+        if(selFied == LOCATION){
+           temp.append(doc.DOCUMENT_LOCATION);
+        }
+        temp.append(" ");
+    }
 
-    if(selFied == CREATE_DATE){
-       return doc.DT_CREATED;
-    }
-    if(selFied == MODIFIED_DATE){
-       return doc.DT_MODIFIED;
-    }
-    if(selFied == ACCESS_DATE){
-       return doc.DT_ACCESSED;
-    }
-    if(selFied == SIZE){
-       // 计算size K
-       QFileInfo file(doc.DOCUMENT_LOCATION);
-       return QString::number(file.size() / 1000);
-    }
-    if(selFied == AUTHOR){
-       return doc.DOCUMENT_AUTHOR;
-    }
-    if(selFied == READ_COUNT){
-       return doc.DOCUMENT_READ_COUNT;
-    }
-    if(selFied == RELATED_COUNT){
-       return doc.DOCUMENT_RELATE_COUNT;
-    }
-    if(selFied == TAGS){
-       // 取得Tags
-       return doc.DT_CREATED;
-    }
-    if(selFied == URL){
-       return doc.DOCUMENT_URL;
-    }
-
-    return doc.DT_MODIFIED;
+    return temp;
 }
 
 

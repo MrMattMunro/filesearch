@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS MF_DOCUMENT
    DT_ACCESSED                    char(19),
    DOCUMENT_ICON_INDEX            int,
    DOCUMENT_SYNC                  int                         default 0,
-   DOCUMENT_PROTECT               char(6),
+   DOCUMENT_PROTECT               varchar(50),
    DOCUMENT_ENCODE                char(1)                     default '0',
    DOCUMENT_READ_COUNT            int                         default 0,
    DOCUMENT_RELATE_COUNT          int                         default 0,

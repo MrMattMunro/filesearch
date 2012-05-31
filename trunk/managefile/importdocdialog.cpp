@@ -218,6 +218,7 @@ int ImportDocDialog::loadFiles(QString parentPath, QStringList filter, QStandard
                 QList<QStandardItem*> items;
                 items << item;
                 model->appendRow(items);
+
             }
         }
     }
