@@ -93,6 +93,7 @@ private slots:
     void buildDocList();
     void helpDoc();
     void bbs();
+    void option();
     void homepage();
     void loadPage(const QString &url);
 

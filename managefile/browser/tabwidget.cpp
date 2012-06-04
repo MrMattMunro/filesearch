@@ -49,6 +49,7 @@
 #include "utils.h"
 #include "fileutils.h"
 #include "preferences.h";
+#include "sqleditorwidget.h"
 
 #include <QtGui/QClipboard>
 #include <QtGui/QCompleter>
@@ -508,6 +509,70 @@ WebView *TabWidget::newTab(bool makeCurrent)
         currentChanged(currentIndex());
     emit tabsChanged();
     return webView;
+}
+
+SqlEditorWidget *TabWidget::newTxtTab(bool makeCurrent, QString filepath)
+{
+    // line edit
+    UrlLineEdit *urlLineEdit = new UrlLineEdit;
+    QLineEdit *lineEdit = urlLineEdit->lineEdit();
+    if (!m_lineEditCompleter && count() > 0) {
+        HistoryCompletionModel *completionModel = new HistoryCompletionModel(this);
+        completionModel->setSourceModel(BrowserApplication::historyManager()->historyFilterModel());
+        m_lineEditCompleter = new QCompleter(completionModel, this);
+        // Should this be in Qt by default?
+        QAbstractItemView *popup = m_lineEditCompleter->popup();
+        QListView *listView = qobject_cast<QListView*>(popup);
+        if (listView)
+            listView->setUniformItemSizes(true);
+    }
+    lineEdit->setCompleter(m_lineEditCompleter);
+    connect(lineEdit, SIGNAL(returnPressed()), this, SLOT(lineEditReturnPressed()));
+    m_lineEdits->addWidget(urlLineEdit);
+    m_lineEdits->setSizePolicy(lineEdit->sizePolicy());
+
+    // optimization to delay creating the more expensive WebView, history, etc
+    if (count() == 0) {
+        QWidget *emptyWidget = new QWidget;
+        QPalette p = emptyWidget->palette();
+        p.setColor(QPalette::Window, palette().color(QPalette::Base));
+        emptyWidget->setPalette(p);
+        emptyWidget->setAutoFillBackground(true);
+        disconnect(this, SIGNAL(currentChanged(int)),
+            this, SLOT(currentChanged(int)));
+        addTab(emptyWidget, tr("(Untitled)"));
+        connect(this, SIGNAL(currentChanged(int)),
+            this, SLOT(currentChanged(int)));
+        currentChanged(currentIndex());
+        return 0;
+    }
+
+    // webview
+    filepath = QDir::fromNativeSeparators(filepath);
+    SqlEditorWidget* widget = new SqlEditorWidget(this);
+
+    QStringList  strs = FileUtils::readFile(filepath);
+    QString str;
+    QString content;
+    foreach(str, strs){
+        content.append(str);
+        content.append("\n");
+    }
+    widget->setText(content);
+    QFileInfo fileinfo(filepath);
+
+    addTab(widget, fileinfo.fileName());
+
+    if (makeCurrent){
+        setCurrentWidget(widget);
+    }
+
+    if (count() == 1){
+       currentChanged(currentIndex());
+    }
+
+    emit tabsChanged();
+    return widget;
 }
 
 QAxWidget *TabWidget::newDocTab(bool makeCurrent, QString filepath)

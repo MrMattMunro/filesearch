@@ -10,12 +10,12 @@ for which a new license (GPL+exception) is in place.
 #include <QSettings>
 #include <QColorDialog>
 #include <QFileDialog>
-
 #include "preferencesdialog.h"
 #include "preferences.h"
 #include "shortcuteditordialog.h"
 #include "utils.h"
 #include "extensionmodel.h"
+#include "qscintilla2/Qt4/Qsci/qscilexersql.h"
 
 
 PrefsDataDisplayWidget::PrefsDataDisplayWidget(QWidget * parent)
@@ -184,12 +184,12 @@ PreferencesDialog::PreferencesDialog(QWidget * parent)
 
 	Preferences * prefs = Preferences::instance();
 
-	// avail langs
-	QDir d(TRANSLATION_DIR, "*.qm");
-	m_prefsLNF->languageComboBox->addItem(tr("From Locales"));
-	foreach (QString f, d.entryList())
-		m_prefsLNF->languageComboBox->addItem(f.remove("sqliteman_").remove(".qm"));
-	m_prefsLNF->languageComboBox->setCurrentIndex(prefs->GUItranslator());
+//	// avail langs
+//	QDir d(TRANSLATION_DIR, "*.qm");
+//	m_prefsLNF->languageComboBox->addItem(tr("From Locales"));
+//	foreach (QString f, d.entryList())
+//		m_prefsLNF->languageComboBox->addItem(f.remove("sqliteman_").remove(".qm"));
+//	m_prefsLNF->languageComboBox->setCurrentIndex(prefs->GUItranslator());
 
 	// avail styles
 	m_prefsLNF->styleComboBox->addItem(tr("System Predefined"));
@@ -229,10 +229,10 @@ PreferencesDialog::PreferencesDialog(QWidget * parent)
 	m_syNumberColor = prefs->syNumberColor();
 	m_syStringColor = prefs->syStringColor();
 	m_syCommentColor = prefs->syCommentColor();
-	resetEditorPreview();
+        resetEditorPreview();
 
-	m_prefsExtension->allowExtensionsBox->setChecked(prefs->allowExtensionLoading());
-	m_prefsExtension->setExtensions(prefs->extensionList());
+//	m_prefsExtension->allowExtensionsBox->setChecked(prefs->allowExtensionLoading());
+//	m_prefsExtension->setExtensions(prefs->extensionList());
 }
 
 bool PreferencesDialog::saveSettings()
@@ -271,8 +271,8 @@ bool PreferencesDialog::saveSettings()
 	prefs->setSyStringColor(m_syStringColor);
 	prefs->setSyCommentColor(m_syCommentColor);
 	// extensions
-	prefs->setAllowExtensionLoading(m_prefsExtension->allowExtensionsBox->isChecked());
-	prefs->setExtensionList(m_prefsExtension->extensions());
+//	prefs->setAllowExtensionLoading(m_prefsExtension->allowExtensionsBox->isChecked());
+//	prefs->setExtensionList(m_prefsExtension->extensions());
 
 	return true;
 }
@@ -306,8 +306,8 @@ void PreferencesDialog::restoreDefaults()
 	m_prefsSQL->completionLengthBox->setValue(3);
 	m_prefsSQL->useShortcutsBox->setChecked(false);
 	//
-	QsciLexerSQL syntaxLexer;
-	m_syDefaultColor = syntaxLexer.defaultColor(QsciLexerSQL::Default);
+        QsciLexerSQL syntaxLexer;
+        m_syDefaultColor = syntaxLexer.defaultColor(QsciLexerSQL::Default);
 	m_syKeywordColor = syntaxLexer.defaultColor(QsciLexerSQL::Keyword);
 	m_syNumberColor = syntaxLexer.defaultColor(QsciLexerSQL::Number);
 	m_syStringColor = syntaxLexer.defaultColor(QsciLexerSQL::SingleQuotedString);

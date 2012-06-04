@@ -11,32 +11,36 @@ for which a new license (GPL+exception) is in place.
 #include <QDialog>
 
 #include "ui_preferencesdialog.h"
+#include "ui_prefsdatadisplaywidget.h"
+#include "ui_prefslnfwidget.h"
+#include "ui_prefssqleditorwidget.h"
+#include "ui_prefsextensionwidget.h"
 
 class ExtensionModel;
 
 
-class PrefsDataDisplayWidget : public QWidget
+class PrefsDataDisplayWidget : public QWidget, public Ui::PrefsDataDisplayWidget
 {
 	Q_OBJECT
 	public:
 		PrefsDataDisplayWidget(QWidget * parent = 0);
 };
 
-class PrefsLNFWidget : public QWidget
+class PrefsLNFWidget : public QWidget, public Ui::PrefsLNFWidget
 {
 	Q_OBJECT
 	public:
 		PrefsLNFWidget(QWidget * parent = 0);
 };
 
-class PrefsSQLEditorWidget : public QWidget
+class PrefsSQLEditorWidget : public QWidget, public Ui::PrefsSQLEditorWidget
 {
 	Q_OBJECT
 	public:
 		PrefsSQLEditorWidget(QWidget * parent = 0);
 };
 
-class PrefsExtensionWidget : public QWidget
+class PrefsExtensionWidget : public QWidget, public Ui::PrefsExtensionWidget
 {
 	Q_OBJECT
 	public:
