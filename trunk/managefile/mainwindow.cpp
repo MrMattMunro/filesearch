@@ -58,6 +58,7 @@
 #include "db/docdao.h"
 #include "db/doctagdao.h"
 #include "noteeditor.h"
+#include "preferencesdialog.h"
 
 extern NoteEditor *noteEditor;
 
@@ -323,7 +324,7 @@ void MainWindow::initActions()
         // 选项
         optionAction = new QAction(Utils::getIcon("option.png"),tr("&Option"), this);
         optionAction->setShortcut(tr("Ctrl+O"));
-        connect(optionAction, SIGNAL(triggered()), this, SLOT(about()));
+        connect(optionAction, SIGNAL(triggered()), this, SLOT(option()));
 
         // 查看log
         viewLogAction = new QAction(Utils::getIcon("log.png"),tr("&View Log..."), this);
@@ -550,6 +551,14 @@ void MainWindow::bbs()
     m_tabWidget->newTab();
     loadUrl(QUrl("http://www.slfile.net/?post_type=forum"));
 
+}
+
+// 选项
+void MainWindow::option()
+{
+    // curPath 用于判断根节点和子节点
+    PreferencesDialog dlg(this);
+    dlg.exec();
 }
 
 // 主页
@@ -1490,8 +1499,19 @@ void MainWindow::openDocInTab()
     QString filepath = m_doctable->getCurFilePath();
 
     m_tabWidget->currentLineEdit()->setText(filepath);
-    m_tabWidget->newDocTab(true, filepath);
-    m_tabWidget->loadDocInCurrentTab(filepath);
+
+//    SqlEditorWidget
+    // 改变NoteEditor的属性
+    Preferences* p = Preferences::instance();
+    QString suffix = FileUtils::suffix(filepath);
+    if(p->sources().contains(suffix.toLower())){
+        m_tabWidget->newTxtTab(true, filepath);
+       // m_tabWidget->loadDocInCurrentTab(filepath);
+    }else{
+
+        m_tabWidget->newDocTab(true, filepath);
+        m_tabWidget->loadDocInCurrentTab(filepath);
+    }
 }
 
 
