@@ -40,12 +40,6 @@ PrefsSQLEditorWidget::PrefsSQLEditorWidget(QWidget * parent)
 	shortcutsButton->hide();
 #endif
 
-	syntaxPreviewEdit->setText("-- this is a comment\n" \
-			"select *\n"
-			"from table_name\n" \
-			"  where id > 37\n"\
-			"    and text_column\n"
-			"      like '%foo%';\n");
 }
 
 
@@ -411,21 +405,21 @@ void PreferencesDialog::fontSizeSpin_valueChanged(int)
 
 void PreferencesDialog::resetEditorPreview()
 {
-	QsciLexerSQL *lexer = qobject_cast<QsciLexerSQL*>(m_prefsSQL->syntaxPreviewEdit->lexer());
+//	QsciLexerSQL *lexer = qobject_cast<QsciLexerSQL*>(m_prefsSQL->syntaxPreviewEdit->lexer());
 
-	QFont newFont(m_prefsSQL->fontComboBox->currentFont());
-	newFont.setPointSize(m_prefsSQL->fontSizeSpin->value());
-	lexer->setFont(newFont);
+//	QFont newFont(m_prefsSQL->fontComboBox->currentFont());
+//	newFont.setPointSize(m_prefsSQL->fontSizeSpin->value());
+//	lexer->setFont(newFont);
 
-	lexer->setColor(m_syDefaultColor, QsciLexerSQL::Default);
-	lexer->setColor(m_syKeywordColor, QsciLexerSQL::Keyword);
-	QFont defFont(lexer->font(QsciLexerSQL::Keyword));
-	defFont.setBold(true);
-	lexer->setFont(defFont, QsciLexerSQL::Keyword);
-	lexer->setColor(m_syNumberColor, QsciLexerSQL::Number);
-	lexer->setColor(m_syStringColor, QsciLexerSQL::SingleQuotedString);
-	lexer->setColor(m_syStringColor, QsciLexerSQL::DoubleQuotedString);
-	lexer->setColor(m_syCommentColor, QsciLexerSQL::Comment);
-	lexer->setColor(m_syCommentColor, QsciLexerSQL::CommentLine);
-	lexer->setColor(m_syCommentColor, QsciLexerSQL::CommentDoc);
+//	lexer->setColor(m_syDefaultColor, QsciLexerSQL::Default);
+//	lexer->setColor(m_syKeywordColor, QsciLexerSQL::Keyword);
+//	QFont defFont(lexer->font(QsciLexerSQL::Keyword));
+//	defFont.setBold(true);
+//	lexer->setFont(defFont, QsciLexerSQL::Keyword);
+//	lexer->setColor(m_syNumberColor, QsciLexerSQL::Number);
+//	lexer->setColor(m_syStringColor, QsciLexerSQL::SingleQuotedString);
+//	lexer->setColor(m_syStringColor, QsciLexerSQL::DoubleQuotedString);
+//	lexer->setColor(m_syCommentColor, QsciLexerSQL::Comment);
+//	lexer->setColor(m_syCommentColor, QsciLexerSQL::CommentLine);
+//	lexer->setColor(m_syCommentColor, QsciLexerSQL::CommentDoc);
 }

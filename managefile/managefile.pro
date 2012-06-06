@@ -72,7 +72,6 @@ SOURCES += main.cpp \
     propofdocdialog.cpp \
     sortsubdirsdialog.cpp \
     preferencesdialog.cpp \
-    sqleditorwidget.cpp \
     qscintilla2/src/XPM.cpp \
     qscintilla2/src/WindowAccessor.cpp \
     qscintilla2/src/ViewStyle.cpp \
@@ -227,7 +226,9 @@ SOURCES += main.cpp \
     shortcuteditordialog.cpp \
     shortcutmodel.cpp \
     sqlkeywords.cpp \
-    sqleditor.cpp
+    txteditorwidget.cpp \
+    txteditor.cpp \
+    logview.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -295,7 +296,6 @@ HEADERS  += mainwindow.h \
     propofdocdialog.h \
     sortsubdirsdialog.h \
     preferencesdialog.h \
-    sqleditorwidget.h \
     qscintilla2/src/XPM.h \
     qscintilla2/src/ViewStyle.h \
     qscintilla2/src/UniConversion.h \
@@ -383,7 +383,9 @@ HEADERS  += mainwindow.h \
     shortcuteditordialog.h \
     shortcutmodel.h \
     sqlkeywords.h \
-    sqleditor.h
+    txteditor.h \
+    txteditorwidget.h \
+    logview.h
 
 RESOURCES += \
     managefile.qrc
@@ -426,7 +428,8 @@ FORMS    += mainwindow.ui \
     prefslnfwidget.ui \
     shortcuteditordialog.ui \
     history.ui \
-    sqleditor.ui
+    txteditor.ui \
+    logview.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -505,6 +508,12 @@ OTHER_FILES += \
     qscintilla2/include/License.txt \
     qscintilla2/include/HFacer.py \
     qscintilla2/include/Face.py
+
+
+
+
+
+
 
 
 

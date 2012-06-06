@@ -30,8 +30,13 @@
 #include "fileutils.h"
 #include "noteeditor.h"
 #include <QDebug>
-NoteEditor    *noteEditor;	// used in Constr. of LinkableMapObj
+#include <QFile>
+#include <QTextStream>
+#include <QTime>
 
+#define _TIME_ qPrintable (QTime::currentTime ().toString ("hh:mm:ss:zzz"))
+
+NoteEditor    *noteEditor;	// used in Constr. of LinkableMapObj
 
 #define ARG_VERSION "--version"
 #define ARG_HELP "--help"
@@ -180,10 +185,61 @@ bool ArgsParser::parseArgs()
     }
     return true;
 }
+
+void customMessageHandler(QtMsgType type, const char *msg)
+ {
+        QString txt;
+
+
+        switch (type) {
+         //调试信息提示
+         case QtDebugMsg:
+                 txt = QString("%1: Debug: %2").arg(_TIME_).arg(msg);
+                 break;
+
+        //一般的warning提示
+         case QtWarningMsg:
+                 txt = QString("%1: Warning: %2").arg(_TIME_).arg(msg);
+         break;
+         //严重错误提示
+         case QtCriticalMsg:
+                txt = QString("%1: Critical: %2").arg(_TIME_).arg(msg);
+         break;
+         //致命错误提示
+         case QtFatalMsg:
+                txt = QString("%1: Fatal: %2").arg(_TIME_).arg(msg);
+                abort();
+         }
+
+         QString logfile = Utils::getSaveLogPath().append(QDir::separator()).append("mflog.log");
+         QFileInfo file(logfile);
+         if(file.exists()){
+             if(file.size() > 10485760){
+                 FileUtils::deleteDirectory(file);
+             }
+         }
+
+         QFile outFile(logfile);
+         outFile.open(QIODevice::WriteOnly | QIODevice::Append);
+         QTextStream ts(&outFile);
+         ts << txt << endl;
+}
+
 // 主函数
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+
+    //先注册自己的MsgHandler
+    qInstallMsgHandler(customMessageHandler);
+
+
+    //以后就可以像下面这样直接打日志到文件中，而且日志也会包含时间信息
+    qDebug("This is a debug message at thisisqt.com");
+    qWarning("This is a warning message  at thisisqt.com");
+    qCritical("This is a critical message  at thisisqt.com");
+    // qFatal("This is a fatal message at thisisqt.com");
+
     //崩溃处理
 #ifndef  WIN32
     initCrashHandler();
@@ -260,6 +316,7 @@ int main(int argc, char *argv[])
     w.showMaximized();
     return app.exec();
 }
+
 
 #ifndef WIN32
 void initCrashHandler()

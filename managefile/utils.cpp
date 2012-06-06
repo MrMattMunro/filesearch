@@ -129,6 +129,18 @@ QString Utils::getSaveDocPath()
     return locpath;
 }
 
+QString Utils::getSaveLogPath()
+{
+    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    locpath.append(QDir::separator()).append("slfile");
+    locpath.append(QDir::separator()).append("log");
+    QDir *dir=new QDir(locpath);
+    if(!dir->exists()){
+       dir->mkdir(locpath);
+    }
+    return locpath;
+}
+
 // 根据目录path取得最底层目录名
 QString Utils::getDirNameByPath(const QString & path)
 {

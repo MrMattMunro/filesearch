@@ -105,7 +105,7 @@ MyTreeView::MyTreeView(QString title, QWidget *parent) : treeTitle("tree"), QTre
                 this, SLOT(currentItemChanged(const QModelIndex &, const QModelIndex &)));
 
         this->setAnimated(true);
-        this->setColumnWidth(0,160);
+        //this->setColumnWidth(0,160);
 
         this->setDragEnabled(true);
         this->setAcceptDrops(true);

@@ -852,6 +852,7 @@ void BrowserMainWindow::slotSwapFocus()
 void BrowserMainWindow::loadPage(const QString &page)
 {
     QUrl url = QUrl::fromUserInput(page);
+    m_tabWidget->newTab();
     loadUrl(url);
     emit testsingal();
 }

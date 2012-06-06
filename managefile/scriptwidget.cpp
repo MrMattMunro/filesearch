@@ -246,8 +246,8 @@ void scriptwidget::seteditor()
 	textEdit->zoomIn(2);
 	ui.vertlayout->addWidget(textEdit);
 
-
-	connect(textEdit, SIGNAL(textChanged()), this, SLOT(evaluatetext())); //make code interactive
+        // make code interactive
+        connect(textEdit, SIGNAL(textChanged()), this, SLOT(evaluatetext()));
 
 	
 	

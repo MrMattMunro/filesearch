@@ -49,8 +49,8 @@
 #include "utils.h"
 #include "fileutils.h"
 #include "preferences.h"
-#include "sqleditorwidget.h"
-#include "SqlEditor.h"
+#include "txteditorwidget.h"
+#include "txteditor.h"
 
 
 #include <QtGui/QClipboard>
@@ -274,6 +274,8 @@ TabWidget::TabWidget(QWidget *parent)
             this, SLOT(currentChanged(int)));
 
     m_lineEdits = new QStackedWidget(this);
+
+
 }
 
 void TabWidget::clear()
@@ -513,7 +515,7 @@ WebView *TabWidget::newTab(bool makeCurrent)
     return webView;
 }
 
-SqlEditor *TabWidget::newTxtTab(bool makeCurrent, QString filepath)
+TxtEditor *TabWidget::newTxtTab(bool makeCurrent, QString filepath)
 {
     // line edit
     UrlLineEdit *urlLineEdit = new UrlLineEdit;
@@ -551,7 +553,7 @@ SqlEditor *TabWidget::newTxtTab(bool makeCurrent, QString filepath)
 
     // webview
     filepath = QDir::fromNativeSeparators(filepath);
-    SqlEditor* widget = new SqlEditor(this);
+    TxtEditor* widget = new TxtEditor(this);
     // widget->prefsChanged();
 
     QStringList  strs = FileUtils::readFile(filepath);

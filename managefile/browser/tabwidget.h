@@ -44,8 +44,8 @@
 
 #include <QtGui/QTabBar>
 
-#include <sqleditorwidget.h>
-#include <SqlEditor.h>
+#include <txteditorwidget.h>
+#include <txteditor.h>
 
 #include <QtGui/QShortcut>
 #include <QAxWidget>
@@ -197,7 +197,7 @@ public slots:
     WebView *newTab(bool makeCurrent = true);
     QAxWidget *newDocTab(bool makeCurrent, QString filepath);
 
-    SqlEditor *newTxtTab(bool makeCurrent, QString filepath);
+    TxtEditor *newTxtTab(bool makeCurrent, QString filepath);
 
     void cloneTab(int index = -1);
     void closeTab(int index = -1);
