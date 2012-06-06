@@ -95,6 +95,7 @@ private slots:
     void bbs();
     void option();
     void homepage();
+    void viewLog();
     //void loadPage(const QString &url);
 
     void slotHome();

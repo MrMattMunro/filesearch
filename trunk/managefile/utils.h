@@ -31,6 +31,7 @@ QString getLocateIndexPath();
 QString getLocateDbPath();
 QString getSavePagePath();
 QString getSaveDocPath();
+QString getSaveLogPath();
 QString getDirNameByPath(const QString & path);
 QDir directoryOf(const QString & subdir);
 

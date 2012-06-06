@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TxtEditor</class>
+ <widget class="QMainWindow" name="TxtEditor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>692</width>
+    <height>431</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>SqlEditor</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QSplitter" name="splitter">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="childrenCollapsible">
+       <bool>false</bool>
+      </property>
+      <widget class="QWidget" name="layoutWidget">
+       <layout class="QVBoxLayout">
+        <property name="spacing">
+         <number>1</number>
+        </property>
+        <item>
+         <widget class="TxtEditorWidget" name="sqlTextEdit"/>
+        </item>
+        <item>
+         <widget class="QFrame" name="searchFrame">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout">
+           <property name="margin">
+            <number>1</number>
+           </property>
+           <property name="spacing">
+            <number>3</number>
+           </property>
+           <item row="0" column="3">
+            <widget class="QToolButton" name="nextToolButton">
+             <property name="toolTip">
+              <string>Search Next</string>
+             </property>
+             <property name="shortcut">
+              <string>F3</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="6">
+            <widget class="QCheckBox" name="wholeWordsCheckBox">
+             <property name="text">
+              <string>Whole Words</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="searchEdit"/>
+           </item>
+           <item row="0" column="5">
+            <widget class="QCheckBox" name="caseCheckBox">
+             <property name="text">
+              <string>Case Sensitive</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Search:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QToolButton" name="previousToolButton">
+             <property name="toolTip">
+              <string>Search previous</string>
+             </property>
+             <property name="shortcut">
+              <string>Shift+F3</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="7">
+            <spacer>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="0" column="4">
+            <spacer>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TxtEditorWidget</class>
+   <extends>QTextEdit</extends>
+   <header location="global">txteditorwidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

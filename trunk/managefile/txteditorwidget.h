@@ -4,8 +4,8 @@ to the COPYING file provided with the program. Following this notice may exist
 a copyright and/or license notice that predates the release of Sqliteman
 for which a new license (GPL+exception) is in place.
 */
-#ifndef SQLEDITORWIDGET_H
-#define SQLEDITORWIDGET_H
+#ifndef TxtEditorWIDGET_H
+#define TxtEditorWIDGET_H
 
 #include <qscintilla2/Qt4/Qsci/qsciscintilla.h>
 
@@ -14,15 +14,15 @@ class Preferences;
 
 /*! \brief A customized QTextEdit.
 It handles the current line highlighting and max line width mark.
-\note SqlEditorWidget is promoted into ui files as a custom widget.
+\note TxtEditorWidget is promoted into ui files as a custom widget.
 \author Petr Vanek <petr@scribus.info>
 */
-class SqlEditorWidget : public QsciScintilla /*QTextEdit*/
+class TxtEditorWidget : public QsciScintilla /*QTextEdit*/
 {
 	Q_OBJECT
 
 	public:
-		SqlEditorWidget(QWidget * parent = 0);
+                TxtEditorWidget(QWidget * parent = 0);
 
         /*! \brief Highlight all occurrences of string s.
         Nothing is processed when s == m_searchText (cache).

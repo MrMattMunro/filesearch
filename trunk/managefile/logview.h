@@ -5,13 +5,13 @@ a copyright and/or license notice that predates the release of Sqliteman
 for which a new license (GPL+exception) is in place.
 */
 
-#ifndef SQLEDITOR_H
-#define SQLEDITOR_H
+#ifndef LogView_H
+#define LogView_H
 
 #include <QWidget>
 #include <QFileSystemWatcher>
 
-#include "ui_sqleditor.h"
+#include "ui_logview.h"
 
 class QTextDocument;
 class QLabel;
@@ -24,21 +24,20 @@ It allows simple editing capabilities for user. There is a simple
 syntax highlighting (see SqlHighlighter class).
 \author Petr Vanek <petr@scribus.info>
  */
-class SqlEditor : public QMainWindow
+class LogView : public QDialog
 {
 	Q_OBJECT
 
 	public:
-		SqlEditor(QWidget * parent = 0);
-		~SqlEditor();
+                LogView(QWidget * parent = 0);
+                ~LogView();
 
 		void saveOnExit();
 
 		void setFileName(const QString & fname);
 		QString fileName() { return m_fileName; };
 
-		void setStatusMessage(const QString & message = 0);
-                        void open(const QString & newFile);
+                void open(const QString & newFile);
 
    	signals:
 		/*! \brief This signal is emitted when user clicks on the one
@@ -59,68 +58,38 @@ class SqlEditor : public QMainWindow
 		void rebuildViewTree(QString schema, QString name);
 
 	private:
-		Ui::SqlEditor ui;
+                Ui::LogView ui;
 
 		QString m_fileName;
 		QFileSystemWatcher * m_fileWatcher;
 
-		QLabel * changedLabel;
-		QLabel * cursorLabel;
 		QString cursorTemplate;
-
-		//! \brief True when user cancel file opening
-		bool canceled;
-		bool m_scriptCancelled;
-		//! \brief Handle long files (prevent app "freezing")
-		QProgressDialog * progress;
-		/*! \brief A helper method for progress.
-		It check the canceled flag. If user cancel the file opening
-		it will stop it. */
-		bool setProgress(int p);
-
-
-        void appendHistory(const QString & sql);
 
 		void showEvent(QShowEvent * event);
 		bool changedConfirm();
-		void saveFile();
-
-
-		/*! \brief Get requested SQL statement from editor.
-		\TODO: Implement a clever sql selecting like TOra/Toad etc.
-		*/
-//		QString query();
-//		//! \brief From TOra
-                //QString prepareExec(toSQLParse::tokenizer &tokens, int line, int pos);
+                void saveFile();
 
 		void find(QString ttf, bool forward/*, bool backward*/);
 
 		//! Reset the QFileSystemWatcher for new name.
 		void setFileWatcher(const QString & newFileName);
 
+                QAction *actionSearch;
+
 	private slots:
-//		void action_Run_SQL_triggered();
-//		void actionRun_Explain_triggered();
-//		void actionRun_as_Script_triggered();
-		void action_Open_triggered();
+
 		void action_Save_triggered();
-		void action_New_triggered();
 		void actionSave_As_triggered();
-                //void actionCreateView_triggered();
-		void sqlTextEdit_cursorPositionChanged(int,int);
-		void documentChanged(bool state);
-		void cancel();
+
 		// searching
 		void actionSearch_triggered();
 		void searchEdit_textChanged(const QString & text);
 		void findPrevious();
 		void findNext();
 
-        void actionShow_History_triggered();
 		//! \brief Watch file for changes from external apps
 		void externalFileChange(const QString & path);
-		//
-		void scriptCancelled();
+
 };
 
 #endif

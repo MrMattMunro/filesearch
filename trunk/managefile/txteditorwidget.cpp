@@ -16,13 +16,14 @@ for which a new license (GPL+exception) is in place.
 #include <qscintilla2/Qt4/Qsci/qsciabstractapis.h>
 #include <qscintilla2/Qt4/Qsci/qscilexer.h>
 
-#include "sqleditorwidget.h"
+#include "txteditorwidget.h"
 #include "preferences.h"
 #include "sqlkeywords.h"
 #include "utils.h"
 
 #include <QtDebug>
-SqlEditorWidget::SqlEditorWidget(QWidget * parent) : QsciScintilla(parent),
+
+TxtEditorWidget::TxtEditorWidget(QWidget * parent) : QsciScintilla(parent),
       m_searchText(""),
       m_searchIndicator(9) // see QsciScintilla docs
 {
@@ -57,12 +58,8 @@ SqlEditorWidget::SqlEditorWidget(QWidget * parent) : QsciScintilla(parent),
 	setAutoCompletionCaseSensitivity(false);
 	setAutoCompletionReplaceWord(true);
 
-        //setCaretLineVisible(m_prefs->activeHighlighting());
-        //setCaretLineBackgroundColor(m_prefs->activeHighlightColor());
-
-        setCaretLineVisible(true);
-        setCaretLineBackgroundColor(QColor(10,12,12));
-
+        setCaretLineVisible(m_prefs->activeHighlighting());
+        setCaretLineBackgroundColor(m_prefs->activeHighlightColor());
 
 	setUtf8(true);
 
@@ -73,15 +70,15 @@ SqlEditorWidget::SqlEditorWidget(QWidget * parent) : QsciScintilla(parent),
 
         setLexer(lexer);
 
-    // search all occurrences
-    // allow indicator painting *under* the text (but it makes editor slower a bit...)
-    // It paints a colored box under the text for all occurrences of m_searchText.
-    SendScintilla(QsciScintilla::SCI_SETTWOPHASEDRAW, 1);
-    SendScintilla(QsciScintilla::SCI_INDICSETSTYLE, m_searchIndicator, QsciScintilla::INDIC_ROUNDBOX);
-    // TODO/FIXME: make it configurable
-    SendScintilla(QsciScintilla::SCI_INDICSETFORE, m_searchIndicator, QColor(255, 230, 90, 100));
-    SendScintilla(QsciScintilla::SCI_INDICSETUNDER, m_searchIndicator, 1);
-    // end of search all occurrences
+        // search all occurrences
+        // allow indicator painting *under* the text (but it makes editor slower a bit...)
+        // It paints a colored box under the text for all occurrences of m_searchText.
+        SendScintilla(QsciScintilla::SCI_SETTWOPHASEDRAW, 1);
+        SendScintilla(QsciScintilla::SCI_INDICSETSTYLE, m_searchIndicator, QsciScintilla::INDIC_ROUNDBOX);
+        // TODO/FIXME: make it configurable
+        SendScintilla(QsciScintilla::SCI_INDICSETFORE, m_searchIndicator, QColor(255, 230, 90, 100));
+        SendScintilla(QsciScintilla::SCI_INDICSETUNDER, m_searchIndicator, 1);
+       // end of search all occurrences
 
 	connect(this, SIGNAL(linesChanged()),
 			this, SLOT(linesChanged()));
@@ -91,11 +88,9 @@ SqlEditorWidget::SqlEditorWidget(QWidget * parent) : QsciScintilla(parent),
 	setCursorPosition(0, 0);
 	linesChanged();
 	prefsChanged();
-
-
 }
 
-void SqlEditorWidget::highlightAllOccurrences(const QString & s,
+void TxtEditorWidget::highlightAllOccurrences(const QString & s,
                                                bool caseSensitive,
                                                bool wholeWords)
 {
@@ -140,7 +135,7 @@ void SqlEditorWidget::highlightAllOccurrences(const QString & s,
     }
 }
 
-void SqlEditorWidget::keyPressEvent(QKeyEvent * e)
+void TxtEditorWidget::keyPressEvent(QKeyEvent * e)
 {
 	// handle editor shortcuts with TAB
 	// It uses qscintilla lowlevel API to handle "word unde cursor"
@@ -182,19 +177,19 @@ void SqlEditorWidget::keyPressEvent(QKeyEvent * e)
 	QsciScintilla::keyPressEvent(e);
 }
 
-void SqlEditorWidget::linesChanged()
+void TxtEditorWidget::linesChanged()
 {
 	int x = QString::number(lines()).length() + 1;
 	setMarginWidth(0, QString().fill('0', x));
 }
 
 #if 0
-void SqlEditorWidget::cursorPositionChanged(int line, int)
+void TxtEditorWidget::cursorPositionChanged(int line, int)
 {
 }
 #endif
 
-void SqlEditorWidget::prefsChanged()
+void TxtEditorWidget::prefsChanged()
 {
 	QFont baseFont(m_prefs->sqlFont());
 	baseFont.setPointSize(m_prefs->sqlFontSize());
