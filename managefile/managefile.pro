@@ -225,7 +225,9 @@ SOURCES += main.cpp \
     qscintilla2/Qt4/PlatQt.cpp \
     qscintilla2/Qt4/ListBoxQt.cpp \
     shortcuteditordialog.cpp \
-    shortcutmodel.cpp
+    shortcutmodel.cpp \
+    sqlkeywords.cpp \
+    sqleditor.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -379,7 +381,9 @@ HEADERS  += mainwindow.h \
     qscintilla2/Qt4/SciClasses.h \
     qscintilla2/Qt4/ListBoxQt.h \
     shortcuteditordialog.h \
-    shortcutmodel.h
+    shortcutmodel.h \
+    sqlkeywords.h \
+    sqleditor.h
 
 RESOURCES += \
     managefile.qrc
@@ -420,7 +424,9 @@ FORMS    += mainwindow.ui \
     prefsdatadisplaywidget.ui \
     prefssqleditorwidget.ui \
     prefslnfwidget.ui \
-    shortcuteditordialog.ui
+    shortcuteditordialog.ui \
+    history.ui \
+    sqleditor.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -499,6 +505,12 @@ OTHER_FILES += \
     qscintilla2/include/License.txt \
     qscintilla2/include/HFacer.py \
     qscintilla2/include/Face.py
+
+
+
+
+
+
 
 
 

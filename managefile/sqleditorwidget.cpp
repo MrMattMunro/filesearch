@@ -34,27 +34,44 @@ SqlEditorWidget::SqlEditorWidget(QWidget * parent) : QsciScintilla(parent),
 
 	QsciLexerSQL * lexer = new QsciLexerSQL(this);
 
+        //lexer->setAPIs(sqlKeywords());
+
 	QsciAPIs * api = new QsciAPIs(lexer);
+//        if (!api->load(":/api/sqlite.api"))
+//            qDebug("api is not loaded");
+//	else
+//	{
+//		api->prepare();
+//                lexer->setAPIs(api);
+//	}
+
         if (!api->load(":/api/sqlite.api"))
             qDebug("api is not loaded");
-	else
-	{
-		api->prepare();
+        else
+        {
+                api->prepare();
                 lexer->setAPIs(api);
-	}
+        }
+
 	setAutoCompletionSource(QsciScintilla::AcsAll);
 	setAutoCompletionCaseSensitivity(false);
 	setAutoCompletionReplaceWord(true);
 
-    setCaretLineVisible(m_prefs->activeHighlighting());
-    setCaretLineBackgroundColor(m_prefs->activeHighlightColor());
+        //setCaretLineVisible(m_prefs->activeHighlighting());
+        //setCaretLineBackgroundColor(m_prefs->activeHighlightColor());
+
+        setCaretLineVisible(true);
+        setCaretLineBackgroundColor(QColor(10,12,12));
+
+
 	setUtf8(true);
 
 	setFolding(QsciScintilla::BoxedFoldStyle);
 	lexer->setFoldComments(true);
 	lexer->setFoldCompact(false);
 
-	setLexer(lexer);
+
+        setLexer(lexer);
 
     // search all occurrences
     // allow indicator painting *under* the text (but it makes editor slower a bit...)
@@ -75,7 +92,7 @@ SqlEditorWidget::SqlEditorWidget(QWidget * parent) : QsciScintilla(parent),
 	linesChanged();
 	prefsChanged();
 
-        highlightAllOccurrences("select", false, true);
+
 }
 
 void SqlEditorWidget::highlightAllOccurrences(const QString & s,
@@ -186,8 +203,9 @@ void SqlEditorWidget::prefsChanged()
 	setFont(baseFont);
 
 	// syntax highlighting
-	lexer()->setColor(m_prefs->syDefaultColor(), QsciLexerSQL::Default);
-	lexer()->setColor(m_prefs->syKeywordColor(), QsciLexerSQL::Keyword);
+        lexer()->setColor(m_prefs->syDefaultColor(), QsciLexerSQL::Default);
+        lexer()->setColor(m_prefs->syKeywordColor(), QsciLexerSQL::Keyword);
+
 	QFont defFont(lexer()->font(QsciLexerSQL::Keyword));
 	defFont.setBold(true);
 	lexer()->setFont(defFont, QsciLexerSQL::Keyword);
@@ -198,6 +216,12 @@ void SqlEditorWidget::prefsChanged()
         lexer()->setColor(m_prefs->syCommentColor(), QsciLexerSQL::CommentLine);
         lexer()->setColor(m_prefs->syCommentColor(), QsciLexerSQL::CommentDoc);
 
+        lexer()->setColor(QColor(12,112,11), QsciLexerSQL::Number);
+        lexer()->setColor(QColor(122,12,131), QsciLexerSQL::SingleQuotedString);
+        lexer()->setColor(QColor(122,12,231), QsciLexerSQL::DoubleQuotedString);
+        lexer()->setColor(QColor(122,12,131), QsciLexerSQL::Comment);
+        lexer()->setColor(QColor(12,123,81), QsciLexerSQL::CommentLine);
+        lexer()->setColor(QColor(12,112,31), QsciLexerSQL::CommentDoc);
 
 
 	setAutoCompletionThreshold(m_prefs->codeCompletion() ?

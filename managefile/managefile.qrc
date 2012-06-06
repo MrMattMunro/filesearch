@@ -147,5 +147,24 @@
         <file>icons/note.png</file>
         <file>icons/sql.ico</file>
         <file>api/sqlite.api</file>
+        <file>api/cplusplus.api</file>
+        <file>api/csharp.api</file>
+        <file>api/css.api</file>
+        <file>api/html.api</file>
+        <file>api/java.api</file>
+        <file>api/javascript.api</file>
+        <file>api/lisp.api</file>
+        <file>api/nsis.api</file>
+        <file>api/pascal.api</file>
+        <file>api/perl.api</file>
+        <file>api/php.api</file>
+        <file>api/python.api</file>
+        <file>api/qore.api</file>
+        <file>api/qorus.api</file>
+        <file>api/sql.api</file>
+        <file>api/tex.api</file>
+        <file>api/vb.api</file>
+        <file>api/vhdl.api</file>
+        <file>api/xml.api</file>
     </qresource>
 </RCC>

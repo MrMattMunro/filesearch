@@ -200,6 +200,14 @@ int main(int argc, char *argv[])
     sqlib.load();
     qDebug() << "my library loaded" << sqlib.isLoaded();
 
+    // 加载数据库驱动
+    QApplication::addLibraryPath("./lib");
+    qDebug() << "my library path : " << app.libraryPaths();
+    QLibrary sciib("SciLexer.dll");
+    sciib.load();
+    qDebug() << "my library loaded" << sciib.isLoaded();
+
+
     // 设置数据库文件
     QString dbpath = Utils::getLocatePath().append(QDir::separator()).append("db");
     QDir *dir=new QDir(dbpath);
