@@ -59,14 +59,15 @@ class WebView;
 
     Handles the tab widget and all the actions
  */
-class BrowserMainWindow : public QMainWindow {
+class BrowserMainWindow : public QWidget {
     Q_OBJECT
 
 public:
-    BrowserMainWindow(QWidget *parent = 0, Qt::WindowFlags flags = 0);
+    BrowserMainWindow(QWidget *parent = 0);
     ~BrowserMainWindow();
     QSize sizeHint() const;
     QString m_lastSearch;
+    QWidget *centralWidget;
 
 public:
     TabWidget *tabWidget() const;
@@ -77,9 +78,14 @@ public:
 public slots:
     void loadPage(const QString &url);
     void slotHome();
-
+    void openDocInTab(const QString &filepath);
+    void openTxtInTab(const QString &filepath);
+signals:
+        //Êó±êË«»÷
+        void         testsingal();
 protected:
     void closeEvent(QCloseEvent *event);
+    void resizeEvent(QResizeEvent * event);
 
 private slots:
     void save();
@@ -137,6 +143,7 @@ private:
     void updateStatusbarActionText(bool visible);
 
 private:
+    static BrowserMainWindow *m_mainWindow;
     QToolBar *m_navigationBar;
     ToolbarSearch *m_toolbarSearch;
     BookmarksToolBar *m_bookmarksToolbar;

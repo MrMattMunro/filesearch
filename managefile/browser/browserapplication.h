@@ -54,24 +54,26 @@ class QLocalServer;
 QT_END_NAMESPACE
 
 class BookmarksManager;
-class BrowserMainWindow;
 class CookieJar;
 class DownloadManager;
 class HistoryManager;
 class NetworkAccessManager;
-class BrowserApplication : public QApplication
+class BrowserMainWindow;
+
+class BrowserApplication : public QObject
 {
     Q_OBJECT
 
 public:
-    BrowserApplication(int &argc, char **argv);
+    BrowserApplication(QObject *parent = 0);
     ~BrowserApplication();
-    static BrowserApplication *instance();
+
+    static BrowserApplication* instance();
+    static void deleteInstance();
+
     void loadSettings();
 
     bool isTheOnlyBrowser() const;
-    BrowserMainWindow *mainWindow();
-    QList<BrowserMainWindow*> mainWindows();
     QIcon icon(const QUrl &url) const;
 
     void saveSession();
@@ -82,13 +84,14 @@ public:
     static DownloadManager *downloadManager();
     static NetworkAccessManager *networkAccessManager();
     static BookmarksManager *bookmarksManager();
+    static BrowserMainWindow *mainWindow();
 
 #if defined(Q_WS_MAC)
     bool event(QEvent *event);
 #endif
 
 public slots:
-    BrowserMainWindow *newMainWindow();
+    BrowserMainWindow *newMainWindow(QWidget * parent);
     void restoreLastSession();
 #if defined(Q_WS_MAC)
     void lastWindowClosed();
@@ -101,6 +104,8 @@ private slots:
     void newLocalSocketConnection();
 
 private:
+    static BrowserApplication* _instance;
+
     void clean();
     void installTranslator(const QString &name);
 
@@ -109,7 +114,8 @@ private:
     static NetworkAccessManager *s_networkAccessManager;
     static BookmarksManager *s_bookmarksManager;
 
-    QList<QPointer<BrowserMainWindow> > m_mainWindows;
+    static BrowserMainWindow *m_mainWindow;
+
     QLocalServer *m_localServer;
     QByteArray m_lastSession;
     mutable QIcon m_defaultIcon;

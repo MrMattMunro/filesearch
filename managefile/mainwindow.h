@@ -65,7 +65,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = 0, Qt::WFlags flags = 0);
     ~MainWindow();
-    QSize sizeHint() const;
+   // QSize sizeHint() const;
 
     TabWidget *tabWidget() const;
     WebView *currentTab() const;
@@ -95,7 +95,7 @@ private slots:
     void bbs();
     void option();
     void homepage();
-    void loadPage(const QString &url);
+    //void loadPage(const QString &url);
 
     void slotHome();
 
@@ -106,54 +106,54 @@ private slots:
     // doc table start
     void openDocInTab();
     // doc table end
-    // browser start
-    void save();
+//    // browser start
+//    void save();
 
-    void slotLoadProgress(int);
-    void slotUpdateStatusbar(const QString &string);
-    void slotUpdateWindowTitle(const QString &title = QString());
+//    void slotLoadProgress(int);
+//    void slotUpdateStatusbar(const QString &string);
+//    void slotUpdateWindowTitle(const QString &title = QString());
 
-    void loadUrl(const QUrl &url);
-    void slotPreferences();
+//    void loadUrl(const QUrl &url);
+//    void slotPreferences();
 
-    void slotFileNew();
-    void slotFileOpen();
-    void slotFilePrintPreview();
-    void slotFilePrint();
-    void slotPrivateBrowsing();
-    void slotFileSaveAs();
-    void slotEditFind();
-    void slotEditFindNext();
-    void slotEditFindPrevious();
-    void slotShowBookmarksDialog();
-    void slotAddBookmark();
-    void slotViewZoomIn();
-    void slotViewZoomOut();
-    void slotViewResetZoom();
-    void slotViewZoomTextOnly(bool enable);
-    void slotViewToolbar();
-    void slotViewBookmarksBar();
-    void slotViewStatusbar();
-    void slotViewPageSource();
-    void slotViewFullScreen(bool enable);
+//    void slotFileNew();
+//    void slotFileOpen();
+//    void slotFilePrintPreview();
+//    void slotFilePrint();
+//    void slotPrivateBrowsing();
+//    void slotFileSaveAs();
+//    void slotEditFind();
+//    void slotEditFindNext();
+//    void slotEditFindPrevious();
+//    void slotShowBookmarksDialog();
+//    void slotAddBookmark();
+//    void slotViewZoomIn();
+//    void slotViewZoomOut();
+//    void slotViewResetZoom();
+//    void slotViewZoomTextOnly(bool enable);
+//    void slotViewToolbar();
+//    void slotViewBookmarksBar();
+//    void slotViewStatusbar();
+//    void slotViewPageSource();
+//    void slotViewFullScreen(bool enable);
 
-    void slotWebSearch();
-    void slotToggleInspector(bool enable);
-    void slotAboutApplication();
-    void slotDownloadManager();
-    void slotSelectLineEdit();
+//    void slotWebSearch();
+//    void slotToggleInspector(bool enable);
+//    void slotAboutApplication();
+//    void slotDownloadManager();
+//    void slotSelectLineEdit();
 
-    void slotAboutToShowBackMenu();
-    void slotAboutToShowForwardMenu();
-    void slotAboutToShowWindowMenu();
-    void slotOpenActionUrl(QAction *action);
-    void slotShowWindow();
-    void slotSwapFocus();
+//    void slotAboutToShowBackMenu();
+//    void slotAboutToShowForwardMenu();
+//    void slotAboutToShowWindowMenu();
+      void slotOpenActionUrl(QAction *action);
+//    void slotShowWindow();
+//    void slotSwapFocus();
 
-    void printRequested(QWebFrame *frame);
-    void geometryChangeRequested(const QRect &geometry);
-    void updateToolbarActionText(bool visible);
-    void updateBookmarksToolbarActionText(bool visible);
+//    void printRequested(QWebFrame *frame);
+//    void geometryChangeRequested(const QRect &geometry);
+//    void updateToolbarActionText(bool visible);
+//    void updateBookmarksToolbarActionText(bool visible);
     void slotShowSearchSetMenu();
     //void resizeSpace();
     //browser end
@@ -164,7 +164,7 @@ private slots:
     void shownotes();
 
 protected:
-    void closeEvent(QCloseEvent *event);
+   // void closeEvent(QCloseEvent *event);
 
 private:
     QActionGroup *m_feedGroup;
@@ -230,42 +230,43 @@ private:
     void upateToolBar(QStringList waitItems, QStringList selItems);
     void initBrowser();
 
-    // browser start
-    void loadDefaultState();
-    void setupMenu();
-    void setupToolBar();
-    void updateStatusbarActionText(bool visible);
+//    // browser start
+//    void loadDefaultState();
+//    void setupMenu();
+//    void setupToolBar();
+//    void updateStatusbarActionText(bool visible);
 
-    QToolBar *m_navigationBar;
-    ToolbarSearch *m_toolbarSearch;
-    BookmarksToolBar *m_bookmarksToolbar;
-    ChaseWidget *m_chaseWidget;
-    TabWidget *m_tabWidget;
-    AutoSaver *m_autoSaver;
+//    QToolBar *m_navigationBar;
+      ToolbarSearch *m_toolbarSearch;
+//    BookmarksToolBar *m_bookmarksToolbar;
+//    ChaseWidget *m_chaseWidget;
+//    TabWidget *m_tabWidget;
+//    AutoSaver *m_autoSaver;
 
-    QAction *m_historyBack;
-    QMenu *m_historyBackMenu;
-    QAction *m_historyForward;
-    QMenu *m_historyForwardMenu;
-    QMenu *m_windowMenu;
-    QMenu *m_searchSetMenu;
+//    QAction *m_historyBack;
+//    QMenu *m_historyBackMenu;
+//    QAction *m_historyForward;
+//    QMenu *m_historyForwardMenu;
+//    QMenu *m_windowMenu;
+     QMenu *m_searchSetMenu;
 
-    QAction *m_stop;
-    QAction *m_reload;
-    QAction *m_stopReload;
-    QAction *m_viewToolbar;
-    QAction *m_viewBookmarkBar;
-    QAction *m_viewStatusbar;
-    QAction *m_restoreLastSession;
-    QAction *m_addBookmark;
+//    QAction *m_stop;
+//    QAction *m_reload;
+//    QAction *m_stopReload;
+//    QAction *m_viewToolbar;
+//    QAction *m_viewBookmarkBar;
+//    QAction *m_viewStatusbar;
+//    QAction *m_restoreLastSession;
+//    QAction *m_addBookmark;
 
-    QIcon m_reloadIcon;
-    QIcon m_stopIcon;
+//    QIcon m_reloadIcon;
+//    QIcon m_stopIcon;
 
-    QString m_lastSearch;
-    // browser end
+//    QString m_lastSearch;
+//    // browser end
+     BrowserMainWindow *browser;
 
-    QDockWidget *noteEditorDW;
+     QDockWidget *noteEditorDW;
 
 };
 

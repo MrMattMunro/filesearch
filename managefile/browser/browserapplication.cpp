@@ -74,14 +74,14 @@ DownloadManager *BrowserApplication::s_downloadManager = 0;
 HistoryManager *BrowserApplication::s_historyManager = 0;
 NetworkAccessManager *BrowserApplication::s_networkAccessManager = 0;
 BookmarksManager *BrowserApplication::s_bookmarksManager = 0;
+BrowserApplication* BrowserApplication::_instance = 0;
+BrowserMainWindow* BrowserApplication::m_mainWindow = 0;
 
-BrowserApplication::BrowserApplication(int &argc, char **argv)
-    : QApplication(argc, argv)
+BrowserApplication::BrowserApplication(QObject *parent)
+    : QObject(parent)
     , m_localServer(0)
 {
-    QCoreApplication::setOrganizationName(QLatin1String("slfile"));
-    QCoreApplication::setApplicationName(QLatin1String("browser"));
-    QCoreApplication::setApplicationVersion(QLatin1String("1.0"));
+
 #ifdef Q_WS_QWS
     // Use a different server name for QWS so we can run an X11
     // browser and a QWS browser in parallel on the same machine for
@@ -149,10 +149,6 @@ BrowserApplication::BrowserApplication(int &argc, char **argv)
 BrowserApplication::~BrowserApplication()
 {
     delete s_downloadManager;
-    for (int i = 0; i < m_mainWindows.size(); ++i) {
-        BrowserMainWindow *window = m_mainWindows.at(i);
-        delete window;
-    }
     delete s_networkAccessManager;
     delete s_bookmarksManager;
 }
@@ -163,14 +159,14 @@ void BrowserApplication::lastWindowClosed()
     clean();
     BrowserMainWindow *mw = new BrowserMainWindow;
     mw->slotHome();
-    m_mainWindows.prepend(mw);
 }
 #endif
 
-BrowserApplication *BrowserApplication::instance()
-{
-    return (static_cast<BrowserApplication *>(QCoreApplication::instance()));
-}
+//BrowserApplication *BrowserApplication::instance()
+//{
+//    return (static_cast<BrowserApplication *>(QCoreApplication::instance()));
+//}
+
 
 #if defined(Q_WS_MAC)
 #include <QtGui/QMessageBox>
@@ -207,18 +203,18 @@ void BrowserApplication::postLaunch()
     QWebSettings::setIconDatabasePath(directory);
     QWebSettings::setOfflineStoragePath(directory);
 
-    setWindowIcon(QIcon(QLatin1String(":browser.svg")));
+//    setWindowIcon(QIcon(QLatin1String(":browser.svg")));
 
     loadSettings();
 
     // newMainWindow() needs to be called in main() for this to happen
-    if (m_mainWindows.count() > 0) {
+    //if (m_mainWindows.count() > 0) {
         QStringList args = QCoreApplication::arguments();
         if (args.count() > 1)
             mainWindow()->loadPage(args.last());
         else
             mainWindow()->slotHome();
-    }
+   // }
     BrowserApplication::historyManager();
 }
 
@@ -253,15 +249,6 @@ void BrowserApplication::loadSettings()
     settings.endGroup();
 }
 
-QList<BrowserMainWindow*> BrowserApplication::mainWindows()
-{
-    clean();
-    QList<BrowserMainWindow*> list;
-    for (int i = 0; i < m_mainWindows.count(); ++i)
-        list.append(m_mainWindows.at(i));
-    return list;
-}
-
 void BrowserApplication::clean()
 {
     // cleanup any deleted main windows first
@@ -286,7 +273,7 @@ void BrowserApplication::saveSession()
     QDataStream stream(&buffer);
     buffer.open(QIODevice::ReadWrite);
 
-    stream << m_mainWindows.count();
+    //stream << m_mainWindows.count();
     // TODO
 //    for (int i = 0; i < m_mainWindows.count(); ++i)
 //        stream << m_mainWindows.at(i)->saveState();
@@ -314,13 +301,7 @@ void BrowserApplication::restoreLastSession()
     }
     for (int i = 0; i < windows.count(); ++i) {
         BrowserMainWindow *newWindow = 0;
-        if (m_mainWindows.count() == 1
-            && mainWindow()->tabWidget()->count() == 1
-            && mainWindow()->currentTab()->url() == QUrl()) {
-            newWindow = mainWindow();
-        } else {
-            newWindow = newMainWindow();
-        }
+        newWindow = mainWindow();
         newWindow->restoreState(windows.at(i));
     }
 }
@@ -368,20 +349,19 @@ void BrowserApplication::openUrl(const QUrl &url)
     mainWindow()->loadPage(url.toString());
 }
 
-BrowserMainWindow *BrowserApplication::newMainWindow()
+BrowserMainWindow *BrowserApplication::newMainWindow(QWidget * parent)
 {
-    BrowserMainWindow *browser = new BrowserMainWindow();
-    m_mainWindows.prepend(browser);
-    browser->show();
-    return browser;
+    m_mainWindow = new BrowserMainWindow(parent);
+    m_mainWindow->show();
+    return m_mainWindow;
 }
 
 BrowserMainWindow *BrowserApplication::mainWindow()
-{
-    clean();
-    if (m_mainWindows.isEmpty())
-        newMainWindow();
-    return m_mainWindows[0];
+{    
+    if (!m_mainWindow) {
+        m_mainWindow = new BrowserMainWindow();
+    }
+    return m_mainWindow;
 }
 
 void BrowserApplication::newLocalSocketConnection()
@@ -399,7 +379,7 @@ void BrowserApplication::newLocalSocketConnection()
         int openLinksIn = settings.value(QLatin1String("openLinksIn"), 0).toInt();
         settings.endGroup();
         if (openLinksIn == 1)
-            newMainWindow();
+            mainWindow();
         else
             mainWindow()->tabWidget()->newTab();
         openUrl(url);
@@ -456,5 +436,20 @@ QIcon BrowserApplication::icon(const QUrl &url) const
     if (m_defaultIcon.isNull())
         m_defaultIcon = QIcon(QLatin1String(":defaulticon.png"));
     return m_defaultIcon.pixmap(16, 16);
+}
+
+BrowserApplication* BrowserApplication::instance()
+{
+    if (_instance == 0)
+        _instance = new BrowserApplication();
+
+    return _instance;
+}
+
+void BrowserApplication::deleteInstance()
+{
+    if (_instance)
+        delete _instance;
+    _instance = 0;
 }
 

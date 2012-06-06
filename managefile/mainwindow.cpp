@@ -64,20 +64,12 @@ extern NoteEditor *noteEditor;
 
 MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     : QMainWindow(parent, flags)
-    , m_tabWidget(new TabWidget(this))
-    , m_autoSaver(new AutoSaver(this))
-    , m_historyBack(0)
-    , m_historyForward(0)
-    , m_stop(0)
-    , m_reload(0)
 {
     initUI();
     initActions();
     initMenus();
     initStatusbar();
     initToolbar();
-    initBrowser();
-
 
     m_appName = tr("Local File Manage");
     setContextMenuPolicy(Qt::CustomContextMenu);
@@ -412,83 +404,76 @@ void MainWindow::initMenus()
 }
 
 // 初始化浏览器
-void MainWindow::initBrowser()
-{
-
-    setupToolBar();
-    QWidget *centralWidget = new QWidget(this);
-
-    BookmarksModel *boomarksModel = BrowserApplication::bookmarksManager()->bookmarksModel();
-    m_bookmarksToolbar = new BookmarksToolBar(boomarksModel, centralWidget);
-
-    //connect(m_bookmarksToolbar, SIGNAL(openUrl(QUrl)), m_tabWidget, SLOT(loadUrlInCurrentTab(QUrl)));
-
-    //connect(m_bookmarksToolbar->toggleViewAction(), SIGNAL(toggled(bool)), this, SLOT(updateBookmarksToolbarActionText(bool)));
-
-//    QVBoxLayout *layout = new QVBoxLayout;
-//    layout->setSpacing(0);
-//    layout->setMargin(0);
-//#if defined(Q_WS_MAC)
-//    layout->addWidget(m_bookmarksToolbar);
-//    layout->addWidget(new QWidget); // <- OS X tab widget style bug
-//#else
-    //addToolBarBreak();
-    //addToolBar(m_bookmarksToolbar);
-//#endif
-//    layout->addWidget(m_tabWidget);
-//    centralWidget->setLayout(layout);
-
-    // 加入spplitter
-    splitter->addWidget(m_tabWidget);
-
-    connect(m_tabWidget, SIGNAL(loadPage(QString)),
-        this, SLOT(loadPage(QString)));
-    connect(m_tabWidget, SIGNAL(setCurrentTitle(QString)),
-        this, SLOT(slotUpdateWindowTitle(QString)));
-    connect(m_tabWidget, SIGNAL(showStatusBarMessage(QString)),
-              statusBar(), SLOT(showMessage(QString)));
-    connect(m_tabWidget, SIGNAL(linkHovered(QString)),
-                statusBar(), SLOT(showMessage(QString)));
-    connect(m_tabWidget, SIGNAL(loadProgress(int)),
-            this, SLOT(slotLoadProgress(int)));
-    connect(m_tabWidget, SIGNAL(tabsChanged()),
-            m_autoSaver, SLOT(changeOccurred()));
-    connect(m_tabWidget, SIGNAL(geometryChangeRequested(QRect)),
-            this, SLOT(geometryChangeRequested(QRect)));
-    connect(m_tabWidget, SIGNAL(printRequested(QWebFrame*)),
-            this, SLOT(printRequested(QWebFrame*)));
-    connect(m_tabWidget, SIGNAL(menuBarVisibilityChangeRequested(bool)),
-            menuBar(), SLOT(setVisible(bool)));
-   connect(m_tabWidget, SIGNAL(statusBarVisibilityChangeRequested(bool)),
-           statusBar(), SLOT(setVisible(bool)));
-    connect(m_tabWidget, SIGNAL(toolBarVisibilityChangeRequested(bool)),
-            m_navigationBar, SLOT(setVisible(bool)));
-    connect(m_tabWidget, SIGNAL(toolBarVisibilityChangeRequested(bool)),
-            m_bookmarksToolbar, SLOT(setVisible(bool)));
-#if defined(Q_WS_MAC)
-    connect(m_tabWidget, SIGNAL(lastTabClosed()),
-            this, SLOT(close()));
-#else
-    connect(m_tabWidget, SIGNAL(lastTabClosed()),
-            m_tabWidget, SLOT(newTab()));
-#endif
-
-//    // 改变m_tabwiget大小时
-//    connect(m_doctable, SIGNAL(resize(QResizeEvent *event)), this, SLOT(resizeSpace()));
-
-    slotUpdateWindowTitle();
-    loadDefaultState();
-    m_tabWidget->newTab();
-
-    int size = m_tabWidget->lineEditStack()->sizeHint().height();
-    m_navigationBar->setIconSize(QSize(size, size));
-}
-
-
-//// 调节空白区域大小
-//void MainWindow::resizeSpace()
+//void MainWindow::initBrowser()
 //{
-//     sapcewidget->setMinimumWidth(m_doctable->width()*1.2);
+
+//    setupToolBar();
+//    QWidget *centralWidget = new QWidget(this);
+
+//    BookmarksModel *boomarksModel = BrowserApplication::bookmarksManager()->bookmarksModel();
+//    m_bookmarksToolbar = new BookmarksToolBar(boomarksModel, centralWidget);
+
+//    //connect(m_bookmarksToolbar, SIGNAL(openUrl(QUrl)), m_tabWidget, SLOT(loadUrlInCurrentTab(QUrl)));
+
+//    //connect(m_bookmarksToolbar->toggleViewAction(), SIGNAL(toggled(bool)), this, SLOT(updateBookmarksToolbarActionText(bool)));
+
+////    QVBoxLayout *layout = new QVBoxLayout;
+////    layout->setSpacing(0);
+////    layout->setMargin(0);
+////#if defined(Q_WS_MAC)
+////    layout->addWidget(m_bookmarksToolbar);
+////    layout->addWidget(new QWidget); // <- OS X tab widget style bug
+////#else
+//    //addToolBarBreak();
+//    //addToolBar(m_bookmarksToolbar);
+////#endif
+////    layout->addWidget(m_tabWidget);
+////    centralWidget->setLayout(layout);
+
+//    // 加入spplitter
+//    splitter->addWidget(m_tabWidget);
+
+//    connect(m_tabWidget, SIGNAL(loadPage(QString)),
+//        this, SLOT(loadPage(QString)));
+//    connect(m_tabWidget, SIGNAL(setCurrentTitle(QString)),
+//        this, SLOT(slotUpdateWindowTitle(QString)));
+//    connect(m_tabWidget, SIGNAL(showStatusBarMessage(QString)),
+//              statusBar(), SLOT(showMessage(QString)));
+//    connect(m_tabWidget, SIGNAL(linkHovered(QString)),
+//                statusBar(), SLOT(showMessage(QString)));
+//    connect(m_tabWidget, SIGNAL(loadProgress(int)),
+//            this, SLOT(slotLoadProgress(int)));
+//    connect(m_tabWidget, SIGNAL(tabsChanged()),
+//            m_autoSaver, SLOT(changeOccurred()));
+//    connect(m_tabWidget, SIGNAL(geometryChangeRequested(QRect)),
+//            this, SLOT(geometryChangeRequested(QRect)));
+//    connect(m_tabWidget, SIGNAL(printRequested(QWebFrame*)),
+//            this, SLOT(printRequested(QWebFrame*)));
+//    connect(m_tabWidget, SIGNAL(menuBarVisibilityChangeRequested(bool)),
+//            menuBar(), SLOT(setVisible(bool)));
+//   connect(m_tabWidget, SIGNAL(statusBarVisibilityChangeRequested(bool)),
+//           statusBar(), SLOT(setVisible(bool)));
+//    connect(m_tabWidget, SIGNAL(toolBarVisibilityChangeRequested(bool)),
+//            m_navigationBar, SLOT(setVisible(bool)));
+//    connect(m_tabWidget, SIGNAL(toolBarVisibilityChangeRequested(bool)),
+//            m_bookmarksToolbar, SLOT(setVisible(bool)));
+//#if defined(Q_WS_MAC)
+//    connect(m_tabWidget, SIGNAL(lastTabClosed()),
+//            this, SLOT(close()));
+//#else
+//    connect(m_tabWidget, SIGNAL(lastTabClosed()),
+//            m_tabWidget, SLOT(newTab()));
+//#endif
+
+////    // 改变m_tabwiget大小时
+////    connect(m_doctable, SIGNAL(resize(QResizeEvent *event)), this, SLOT(resizeSpace()));
+
+//    slotUpdateWindowTitle();
+//    loadDefaultState();
+//    m_tabWidget->newTab();
+
+//    int size = m_tabWidget->lineEditStack()->sizeHint().height();
+//    m_navigationBar->setIconSize(QSize(size, size));
 //}
 
 // 状态栏
@@ -541,15 +526,15 @@ void MainWindow::initToolbar()
 // 用户手册
 void MainWindow::helpDoc()
 {
-     m_tabWidget->newTab();
-     loadUrl(QUrl("http://www.slfile.net/?page_id=58"));
+//     m_tabWidget->newTab();
+//     loadUrl(QUrl("http://www.slfile.net/?page_id=58"));
 }
 
 // 论坛
 void MainWindow::bbs()
 {
-    m_tabWidget->newTab();
-    loadUrl(QUrl("http://www.slfile.net/?post_type=forum"));
+//    m_tabWidget->newTab();
+//    loadUrl(QUrl("http://www.slfile.net/?post_type=forum"));
 
 }
 
@@ -564,8 +549,8 @@ void MainWindow::option()
 // 主页
 void MainWindow::homepage()
 {
-    m_tabWidget->newTab();
-    loadUrl(QUrl("http://www.slfile.net/"));
+//    m_tabWidget->newTab();
+//    loadUrl(QUrl("http://www.slfile.net/"));
 }
 
 
@@ -586,6 +571,22 @@ void MainWindow::initUI()
 
         splitter->addWidget(q_myTreeList);
         splitter->addWidget(m_doctable);
+
+        BrowserApplication* applcation = BrowserApplication::instance();
+        browser = applcation->newMainWindow(splitter);
+
+
+        //browser->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        //browser->setMinimumWidth(1000);
+
+       // resizeSpace();
+        splitter->addWidget(browser);
+
+        browser->hide();
+        browser->setMaximumWidth(0);
+        browser->setMinimumWidth(0);
+
+        connect(browser, SIGNAL(testsingal()), this, SLOT(resizeSpace()));
 
         connect(q_myTreeList, SIGNAL(LBtnClk()), this, SLOT(buildDocList()));
 
@@ -624,8 +625,8 @@ void MainWindow::shownotes(){
 
 MainWindow::~MainWindow()
 {
-    m_autoSaver->changeOccurred();
-    m_autoSaver->saveIfNeccessary();
+    //m_autoSaver->changeOccurred();
+    //m_autoSaver->saveIfNeccessary();
     Preferences::deleteInstance();
 }
 
@@ -815,603 +816,591 @@ void MainWindow::clearHistory()
 
 
 
-void MainWindow::loadDefaultState()
-{
-    QSettings settings;
-    settings.beginGroup(QLatin1String("BrowserMainWindow"));
-    QByteArray data = settings.value(QLatin1String("defaultState")).toByteArray();
-    restoreState(data);
-    settings.endGroup();
-}
+//void MainWindow::loadDefaultState()
+//{
+//    QSettings settings;
+//    settings.beginGroup(QLatin1String("BrowserMainWindow"));
+//    QByteArray data = settings.value(QLatin1String("defaultState")).toByteArray();
+//    restoreState(data);
+//    settings.endGroup();
+//}
 
-QSize MainWindow::sizeHint() const
-{
-    QRect desktopRect = QApplication::desktop()->screenGeometry();
-    QSize size = desktopRect.size() * qreal(0.9);
-    return size;
-}
+//QSize MainWindow::sizeHint() const
+//{
+//    QRect desktopRect = QApplication::desktop()->screenGeometry();
+//    QSize size = desktopRect.size() * qreal(0.9);
+//    return size;
+//}
 
-void MainWindow::save()
-{
-    BrowserApplication::instance()->saveSession();
+//void MainWindow::save()
+//{
+//    BrowserApplication::instance()->saveSession();
 
-    QSettings settings;
-    settings.beginGroup(QLatin1String("BrowserMainWindow"));
-    QByteArray data = saveState(false);
-    settings.setValue(QLatin1String("defaultState"), data);
-    settings.endGroup();
-}
+//    QSettings settings;
+//    settings.beginGroup(QLatin1String("BrowserMainWindow"));
+//    QByteArray data = saveState(false);
+//    settings.setValue(QLatin1String("defaultState"), data);
+//    settings.endGroup();
+//}
 
 static const qint32 BrowserMainWindowMagic = 0xba;
 
-QByteArray MainWindow::saveState(bool withTabs) const
-{
-    int version = 2;
-    QByteArray data;
-    QDataStream stream(&data, QIODevice::WriteOnly);
+//QByteArray MainWindow::saveState(bool withTabs) const
+//{
+//    int version = 2;
+//    QByteArray data;
+//    QDataStream stream(&data, QIODevice::WriteOnly);
 
-    stream << qint32(BrowserMainWindowMagic);
-    stream << qint32(version);
+//    stream << qint32(BrowserMainWindowMagic);
+//    stream << qint32(version);
 
-    stream << size();
-    stream << !m_navigationBar->isHidden();
-    stream << !m_bookmarksToolbar->isHidden();
-    //stream << !statusBar()->isHidden();
-    if (withTabs)
-        stream << tabWidget()->saveState();
-    else
-        stream << QByteArray();
-    return data;
-}
+//    stream << size();
+//    stream << !m_navigationBar->isHidden();
+//    stream << !m_bookmarksToolbar->isHidden();
+//    //stream << !statusBar()->isHidden();
+//    if (withTabs)
+//        stream << tabWidget()->saveState();
+//    else
+//        stream << QByteArray();
+//    return data;
+//}
 
-bool MainWindow::restoreState(const QByteArray &state)
-{
-    int version = 2;
-    QByteArray sd = state;
-    QDataStream stream(&sd, QIODevice::ReadOnly);
-    if (stream.atEnd())
-        return false;
+//bool MainWindow::restoreState(const QByteArray &state)
+//{
+//    int version = 2;
+//    QByteArray sd = state;
+//    QDataStream stream(&sd, QIODevice::ReadOnly);
+//    if (stream.atEnd())
+//        return false;
 
-    qint32 marker;
-    qint32 v;
-    stream >> marker;
-    stream >> v;
-    if (marker != BrowserMainWindowMagic || v != version)
-        return false;
+//    qint32 marker;
+//    qint32 v;
+//    stream >> marker;
+//    stream >> v;
+//    if (marker != BrowserMainWindowMagic || v != version)
+//        return false;
 
-    QSize size;
-    bool showToolbar;
-    bool showBookmarksBar;
-    bool showStatusbar;
-    QByteArray tabState;
+//    QSize size;
+//    bool showToolbar;
+//    bool showBookmarksBar;
+//    bool showStatusbar;
+//    QByteArray tabState;
 
-    stream >> size;
-    stream >> showToolbar;
-    stream >> showBookmarksBar;
-    stream >> showStatusbar;
-    stream >> tabState;
+//    stream >> size;
+//    stream >> showToolbar;
+//    stream >> showBookmarksBar;
+//    stream >> showStatusbar;
+//    stream >> tabState;
 
-    resize(size);
+//    resize(size);
 
-    m_navigationBar->setVisible(showToolbar);
-    updateToolbarActionText(showToolbar);
+//    m_navigationBar->setVisible(showToolbar);
+//    updateToolbarActionText(showToolbar);
 
-    m_bookmarksToolbar->setVisible(showBookmarksBar);
-    updateBookmarksToolbarActionText(showBookmarksBar);
+//    m_bookmarksToolbar->setVisible(showBookmarksBar);
+//    updateBookmarksToolbarActionText(showBookmarksBar);
 
-    //statusBar()->setVisible(showStatusbar);
-    updateStatusbarActionText(showStatusbar);
+//    //statusBar()->setVisible(showStatusbar);
+//    updateStatusbarActionText(showStatusbar);
 
-    if (!tabWidget()->restoreState(tabState))
-        return false;
+//    if (!tabWidget()->restoreState(tabState))
+//        return false;
 
-    return true;
-}
+//    return true;
+//}
 
-void MainWindow::setupToolBar()
-{
-    setUnifiedTitleAndToolBarOnMac(true);
-    m_navigationBar = addToolBar(tr("Navigation"));
-    connect(m_navigationBar->toggleViewAction(), SIGNAL(toggled(bool)),
-            this, SLOT(updateToolbarActionText(bool)));
+//void MainWindow::setupToolBar()
+//{
+//    setUnifiedTitleAndToolBarOnMac(true);
+//    m_navigationBar = addToolBar(tr("Navigation"));
+//    connect(m_navigationBar->toggleViewAction(), SIGNAL(toggled(bool)),
+//            this, SLOT(updateToolbarActionText(bool)));
 
-    m_viewToolbar = new QAction(this);
-    updateToolbarActionText(true);
-    m_viewToolbar->setShortcut(tr("Ctrl+|"));
-    connect(m_viewToolbar, SIGNAL(triggered()), this, SLOT(slotViewToolbar()));
-    //viewMenu->addAction(m_viewToolbar);
+//    m_viewToolbar = new QAction(this);
+//    updateToolbarActionText(true);
+//    m_viewToolbar->setShortcut(tr("Ctrl+|"));
+//    connect(m_viewToolbar, SIGNAL(triggered()), this, SLOT(slotViewToolbar()));
+//    //viewMenu->addAction(m_viewToolbar);
 
-    m_historyBack = new QAction(tr("Back"), this);
-    m_tabWidget->addWebAction(m_historyBack, QWebPage::Back);
-    m_historyBack->setShortcuts(QKeySequence::Back);
-    m_historyBack->setIconVisibleInMenu(false);
+//    m_historyBack = new QAction(tr("Back"), this);
+//    m_tabWidget->addWebAction(m_historyBack, QWebPage::Back);
+//    m_historyBack->setShortcuts(QKeySequence::Back);
+//    m_historyBack->setIconVisibleInMenu(false);
 
-    m_historyForward = new QAction(tr("Forward"), this);
-    m_tabWidget->addWebAction(m_historyForward, QWebPage::Forward);
-    m_historyForward->setShortcuts(QKeySequence::Forward);
-    m_historyForward->setIconVisibleInMenu(false);
+//    m_historyForward = new QAction(tr("Forward"), this);
+//    m_tabWidget->addWebAction(m_historyForward, QWebPage::Forward);
+//    m_historyForward->setShortcuts(QKeySequence::Forward);
+//    m_historyForward->setIconVisibleInMenu(false);
 
-    m_historyBack->setIcon(style()->standardIcon(QStyle::SP_ArrowBack, 0, this));
-    m_historyBackMenu = new QMenu(this);
-    m_historyBack->setMenu(m_historyBackMenu);
-    connect(m_historyBackMenu, SIGNAL(aboutToShow()),
-            this, SLOT(slotAboutToShowBackMenu()));
-    connect(m_historyBackMenu, SIGNAL(triggered(QAction*)),
-            this, SLOT(slotOpenActionUrl(QAction*)));
-    m_navigationBar->addAction(m_historyBack);
+//    m_historyBack->setIcon(style()->standardIcon(QStyle::SP_ArrowBack, 0, this));
+//    m_historyBackMenu = new QMenu(this);
+//    m_historyBack->setMenu(m_historyBackMenu);
+//    connect(m_historyBackMenu, SIGNAL(aboutToShow()),
+//            this, SLOT(slotAboutToShowBackMenu()));
+//    connect(m_historyBackMenu, SIGNAL(triggered(QAction*)),
+//            this, SLOT(slotOpenActionUrl(QAction*)));
+//    m_navigationBar->addAction(m_historyBack);
 
-    m_historyForward->setIcon(style()->standardIcon(QStyle::SP_ArrowForward, 0, this));
-    m_historyForwardMenu = new QMenu(this);
-    connect(m_historyForwardMenu, SIGNAL(aboutToShow()),
-            this, SLOT(slotAboutToShowForwardMenu()));
-    connect(m_historyForwardMenu, SIGNAL(triggered(QAction*)),
-            this, SLOT(slotOpenActionUrl(QAction*)));
-    m_historyForward->setMenu(m_historyForwardMenu);
-    m_navigationBar->addAction(m_historyForward);
+//    m_historyForward->setIcon(style()->standardIcon(QStyle::SP_ArrowForward, 0, this));
+//    m_historyForwardMenu = new QMenu(this);
+//    connect(m_historyForwardMenu, SIGNAL(aboutToShow()),
+//            this, SLOT(slotAboutToShowForwardMenu()));
+//    connect(m_historyForwardMenu, SIGNAL(triggered(QAction*)),
+//            this, SLOT(slotOpenActionUrl(QAction*)));
+//    m_historyForward->setMenu(m_historyForwardMenu);
+//    m_navigationBar->addAction(m_historyForward);
 
-    m_stopReload = new QAction(this);
-    m_reloadIcon = style()->standardIcon(QStyle::SP_BrowserReload);
-    m_stopReload->setIcon(m_reloadIcon);
+//    m_stopReload = new QAction(this);
+//    m_reloadIcon = style()->standardIcon(QStyle::SP_BrowserReload);
+//    m_stopReload->setIcon(m_reloadIcon);
 
-    m_navigationBar->addAction(m_stopReload);
+//    m_navigationBar->addAction(m_stopReload);
 
-    m_navigationBar->addWidget(m_tabWidget->lineEditStack());
+//    m_navigationBar->addWidget(m_tabWidget->lineEditStack());
 
-    m_chaseWidget = new ChaseWidget(this);
-    m_navigationBar->addWidget(m_chaseWidget);
+//    m_chaseWidget = new ChaseWidget(this);
+//    m_navigationBar->addWidget(m_chaseWidget);
 
+//}
 
-}
+//void MainWindow::slotShowBookmarksDialog()
+//{
+//    BookmarksDialog *dialog = new BookmarksDialog(this);
+//    connect(dialog, SIGNAL(openUrl(QUrl)),
+//            m_tabWidget, SLOT(loadUrlInCurrentTab(QUrl)));
+//    dialog->show();
+//}
 
-void MainWindow::slotShowBookmarksDialog()
-{
-    BookmarksDialog *dialog = new BookmarksDialog(this);
-    connect(dialog, SIGNAL(openUrl(QUrl)),
-            m_tabWidget, SLOT(loadUrlInCurrentTab(QUrl)));
-    dialog->show();
-}
+//void MainWindow::slotAddBookmark()
+//{
+//    WebView *webView = currentTab();
+//    QString url = webView->url().toString();
+//    QString title = webView->title();
+//    AddBookmarkDialog dialog(url, title);
+//    dialog.exec();
+//}
 
-void MainWindow::slotAddBookmark()
-{
-    WebView *webView = currentTab();
-    QString url = webView->url().toString();
-    QString title = webView->title();
-    AddBookmarkDialog dialog(url, title);
-    dialog.exec();
-}
+//void MainWindow::slotViewToolbar()
+//{
+//    if (m_navigationBar->isVisible()) {
+//        updateToolbarActionText(false);
+//        m_navigationBar->close();
+//    } else {
+//        updateToolbarActionText(true);
+//        m_navigationBar->show();
+//    }
+//    m_autoSaver->changeOccurred();
+//}
 
-void MainWindow::slotViewToolbar()
-{
-    if (m_navigationBar->isVisible()) {
-        updateToolbarActionText(false);
-        m_navigationBar->close();
-    } else {
-        updateToolbarActionText(true);
-        m_navigationBar->show();
-    }
-    m_autoSaver->changeOccurred();
-}
+//void MainWindow::slotViewBookmarksBar()
+//{
+//    if (m_bookmarksToolbar->isVisible()) {
+//        updateBookmarksToolbarActionText(false);
+//        m_bookmarksToolbar->close();
+//    } else {
+//        updateBookmarksToolbarActionText(true);
+//        m_bookmarksToolbar->show();
+//    }
+//    m_autoSaver->changeOccurred();
+//}
 
-void MainWindow::slotViewBookmarksBar()
-{
-    if (m_bookmarksToolbar->isVisible()) {
-        updateBookmarksToolbarActionText(false);
-        m_bookmarksToolbar->close();
-    } else {
-        updateBookmarksToolbarActionText(true);
-        m_bookmarksToolbar->show();
-    }
-    m_autoSaver->changeOccurred();
-}
+//void MainWindow::updateStatusbarActionText(bool visible)
+//{
+//    m_viewStatusbar->setText(!visible ? tr("Show Status Bar") : tr("Hide Status Bar"));
+//}
 
-void MainWindow::updateStatusbarActionText(bool visible)
-{
-    m_viewStatusbar->setText(!visible ? tr("Show Status Bar") : tr("Hide Status Bar"));
-}
+//void MainWindow::updateToolbarActionText(bool visible)
+//{
+//    m_viewToolbar->setText(!visible ? tr("Show Toolbar") : tr("Hide Toolbar"));
+//}
 
-void MainWindow::updateToolbarActionText(bool visible)
-{
-    m_viewToolbar->setText(!visible ? tr("Show Toolbar") : tr("Hide Toolbar"));
-}
+//void MainWindow::updateBookmarksToolbarActionText(bool visible)
+//{
+//    m_viewBookmarkBar->setText(!visible ? tr("Show Bookmarks bar") : tr("Hide Bookmarks bar"));
+//}
 
-void MainWindow::updateBookmarksToolbarActionText(bool visible)
-{
-    m_viewBookmarkBar->setText(!visible ? tr("Show Bookmarks bar") : tr("Hide Bookmarks bar"));
-}
+//void MainWindow::slotViewStatusbar()
+//{
+//    if (statusBar()->isVisible()) {
+//        updateStatusbarActionText(false);
+//        statusBar()->close();
+//    } else {
+//        updateStatusbarActionText(true);
+//        statusBar()->show();
+//    }
+//    m_autoSaver->changeOccurred();
+//}
 
-void MainWindow::slotViewStatusbar()
-{
-    if (statusBar()->isVisible()) {
-        updateStatusbarActionText(false);
-        statusBar()->close();
-    } else {
-        updateStatusbarActionText(true);
-        statusBar()->show();
-    }
-    m_autoSaver->changeOccurred();
-}
+//void MainWindow::loadUrl(const QUrl &url)
+//{
+//    if (!currentTab() || !url.isValid())
+//        return;
 
-void MainWindow::loadUrl(const QUrl &url)
-{
-    if (!currentTab() || !url.isValid())
-        return;
+//    m_tabWidget->currentLineEdit()->setText(QString::fromUtf8(url.toEncoded()));
+//    m_tabWidget->loadUrlInCurrentTab(url);
+//}
 
-    m_tabWidget->currentLineEdit()->setText(QString::fromUtf8(url.toEncoded()));
-    m_tabWidget->loadUrlInCurrentTab(url);
-}
+//void MainWindow::slotDownloadManager()
+//{
+//    BrowserApplication::downloadManager()->show();
+//}
 
-void MainWindow::slotDownloadManager()
-{
-    BrowserApplication::downloadManager()->show();
-}
+//void MainWindow::slotSelectLineEdit()
+//{
+//    m_tabWidget->currentLineEdit()->selectAll();
+//    m_tabWidget->currentLineEdit()->setFocus();
+//}
 
-void MainWindow::slotSelectLineEdit()
-{
-    m_tabWidget->currentLineEdit()->selectAll();
-    m_tabWidget->currentLineEdit()->setFocus();
-}
+//void MainWindow::slotFileSaveAs()
+//{
+//    BrowserApplication::downloadManager()->download(currentTab()->url(), true);
+//}
 
-void MainWindow::slotFileSaveAs()
-{
-    BrowserApplication::downloadManager()->download(currentTab()->url(), true);
-}
+//void MainWindow::slotPreferences()
+//{
+//    SettingsDialog *s = new SettingsDialog(this);
+//    s->show();
+//}
 
-void MainWindow::slotPreferences()
-{
-    SettingsDialog *s = new SettingsDialog(this);
-    s->show();
-}
+//void MainWindow::slotUpdateStatusbar(const QString &string)
+//{
+//    statusBar()->showMessage(string, 2000);
+//}
 
-void MainWindow::slotUpdateStatusbar(const QString &string)
-{
-    statusBar()->showMessage(string, 2000);
-}
+//void MainWindow::slotUpdateWindowTitle(const QString &title)
+//{
+//    if (title.isEmpty()) {
+//        setWindowTitle(tr("Qt Demo Browser"));
+//    } else {
+//#if defined(Q_WS_MAC)
+//        setWindowTitle(title);
+//#else
+//        setWindowTitle(tr("%1 - Qt Demo Browser", "Page title and Browser name").arg(title));
+//#endif
+//    }
+//}
 
-void MainWindow::slotUpdateWindowTitle(const QString &title)
-{
-    if (title.isEmpty()) {
-        setWindowTitle(tr("Qt Demo Browser"));
-    } else {
-#if defined(Q_WS_MAC)
-        setWindowTitle(title);
-#else
-        setWindowTitle(tr("%1 - Qt Demo Browser", "Page title and Browser name").arg(title));
-#endif
-    }
-}
+//void MainWindow::slotAboutApplication()
+//{
+//    QMessageBox::about(this, tr("About"), tr(
+//        "Version %1"
+//        "<p>This demo demonstrates Qt's "
+//        "webkit facilities in action, providing an example "
+//        "browser for you to experiment with.<p>"
+//        "<p>QtWebKit is based on the Open Source WebKit Project developed at <a href=\"http://webkit.org/\">http://webkit.org/</a>."
+//        ).arg(QCoreApplication::applicationVersion()));
+//}
 
-void MainWindow::slotAboutApplication()
-{
-    QMessageBox::about(this, tr("About"), tr(
-        "Version %1"
-        "<p>This demo demonstrates Qt's "
-        "webkit facilities in action, providing an example "
-        "browser for you to experiment with.<p>"
-        "<p>QtWebKit is based on the Open Source WebKit Project developed at <a href=\"http://webkit.org/\">http://webkit.org/</a>."
-        ).arg(QCoreApplication::applicationVersion()));
-}
+//void MainWindow::slotFileNew()
+//{
+//    BrowserApplication::instance()->newMainWindow();
+//    BrowserMainWindow *mw = BrowserApplication::instance()->mainWindow();
+//    mw->slotHome();
+//}
 
-void MainWindow::slotFileNew()
-{
-    BrowserApplication::instance()->newMainWindow();
-    BrowserMainWindow *mw = BrowserApplication::instance()->mainWindow();
-    mw->slotHome();
-}
+//void MainWindow::slotFileOpen()
+//{
+//    QString file = QFileDialog::getOpenFileName(this, tr("Open Web Resource"), QString(),
+//            tr("Web Resources (*.html *.htm *.svg *.png *.gif *.svgz);;All files (*.*)"));
 
-void MainWindow::slotFileOpen()
-{
-    QString file = QFileDialog::getOpenFileName(this, tr("Open Web Resource"), QString(),
-            tr("Web Resources (*.html *.htm *.svg *.png *.gif *.svgz);;All files (*.*)"));
+//    if (file.isEmpty())
+//        return;
 
-    if (file.isEmpty())
-        return;
+//    loadPage(file);
+//}
 
-    loadPage(file);
-}
+//void MainWindow::slotFilePrintPreview()
+//{
+//#ifndef QT_NO_PRINTER
+//    if (!currentTab())
+//        return;
+//    QPrintPreviewDialog *dialog = new QPrintPreviewDialog(this);
+//    connect(dialog, SIGNAL(paintRequested(QPrinter*)),
+//            currentTab(), SLOT(print(QPrinter*)));
+//    dialog->exec();
+//#endif
+//}
 
-void MainWindow::slotFilePrintPreview()
-{
-#ifndef QT_NO_PRINTER
-    if (!currentTab())
-        return;
-    QPrintPreviewDialog *dialog = new QPrintPreviewDialog(this);
-    connect(dialog, SIGNAL(paintRequested(QPrinter*)),
-            currentTab(), SLOT(print(QPrinter*)));
-    dialog->exec();
-#endif
-}
+//void MainWindow::slotFilePrint()
+//{
+//    if (!currentTab())
+//        return;
+//    printRequested(currentTab()->page()->mainFrame());
+//}
 
-void MainWindow::slotFilePrint()
-{
-    if (!currentTab())
-        return;
-    printRequested(currentTab()->page()->mainFrame());
-}
+//void MainWindow::printRequested(QWebFrame *frame)
+//{
+//#ifndef QT_NO_PRINTER
+//    QPrinter printer;
+//    QPrintDialog *dialog = new QPrintDialog(&printer, this);
+//    dialog->setWindowTitle(tr("Print Document"));
+//    if (dialog->exec() != QDialog::Accepted)
+//        return;
+//    frame->print(&printer);
+//#endif
+//}
 
-void MainWindow::printRequested(QWebFrame *frame)
-{
-#ifndef QT_NO_PRINTER
-    QPrinter printer;
-    QPrintDialog *dialog = new QPrintDialog(&printer, this);
-    dialog->setWindowTitle(tr("Print Document"));
-    if (dialog->exec() != QDialog::Accepted)
-        return;
-    frame->print(&printer);
-#endif
-}
+//void MainWindow::slotPrivateBrowsing()
+//{
+//    QWebSettings *settings = QWebSettings::globalSettings();
+//    bool pb = settings->testAttribute(QWebSettings::PrivateBrowsingEnabled);
+//    if (!pb) {
+//        QString title = tr("Are you sure you want to turn on private browsing?");
+//        QString text = tr("<b>%1</b><br><br>When private browsing in turned on,"
+//            " webpages are not added to the history,"
+//            " items are automatically removed from the Downloads window," \
+//            " new cookies are not stored, current cookies can't be accessed," \
+//            " site icons wont be stored, session wont be saved, " \
+//            " and searches are not added to the pop-up menu in the Google search box." \
+//            "  Until you close the window, you can still click the Back and Forward buttons" \
+//            " to return to the webpages you have opened.").arg(title);
 
-void MainWindow::slotPrivateBrowsing()
-{
-    QWebSettings *settings = QWebSettings::globalSettings();
-    bool pb = settings->testAttribute(QWebSettings::PrivateBrowsingEnabled);
-    if (!pb) {
-        QString title = tr("Are you sure you want to turn on private browsing?");
-        QString text = tr("<b>%1</b><br><br>When private browsing in turned on,"
-            " webpages are not added to the history,"
-            " items are automatically removed from the Downloads window," \
-            " new cookies are not stored, current cookies can't be accessed," \
-            " site icons wont be stored, session wont be saved, " \
-            " and searches are not added to the pop-up menu in the Google search box." \
-            "  Until you close the window, you can still click the Back and Forward buttons" \
-            " to return to the webpages you have opened.").arg(title);
+//        QMessageBox::StandardButton button = QMessageBox::question(this, QString(), text,
+//                               QMessageBox::Ok | QMessageBox::Cancel,
+//                               QMessageBox::Ok);
+//        if (button == QMessageBox::Ok) {
+//            settings->setAttribute(QWebSettings::PrivateBrowsingEnabled, true);
+//        }
+//    } else {
+//        settings->setAttribute(QWebSettings::PrivateBrowsingEnabled, false);
+//        BrowserMainWindow * windows = BrowserApplication::instance()->mainWindow();
+//        windows->m_lastSearch = QString::null;
+//        windows->tabWidget()->clear();
+//    }
+//}
 
-        QMessageBox::StandardButton button = QMessageBox::question(this, QString(), text,
-                               QMessageBox::Ok | QMessageBox::Cancel,
-                               QMessageBox::Ok);
-        if (button == QMessageBox::Ok) {
-            settings->setAttribute(QWebSettings::PrivateBrowsingEnabled, true);
-        }
-    } else {
-        settings->setAttribute(QWebSettings::PrivateBrowsingEnabled, false);
+//void MainWindow::closeEvent(QCloseEvent *event)
+//{
+//    if (m_tabWidget->count() > 1) {
+//        int ret = QMessageBox::warning(this, QString(),
+//                           tr("Are you sure you want to close the window?"
+//                              "  There are %1 tabs open").arg(m_tabWidget->count()),
+//                           QMessageBox::Yes | QMessageBox::No,
+//                           QMessageBox::No);
+//        if (ret == QMessageBox::No) {
+//            event->ignore();
+//            return;
+//        }
+//    }
+//    event->accept();
+//    deleteLater();
+//}
 
-        QList<BrowserMainWindow*> windows = BrowserApplication::instance()->mainWindows();
-        for (int i = 0; i < windows.count(); ++i) {
-            BrowserMainWindow *window = windows.at(i);
-            window->m_lastSearch = QString::null;
-            window->tabWidget()->clear();
-        }
-    }
-}
+//void MainWindow::slotEditFind()
+//{
+//    if (!currentTab())
+//        return;
+//    bool ok;
+//    QString search = QInputDialog::getText(this, tr("Find"),
+//                                          tr("Text:"), QLineEdit::Normal,
+//                                          m_lastSearch, &ok);
+//    if (ok && !search.isEmpty()) {
+//        m_lastSearch = search;
+//        if (!currentTab()->findText(m_lastSearch))
+//            slotUpdateStatusbar(tr("\"%1\" not found.").arg(m_lastSearch));
+//    }
+//}
 
-void MainWindow::closeEvent(QCloseEvent *event)
-{
-    if (m_tabWidget->count() > 1) {
-        int ret = QMessageBox::warning(this, QString(),
-                           tr("Are you sure you want to close the window?"
-                              "  There are %1 tabs open").arg(m_tabWidget->count()),
-                           QMessageBox::Yes | QMessageBox::No,
-                           QMessageBox::No);
-        if (ret == QMessageBox::No) {
-            event->ignore();
-            return;
-        }
-    }
-    event->accept();
-    deleteLater();
-}
+//void MainWindow::slotEditFindNext()
+//{
+//    if (!currentTab() && !m_lastSearch.isEmpty())
+//        return;
+//    currentTab()->findText(m_lastSearch);
+//}
 
-void MainWindow::slotEditFind()
-{
-    if (!currentTab())
-        return;
-    bool ok;
-    QString search = QInputDialog::getText(this, tr("Find"),
-                                          tr("Text:"), QLineEdit::Normal,
-                                          m_lastSearch, &ok);
-    if (ok && !search.isEmpty()) {
-        m_lastSearch = search;
-        if (!currentTab()->findText(m_lastSearch))
-            slotUpdateStatusbar(tr("\"%1\" not found.").arg(m_lastSearch));
-    }
-}
+//void MainWindow::slotEditFindPrevious()
+//{
+//    if (!currentTab() && !m_lastSearch.isEmpty())
+//        return;
+//    currentTab()->findText(m_lastSearch, QWebPage::FindBackward);
+//}
 
-void MainWindow::slotEditFindNext()
-{
-    if (!currentTab() && !m_lastSearch.isEmpty())
-        return;
-    currentTab()->findText(m_lastSearch);
-}
+//void MainWindow::slotViewZoomIn()
+//{
+//    if (!currentTab())
+//        return;
+//    currentTab()->setZoomFactor(currentTab()->zoomFactor() + 0.1);
+//}
 
-void MainWindow::slotEditFindPrevious()
-{
-    if (!currentTab() && !m_lastSearch.isEmpty())
-        return;
-    currentTab()->findText(m_lastSearch, QWebPage::FindBackward);
-}
+//void MainWindow::slotViewZoomOut()
+//{
+//    if (!currentTab())
+//        return;
+//    currentTab()->setZoomFactor(currentTab()->zoomFactor() - 0.1);
+//}
 
-void MainWindow::slotViewZoomIn()
-{
-    if (!currentTab())
-        return;
-    currentTab()->setZoomFactor(currentTab()->zoomFactor() + 0.1);
-}
+//void MainWindow::slotViewResetZoom()
+//{
+//    if (!currentTab())
+//        return;
+//    currentTab()->setZoomFactor(1.0);
+//}
 
-void MainWindow::slotViewZoomOut()
-{
-    if (!currentTab())
-        return;
-    currentTab()->setZoomFactor(currentTab()->zoomFactor() - 0.1);
-}
+//void MainWindow::slotViewZoomTextOnly(bool enable)
+//{
+//    if (!currentTab())
+//        return;
+//    currentTab()->page()->settings()->setAttribute(QWebSettings::ZoomTextOnly, enable);
+//}
 
-void MainWindow::slotViewResetZoom()
-{
-    if (!currentTab())
-        return;
-    currentTab()->setZoomFactor(1.0);
-}
+//void MainWindow::slotViewFullScreen(bool makeFullScreen)
+//{
+//    if (makeFullScreen) {
+//        showFullScreen();
+//    } else {
+//        if (isMinimized())
+//            showMinimized();
+//        else if (isMaximized())
+//            showMaximized();
+//        else showNormal();
+//    }
+//}
 
-void MainWindow::slotViewZoomTextOnly(bool enable)
-{
-    if (!currentTab())
-        return;
-    currentTab()->page()->settings()->setAttribute(QWebSettings::ZoomTextOnly, enable);
-}
+//void MainWindow::slotViewPageSource()
+//{
+//    if (!currentTab())
+//        return;
 
-void MainWindow::slotViewFullScreen(bool makeFullScreen)
-{
-    if (makeFullScreen) {
-        showFullScreen();
-    } else {
-        if (isMinimized())
-            showMinimized();
-        else if (isMaximized())
-            showMaximized();
-        else showNormal();
-    }
-}
-
-void MainWindow::slotViewPageSource()
-{
-    if (!currentTab())
-        return;
-
-    QString markup = currentTab()->page()->mainFrame()->toHtml();
-    QPlainTextEdit *view = new QPlainTextEdit(markup);
-    view->setWindowTitle(tr("Page Source of %1").arg(currentTab()->title()));
-    view->setMinimumWidth(640);
-    view->setAttribute(Qt::WA_DeleteOnClose);
-    view->show();
-}
+//    QString markup = currentTab()->page()->mainFrame()->toHtml();
+//    QPlainTextEdit *view = new QPlainTextEdit(markup);
+//    view->setWindowTitle(tr("Page Source of %1").arg(currentTab()->title()));
+//    view->setMinimumWidth(640);
+//    view->setAttribute(Qt::WA_DeleteOnClose);
+//    view->show();
+//}
 
 void MainWindow::slotHome()
 {
     QSettings settings;
     settings.beginGroup(QLatin1String("MainWindow"));
-    QString home = settings.value(QLatin1String("home"), QLatin1String("http://qt.nokia.com/")).toString();
-    loadPage(home);
+    QString home = settings.value(QLatin1String("home"), QLatin1String("http://www.tom.com")).toString();
+    //loadPage(home);
 }
 
-void MainWindow::slotWebSearch()
-{
-    m_toolbarSearch->lineEdit()->selectAll();
-    m_toolbarSearch->lineEdit()->setFocus();
-}
+//void MainWindow::slotWebSearch()
+//{
+//    m_toolbarSearch->lineEdit()->selectAll();
+//    m_toolbarSearch->lineEdit()->setFocus();
+//}
 
-void MainWindow::slotToggleInspector(bool enable)
-{
-    QWebSettings::globalSettings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, enable);
-    if (enable) {
-        int result = QMessageBox::question(this, tr("Web Inspector"),
-                                           tr("The web inspector will only work correctly for pages that were loaded after enabling.\n"
-                                           "Do you want to reload all pages?"),
-                                           QMessageBox::Yes | QMessageBox::No);
-        if (result == QMessageBox::Yes) {
-            m_tabWidget->reloadAllTabs();
-        }
-    }
-}
+//void MainWindow::slotToggleInspector(bool enable)
+//{
+//    QWebSettings::globalSettings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, enable);
+//    if (enable) {
+//        int result = QMessageBox::question(this, tr("Web Inspector"),
+//                                           tr("The web inspector will only work correctly for pages that were loaded after enabling.\n"
+//                                           "Do you want to reload all pages?"),
+//                                           QMessageBox::Yes | QMessageBox::No);
+//        if (result == QMessageBox::Yes) {
+//            m_tabWidget->reloadAllTabs();
+//        }
+//    }
+//}
 
-void MainWindow::slotSwapFocus()
-{
-    if (currentTab()->hasFocus())
-        m_tabWidget->currentLineEdit()->setFocus();
-    else
-        currentTab()->setFocus();
-}
+//void MainWindow::slotSwapFocus()
+//{
+//    if (currentTab()->hasFocus())
+//        m_tabWidget->currentLineEdit()->setFocus();
+//    else
+//        currentTab()->setFocus();
+//}
 
-void MainWindow::loadPage(const QString &page)
-{
-    QUrl url = QUrl::fromUserInput(page);
-    loadUrl(url);
-}
+//void MainWindow::loadPage(const QString &page)
+//{
+//    //QUrl url = QUrl::fromUserInput(page);
+//    //loadUrl(url);
+//}
 
-TabWidget *MainWindow::tabWidget() const
-{
-    return m_tabWidget;
-}
+//TabWidget *MainWindow::tabWidget() const
+//{
+//    return m_tabWidget;
+//}
 
-WebView *MainWindow::currentTab() const
-{
-    return m_tabWidget->currentWebView();
-}
+//WebView *MainWindow::currentTab() const
+//{
+//    return m_tabWidget->currentWebView();
+//}
 
-void MainWindow::slotLoadProgress(int progress)
-{
-    if (progress < 100 && progress > 0) {
-        m_chaseWidget->setAnimated(true);
-        disconnect(m_stopReload, SIGNAL(triggered()), m_reload, SLOT(trigger()));
-        if (m_stopIcon.isNull())
-            m_stopIcon = style()->standardIcon(QStyle::SP_BrowserStop);
-        m_stopReload->setIcon(m_stopIcon);
-        connect(m_stopReload, SIGNAL(triggered()), m_stop, SLOT(trigger()));
-        m_stopReload->setToolTip(tr("Stop loading the current page"));
-    } else {
-        m_chaseWidget->setAnimated(false);
-        disconnect(m_stopReload, SIGNAL(triggered()), m_stop, SLOT(trigger()));
-        m_stopReload->setIcon(m_reloadIcon);
-        connect(m_stopReload, SIGNAL(triggered()), m_reload, SLOT(trigger()));
-        m_stopReload->setToolTip(tr("Reload the current page"));
-    }
-}
+//void MainWindow::slotLoadProgress(int progress)
+//{
+//    if (progress < 100 && progress > 0) {
+//        m_chaseWidget->setAnimated(true);
+//        disconnect(m_stopReload, SIGNAL(triggered()), m_reload, SLOT(trigger()));
+//        if (m_stopIcon.isNull())
+//            m_stopIcon = style()->standardIcon(QStyle::SP_BrowserStop);
+//        m_stopReload->setIcon(m_stopIcon);
+//        connect(m_stopReload, SIGNAL(triggered()), m_stop, SLOT(trigger()));
+//        m_stopReload->setToolTip(tr("Stop loading the current page"));
+//    } else {
+//        m_chaseWidget->setAnimated(false);
+//        disconnect(m_stopReload, SIGNAL(triggered()), m_stop, SLOT(trigger()));
+//        m_stopReload->setIcon(m_reloadIcon);
+//        connect(m_stopReload, SIGNAL(triggered()), m_reload, SLOT(trigger()));
+//        m_stopReload->setToolTip(tr("Reload the current page"));
+//    }
+//}
 
-void MainWindow::slotAboutToShowBackMenu()
-{
-    m_historyBackMenu->clear();
-    if (!currentTab())
-        return;
-    QWebHistory *history = currentTab()->history();
-    int historyCount = history->count();
-    for (int i = history->backItems(historyCount).count() - 1; i >= 0; --i) {
-        QWebHistoryItem item = history->backItems(history->count()).at(i);
-        QAction *action = new QAction(this);
-        action->setData(-1*(historyCount-i-1));
-        QIcon icon = BrowserApplication::instance()->icon(item.url());
-        action->setIcon(icon);
-        action->setText(item.title());
-        m_historyBackMenu->addAction(action);
-    }
-}
+//void MainWindow::slotAboutToShowBackMenu()
+//{
+//    m_historyBackMenu->clear();
+//    if (!currentTab())
+//        return;
+//    QWebHistory *history = currentTab()->history();
+//    int historyCount = history->count();
+//    for (int i = history->backItems(historyCount).count() - 1; i >= 0; --i) {
+//        QWebHistoryItem item = history->backItems(history->count()).at(i);
+//        QAction *action = new QAction(this);
+//        action->setData(-1*(historyCount-i-1));
+//        QIcon icon = BrowserApplication::instance()->icon(item.url());
+//        action->setIcon(icon);
+//        action->setText(item.title());
+//        m_historyBackMenu->addAction(action);
+//    }
+//}
 
-void MainWindow::slotAboutToShowForwardMenu()
-{
-    m_historyForwardMenu->clear();
-    if (!currentTab())
-        return;
-    QWebHistory *history = currentTab()->history();
-    int historyCount = history->count();
-    for (int i = 0; i < history->forwardItems(history->count()).count(); ++i) {
-        QWebHistoryItem item = history->forwardItems(historyCount).at(i);
-        QAction *action = new QAction(this);
-        action->setData(historyCount-i);
-        QIcon icon = BrowserApplication::instance()->icon(item.url());
-        action->setIcon(icon);
-        action->setText(item.title());
-        m_historyForwardMenu->addAction(action);
-    }
-}
+//void MainWindow::slotAboutToShowForwardMenu()
+//{
+//    m_historyForwardMenu->clear();
+//    if (!currentTab())
+//        return;
+//    QWebHistory *history = currentTab()->history();
+//    int historyCount = history->count();
+//    for (int i = 0; i < history->forwardItems(history->count()).count(); ++i) {
+//        QWebHistoryItem item = history->forwardItems(historyCount).at(i);
+//        QAction *action = new QAction(this);
+//        action->setData(historyCount-i);
+//        QIcon icon = BrowserApplication::instance()->icon(item.url());
+//        action->setIcon(icon);
+//        action->setText(item.title());
+//        m_historyForwardMenu->addAction(action);
+//    }
+//}
 
-void MainWindow::slotAboutToShowWindowMenu()
-{
-    m_windowMenu->clear();
-    m_windowMenu->addAction(m_tabWidget->nextTabAction());
-    m_windowMenu->addAction(m_tabWidget->previousTabAction());
-    m_windowMenu->addSeparator();
-    m_windowMenu->addAction(tr("Downloads"), this, SLOT(slotDownloadManager()), QKeySequence(tr("Alt+Ctrl+L", "Download Manager")));
+//void MainWindow::slotAboutToShowWindowMenu()
+//{
+//    m_windowMenu->clear();
+//    m_windowMenu->addAction(m_tabWidget->nextTabAction());
+//    m_windowMenu->addAction(m_tabWidget->previousTabAction());
+//    m_windowMenu->addSeparator();
+//    m_windowMenu->addAction(tr("Downloads"), this, SLOT(slotDownloadManager()), QKeySequence(tr("Alt+Ctrl+L", "Download Manager")));
 
-    m_windowMenu->addSeparator();
-    QList<BrowserMainWindow*> windows = BrowserApplication::instance()->mainWindows();
-    for (int i = 0; i < windows.count(); ++i) {
-        BrowserMainWindow *window = windows.at(i);
-        QAction *action = m_windowMenu->addAction(window->windowTitle(), this, SLOT(slotShowWindow()));
-        action->setData(i);
-        action->setCheckable(true);
-//        if (window == this)
-//            action->setChecked(true);
-    }
-}
+//    m_windowMenu->addSeparator();
+//    BrowserMainWindow *window = BrowserApplication::instance()->mainWindow();
+//    QAction *action = m_windowMenu->addAction(window->windowTitle(), this, SLOT(slotShowWindow()));
+//    action->setCheckable(true);
+//}
 
-void MainWindow::slotShowWindow()
-{
-    if (QAction *action = qobject_cast<QAction*>(sender())) {
-        QVariant v = action->data();
-        if (v.canConvert<int>()) {
-            int offset = qvariant_cast<int>(v);
-            QList<BrowserMainWindow*> windows = BrowserApplication::instance()->mainWindows();
-            windows.at(offset)->activateWindow();
-            windows.at(offset)->currentTab()->setFocus();
-        }
-    }
-}
+//void MainWindow::slotShowWindow()
+//{
+//    if (QAction *action = qobject_cast<QAction*>(sender())) {
+//        QVariant v = action->data();
+//        if (v.canConvert<int>()) {
+//            BrowserMainWindow* windows = BrowserApplication::instance()->mainWindow();
+//            windows->activateWindow();
+//            windows->currentTab()->setFocus();
+//        }
+//    }
+//}
 
 // 搜索设置
 void MainWindow::slotOpenActionUrl(QAction *action)
@@ -1440,11 +1429,6 @@ void MainWindow::slotOpenActionUrl(QAction *action)
           ;
     }
  }
-
-void MainWindow::geometryChangeRequested(const QRect &geometry)
-{
-    setGeometry(geometry);
-}
 
 void MainWindow::windowToggleNoteEditor()
 {
@@ -1493,24 +1477,29 @@ void MainWindow::windowHideNoteEditor()
 }
 
 
+//void MainWindow::geometryChangeRequested(const QRect &geometry)
+//{
+//    setGeometry(geometry);
+//}
 // 以tab页打开Doc
 void MainWindow::openDocInTab()
 {
     QString filepath = m_doctable->getCurFilePath();
 
-    m_tabWidget->currentLineEdit()->setText(filepath);
+    //m_tabWidget->currentLineEdit()->setText(filepath);
 
 //    SqlEditorWidget
     // 改变NoteEditor的属性
     Preferences* p = Preferences::instance();
     QString suffix = FileUtils::suffix(filepath);
     if(p->sources().contains(suffix.toLower())){
-        m_tabWidget->newTxtTab(true, filepath);
+            browser->openTxtInTab(filepath);
+        //m_tabWidget->newTxtTab(true, filepath);
        // m_tabWidget->loadDocInCurrentTab(filepath);
     }else{
-
-        m_tabWidget->newDocTab(true, filepath);
-        m_tabWidget->loadDocInCurrentTab(filepath);
+   browser->openDocInTab(filepath);
+        //m_tabWidget->newDocTab(true, filepath);
+        //m_tabWidget->loadDocInCurrentTab(filepath);
     }
 }
 
