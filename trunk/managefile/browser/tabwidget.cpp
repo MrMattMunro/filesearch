@@ -48,8 +48,10 @@
 #include "webview.h"
 #include "utils.h"
 #include "fileutils.h"
-#include "preferences.h";
+#include "preferences.h"
 #include "sqleditorwidget.h"
+#include "SqlEditor.h"
+
 
 #include <QtGui/QClipboard>
 #include <QtGui/QCompleter>
@@ -511,7 +513,7 @@ WebView *TabWidget::newTab(bool makeCurrent)
     return webView;
 }
 
-SqlEditorWidget *TabWidget::newTxtTab(bool makeCurrent, QString filepath)
+SqlEditor *TabWidget::newTxtTab(bool makeCurrent, QString filepath)
 {
     // line edit
     UrlLineEdit *urlLineEdit = new UrlLineEdit;
@@ -549,7 +551,8 @@ SqlEditorWidget *TabWidget::newTxtTab(bool makeCurrent, QString filepath)
 
     // webview
     filepath = QDir::fromNativeSeparators(filepath);
-    SqlEditorWidget* widget = new SqlEditorWidget(this);
+    SqlEditor* widget = new SqlEditor(this);
+    // widget->prefsChanged();
 
     QStringList  strs = FileUtils::readFile(filepath);
     QString str;
@@ -558,7 +561,10 @@ SqlEditorWidget *TabWidget::newTxtTab(bool makeCurrent, QString filepath)
         content.append(str);
         content.append("\n");
     }
-    widget->setText(content);
+//    widget->setText(content);
+
+   widget->open(filepath);
+   // widget->append(content);
     QFileInfo fileinfo(filepath);
 
     addTab(widget, fileinfo.fileName());
