@@ -15,10 +15,9 @@ Preferences::Preferences(QObject *parent)
  : QObject(parent)
 {
 	QFont f(QApplication::font());
-// 	f.setPointSize(sqlFontSize());
 
         QSettings s("slfile.cn", "filemanage");
-        s.clear();
+        // s.clear();
 	m_checkQtVersion = s.value("checkQtVersion", true).toBool();
         m_isFullScreen = s.value("isFullScreen", true).toBool();
         m_isShowClassTree = s.value("isShowClassTree", true).toBool();
@@ -39,13 +38,12 @@ Preferences::Preferences(QObject *parent)
         m_isShowNotesOnTips = s.value("table/showNotesOnTips", true).toBool();
         m_tableselfield = s.value("table/selField", QStringList()).toStringList();
 
-	//
-	m_nullHighlight = s.value("prefs/nullCheckBox", true).toBool();
-	m_blobHighlight = s.value("prefs/blobCheckBox", true).toBool();
-	m_nullHighlightText = s.value("prefs/nullAliasEdit", "{null}").toString();
-	m_blobHighlightText = s.value("prefs/blobAliasEdit", "{blob}").toString();
-	m_nullHighlightColor = s.value("prefs/nullBgButton", stdLightColor()).value<QColor>();
-	m_blobHighlightColor = s.value("prefs/blobBgButton", stdLightColor()).value<QColor>();
+        // prefs data
+        m_mainpath = s.value("prefs/data/mainpath", QString()).toString();
+        m_indexpath = s.value("prefs/data/indexpath", QString()).toString();
+        m_backpath = s.value("prefs/data/backpath", QString()).toString();
+        m_exportpath = s.value("prefs/data/exportpath", QString()).toString();
+
 	m_recentlyUsedCount = s.value("prefs/recentlyUsedSpinBox", 5).toInt();
 	m_openLastDB = s.value("prefs/openLastDB", true).toBool();
 	m_openLastSqlFile = s.value("prefs/openLastSqlFile", true).toBool();
@@ -68,6 +66,7 @@ Preferences::Preferences(QObject *parent)
 
 	// data
 	m_dateTimeFormat = s.value("data/dateTimeFormat", "MM/dd/yyyy").toString();
+
 	// data export
 	m_exportFormat = s.value("dataExport/format", 0).toInt();
 	m_exportDestination = s.value("dataExport/destination", 0).toInt();
@@ -143,13 +142,13 @@ Preferences::~Preferences()
 	settings.setValue("prefs/openLastDB", m_openLastDB);
 	settings.setValue("prefs/openLastSqlFile", m_openLastSqlFile);
 	// data results
-	settings.setValue("prefs/nullCheckBox", m_nullHighlight);
-	settings.setValue("prefs/nullAliasEdit", m_nullHighlightText);
-	settings.setValue("prefs/nullBgButton", m_nullHighlightColor);
-	settings.setValue("prefs/blobCheckBox", m_blobHighlight);
-	settings.setValue("prefs/blobAliasEdit", m_blobHighlightText);
-	settings.setValue("prefs/blobBgButton", m_blobHighlightColor);
 	settings.setValue("prefs/cropColumnsCheckBox", m_cropColumns);
+        // data
+        settings.setValue("prefs/data/mainpath", m_mainpath);
+        settings.setValue("prefs/data/indexpath", m_indexpath);
+        settings.setValue("prefs/data/backpath", m_backpath);
+        settings.setValue("prefs/data/exportpath", m_exportpath);
+
 	// sql editor
 	settings.setValue("prefs/sqleditor/font", m_sqlFont);
         settings.setValue("prefs/sqleditor/fontSize", m_sqlFontSize);

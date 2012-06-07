@@ -197,27 +197,16 @@ void TxtEditorWidget::prefsChanged()
 	lexer()->setFont(baseFont);
 	setFont(baseFont);
 
-	// syntax highlighting
-        lexer()->setColor(m_prefs->syDefaultColor(), QsciLexerSQL::Default);
-        lexer()->setColor(m_prefs->syKeywordColor(), QsciLexerSQL::Keyword);
-
 	QFont defFont(lexer()->font(QsciLexerSQL::Keyword));
 	defFont.setBold(true);
 	lexer()->setFont(defFont, QsciLexerSQL::Keyword);
-        lexer()->setColor(m_prefs->syNumberColor(), QsciLexerSQL::Number);
-        lexer()->setColor(m_prefs->syStringColor(), QsciLexerSQL::SingleQuotedString);
-        lexer()->setColor(m_prefs->syStringColor(), QsciLexerSQL::DoubleQuotedString);
-        lexer()->setColor(m_prefs->syCommentColor(), QsciLexerSQL::Comment);
-        lexer()->setColor(m_prefs->syCommentColor(), QsciLexerSQL::CommentLine);
-        lexer()->setColor(m_prefs->syCommentColor(), QsciLexerSQL::CommentDoc);
 
-        lexer()->setColor(QColor(12,112,11), QsciLexerSQL::Number);
-        lexer()->setColor(QColor(122,12,131), QsciLexerSQL::SingleQuotedString);
-        lexer()->setColor(QColor(122,12,231), QsciLexerSQL::DoubleQuotedString);
-        lexer()->setColor(QColor(122,12,131), QsciLexerSQL::Comment);
-        lexer()->setColor(QColor(12,123,81), QsciLexerSQL::CommentLine);
-        lexer()->setColor(QColor(12,112,31), QsciLexerSQL::CommentDoc);
-
+//        lexer()->setColor(QColor(12,112,11), QsciLexerSQL::Number);
+//        lexer()->setColor(QColor(122,12,131), QsciLexerSQL::SingleQuotedString);
+//        lexer()->setColor(QColor(122,12,231), QsciLexerSQL::DoubleQuotedString);
+//        lexer()->setColor(QColor(122,12,131), QsciLexerSQL::Comment);
+//        lexer()->setColor(QColor(12,123,81), QsciLexerSQL::CommentLine);
+//        lexer()->setColor(QColor(12,112,31), QsciLexerSQL::CommentDoc);
 
 	setAutoCompletionThreshold(m_prefs->codeCompletion() ?
 								m_prefs->codeCompletionLength() : -1

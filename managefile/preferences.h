@@ -71,24 +71,14 @@ Q_OBJECT
                 QStringList getTableSelField() { return m_tableselfield; };
                 void setTableSelField(QStringList v) { m_tableselfield = v; };
 
-
-		bool nullHighlight() { return m_nullHighlight; };
-		void setNullHighlight(bool v) { m_nullHighlight = v; };
-
-		bool blobHighlight() { return m_blobHighlight; };
-		void setBlobHighlight(bool v) { m_blobHighlight = v; };
-
-		QString nullHighlightText() { return m_nullHighlightText; };
-		void setNullHighlightText(const QString & v) { m_nullHighlightText = v; };
-
-		QString blobHighlightText() { return m_blobHighlightText; };
-		void setBlobHighlightText(const QString & v) { m_blobHighlightText = v; };
-
-		QColor nullHighlightColor() { return m_nullHighlightColor; };
-		void setNullHighlightColor(const QColor & v) { m_nullHighlightColor = v; };
-
-		QColor blobHighlightColor() { return m_blobHighlightColor; };
-		void setBlobHighlightColor(const QColor & v) { m_blobHighlightColor = v; };
+                QString getMainPath() { return m_mainpath; };
+                void setMainPath(QString v) { m_mainpath = v; };
+                QString getIndexPath() { return m_indexpath; };
+                void setIndexPath(QString v) { m_indexpath = v; };
+                QString getBackPath() { return m_backpath; };
+                void setBackPath(QString v) { m_backpath = v; };
+                QString getExportPath() { return m_exportpath; };
+                void setExportPath(QString v) { m_exportpath = v; };
 
 		int recentlyUsedCount() { return m_recentlyUsedCount; };
 		void setRecentlyUsedCount(int v) { m_recentlyUsedCount = v; };
@@ -160,23 +150,6 @@ Q_OBJECT
 		int exportEol() { return m_exportEol; };
 		void setExportEol(int v) { m_exportEol = v; };
 
-		// qscintilla syntax
-		QColor syDefaultColor() { return m_syDefaultColor; };
-		void setSyDefaultColor(const QColor & v ) { m_syDefaultColor = v; };
-
-		QColor syKeywordColor() { return m_syKeywordColor; };
-		void setSyKeywordColor(const QColor & v ) { m_syKeywordColor = v; };
-
-		QColor syNumberColor() { return m_syNumberColor; };
-		void setSyNumberColor(const QColor & v ) { m_syNumberColor = v; };
-
-		QColor syStringColor() { return m_syStringColor; };
-		void setSyStringColor(const QColor & v ) { m_syStringColor = v; };
-
-		QColor syCommentColor() { return m_syCommentColor; };
-		void setSyCommentColor(const QColor & v ) { m_syCommentColor = v; };
-
-
                 QStringList allsupported() { return m_allsupported; };
                 void setAllsupported(const QStringList & v ) { m_allsupported = v; };
 
@@ -238,13 +211,14 @@ Q_OBJECT
                 bool m_isShowNotesOnTips;
                 QStringList m_tableselfield;
 
+                // pref data
+                QString m_mainpath;
+                QString m_indexpath;
+                QString m_backpath;
+                QString m_exportpath;
+
 		bool m_checkQtVersion;
-		bool m_nullHighlight;
-		bool m_blobHighlight;
-		QString m_nullHighlightText;
-		QString m_blobHighlightText;
-		QColor m_nullHighlightColor;
-		QColor m_blobHighlightColor;
+
 		int m_recentlyUsedCount;
 		bool m_openLastDB;
 		bool m_openLastSqlFile;

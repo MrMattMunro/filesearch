@@ -548,11 +548,13 @@ void MainWindow::shownotes(){
 
 MainWindow::~MainWindow()
 {
-    //m_autoSaver->changeOccurred();
-    //m_autoSaver->saveIfNeccessary();
     Preferences::deleteInstance();
 }
 
+void MainWindow::closeEvent(QCloseEvent * e)
+{
+     Preferences::deleteInstance();
+}
 
 // 自定义工具栏
 void MainWindow::customToolBar()

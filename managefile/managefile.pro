@@ -11,7 +11,6 @@ SOURCES += main.cpp \
         mainwindow.cpp \
     preferences.cpp \
     utils.cpp \
-    extensionmodel.cpp \
     fileutils.cpp \
     importdocdialog.cpp \
     excuteJavaUtil.cpp \
@@ -422,14 +421,13 @@ FORMS    += mainwindow.ui \
     sortsubdirsdialog.ui \
     propofdirdialog.ui \
     propofdocdialog.ui \
-    prefsextensionwidget.ui \
-    prefsdatadisplaywidget.ui \
-    prefssqleditorwidget.ui \
     prefslnfwidget.ui \
     shortcuteditordialog.ui \
     history.ui \
     txteditor.ui \
-    logview.ui
+    logview.ui \
+    prefsdatastorewidget.ui \
+    prefseditorwidget.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -508,6 +506,12 @@ OTHER_FILES += \
     qscintilla2/include/License.txt \
     qscintilla2/include/HFacer.py \
     qscintilla2/include/Face.py
+
+
+
+
+
+
 
 
 
