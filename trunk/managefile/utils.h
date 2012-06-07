@@ -32,6 +32,7 @@ QString getLocateDbPath();
 QString getSavePagePath();
 QString getSaveDocPath();
 QString getSaveLogPath();
+QString getBackUpPath();
 QString getDirNameByPath(const QString & path);
 QDir directoryOf(const QString & subdir);
 

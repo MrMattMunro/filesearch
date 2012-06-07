@@ -11,19 +11,19 @@ for which a new license (GPL+exception) is in place.
 #include <QDialog>
 
 #include "ui_preferencesdialog.h"
-#include "ui_prefsdatadisplaywidget.h"
+#include "ui_prefsdatastorewidget.h"
 #include "ui_prefslnfwidget.h"
-#include "ui_prefssqleditorwidget.h"
+#include "ui_prefseditorwidget.h"
 #include "ui_prefsextensionwidget.h"
 
 class ExtensionModel;
 
 
-class PrefsDataDisplayWidget : public QWidget, public Ui::PrefsDataDisplayWidget
+class PrefsDataStoreWidget : public QWidget, public Ui::PrefsDataStoreWidget
 {
 	Q_OBJECT
 	public:
-		PrefsDataDisplayWidget(QWidget * parent = 0);
+                PrefsDataStoreWidget(QWidget * parent = 0);
 };
 
 class PrefsLNFWidget : public QWidget, public Ui::PrefsLNFWidget
@@ -33,26 +33,11 @@ class PrefsLNFWidget : public QWidget, public Ui::PrefsLNFWidget
 		PrefsLNFWidget(QWidget * parent = 0);
 };
 
-class PrefsSQLEditorWidget : public QWidget, public Ui::PrefsSQLEditorWidget
+class PrefsEditorWidget : public QWidget, public Ui::PrefsEditorWidget
 {
 	Q_OBJECT
 	public:
-		PrefsSQLEditorWidget(QWidget * parent = 0);
-};
-
-class PrefsExtensionWidget : public QWidget, public Ui::PrefsExtensionWidget
-{
-	Q_OBJECT
-	public:
-		PrefsExtensionWidget(QWidget * parent = 0);
-        QStringList extensions();
-        void setExtensions(const QStringList & v);
-    private:
-        ExtensionModel * m_ext;
-    private slots:
-        void allowExtensionsBox_clicked(bool);
-        void addExtensionButton_clicked();
-        void removeExtensionButton_clicked();
+                PrefsEditorWidget(QWidget * parent = 0);
 };
 
 
@@ -70,36 +55,19 @@ class PreferencesDialog : public QDialog, public Ui::PreferencesDialog
 		PreferencesDialog(QWidget * parent = 0);
 		~PreferencesDialog(){};
 
-		bool saveSettings();
-
 	private:
-		PrefsDataDisplayWidget * m_prefsData;
+                PrefsDataStoreWidget * m_prefsData;
 		PrefsLNFWidget * m_prefsLNF;
-		PrefsSQLEditorWidget * m_prefsSQL;
-		PrefsExtensionWidget * m_prefsExtension;
-
-		// temporary qscintilla syntax colors
-		QColor m_syDefaultColor;
-		QColor m_syKeywordColor;
-		QColor m_syNumberColor;
-		QColor m_syStringColor;
-		QColor m_syCommentColor;
+                PrefsEditorWidget * m_prefsEditor;
 
 		//! \brief Update editor preview for new color/font values.
 		void resetEditorPreview();
 
 	private slots:
 		void restoreDefaults();
-		void blobBgButton_clicked();
-		void nullBgButton_clicked();
+                bool saveSettings();
 		void activeHighlightButton_clicked();
 		void shortcutsButton_clicked();
-		//
-		void syDefaultButton_clicked();
-		void syKeywordButton_clicked();
-		void syNumberButton_clicked();
-		void syStringButton_clicked();
-		void syCommentButton_clicked();
 		//
 		void fontComboBox_activated(int);
 		void fontSizeSpin_valueChanged(int);

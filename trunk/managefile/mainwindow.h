@@ -65,7 +65,6 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = 0, Qt::WFlags flags = 0);
     ~MainWindow();
-   // QSize sizeHint() const;
 
     TabWidget *tabWidget() const;
     WebView *currentTab() const;
@@ -96,68 +95,17 @@ private slots:
     void option();
     void homepage();
     void viewLog();
-    //void loadPage(const QString &url);
-
     void slotHome();
-
     void importDlg();
     void exportDlg();
 
     void customToolBar();
-    // doc table start
     void openDocInTab();
-    // doc table end
-//    // browser start
-//    void save();
-
-//    void slotLoadProgress(int);
-//    void slotUpdateStatusbar(const QString &string);
-//    void slotUpdateWindowTitle(const QString &title = QString());
-
-//    void loadUrl(const QUrl &url);
-//    void slotPreferences();
-
-//    void slotFileNew();
-//    void slotFileOpen();
-//    void slotFilePrintPreview();
-//    void slotFilePrint();
-//    void slotPrivateBrowsing();
-//    void slotFileSaveAs();
-//    void slotEditFind();
-//    void slotEditFindNext();
-//    void slotEditFindPrevious();
-//    void slotShowBookmarksDialog();
-//    void slotAddBookmark();
-//    void slotViewZoomIn();
-//    void slotViewZoomOut();
-//    void slotViewResetZoom();
-//    void slotViewZoomTextOnly(bool enable);
-//    void slotViewToolbar();
-//    void slotViewBookmarksBar();
-//    void slotViewStatusbar();
-//    void slotViewPageSource();
-//    void slotViewFullScreen(bool enable);
-
-//    void slotWebSearch();
-//    void slotToggleInspector(bool enable);
-//    void slotAboutApplication();
-//    void slotDownloadManager();
-//    void slotSelectLineEdit();
-
-//    void slotAboutToShowBackMenu();
-//    void slotAboutToShowForwardMenu();
-//    void slotAboutToShowWindowMenu();
-      void slotOpenActionUrl(QAction *action);
-//    void slotShowWindow();
-//    void slotSwapFocus();
-
-//    void printRequested(QWebFrame *frame);
-//    void geometryChangeRequested(const QRect &geometry);
-//    void updateToolbarActionText(bool visible);
-//    void updateBookmarksToolbarActionText(bool visible);
     void slotShowSearchSetMenu();
-    //void resizeSpace();
-    //browser end
+
+    // À—À˜…Ë÷√
+    void slotOpenActionUrl(QAction *action);
+
 
     void windowToggleNoteEditor();
     void windowShowNoteEditor();
@@ -165,7 +113,7 @@ private slots:
     void shownotes();
 
 protected:
-   // void closeEvent(QCloseEvent *event);
+    void closeEvent(QCloseEvent *event);
 
 private:
     QActionGroup *m_feedGroup;
