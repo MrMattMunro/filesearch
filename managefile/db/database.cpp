@@ -40,16 +40,13 @@ QString Database::getSql(QString sqlfile)
     }
     if(!file.open(QIODevice::ReadOnly|QIODevice::Text))
     {
-        qDebug()<<"Open file failure!";
+        qDebug() << "Open file failure :: " << sqlfile;
         return -1;
     }
     QTextStream fs(&file);
     QString fileContent (fs.readAll());
 
-    qDebug()<<"The content of file is \n"<<fileContent;
-
     return fileContent;
-
 }
 
 bool Database::execSql(QString statement)
