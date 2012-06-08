@@ -201,6 +201,8 @@ void TxtEditorWidget::prefsChanged()
 	defFont.setBold(true);
 	lexer()->setFont(defFont, QsciLexerSQL::Keyword);
 
+        lexer()->setColor(QColor(0,0,0), QsciLexerSQL::Default);
+
 //        lexer()->setColor(QColor(12,112,11), QsciLexerSQL::Number);
 //        lexer()->setColor(QColor(122,12,131), QsciLexerSQL::SingleQuotedString);
 //        lexer()->setColor(QColor(122,12,231), QsciLexerSQL::DoubleQuotedString);
@@ -221,6 +223,6 @@ void TxtEditorWidget::prefsChanged()
 	else
 		setEdgeMode(QsciScintilla::EdgeNone);
 
-	setMarkerBackgroundColor(m_prefs->activeHighlighting() ?
-								m_prefs->activeHighlightColor() : paper());
+//	setMarkerBackgroundColor(m_prefs->activeHighlighting() ?
+//								m_prefs->activeHighlightColor() : paper());
 }

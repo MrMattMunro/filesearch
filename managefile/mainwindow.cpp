@@ -259,22 +259,22 @@ void MainWindow::initActions()
         showClassTreeAction->setShortcut(tr("Ctrl+H"));
         connect(showClassTreeAction, SIGNAL(triggered()), this, SLOT(showClassTree()));
 
-        // ∆§∑Ù
-        skinAction = new QAction(Utils::getIcon("skins.png"),tr("&Skin"), this);
-        menu_skin = new QMenu(this);
-        skinAction->setMenu(menu_skin);
+//        // ∆§∑Ù
+//        skinAction = new QAction(Utils::getIcon("skins.png"),tr("&Skin"), this);
+//        menu_skin = new QMenu(this);
+//        skinAction->setMenu(menu_skin);
 
-        //∆§∑Ù ƒ¨»œ
-        defaultAction = new QAction(tr("&Defaut"), this);
-        connect(defaultAction, SIGNAL(triggered()), this, SLOT(about()));
+//        //∆§∑Ù ƒ¨»œ
+//        defaultAction = new QAction(tr("&Defaut"), this);
+//        connect(defaultAction, SIGNAL(triggered()), this, SLOT(about()));
 
-       // ∆§∑Ù  Èœ„
-        bookAction = new QAction(tr("&Book"), this);
-        connect(bookAction, SIGNAL(triggered()), this, SLOT(about()));
+//       // ∆§∑Ù  Èœ„
+//        bookAction = new QAction(tr("&Book"), this);
+//        connect(bookAction, SIGNAL(triggered()), this, SLOT(about()));
 
-        //∆§∑Ù ª“…´
-        grayAction = new QAction(tr("&Gray"), this);
-        connect(grayAction, SIGNAL(triggered()), this, SLOT(about()));
+//        //∆§∑Ù ª“…´
+//        grayAction = new QAction(tr("&Gray"), this);
+//        connect(grayAction, SIGNAL(triggered()), this, SLOT(about()));
 
         // ◊‘∂®“Âπ§æﬂ¿∏
         customToolbarAction = new QAction(Utils::getIcon("toolbar.png"),tr("&Setting ToolBar"), this);
@@ -284,9 +284,9 @@ void MainWindow::initActions()
         showToolbarAction = new QAction(Utils::getIcon("status_bar.png"),tr("&Show/Hide Tool Bar"), this);
         connect(showToolbarAction, SIGNAL(triggered()), this, SLOT(showToolBar()));
 
-        // œ‘ æ/“˛≤ÿ◊¥Ã¨¿∏
-        showSatebarAction = new QAction(Utils::getIcon("status_bar.png"),tr("&Show/Hide Status Bar..."), this);
-        connect(showSatebarAction, SIGNAL(triggered()), this, SLOT(about()));
+//        // œ‘ æ/“˛≤ÿ◊¥Ã¨¿∏
+//        showSatebarAction = new QAction(Utils::getIcon("status_bar.png"),tr("&Show/Hide Status Bar..."), this);
+//        connect(showSatebarAction, SIGNAL(triggered()), this, SLOT(about()));
 
         // ”√ªß ÷≤·
         userBookAction = new QAction(Utils::getIcon("help_viewer.png"),tr("&Help"), this);
@@ -328,22 +328,22 @@ void MainWindow::initActions()
         pluginAction->setShortcut(tr("Ctrl+P"));
         connect(pluginAction, SIGNAL(triggered()), this, SLOT(about()));;
 
-        // ∆§∑Ù
-        languageAction = new QAction(Utils::getIcon("language.png"),tr("&Language"), this);
-        menu_language = new QMenu(this);
-        languageAction->setMenu(menu_language);
+//        // ”Ô—‘
+//        languageAction = new QAction(Utils::getIcon("language.png"),tr("&Language"), this);
+//        menu_language = new QMenu(this);
+//        languageAction->setMenu(menu_language);
 
-        // ”¢Œƒ∞Ê
-        enAction = new QAction(tr("&English"), this);
-        connect(enAction, SIGNAL(triggered()), this, SLOT(about()));
+//        // ”¢Œƒ∞Ê
+//        enAction = new QAction(tr("&English"), this);
+//        connect(enAction, SIGNAL(triggered()), this, SLOT(about()));
 
-        // ÷–Œƒ∞Ê
-        cnAction = new QAction(tr("&Chinese"), this);
-        connect(cnAction, SIGNAL(triggered()), this, SLOT(about()));
+//        // ÷–Œƒ∞Ê
+//        cnAction = new QAction(tr("&Chinese"), this);
+//        connect(cnAction, SIGNAL(triggered()), this, SLOT(about()));
 
-        // »’Œƒ∞Ê
-        jpAction = new QAction(tr("&Japanese"), this);
-        connect(jpAction, SIGNAL(triggered()), this, SLOT(about()));
+//        // »’Œƒ∞Ê
+//        jpAction = new QAction(tr("&Japanese"), this);
+//        connect(jpAction, SIGNAL(triggered()), this, SLOT(about()));
 
 
 }
@@ -363,21 +363,21 @@ void MainWindow::initMenus()
         menu_View->addAction(fullScreenAction);
         menu_View->addAction(showClassTreeAction);
         menu_View->addAction(showToolbarAction);
-        menu_View->addAction(skinAction);
 
-        menu_skin->addAction(defaultAction);
-        menu_skin->addAction(bookAction);
-        menu_skin->addAction(grayAction);
-        menu_View->addAction(menu_skin->menuAction());
+//        menu_View->addAction(skinAction);
+//        menu_skin->addAction(defaultAction);
+//        menu_skin->addAction(bookAction);
+//        menu_skin->addAction(grayAction);
+//        menu_View->addAction(menu_skin->menuAction());
 
-        menu_View->addAction(languageAction);
-        menu_language->addAction(cnAction);
-        menu_language->addAction(enAction);
-        menu_language->addAction(jpAction);
-        menu_View->addAction(menu_language->menuAction());
+//        menu_View->addAction(languageAction);
+//        menu_language->addAction(cnAction);
+//        menu_language->addAction(enAction);
+//        menu_language->addAction(jpAction);
+//        menu_View->addAction(menu_language->menuAction());
 
-        menu_View->addSeparator();
-        menu_View->addAction(showSatebarAction);
+//        menu_View->addSeparator();
+//        menu_View->addAction(showSatebarAction);
         menu_View->addSeparator();
         menu_View->addAction(customToolbarAction);
 
@@ -726,25 +726,6 @@ void MainWindow::importDlg()
 void MainWindow::exportDlg()
 {
    q_myTreeList->showExportDlg();
-}
-
-void MainWindow::aboutQt()
-{
-    QMessageBox::aboutQt(this);
-}
-
-void MainWindow::clearHistory()
-{
-    //ui.webView->page()->mainFrame()->evaluateJavaScript("clearHistory()");
-    //statusBar()->showMessage(tr("History cleared"));
-}
-
-void MainWindow::slotHome()
-{
-    QSettings settings;
-    settings.beginGroup(QLatin1String("MainWindow"));
-    QString home = settings.value(QLatin1String("home"), QLatin1String("http://www.tom.com")).toString();
-    //loadPage(home);
 }
 
 // À—À˜…Ë÷√

@@ -74,7 +74,7 @@ void TxtEditor::open(const QString &  newFile)
 	QFile f(newFile);
 	if (!f.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		QMessageBox::warning(this, tr("Open SQL Script"), tr("Cannot open file %1").arg(newFile));
+                QMessageBox::warning(this, tr("Open File"), tr("Cannot open file %1").arg(newFile));
 		return;
 	}
 
@@ -112,8 +112,8 @@ void TxtEditor::action_Save_triggered()
 
 void TxtEditor::actionSave_As_triggered()
 {
-	QString newFile = QFileDialog::getSaveFileName(this, tr("Save SQL Script"),
-			QDir::currentPath(), tr("SQL file (*.sql);;All Files (*)"));
+        QString newFile = QFileDialog::getSaveFileName(this, tr("Save"),
+                        QDir::currentPath(), tr("All Files (*)"));
 	if (newFile.isNull())
 		return;
 	m_fileName = newFile;
