@@ -27,6 +27,7 @@
 #include "preferences.h"
 #include "utils.h"
 #include "db/database.h"
+#include "logindialog.h"
 #include "fileutils.h"
 #include "noteeditor.h"
 #include <QDebug>
@@ -256,14 +257,6 @@ int main(int argc, char *argv[])
     sqlib.load();
     qDebug() << "my library loaded" << sqlib.isLoaded();
 
-    // 加载数据库驱动
-    QApplication::addLibraryPath("./lib");
-    qDebug() << "my library path : " << app.libraryPaths();
-    QLibrary sciib("SciLexer.dll");
-    sciib.load();
-    qDebug() << "my library loaded" << sciib.isLoaded();
-
-
     // 设置数据库文件
     QString dbpath = Utils::getLocatePath().append(QDir::separator()).append("db");
     QDir *dir=new QDir(dbpath);
@@ -299,6 +292,11 @@ int main(int argc, char *argv[])
             return -1;
     }
 
+    QString md5;
+    QString pwd="123456";
+    QByteArray bb;
+    bb = QCryptographicHash::hash (pwd.toAscii(), QCryptographicHash::Md5 );
+    md5.append(bb.toHex());
 
     // 初始化数据库
     Database::execSql(Database::getSql("mf_document_related.sql"));
@@ -309,12 +307,21 @@ int main(int argc, char *argv[])
     Database::execSql(Database::getSql("mf_document_tag.sql"));
     Database::execSql(Database::getSql("mf_tag.sql"));
     Database::execSql(Database::getSql("mf_accout.sql"));
+    Database::execSql(Database::getSql("mf_meta.sql"));
 
-    MainWindow w;
-    w.setLocale(cli.localeCode());
+    // 显示登录界面
+    LoginDialog dlg;
+    dlg.exec();
+    if(dlg.update){
+      // 不做任何操作
+        MainWindow w;
+        w.setLocale(cli.localeCode());
+        w.showMaximized();
+        return app.exec();
+    }else{
+        return 0;
+    }
 
-    w.showMaximized();
-    return app.exec();
 }
 
 

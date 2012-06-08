@@ -227,7 +227,8 @@ SOURCES += main.cpp \
     sqlkeywords.cpp \
     txteditorwidget.cpp \
     txteditor.cpp \
-    logview.cpp
+    logview.cpp \
+    logindialog.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -384,7 +385,8 @@ HEADERS  += mainwindow.h \
     sqlkeywords.h \
     txteditor.h \
     txteditorwidget.h \
-    logview.h
+    logview.h \
+    logindialog.h
 
 RESOURCES += \
     managefile.qrc
@@ -427,7 +429,8 @@ FORMS    += mainwindow.ui \
     txteditor.ui \
     logview.ui \
     prefsdatastorewidget.ui \
-    prefseditorwidget.ui
+    prefseditorwidget.ui \
+    logindialog.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -506,6 +509,9 @@ OTHER_FILES += \
     qscintilla2/include/License.txt \
     qscintilla2/include/HFacer.py \
     qscintilla2/include/Face.py
+
+
+
 
 
 

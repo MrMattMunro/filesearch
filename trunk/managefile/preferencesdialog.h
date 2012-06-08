@@ -14,7 +14,6 @@ for which a new license (GPL+exception) is in place.
 #include "ui_prefsdatastorewidget.h"
 #include "ui_prefslnfwidget.h"
 #include "ui_prefseditorwidget.h"
-#include "ui_prefsextensionwidget.h"
 
 class ExtensionModel;
 
@@ -71,6 +70,13 @@ class PreferencesDialog : public QDialog, public Ui::PreferencesDialog
 		//
 		void fontComboBox_activated(int);
 		void fontSizeSpin_valueChanged(int);
+
+                void mainSelBtn_clicked();
+                void indexSelBtn_clicked();
+                void backSelBtn_clicked();
+                void exportSelBtn_clicked();
+
+                void accept();
 };
 
 

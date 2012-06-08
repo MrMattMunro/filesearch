@@ -101,6 +101,11 @@ PreferencesDialog::PreferencesDialog(QWidget * parent)
         m_prefsData->indexPath->setText(prefs->getIndexPath());
         m_prefsData->backPath->setText(prefs->getBackPath());
         m_prefsData->exportPath->setText(prefs->getExportPath());
+        connect(m_prefsData->mainSelBtn, SIGNAL(clicked()), this, SLOT(mainSelBtn_clicked()));
+        connect(m_prefsData->indexSelBtn, SIGNAL(clicked()), this, SLOT(indexSelBtn_clicked()));
+        connect(m_prefsData->backSelBtn, SIGNAL(clicked()), this, SLOT(backSelBtn_clicked()));
+        connect(m_prefsData->exportSelBtn, SIGNAL(clicked()), this, SLOT(exportSelBtn_clicked()));
+
 
         m_prefsEditor->fontComboBox->setCurrentFont(prefs->sqlFont());
         m_prefsEditor->fontSizeSpin->setValue(prefs->sqlFontSize());
@@ -113,6 +118,7 @@ PreferencesDialog::PreferencesDialog(QWidget * parent)
         m_prefsEditor->useShortcutsBox->setChecked(prefs->useShortcuts());
 
         resetEditorPreview();
+
 }
 
 bool PreferencesDialog::saveSettings()
@@ -144,6 +150,11 @@ bool PreferencesDialog::saveSettings()
         prefs->setUseShortcuts(m_prefsEditor->useShortcutsBox->isChecked());
 
 	return true;
+}
+
+void PreferencesDialog::accept(){
+    saveSettings();
+    this->close();
 }
 
 void PreferencesDialog::restoreDefaults()
@@ -199,6 +210,48 @@ void PreferencesDialog::fontComboBox_activated(int)
 void PreferencesDialog::fontSizeSpin_valueChanged(int)
 {
 	resetEditorPreview();
+}
+
+void PreferencesDialog::mainSelBtn_clicked(){
+
+    QString path = QFileDialog::getExistingDirectory(this, tr("Select existing directory"),
+                                                    m_prefsData->mainPath->text(), QFileDialog::ShowDirsOnly);
+    if (path.isEmpty()){
+         return;
+    }
+    path = QDir::toNativeSeparators(path);
+    m_prefsData->mainPath->setText(path);
+}
+
+void PreferencesDialog::indexSelBtn_clicked(){
+    QString path = QFileDialog::getExistingDirectory(this, tr("Select existing directory"),
+                                                    m_prefsData->indexPath->text(), QFileDialog::ShowDirsOnly);
+    if (path.isEmpty()){
+         return;
+    }
+    path = QDir::toNativeSeparators(path);
+    m_prefsData->indexPath->setText(path);
+
+}
+void PreferencesDialog::backSelBtn_clicked(){
+    QString path = QFileDialog::getExistingDirectory(this, tr("Select existing directory"),
+                                                   m_prefsData->backPath->text(), QFileDialog::ShowDirsOnly);
+    if (path.isEmpty()){
+         return;
+    }
+    path = QDir::toNativeSeparators(path);
+    m_prefsData->backPath->setText(path);
+
+}
+void PreferencesDialog::exportSelBtn_clicked(){
+    QString path = QFileDialog::getExistingDirectory(this, tr("Select existing directory"),
+                                                   m_prefsData->exportPath->text(), QFileDialog::ShowDirsOnly);
+    if (path.isEmpty()){
+         return;
+    }
+    path = QDir::toNativeSeparators(path);
+    m_prefsData->exportPath->setText(path);
+
 }
 
 void PreferencesDialog::resetEditorPreview()

@@ -84,8 +84,6 @@ public:
 
 private slots:
     void about();
-    void aboutQt();
-    void clearHistory();
     void fullScreen();
     void showClassTree();
     void showToolBar();
@@ -95,7 +93,6 @@ private slots:
     void option();
     void homepage();
     void viewLog();
-    void slotHome();
     void importDlg();
     void exportDlg();
 
@@ -139,12 +136,12 @@ private:
     QAction *exitAction;
     QAction *fullScreenAction;
     QAction *showClassTreeAction;
-    QAction *skinAction;
-    QAction *defaultAction;
-    QAction *bookAction;
-    QAction *grayAction;
+//    QAction *skinAction;
+//    QAction *defaultAction;
+//    QAction *bookAction;
+//    QAction *grayAction;
     QAction *customToolbarAction;
-    QAction *showSatebarAction;
+//    QAction *showSatebarAction;
     QAction *showToolbarAction;
     QAction *userBookAction;
     QAction *homepageAction;
@@ -155,15 +152,15 @@ private:
     QAction *optionAction;
     QAction *viewLogAction;
     QAction *pluginAction;
-    QAction *languageAction;
-    QAction *cnAction;
-    QAction *enAction;
-    QAction *jpAction;
+//    QAction *languageAction;
+//    QAction *cnAction;
+//    QAction *enAction;
+//    QAction *jpAction;
 
     //QStatusBar *statusBar;
     QMenu *menu_View;
-    QMenu *menu_skin;
-    QMenu *menu_language;
+//    QMenu *menu_skin;
+//    QMenu *menu_language;
     QMenu *menu_File;
     QMenu *menu_Help;
     QMenu *menu_Tool;
@@ -179,43 +176,10 @@ private:
     void upateToolBar(QStringList waitItems, QStringList selItems);
     void initBrowser();
 
-//    // browser start
-//    void loadDefaultState();
-//    void setupMenu();
-//    void setupToolBar();
-//    void updateStatusbarActionText(bool visible);
-
-//    QToolBar *m_navigationBar;
-      ToolbarSearch *m_toolbarSearch;
-//    BookmarksToolBar *m_bookmarksToolbar;
-//    ChaseWidget *m_chaseWidget;
-//    TabWidget *m_tabWidget;
-//    AutoSaver *m_autoSaver;
-
-//    QAction *m_historyBack;
-//    QMenu *m_historyBackMenu;
-//    QAction *m_historyForward;
-//    QMenu *m_historyForwardMenu;
-//    QMenu *m_windowMenu;
-     QMenu *m_searchSetMenu;
-
-//    QAction *m_stop;
-//    QAction *m_reload;
-//    QAction *m_stopReload;
-//    QAction *m_viewToolbar;
-//    QAction *m_viewBookmarkBar;
-//    QAction *m_viewStatusbar;
-//    QAction *m_restoreLastSession;
-//    QAction *m_addBookmark;
-
-//    QIcon m_reloadIcon;
-//    QIcon m_stopIcon;
-
-//    QString m_lastSearch;
-//    // browser end
-     BrowserMainWindow *browser;
-
-     QDockWidget *noteEditorDW;
+    ToolbarSearch *m_toolbarSearch;
+    QMenu *m_searchSetMenu;
+    BrowserMainWindow *browser;
+    QDockWidget *noteEditorDW;
 
 };
 
