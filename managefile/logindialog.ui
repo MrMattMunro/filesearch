@@ -42,7 +42,7 @@
      </property>
      <widget class="QWidget" name="login">
       <attribute name="title">
-       <string>Tab 1</string>
+       <string>Login</string>
       </attribute>
       <widget class="QGroupBox" name="groupBox">
        <property name="geometry">
@@ -136,7 +136,7 @@
      </widget>
      <widget class="QWidget" name="registration">
       <attribute name="title">
-       <string>Tab 2</string>
+       <string>Register</string>
       </attribute>
       <widget class="QPushButton" name="registerBtn">
        <property name="geometry">
@@ -257,7 +257,7 @@ acknowledge our Terms of Service</string>
      </widget>
      <widget class="QWidget" name="forgetpwd">
       <attribute name="title">
-       <string>页</string>
+       <string>Forget Password</string>
       </attribute>
       <widget class="QLabel" name="label_5">
        <property name="geometry">

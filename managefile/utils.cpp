@@ -12,6 +12,8 @@ for which a new license (GPL+exception) is in place.
 #include <QApplication>
 #include <QListWidgetItem>
 #include <QObject>
+#include <QCryptographicHash>
+
 #include "utils.h"
 
 #define ICON_DIR ":/icons"
@@ -161,6 +163,7 @@ QString Utils::getDirNameByPath(const QString & path)
     return temp;
 }
 
+
 QDir Utils::directoryOf(const QString & subdir)
 {
 
@@ -181,6 +184,15 @@ QDir Utils::directoryOf(const QString & subdir)
     #endif
     dir.cd(subdir);
     return dir;
+}
+
+QString Utils::getMD5Str(const QString & str)
+{
+
+    QString md5;
+    QByteArray bb;
+    bb = QCryptographicHash::hash (str.toAscii(), QCryptographicHash::Md5 );
+    return md5.append(bb.toHex());
 }
 
 

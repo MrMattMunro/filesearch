@@ -7,8 +7,8 @@ CREATE TABLE IF NOT EXISTS MF_DOCUMENT_NOTE
    NOTE_OWNER                     char(36)                       not null,
    PAGE                           int                            default 0,
    SHEETPAGE                      varchar(150),
-   ROW                            int                            default 0,
-   COLUMN                         int                            default 0,
+   MROW                           int                            default 0,
+   MCOLUMN                        int                            default 0,
    DT_MODIFIED                    char(19),
    primary key (NOTE_GUID)
 )

@@ -6,6 +6,6 @@ CREATE TABLE IF NOT EXISTS MF_TAG
    TAG_NAME                       varchar(150),
    TAG_DESCRIPTION                varchar(600),
    DT_MODIFIED                    char(19),
-   MF_VERSION                     int64,
+   MF_VERSION                     int,
    primary key (TAG_GUID)
 )

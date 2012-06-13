@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS MF_DIR
    DIR_ORDER                      int                          default 0,
    DIR_PROTECT                    varchar(50),
    DT_MODIFIED                    char(19),  
-   MF_VERSION                     int64                        default 0,
+   MF_VERSION                     int                          default 0,
    DELETE_FLAG                    char(1)                      default '0',
    primary key (DIR_GUID)
 )

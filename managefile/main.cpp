@@ -292,11 +292,6 @@ int main(int argc, char *argv[])
             return -1;
     }
 
-    QString md5;
-    QString pwd="123456";
-    QByteArray bb;
-    bb = QCryptographicHash::hash (pwd.toAscii(), QCryptographicHash::Md5 );
-    md5.append(bb.toHex());
 
     // 初始化数据库
     Database::execSql(Database::getSql("mf_document_related.sql"));
