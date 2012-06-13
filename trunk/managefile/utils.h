@@ -35,6 +35,7 @@ QString getSaveLogPath();
 QString getBackUpPath();
 QString getDirNameByPath(const QString & path);
 QDir directoryOf(const QString & subdir);
+QString getMD5Str(const QString & str);
 
 };
 

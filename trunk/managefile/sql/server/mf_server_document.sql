@@ -24,6 +24,6 @@ CREATE TABLE IF NOT EXISTS MF_DOCUMENT
    DOCUMENT_INDEXFLG              char(1)                     default '0',
    DOCUMENT_OPERFLG               char(1)                     default '0',
    DELETE_FLAG                    char(1)                     default 0,
-   MF_VERSION                     int64                       default 0,
+   MF_VERSION                     int                         default 0,
    primary key (DOCUMENT_GUID)
 )
