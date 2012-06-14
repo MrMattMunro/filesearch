@@ -305,18 +305,37 @@ int main(int argc, char *argv[])
     Database::execSql(Database::getSql("mf_meta.sql"));
 
     // 显示登录界面
-    LoginDialog dlg;
-    dlg.exec();
-    if(dlg.update){
-      // 不做任何操作
-        MainWindow w;
-        w.setLocale(cli.localeCode());
-        w.showMaximized();
-        return app.exec();
-    }else{
-        return 0;
-    }
+    Preferences* p = Preferences::instance();
+    QString usremail = p->getUserEmail();
+    QString usrename= p->getUserName();
 
+    // 当当前用户为空时,才显示登录界面
+    if(usremail.isEmpty() && usrename.isEmpty() ){
+        LoginDialog dlg;
+        dlg.exec();
+        if(dlg.update){
+          // 不做任何操作
+            MainWindow w;
+            w.setLocale(cli.localeCode());
+            w.showMaximized();
+            return app.exec();
+        }else{
+            return 0;
+        }
+    } else {
+       // 不做任何操作
+       MainWindow w;
+       w.setLocale(cli.localeCode());
+       w.showMaximized();
+
+       // 重新启动
+       int ret = app.exec();
+       if (ret == 773) {
+            QProcess::startDetached(app.applicationFilePath(), QStringList());
+            return 0;
+       }
+       return ret;
+    }
 }
 
 

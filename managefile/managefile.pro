@@ -235,7 +235,8 @@ SOURCES += main.cpp \
     qjson/parserrunnable.cpp \
     qjson/parser.cpp \
     qjson/json_scanner.cpp \
-    qjson/json_parser.cc
+    qjson/json_parser.cc \
+    accountdialog.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -406,7 +407,8 @@ HEADERS  += mainwindow.h \
     qjson/parser.h \
     qjson/location.hh \
     qjson/json_scanner.h \
-    qjson/json_parser.hh
+    qjson/json_parser.hh \
+    accountdialog.h
 
 RESOURCES += \
     managefile.qrc
@@ -417,7 +419,6 @@ FORMS    += mainwindow.ui \
     exportdocdialog.ui \
     createsubdirdialog.ui \
     movetodirdialog.ui \
-    history.ui \
     browser/settings.ui \
     browser/proxy.ui \
     browser/passworddialog.ui \
@@ -445,12 +446,12 @@ FORMS    += mainwindow.ui \
     propofdocdialog.ui \
     prefslnfwidget.ui \
     shortcuteditordialog.ui \
-    history.ui \
     txteditor.ui \
     logview.ui \
     prefsdatastorewidget.ui \
     prefseditorwidget.ui \
-    logindialog.ui
+    logindialog.ui \
+    accountdialog.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -529,6 +530,13 @@ OTHER_FILES += \
     qscintilla2/include/License.txt \
     qscintilla2/include/HFacer.py \
     qscintilla2/include/Face.py
+
+
+
+
+
+
+
 
 
 

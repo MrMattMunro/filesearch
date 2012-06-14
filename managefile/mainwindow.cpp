@@ -60,6 +60,7 @@
 #include "noteeditor.h"
 #include "logview.h"
 #include "preferencesdialog.h"
+#include "accountdialog.h"
 
 extern NoteEditor *noteEditor;
 
@@ -328,6 +329,18 @@ void MainWindow::initActions()
         pluginAction->setShortcut(tr("Ctrl+P"));
         connect(pluginAction, SIGNAL(triggered()), this, SLOT(about()));;
 
+        // 账户信息
+        accountInfoAction = new QAction(Utils::getIcon("my_account.ico"),tr("Account Information"), this);
+        connect(accountInfoAction, SIGNAL(triggered()), this, SLOT(showAccountInfo()));;
+
+        // 升级到VIP
+        update2VipAction = new QAction(Utils::getIcon("vip.png"),tr("Update to VIP"), this);
+        connect(update2VipAction, SIGNAL(triggered()), this, SLOT(about()));;
+
+        // 注销
+        logoffAction = new QAction(Utils::getIcon("logo_off.png"),tr("Logo Off"), this);
+        connect(logoffAction, SIGNAL(triggered()), this, SLOT(logoff()));;
+
 //        // 语言
 //        languageAction = new QAction(Utils::getIcon("language.png"),tr("&Language"), this);
 //        menu_language = new QMenu(this);
@@ -387,6 +400,15 @@ void MainWindow::initMenus()
         menu_Tool->addAction(viewLogAction);
         menu_Tool->addSeparator();
         menu_Tool->addAction(pluginAction);
+
+        menu_Account =  menuBar()->addMenu(tr("&Account"));
+        menu_Account->addAction(accountInfoAction);
+        menu_Account->addSeparator();
+        menu_Account->addAction(update2VipAction);
+        menu_Account->addSeparator();
+        menu_Account->addAction(logoffAction);
+        menu_Account->addSeparator();
+
 
         menu_Help =  menuBar()->addMenu(tr("&Help"));
         menu_Help->addAction(userBookAction);
@@ -726,6 +748,45 @@ void MainWindow::importDlg()
 void MainWindow::exportDlg()
 {
    q_myTreeList->showExportDlg();
+}
+
+// 显示账户信息
+void MainWindow::showAccountInfo(){
+    AccountDialog dlg(this);
+    dlg.exec();
+}
+// 升级到VIP
+void MainWindow::update2Vip(){
+
+}
+// 注销
+void MainWindow::logoff(){
+    // 改变NoteEditor的属性
+    Preferences* p = Preferences::instance();
+    p->setUserName("");
+    p->setUserEmail("");
+//    p->setDisplayName("");
+//    p->setScore("");
+//    p->setDtExpired("");
+//    p->setType("");
+//    p->setLastOpenDocs("");
+
+//    m_displayname = s.value("userinfo/displayname", QString()).toString();
+//    m_score = s.value("userinfo/score", QString()).toString();
+//    m_dt_expired = s.value("userinfo/dtexpired", QString()).toString();
+//    m_type = s.value("userinfo/type", QString()).toString();
+//    m_store_limit = s.value("userinfo/storelimit", QString()).toString();
+//    m_store_used = s.value("userinfo/storeused", QString()).toString();
+//    m_traffic_limit = s.value("userinfo/trafficlimit", QString()).toString();
+//    m_traffic_used = s.value("userinfo/trafficused", QString()).toString();
+//    m_last_sel_tags = s.value("userinfo/lastseltags", QString()).toString();
+//    m_last_sel_dirs = s.value("userinfo/lastseldirs", QString()).toString();
+//    m_last_open_docs = s.value("userinfo/lastopendocs", QString()).toString();
+//    m_last_open_notes = s.value("userinfo/lastopennotes", QString()).toString();
+//    m_last_open_urls = s.value("userinfo/lastopenurls", QString()).toString();
+
+    // 重新启动
+    QCoreApplication::exit(773);
 }
 
 // 搜索设置

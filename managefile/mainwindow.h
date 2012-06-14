@@ -96,6 +96,10 @@ private slots:
     void importDlg();
     void exportDlg();
 
+    void showAccountInfo();
+    void update2Vip();
+    void logoff();
+
     void customToolBar();
     void openDocInTab();
     void slotShowSearchSetMenu();
@@ -161,7 +165,13 @@ private:
     QMenu *menu_View;
 //    QMenu *menu_skin;
 //    QMenu *menu_language;
+
+    QAction *accountInfoAction;
+    QAction *update2VipAction;
+    QAction *logoffAction;
+
     QMenu *menu_File;
+    QMenu *menu_Account;
     QMenu *menu_Help;
     QMenu *menu_Tool;
 

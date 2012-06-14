@@ -38,11 +38,30 @@ Preferences::Preferences(QObject *parent)
         m_isShowNotesOnTips = s.value("table/showNotesOnTips", true).toBool();
         m_tableselfield = s.value("table/selField", QStringList()).toStringList();
 
-        // prefs data
+        // prefs data start
         m_mainpath = s.value("prefs/data/mainpath", QString()).toString();
         m_indexpath = s.value("prefs/data/indexpath", QString()).toString();
         m_backpath = s.value("prefs/data/backpath", QString()).toString();
         m_exportpath = s.value("prefs/data/exportpath", QString()).toString();
+        // prefs data end
+
+        // userinfo start
+        m_useremail = s.value("userinfo/useremail", QString()).toString();
+        m_username = s.value("userinfo/username", QString()).toString();
+        m_displayname = s.value("userinfo/displayname", QString()).toString();
+        m_score = s.value("userinfo/score", QString()).toString();
+        m_dt_expired = s.value("userinfo/dtexpired", QString()).toString();
+        m_type = s.value("userinfo/type", QString()).toString();
+        m_store_limit = s.value("userinfo/storelimit", QString()).toString();
+        m_store_used = s.value("userinfo/storeused", QString()).toString();
+        m_traffic_limit = s.value("userinfo/trafficlimit", QString()).toString();
+        m_traffic_used = s.value("userinfo/trafficused", QString()).toString();
+        m_last_sel_tags = s.value("userinfo/lastseltags", QString()).toString();
+        m_last_sel_dirs = s.value("userinfo/lastseldirs", QString()).toString();
+        m_last_open_docs = s.value("userinfo/lastopendocs", QString()).toString();
+        m_last_open_notes = s.value("userinfo/lastopennotes", QString()).toString();
+        m_last_open_urls = s.value("userinfo/lastopenurls", QString()).toString();
+        // userinfo end
 
 	m_recentlyUsedCount = s.value("prefs/recentlyUsedSpinBox", 5).toInt();
 	m_openLastDB = s.value("prefs/openLastDB", true).toBool();
@@ -148,6 +167,24 @@ Preferences::~Preferences()
         settings.setValue("prefs/data/indexpath", m_indexpath);
         settings.setValue("prefs/data/backpath", m_backpath);
         settings.setValue("prefs/data/exportpath", m_exportpath);
+
+        // userinfo start
+        settings.setValue("userinfo/useremail", m_useremail);
+        settings.setValue("userinfo/username", m_username);
+        settings.setValue("userinfo/displayname",  m_displayname);
+        settings.setValue("userinfo/score", m_score);
+        settings.setValue("userinfo/dtexpired",m_dt_expired);
+        settings.setValue("userinfo/type", m_type);
+        settings.setValue("userinfo/storelimit", m_store_limit);
+        settings.setValue("userinfo/storeused", m_store_used);
+        settings.setValue("userinfo/trafficlimit", m_traffic_limit);
+        settings.setValue("userinfo/trafficused",  m_traffic_used);
+        settings.setValue("userinfo/lastseltags", m_last_sel_tags);
+        settings.setValue("userinfo/lastseldirs", m_last_sel_dirs);
+        settings.setValue("userinfo/lastopendocs", m_last_open_docs);
+        settings.setValue("userinfo/lastopennotes",  m_last_open_notes);
+        settings.setValue("userinfo/lastopenurls", m_last_open_urls);
+        // userinfo end
 
 	// sql editor
 	settings.setValue("prefs/sqleditor/font", m_sqlFont);

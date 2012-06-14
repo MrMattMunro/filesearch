@@ -82,9 +82,6 @@
         <file>icons/setnull.png</file>
         <file>icons/skins.png</file>
         <file>icons/snapshot.png</file>
-        <file>icons/sqliteman.ico</file>
-        <file>icons/sqliteman.png</file>
-        <file>icons/sqliteman.svg</file>
         <file>icons/status_bar.png</file>
         <file>icons/system.png</file>
         <file>icons/system-search.png</file>
@@ -147,5 +144,7 @@
         <file>icons/note.png</file>
         <file>icons/sql.ico</file>
         <file>api/sqlite.api</file>
+        <file>icons/my_account.ico</file>
+        <file>icons/logo_off.png</file>
     </qresource>
 </RCC>
