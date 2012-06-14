@@ -36,6 +36,7 @@ class LoginDialog : public QDialog, public Ui::LoginDialog
                 QFile* file;  //文件指针
                 QFile* pic;
                 QString fileName;
+                QString m_action;
 
         private:
                 void startRequest(QUrl url);
@@ -45,6 +46,7 @@ class LoginDialog : public QDialog, public Ui::LoginDialog
                 void resetBtn_clicked();
                 void httpFinished();  //完成下载后的处理
                 void httpReadyRead();  //接收到数据时的处理
+                void doReply();
 
         signals:
                 //确定按钮点击

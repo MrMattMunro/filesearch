@@ -45,6 +45,7 @@ extern "C++" {
 // Under Windows, define QSCINTILLA_MAKE_DLL to create a Scintilla DLL, or
 // define QSCINTILLA_DLL to link against a Scintilla DLL, or define neither
 // to either build or link against a static Scintilla library.
+// TODO test
 #if defined(Q_WS_WIN)
 
 #if defined(QSCINTILLA_DLL)
