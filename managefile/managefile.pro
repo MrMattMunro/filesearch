@@ -3,7 +3,7 @@ TARGET = managefile
 TEMPLATE = app
 
 LIBS += C:\QtWorksapce\managefile\lib\sqlite3.lib  \
-         C:\QtSDK\Symbian\tools\sbs\win32\mingw\lib\libwinspool.a
+         C:\QtSDK\Symbian\tools\sbs\win32\mingw\lib\libwinspool.a \
 
 CONFIG+=qaxcontainer
 
@@ -228,7 +228,14 @@ SOURCES += main.cpp \
     txteditorwidget.cpp \
     txteditor.cpp \
     logview.cpp \
-    logindialog.cpp
+    logindialog.cpp \
+    qjson/serializerrunnable.cpp \
+    qjson/serializer.cpp \
+    qjson/qobjecthelper.cpp \
+    qjson/parserrunnable.cpp \
+    qjson/parser.cpp \
+    qjson/json_scanner.cpp \
+    qjson/json_parser.cc
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -386,7 +393,20 @@ HEADERS  += mainwindow.h \
     txteditor.h \
     txteditorwidget.h \
     logview.h \
-    logindialog.h
+    logindialog.h \
+    qjson/stack.hh \
+    qjson/serializerrunnable.h \
+    qjson/serializer.h \
+    qjson/qobjecthelper.h \
+    qjson/qjson_export.h \
+    qjson/qjson_debug.h \
+    qjson/position.hh \
+    qjson/parserrunnable.h \
+    qjson/parser_p.h \
+    qjson/parser.h \
+    qjson/location.hh \
+    qjson/json_scanner.h \
+    qjson/json_parser.hh
 
 RESOURCES += \
     managefile.qrc
@@ -509,6 +529,17 @@ OTHER_FILES += \
     qscintilla2/include/License.txt \
     qscintilla2/include/HFacer.py \
     qscintilla2/include/Face.py
+
+
+
+
+
+
+
+
+
+
+
 
 
 
