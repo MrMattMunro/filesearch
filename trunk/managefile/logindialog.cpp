@@ -210,51 +210,69 @@ void LoginDialog::doReply()
 
   // 登录成功时
   if(m_action == "login" && error.isEmpty()){
-      // 处理Setting
+      // 传递选择的docUuid
+      Preferences* p = Preferences::instance();
+
+      // 处理Setting 设置用户信息
       QVariant user_email = result["user_email"];
       QString  suser_email = qvariant_cast<QString>(user_email);
+      p->setUserEmail(suser_email);
 
       QVariant username = result["username"];
       QString  susername = qvariant_cast<QString>(username);
+      p->setUserName(susername);
 
       QVariant displayname = result["displayname"];
       QString  sdisplayname = qvariant_cast<QString>(displayname);
+      p->setDisplayName(sdisplayname);
 
       QVariant score = result["score"];
       QString  sscore = qvariant_cast<QString>(score);
+      p->setScore(sscore);
 
       QVariant dt_expired = result["dt_expired"];
       QString  sdt_expired = qvariant_cast<QString>(dt_expired);
+      p->setDtExpired(sdt_expired);
 
       QVariant type = result["type"];
       QString  stype = qvariant_cast<QString>(type);
+      p->setType(stype);
 
       QVariant store_limit = result["store_limit"];
       QString  sstore_limit = qvariant_cast<QString>(store_limit);
+      p->setStoreLimit(sstore_limit);
 
       QVariant store_used = result["store_used"];
       QString  sstore_used = qvariant_cast<QString>(store_used);
+      p->setStoreUsed(sstore_used);
 
       QVariant traffic_limit = result["traffic_limit"];
       QString  straffic_limit = qvariant_cast<QString>(traffic_limit);
+      p->setTrafficLimit(straffic_limit);
 
       QVariant traffic_used = result["traffic_used"];
       QString  straffic_used = qvariant_cast<QString>(traffic_used);
+      p->setTrafficUsed(straffic_used);
 
       QVariant last_sel_tags = result["last_sel_tags"];
       QString  slast_sel_tags = qvariant_cast<QString>(last_sel_tags);
+      p->setLastSelTags(slast_sel_tags);
 
       QVariant last_sel_dirs = result["last_sel_dirs"];
       QString  slast_sel_dirs = qvariant_cast<QString>(last_sel_dirs);
+      p->setLastSelDirs(slast_sel_dirs);
 
       QVariant last_open_docs = result["last_open_docs"];
       QString  slast_open_docs = qvariant_cast<QString>(last_open_docs);
+      p->setLastOpenDocs(slast_open_docs);
 
       QVariant last_open_notes = result["last_open_notes"];
       QString  slast_open_notes = qvariant_cast<QString>(last_open_notes);
+      p->setLastOpenNotes(slast_open_notes);
 
       QVariant last_open_urls = result["last_open_urls"];
       QString  slast_open_urls = qvariant_cast<QString>(last_open_urls);
+      p->setLastOpenUrls(slast_open_urls);
 
       update = true;
       this->close();

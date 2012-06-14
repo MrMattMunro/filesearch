@@ -80,6 +80,54 @@ Q_OBJECT
                 QString getExportPath() { return m_exportpath; };
                 void setExportPath(QString v) { m_exportpath = v; };
 
+                // UserInfo start
+                QString getUserEmail() { return m_useremail; };
+                void setUserEmail(QString v) { m_useremail = v; };
+
+                QString getUserName() { return m_username; };
+                void setUserName(QString v) { m_username = v; };
+
+                QString getDisplayName() { return m_displayname; };
+                void setDisplayName(QString v) { m_displayname = v; };
+
+                QString getScore() { return m_score; };
+                void setScore(QString v) { m_score = v; };
+
+                QString getDtExpired() { return m_dt_expired; };
+                void setDtExpired(QString v) { m_dt_expired = v; };
+
+                QString getType() { return m_type; };
+                void setType(QString v) { m_type = v; };
+
+                QString getStoreLimit() { return m_store_limit; };
+                void setStoreLimit(QString v) { m_store_limit = v; };
+
+                QString getStoreUsed() { return m_store_used; };
+                void setStoreUsed(QString v) { m_store_used = v; };
+
+                QString getTrafficLimit() { return m_traffic_limit; };
+                void setTrafficLimit(QString v) { m_traffic_limit = v; };
+
+                QString getTrafficUsed() { return m_traffic_used; };
+                void setTrafficUsed(QString v) { m_traffic_used = v; };
+
+                QString getLastSelTags() { return m_last_sel_tags; };
+                void setLastSelTags(QString v) { m_last_sel_tags = v; };
+
+                QString getLastSelDirs() { return m_last_sel_dirs; };
+                void setLastSelDirs(QString v) { m_last_sel_dirs = v; };
+
+                QString getLastOpenDocs() { return m_last_open_docs; };
+                void setLastOpenDocs(QString v) { m_last_open_docs = v; };
+
+                QString getLastOpenNotes() { return m_last_open_notes; };
+                void setLastOpenNotes(QString v) { m_last_open_notes = v; };
+
+                QString getLastOpenUrls() { return m_last_open_urls; };
+                void setLastOpenUrls(QString v) { m_last_open_urls = v; };
+                // UserInfo end
+
+
 		int recentlyUsedCount() { return m_recentlyUsedCount; };
 		void setRecentlyUsedCount(int v) { m_recentlyUsedCount = v; };
 
@@ -216,6 +264,24 @@ Q_OBJECT
                 QString m_indexpath;
                 QString m_backpath;
                 QString m_exportpath;
+
+                // userinfo start
+                QString m_useremail;
+                QString m_username;
+                QString m_displayname;
+                QString m_score;
+                QString m_dt_expired;
+                QString m_type;
+                QString m_store_limit;
+                QString m_store_used;
+                QString m_traffic_limit;
+                QString m_traffic_used;
+                QString m_last_sel_tags;
+                QString m_last_sel_dirs;
+                QString m_last_open_docs;
+                QString m_last_open_notes;
+                QString m_last_open_urls;
+                // userinfo end
 
 		bool m_checkQtVersion;
 
