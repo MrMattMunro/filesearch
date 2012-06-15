@@ -12,6 +12,8 @@ for which a new license (GPL+exception) is in place.
 #include <QIcon>
 #include <QPixmap>
 #include <QListWidgetItem>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 
 //! Various helper functions
 namespace Utils {
