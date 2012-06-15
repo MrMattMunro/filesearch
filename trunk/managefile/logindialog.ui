@@ -38,7 +38,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="login">
       <attribute name="title">
@@ -97,6 +97,9 @@
        <layout class="QVBoxLayout" name="verticalLayout_6">
         <item>
          <widget class="QLineEdit" name="password">
+          <property name="maxLength">
+           <number>10</number>
+          </property>
           <property name="echoMode">
            <enum>QLineEdit::Password</enum>
           </property>
@@ -178,7 +181,11 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="QLineEdit" name="email"/>
+         <widget class="QLineEdit" name="email">
+          <property name="inputMethodHints">
+           <set>Qt::ImhEmailCharactersOnly</set>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -215,6 +222,9 @@
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
          <widget class="QLineEdit" name="pwd">
+          <property name="maxLength">
+           <number>10</number>
+          </property>
           <property name="echoMode">
            <enum>QLineEdit::Password</enum>
           </property>
@@ -312,12 +322,19 @@ acknowledge our Terms of Service</string>
          <pointsize>11</pointsize>
         </font>
        </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhEmailCharactersOnly</set>
+       </property>
        <property name="title">
         <string>Email</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QLineEdit" name="usremail"/>
+         <widget class="QLineEdit" name="usremail">
+          <property name="inputMethodHints">
+           <set>Qt::ImhEmailCharactersOnly</set>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>

@@ -236,7 +236,9 @@ SOURCES += main.cpp \
     qjson/parser.cpp \
     qjson/json_scanner.cpp \
     qjson/json_parser.cc \
-    accountdialog.cpp
+    accountdialog.cpp \
+    changepwddialog.cpp \
+    requtil.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -408,7 +410,9 @@ HEADERS  += mainwindow.h \
     qjson/location.hh \
     qjson/json_scanner.h \
     qjson/json_parser.hh \
-    accountdialog.h
+    accountdialog.h \
+    changepwddialog.h \
+    requtil.h
 
 RESOURCES += \
     managefile.qrc
@@ -451,7 +455,8 @@ FORMS    += mainwindow.ui \
     prefsdatastorewidget.ui \
     prefseditorwidget.ui \
     logindialog.ui \
-    accountdialog.ui
+    accountdialog.ui \
+    changepwddialog.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -530,6 +535,15 @@ OTHER_FILES += \
     qscintilla2/include/License.txt \
     qscintilla2/include/HFacer.py \
     qscintilla2/include/Face.py
+
+
+
+
+
+
+
+
+
 
 
 

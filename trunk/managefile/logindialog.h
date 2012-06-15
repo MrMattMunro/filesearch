@@ -12,10 +12,11 @@ for which a new license (GPL+exception) is in place.
 #include "ui_logindialog.h"
 
 #include <QStandardItemModel>
-#include <QHttp>
-#include <QFile>
-#include <QNetworkReply>
-#include <QNetworkAccessManager>
+//#include <QHttp>
+//#include <QFile>
+//#include <QNetworkReply>
+//#include <QNetworkAccessManager>
+#include "requtil.h"
 
 /*! \brief Import data into table using various importer types.
 \note XML import requires Qt library at least in the 4.3.0 version.
@@ -28,24 +29,20 @@ class LoginDialog : public QDialog, public Ui::LoginDialog
 	public:
                 LoginDialog(QWidget * parent = 0);
                 bool update;
-
-                QNetworkAccessManager *manager;
-                QHttp *http;
-                QNetworkReply *reply;
-                QUrl url;     //存储网络地址
-                QFile* file;  //文件指针
-                QFile* pic;
-                QString fileName;
-                QString m_action;
-
         private:
-                void startRequest(QUrl url);
+//                QNetworkAccessManager *manager;
+//                QNetworkReply *reply;
+//                QUrl url;     //存储网络地址
+//                QFile* file;  //文件指针
+                QString m_action;
+                ReqUtil * requtil;
+//                void startRequest(QUrl url);
 	private slots:
                 void loginBtn_clicked();
                 void registerBtn_clicked();
                 void resetBtn_clicked();
-                void httpFinished();  //完成下载后的处理
-                void httpReadyRead();  //接收到数据时的处理
+//                void httpFinished();  //完成下载后的处理
+//                void httpReadyRead();  //接收到数据时的处理
                 void doReply();
 
         signals:
