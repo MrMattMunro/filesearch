@@ -238,7 +238,8 @@ SOURCES += main.cpp \
     qjson/json_parser.cc \
     accountdialog.cpp \
     changepwddialog.cpp \
-    requtil.cpp
+    requtil.cpp \
+    scoretovipialog.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -412,7 +413,8 @@ HEADERS  += mainwindow.h \
     qjson/json_parser.hh \
     accountdialog.h \
     changepwddialog.h \
-    requtil.h
+    requtil.h \
+    scoretovipialog.h
 
 RESOURCES += \
     managefile.qrc
@@ -456,7 +458,8 @@ FORMS    += mainwindow.ui \
     prefseditorwidget.ui \
     logindialog.ui \
     accountdialog.ui \
-    changepwddialog.ui
+    changepwddialog.ui \
+    scoretovipialog.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -535,6 +538,9 @@ OTHER_FILES += \
     qscintilla2/include/License.txt \
     qscintilla2/include/HFacer.py \
     qscintilla2/include/Face.py
+
+
+
 
 
 
