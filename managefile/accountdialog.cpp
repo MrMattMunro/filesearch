@@ -18,6 +18,7 @@ for which a new license (GPL+exception) is in place.
 #include "fileutils.h"
 #include "preferences.h"
 #include "changepwddialog.h"
+#include "scoretovipdialog.h"
 #include "db/tagdao.h"
 
 AccountDialog::AccountDialog(QWidget * parent)
@@ -99,7 +100,6 @@ AccountDialog::AccountDialog(QWidget * parent)
 void AccountDialog::changePassword(){
     ChangePwdDialog dlg;
     dlg.exec();
-
     if(dlg.update){
 
     }
@@ -107,12 +107,16 @@ void AccountDialog::changePassword(){
 
 // 积分换VIP
 void AccountDialog::score4vip(){
-
+    ScoreToVipDialog dlg;
+    dlg.exec();
+    if(dlg.update){
+    }
 }
 
 // 升级到VIP
 void AccountDialog::updatevip(){
-
+    // 打开ie
+    emit updateVip();
 }
 
 // 取消按钮

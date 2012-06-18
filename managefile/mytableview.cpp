@@ -178,10 +178,7 @@ void MyTableView::initActions ()
    menu_ad->addAction(pprintAction);
    menu_ad->addAction(pformatChangeAction);
 
-
-
    Preferences* p = Preferences::instance();
-
    // 移动到文件夹
    moveToDirAction = new QAction(tr("&Move to..."), this);
    connect(moveToDirAction, SIGNAL(triggered()), this, SLOT(moveToDir()));

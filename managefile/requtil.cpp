@@ -10,7 +10,7 @@
 #include <qjson/parser.h>
 #include <qjson/serializer.h>
 
-#include "ReqUtil.h"
+#include "requtil.h"
 #include "preferences.h"
 #include "utils.h"
 #include "db/docdao.h"

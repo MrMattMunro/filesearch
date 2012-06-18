@@ -78,6 +78,12 @@ void LoginDialog::registerBtn_clicked()
     surl.append("&guid=");
     QString guid = QUuid::createUuid().toString();
     surl.append(guid);
+    surl.append("&ip=");
+    QString ipAddr = Utils::getIPAddress();
+    surl.append(ipAddr);
+    surl.append("&os=");
+    QString os = Utils::getSysOs();
+    surl.append(os);
 
     requtil = new ReqUtil(this);
     connect(requtil,SIGNAL(reqfinished()),this,SLOT(doReply()));

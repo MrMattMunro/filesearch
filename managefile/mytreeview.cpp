@@ -112,6 +112,7 @@ MyTreeView::MyTreeView(QString title, QWidget *parent) : treeTitle("tree"), QTre
 
         m_appName = tr("File Manage");
 
+        this->header()->hide();
         initActions();
 }
 
