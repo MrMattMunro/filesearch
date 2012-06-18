@@ -60,7 +60,6 @@
 #include "noteeditor.h"
 #include "logview.h"
 #include "preferencesdialog.h"
-#include "accountdialog.h"
 
 extern NoteEditor *noteEditor;
 
@@ -335,7 +334,7 @@ void MainWindow::initActions()
 
         // 升级到VIP
         update2VipAction = new QAction(Utils::getIcon("vip.png"),tr("Update to VIP"), this);
-        connect(update2VipAction, SIGNAL(triggered()), this, SLOT(about()));;
+        connect(update2VipAction, SIGNAL(triggered()), this, SLOT(updateToVip()));;
 
         // 注销
         logoffAction = new QAction(Utils::getIcon("logo_off.png"),tr("Logo Off"), this);
@@ -752,12 +751,14 @@ void MainWindow::exportDlg()
 
 // 显示账户信息
 void MainWindow::showAccountInfo(){
-    AccountDialog dlg(this);
-    dlg.exec();
+    accoutdlg = new AccountDialog(this);
+    connect(accoutdlg, SIGNAL(updateVip()), this, SLOT(updateToVip()));;
+    accoutdlg->exec();
 }
 // 升级到VIP
-void MainWindow::update2Vip(){
-
+void MainWindow::updateToVip(){
+  // 打开升级到VIP账号
+  browser->loadPage("http://www.slfile.net/?page_id=115");
 }
 // 注销
 void MainWindow::logoff(){
@@ -765,26 +766,11 @@ void MainWindow::logoff(){
     Preferences* p = Preferences::instance();
     p->setUserName("");
     p->setUserEmail("");
-//    p->setDisplayName("");
-//    p->setScore("");
-//    p->setDtExpired("");
-//    p->setType("");
-//    p->setLastOpenDocs("");
-
-//    m_displayname = s.value("userinfo/displayname", QString()).toString();
-//    m_score = s.value("userinfo/score", QString()).toString();
-//    m_dt_expired = s.value("userinfo/dtexpired", QString()).toString();
-//    m_type = s.value("userinfo/type", QString()).toString();
-//    m_store_limit = s.value("userinfo/storelimit", QString()).toString();
-//    m_store_used = s.value("userinfo/storeused", QString()).toString();
-//    m_traffic_limit = s.value("userinfo/trafficlimit", QString()).toString();
-//    m_traffic_used = s.value("userinfo/trafficused", QString()).toString();
-//    m_last_sel_tags = s.value("userinfo/lastseltags", QString()).toString();
-//    m_last_sel_dirs = s.value("userinfo/lastseldirs", QString()).toString();
-//    m_last_open_docs = s.value("userinfo/lastopendocs", QString()).toString();
-//    m_last_open_notes = s.value("userinfo/lastopennotes", QString()).toString();
-//    m_last_open_urls = s.value("userinfo/lastopenurls", QString()).toString();
-
+    p->setDisplayName("");
+    p->setScore("");
+    p->setDtExpired("");
+    p->setType("");
+    p->setLastOpenDocs("");
     // 重新启动
     QCoreApplication::exit(773);
 }

@@ -21,5 +21,6 @@ class AccountDialog : public QDialog, public Ui::AccountDialog
                 void updatevip();
 
         signals:
+               void updateVip();
 
 };

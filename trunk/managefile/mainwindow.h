@@ -55,6 +55,7 @@
 #include <browser/downloadmanager.h>
 #include <browser/networkaccessmanager.h>
 #include <browser/settings.h>
+#include <accountdialog.h>
 
 //#include "ui_mainwindow.h"
 
@@ -97,7 +98,7 @@ private slots:
     void exportDlg();
 
     void showAccountInfo();
-    void update2Vip();
+    void updateToVip();
     void logoff();
 
     void customToolBar();
@@ -190,6 +191,7 @@ private:
     QMenu *m_searchSetMenu;
     BrowserMainWindow *browser;
     QDockWidget *noteEditorDW;
+    AccountDialog *accoutdlg;
 
 };
 

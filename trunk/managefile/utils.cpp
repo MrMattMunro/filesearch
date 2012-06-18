@@ -13,13 +13,62 @@ for which a new license (GPL+exception) is in place.
 #include <QListWidgetItem>
 #include <QObject>
 #include <QCryptographicHash>
+#include <QSysInfo>
+#include <QNetworkInterface>
+
 
 #include "utils.h"
 
 #define ICON_DIR ":/icons"
 #define TRANSLATION_DIR ":/ts"
 
+// 取得操作系统
+QString Utils::getSysOs()
+{
+    if (QSysInfo::WindowsVersion == QSysInfo::WV_32s){
+        return "WV_32s";
+    }
+    if (QSysInfo::WindowsVersion == QSysInfo::WV_95){
+        return "WV_95";
+    }
+    if (QSysInfo::WindowsVersion == QSysInfo::WV_98){
+        return "WV_98";
+    }
+    if (QSysInfo::WindowsVersion == QSysInfo::WV_Me){
+        return "WV_Me";
+    }
+    if (QSysInfo::WindowsVersion == QSysInfo::WV_NT){
+        return "WV_NT";
+    }
+    if (QSysInfo::WindowsVersion == QSysInfo::WV_2000){
+        return "WV_2000";
+    }
+    if (QSysInfo::WindowsVersion == QSysInfo::WV_XP){
+        return "WV_XP";
+    }
+    if (QSysInfo::WindowsVersion == QSysInfo::WV_2003){
+        return "WV_2003";
+    }
+    if (QSysInfo::WindowsVersion == QSysInfo::WV_VISTA){
+        return "WV_VISTA";
+    }
 
+    return "";
+}
+// 取得IP
+QString Utils::getIPAddress(){
+    QList<QHostAddress> list = QNetworkInterface::allAddresses();
+    foreach (QHostAddress address, list)
+    {
+       if(address.protocol() == QAbstractSocket::IPv4Protocol){
+           //IPv4地址
+           if (address.toString().contains("127.0.")){
+               continue;
+           }
+           return address.toString();
+        }
+   }
+}
 
 QIcon Utils::getIcon(const QString & fileName)
 {
