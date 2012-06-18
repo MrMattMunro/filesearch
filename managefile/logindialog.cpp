@@ -34,10 +34,6 @@ LoginDialog::LoginDialog(QWidget * parent)
         QDir pathDir = Utils::directoryOf("html");
         QString path = pathDir.absolutePath();
         path.append(QDir::separator());
-        path.append("welcome");
-        path.append(QDir::separator());
-        path.append("html");
-        path.append(QDir::separator());
         path.append("welcome.html");
 
         welcome->load(QUrl::fromUserInput(path));
