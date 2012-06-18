@@ -1,0 +1,177 @@
+@charset "utf-8"; by been
+/* CSS Document */
+*{
+  margin:0;
+  padding:0;
+  list-style-type:none;
+  }
+body{
+	font:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	margin:0px;
+	background:#EEE;
+}
+.header{
+	height:75px;
+	width:100%;
+	text-align:center;
+	position:relative;
+	border-width:5px;
+	border-color:#FFF;
+	border-bottom-style:solid;
+	z-index:auto;
+}
+.logo{
+	width:300px;
+	height:100%;
+	float:left;
+}
+.content{
+	width:100%;
+	z-index:auto;
+}
+.result{
+	width:80em;
+	table-layout:fixed;
+	border-right-width:0px;
+	border-top-width:0px;
+	border-bottom-width:0px;
+	border-left-width:0px;
+	font-family:arial;
+	color:#000;
+}
+.result_a{
+	font-size:medium;
+	font-weight:normal;
+    list-style-type:none;
+	line-height:120%;
+	font-family:arial;
+	color:#000;
+}
+.result_content{
+	font-size:9pt;
+	line-height:120%;
+	font-family:arial;
+}
+.result_path{
+	font-size:9pt;
+	line-height:120%;
+	font-family:arial;
+	color:#008000;
+}
+.result_time{
+	font-size:9pt;
+	line-height:120%;
+	font-family:arial;
+	color:#666;
+}
+
+.inputsearch{
+	height:30px;
+	width:50%;
+	align:center;
+	font-size:22;
+}
+	
+	
+.left{
+	height:100%;
+	width:210px;
+	float:left;
+	/*border-width:5px;
+	border-color:#666;
+	border-left-style:solid;
+	border-right-style:solid;
+	*/	
+	/*
+	position:absolute;
+	overflow:auto;
+	border-bottom-style:solid;*/
+	overflow:auto;
+	}
+.menu{
+	height:25px;
+	display:block;
+	overflow:hidden;
+	font-size:14px;
+	text-align:center;
+	cursor:hand;
+	width:150px;
+	/*width:100%;
+	  margin:0px 5px 0px 5px;
+	  text-align:left;
+	  border:1px #333 solid;
+	  background:url(../img/menu_bg_bule.gif) repeat-x top center;
+	*/
+	margin:1px 0px 0px 0px;
+	background:url(../img/orange.png) repeat-x bottom left;
+}
+.menu div{
+	vertical-align:middle;}
+
+.menu:hover,.menu:active,.menu:focus{
+	background:#444;
+	color:#000;
+	_text-decoration:none;
+	}
+.menuChild div:hover,.menuChild div:active,.menuChild div:focus{
+	background:#CCC;
+	color:#000;
+	}
+div.menuChild{
+	cursor:hand;
+	display:none;
+	text-align:left;
+	margin:0px 5px 0px 5px;
+	
+}
+.menuChild div{
+	height:20px;
+	background:#999;
+	border:1px #333 solid;
+	margin:1px 5px 1px 5px;
+	}
+
+.main{
+	weight:100%;
+	height:100%;
+	/*border-width:5px;
+	border-color:#FFF;
+	border-right-style:solid;*/
+}
+.split{
+	width:5px;
+	height:100%;
+	background:url(../img/split_left_bg.gif) repeat-y;
+	float:left;
+	}
+.split_button{
+	width:100%;
+	height:100%;
+	background:url(../img/split_close.gif) no-repeat center;
+	/*float:left;*/
+	}
+.mianRight{
+	width:100%;
+	height:100%;
+	text-align:left;
+	}
+.footer {
+	
+	text-align:center;
+	position:fixed;
+	height:25px;
+	bottom:0px;
+	width:100%;
+	border-width:5px;
+	border-color:#FFF;
+	border-top-style:solid;
+}
+
+div.growlUI { background: url(check48.png) no-repeat 10px 10px }
+div.growlUI h1, div.growlUI h2 {
+	color: white; 
+	padding: 5px 5px 5px 75px; 
+	text-align: left;
+	font-size:15px;
+}
