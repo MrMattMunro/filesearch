@@ -239,7 +239,8 @@ SOURCES += main.cpp \
     accountdialog.cpp \
     changepwddialog.cpp \
     requtil.cpp \
-    scoretovipdialog.cpp
+    scoretovipdialog.cpp \
+    aboutdialog.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -414,7 +415,8 @@ HEADERS  += mainwindow.h \
     accountdialog.h \
     changepwddialog.h \
     requtil.h \
-    scoretovipdialog.h
+    scoretovipdialog.h \
+    aboutdialog.h
 
 RESOURCES += \
     managefile.qrc
@@ -459,7 +461,8 @@ FORMS    += mainwindow.ui \
     logindialog.ui \
     accountdialog.ui \
     changepwddialog.ui \
-    scoretovipdialog.ui
+    scoretovipdialog.ui \
+    aboutdialog.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -538,6 +541,9 @@ OTHER_FILES += \
     qscintilla2/include/License.txt \
     qscintilla2/include/HFacer.py \
     qscintilla2/include/Face.py
+
+
+
 
 
 

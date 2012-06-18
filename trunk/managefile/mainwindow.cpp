@@ -58,6 +58,7 @@
 #include "db/docdao.h"
 #include "db/doctagdao.h"
 #include "noteeditor.h"
+#include "aboutdialog.h"
 #include "logview.h"
 #include "preferencesdialog.h"
 
@@ -697,8 +698,11 @@ void MainWindow::upateToolBar(QStringList waitItems, QStringList selItems)
 
 void MainWindow::about()
 {
-    QMessageBox::about(this, tr("About %1").arg(windowTitle()), 
-                       tr("Sorry, The function is under construction..."));
+
+    AboutDialog aboutdlg(this);
+    aboutdlg.exec();
+//    QMessageBox::about(this, tr("About %1").arg(windowTitle()),
+//                       tr("Sorry, The function is under construction..."));
 }
 
 
