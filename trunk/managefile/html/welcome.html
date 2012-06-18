@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="../style.css" rel="stylesheet" type="text/css" />
+<!--
+  jQuery library
+-->
+<script type="text/javascript" src="lib/jquery-1.2.3.pack.js"></script>
+<!--
+  jCarousel library
+-->
+<script type="text/javascript" src="lib/jquery.jcarousel.pack.js"></script>
+<!--
+  jCarousel core stylesheet
+-->
+<link rel="stylesheet" type="text/css" href="lib/jquery.jcarousel.css" />
+<!--
+  jCarousel skin stylesheet
+-->
+<link rel="stylesheet" type="text/css" href="skins/tango/skin.css" />
+
+<script type="text/javascript">
+
+function mycarousel_initCallback(carousel)
+{
+    // Disable autoscrolling if the user clicks the prev or next button.
+    carousel.buttonNext.bind('click', function() {
+        carousel.startAuto(0);
+    });
+
+    carousel.buttonPrev.bind('click', function() {
+        carousel.startAuto(0);
+    });
+
+    // Pause autoscrolling if the user moves with the cursor over the clip.
+    carousel.clip.hover(function() {
+        carousel.stopAuto();
+    }, function() {
+        carousel.startAuto();
+    });
+};
+
+jQuery(document).ready(function() {
+    jQuery('#mycarousel').jcarousel({
+        auto: 2,
+        wrap: 'last',
+        initCallback: mycarousel_initCallback
+    });
+});
+
+</script>
+</head>
+<body>
+	<ul id="mycarousel" class="jcarousel-skin-tango">
+		<li><br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理电脑中的文档，提供目录及标签管理。对文档进行备注，设置关联文档，文档转换加密等功能</li>
+		<li><br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;强大的搜索功能，快速查找文档，精确定位关键字位置</li>
+		<li><br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对上网时网页分类管理</li>
+	</ul>
+</body>
+</html>
+
