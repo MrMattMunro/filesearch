@@ -292,7 +292,6 @@ int main(int argc, char *argv[])
             return -1;
     }
 
-
     // 初始化数据库
     Database::execSql(Database::getSql("mf_document_related.sql"));
     Database::execSql(Database::getSql("mf_dir.sql"));
@@ -301,7 +300,6 @@ int main(int argc, char *argv[])
     Database::execSql(Database::getSql("mf_document_related.sql"));
     Database::execSql(Database::getSql("mf_document_tag.sql"));
     Database::execSql(Database::getSql("mf_tag.sql"));
-    Database::execSql(Database::getSql("mf_accout.sql"));
     Database::execSql(Database::getSql("mf_meta.sql"));
 
     // 显示登录界面
@@ -336,8 +334,8 @@ int main(int argc, char *argv[])
        }
        return ret;
     }
-}
 
+}
 
 #ifndef WIN32
 void initCrashHandler()

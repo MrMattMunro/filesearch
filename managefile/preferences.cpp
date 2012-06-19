@@ -61,6 +61,7 @@ Preferences::Preferences(QObject *parent)
         m_last_open_docs = s.value("userinfo/lastopendocs", QString()).toString();
         m_last_open_notes = s.value("userinfo/lastopennotes", QString()).toString();
         m_last_open_urls = s.value("userinfo/lastopenurls", QString()).toString();
+        m_version = s.value("userinfo/version", QString()).toString();
         // userinfo end
 
 	m_recentlyUsedCount = s.value("prefs/recentlyUsedSpinBox", 5).toInt();
@@ -184,6 +185,7 @@ Preferences::~Preferences()
         settings.setValue("userinfo/lastopendocs", m_last_open_docs);
         settings.setValue("userinfo/lastopennotes",  m_last_open_notes);
         settings.setValue("userinfo/lastopenurls", m_last_open_urls);
+        settings.setValue("userinfo/version", m_version);
         // userinfo end
 
 	// sql editor

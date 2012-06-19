@@ -56,6 +56,7 @@
 #include <browser/networkaccessmanager.h>
 #include <browser/settings.h>
 #include <accountdialog.h>
+#include <requtil.h>
 
 //#include "ui_mainwindow.h"
 
@@ -113,6 +114,8 @@ private slots:
     void windowShowNoteEditor();
     void windowHideNoteEditor();
     void shownotes();
+
+    void doConfirmReply();
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -192,6 +195,8 @@ private:
     BrowserMainWindow *browser;
     QDockWidget *noteEditorDW;
     AccountDialog *accoutdlg;
+
+    ReqUtil * requtil;
 
 };
 

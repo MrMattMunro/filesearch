@@ -125,6 +125,9 @@ Q_OBJECT
 
                 QString getLastOpenUrls() { return m_last_open_urls; };
                 void setLastOpenUrls(QString v) { m_last_open_urls = v; };
+
+                QString getVersion() { return m_version; };
+                void setVersion(QString v) { m_version = v; };
                 // UserInfo end
 
 
@@ -281,6 +284,7 @@ Q_OBJECT
                 QString m_last_open_docs;
                 QString m_last_open_notes;
                 QString m_last_open_urls;
+                QString m_version;
                 // userinfo end
 
 		bool m_checkQtVersion;

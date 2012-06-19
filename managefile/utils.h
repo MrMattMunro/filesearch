@@ -40,6 +40,7 @@ QDir directoryOf(const QString & subdir);
 QString getMD5Str(const QString & str);
 QString getSysOs();
 QString getIPAddress();
+QString getSysLang();
 
 };
 

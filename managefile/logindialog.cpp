@@ -80,6 +80,9 @@ void LoginDialog::registerBtn_clicked()
     surl.append("&os=");
     QString os = Utils::getSysOs();
     surl.append(os);
+    surl.append("&lang=");
+    QString lang = Utils::getSysLang();
+    surl.append(lang);
 
     requtil = new ReqUtil(this);
     connect(requtil,SIGNAL(reqfinished()),this,SLOT(doReply()));
