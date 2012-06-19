@@ -244,6 +244,11 @@ QString Utils::getMD5Str(const QString & str)
     return md5.append(bb.toHex());
 }
 
+QString Utils::getSysLang()
+{
+    return QLocale::system().name().left(2);
+}
+
 
 
 
