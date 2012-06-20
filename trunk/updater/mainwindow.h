@@ -2,22 +2,20 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
-namespace Ui {
-    class MainWindow;
-}
+#include <QFtp>
+#include <QNetworkSession>
+#include <requtil.h>
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    MainWindow(QWidget *parent = 0, Qt::WFlags flags = 0);
     ~MainWindow();
 private slots:
     void doConfirmReply();
 private:
-    Ui::MainWindow *ui;
     ReqUtil * requtil;
 };
 

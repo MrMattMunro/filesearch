@@ -14,8 +14,6 @@
 #include "showupdatedialog.h"
 #include "preferences.h"
 #include "utils.h"
-#include "db/docdao.h"
-#include "db/dirdao.h"
 
 // µÇÂ¼½çÃæ
 UpdateDialog::UpdateDialog(QWidget * parent)

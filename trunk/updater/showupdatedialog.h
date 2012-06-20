@@ -18,6 +18,15 @@ for which a new license (GPL+exception) is in place.
 \note XML import requires Qt library at least in the 4.3.0 version.
 \author Petr Vanek <petr@scribus.info>
 */
+class QDialogButtonBox;
+class QFile;
+class QLabel;
+class QLineEdit;
+class QProgressDialog;
+class QPushButton;
+class QNetworkReply;
+
+
 class ShowUpdateDialog : public QDialog, public Ui::ShowUpdateDialog
 {
 	Q_OBJECT
@@ -26,12 +35,24 @@ class ShowUpdateDialog : public QDialog, public Ui::ShowUpdateDialog
                 ShowUpdateDialog(QWidget * parent = 0);
                 bool update;
         private:
+                QUrl url;
+                QNetworkAccessManager qnam;
+                QNetworkReply *reply;
+                QFile *file;
+                int httpGetId;
+                bool httpRequestAborted;
+
                 ReqUtil * requtil;
                 void updatefiles();
         private slots:
                 void doConfirmReply();
                 void confirmBtn_clicked();
                 void closeBtn_clicked();
+
+                void downloadFile(QString server, QString filepath);
+                void httpFinished();
+                void httpReadyRead();
+                void startRequest(QUrl url);
         signals:
 
 

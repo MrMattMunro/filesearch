@@ -13,8 +13,6 @@
 #include "requtil.h"
 #include "preferences.h"
 #include "utils.h"
-#include "db/docdao.h"
-#include "db/dirdao.h"
 
 // µÇÂ¼½çÃæ
 ReqUtil::ReqUtil(QWidget * parent)
