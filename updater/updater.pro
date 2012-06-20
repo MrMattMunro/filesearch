@@ -3,48 +3,77 @@
 # Project created by QtCreator 2012-06-20T10:54:24
 #
 #-------------------------------------------------
-
-QT       += core gui
+QT += core gui network webkit
 
 TARGET = updater
 TEMPLATE = app
 
+LIBS += -Lc:/QtWorksapce/updater/lib -lqjson0
 
 SOURCES += main.cpp\
         mainwindow.cpp \
     updatedialog.cpp \
     showupdatedialog.cpp \
-    qjson/serializerrunnable.cpp \
-    qjson/serializer.cpp \
-    qjson/qobjecthelper.cpp \
-    qjson/parserrunnable.cpp \
-    qjson/parser.cpp \
-    qjson/json_scanner.cpp \
-    qjson/json_parser.cc
+    requtil.cpp \
+    preferences.cpp \
+    fileutils.cpp \
+    utils.cpp \
+    downloadcontrol.cpp \
+    download.cpp
 
 HEADERS  += mainwindow.h \
     updatedialog.h \
     showupdatedialog.h \
-    qjson/serializerrunnable.h \
-    qjson/serializer.h \
-    qjson/qobjecthelper.h \
-    qjson/qjson_export.h \
-    qjson/qjson_debug.h \
-    qjson/position.hh \
-    qjson/parserrunnable.h \
-    qjson/parser_p.h \
     qjson/parser.h \
-    qjson/location.hh \
-    qjson/json_scanner.h \
-    qjson/json_parser.hh \
-    qjson/stack.hh
+    requtil.h \
+    preferences.h \
+    fileutils.h \
+    utils.h \
+    qjson/serializer.h \
+    download.h \
+    downloadcontrol.h
 
-FORMS    += mainwindow.ui \
+FORMS    += \
     showupdatedialog.ui \
     updatedialog.ui
 
 OTHER_FILES += \
     qjson/json_parser.yy
+
+RESOURCES += \
+    updater.qrc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
