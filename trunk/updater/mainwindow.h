@@ -14,9 +14,11 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
+private slots:
+    void doConfirmReply();
 private:
     Ui::MainWindow *ui;
+    ReqUtil * requtil;
 };
 
 #endif // MAINWINDOW_H
