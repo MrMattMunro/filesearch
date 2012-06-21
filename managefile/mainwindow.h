@@ -115,8 +115,6 @@ private slots:
     void windowHideNoteEditor();
     void shownotes();
 
-    void doConfirmReply();
-
 protected:
     void closeEvent(QCloseEvent *event);
 
@@ -195,8 +193,6 @@ private:
     BrowserMainWindow *browser;
     QDockWidget *noteEditorDW;
     AccountDialog *accoutdlg;
-
-    ReqUtil * requtil;
 
 };
 

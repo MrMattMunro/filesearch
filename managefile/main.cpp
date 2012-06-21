@@ -270,7 +270,7 @@ int main(int argc, char *argv[])
       dirfile->close();
     }
 
-   // 设置窗口图标
+    // 设置窗口图标
     app.setWindowIcon(Utils::getIcon("file_manager.png"));
     QTranslator translator;
     translator.load(Utils::getTranslator(cli.localeCode()));
@@ -288,8 +288,8 @@ int main(int argc, char *argv[])
     db.setDatabaseName(dbfilepath);
     if(!db.open())
     {
-            QMessageBox::critical(0, "", "Unable to open or create file. It is probably not a database");
-            return -1;
+        QMessageBox::critical(0, "", "Unable to open or create file. It is probably not a database");
+        return -1;
     }
 
     // 初始化数据库
