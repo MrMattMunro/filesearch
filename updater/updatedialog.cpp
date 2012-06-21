@@ -25,7 +25,7 @@ UpdateDialog::UpdateDialog(QWidget * parent)
         this->setWindowTitle(tr("Slfile"));
 
         QString url;
-        url.append("http://www.slfile.net/changelog_");
+        url.append("http://www.slfile.net/bootstrap/changelog_");
         url.append(Utils::getSysLang());
         url.append(".html");
         changelog->load(QUrl::fromUserInput(url));
@@ -39,12 +39,14 @@ UpdateDialog::UpdateDialog(QWidget * parent)
 void UpdateDialog::nexttimeBtn_clicked(){
      update = false;
      this->close();
+     QCoreApplication::exit(773);
 }
 
 // 忽视按钮 -<不能忽视>
 void UpdateDialog::ingoreBtn_clicked(){
      update = false;
      this->close();
+     QCoreApplication::exit(773);
 }
 
 // 升级按钮

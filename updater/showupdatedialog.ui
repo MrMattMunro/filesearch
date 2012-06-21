@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QPlainTextEdit" name="showfiles"/>
+    <widget class="QTableView" name="showfiles"/>
    </item>
    <item>
     <widget class="QProgressBar" name="progressBar">

@@ -12,6 +12,7 @@ for which a new license (GPL+exception) is in place.
 #include "ui_showupdatedialog.h"
 
 #include <QStandardItemModel>
+#include <QFileInfo>
 #include "requtil.h"
 
 /*! \brief Import data into table using various importer types.
@@ -34,6 +35,7 @@ class ShowUpdateDialog : public QDialog, public Ui::ShowUpdateDialog
 	public:
                 ShowUpdateDialog(QWidget * parent = 0);
                 bool update;
+                QStandardItemModel *model;
         private:
                 QUrl url;
                 QNetworkAccessManager qnam;
@@ -42,17 +44,22 @@ class ShowUpdateDialog : public QDialog, public Ui::ShowUpdateDialog
                 int httpGetId;
                 bool httpRequestAborted;
 
+                QString server;
+                QVariantList updatelist;
+                QVariantList dellist;
+                QFileInfo locfileinfo;
+
                 ReqUtil * requtil;
                 void updatefiles();
+                QFileInfo getLocalFile(QString filepath);
+
         private slots:
                 void doConfirmReply();
                 void confirmBtn_clicked();
                 void closeBtn_clicked();
-
-                void downloadFile(QString server, QString filepath);
-                void httpFinished();
-                void httpReadyRead();
-                void startRequest(QUrl url);
+                void servererror();
+                void downloadfiles();
+                void checkTestFile();
         signals:
 
 

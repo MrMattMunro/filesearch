@@ -4,6 +4,8 @@
 #include <QtDebug>
 #include "downloadcontrol.h"
 #include "download.h"
+#include "fileutils.h"
+
 
 //用阻塞的方式获取下载文件的长度
 qint64 DownloadControl::GetFileSize(QUrl url)
@@ -22,13 +24,13 @@ qint64 DownloadControl::GetFileSize(QUrl url)
     return size;
 }
 
-DownloadControl::DownloadControl(QObject *parent)
+DownloadControl::DownloadControl(QObject *parent, QFileInfo *locfileinfo)
 : QObject(parent)
 {
     m_DownloadCount = 0;
     m_FinishedNum = 0;
     m_FileSize = 0;
-    m_File = new QFile;
+    m_locfileinfo = locfileinfo;
 }
 
 void DownloadControl::StartFileDownload(const QString &url, int count)
@@ -38,12 +40,7 @@ void DownloadControl::StartFileDownload(const QString &url, int count)
     m_Url = QUrl(url);
     m_FileSize = GetFileSize(m_Url);
     //先获得文件的名字
-    QFileInfo fileInfo(m_Url.path());
-    QString fileName = fileInfo.fileName();
-    if (fileName.isEmpty())
-        fileName = "index.html";
-
-    m_File->setFileName(fileName);
+    m_File = new QFile(m_locfileinfo->filePath());
     //打开文件
     m_File->open(QIODevice::WriteOnly);
     Download *tempDownload;
@@ -79,3 +76,5 @@ void DownloadControl::SubPartFinished()
         qDebug() << "Download finished";
     }
 }
+
+
