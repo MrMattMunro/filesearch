@@ -12,7 +12,7 @@ for which a new license (GPL+exception) is in place.
 #include "ui_updatedialog.h"
 
 #include <QStandardItemModel>
-#include "requtil.h"
+#include <QFileInfo>
 
 /*! \brief Import data into table using various importer types.
 \note XML import requires Qt library at least in the 4.3.0 version.
@@ -28,12 +28,15 @@ class DownloadControl : public QObject
         int m_FileSize;
         QUrl m_Url;
         QFile *m_File;
+        QFileInfo *m_locfileinfo;
     public:
-        DownloadControl(QObject *parent = 0);
+        DownloadControl(QObject *parent = 0,  QFileInfo *m_locfileinfo = 0);
         void StartFileDownload(const QString &url, int count);
         qint64 GetFileSize(QUrl url);
     signals:
         void FileDownloadFinished();
     private slots:
             void SubPartFinished();
+            // 用户判断网络下载是否有问题
+
 };

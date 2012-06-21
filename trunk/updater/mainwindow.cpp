@@ -1,8 +1,10 @@
 #include <QDebug>
+#include <QProcess>
+#include <QDir>
 
 #include "mainwindow.h"
 #include "preferences.h"
-#include "showupdatedialog.h"
+#include "updatedialog.h"
 
 
 MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
@@ -32,10 +34,13 @@ void MainWindow::doConfirmReply(){
      QString version = p->getVersion();
      qDebug() << "version::" << version;
      if(newversion != version || version.isEmpty()){
-         ShowUpdateDialog dlg;
-         dlg.exec();
+//         ShowUpdateDialog dlg;
+//         dlg.exec();
+          UpdateDialog dlg;
+          dlg.exec();
+     }else{
+         QCoreApplication::exit(773);
      }
-
 }
 
 
