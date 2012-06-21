@@ -241,8 +241,7 @@ SOURCES += main.cpp \
     requtil.cpp \
     scoretovipdialog.cpp \
     aboutdialog.cpp \
-    updatedialog.cpp \
-    showupdatedialog.cpp
+    updatedialog.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -547,6 +546,7 @@ OTHER_FILES += \
     qscintilla2/include/License.txt \
     qscintilla2/include/HFacer.py \
     qscintilla2/include/Face.py
+
 
 
 
