@@ -17,18 +17,18 @@ Class5=CShortcutBarView
 Class6=CShortcutPaneCalendar
 
 ResourceCount=10
-Resource1=IDR_MENU_POPUP_TREE_PARENT
-Resource2=IDD_DIALOG_WEBSITE
-Resource3=IDD_DIALOG_GROUP
-Resource4=IDR_MENU_POPUP_LIST
-Resource5=IDR_MENU_MAINFRAME
+Resource1=IDD_DIALOG_WEBSITE
+Resource2=IDR_MENU_POPUP_LIST
+Resource3=IDD_DIALOG_TOOLBAR
+Resource4=IDR_MENU_MAINFRAME
+Resource5=IDR_POPUP_MENU (English (U.S.))
 Class7=CGroupDlg
-Resource6=IDR_POPUP_MENU (English (U.S.))
+Resource6=IDR_MENU_POPUP_TREE_PARENT
 Resource7=IDR_MENU_POPUP_TREE_CHILD
 Class8=CWebsiteDlg
 Resource8=IDR_TOOLBAR_TOP
 Class9=CToolbarDlg
-Resource9=IDD_DIALOG_TOOLBAR
+Resource9=IDD_DIALOG_GROUP
 Resource10=IDR_MAINFRAME (English (U.S.))
 
 [CLS:CMainFrame]
