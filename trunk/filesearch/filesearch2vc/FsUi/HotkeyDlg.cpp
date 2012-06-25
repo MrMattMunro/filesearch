@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "FsUi.h"
 #include "HotkeyDlg.h"
+#include "sltHotkeyChangeThread.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -164,4 +165,6 @@ void CHotkeyDlg::OnButtonSetHotkey()
 	m_hotkey.SaveHotkey("fasts", vk1, sk1);
 	m_hotkey.SaveHotkey("webs", vk2, sk2);	
 	
+	//事件通知
+	sltHotkeyChangeThread::getInstance()->addEvent();
 }
