@@ -5,6 +5,7 @@
 #include "FsUi.h"
 #include "FloatWnd.h"
 #include "FsUi.h"
+#include "sltHotkeyChangeThread.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -51,7 +52,9 @@ BEGIN_MESSAGE_MAP(CFloatWnd, CDialog)
 	ON_BN_CLICKED(IDC_LOGO, OnLogo)
 	ON_WM_LBUTTONDBLCLK()
 	ON_MESSAGE(WM_HOTKEY,OnHotKey)
+	ON_WM_DESTROY()
 	//}}AFX_MSG_MAP
+	ON_MESSAGE(MSG_HOTCHANGE,OnHotKeyChange)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -105,6 +108,9 @@ BOOL CFloatWnd::OnInitDialog()
 
 	OnUpdateTransparent(255);
 
+	sltHotkeyChangeThread::newInstance();
+	sltHotkeyChangeThread::getInstance()->startup(this);
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -121,16 +127,21 @@ void CFloatWnd::RegHotKey()
 	UINT fs1 = 0;
 	if (sk1 & HOTKEYF_ALT)	    fs1|= MOD_ALT;
 	if (sk1 & HOTKEYF_CONTROL)   fs1|= MOD_CONTROL;
-	if (sk1 & HOTKEYF_SHIFT) 	fs1|= MOD_SHIFT; 	
-	if(!::RegisterHotKey(m_hWnd, 1, fs1, vk1))
+	if (sk1 & HOTKEYF_SHIFT) 	fs1|= MOD_SHIFT; 
+	HWND hwnd = this->GetSafeHwnd();
+	BOOL bRet = UnregisterHotKey(this->GetSafeHwnd(), 1);
+	if(!RegisterHotKey(this->GetSafeHwnd(), 1, fs1, vk1))
 	{
 		MessageBox("快速查询的快捷键冲突，请重新设置快捷键!");
+		DWORD dwError = GetLastError();
 	}
 	UINT fs2 = 0;
 	if (sk2 & HOTKEYF_ALT)	    fs2|= MOD_ALT;
 	if (sk2 & HOTKEYF_CONTROL)   fs2|= MOD_CONTROL;
-	if (sk2 & HOTKEYF_SHIFT) 	fs2|= MOD_SHIFT; 	
-	if(!::RegisterHotKey(m_hWnd, 2, fs2, vk2))
+	if (sk2 & HOTKEYF_SHIFT) 	fs2|= MOD_SHIFT; 
+	
+	bRet = UnregisterHotKey(this->GetSafeHwnd(), 2);	
+	if(!RegisterHotKey(this->GetSafeHwnd(), 2, fs2, vk2))
 	{
 		MessageBox("web查询的快捷键冲突，请重新设置快捷键!");	
 	}	
@@ -299,5 +310,21 @@ LRESULT CFloatWnd::OnHotKey(WPARAM wp,LPARAM lp)   //热键处理函数
 		break;
 	}
 	
+	return 0;
+}
+
+void CFloatWnd::OnDestroy() 
+{
+	CDialog::OnDestroy();
+	
+	// TODO: Add your message handler code here
+	UnregisterHotKey(m_hWnd, 1);
+	UnregisterHotKey(m_hWnd, 2);
+}
+
+LRESULT CFloatWnd::OnHotKeyChange(WPARAM wp,LPARAM lp)
+{
+	RegHotKey();
+
 	return 0;
 }

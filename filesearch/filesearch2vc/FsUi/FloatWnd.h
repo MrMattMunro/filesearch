@@ -10,7 +10,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // CFloatWnd dialog
 #include "sloHotkeyAgent.h"
-
+#define MSG_HOTCHANGE	WM_USER+500
 class CFloatWnd : public CDialog
 {
 // Construction
@@ -55,7 +55,9 @@ protected:
 	afx_msg void OnLogo();
 	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 	afx_msg LRESULT OnHotKey(WPARAM wp,LPARAM lp);
+	afx_msg void OnDestroy();
 	//}}AFX_MSG
+	LRESULT OnHotKeyChange(WPARAM wp,LPARAM lp);
 	DECLARE_MESSAGE_MAP()
 };
 

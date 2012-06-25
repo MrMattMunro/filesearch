@@ -229,6 +229,10 @@ SOURCE=.\comm\sltFastSearchThread.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\sltHotkeyChangeThread.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\sltLoadwndThread.cpp
 # End Source File
 # Begin Source File
@@ -371,6 +375,10 @@ SOURCE=.\comm\sloSkinAgent.h
 # Begin Source File
 
 SOURCE=.\comm\sltFastSearchThread.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\sltHotkeyChangeThread.h
 # End Source File
 # Begin Source File
 
