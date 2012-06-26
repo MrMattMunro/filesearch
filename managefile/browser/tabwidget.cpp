@@ -662,6 +662,20 @@ QAxWidget* TabWidget::getDocWidget(QString filepath)
         path.append(isExisted);
 
         myWebBrowser->dynamicCall("Navigate(const QString&)", path);
+
+//            myWebBrowser->setControl(QString::fromUtf8("{00460182-9E5E-11D5-B7C8-B8269041DD57}"));
+//            myWebBrowser->setObjectName(QString::fromUtf8("FramerControl1"));
+//            myWebBrowser->setFocusPolicy(Qt::StrongFocus);
+//            QDir pathDir = Utils::directoryOf("docview");
+//            QString path = pathDir.absolutePath();
+//            path.append(QDir::separator());
+//            path.append("viewdoc.htm");
+//            path.append("?path=");
+//            path.append(filepath);
+//            path.append("&isExisted=");
+//            path.append(isExisted);
+
+//            myWebBrowser->dynamicCall("Open(const QString&,const bool)", filepath, false);
     }
 
     // ´ò¿ªpdfÎÄµµ TODO

@@ -155,7 +155,7 @@ void MainWindow::buildDocList()
 void MainWindow::slotShowSearchSetMenu()
 {
     if(m_searchSetMenu->children().length() > 2){
-      return;
+       return;
     }
 
     // 设置Menu
@@ -176,6 +176,13 @@ void MainWindow::slotShowSearchSetMenu()
     action3->setCheckable(true);
     action3->setText(tr("Current Directory(Include Sub Directory)"));
 
+    QActionGroup *grp = new QActionGroup( this );
+    grp->setExclusive(true);
+    connect(grp, SIGNAL(selected(QAction*)), this, SLOT(setSearchDir(QAction*)));
+    grp->addAction(action1);
+    grp->addAction(action2);
+    grp->addAction(action3);
+
     // 设置Menu
     QAction *action4 = new QAction(this);
     action4->setData(ALLTEXT);
@@ -187,32 +194,39 @@ void MainWindow::slotShowSearchSetMenu()
     action5->setCheckable(true);
     action5->setText(tr("Document Name Only"));
 
-    QAction *action6 = new QAction(this);
-    action6->setData(WEBSEARCH);
-    action6->setCheckable(true);
-    action6->setText(tr("Web Search"));
+    QActionGroup *grp1 = new QActionGroup( this );
+    grp1->setExclusive(true);
+    connect(grp1, SIGNAL(selected(QAction*)), this, SLOT(setSearchObject(QAction*)));
+    grp1->addAction(action4);
+    grp1->addAction(action5);
+
+//    QAction *action6 = new QAction(this);
+//    action6->setData(WEBSEARCH);
+//    action6->setCheckable(true);
+//    action6->setText(tr("Web Search"));
 
     QAction *action7 = new QAction(this);
     action7->setData(OPTION);
-    action7->setCheckable(true);
+    action7->setCheckable(false);
     action7->setText(tr("Option"));
 
-    QAction *action8 = new QAction(this);
-    action8->setData(SAVETOFASTSEARCH);
-    action8->setCheckable(true);
-    action8->setText(tr("Save To Fast Search"));
+//    QAction *action8 = new QAction(this);
+//    action8->setData(SAVETOFASTSEARCH);
+//    action8->setCheckable(true);
+//    action8->setText(tr("Save To Fast Search"));
 
     m_searchSetMenu->addAction(action1);
     m_searchSetMenu->addAction(action2);
     m_searchSetMenu->addAction(action3);
+
     m_searchSetMenu->addSeparator();
     m_searchSetMenu->addAction(action4);
     m_searchSetMenu->addAction(action5);
-    m_searchSetMenu->addSeparator();
-    m_searchSetMenu->addAction(action6);
+//    m_searchSetMenu->addSeparator();
+//    m_searchSetMenu->addAction(action6);
     m_searchSetMenu->addSeparator();
     m_searchSetMenu->addAction(action7);
-    m_searchSetMenu->addAction(action8);
+//    m_searchSetMenu->addAction(action8);
 }
 
 // 初始化界面动作
@@ -458,7 +472,8 @@ void MainWindow::initToolbar()
     toolBar->addWidget(twidget);
 
     m_toolbarSearch = new ToolbarSearch();
-    connect(m_toolbarSearch, SIGNAL(search(QUrl)), SLOT(loadUrl(QUrl)));
+    connect(m_toolbarSearch, SIGNAL(search(QUrl)), this, SLOT(openUrl(QUrl)));
+    connect(m_toolbarSearch, SIGNAL(textChanged(QString)), this, SLOT(dosearch(QString)));
 
     toolBar->addWidget(m_toolbarSearch);
     toolBar->addAction(m_searchSetAction);
@@ -469,6 +484,21 @@ void MainWindow::initToolbar()
     sapcewidget = new QWidget(this);
     sapcewidget->setMinimumWidth(m_doctable->width()*1.2);
     toolBar->addWidget(sapcewidget);
+}
+
+// 搜索关键字
+void MainWindow::dosearch(QString keyWord)
+{
+     // 名称排在前面
+     QList<Doc> docs= DocDao::selectDocsByName(keyWord);
+     // 内容排在后面
+     m_doctable->buildDocList(docs);
+}
+
+// 打开网络
+void MainWindow::openUrl(QUrl url)
+{
+    browser->loadUrl(url);
 }
 
 // 用户手册
@@ -565,7 +595,6 @@ void MainWindow::initUI()
 void MainWindow::shownotes(){
     m_doctable->showNoteDialog();
 }
-
 
 MainWindow::~MainWindow()
 {
@@ -719,6 +748,12 @@ void MainWindow::fullScreen()
     }else{
        q_myTreeList->hide();
     }
+
+    if(toolBar->isHidden()){
+       toolBar->show();
+    }else{
+       toolBar->hide();
+    }
 }
 
 // 显示/隐藏分类树
@@ -776,6 +811,19 @@ void MainWindow::logoff(){
     p->setLastOpenDocs("");
     // 重新启动
     QCoreApplication::exit(773);
+}
+
+// 设置搜索目录
+void MainWindow::setSearchDir(QAction *action){
+    int offset = action->data().toInt();
+    // 改变NoteEditor的属性
+    Preferences* p = Preferences::instance();
+    p->setSearchDir(QString::number(offset));
+}
+
+// 设置搜索对象
+void MainWindow::setSearchObject(QAction *action){
+    int offset = action->data().toInt();
 }
 
 // 搜索设置

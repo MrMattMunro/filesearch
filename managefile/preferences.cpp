@@ -64,6 +64,11 @@ Preferences::Preferences(QObject *parent)
         m_version = s.value("userinfo/version", QString()).toString();
         // userinfo end
 
+        // search setting start
+        m_searchdir = s.value("search/dir", QString()).toString();
+        m_searchobject = s.value("search/object", QString()).toString();
+        // search setting end
+
 	m_recentlyUsedCount = s.value("prefs/recentlyUsedSpinBox", 5).toInt();
 	m_openLastDB = s.value("prefs/openLastDB", true).toBool();
 	m_openLastSqlFile = s.value("prefs/openLastSqlFile", true).toBool();
@@ -187,6 +192,12 @@ Preferences::~Preferences()
         settings.setValue("userinfo/lastopenurls", m_last_open_urls);
         settings.setValue("userinfo/version", m_version);
         // userinfo end
+
+        // search setting start
+        settings.setValue("search/dir", m_searchdir);
+        settings.setValue("search/object", m_searchobject);
+        // search setting end
+
 
 	// sql editor
 	settings.setValue("prefs/sqleditor/font", m_sqlFont);

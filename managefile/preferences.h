@@ -130,6 +130,14 @@ Q_OBJECT
                 void setVersion(QString v) { m_version = v; };
                 // UserInfo end
 
+                // search setting start
+                QString getSearchDir() { return m_searchdir; };
+                void setSearchDir(QString v) { m_searchdir = v; };
+
+                QString getSearchObject() { return m_searchobject; };
+                void setSearchObject(QString v) { m_searchobject = v; };
+                // search setting end
+
 
 		int recentlyUsedCount() { return m_recentlyUsedCount; };
 		void setRecentlyUsedCount(int v) { m_recentlyUsedCount = v; };
@@ -286,6 +294,11 @@ Q_OBJECT
                 QString m_last_open_urls;
                 QString m_version;
                 // userinfo end
+
+                // search setting start
+                QString m_searchdir;
+                QString  m_searchobject;
+                // search setting end
 
 		bool m_checkQtVersion;
 

@@ -77,12 +77,13 @@ public:
 
 public slots:
     void loadPage(const QString &url);
+    void loadUrl(const QUrl &url);
     void slotHome();
     void openDocInTab(const QString &filepath);
     void openTxtInTab(const QString &filepath);
 signals:
-        //Êó±êË«»÷
-        void         testsingal();
+    //Êó±êË«»÷
+    void         testsingal();
 protected:
     void closeEvent(QCloseEvent *event);
     void resizeEvent(QResizeEvent * event);
@@ -94,7 +95,6 @@ private slots:
     void slotUpdateStatusbar(const QString &string);
     void slotUpdateWindowTitle(const QString &title = QString());
 
-    void loadUrl(const QUrl &url);
     void slotPreferences();
 
     void slotFileNew();
