@@ -71,6 +71,7 @@ private slots:
     void save();
     void aboutToShowMenu();
     void triggeredMenuAction(QAction *action);
+    void lineEditTextChanged();
 
 private:
     void load();

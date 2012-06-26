@@ -114,6 +114,10 @@ private slots:
     void windowShowNoteEditor();
     void windowHideNoteEditor();
     void shownotes();
+    void openUrl(QUrl url);
+    void dosearch(QString keyword);
+    void setSearchDir(QAction *action);
+    void setSearchObject(QAction *action);
 
 protected:
     void closeEvent(QCloseEvent *event);

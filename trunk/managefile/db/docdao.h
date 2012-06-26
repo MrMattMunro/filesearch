@@ -50,6 +50,8 @@ class DocDao
                 static QList<Doc> selectDocsbyDir(const QString & dirUuid,  const QString & delFlg);
                 static QList<Doc> selectDocsByDelFlg(const QString & delFlg);
                 static QList<Doc> selectDocsByTag(const Tag & tag);
+                // Ä£ºý²éÑ¯
+                static QList<Doc> selectDocsByName(const QString & name);
                 static bool physicalDelDoc();
 
         private:

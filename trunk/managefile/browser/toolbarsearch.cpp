@@ -70,6 +70,7 @@ ToolbarSearch::ToolbarSearch(QWidget *parent)
     lineEdit()->setCompleter(completer);
 
     connect(lineEdit(), SIGNAL(returnPressed()), SLOT(searchNow()));
+    connect(lineEdit(), SIGNAL(textChanged(const QString &)), SLOT(lineEditTextChanged()));
     setInactiveText(tr("Google"));
     load();
 }
@@ -120,6 +121,19 @@ void ToolbarSearch::searchNow()
     url.addQueryItem(QLatin1String("oe"), QLatin1String("UTF-8"));
     url.addQueryItem(QLatin1String("client"), QLatin1String("qtdemobrowser"));
     emit search(url);
+}
+
+void ToolbarSearch::lineEditTextChanged()
+{
+    QString searchText = lineEdit()->text();
+    QStringList newList = m_stringListModel->stringList();
+    if (newList.contains(searchText))
+        newList.removeAt(newList.indexOf(searchText));
+    newList.prepend(searchText);
+    if (newList.size() >= m_maxSavedSearches)
+        newList.removeLast();
+
+    emit textChanged(searchText);
 }
 
 void ToolbarSearch::aboutToShowMenu()
