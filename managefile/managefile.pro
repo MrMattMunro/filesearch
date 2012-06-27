@@ -416,7 +416,10 @@ HEADERS  += mainwindow.h \
     changepwddialog.h \
     requtil.h \
     scoretovipdialog.h \
-    aboutdialog.h
+    aboutdialog.h \
+    jni.h \
+    jni_md.h \
+    excuteJavaUtil.h
 
 RESOURCES += \
     managefile.qrc
@@ -541,6 +544,8 @@ OTHER_FILES += \
     qscintilla2/include/License.txt \
     qscintilla2/include/HFacer.py \
     qscintilla2/include/Face.py
+
+
 
 
 

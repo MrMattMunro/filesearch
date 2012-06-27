@@ -434,8 +434,6 @@ void MainWindow::initMenus()
         menu_Help->addAction(bbsAction);
         menu_Help->addAction(aboutAction);
         menu_Help->addSeparator();
-
-
 }
 
 // 状态栏
@@ -816,7 +814,6 @@ void MainWindow::logoff(){
 // 设置搜索目录
 void MainWindow::setSearchDir(QAction *action){
     int offset = action->data().toInt();
-    // 改变NoteEditor的属性
     Preferences* p = Preferences::instance();
     p->setSearchDir(QString::number(offset));
 }
@@ -824,19 +821,14 @@ void MainWindow::setSearchDir(QAction *action){
 // 设置搜索对象
 void MainWindow::setSearchObject(QAction *action){
     int offset = action->data().toInt();
+    Preferences* p = Preferences::instance();
+    p->setSearchObject(QString::number(offset));
 }
 
 // 搜索设置
 void MainWindow::slotOpenActionUrl(QAction *action)
 {
     int offset = action->data().toInt();
-
-    if(action->isChecked()){
-       action->setChecked(true);
-    }else{
-       action->setChecked(false);
-    }
-
     switch (offset) {
         case ALLDOC:
 
