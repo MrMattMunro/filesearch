@@ -949,10 +949,10 @@ void MyTableView::secondRowSetMenu()
     action3->setChecked(selFields.contains(QString::number(ACCESS_DATE)));
 
     QAction *action4 = new QAction(this);
-    action4->setData(SIZE);
+    action4->setData(FILE_SIZE);
     action4->setCheckable(true);
     action4->setText(tr("Size"));
-    action4->setChecked(selFields.contains(QString::number(SIZE)));
+    action4->setChecked(selFields.contains(QString::number(FILE_SIZE)));
 
     QAction *action5 = new QAction(this);
     action5->setData(AUTHOR);
@@ -1046,7 +1046,7 @@ void MyTableView::updateSecRow(QList<int> types)
                     case ACCESS_DATE:
                        temp.append(qvariant_cast<QString>(model->data(index, DOC_ACCESS_DATE)));
                        break;
-                    case SIZE:
+                    case FILE_SIZE:
                        temp.append(qvariant_cast<QString>(model->data(index, DOC_SIZE)));
                         break;
                     case AUTHOR:
@@ -1167,7 +1167,7 @@ QString MyTableView::getAvailableField(Doc doc)
         if(selFied == ACCESS_DATE){
            temp.append(doc.DT_ACCESSED);
         }
-        if(selFied == SIZE){
+        if(selFied == FILE_SIZE){
            // º∆À„size K
            QFileInfo file(doc.DOCUMENT_LOCATION);
            temp.append(QString::number(file.size() / 1000));

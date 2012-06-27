@@ -44,7 +44,7 @@ enum SecondRowOptionSet {
     CREATE_DATE = 1,
     MODIFIED_DATE = 2,
     ACCESS_DATE = 3,
-    SIZE = 4,
+    FILE_SIZE = 4,
     AUTHOR = 5,
     READ_COUNT = 6,
     RELATED_COUNT = 7,
