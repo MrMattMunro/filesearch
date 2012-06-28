@@ -9,6 +9,7 @@
 
 #include "importdocdialog.h"
 #include "preferences.h"
+#include "excuteJavaUtil.h"
 #include "utils.h"
 #include "db/docdao.h"
 #include "db/dirdao.h"
@@ -275,12 +276,14 @@ void ImportDocDialog::confirmBtn_clicked(){
     progressBar->setWindowModality(Qt::WindowModal);
     progressBar->setRange(0, row);
 
+    QList<QString> files;
     QString parentUuId = m_baseUuid;
     for (int var = 0; var < row; ++var) {
 
         QStandardItem* temp = model->item(var);
         QString path = temp->text();
         pgfilename->setText(path);
+        files.append(path);
 
         QString filepath = path.left(path.lastIndexOf(QDir::separator()));
         filepath = filepath.replace("\"","");
@@ -356,6 +359,9 @@ void ImportDocDialog::confirmBtn_clicked(){
         }
         setProgress(var);
     }
+
+    // 后台运行建立索引
+    ExcuteJavaUtil::indexFiles(Utils::getLocateIndexPath(), files);
 
     update = true;
     this->close();

@@ -30,7 +30,6 @@
 #include "logindialog.h"
 #include "fileutils.h"
 #include "noteeditor.h"
-#include "excuteJavaUtil.h"
 #include <QDebug>
 #include <QFile>
 #include <QTextStream>
@@ -250,9 +249,6 @@ int main(int argc, char *argv[])
     if (!cli.parseArgs()){
       return 0;
     }
-
-    ExcuteJavaUtil::executeJava();
-
     // 加载数据库驱动
     QApplication::addLibraryPath("./lib");
     qDebug() << "my library path : " << app.libraryPaths();
