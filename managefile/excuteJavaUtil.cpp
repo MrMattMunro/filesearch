@@ -2,7 +2,7 @@
 #include "jni.h"
 #include <string>
 #include <iostream>
-#include <QDebug>
+#include <QDir>
 #include <excuteJavaUtil.h>
 
 using namespace std;
@@ -10,7 +10,7 @@ using namespace std;
 //jstring NewJString(JNIEnv *env, char *str);
 //string  JStringToCString (JNIEnv *env, jstring str);
 
-bool ExcuteJavaUtil::executeJava()
+bool ExcuteJavaUtil::indexFiles(QString indexpath, QList<QString> files)
 {
 
     //定义一个函数指针，下面用来指向JVM中的JNI_CreateJavaVM函数
@@ -28,7 +28,34 @@ bool ExcuteJavaUtil::executeJava()
     options[0].optionString = "-Djava.compiler=NONE";
 
     //设置classpath，如果程序用到了第三方的JAR包，也可以在这里面包含进来
-    options[1].optionString = "-Djava.class.path=.;c:\\";
+        // char *optionString;
+    QString option = "-Djava.class.path=.;";
+    option.append(".\\jre\\jar\\bcmail-jdk14-132.jar;");
+    option.append(".\\jre\\jar\\bcprov-jdk14-132.jar;");
+    option.append(".\\jre\\jar\\commons-collections-3.2.1.jar;");
+    option.append(".\\jre\\jar\\commons-logging-1.1.jar;");
+    option.append(".\\jre\\jar\\geronimo-stax-api_1.0_spec-1.0.jar;");
+    option.append(".\\jre\\jar\\htmllexer.jar;");
+    option.append(".\\jre\\jar\\htmlparser.jar;");
+    option.append(".\\jre\\jar\\indexFile.jar;");
+    option.append(".\\jre\\jar\\log4j-1.2.13.jar;");
+    option.append(".\\jre\\jar\\lucene-core-3.3.0.jar;");
+    option.append(".\\jre\\jar\\lucene-gosen-1.2-dev-ipadic.jar;");
+    option.append(".\\jre\\jar\\lucene-highlighter-3.3.0.jar;");
+    option.append(".\\jre\\jar\\lucene-memory-3.3.0.jar;");
+    option.append(".\\jre\\jar\\nekohtml.jar;");
+    option.append(".\\jre\\jar\\paoding-analysis.jar;");
+    option.append(".\\jre\\jar\\poi-3.8-beta3-20110606.jar;");
+    option.append(".\\jre\\jar\\poi-excelant-3.8-beta3-20110606.jar;");
+    option.append(".\\jre\\jar\\poi-ooxml-3.8-beta3-20110606.jar;");
+    option.append(".\\jre\\jar\\poi-ooxml-schemas-3.8-beta3-20110606.jar;");
+    option.append(".\\jre\\jar\\poi-scratchpad-3.8-beta3-20110606.jar;");
+    option.append(".\\jre\\jar\\stax-api-1.0.1.jar;");
+    option.append(".\\jre\\jar\\xercesImpl.jar;");
+    option.append(".\\jre\\jar\\xmlbeans-2.3.0.jar;");
+
+    options[1].optionString = "-Djava.class.path=.;.\\jre\\jar\\bcmail-jdk14-132.jar;.\\jre\\jar\\bcprov-jdk14-132.jar;.\\jre\\jar\\commons-collections-3.2.1.jar;.\\jre\\jar\\commons-logging-1.1.jar;.\\jre\\jar\\geronimo-stax-api_1.0_spec-1.0.jar;.\\jre\\jar\\htmllexer.jar;.\\jre\\jar\\htmlparser.jar;.\\jre\\jar\\indexFile.jar;.\\jre\\jar\\log4j-1.2.13.jar;.\\jre\\jar\\lucene-core-3.3.0.jar;.\\jre\\jar\\lucene-gosen-1.2-dev-ipadic.jar;.\\jre\\jar\\lucene-highlighter-3.3.0.jar;.\\jre\\jar\\lucene-memory-3.3.0.jar;.\\jre\\jar\\nekohtml.jar;.\\jre\\jar\\paoding-analysis.jar;.\\jre\\jar\\poi-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-excelant-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-ooxml-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-ooxml-schemas-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-scratchpad-3.8-beta3-20110606.jar;.\\jre\\jar\\stax-api-1.0.1.jar;.\\jre\\jar\\xercesImpl.jar;.\\jre\\jar\\xmlbeans-2.3.0.jar";
+    // options[1].optionString = option.toLatin1().data();
 
     //设置显示消息的类型，取值有gc、class和jni，如果一次取多个的话值之间用逗号格开，如-verbose:gc,class
     //该参数可以用来观察C++调用JAVA的过程，设置该参数后，程序会在标准输出设备上打印调用的相关信息
@@ -36,13 +63,16 @@ bool ExcuteJavaUtil::executeJava()
 
     //设置版本号，版本号有JNI_VERSION_1_1，JNI_VERSION_1_2和JNI_VERSION_1_4
     //选择一个根你安装的JRE版本最近的版本号即可，不过你的JRE版本一定要等于或者高于指定的版本号
-    vm_args.version = JNI_VERSION_1_4;
+    vm_args.version = JNI_VERSION_1_6;
     vm_args.nOptions = 3;
     vm_args.options = options;
     //该参数指定是否忽略非标准的参数，如果填JNI_FLASE，当遇到非标准参数时，JNI_CreateJavaVM会返回JNI_ERR
     vm_args.ignoreUnrecognized = JNI_TRUE;
+    QString path = QDir::currentPath();
+    path.append("\\jre\\bin\\client\\jvm.dll");
     //加载JVM.DLL动态库
-    HINSTANCE hInstance = ::LoadLibraryA("C:\\QtWorksapce\\managefile\\jre\\bin\\client\\jvm.dll");
+    // HINSTANCE hInstance = ::LoadLibraryA("C:\\QtWorksapce\\managefile\\jre\\bin\\client\\jvm.dll");
+    HINSTANCE hInstance = ::LoadLibraryA(path.toLocal8Bit().constData());
     if (hInstance == NULL)
     {
         return false;
@@ -56,20 +86,42 @@ bool ExcuteJavaUtil::executeJava()
         return false;
     }
     //查找test.Demo类，返回JAVA类的CLASS对象
-    jclass cls = env->FindClass("test/Demo");
+    jclass cls = env->FindClass("com/searchlocal/lucene/IndexMaker");
     //根据类的CLASS对象获取该类的实例
     jobject obj = env->AllocObject(cls);
 
     //获取类中的方法，最后一个参数是方法的签名，通过javap -s -p 文件名可以获得
-    jmethodID mid = env->GetMethodID(cls, "append", "(Ljava/lang/String;I)Ljava/lang/String;");
+//    jmethodID mid = env->GetMethodID(cls, "A", "(Ljava/lang/String;Ljava/lang/String;)Z");
+        jmethodID mid = env->GetMethodID(cls, "makeindex", "(Ljava/lang/String;Ljava/lang/String;)Z");
+
+
+//        javap -s -p -classpath C:\QtWorksapce\managefile-build-de
+//        sktop-Qt_4_7_4_for_Desktop_-_MSVC2008__Qt_SDK____\jre\jar\indexFile\ com.searchl
+//        ocal.lucene.IndexMaker
+
     //构造参数并调用对象的方法  中文乱码
-    char *szTest = "aaaaa";
-    jstring arg = NewJString(env, szTest);
-    jstring msg = (jstring) env->CallObjectMethod(obj, mid, arg, 12);
-    string temp = JStringToCString(env, msg);
+    // char *indexpath = "C:\\Documents and Settings\\Administrator\\Local Settings\\Application Data\\slfile\\index";
+    QString indexpath = "C:\\Documents and Settings\\Administrator\\Local Settings\\Application Data\\slfile\\index";
+    jstring arg1 = NewJString(env, indexpath.toLatin1().data());
+
+    //char *filepath = "E:\\MyDocuments\\Qt\\Document+For+QT.doc";
+    QString filepath = "E:\\MyDocuments\\Qt\\Document+For+QT.doc";
+    jstring arg2 = NewJString(env, filepath.toLatin1().data());
+
+   // jstring msg = (jstring) env->CallObjectMethod(obj, mid, arg1, arg2);
+    env->CallObjectMethod(obj, mid, arg1, arg2);
+
+    QString file;
+    foreach(file, files){
+        // jstring msg = (jstring) env->CallObjectMethod(obj, mid, arg1, arg2);
+         arg2 = NewJString(env, file.toLatin1().data());
+         env->CallObjectMethod(obj, mid, arg1, arg2);
+    }
+    // string temp = JStringToCString(env, msg);
+
     // QDebug << JStringToCString(env, msg);
 
-    QString qstr = QString::fromStdString(temp);
+    //QString qstr = QString::fromStdString(temp);
 
 //    str = qstr.toStdString();
 //    qstr = QString::fromStdString(str);

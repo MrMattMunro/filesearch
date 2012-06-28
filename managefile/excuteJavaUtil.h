@@ -2,6 +2,8 @@
 #include "jni.h"
 #include <string>
 #include <iostream>
+#include <QString>
+#include <QList>
 
 using namespace std;
 
@@ -10,7 +12,7 @@ using namespace std;
 
 namespace ExcuteJavaUtil {
 
-bool executeJava();
+bool indexFiles(QString indexpath, QList<QString> files);
 string JStringToCString (JNIEnv *env, jstring str); // (jstring str, LPTSTR desc, int desc_len);
 jstring NewJString(JNIEnv *env, char *str);
 
