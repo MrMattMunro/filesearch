@@ -7,7 +7,7 @@
 #include <QMenu>
 #include <QUuid>
 #include <QInputDialog>
-
+#include <QThread>
 
 #include "mytreeview.h"
 #include "utils.h"
@@ -30,6 +30,7 @@
 #include "propoftagdialog.h"
 #include "createtagdialog.h"
 #include "sortsubdirsdialog.h"
+#include "excuteJavaUtil.h"
 
 static  QModelIndex preindex;
 
@@ -782,7 +783,13 @@ void MyTreeView::importDlg()
     // 需选中子节点
     if(!curType.isEmpty() && curType != "alldocs" && curType != "alltags") {
         hasSelRight = true;
+        // 后台运行Thread
         ImportDocDialog dlg(this, uuId, getCurPath());
+        QThread thread;
+        IndexFilesObj* indexFilesObj = new IndexFilesObj();
+        dlg.moveToThread(&thread);
+        QObject::connect(&dlg, SIGNAL(indexfile(QList<QString>)), indexFilesObj, SLOT(indexfiles(QList<QString>)));
+        thread.start();
         dlg.exec();
         if(dlg.update){
             // 重新加载树节点

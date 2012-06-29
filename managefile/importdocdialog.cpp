@@ -360,11 +360,10 @@ void ImportDocDialog::confirmBtn_clicked(){
         setProgress(var);
     }
 
-    // 后台运行建立索引
-    ExcuteJavaUtil::indexFiles(Utils::getLocateIndexPath(), files);
-
     update = true;
-    this->close();
+    if(this->close()){
+       emit indexfile(files);
+    }
 }
 
 // 取消按钮

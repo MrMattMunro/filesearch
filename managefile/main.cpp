@@ -30,6 +30,7 @@
 #include "logindialog.h"
 #include "fileutils.h"
 #include "noteeditor.h"
+#include "excuteJavaUtil.h""
 #include <QDebug>
 #include <QFile>
 #include <QTextStream>
@@ -300,6 +301,8 @@ int main(int argc, char *argv[])
     Database::execSql(Database::getSql("mf_document_tag.sql"));
     Database::execSql(Database::getSql("mf_tag.sql"));
     Database::execSql(Database::getSql("mf_meta.sql"));
+
+    ExcuteJavaUtil::queryIndex("all", "bug");
 
     // œ‘ æµ«¬ºΩÁ√Ê
     Preferences* p = Preferences::instance();
