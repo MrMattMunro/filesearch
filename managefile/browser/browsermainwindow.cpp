@@ -817,8 +817,8 @@ void BrowserMainWindow::slotHome()
 {
     QSettings settings;
     settings.beginGroup(QLatin1String("MainWindow"));
-    QString home = settings.value(QLatin1String("home"), QLatin1String("http://www.tom.com")).toString();
-    loadPage("http://www.tom.com");
+//    QString home = settings.value(QLatin1String("home"), QLatin1String("http://www.tom.com")).toString();
+//    loadPage("http://www.tom.com");
 }
 
 void BrowserMainWindow::slotWebSearch()

@@ -51,6 +51,8 @@
 
 #include "browser/browsermainwindow.h"
 #include "browser/browserapplication.h"
+#include <qjson/parser.h>
+#include <qjson/serializer.h>
 #include "utils.h"
 #include "fileutils.h"
 #include "db/tagdao.h"
@@ -487,10 +489,57 @@ void MainWindow::initToolbar()
 // 搜索关键字
 void MainWindow::dosearch(QString keyWord)
 {
-     // 名称排在前面
-     QList<Doc> docs= DocDao::selectDocsByName(keyWord);
+//     // 名称排在前面
+//     QList<Doc> docs= DocDao::selectDocsByName(keyWord);
+//     m_doctable->buildDocList(docs);
+
+     // 检索内容
      // 内容排在后面
-     m_doctable->buildDocList(docs);
+     QString resultjson = ExcuteJavaUtil::queryIndex("all", keyWord);
+
+     qDebug() << "resultjson>> " << resultjson;
+
+     //  QString resultjson = "[{\"content\":\"33.0,界面显示改变,bug,饶伟,紧急,○\",\"filename\":\"Bug及改进列表.xls\",\"id\":\"\",\"lastmodify\":0,\"path\":\"F:\\Document\\测试\\Bug及改进列表.xls\",\"rownb\":33,\"sheetname\":\"Ver1.2\",\"systime\":0},{\"content\":\"8.0,界面目录选择框可以输入,bug,饶伟,低级,○\",\"filename\":\"Bug及改进列表.xls\",\"id\":\"\",\"lastmodify\":0,\"path\":\"F:\\Document\\测试\\Bug及改进列表.xls\",\"rownb\":9,\"sheetname\":\"Ver1.2\",\"systime\":0}]";
+
+     QByteArray ch = resultjson.toUtf8();
+     QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+     resultjson = codec->toUnicode(ch);
+     qDebug() << "resultjson changed>> " << resultjson;
+
+     QJson::Parser parser;
+     QBuffer buffer;
+     buffer.open(QBuffer::ReadWrite);
+     buffer.write(resultjson.toUtf8());
+     buffer.seek(0);
+     bool ok;
+     QList<QVariant> results = parser.parse(&buffer, &ok).toList();
+     qDebug() << "results size>>" << results.size();
+
+     QList<SearchResult> resultList;
+     foreach(QVariant result, results){
+         QVariantMap mymap = result.toMap();
+         SearchResult searchResult;
+
+         QVariant filename = mymap["filename"];
+         searchResult.FILE_NAME = qvariant_cast<QString>(filename);
+         QVariant filepath = mymap["path"];
+         searchResult.FILE_PATH = qvariant_cast<QString>(filepath);
+         QVariant lastmodify = mymap["lastmodify"];
+         searchResult.LAST_MODIFIED = qvariant_cast<QString>(lastmodify);
+         QVariant sheetname = mymap["sheetname"];
+         searchResult.SHEET_NAME = qvariant_cast<QString>(sheetname);
+         QVariant page = mymap["page"];
+         searchResult.PAGE = qvariant_cast<QString>(page);
+         QVariant rownb = mymap["rownb"];
+         searchResult.ROW_NB = qvariant_cast<QString>(rownb);
+         QVariant content = mymap["content"];
+         searchResult.CONTENT = qvariant_cast<QString>(content);
+
+         resultList.append(searchResult);
+     }
+
+     m_doctable->buildSearchResult(resultList);
+
 }
 
 // 打开网络
