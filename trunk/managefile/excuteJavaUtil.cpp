@@ -4,6 +4,7 @@
 #include <iostream>
 #include <QDir>
 #include <excuteJavaUtil.h>
+#include <QDebug>
 
 using namespace std;
 
@@ -177,14 +178,15 @@ QString ExcuteJavaUtil::queryIndex(QString searchType, QString keyword)
     option.append(".\\jre\\jar\\stax-api-1.0.1.jar;");
     option.append(".\\jre\\jar\\xercesImpl.jar;");
     option.append(".\\jre\\jar\\xmlbeans-2.3.0.jar;");
-    option.append(".\\jre\\jar\\json-lib-2.3-jdk13.jar;");
-    option.append(".\\jre\\jar\\commons-lang.jar;");
-    option.append(".\\jre\\jar\\ezmorph-1.0.4.jar;");
-    option.append(".\\jre\\jar\\commons-collections.jar;");
-    option.append(".\\jre\\jar\\commons-beanutils-1.8.0.jar;");
+//    option.append(".\\jre\\jar\\json-lib-2.3-jdk13.jar;");
+//    option.append(".\\jre\\jar\\commons-lang.jar;");
+//    option.append(".\\jre\\jar\\ezmorph-1.0.4.jar;");
+//    option.append(".\\jre\\jar\\commons-collections.jar;");
+//    option.append(".\\jre\\jar\\commons-beanutils-1.8.0.jar;");
 
+    // options[1].optionString = "-Djava.class.path=.;.\\jre\\jar\\bcmail-jdk14-132.jar;.\\jre\\jar\\bcprov-jdk14-132.jar;.\\jre\\jar\\commons-collections-3.2.1.jar;.\\jre\\jar\\commons-logging-1.1.jar;.\\jre\\jar\\geronimo-stax-api_1.0_spec-1.0.jar;.\\jre\\jar\\htmllexer.jar;.\\jre\\jar\\htmlparser.jar;.\\jre\\jar\\indexFile.jar;.\\jre\\jar\\log4j-1.2.13.jar;.\\jre\\jar\\lucene-core-3.3.0.jar;.\\jre\\jar\\lucene-gosen-1.2-dev-ipadic.jar;.\\jre\\jar\\lucene-highlighter-3.3.0.jar;.\\jre\\jar\\lucene-memory-3.3.0.jar;.\\jre\\jar\\nekohtml.jar;.\\jre\\jar\\paoding-analysis.jar;.\\jre\\jar\\poi-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-excelant-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-ooxml-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-ooxml-schemas-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-scratchpad-3.8-beta3-20110606.jar;.\\jre\\jar\\stax-api-1.0.1.jar;.\\jre\\jar\\xercesImpl.jar;.\\jre\\jar\\xmlbeans-2.3.0.jar;.\\jre\\jar\\json-lib-2.3-jdk13.jar;.\\jre\\jar\\commons-lang.jar;.\\jre\\jar\\ezmorph-1.0.4.jar;.\\jre\\jar\\commons-collections.jar;.\\jre\\jar\\commons-beanutils-1.8.0.jar";
+     options[1].optionString = "-Djava.class.path=.;.\\jre\\jar\\bcmail-jdk14-132.jar;.\\jre\\jar\\bcprov-jdk14-132.jar;.\\jre\\jar\\commons-collections-3.2.1.jar;.\\jre\\jar\\commons-logging-1.1.jar;.\\jre\\jar\\geronimo-stax-api_1.0_spec-1.0.jar;.\\jre\\jar\\htmllexer.jar;.\\jre\\jar\\htmlparser.jar;.\\jre\\jar\\indexFile.jar;.\\jre\\jar\\log4j-1.2.13.jar;.\\jre\\jar\\lucene-core-3.3.0.jar;.\\jre\\jar\\lucene-gosen-1.2-dev-ipadic.jar;.\\jre\\jar\\lucene-highlighter-3.3.0.jar;.\\jre\\jar\\lucene-memory-3.3.0.jar;.\\jre\\jar\\nekohtml.jar;.\\jre\\jar\\paoding-analysis.jar;.\\jre\\jar\\poi-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-excelant-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-ooxml-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-ooxml-schemas-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-scratchpad-3.8-beta3-20110606.jar;.\\jre\\jar\\stax-api-1.0.1.jar;.\\jre\\jar\\xercesImpl.jar;.\\jre\\jar\\xmlbeans-2.3.0.jar";
 
-    options[1].optionString = "-Djava.class.path=.;.\\jre\\jar\\bcmail-jdk14-132.jar;.\\jre\\jar\\bcprov-jdk14-132.jar;.\\jre\\jar\\commons-collections-3.2.1.jar;.\\jre\\jar\\commons-logging-1.1.jar;.\\jre\\jar\\geronimo-stax-api_1.0_spec-1.0.jar;.\\jre\\jar\\htmllexer.jar;.\\jre\\jar\\htmlparser.jar;.\\jre\\jar\\indexFile.jar;.\\jre\\jar\\log4j-1.2.13.jar;.\\jre\\jar\\lucene-core-3.3.0.jar;.\\jre\\jar\\lucene-gosen-1.2-dev-ipadic.jar;.\\jre\\jar\\lucene-highlighter-3.3.0.jar;.\\jre\\jar\\lucene-memory-3.3.0.jar;.\\jre\\jar\\nekohtml.jar;.\\jre\\jar\\paoding-analysis.jar;.\\jre\\jar\\poi-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-excelant-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-ooxml-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-ooxml-schemas-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-scratchpad-3.8-beta3-20110606.jar;.\\jre\\jar\\stax-api-1.0.1.jar;.\\jre\\jar\\xercesImpl.jar;.\\jre\\jar\\xmlbeans-2.3.0.jar;.\\jre\\jar\\json-lib-2.3-jdk13.jar;.\\jre\\jar\\commons-lang.jar;.\\jre\\jar\\ezmorph-1.0.4.jar;.\\jre\\jar\\commons-collections.jar;.\\jre\\jar\\commons-beanutils-1.8.0.jar";
     // options[1].optionString = option.toLatin1().data();
 
     //设置显示消息的类型，取值有gc、class和jni，如果一次取多个的话值之间用逗号格开，如-verbose:gc,class
@@ -231,19 +233,22 @@ QString ExcuteJavaUtil::queryIndex(QString searchType, QString keyword)
     //构造参数并调用对象的方法  中文乱码
     // char *indexpath = "C:\\Documents and Settings\\Administrator\\Local Settings\\Application Data\\slfile\\index";
 
-
+    keyword = "bug";
     jstring arg1 = NewJString(env, searchType.toLatin1().data());
     jstring arg2 = NewJString(env, keyword.toLatin1().data());
 
     QString indexpath = "C:\\Documents and Settings\\Administrator\\Local Settings\\Application Data\\slfile\\index";
     jstring arg3 = NewJString(env, indexpath.toLatin1().data());
 
+    qDebug() << "searchType>> " << searchType;
+    qDebug() << "keyword>> " << keyword;
+    qDebug() << "indexpath>> " << indexpath;
     jstring msg = (jstring)env->CallObjectMethod(obj, mid, arg1, arg2, arg3);
-
+    qDebug() << "temp>> " << msg;
     string temp = JStringToCString(env, msg);
 
     QString jsonresult = QString::fromStdString(temp);
-
+    qDebug() << "jsonresult>> " << jsonresult;
 
     //销毁虚拟机并释放动态库
     jvm->DestroyJavaVM();

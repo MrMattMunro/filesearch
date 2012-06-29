@@ -430,6 +430,84 @@ void MyTableView::buildDocList(QList<Doc> doclist)
     qDebug("buildDocList end");
 }
 
+void MyTableView::buildSearchResult(QList<SearchResult> resultlist)
+{
+    qDebug("buildResultList start");
+    Preferences* p = Preferences::instance();
+    for (int var = 0; var < resultlist.size(); ++var) {
+         SearchResult result = resultlist.at(var);
+         QString filename = result.FILE_NAME;
+         QString path = result.FILE_PATH;
+         QString lastmodifed = result.LAST_MODIFIED;
+         QString sheetname = result.SHEET_NAME;
+         QString page = result.PAGE;
+         QString rownb = result.ROW_NB;
+         QString content = result.CONTENT;
+
+
+         int dotpos = filename.lastIndexOf(".");
+         QString icon = filename.right(filename.length() - dotpos - 1).toLower();
+         QString dotsuffix = filename.right(filename.length() - dotpos);
+         QString suffix = "*" + dotsuffix;
+
+         // 第一行
+         QList<QStandardItem*> items;
+         // 第二行
+         QList<QStandardItem*> secitems;
+
+         // 支持的文件类型
+         if(p->word().contains(suffix, Qt::CaseInsensitive)
+                 || p->excel().contains(suffix, Qt::CaseInsensitive)
+                 || p->ppt().contains(suffix, Qt::CaseInsensitive)
+                 || p->pdf().contains(suffix, Qt::CaseInsensitive)
+                 || p->htmls().contains(suffix, Qt::CaseInsensitive)
+                 || p->pics().contains(suffix, Qt::CaseInsensitive)
+                 || p->swfs().contains(suffix, Qt::CaseInsensitive)
+                 || p->sources().contains(suffix, Qt::CaseInsensitive)
+                 || p->txts().contains(suffix, Qt::CaseInsensitive)
+                 || p->movies().contains(suffix, Qt::CaseInsensitive)
+                 || p->ppt().contains(suffix, Qt::CaseInsensitive)
+                 || p->ppt().contains(suffix, Qt::CaseInsensitive)){
+
+            // 第一行
+            QStandardItem* item = new QStandardItem();
+            icon = icon.append(".ico");
+            item->setData(icon,  Qt::DecorationRole);
+            items.append(item);
+
+            item = new QStandardItem();
+            item->setBackground(QBrush(QColor(255, 255, 255)));
+            item->setTextAlignment(Qt::AlignLeft);
+            item->setFont(QFont( "Times", 11,  QFont::Normal ));
+            item->setData(filename, Qt::DisplayRole);
+            item->setData(path, Qt::ToolTipRole);
+
+            // 在第二个动态项中加入所有其他数据
+            item->setData(lastmodifed, LAST_MODIFIED);
+            item->setData(sheetname, SHEET_NAME);
+            item->setData(page, PAGE);
+            item->setData(rownb, ROW_NB);
+            items.append(item);
+
+
+             // 第二行
+            item = new QStandardItem();
+            item->setData(content, Qt::DisplayRole);
+            item->setFont(QFont( "Times", 8,  QFont::Light ));
+            item->setTextAlignment(Qt::AlignTop);
+            secitems.append(item);
+         }
+
+         if(p->allsupported().contains(suffix, Qt::CaseInsensitive)){
+             model->appendRow(items);
+             model->appendRow(secitems);
+         }
+    }
+
+    qDebug("buildResultList end");
+}
+
+
 // Show tooltip
 void MyTableView::showToolTip(const QModelIndex &index)
 {
