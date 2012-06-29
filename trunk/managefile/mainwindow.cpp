@@ -194,11 +194,11 @@ void MainWindow::slotShowSearchSetMenu()
     action5->setCheckable(true);
     action5->setText(tr("Document Name Only"));
 
-    QActionGroup *grp1 = new QActionGroup( this );
-    grp1->setExclusive(true);
-    connect(grp1, SIGNAL(selected(QAction*)), this, SLOT(setSearchObject(QAction*)));
-    grp1->addAction(action4);
-    grp1->addAction(action5);
+    QActionGroup *grp11 = new QActionGroup(this);
+    grp11->setExclusive(true);
+    connect(grp11, SIGNAL(selected(QAction*)), this, SLOT(setSearchObject(QAction*)));
+    grp11->addAction(action4);
+    grp11->addAction(action5);
 
 //    QAction *action6 = new QAction(this);
 //    action6->setData(WEBSEARCH);

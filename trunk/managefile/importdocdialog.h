@@ -18,6 +18,7 @@ for which a new license (GPL+exception) is in place.
 \note XML import requires Qt library at least in the 4.3.0 version.
 \author Petr Vanek <petr@scribus.info>
 */
+
 class ImportDocDialog : public QDialog, public Ui::ImportDocDialog
 {
 	Q_OBJECT
@@ -47,5 +48,6 @@ class ImportDocDialog : public QDialog, public Ui::ImportDocDialog
         signals:
                 //确定按钮点击
                 void  comfirmBtnClk();
+                void  indexfile(QList<QString> filepaths);
 
 };

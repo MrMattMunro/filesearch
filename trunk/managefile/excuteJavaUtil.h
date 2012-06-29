@@ -4,6 +4,7 @@
 #include <iostream>
 #include <QString>
 #include <QList>
+#include <QObject>
 
 using namespace std;
 
@@ -12,7 +13,8 @@ using namespace std;
 
 namespace ExcuteJavaUtil {
 
-bool indexFiles(QString indexpath, QList<QString> files);
+bool indexFiles(QList<QString> files);
+QString queryIndex(QString searchType, QString keyword);
 string JStringToCString (JNIEnv *env, jstring str); // (jstring str, LPTSTR desc, int desc_len);
 jstring NewJString(JNIEnv *env, char *str);
 

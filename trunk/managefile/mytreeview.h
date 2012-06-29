@@ -12,7 +12,18 @@
 
 #include "mytreedelegate.h"
 #include "mytreeitemmodel.h"
+#include "excuteJavaUtil.h"
 
+class IndexFilesObj:public QObject {
+    Q_OBJECT
+    public:
+        IndexFilesObj(){}
+    public slots:
+       void indexfiles(QList<QString> files)
+       {
+          ExcuteJavaUtil::indexFiles(files);
+       }
+};
 class MyTreeView : public QTreeView
 {
 Q_OBJECT
