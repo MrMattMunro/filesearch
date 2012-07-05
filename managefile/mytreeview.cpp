@@ -786,12 +786,18 @@ void MyTreeView::importDlg()
         // 后台运行Thread
         ImportDocDialog dlg(this, uuId, getCurPath());
         QThread thread;
-        IndexFilesObj* indexFilesObj = new IndexFilesObj();
-        dlg.moveToThread(&thread);
-        QObject::connect(&dlg, SIGNAL(indexfile(QList<QString>)), indexFilesObj, SLOT(indexfiles(QList<QString>)));
+        IndexFilesObj indexFilesObj;
+        indexFilesObj.moveToThread(&thread);
+
+        IndexFilesSign dummy;
+        qDebug()<<"main thread:"<< QThread::currentThreadId();
+
+        QObject::connect(&dummy, SIGNAL(sig()), &indexFilesObj, SLOT(indexfiles()));
         thread.start();
         dlg.exec();
+
         if(dlg.update){
+            dummy.emitsig();
             // 重新加载树节点
             QStandardItem* curItem = getCurItem();
             delSubItems(curItem);
@@ -992,6 +998,7 @@ void MyTreeView::createRootDir()
                 dir.DIR_GUID = QUuid::createUuid();
                 dir.DIR_PARENT_UUID = "";
                 dir.DIR_NAME = text;
+                dir.DIR_DESCRIPTION = "";
                 dir.DIR_ICON = "folder.ico";
                 dir.DIR_ORDER = 0;
                 dir.DELETE_FLAG = '0';

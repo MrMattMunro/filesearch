@@ -4,6 +4,7 @@
 #include <iostream>
 #include <QDir>
 #include <excuteJavaUtil.h>
+#include <utils.h>
 #include <QDebug>
 
 using namespace std;
@@ -11,17 +12,20 @@ using namespace std;
 //jstring NewJString(JNIEnv *env, char *str);
 //string  JStringToCString (JNIEnv *env, jstring str);
 
-bool ExcuteJavaUtil::indexFiles(QList<QString> files)
+bool ExcuteJavaUtil::indexFiles(QList<Doc> files)
 {
+
+    // 先调用JNI_GetCreatedJavaVMs()，如果返回0就调用JNI_CreateJavaVM，否则不调用
 
     //定义一个函数指针，下面用来指向JVM中的JNI_CreateJavaVM函数
     typedef jint (WINAPI *PFunCreateJavaVM)(JavaVM **, void **, void *);
-
+    typedef jint (WINAPI *PFunGetCreatedJavaVMs)(JavaVM **, void **, void *);
     int res;
     JavaVMInitArgs vm_args;
     JavaVMOption options[3];
     JavaVM *jvm;
     JNIEnv *env;
+    qDebug() << "indexFiles 3";
 
     /*设置初始化参数*/
     //disable JIT，这是JNI文档中的解释，具体意义不是很清楚 ，能取哪些值也不清楚。
@@ -76,15 +80,24 @@ bool ExcuteJavaUtil::indexFiles(QList<QString> files)
     HINSTANCE hInstance = ::LoadLibraryA(path.toLocal8Bit().constData());
     if (hInstance == NULL)
     {
+        qDebug() << "indexFiles hInstance == NULL";
         return false;
     }
     //取得里面的JNI_CreateJavaVM函数指针
-    PFunCreateJavaVM funCreateJavaVM = (PFunCreateJavaVM)::GetProcAddress(hInstance, "JNI_CreateJavaVM");
+    PFunGetCreatedJavaVMs funGetCreatedJavaVMs = (PFunGetCreatedJavaVMs)::GetProcAddress(hInstance, "JNI_GetCreatedJavaVMs");
+    // 先调用JNI_GetCreatedJavaVMs()，如果返回0就调用JNI_CreateJavaVM，否则不调用
+
     //调用JNI_CreateJavaVM创建虚拟机
-    res = (*funCreateJavaVM)(&jvm, (void**)&env, &vm_args);
+    res = (*funGetCreatedJavaVMs)(&jvm, (void**)&env, &vm_args);
+    if( res == 0){
+        //取得里面的JNI_CreateJavaVM函数指针
+        PFunCreateJavaVM funCreateJavaVM = (PFunCreateJavaVM)::GetProcAddress(hInstance, "JNI_CreateJavaVM");
+        //调用JNI_CreateJavaVM创建虚拟机
+        res = (*funCreateJavaVM)(&jvm, (void**)&env, &vm_args);
+    }
     if (res < 0)
     {
-        return false;
+       return false;
     }
     //查找test.Demo类，返回JAVA类的CLASS对象
     jclass cls = env->FindClass("com/searchlocal/lucene/IndexMaker");
@@ -92,8 +105,7 @@ bool ExcuteJavaUtil::indexFiles(QList<QString> files)
     jobject obj = env->AllocObject(cls);
 
     //获取类中的方法，最后一个参数是方法的签名，通过javap -s -p 文件名可以获得
-//    jmethodID mid = env->GetMethodID(cls, "A", "(Ljava/lang/String;Ljava/lang/String;)Z");
-        jmethodID mid = env->GetMethodID(cls, "makeindex", "(Ljava/lang/String;Ljava/lang/String;)Z");
+    jmethodID mid = env->GetMethodID(cls, "makeindex", "(Ljava/lang/String;Ljava/lang/String;)Z");
 
 
 //        javap -s -p -classpath C:\QtWorksapce\managefile-build-de
@@ -105,19 +117,20 @@ bool ExcuteJavaUtil::indexFiles(QList<QString> files)
     QString indexpath = "C:\\Documents and Settings\\Administrator\\Local Settings\\Application Data\\slfile\\index";
     jstring arg1 = NewJString(env, indexpath.toLatin1().data());
 
-    //char *filepath = "E:\\MyDocuments\\Qt\\Document+For+QT.doc";
-    QString filepath = "F:\\Document\\测试\\Bug及改进列表.xls";
-    jstring arg2 = NewJString(env, filepath.toLatin1().data());
+//    char *filepath = "E:\\MyDocuments\\Qt\\Document+For+QT.doc";
+//    QString filepath = "F:\\Document\\测试\\Bug及改进列表.xls";
+//    jstring arg2 = NewJString(env, filepath.toLatin1().data());
 
-   // jstring msg = (jstring) env->CallObjectMethod(obj, mid, arg1, arg2);
-    env->CallObjectMethod(obj, mid, arg1, arg2);
+//   // jstring msg = (jstring) env->CallObjectMethod(obj, mid, arg1, arg2);
+//    env->CallObjectMethod(obj, mid, arg1, arg2);
 
-//    QString file;
-//    foreach(file, files){
-//        // jstring msg = (jstring) env->CallObjectMethod(obj, mid, arg1, arg2);
-//         arg2 = NewJString(env, file.toLatin1().data());
-//         env->CallObjectMethod(obj, mid, arg1, arg2);
-//    }
+    Doc file;
+    foreach(file, files){
+        // jstring msg = (jstring) env->CallObjectMethod(obj, mid, arg1, arg2);
+        qDebug() << "index file ---" << file.DOCUMENT_LOCATION;
+        jstring arg2 = NewJString(env, file.DOCUMENT_LOCATION.toLatin1().data());
+        env->CallObjectMethod(obj, mid, arg1, arg2);
+    }
 
     // string temp = JStringToCString(env, msg);
 
@@ -131,11 +144,11 @@ bool ExcuteJavaUtil::indexFiles(QList<QString> files)
     //销毁虚拟机并释放动态库
     jvm->DestroyJavaVM();
     ::FreeLibrary(hInstance);
-    return 0;
+    return true;
 }
 
 
-QString ExcuteJavaUtil::queryIndex(QString searchType, QString keyword)
+bool ExcuteJavaUtil::queryIndex(const QString &searchType, const QString &keyword)
 {
 
     //定义一个函数指针，下面用来指向JVM中的JNI_CreateJavaVM函数
@@ -155,13 +168,9 @@ QString ExcuteJavaUtil::queryIndex(QString searchType, QString keyword)
     //设置classpath，如果程序用到了第三方的JAR包，也可以在这里面包含进来
         // char *optionString;
     QString option = "-Djava.class.path=.;";
-    option.append(".\\jre\\jar\\bcmail-jdk14-132.jar;");
-    option.append(".\\jre\\jar\\bcprov-jdk14-132.jar;");
     option.append(".\\jre\\jar\\commons-collections-3.2.1.jar;");
     option.append(".\\jre\\jar\\commons-logging-1.1.jar;");
     option.append(".\\jre\\jar\\geronimo-stax-api_1.0_spec-1.0.jar;");
-    option.append(".\\jre\\jar\\htmllexer.jar;");
-    option.append(".\\jre\\jar\\htmlparser.jar;");
     option.append(".\\jre\\jar\\indexFile.jar;");
     option.append(".\\jre\\jar\\log4j-1.2.13.jar;");
     option.append(".\\jre\\jar\\lucene-core-3.3.0.jar;");
@@ -170,22 +179,13 @@ QString ExcuteJavaUtil::queryIndex(QString searchType, QString keyword)
     option.append(".\\jre\\jar\\lucene-memory-3.3.0.jar;");
     option.append(".\\jre\\jar\\nekohtml.jar;");
     option.append(".\\jre\\jar\\paoding-analysis.jar;");
-    option.append(".\\jre\\jar\\poi-3.8-beta3-20110606.jar;");
-    option.append(".\\jre\\jar\\poi-excelant-3.8-beta3-20110606.jar;");
-    option.append(".\\jre\\jar\\poi-ooxml-3.8-beta3-20110606.jar;");
-    option.append(".\\jre\\jar\\poi-ooxml-schemas-3.8-beta3-20110606.jar;");
-    option.append(".\\jre\\jar\\poi-scratchpad-3.8-beta3-20110606.jar;");
     option.append(".\\jre\\jar\\stax-api-1.0.1.jar;");
     option.append(".\\jre\\jar\\xercesImpl.jar;");
     option.append(".\\jre\\jar\\xmlbeans-2.3.0.jar;");
-//    option.append(".\\jre\\jar\\json-lib-2.3-jdk13.jar;");
-//    option.append(".\\jre\\jar\\commons-lang.jar;");
-//    option.append(".\\jre\\jar\\ezmorph-1.0.4.jar;");
-//    option.append(".\\jre\\jar\\commons-collections.jar;");
-//    option.append(".\\jre\\jar\\commons-beanutils-1.8.0.jar;");
+
 
     // options[1].optionString = "-Djava.class.path=.;.\\jre\\jar\\bcmail-jdk14-132.jar;.\\jre\\jar\\bcprov-jdk14-132.jar;.\\jre\\jar\\commons-collections-3.2.1.jar;.\\jre\\jar\\commons-logging-1.1.jar;.\\jre\\jar\\geronimo-stax-api_1.0_spec-1.0.jar;.\\jre\\jar\\htmllexer.jar;.\\jre\\jar\\htmlparser.jar;.\\jre\\jar\\indexFile.jar;.\\jre\\jar\\log4j-1.2.13.jar;.\\jre\\jar\\lucene-core-3.3.0.jar;.\\jre\\jar\\lucene-gosen-1.2-dev-ipadic.jar;.\\jre\\jar\\lucene-highlighter-3.3.0.jar;.\\jre\\jar\\lucene-memory-3.3.0.jar;.\\jre\\jar\\nekohtml.jar;.\\jre\\jar\\paoding-analysis.jar;.\\jre\\jar\\poi-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-excelant-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-ooxml-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-ooxml-schemas-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-scratchpad-3.8-beta3-20110606.jar;.\\jre\\jar\\stax-api-1.0.1.jar;.\\jre\\jar\\xercesImpl.jar;.\\jre\\jar\\xmlbeans-2.3.0.jar;.\\jre\\jar\\json-lib-2.3-jdk13.jar;.\\jre\\jar\\commons-lang.jar;.\\jre\\jar\\ezmorph-1.0.4.jar;.\\jre\\jar\\commons-collections.jar;.\\jre\\jar\\commons-beanutils-1.8.0.jar";
-     options[1].optionString = "-Djava.class.path=.;.\\jre\\jar\\bcmail-jdk14-132.jar;.\\jre\\jar\\bcprov-jdk14-132.jar;.\\jre\\jar\\commons-collections-3.2.1.jar;.\\jre\\jar\\commons-logging-1.1.jar;.\\jre\\jar\\geronimo-stax-api_1.0_spec-1.0.jar;.\\jre\\jar\\htmllexer.jar;.\\jre\\jar\\htmlparser.jar;.\\jre\\jar\\indexFile.jar;.\\jre\\jar\\log4j-1.2.13.jar;.\\jre\\jar\\lucene-core-3.3.0.jar;.\\jre\\jar\\lucene-gosen-1.2-dev-ipadic.jar;.\\jre\\jar\\lucene-highlighter-3.3.0.jar;.\\jre\\jar\\lucene-memory-3.3.0.jar;.\\jre\\jar\\nekohtml.jar;.\\jre\\jar\\paoding-analysis.jar;.\\jre\\jar\\poi-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-excelant-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-ooxml-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-ooxml-schemas-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-scratchpad-3.8-beta3-20110606.jar;.\\jre\\jar\\stax-api-1.0.1.jar;.\\jre\\jar\\xercesImpl.jar;.\\jre\\jar\\xmlbeans-2.3.0.jar";
+     options[1].optionString = "-Djava.class.path=.;.\\jre\\jar\\commons-collections-3.2.1.jar;.\\jre\\jar\\commons-logging-1.1.jar;.\\jre\\jar\\geronimo-stax-api_1.0_spec-1.0.jar;.\\jre\\jar\\indexFile.jar;.\\jre\\jar\\log4j-1.2.13.jar;.\\jre\\jar\\lucene-core-3.3.0.jar;.\\jre\\jar\\lucene-gosen-1.2-dev-ipadic.jar;.\\jre\\jar\\lucene-highlighter-3.3.0.jar;.\\jre\\jar\\lucene-memory-3.3.0.jar;.\\jre\\jar\\nekohtml.jar;.\\jre\\jar\\paoding-analysis.jar;.\\jre\\jar\\stax-api-1.0.1.jar;.\\jre\\jar\\xercesImpl.jar;.\\jre\\jar\\xmlbeans-2.3.0.jar";
 
     // options[1].optionString = option.toLatin1().data();
 
@@ -223,7 +223,7 @@ QString ExcuteJavaUtil::queryIndex(QString searchType, QString keyword)
     jobject obj = env->AllocObject(cls);
 
     //获取类中的方法，最后一个参数是方法的签名，通过javap -s -p 文件名可以获得
-    jmethodID mid = env->GetMethodID(cls, "queryAll", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;");
+    jmethodID mid = env->GetMethodID(cls, "queryAll", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Z");
 
 
 //        javap -s -p -classpath C:\QtWorksapce\managefile-build-de
@@ -233,27 +233,31 @@ QString ExcuteJavaUtil::queryIndex(QString searchType, QString keyword)
     //构造参数并调用对象的方法  中文乱码
     // char *indexpath = "C:\\Documents and Settings\\Administrator\\Local Settings\\Application Data\\slfile\\index";
 
-    keyword = "bug";
     jstring arg1 = NewJString(env, searchType.toLatin1().data());
     jstring arg2 = NewJString(env, keyword.toLatin1().data());
 
-    QString indexpath = "C:\\Documents and Settings\\Administrator\\Local Settings\\Application Data\\slfile\\index";
+    QString indexpath = Utils::getLocateIndexPath();
     jstring arg3 = NewJString(env, indexpath.toLatin1().data());
+
+    QString dbpath = Utils::getLocateDbPath();
+    dbpath.append(QDir::separator()).append("MF");
+    jstring arg4 = NewJString(env, dbpath.toLatin1().data());
 
     qDebug() << "searchType>> " << searchType;
     qDebug() << "keyword>> " << keyword;
     qDebug() << "indexpath>> " << indexpath;
-    jstring msg = (jstring)env->CallObjectMethod(obj, mid, arg1, arg2, arg3);
-    qDebug() << "temp>> " << msg;
-    string temp = JStringToCString(env, msg);
+    qDebug() << "dbpath>> " << dbpath;
+    env->CallObjectMethod(obj, mid, arg1, arg2, arg3, arg4);
+//    qDebug() << "temp>> " << msg;
+//    string temp = JStringToCString(env, msg);
 
-    QString jsonresult = QString::fromStdString(temp);
-    qDebug() << "jsonresult>> " << jsonresult;
+//    QString jsonresult = QString::fromStdString(temp);
+//    qDebug() << "jsonresult>> " << jsonresult;
 
     //销毁虚拟机并释放动态库
-    jvm->DestroyJavaVM();
-    ::FreeLibrary(hInstance);
-    return jsonresult;
+//    jvm->DestroyJavaVM();
+//    ::FreeLibrary(hInstance);
+    return true;
 }
 
 string ExcuteJavaUtil::JStringToCString (JNIEnv *env, jstring str)// (jstring str, LPTSTR desc, int desc_len)

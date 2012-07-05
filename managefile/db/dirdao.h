@@ -12,6 +12,7 @@ typedef struct
         QString DIR_DESCRIPTION;
         QString DIR_ICON;
         int DIR_ORDER;
+        QString DIR_PROTECT;
         QString  DT_MODIFIED;
         int MF_VERSION;
         QString DELETE_FLAG;

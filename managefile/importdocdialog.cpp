@@ -276,14 +276,13 @@ void ImportDocDialog::confirmBtn_clicked(){
     progressBar->setWindowModality(Qt::WindowModal);
     progressBar->setRange(0, row);
 
-    QList<QString> files;
     QString parentUuId = m_baseUuid;
     for (int var = 0; var < row; ++var) {
 
         QStandardItem* temp = model->item(var);
         QString path = temp->text();
         pgfilename->setText(path);
-        files.append(path);
+        m_files.append(path);
 
         QString filepath = path.left(path.lastIndexOf(QDir::separator()));
         filepath = filepath.replace("\"","");
@@ -362,7 +361,7 @@ void ImportDocDialog::confirmBtn_clicked(){
 
     update = true;
     if(this->close()){
-       emit indexfile(files);
+       emit indexfile(m_files);
     }
 }
 

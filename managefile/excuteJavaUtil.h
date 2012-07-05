@@ -5,6 +5,7 @@
 #include <QString>
 #include <QList>
 #include <QObject>
+#include <db/docdao.h>
 
 using namespace std;
 
@@ -13,8 +14,8 @@ using namespace std;
 
 namespace ExcuteJavaUtil {
 
-bool indexFiles(QList<QString> files);
-QString queryIndex(QString searchType, QString keyword);
+bool indexFiles(QList<Doc> files);
+bool queryIndex(const QString &searchType, const QString &keyword);
 string JStringToCString (JNIEnv *env, jstring str); // (jstring str, LPTSTR desc, int desc_len);
 jstring NewJString(JNIEnv *env, char *str);
 

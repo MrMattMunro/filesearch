@@ -25,7 +25,8 @@ bool DirDao::insertDir(Dir dir)
 {
     QString sql = Database::getSql("mf_insert_dir.sql");
     sql = sql.arg(dir.DIR_GUID, dir.DIR_PARENT_UUID, dir.DIR_NAME, dir.DIR_DESCRIPTION, dir.DIR_ICON,
-                   QString::number(dir.DIR_ORDER), QString::number(dir.MF_VERSION), dir.DELETE_FLAG);
+                   QString::number(dir.DIR_ORDER), dir.DIR_PROTECT, QString::number(dir.MF_VERSION), dir.DELETE_FLAG);
+
     return Database::execSql(sql);
 }
 // É¾³ýÎÄ¼þ¼Ð
@@ -125,9 +126,10 @@ Dir DirDao::selectDir(const QString & uuid)
             field.DIR_DESCRIPTION = query.value(3).toString();
             field.DIR_ICON = query.value(4).toString();
             field.DIR_ORDER = query.value(5).toInt();
-            field.DT_MODIFIED = query.value(6).toString();
-            field.MF_VERSION = query.value(7).toInt();
-            field.DELETE_FLAG = query.value(8).toString();
+            field.DIR_PROTECT = query.value(6).toString();
+            field.DT_MODIFIED = query.value(7).toString();
+            field.MF_VERSION = query.value(8).toInt();
+            field.DELETE_FLAG = query.value(9).toString();
             return field;
     }
 }
@@ -145,6 +147,7 @@ bool DirDao::updateDir(Dir dir){
     QString diricon = orgDir.DIR_ICON;
     int dirorder = orgDir.DIR_ORDER;
     int version = orgDir.MF_VERSION;
+    QString protect = orgDir.DIR_PROTECT;
     QString delflg = orgDir.DELETE_FLAG;
 
     if(! dir.DIR_PARENT_UUID.isEmpty()){
@@ -167,6 +170,10 @@ bool DirDao::updateDir(Dir dir){
        dirorder = dir.DIR_ORDER;
     }
 
+    if(! dir.DIR_PROTECT.isEmpty()){
+       protect = dir.DIR_PROTECT;
+    }
+
     if(dir.MF_VERSION != 0){
        version = dir.MF_VERSION;
     }
@@ -176,7 +183,7 @@ bool DirDao::updateDir(Dir dir){
     }
 
     QString sql = Database::getSql("mf_update_dir.sql");
-    sql = sql.arg(dirparentuuid, dirname, dirdesp, diricon, QString::number(dirorder), QString::number(version), delflg, dir.DIR_GUID);
+    sql = sql.arg(dirparentuuid, dirname, dirdesp, diricon, QString::number(dirorder), protect, QString::number(version), delflg, dir.DIR_GUID);
     return Database::execSql(sql);
 }
 

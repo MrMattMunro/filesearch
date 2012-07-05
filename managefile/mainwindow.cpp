@@ -59,6 +59,7 @@
 #include "db/dirdao.h"
 #include "db/docdao.h"
 #include "db/doctagdao.h"
+#include "db/resultdao.h"
 #include "noteeditor.h"
 #include "aboutdialog.h"
 #include "logview.h"
@@ -76,6 +77,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     initToolbar();
 
     m_appName = tr("Local File Manage");
+    isBusySearch = false;
     setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
@@ -489,57 +491,57 @@ void MainWindow::initToolbar()
 // 搜索关键字
 void MainWindow::dosearch(QString keyWord)
 {
-//     // 名称排在前面
-//     QList<Doc> docs= DocDao::selectDocsByName(keyWord);
-//     m_doctable->buildDocList(docs);
+    // 空则退出
+    if(keyWord.isEmpty()){
+       return;
+    }
+     // 名称排在前面
+     QList<Doc> docs= DocDao::selectDocsByName(keyWord);
+     m_doctable->buildDocList(docs);
 
      // 检索内容
      // 内容排在后面
-     QString resultjson = ExcuteJavaUtil::queryIndex("all", keyWord);
+     // 检索数据库
+     ResultDao dao;
+     QList<Result> resultlist;
+     resultlist.append(dao.selectByFullEqual(keyWord));
 
-     qDebug() << "resultjson>> " << resultjson;
+     qDebug() << "dao.selectByFullEqual size::" << resultlist.size();
 
-     //  QString resultjson = "[{\"content\":\"33.0,界面显示改变,bug,饶伟,紧急,○\",\"filename\":\"Bug及改进列表.xls\",\"id\":\"\",\"lastmodify\":0,\"path\":\"F:\\Document\\测试\\Bug及改进列表.xls\",\"rownb\":33,\"sheetname\":\"Ver1.2\",\"systime\":0},{\"content\":\"8.0,界面目录选择框可以输入,bug,饶伟,低级,○\",\"filename\":\"Bug及改进列表.xls\",\"id\":\"\",\"lastmodify\":0,\"path\":\"F:\\Document\\测试\\Bug及改进列表.xls\",\"rownb\":9,\"sheetname\":\"Ver1.2\",\"systime\":0}]";
-
-     QByteArray ch = resultjson.toUtf8();
-     QTextCodec *codec = QTextCodec::codecForName("UTF-8");
-     resultjson = codec->toUnicode(ch);
-     qDebug() << "resultjson changed>> " << resultjson;
-
-     QJson::Parser parser;
-     QBuffer buffer;
-     buffer.open(QBuffer::ReadWrite);
-     buffer.write(resultjson.toUtf8());
-     buffer.seek(0);
-     bool ok;
-     QList<QVariant> results = parser.parse(&buffer, &ok).toList();
-     qDebug() << "results size>>" << results.size();
-
-     QList<SearchResult> resultList;
-     foreach(QVariant result, results){
-         QVariantMap mymap = result.toMap();
-         SearchResult searchResult;
-
-         QVariant filename = mymap["filename"];
-         searchResult.FILE_NAME = qvariant_cast<QString>(filename);
-         QVariant filepath = mymap["path"];
-         searchResult.FILE_PATH = qvariant_cast<QString>(filepath);
-         QVariant lastmodify = mymap["lastmodify"];
-         searchResult.LAST_MODIFIED = qvariant_cast<QString>(lastmodify);
-         QVariant sheetname = mymap["sheetname"];
-         searchResult.SHEET_NAME = qvariant_cast<QString>(sheetname);
-         QVariant page = mymap["page"];
-         searchResult.PAGE = qvariant_cast<QString>(page);
-         QVariant rownb = mymap["rownb"];
-         searchResult.ROW_NB = qvariant_cast<QString>(rownb);
-         QVariant content = mymap["content"];
-         searchResult.CONTENT = qvariant_cast<QString>(content);
-
-         resultList.append(searchResult);
+     if(resultlist.size() == 0){
+        resultlist.append(dao.selectByMiddle(keyWord));
+        qDebug()<< "dao.selectByMiddle size::" << resultlist.size();
      }
 
-     m_doctable->buildSearchResult(resultList);
+     if(resultlist.size() == 0 && !isBusySearch){
+         isBusySearch = true;
 
+//         QThread thread;
+         QueryIndexFilesObj queryIndexFilesObj;
+         queryIndexFilesObj.keyWord = keyWord;
+         queryIndexFilesObj.searchType = "all";
+//         queryIndexFilesObj.moveToThread(&thread);
+
+         QueryIIndexFilesSign dummy;
+         qDebug()<<"main thread:"<< QThread::currentThreadId();
+
+         QObject::connect(&dummy, SIGNAL(sig()), &queryIndexFilesObj, SLOT(queryfiles()));
+         QObject::connect(&queryIndexFilesObj, SIGNAL(finished()), this, SLOT(nextSearchCanStart()));
+//         thread.start();
+         dummy.emitsig();
+
+//         ExcuteJavaUtil::queryIndex("all", keyWord);
+//         resultlist.append(dao.selectByFullEqual(keyWord));
+//         qDebug() << "After ExcuteJavaUtil::queryIndexsize::" << resultlist.size();
+     }
+     m_doctable->buildSearchResult(resultlist);
+}
+
+// 打开网络
+void MainWindow::nextSearchCanStart()
+{
+    qDebug()<<"set isBusy Search true" << QThread::currentThreadId();
+    isBusySearch = false;
 }
 
 // 打开网络

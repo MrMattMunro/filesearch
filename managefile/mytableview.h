@@ -20,27 +20,18 @@
 #include "doctagsdialog.h"
 #include "propofdocdialog.h"
 #include "db/docdao.h"
-
-typedef struct
-{
-        QString KEY_WORD;
-        QString FILE_TYPE;
-        QString FILE_PATH;
-        QString FILE_NAME;
-        QString DESP;
-        QString CONTENT;
-        QString SHEET_NAME;
-        QString ROW_NB;
-        QString PAGE;
-        QString DT_CREATED;
-
-}SearchResult;
+#include "db/resultdao.h"
 
 enum RESULT_FIELD {
-    LAST_MODIFIED = Qt::UserRole + 1,
-    SHEET_NAME = Qt::UserRole + 2,
-    PAGE = Qt::UserRole + 3,
-    ROW_NB = Qt::UserRole +  4
+    RESULT_FILE_TYPE = Qt::UserRole + 1,
+    RESULT_FILE_PATH = Qt::UserRole + 2,
+    RESULT_FILE_NAME = Qt::UserRole + 3,
+    RESULT_DESP = Qt::UserRole +  4,
+    RESULT_CONTENT = Qt::UserRole + 5,
+    RESULT_SHEET_NAME = Qt::UserRole +  6,
+    RESULT_ROW_NB = Qt::UserRole + 7,
+    RESULT_PAGE = Qt::UserRole +  8,
+    RESULT_DT_CREATED = Qt::UserRole + 9
 };
 
 enum DOC_FIELD {
@@ -83,7 +74,7 @@ public:
         ~MyTableView(){}
 
         void buildDocList(QList<Doc> doclist);
-        void buildSearchResult(QList<SearchResult> resultlist);
+        void buildSearchResult(QList<Result> resultlist);
         QPoint getCurPoint();               // 取得当前鼠标点击位置
         QString getCurUuid();
         void    enableMouse(bool yesOrNo);  //设置鼠标相应

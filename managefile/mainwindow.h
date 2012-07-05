@@ -60,6 +60,38 @@
 
 //#include "ui_mainwindow.h"
 
+class QueryIndexFilesObj:public QObject {
+    Q_OBJECT
+    public:
+        QueryIndexFilesObj(){}
+        QString searchType;
+        QString keyWord;
+    public slots:
+       void queryfiles()
+       {
+          qDebug()<<"from thread slot:" << QThread::currentThreadId();
+          qDebug()<<"searchType:" << searchType;
+          qDebug()<<"keyWord:" << keyWord;
+ //         ExcuteJavaUtil::queryIndex(searchType, keyWord);
+          if(ExcuteJavaUtil::queryIndex(searchType, keyWord)){
+              emit finished();
+          }
+       }
+    signals:
+        void finished();
+};
+class QueryIIndexFilesSign:public QObject {
+    Q_OBJECT
+    public:
+        QueryIIndexFilesSign(QObject* parent=0):QObject(parent){
+        }
+   public slots:
+        void emitsig()   {
+           emit sig();
+        }
+   signals:
+       void sig();
+};
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -118,6 +150,7 @@ private slots:
     void dosearch(QString keyword);
     void setSearchDir(QAction *action);
     void setSearchObject(QAction *action);
+    void nextSearchCanStart();
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -197,6 +230,7 @@ private:
     BrowserMainWindow *browser;
     QDockWidget *noteEditorDW;
     AccountDialog *accoutdlg;
+    bool isBusySearch;
 
 };
 
