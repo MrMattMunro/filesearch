@@ -26,6 +26,7 @@
 #include "db/docdao.h"
 #include "db/doctagdao.h"
 #include "db/notedao.h"
+#include "db/resultdao.h"
 #include "printerwidget.h"
 #include "QSettings"
 
@@ -430,20 +431,20 @@ void MyTableView::buildDocList(QList<Doc> doclist)
     qDebug("buildDocList end");
 }
 
-void MyTableView::buildSearchResult(QList<SearchResult> resultlist)
+void MyTableView::buildSearchResult(QList<Result> resultlist)
 {
     qDebug("buildResultList start");
     Preferences* p = Preferences::instance();
     for (int var = 0; var < resultlist.size(); ++var) {
-         SearchResult result = resultlist.at(var);
+         Result result = resultlist.at(var);
          QString filename = result.FILE_NAME;
-         QString path = result.FILE_PATH;
-         QString lastmodifed = result.LAST_MODIFIED;
+         QString filepath = result.FILE_PATH;
          QString sheetname = result.SHEET_NAME;
-         QString page = result.PAGE;
-         QString rownb = result.ROW_NB;
+         QString desp = result.DESP;
          QString content = result.CONTENT;
-
+         int page = result.PAGE;
+         int rownb = result.ROW_NB;
+         QString lastmodifed = result.DT_CREATED;
 
          int dotpos = filename.lastIndexOf(".");
          QString icon = filename.right(filename.length() - dotpos - 1).toLower();
@@ -479,16 +480,15 @@ void MyTableView::buildSearchResult(QList<SearchResult> resultlist)
             item->setBackground(QBrush(QColor(255, 255, 255)));
             item->setTextAlignment(Qt::AlignLeft);
             item->setFont(QFont( "Times", 11,  QFont::Normal ));
-            item->setData(filename, Qt::DisplayRole);
-            item->setData(path, Qt::ToolTipRole);
+            item->setData(filename + " " + desp, Qt::DisplayRole);
+            item->setData(filepath, Qt::ToolTipRole);
 
             // 在第二个动态项中加入所有其他数据
-            item->setData(lastmodifed, LAST_MODIFIED);
-            item->setData(sheetname, SHEET_NAME);
-            item->setData(page, PAGE);
-            item->setData(rownb, ROW_NB);
+            item->setData(lastmodifed, RESULT_DT_CREATED);
+            item->setData(sheetname, RESULT_SHEET_NAME);
+            item->setData(page, RESULT_PAGE);
+            item->setData(rownb, RESULT_ROW_NB);
             items.append(item);
-
 
              // 第二行
             item = new QStandardItem();

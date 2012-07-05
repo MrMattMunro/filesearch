@@ -240,7 +240,9 @@ SOURCES += main.cpp \
     changepwddialog.cpp \
     requtil.cpp \
     scoretovipdialog.cpp \
-    aboutdialog.cpp
+    aboutdialog.cpp \
+    db/resultdao.cpp \
+    jvm.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -419,7 +421,9 @@ HEADERS  += mainwindow.h \
     aboutdialog.h \
     jni.h \
     jni_md.h \
-    excuteJavaUtil.h
+    excuteJavaUtil.h \
+    db/resultdao.h \
+    jvm.h
 
 RESOURCES += \
     managefile.qrc
@@ -544,6 +548,10 @@ OTHER_FILES += \
     qscintilla2/include/License.txt \
     qscintilla2/include/HFacer.py \
     qscintilla2/include/Face.py
+
+
+
+
 
 
 

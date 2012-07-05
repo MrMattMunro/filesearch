@@ -7,7 +7,7 @@ QVariant MyTableItemModel::data(const QModelIndex & index, int role) const
 {
     //qDebug ("MyTableItemModel data start");
     int column= index.column();
-    int row = index.row();
+//    int row = index.row();
 
 //     if(column == 0){
 //       QString uuid =  qvariant_cast<QString> (QStandardItemModel::data(index, Qt::UserRole));

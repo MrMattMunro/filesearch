@@ -23,7 +23,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="basic">
       <attribute name="title">
@@ -115,7 +115,7 @@
      </widget>
      <widget class="QWidget" name="protect">
       <attribute name="title">
-       <string>Times</string>
+       <string>Advance</string>
       </attribute>
       <widget class="QGroupBox" name="groupBox_6">
        <property name="geometry">
@@ -129,7 +129,7 @@
        <property name="title">
         <string>Count</string>
        </property>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -162,7 +162,7 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>130</x>
@@ -209,7 +209,7 @@
         <string>Protect Directory</string>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -278,7 +278,7 @@
      </widget>
      <widget class="QWidget" name="synch">
       <attribute name="title">
-       <string>Other</string>
+       <string>Synchronization </string>
       </attribute>
       <widget class="QGroupBox" name="groupBox_7">
        <property name="geometry">

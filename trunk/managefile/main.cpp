@@ -300,6 +300,9 @@ int main(int argc, char *argv[])
     Database::execSql(Database::getSql("mf_document_tag.sql"));
     Database::execSql(Database::getSql("mf_tag.sql"));
     Database::execSql(Database::getSql("mf_meta.sql"));
+    Database::execSql(Database::getSql("mf_result.sql"));
+
+    qDebug()<<"main main thread:"<<QThread::currentThreadId();
 
     // ÏÔÊ¾µÇÂ¼½çÃæ
     Preferences* p = Preferences::instance();

@@ -20,6 +20,7 @@ class PropOfDirDialog: public QDialog, public Ui::PropOfDirDialog
     private slots:
         void closeBtn_clicked();
         void applyBtn_clicked();
+        void setProtect();
 };
 
 #endif // 

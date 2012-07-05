@@ -4,6 +4,7 @@ SELECT  DIR_GUID,
         DIR_DESCRIPTION,
         DIR_ICON,
         DIR_ORDER,
+        DIR_PROTECT,
         DT_MODIFIED,
         MF_VERSION,
         DELETE_FLAG

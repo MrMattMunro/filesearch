@@ -1,6 +1,7 @@
 #include "PropOfDirDialog.h"
 
 #include <QDir>
+#include <QMessageBox>
 #include "db/docdao.h"
 #include "db/dirdao.h"
 #include "db/relatedocdao.h"
@@ -43,8 +44,8 @@ PropOfDirDialog::PropOfDirDialog (QWidget *parent, const QString & curUuid)
     dirCount->setText(QString::number(selDirList.size()));
 
     Dir tempDir;
-    int ifileCount;
-    int ifileSize;
+    int ifileCount = 0;
+    int ifileSize = 0;
     foreach(tempDir, selDirList){
         QList<Doc> docs = DocDao::selectDocsbyDir(tempDir.DIR_GUID, "0");
         QList<Doc> deldocs = DocDao::selectDocsbyDir(tempDir.DIR_GUID, "1");
@@ -60,18 +61,30 @@ PropOfDirDialog::PropOfDirDialog (QWidget *parent, const QString & curUuid)
             QFileInfo file(doc.DOCUMENT_LOCATION);
             ifileSize = ifileSize + file.size();
         }
-
-
     }
     fileCount->setText(QString::number(ifileCount));
     fileSize->setText(QString::number(ifileSize/1024).append(" K"));
 
     // 密码
     // MD5解密
-    if(isProtect->isChecked()){
+    QString dirprotect = dir.DIR_PROTECT;
+    if(dirprotect.isEmpty()){
+        // 未设置保护
+        isProtect->setChecked(false);
         orgpwd->setText("");
         pwd->setText("");
         repwd->setText("");
+
+        orgpwd->setDisabled(true);
+        pwd->setDisabled(true);
+        repwd->setDisabled(true);
+    }else{
+        // 设置过保护
+        isProtect->setChecked(true);
+        orgpwd->setText("password");
+        orgpwd->setDisabled(false);
+        pwd->setDisabled(false);
+        repwd->setDisabled(false);
     }
 
     // 设置同步
@@ -81,15 +94,76 @@ PropOfDirDialog::PropOfDirDialog (QWidget *parent, const QString & curUuid)
     // remoteVer->setText();
     connect(closeBtn,SIGNAL(clicked()),this, SLOT(closeBtn_clicked()));
     connect(applyBtn,SIGNAL(clicked()),this, SLOT(applyBtn_clicked()));
+    connect(isProtect,SIGNAL(clicked()),this, SLOT(setProtect()));
+
 
     // 默认选中第一个tab
     tabWidget->setCurrentIndex(0);
 
 }
+
+// 保护文件夹
+void PropOfDirDialog::setProtect()
+{
+    if(orgpwd->isEnabled()){
+       orgpwd->setDisabled(true);
+    }else{
+       orgpwd->setDisabled(false);
+    }
+
+    if(pwd->isEnabled()){
+       pwd->setDisabled(true);
+    }else{
+       pwd->setDisabled(false);
+    }
+
+    if(repwd->isEnabled()){
+       repwd->setDisabled(true);
+    }else{
+       repwd->setDisabled(false);
+    }
+
+}
+
 // 更新数据项
 void PropOfDirDialog::applyBtn_clicked()
 {
-     Dir dir;
+     // 参数检查
+    // 取得当前文档
+    Dir dir = DirDao::selectDir(m_curUuid);
+
+     QString sorgpwd = orgpwd->text();
+     if(!sorgpwd.isEmpty()){
+        // 判断跟数据库一致
+         QString dbprotect = dir.DIR_PROTECT;
+         QString md5pwd = Utils::getMD5Str(sorgpwd);
+         if(dbprotect != md5pwd){
+             QMessageBox::warning(this, tr("Warning"), tr("The Org password is wrong, Please Confirm"), QMessageBox::Yes);
+             return;
+         }
+     }
+
+
+     QString srepwd = repwd->text();
+     QString spwd = pwd->text();
+     QString protectStr = "";
+
+     if(!srepwd.isEmpty() && !spwd.isEmpty()){
+         if(srepwd != spwd){
+             QMessageBox::warning(this, tr("Warning"), tr("The password you entered must be the same as the  former"), QMessageBox::Yes);
+             return;
+         }else{
+             protectStr =  Utils::getMD5Str(srepwd);
+         }
+     }
+
+
+     dir.DIR_NAME = name->text();
+     dir.DIR_DESCRIPTION = desp->toPlainText();
+     dir.DIR_ICON = icon->icon().name();
+     dir.DIR_PROTECT = protectStr;
+     dir.MF_VERSION = dir.MF_VERSION + 1;
+
      DirDao::updateDir(dir);
 
      update = true;
