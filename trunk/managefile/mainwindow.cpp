@@ -491,48 +491,52 @@ void MainWindow::initToolbar()
 // 搜索关键字
 void MainWindow::dosearch(QString keyWord)
 {
+    resultlist.clear();
     // 空则退出
     if(keyWord.isEmpty()){
+       m_doctable->buildSearchResult(resultlist);
        return;
     }
-     // 名称排在前面
-     QList<Doc> docs= DocDao::selectDocsByName(keyWord);
-     m_doctable->buildDocList(docs);
+    // 名称排在前面
+    QList<Doc> docs= DocDao::selectDocsByName(keyWord);
+     // 把转换成Result
+     // 根据文件夹取得所有文件
+    for(int i = 0 ; i< docs.size(); i ++){
+         Doc doc = docs.at(i);
+         Result rst;
+         rst.DOC_UUID = doc.DOCUMENT_GUID;
+         rst.KEY_WORD = keyWord;
+         rst.FILE_PATH = doc.DOCUMENT_LOCATION;
+         rst.FILE_NAME = doc.DOCUMENT_NAME;
+         rst.DESP = "name";
+         rst.CONTENT = doc.DOCUMENT_NAME;
+         rst.SHEET_NAME = "";
+         rst.DT_CREATED = doc.DT_CREATED;
+         resultlist.push_back(rst);
+    }
 
      // 检索内容
      // 内容排在后面
      // 检索数据库
      ResultDao dao;
-     QList<Result> resultlist;
-     resultlist.append(dao.selectByFullEqual(keyWord));
+     QList<Result> dbList = dao.selectByFullEqual(keyWord);
 
-     qDebug() << "dao.selectByFullEqual size::" << resultlist.size();
+     qDebug() << "name size::" << resultlist.size();
 
-     if(resultlist.size() == 0){
-        resultlist.append(dao.selectByMiddle(keyWord));
-        qDebug()<< "dao.selectByMiddle size::" << resultlist.size();
-     }
-
-     if(resultlist.size() == 0 && !isBusySearch){
+     if(dbList.size() == 0 && !isBusySearch){
          isBusySearch = true;
-
-//         QThread thread;
+         m_keyWord = keyWord;
          QueryIndexFilesObj queryIndexFilesObj;
          queryIndexFilesObj.keyWord = keyWord;
          queryIndexFilesObj.searchType = "all";
-//         queryIndexFilesObj.moveToThread(&thread);
-
          QueryIIndexFilesSign dummy;
-         qDebug()<<"main thread:"<< QThread::currentThreadId();
 
          QObject::connect(&dummy, SIGNAL(sig()), &queryIndexFilesObj, SLOT(queryfiles()));
          QObject::connect(&queryIndexFilesObj, SIGNAL(finished()), this, SLOT(nextSearchCanStart()));
-//         thread.start();
          dummy.emitsig();
-
-//         ExcuteJavaUtil::queryIndex("all", keyWord);
-//         resultlist.append(dao.selectByFullEqual(keyWord));
-//         qDebug() << "After ExcuteJavaUtil::queryIndexsize::" << resultlist.size();
+         qDebug() << "After ExcuteJavaUtil::queryIndexsize::" << resultlist.size();
+     }else{
+        resultlist.append(dbList);
      }
      m_doctable->buildSearchResult(resultlist);
 }
@@ -541,6 +545,9 @@ void MainWindow::dosearch(QString keyWord)
 void MainWindow::nextSearchCanStart()
 {
     qDebug()<<"set isBusy Search true" << QThread::currentThreadId();
+    ResultDao dao;
+    resultlist.append(dao.selectByFullEqual(m_keyWord));
+    m_doctable->buildSearchResult(resultlist);
     isBusySearch = false;
 }
 

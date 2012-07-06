@@ -6,6 +6,7 @@
 
 typedef struct
 {
+        QString DOC_UUID;
         QString KEY_WORD;
         QString FILE_TYPE;
         QString FILE_PATH;

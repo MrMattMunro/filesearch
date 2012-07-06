@@ -17,6 +17,7 @@
 #include "mytreeitemmodel.h"
 #include "db/docdao.h"
 #include "jvm.h"
+#include "utils.h"
 #include "excuteJavaUtil.h"
 
 class IndexFilesObj:public QObject {
@@ -26,33 +27,16 @@ class IndexFilesObj:public QObject {
     public slots:
        void indexfiles()
        {
-//          QList<Doc> docs = DocDao::selectDocsByIndexFlag("0");
-//          qDebug()<<"indexFileList size:" << docs.size();
-//          ExcuteJavaUtil::indexFiles(docs);
-            Jvm jvm;
-
-//           //查找test.Demo类，返回JAVA类的CLASS对象
-//           jclass cls = env->FindClass("com/searchlocal/lucene/IndexMaker");
-//           //根据类的CLASS对象获取该类的实例
-//           jobject obj = env->AllocObject(cls);
-
-//           //获取类中的方法，最后一个参数是方法的签名，通过javap -s -p 文件名可以获得
-//           jmethodID mid = env->GetMethodID(cls, "makeindex", "(Ljava/lang/String;Ljava/lang/String;)Z");
-
-
-//       //        javap -s -p -classpath C:\QtWorksapce\managefile-build-de
-//       //        sktop-Qt_4_7_4_for_Desktop_-_MSVC2008__Qt_SDK____\jre\jar\indexFile\ com.searchl
-//       //        ocal.lucene.IndexMaker
-
-//           //构造参数并调用对象的方法  中文乱码
-//           // char *indexpath = "C:\\Documents and Settings\\Administrator\\Local Settings\\Application Data\\slfile\\index";
-
-
-           QString indexpath = "C:\\Documents and Settings\\Administrator\\Local Settings\\Application Data\\slfile\\index";
-
+           Jvm jvm;
+           QString indexpath = Utils::getLocateIndexPath();
            QMap<QString, QString> map;
            map.insert("indexpath",indexpath);
-           jvm.invokeMethod("com/searchlocal/lucene/IndexMaker", "makeindex", "(Ljava/lang/String;Ljava/lang/String;)Z", map);
+
+           QString dbpath = Utils::getLocateDbPath();
+           dbpath.append(QDir::separator()).append("MF");
+           map.insert("dbpath",dbpath);
+
+           jvm.invokeMethod("com/searchlocal/lucene/IndexMaker", "makeindex", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Z", map);
        }
 };
 class IndexFilesSign:public QObject {

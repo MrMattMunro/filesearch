@@ -399,30 +399,7 @@ void MyTableView::buildDocList(QList<Doc> doclist)
 
          }
     }
-
-
-
-//    int wide = this->columnWidth(0);
-//    int nRow = model->rowCount();
-
-//    for(int i =0; i< nRow; i++)
-//    {
-//       this->setColumnWidth(0, wide);
-//       this->setRowHeight(i, 20);
-//    }
-
-
-    // 恢复QTableView的为未合并前的样子
-//    for (int i = 0; i < model->rowCount(); ++i) {
-//        this->setSpan(i, 1, 2, 1);
-////        this->setSpan(i, 10, 1, 1);
-
-//    }
-
-
-
     this->hideColumn(0);
-
     // 设置各列比例,使其占满全行
     int tablewidth = this->width();
     this->setColumnWidth(1, 20);
@@ -434,9 +411,11 @@ void MyTableView::buildDocList(QList<Doc> doclist)
 void MyTableView::buildSearchResult(QList<Result> resultlist)
 {
     qDebug("buildResultList start");
+    model->clear();
     Preferences* p = Preferences::instance();
     for (int var = 0; var < resultlist.size(); ++var) {
          Result result = resultlist.at(var);
+         QString docUuid = result.DOC_UUID;
          QString filename = result.FILE_NAME;
          QString filepath = result.FILE_PATH;
          QString sheetname = result.SHEET_NAME;
@@ -455,6 +434,10 @@ void MyTableView::buildSearchResult(QList<Result> resultlist)
          QList<QStandardItem*> items;
          // 第二行
          QList<QStandardItem*> secitems;
+
+         QStandardItem* item = new QStandardItem();
+         item->setData(docUuid, Qt::UserRole);
+         items.append(item);
 
          // 支持的文件类型
          if(p->word().contains(suffix, Qt::CaseInsensitive)
@@ -480,7 +463,7 @@ void MyTableView::buildSearchResult(QList<Result> resultlist)
             item->setBackground(QBrush(QColor(255, 255, 255)));
             item->setTextAlignment(Qt::AlignLeft);
             item->setFont(QFont( "Times", 11,  QFont::Normal ));
-            item->setData(filename + " " + desp, Qt::DisplayRole);
+            item->setData(filename, Qt::DisplayRole);
             item->setData(filepath, Qt::ToolTipRole);
 
             // 在第二个动态项中加入所有其他数据
@@ -492,8 +475,18 @@ void MyTableView::buildSearchResult(QList<Result> resultlist)
 
              // 第二行
             item = new QStandardItem();
-            item->setData(content, Qt::DisplayRole);
-            item->setFont(QFont( "Times", 8,  QFont::Light ));
+            item->setData(docUuid, Qt::UserRole);
+            secitems.append(item);
+
+            item = new QStandardItem();
+            item->setData("", Qt::DisplayRole);
+            secitems.append(item);
+
+            // 动态的第二项
+            item = new QStandardItem();
+            item->setText(desp + "  " + content);
+            // item->setData(desp + content, Qt::DisplayRole);
+            item->setFont(QFont( "Times", 9,  QFont::Light ));
             item->setTextAlignment(Qt::AlignTop);
             secitems.append(item);
          }
@@ -503,7 +496,11 @@ void MyTableView::buildSearchResult(QList<Result> resultlist)
              model->appendRow(secitems);
          }
     }
-
+    this->hideColumn(0);
+    // 设置各列比例,使其占满全行
+    int tablewidth = this->width();
+    this->setColumnWidth(1, 20);
+    this->setColumnWidth(2, tablewidth);
     qDebug("buildResultList end");
 }
 
