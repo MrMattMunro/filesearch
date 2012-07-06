@@ -269,6 +269,8 @@ int main(int argc, char *argv[])
       dirfile->close();
     }
 
+
+
     // …Ë÷√¥∞ø⁄Õº±Í
     app.setWindowIcon(Utils::getIcon("file_manager.png"));
     QTranslator translator;

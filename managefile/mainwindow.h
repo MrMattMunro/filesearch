@@ -57,6 +57,8 @@
 #include <browser/settings.h>
 #include <accountdialog.h>
 #include <requtil.h>
+#include <jvm.h>
+#include <utils.h>
 
 //#include "ui_mainwindow.h"
 
@@ -70,10 +72,19 @@ class QueryIndexFilesObj:public QObject {
        void queryfiles()
        {
           qDebug()<<"from thread slot:" << QThread::currentThreadId();
-          qDebug()<<"searchType:" << searchType;
-          qDebug()<<"keyWord:" << keyWord;
- //         ExcuteJavaUtil::queryIndex(searchType, keyWord);
-          if(ExcuteJavaUtil::queryIndex(searchType, keyWord)){
+          Jvm jvm;
+
+          QString indexpath = Utils::getLocateIndexPath();
+          QString dbpath = Utils::getLocateDbPath();
+          dbpath.append(QDir::separator()).append("MF");
+
+          QMap<QString, QString> map;
+          map.insert("searchtype",searchType);
+          map.insert("keyword",keyWord);
+          map.insert("indexpath",indexpath);
+          map.insert("dbpath",dbpath);
+          bool rtn = jvm.invokeMethod("com/searchlocal/lucene/ContentSearcher", "queryAll", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Z", map);
+          if(rtn){
               emit finished();
           }
        }
@@ -231,6 +242,8 @@ private:
     QDockWidget *noteEditorDW;
     AccountDialog *accoutdlg;
     bool isBusySearch;
+    QString m_keyWord;
+    QList<Result> resultlist;
 
 };
 
