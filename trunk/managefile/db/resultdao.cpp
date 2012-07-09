@@ -99,7 +99,7 @@ QList<Result> ResultDao::selectByMiddle(const QString & keyword){
 
 // 完全相等
 QList<Result> ResultDao::selectByFullEqual(const QString & keyword){
-    QString sql = "SELECT * FROM MF_RESULT WHERE KEY_WORD = '%1'";
+    QString sql = "SELECT DOCUMENT_GUID,KEY_WORD,FILE_TYPE,FILE_PATH,FILE_NAME,DESP,CONTENT,SHEET_NAME,ROW_NB,PAGE,DT_CREATED FROM MF_RESULT WHERE KEY_WORD = '%1'";
     sql = sql.arg(keyword);
     QSqlQuery query = Database::execSelect(sql);
 

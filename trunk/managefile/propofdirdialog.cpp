@@ -49,7 +49,7 @@ PropOfDirDialog::PropOfDirDialog (QWidget *parent, const QString & curUuid)
     foreach(tempDir, selDirList){
         QList<Doc> docs = DocDao::selectDocsbyDir(tempDir.DIR_GUID, "0");
         QList<Doc> deldocs = DocDao::selectDocsbyDir(tempDir.DIR_GUID, "1");
-        ifileCount = docs.size() + deldocs.size();
+        ifileCount = docs.size() + deldocs.size() + 1;
         Doc doc;
         foreach(doc, docs){
             // º∆À„size K

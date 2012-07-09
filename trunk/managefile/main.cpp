@@ -269,7 +269,8 @@ int main(int argc, char *argv[])
       dirfile->close();
     }
 
-
+    Preferences* pre = Preferences::instance();
+    pre->setIsIndexing(false);
 
     // ÉèÖÃ´°¿ÚÍ¼±ê
     app.setWindowIcon(Utils::getIcon("file_manager.png"));

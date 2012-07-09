@@ -782,6 +782,7 @@ void MyTreeView::importDlg()
 
     // 需选中子节点
     if(!curType.isEmpty() && curType != "alldocs" && curType != "alltags") {
+
         hasSelRight = true;
         // 后台运行Thread
         ImportDocDialog dlg(this, uuId, getCurPath());
@@ -797,6 +798,9 @@ void MyTreeView::importDlg()
         dlg.exec();
 
         if(dlg.update){
+            // 通知主界面改变不可搜索
+            Preferences* p = Preferences::instance();
+            p->setIsIndexing(true);
             dummy.emitsig();
             // 重新加载树节点
             QStandardItem* curItem = getCurItem();
@@ -1255,7 +1259,7 @@ void MyTreeView::delSubDir()
 }
 
 
-// 删除子文件夹
+// 删除子文件夹 TODO 加入进度条
 void MyTreeView::dropBasket()
 {
     int ret = QMessageBox::question(this, "",
@@ -1268,6 +1272,21 @@ void MyTreeView::dropBasket()
 
        QList<Doc> deldocs = DocDao::selectDocsByDelFlg("1");
        Doc doc;
+
+       // 删除索引文件
+       // 后台运行Thread
+       QThread thread;
+       DelIndexFilesObj indexFilesObj;
+
+       indexFilesObj.deldocs = deldocs;
+       indexFilesObj.moveToThread(&thread);
+
+       DelIndexFilesSign dummy;
+       qDebug()<<"main thread:"<< QThread::currentThreadId();
+
+       QObject::connect(&dummy, SIGNAL(sigDelIndexFile()), &indexFilesObj, SLOT(delIndexfiles()));
+       thread.start();
+       dummy.emitDelIndexFile();
 
        QString notePath = Utils::getLocateNotesPath();
        foreach (doc, deldocs) {

@@ -138,6 +138,11 @@ Q_OBJECT
                 void setSearchObject(QString v) { m_searchobject = v; };
                 // search setting end
 
+                // index state start
+                bool getIsIndexing() { return m_is_indexing; };
+                void setIsIndexing(bool v) { m_is_indexing = v; };
+                // index state end
+
 
 		int recentlyUsedCount() { return m_recentlyUsedCount; };
 		void setRecentlyUsedCount(int v) { m_recentlyUsedCount = v; };
@@ -299,6 +304,8 @@ Q_OBJECT
                 QString m_searchdir;
                 QString  m_searchobject;
                 // search setting end
+
+                bool m_is_indexing;
 
 		bool m_checkQtVersion;
 

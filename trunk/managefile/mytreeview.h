@@ -19,6 +19,7 @@
 #include "jvm.h"
 #include "utils.h"
 #include "excuteJavaUtil.h"
+#include "preferences.h"
 
 class IndexFilesObj:public QObject {
     Q_OBJECT
@@ -36,7 +37,11 @@ class IndexFilesObj:public QObject {
            dbpath.append(QDir::separator()).append("MF");
            map.insert("dbpath",dbpath);
 
-           jvm.invokeMethod("com/searchlocal/lucene/IndexMaker", "makeindex", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Z", map);
+           bool ret = jvm.invokeMethod("com/searchlocal/lucene/IndexMaker", "makeindex", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Z", map);
+           if(ret){
+               Preferences* p = Preferences::instance();
+               p->setIsIndexing(false);
+           }
        }
 };
 class IndexFilesSign:public QObject {
@@ -50,6 +55,50 @@ class IndexFilesSign:public QObject {
         }
    signals:
        void sig();
+};
+
+class DelIndexFilesObj:public QObject {
+    Q_OBJECT
+    public:
+        DelIndexFilesObj(){}
+        QList<Doc> deldocs;
+    public slots:
+       void delIndexfiles()
+       {
+           Jvm jvm;
+           QString indexpath = Utils::getLocateIndexPath();
+           QMap<QString, QString> map;
+           map.insert("indexpath",indexpath);
+
+           QString dbpath = Utils::getLocateDbPath();
+           dbpath.append(QDir::separator()).append("MF");
+           map.insert("dbpath",dbpath);
+
+           qDebug()<<"slot thread:"<< QThread::currentThreadId();
+
+           for(int i = 0; i < deldocs.size(); i++ ){
+                Doc doc = deldocs.at(i);
+                map.insert("docuuid",doc.DOCUMENT_GUID);
+                map.insert("filepath",doc.DOCUMENT_LOCATION);
+                jvm.invokeMethod("com/searchlocal/lucene/IndexMaker", "deleteIndex", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Z", map);
+           }
+           emit finished();
+       }
+    signals:
+        void finished();
+};
+class DelIndexFilesSign:public QObject {
+    Q_OBJECT
+    public:
+        DelIndexFilesSign(QObject* parent=0):QObject(parent){
+        }
+   public slots:
+        void emitDelIndexFile()   {
+           emit sigDelIndexFile();
+        }
+   signals:
+       void sigDelIndexFile();
+
 };
 class MyTreeView : public QTreeView
 {
@@ -115,7 +164,6 @@ private slots:
         void movetoTag();
 
         void dropBasket();
-
 signals:
 	//鼠标双击
 	void         LBtnDbClk();
@@ -123,6 +171,7 @@ signals:
         void         LBtnClk();
 //        //选中某个Item
 //        void         RBtnClk();
+        void         changeSearchState();
 protected:
 	void         mouseDoubleClickEvent(QMouseEvent *event);
      //    void         mousePressEvent(QMouseEvent *event);
