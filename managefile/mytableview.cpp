@@ -548,7 +548,7 @@ void MyTableView::mouseDoubleClickEvent(QMouseEvent *event)
 
                 QStandardItem *uuidItem = model->item(row, 0);
                 if(uuidItem){
-                     curUuid = qvariant_cast<QString>(uuidItem->data(Qt::UserRole));
+                    curUuid = qvariant_cast<QString>(uuidItem->data(Qt::UserRole));
                 }
 
                 changeColor(row);
@@ -1199,6 +1199,18 @@ void MyTableView::slotShowTableOption(QAction* action)
 // 显示文档属性
 void MyTableView::propOfDoc()
 {
+    // 取得当前文档
+    Doc doc = DocDao::selectDoc(curUuid);
+    // 判断不存在
+    if(doc.DIR_GUID == ""){
+        int ret = QMessageBox::warning(this, tr("Warning"),
+                 tr("Please Confirm The original file has Deleted Or Moved. "), QMessageBox::Yes);
+
+        if(ret == QMessageBox::Yes){
+            return;
+        }
+    }
+
     m_propOfdocdlg = new PropOfDocDialog(this, curUuid);
 
     bool hasSelRight = false;

@@ -285,9 +285,8 @@ Doc DocDao::selectDoc(const QString & uuid)
     QString sql = Database::getSql("mf_select_doc_uuid.sql");
     sql = sql.arg(uuid);
     QSqlQuery query = Database::execSelect(sql);
-
+    Doc field;
     while (query.next()){
-            Doc field;
             field.DOCUMENT_GUID = query.value(0).toString();
             field.DOCUMENT_TITLE = query.value(1).toString();
             field.DIR_GUID = query.value(2).toString();
@@ -312,8 +311,9 @@ Doc DocDao::selectDoc(const QString & uuid)
             field.DOCUMENT_OPERFLG = query.value(21).toString();
             field.DELETE_FLAG = query.value(22).toString();
             field.MF_VERSION = query.value(23).toInt();
-            return field;
+
     }
+    return field;
 }
 
 // ¸üÐÂÎÄµµ

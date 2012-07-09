@@ -508,7 +508,7 @@ void MainWindow::dosearch(QString keyWord)
          rst.KEY_WORD = keyWord;
          rst.FILE_PATH = doc.DOCUMENT_LOCATION;
          rst.FILE_NAME = doc.DOCUMENT_NAME;
-         rst.DESP = "name";
+         rst.DESP = "";
          rst.CONTENT = doc.DOCUMENT_NAME;
          rst.SHEET_NAME = "";
          rst.DT_CREATED = doc.DT_CREATED;
@@ -523,7 +523,11 @@ void MainWindow::dosearch(QString keyWord)
 
      qDebug() << "name size::" << resultlist.size();
 
-     if(dbList.size() == 0 && !isBusySearch){
+
+     Preferences* p = Preferences::instance();
+     bool isIndexing = p->getIsIndexing();
+
+     if(dbList.size() == 0 && !isBusySearch && !isIndexing){
          isBusySearch = true;
          m_keyWord = keyWord;
          QueryIndexFilesObj queryIndexFilesObj;
@@ -619,6 +623,7 @@ void MainWindow::initUI()
         connect(browser, SIGNAL(testsingal()), this, SLOT(resizeSpace()));
 
         connect(q_myTreeList, SIGNAL(LBtnClk()), this, SLOT(buildDocList()));
+
 
         // 后期需要调用主界面的动作
         connect(m_doctable, SIGNAL(LBtnDbClk()), this, SLOT(openDocInTab()));

@@ -69,6 +69,9 @@ Preferences::Preferences(QObject *parent)
         m_searchobject = s.value("search/object", QString()).toString();
         // search setting end
 
+        // is Indexing
+        m_is_indexing = s.value("isindexing", false).toBool();
+
 	m_recentlyUsedCount = s.value("prefs/recentlyUsedSpinBox", 5).toInt();
 	m_openLastDB = s.value("prefs/openLastDB", true).toBool();
 	m_openLastSqlFile = s.value("prefs/openLastSqlFile", true).toBool();
@@ -197,7 +200,7 @@ Preferences::~Preferences()
         settings.setValue("search/dir", m_searchdir);
         settings.setValue("search/object", m_searchobject);
         // search setting end
-
+        settings.setValue("isindexing", false);
 
 	// sql editor
 	settings.setValue("prefs/sqleditor/font", m_sqlFont);

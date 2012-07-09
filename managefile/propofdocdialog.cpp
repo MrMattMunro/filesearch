@@ -1,6 +1,7 @@
 #include "propofdocdialog.h"
 
 #include <QDir>
+#include <QMessageBox>
 #include "db/docdao.h"
 #include "db/dirdao.h"
 #include "db/relatedocdao.h"
@@ -8,12 +9,11 @@
 PropOfDocDialog::PropOfDocDialog (QWidget *parent, const QString & curUuid)
     : QDialog(parent), m_curUuid(curUuid),update(false)
 {
-    setupUi (this);
+    setupUi(this);
 
     // 取得当前文档
     Doc doc = DocDao::selectDoc(m_curUuid);
-
-    setWindowTitle (doc.DOCUMENT_NAME +" - " +tr ("Property Editor","Window caption"));
+    this->setWindowTitle(doc.DOCUMENT_NAME +" - " +tr ("Property Editor","Window caption"));
 
 
     // 设置基本信息
