@@ -238,6 +238,13 @@
      </property>
     </widget>
    </item>
+   <item row="17" column="0">
+    <widget class="QCheckBox" name="createSubDirCheck">
+     <property name="text">
+      <string>Create Sub Directory</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>

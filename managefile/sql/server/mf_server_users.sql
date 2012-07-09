@@ -1,5 +1,5 @@
 CREATE TABLE `xwp_users` (
-  `ACOUNT_GUID` char(36) NOT NULL,
+  `ACOUNT_GUID` char(38) NOT NULL,
   `ID` bigint(20) unsigned NOT NULL auto_increment,
   `user_login` varchar(60) NOT NULL default '',
   `user_pass` varchar(64) NOT NULL default '',
@@ -9,24 +9,28 @@ CREATE TABLE `xwp_users` (
   `user_registered` datetime NOT NULL default '0000-00-00 00:00:00',
   `user_activation_key` varchar(60) NOT NULL default '',
   `user_status` int(11) NOT NULL default '0',
+  `user_ip` char(15) default NULL,
+  `user_os` varchar(20) default NULL,
+  `user_lang` varchar(10) default NULL,
+  `user_version` varchar(10) default NULL,
   `display_name` varchar(250) NOT NULL default '',
   `type` varchar(100) NOT NULL,
-  `score` int(11) NOT NULL,
+  `score` int(11) NOT NULL default '1',
   `dt_expired` datetime default NULL,
-  `store_limit` double default NULL,
-  `store_used` double default NULL,
-  `traffic_limit` double default NULL,
-  `traffic_used` double default NULL,
+  `store_limit` double default '1073741824',
+  `store_used` double default '1',
+  `traffic_limit` double default '209715200',
+  `traffic_used` double default '1',
   `last_sel_dirs` varchar(300) default NULL,
   `last_sel_tags` varchar(300) default NULL,
   `last_open_docs` varchar(300) default NULL,
   `last_open_notes` varchar(300) default NULL,
   `last_open_urls` varchar(300) default NULL,
+  `dt_modified` timestamp NOT NULL default '0000-00-00 00:00:00' on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`ID`),
   KEY `user_login_key` (`user_login`),
   KEY `user_nicename` (`user_nicename`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8
-
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8
 
 // TYPE a2b29z3fde free
 // TYPE b6e70zfef3 vip

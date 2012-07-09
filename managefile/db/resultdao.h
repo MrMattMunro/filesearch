@@ -32,6 +32,8 @@ class ResultDao
                 static QList<Result> selectByMiddle(const QString & keyword);
                 // 完全相等
                 static QList<Result> selectByFullEqual(const QString & keyword);
+                // 删除关于某个文档的所有检索记录
+                static bool deleteResultByDocUid(const QString & docUuid);
 
         private:
                 static void exception(const QString & message);

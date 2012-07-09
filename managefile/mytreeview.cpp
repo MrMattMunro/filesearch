@@ -102,14 +102,12 @@ MyTreeView::MyTreeView(QString title, QWidget *parent) : treeTitle("tree"), QTre
         // 转移到Tree内部实现
         connect(this, SIGNAL(LBtnDbClk()), this, SLOT(showChildTree()));
 
-        connect(this->selectionModel(), SIGNAL(currentRowChanged(const QModelIndex &,const QModelIndex &)),
-                this, SLOT(currentItemChanged(const QModelIndex &, const QModelIndex &)));
-
         this->setAnimated(true);
         //this->setColumnWidth(0,160);
 
-        this->setDragEnabled(true);
-        this->setAcceptDrops(true);
+        // TODO 实现拖动功能
+//        this->setDragEnabled(true);
+//        this->setAcceptDrops(true);
 
         m_appName = tr("File Manage");
 
@@ -361,14 +359,17 @@ void MyTreeView::addItemByParentItem(QStandardItem *parentItem, QString itemName
 bool MyTreeView::delSubItems(QStandardItem *parenItem)
 {
     // 清除直接点
-    for(int i = 0; i < parenItem->rowCount(); i++)
+    int rows = parenItem->rowCount();
+    int columns = parenItem->columnCount();
+    for(int i = 0; i < rows; i++)
     {
-        for(int j = 0; j < parenItem->columnCount(); j++)
+        for(int j = 0; j < columns; j++)
         {
             model->removeRow(i, parenItem->index());
             model->removeColumn(j, parenItem->index());
         }
     }
+
     parenItem->setRowCount(0);
     return true;
 }
@@ -674,10 +675,11 @@ void MyTreeView::delSubTree()
     if(!curItem){
        return;
     }
+    QStandardItem *parent = curItem->parent();
 
     if(!curType.isEmpty() && curType != "alltags" && curType != "alldocs") {
         delSubItems(curItem);
-        curItem->parent()->removeRow(curItem->row());
+        parent->removeRow(curItem->row());
     }
 }
 
@@ -708,44 +710,7 @@ void MyTreeView::setCurItemByUuid(QString uuId, QString type){
             }
     }
 }
-// 拖放事件
-void MyTreeView::dropEvent(QDropEvent *event)
-{
-    qDebug() << "CLocalDirTreeView::dropEvent(QDropEvent *event)";
-    qDebug() << "local::dropEvent mouse pos" << event->pos();
-    QObject *source = qobject_cast<QObject *>(event->source());
-    if (source && source != this) {
-        qDebug() << "CLocalDirTreeView::dropEvent << " << event->mimeData()->text() << event->mimeData()->data("drag/remote");
 
-        QModelIndex dropIndex = indexAt(event->pos());
-        if(dropIndex != QModelIndex()) {
-            //QDirModel *pModel = qobject_cast<QDirModel *>(model());
-            //qDebug() << "drop to local path" << pModel->filePath(dropIndex) << "isdir" << pModel->isDir(dropIndex);
-        }
-
-        // 接受
-        event->setDropAction(Qt::MoveAction);
-        event->accept();
-    }
-}
-// 改变时间
-void  MyTreeView::currentItemChanged(const QModelIndex &current, const QModelIndex &previous){
-    qDebug("currentItemChanged");
-     // 改变Item背景颜色，表示选中状态
-//    QStandardItem* preItem = model->itemFromIndex(previous);
-//    if (!current.isValid()|| !previous.isValid()){
-//        return;
-//    }
-//    if(preItem){
-//         qDebug("change preItem");
-//       preItem->setData(QBrush(QColor(255,255,255)), Qt::BackgroundRole);
-//    }
-//    QStandardItem* currentItem = model->itemFromIndex(current);
-//    if(currentItem){
-//           qDebug("change preItem");
-//       currentItem->setData(QBrush(QColor(150,150,150)), Qt::BackgroundRole);
-//    }
-}
 // 重新加载Tag树
 void MyTreeView::reloadTagTree()
 {
