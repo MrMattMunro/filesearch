@@ -140,7 +140,6 @@ public:
 private slots:
         void         showChildTree();
         void         reloadTagTree();
-        void         currentItemChanged(const QModelIndex &current, const QModelIndex &previous);
         void         tableTree_currentItemChanged();
 
         void importDlg();
@@ -169,24 +168,11 @@ signals:
 	void         LBtnDbClk();
         //鼠标单击
         void         LBtnClk();
-//        //选中某个Item
-//        void         RBtnClk();
         void         changeSearchState();
 protected:
 	void         mouseDoubleClickEvent(QMouseEvent *event);
-     //    void         mousePressEvent(QMouseEvent *event);
-   //    void         mouseReleaseEvent(QMouseEvent *event);
-        void         dropEvent(QDropEvent *event);
         void         mousePressEvent(QMouseEvent *event);
-        // 只需改变颜色
         void         changeColor();
-
-        //void         mouseDoubleClickEvent(QMouseEvent *event);
-        //void         mouseMoveEvent(QMouseEvent *event);
-        //void         keyPressEvent(QKeyEvent *event);
-    //#ifndef QT_NO_DRAGANDDROP
-        //void dragMoveEvent(QDragMoveEvent *event);
-    //#endif
 private:
 	int                   numSubTree;
 	bool                  mouseStatus;

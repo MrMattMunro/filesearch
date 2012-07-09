@@ -162,6 +162,7 @@ private slots:
     void setSearchDir(QAction *action);
     void setSearchObject(QAction *action);
     void nextSearchCanStart();
+    void checkNewVersion();
 
 protected:
     void closeEvent(QCloseEvent *event);

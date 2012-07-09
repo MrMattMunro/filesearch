@@ -22,6 +22,7 @@ ImportDocDialog::ImportDocDialog(QWidget * parent, const QString & baseUuid, con
 {
 	setupUi(this);
         inclueSubDirCheck->setChecked(true);
+        createSubDirCheck->setChecked(false);
 
         // fileTypeCmb
         fileTypeCmb->clear();
@@ -277,33 +278,105 @@ void ImportDocDialog::confirmBtn_clicked(){
     progressBar->setRange(0, row);
 
     QString parentUuId = m_baseUuid;
-    for (int var = 0; var < row; ++var) {
 
-        QStandardItem* temp = model->item(var);
-        QString path = temp->text();
-        pgfilename->setText(path);
-        m_files.append(path);
+    bool isCreateSubDir = createSubDirCheck->isChecked();
 
-        QString filepath = path.left(path.lastIndexOf(QDir::separator()));
-        filepath = filepath.replace("\"","");
+    if(isCreateSubDir){
+        // 创建子文件夹
+        for (int var = 0; var < row; ++var) {
 
-        // 设置目标目录
-        QString destDir = filepath.remove(0, m_importDir.length());
-        QStringList dirs = destDir.split(QDir::separator());
+            QStandardItem* temp = model->item(var);
+            QString path = temp->text();
+            pgfilename->setText(path);
 
-        // 建立目录
-        for (int i = 0; i < dirs.length(); ++i) {
-            // 插入文档
-            if(i = dirs.length() - 1){
+            QString filepath = path.left(path.lastIndexOf(QDir::separator()));
+            filepath = filepath.replace("\"","");
+
+            // 设置目标目录
+            QString destDir = filepath.remove(0, m_importDir.length());
+            QStringList dirs = destDir.split(QDir::separator());
+
+            // 建立目录
+            for (int i = 0; i < dirs.length(); ++i) {
+                // 插入文档
+                if(i = dirs.length() - 1){
+                    QUuid docUuid = QUuid::createUuid();
+                    QFileInfo fileinfo(path);
+                    Doc doc;
+                    doc.DOCUMENT_GUID = docUuid;
+                    doc.DOCUMENT_TITLE = fileinfo.fileName();
+                    // 父目录
+                    if(parentUuId.isEmpty()){
+                       // 选择树节点UuId
+                    }
+
+                    doc.DIR_GUID = parentUuId;
+                    doc.DOCUMENT_LOCATION = path;
+                    doc.DOCUMENT_NAME = fileinfo.fileName();
+                    doc.DOCUMENT_SEO = "";
+                    doc.DOCUMENT_URL = "";
+                    doc.DOCUMENT_AUTHOR = fileinfo.owner();
+                    doc.DOCUMENT_KEYWORDS = "";
+                    doc.DOCUMENT_TYPE = "";
+                    doc.DOCUMENT_OWNER = fileinfo.owner();
+                    doc.DT_CREATED = fileinfo.created().toString("yyyy-MM-dd hh:mm:ss");
+                    doc.DT_MODIFIED = fileinfo.lastModified().toString("yyyy-MM-dd hh:mm:ss");
+                    doc.DT_ACCESSED = fileinfo.lastRead().toString("yyyy-MM-dd hh:mm:ss");
+                    doc.DOCUMENT_ICON_INDEX = 0;
+                    doc.DOCUMENT_SYNC = 0;
+                    doc.DOCUMENT_PROTECT = "";
+                    doc.DOCUMENT_ENCODE= "0";
+                    doc.DOCUMENT_READ_COUNT = 0;
+                    doc.DOCUMENT_RELATE_COUNT = 0;
+                    doc.DOCUMENT_INDEXFLG = "0";
+                    doc.DOCUMENT_OPERFLG = "";
+                    doc.DELETE_FLAG = "0";
+                    doc.MF_VERSION = 0;
+
+                    DocDao::insertDoc(doc);
+                }
+
+                  QString tmpDir = dirs.at(i);
+                  if(tmpDir.isEmpty()){
+                      continue;
+                  }
+
+                  QStringList exitedDirs = writeMap[i];
+                  if(exitedDirs.contains(tmpDir)){
+                       continue;
+                  } else {
+                      QUuid uuid = QUuid::createUuid();
+                      Dir dir;
+                      dir.DIR_GUID = uuid;
+                      dir.DIR_NAME = tmpDir;
+                      dir.DIR_PARENT_UUID = parentUuId;
+                      dir.DIR_ICON = "folder.ico";
+                      dir.DIR_ORDER = 0;
+                      dir.DELETE_FLAG = '0';
+                      dir.MF_VERSION = 0;
+
+                      DirDao::insertDir(dir);
+                      exitedDirs.append(tmpDir);
+                      writeMap.insert(i, exitedDirs);
+                      parentUuId = uuid;
+                  }
+            }
+            setProgress(var);
+        }
+
+    } else{
+            // 不建立子文件夹
+          for (int var = 0; var < row; ++var) {
+
+                QStandardItem* temp = model->item(var);
+                QString path = temp->text();
+                pgfilename->setText(path);
+
                 QUuid docUuid = QUuid::createUuid();
                 QFileInfo fileinfo(path);
                 Doc doc;
                 doc.DOCUMENT_GUID = docUuid;
                 doc.DOCUMENT_TITLE = fileinfo.fileName();
-                // 父目录
-                if(parentUuId.isEmpty()){
-                   // 选择树节点UuId
-                }
 
                 doc.DIR_GUID = parentUuId;
                 doc.DOCUMENT_LOCATION = path;
@@ -329,40 +402,13 @@ void ImportDocDialog::confirmBtn_clicked(){
                 doc.MF_VERSION = 0;
 
                 DocDao::insertDoc(doc);
+                setProgress(var);
             }
-
-              QString tmpDir = dirs.at(i);
-              if(tmpDir.isEmpty()){
-                  continue;
-              }
-
-              QStringList exitedDirs = writeMap[i];
-              if(exitedDirs.contains(tmpDir)){
-                   continue;
-              } else {
-                  QUuid uuid = QUuid::createUuid();
-                  Dir dir;
-                  dir.DIR_GUID = uuid;
-                  dir.DIR_NAME = tmpDir;
-                  dir.DIR_PARENT_UUID = parentUuId;
-                  dir.DIR_ICON = "folder.ico";
-                  dir.DIR_ORDER = 0;
-                  dir.DELETE_FLAG = '0';
-                  dir.MF_VERSION = 0;
-
-                  DirDao::insertDir(dir);
-                  exitedDirs.append(tmpDir);
-                  writeMap.insert(i, exitedDirs);
-                  parentUuId = uuid;
-              }
-        }
-        setProgress(var);
     }
 
     update = true;
-    if(this->close()){
-       emit indexfile(m_files);
-    }
+    this->close();
+
 }
 
 // 取消按钮

@@ -122,3 +122,10 @@ QList<Result> ResultDao::selectByFullEqual(const QString & keyword){
     return returnList;
 }
 
+// 删除关于某个文档的所有检索记录
+bool ResultDao::deleteResultByDocUid(const QString & docUuid){
+    QString sql = "DELETE FROM MF_RESULT WHERE DOCUMENT_GUID='%1'";
+    sql = sql.arg(docUuid);
+    return Database::execSql(sql);
+}
+

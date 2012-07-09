@@ -29,7 +29,6 @@ class ImportDocDialog : public QDialog, public Ui::ImportDocDialog
                 QStandardItemModel *model;
 
                 QString m_importDir;
-                QList<QString> m_files;
 	private:
                 QObject * m_parent;
                 QString m_baseDir;
@@ -45,13 +44,9 @@ class ImportDocDialog : public QDialog, public Ui::ImportDocDialog
                 void delBtn_clicked();
                 void confirmBtn_clicked();
                 void cancelBtn_clicked();
-                void emitIndexFiles(){
-                    emit indexfile(m_files);
-                }
 
         signals:
                 //确定按钮点击
                 void  comfirmBtnClk();
-                void  indexfile(QList<QString> filepaths);
 
 };

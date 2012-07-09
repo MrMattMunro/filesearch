@@ -329,7 +329,7 @@ void MainWindow::initActions()
 
         // 检查新版本
         checkNewAction = new QAction(Utils::getIcon("update_product.png"),tr("&Update"), this);
-        connect(checkNewAction, SIGNAL(triggered()), this, SLOT(about()));
+        connect(checkNewAction, SIGNAL(triggered()), this, SLOT(checkNewVersion()));
 
         // 选项
         optionAction = new QAction(Utils::getIcon("option.png"),tr("&Option"), this);
@@ -341,10 +341,10 @@ void MainWindow::initActions()
         viewLogAction->setShortcut(tr("Ctrl+L"));
         connect(viewLogAction, SIGNAL(triggered()), this, SLOT(viewLog()));
 
-        // 插件管理
-        pluginAction = new QAction(Utils::getIcon("plugin.png"),tr("Plugins"), this);
-        pluginAction->setShortcut(tr("Ctrl+P"));
-        connect(pluginAction, SIGNAL(triggered()), this, SLOT(about()));;
+//        // 插件管理
+//        pluginAction = new QAction(Utils::getIcon("plugin.png"),tr("Plugins"), this);
+//        pluginAction->setShortcut(tr("Ctrl+P"));
+//        connect(pluginAction, SIGNAL(triggered()), this, SLOT(about()));;
 
         // 账户信息
         accountInfoAction = new QAction(Utils::getIcon("my_account.ico"),tr("Account Information"), this);
@@ -416,7 +416,7 @@ void MainWindow::initMenus()
         menu_Tool->addSeparator();
         menu_Tool->addAction(viewLogAction);
         menu_Tool->addSeparator();
-        menu_Tool->addAction(pluginAction);
+//        menu_Tool->addAction(pluginAction);
 
         menu_Account =  menuBar()->addMenu(tr("&Account"));
         menu_Account->addAction(accountInfoAction);
@@ -794,6 +794,14 @@ void MainWindow::about()
 //                       tr("Sorry, The function is under construction..."));
 }
 
+void MainWindow::checkNewVersion()
+{
+    // 启动升级程序
+    qDebug() << "start update programme";
+    QProcess::startDetached(QDir::currentPath().append("updater.exe"), QStringList());
+    // 退出主程序
+    QCoreApplication::exit(0);
+}
 
 // 全屏
 void MainWindow::fullScreen()
