@@ -85,7 +85,7 @@ BrowserMainWindow::BrowserMainWindow(QWidget *parent)
 //    setToolButtonStyle(Qt::ToolButtonFollowStyle);
     setAttribute(Qt::WA_DeleteOnClose, true);
     //statusBar()->setSizeGripEnabled(true);
-    //setupMenu();
+    setupMenu();
     setupToolBar();
 
     centralWidget = new QWidget(parent);
@@ -258,9 +258,8 @@ bool BrowserMainWindow::restoreState(const QByteArray &state)
 
     return true;
 }
-
-//void BrowserMainWindow::setupMenu()
-//{
+void BrowserMainWindow::setupMenu()
+{
 //    new QShortcut(QKeySequence(Qt::Key_F6), this, SLOT(slotSwapFocus()));
 
 //    // File
@@ -354,19 +353,23 @@ bool BrowserMainWindow::restoreState(const QByteArray &state)
 //    viewMenu->addSeparator();
 
 //    m_stop = viewMenu->addAction(tr("&Stop"));
-//    QList<QKeySequence> shortcuts;
-//    shortcuts.append(QKeySequence(Qt::CTRL | Qt::Key_Period));
-//    shortcuts.append(Qt::Key_Escape);
-//    m_stop->setShortcuts(shortcuts);
-//    m_tabWidget->addWebAction(m_stop, QWebPage::Stop);
+    m_stop = new QAction(this);
+    QList<QKeySequence> shortcuts;
+    shortcuts.append(QKeySequence(Qt::CTRL | Qt::Key_Period));
+    shortcuts.append(Qt::Key_Escape);
+    m_stop->setShortcuts(shortcuts);
+    m_tabWidget->addWebAction(m_stop, QWebPage::Stop);
 
-//    m_reload = viewMenu->addAction(tr("Reload Page"));
-//    m_reload->setShortcuts(QKeySequence::Refresh);
-//    m_tabWidget->addWebAction(m_reload, QWebPage::Reload);
+   // m_reload = viewMenu->addAction(tr("Reload Page"));
+    m_reload = new QAction(this);
+    m_reload->setShortcuts(QKeySequence::Refresh);
+    m_tabWidget->addWebAction(m_reload, QWebPage::Reload);
 
-//    viewMenu->addAction(tr("Zoom &In"), this, SLOT(slotViewZoomIn()), QKeySequence(Qt::CTRL | Qt::Key_Plus));
-//    viewMenu->addAction(tr("Zoom &Out"), this, SLOT(slotViewZoomOut()), QKeySequence(Qt::CTRL | Qt::Key_Minus));
-//    viewMenu->addAction(tr("Reset &Zoom"), this, SLOT(slotViewResetZoom()), QKeySequence(Qt::CTRL | Qt::Key_0));
+    QMenu* viewMenu = new QMenu(this);
+    viewMenu->addAction(tr("Zoom &In"), this, SLOT(slotViewZoomIn()), QKeySequence(Qt::CTRL | Qt::Key_Plus));
+    viewMenu->addAction(tr("Zoom &Out"), this, SLOT(slotViewZoomOut()), QKeySequence(Qt::CTRL | Qt::Key_Minus));
+    viewMenu->addAction(tr("Reset &Zoom"), this, SLOT(slotViewResetZoom()), QKeySequence(Qt::CTRL | Qt::Key_0));
+
 //    QAction *zoomTextOnlyAction = viewMenu->addAction(tr("Zoom &Text Only"));
 //    connect(zoomTextOnlyAction, SIGNAL(toggled(bool)), this, SLOT(slotViewZoomTextOnly(bool)));
 //    zoomTextOnlyAction->setCheckable(true);
@@ -384,7 +387,7 @@ bool BrowserMainWindow::restoreState(const QByteArray &state)
 //    connect(historyMenu, SIGNAL(hovered(QString)), this,
 //            SLOT(slotUpdateStatusbar(QString)));
 //    historyMenu->setTitle(tr("Hi&story"));
-//    menuBar()->addMenu(historyMenu);
+////    menuBar()->addMenu(historyMenu);
 //    QList<QAction*> historyActions;
 
 //    m_historyBack = new QAction(tr("Back"), this);
@@ -401,15 +404,15 @@ bool BrowserMainWindow::restoreState(const QByteArray &state)
 //    connect(m_historyHome, SIGNAL(triggered()), this, SLOT(slotHome()));
 //    m_historyHome->setShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_H));
 
-////    m_restoreLastSession = new QAction(tr("Restore Last Session"), this);
-////    connect(m_restoreLastSession, SIGNAL(triggered()), BrowserApplication::instance(), SLOT(restoreLastSession()));
-////    m_restoreLastSession->setEnabled(BrowserApplication::instance()->canRestoreSession());
+//    m_restoreLastSession = new QAction(tr("Restore Last Session"), this);
+//    connect(m_restoreLastSession, SIGNAL(triggered()), BrowserApplication::instance(), SLOT(restoreLastSession()));
+//    m_restoreLastSession->setEnabled(BrowserApplication::instance()->canRestoreSession());
 
 //    historyActions.append(m_historyBack);
 //    historyActions.append(m_historyForward);
 //    historyActions.append(m_historyHome);
 //    historyActions.append(m_tabWidget->recentlyClosedTabsAction());
-//    // historyActions.append(m_restoreLastSession);
+//    historyActions.append(m_restoreLastSession);
 //    historyMenu->setInitialActions(historyActions);
 
 //    // Bookmarks
@@ -449,7 +452,7 @@ bool BrowserMainWindow::restoreState(const QByteArray &state)
 //    QMenu *helpMenu = menuBar()->addMenu(tr("&Help"));
 //    helpMenu->addAction(tr("About &Qt"), qApp, SLOT(aboutQt()));
 //    helpMenu->addAction(tr("About &Demo Browser"), this, SLOT(slotAboutApplication()));
-//}
+}
 
 void BrowserMainWindow::setupToolBar()
 {
@@ -597,7 +600,7 @@ void BrowserMainWindow::slotSelectLineEdit()
 
 void BrowserMainWindow::slotFileSaveAs()
 {
-    BrowserApplication::downloadManager()->download(currentTab()->url(), true);
+    BrowserApplication::downloadManager()->download(currentTab()->url(), "",  true);
 }
 
 void BrowserMainWindow::slotPreferences()
@@ -870,7 +873,6 @@ void BrowserMainWindow::openTxtInTab(const QString &filepath)
     m_tabWidget->newTxtTab(true, filepath);
     m_tabWidget->loadDocInCurrentTab(filepath);
 }
-
 
 TabWidget *BrowserMainWindow::tabWidget() const
 {

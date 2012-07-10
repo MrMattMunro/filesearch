@@ -108,6 +108,7 @@ private slots:
     void setStatusBarText(const QString &string);
     void downloadRequested(const QNetworkRequest &request);
     void openLinkInNewTab();
+    void saveToSlfile();
 
 private:
     QString m_statusBarText;

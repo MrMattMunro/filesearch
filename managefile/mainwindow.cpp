@@ -986,13 +986,12 @@ void MainWindow::openDocInTab()
     Preferences* p = Preferences::instance();
     QString suffix = FileUtils::suffix(filepath);
     if(p->sources().contains(suffix.toLower())){
-            browser->openTxtInTab(filepath);
-        //m_tabWidget->newTxtTab(true, filepath);
-       // m_tabWidget->loadDocInCurrentTab(filepath);
+        browser->openTxtInTab(filepath);
+    } if(p->htmls().contains(suffix.toLower())){
+        browser->loadPage(filepath);
     }else{
-   browser->openDocInTab(filepath);
-        //m_tabWidget->newDocTab(true, filepath);
-        //m_tabWidget->loadDocInCurrentTab(filepath);
+        browser->openDocInTab(filepath);
+
     }
 }
 

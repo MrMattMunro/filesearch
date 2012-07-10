@@ -46,12 +46,12 @@
 #include "networkaccessmanager.h"
 #include "tabwidget.h"
 #include "webview.h"
-
+#include "saveurldialog.h"
 #include <QtGui/QClipboard>
 #include <QtGui/QMenu>
 #include <QtGui/QMessageBox>
 #include <QtGui/QMouseEvent>
-
+#include <QUuid>
 #include <QtWebKit/QWebHitTestResult>
 
 #ifndef QT_NO_UITOOLS
@@ -230,8 +230,61 @@ void WebView::contextMenuEvent(QContextMenuEvent *event)
             menu.addAction(pageAction(QWebPage::InspectElement));
         menu.exec(mapToGlobal(event->pos()));
         return;
+    }else{
+        QMenu menu(this);
+        menu.addAction(tr("Save to the slfile"), this, SLOT(saveToSlfile()));
+        menu.addSeparator();
+        menu.exec(mapToGlobal(event->pos()));
+        return;
     }
+
     QWebView::contextMenuEvent(event);
+}
+
+// 打开保存界面
+void WebView::saveToSlfile()
+{
+   // 打开保存界面
+   QUrl url = page()->mainFrame()->url();
+   QString locate = Utils::getLocateDownloadPath();
+
+   QString surl = url.toString();
+   // title 换成uuid
+
+   QString title = this->title();
+   // curPath 用于判断根节点和子节点
+   SaveUrlDialog dlg(this);
+   dlg.exec();
+   if(dlg.update){
+       // 保存网页
+       Doc doc;
+       doc.DOCUMENT_GUID = QUuid::createUuid();
+       doc.DOCUMENT_TITLE = title;
+       doc.DIR_GUID = dlg.m_toUuid;
+       doc.DOCUMENT_LOCATION = locate.append(QDir::separator()).append(doc.DOCUMENT_GUID).append(".html");
+       doc.DOCUMENT_NAME = title.append(".html");
+       doc.DOCUMENT_SEO = "";
+       doc.DOCUMENT_URL = surl;
+       doc.DOCUMENT_AUTHOR = "";
+       doc.DOCUMENT_KEYWORDS = "";
+       doc.DOCUMENT_TYPE = "html";
+       doc.DOCUMENT_OWNER = "";
+       doc.DT_CREATED = "";
+       doc.DT_MODIFIED = "";
+       doc.DT_ACCESSED = "";
+       doc.DOCUMENT_ICON_INDEX = 0;
+       doc.DOCUMENT_SYNC = 0;
+       doc.DOCUMENT_PROTECT = "";
+       doc.DOCUMENT_ENCODE = "";
+       doc.DOCUMENT_READ_COUNT = 1;
+       doc.DOCUMENT_RELATE_COUNT = 0;
+       doc.DOCUMENT_INDEXFLG = "0";
+       doc.DOCUMENT_OPERFLG = "0";
+       doc.DELETE_FLAG = "0";
+       doc.MF_VERSION = 0;
+       DocDao::insertDoc(doc);
+       BrowserApplication::downloadManager()->download(url, doc.DOCUMENT_GUID, false);
+   }
 }
 
 void WebView::wheelEvent(QWheelEvent *event)
@@ -311,6 +364,6 @@ void WebView::setStatusBarText(const QString &string)
 
 void WebView::downloadRequested(const QNetworkRequest &request)
 {
-    BrowserApplication::downloadManager()->download(request);
+    BrowserApplication::downloadManager()->download(request, this->title(), false);
 }
 
