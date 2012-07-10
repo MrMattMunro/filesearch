@@ -242,7 +242,8 @@ SOURCES += main.cpp \
     scoretovipdialog.cpp \
     aboutdialog.cpp \
     db/resultdao.cpp \
-    jvm.cpp
+    jvm.cpp \
+    saveurldialog.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -423,7 +424,8 @@ HEADERS  += mainwindow.h \
     jni_md.h \
     excuteJavaUtil.h \
     db/resultdao.h \
-    jvm.h
+    jvm.h \
+    saveurldialog.h
 
 RESOURCES += \
     managefile.qrc
@@ -469,7 +471,8 @@ FORMS    += mainwindow.ui \
     accountdialog.ui \
     changepwddialog.ui \
     scoretovipdialog.ui \
-    aboutdialog.ui
+    aboutdialog.ui \
+    saveurldialog.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -548,6 +551,9 @@ OTHER_FILES += \
     qscintilla2/include/License.txt \
     qscintilla2/include/HFacer.py \
     qscintilla2/include/Face.py
+
+
+
 
 
 

@@ -120,6 +120,18 @@ QString Utils::getLocatePath()
     return locpath;
 }
 
+QString Utils::getLocateDownloadPath()
+{
+    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    locpath.append(QDir::separator()).append("slfile");
+    locpath.append(QDir::separator()).append("download");
+    QDir *dir=new QDir(locpath);
+    if(!dir->exists()){
+       dir->mkdir(locpath);
+    }
+    return locpath;
+}
+
 QString Utils::getLocateNotesPath()
 {
     QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);

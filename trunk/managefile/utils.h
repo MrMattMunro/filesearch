@@ -28,6 +28,7 @@ QString getTranslator(const QString & localeName);
 //! \brief Check if the object tre should be refileld depending on sql statement
 bool updateObjectTree(const QString & sql);
 QString getLocatePath();
+QString getLocateDownloadPath();
 QString getLocateNotesPath();
 QString getLocateIndexPath();
 QString getLocateDbPath();

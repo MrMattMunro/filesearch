@@ -58,13 +58,14 @@ signals:
     void statusChanged();
 
 public:
-    DownloadItem(QNetworkReply *reply = 0, bool requestFileName = false, QWidget *parent = 0);
+    DownloadItem(QNetworkReply *reply = 0, const QString &title = 0, bool requestFileName = false, QWidget *parent = 0);
     bool downloading() const;
     bool downloadedSuccessfully() const;
 
     QUrl m_url;
 
     QFile m_output;
+    QString m_title;
     QNetworkReply *m_reply;
 
 private slots:
@@ -118,10 +119,10 @@ public:
     void setRemovePolicy(RemovePolicy policy);
 
 public slots:
-    void download(const QNetworkRequest &request, bool requestFileName = false);
-    inline void download(const QUrl &url, bool requestFileName = false)
-        { download(QNetworkRequest(url), requestFileName); }
-    void handleUnsupportedContent(QNetworkReply *reply, bool requestFileName = false);
+    void download(const QNetworkRequest &request, const QString  &title, bool requestFileName = false);
+    inline void download(const QUrl &url, const QString  &title,  bool requestFileName = false)
+        { download(QNetworkRequest(url), title, requestFileName); }
+    void handleUnsupportedContent(QNetworkReply *reply, const QString &title, bool requestFileName = false);
     void cleanup();
 
 private slots:
