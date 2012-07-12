@@ -34,6 +34,7 @@ class ResultDao
                 static QList<Result> selectByFullEqual(const QString & keyword);
                 // 删除关于某个文档的所有检索记录
                 static bool deleteResultByDocUid(const QString & docUuid);
+                static bool deleteResultByCreateDate(int minusday);
 
         private:
                 static void exception(const QString & message);
