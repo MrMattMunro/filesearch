@@ -250,6 +250,16 @@ int main(int argc, char *argv[])
     if (!cli.parseArgs()){
       return 0;
     }
+
+    // 设置系统右下图标
+    if (!QSystemTrayIcon::isSystemTrayAvailable()) {
+            QMessageBox::critical(0, QObject::tr("Systray"),
+                                  QObject::tr("I couldn't detect any system tray "
+                                              "on this system."));
+            return 1;
+     }
+     QApplication::setQuitOnLastWindowClosed(false);
+
     // 加载数据库驱动
     QApplication::addLibraryPath("./lib");
     qDebug() << "my library path : " << app.libraryPaths();
@@ -276,7 +286,8 @@ int main(int argc, char *argv[])
     // 设置窗口图标
     app.setWindowIcon(Utils::getIcon("file_manager.png"));
     QTranslator translator;
-    translator.load(Utils::getTranslator(cli.localeCode()));
+    QString localTranslator = Utils::getTranslator(cli.localeCode());
+    translator.load(localTranslator);
     app.installTranslator(&translator);
 
     //QString QCoreApplication::applicationDirPath () [static]
@@ -306,6 +317,9 @@ int main(int argc, char *argv[])
     Database::execSql(sqlLoader->getSql("mf_tag.sql"));
     Database::execSql(sqlLoader->getSql("mf_meta.sql"));
     Database::execSql(sqlLoader->getSql("mf_result.sql"));
+
+    // 删除一段时间以上的T_result
+    ResultDao::deleteResultByCreateDate(-15);
 
     // 显示登录界面
     Preferences* p = Preferences::instance();
