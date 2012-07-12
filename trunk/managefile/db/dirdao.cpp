@@ -14,6 +14,7 @@
 #include "db/database.h"
 #include "db/dirdao.h"
 #include "db/sqlite3.h"
+#include "sqlloader.h"
 
 // 异常情况
 void DirDao::exception(const QString & message)
@@ -23,7 +24,8 @@ void DirDao::exception(const QString & message)
 // 插入文件夹
 bool DirDao::insertDir(Dir dir)
 {
-    QString sql = Database::getSql("mf_insert_dir.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_insert_dir.sql");
     sql = sql.arg(dir.DIR_GUID, dir.DIR_PARENT_UUID, dir.DIR_NAME, dir.DIR_DESCRIPTION, dir.DIR_ICON,
                    QString::number(dir.DIR_ORDER), dir.DIR_PROTECT, QString::number(dir.MF_VERSION), dir.DELETE_FLAG);
 
@@ -32,7 +34,8 @@ bool DirDao::insertDir(Dir dir)
 // 删除文件夹
 bool DirDao::deleteDir(QString dirUuId)
 {
-    QString sql = Database::getSql("mf_delete_dir.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_delete_dir.sql");
     sql = sql.arg("1", dirUuId);
     return Database::execSql(sql);
 }
@@ -48,7 +51,8 @@ bool DirDao::updateToRootDir(QString dirUuId)
 // 恢复文件夹
 bool DirDao::restoreDir(QString dirUuId)
 {
-    QString sql = Database::getSql("mf_delete_dir.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_delete_dir.sql");
     sql = sql.arg("0", dirUuId);
     return Database::execSql(sql);
 }
@@ -56,7 +60,8 @@ bool DirDao::restoreDir(QString dirUuId)
 // 根据父目录取得子目录
 QList<Dir> DirDao::selectDirsbyParent(QString groupUuid, QString delFlg)
 {
-    QString sql = Database::getSql("mf_select_dir_parent.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_select_dir_parent.sql");
     sql = sql.arg(groupUuid, delFlg);
 
 
@@ -114,7 +119,8 @@ bool DirDao::physicalDelDir(){
 // 根据标签uuId获取标签
 Dir DirDao::selectDir(const QString & uuid)
 {
-    QString sql = Database::getSql("mf_select_dir_uuid.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_select_dir_uuid.sql");
     sql = sql.arg(uuid);
     QSqlQuery query = Database::execSelect(sql);
 
@@ -182,7 +188,8 @@ bool DirDao::updateDir(Dir dir){
        delflg = dir.DELETE_FLAG;
     }
 
-    QString sql = Database::getSql("mf_update_dir.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_update_dir.sql");
     sql = sql.arg(dirparentuuid, dirname, dirdesp, diricon, QString::number(dirorder), protect, QString::number(version), delflg, dir.DIR_GUID);
     return Database::execSql(sql);
 }

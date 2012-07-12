@@ -142,8 +142,10 @@ void MainWindow::buildDocList()
         if(isShowDocUnderSub){
               // 取得所有文件夹
               QList<Dir> dirs ;
+              // 取得当前目录下的文档
+              docs.append(DocDao::selectDocsbyDir(curUuid, "0"));
+              // 根据子文件夹取得所有文件
               DirDao::selectAllSubDirbyDir(dirs, curUuid, "0");
-              // 根据文件夹取得所有文件
               for(int i = 0 ; i< dirs.size(); i ++){
                  Dir dir = dirs.at(i);
                  docs.append(DocDao::selectDocsbyDir(dir.DIR_GUID, "0"));
@@ -620,8 +622,8 @@ void MainWindow::initUI()
         browser->setMaximumWidth(0);
         browser->setMinimumWidth(0);
 
-        connect(browser, SIGNAL(testsingal()), this, SLOT(resizeSpace()));
 
+        connect(browser, SIGNAL(exitFullScreen()), this, SLOT(fullScreen()));
         connect(q_myTreeList, SIGNAL(LBtnClk()), this, SLOT(buildDocList()));
 
 
@@ -674,7 +676,11 @@ void MainWindow::customToolBar()
     dlg.exec();
     if(dlg.update){
         // 更新工具栏
-        upateToolBar(dlg.waitItems, dlg.sellItems);
+        Preferences* p = Preferences::instance();
+        QStringList waitItems = p->getWaitToolbarItemList();
+        QStringList selItems = p->getSelToolbarItemList();
+
+        upateToolBar(waitItems, selItems);
     }
 }
 // 更新工具栏

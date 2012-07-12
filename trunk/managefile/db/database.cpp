@@ -30,10 +30,7 @@ void Database::exception(const QString & message)
 
 QString Database::getSql(QString sqlfile)
 {
-    QFile file(Utils::directoryOf("sql").absoluteFilePath(sqlfile));
-    qDebug() << "sql dir" << Utils::directoryOf("sql");
-    qDebug() << "file" << Utils::directoryOf("sql").absoluteFilePath(sqlfile);
-    qDebug() << "file" << file.fileName();
+    QFile file(sqlfile);
     // 打开文件
     if(!file.exists()){
       return -1;
@@ -95,7 +92,6 @@ bool Database::dropTable(const QString & table, const QString & schema)
 
 QSqlQuery Database::execSelect(const QString & sql)
 {
-        qDebug() << "query sql" << sql;
         QSqlQuery query(sql, QSqlDatabase::database(SESSION_NAME));
 	if (query.lastError().isValid())
 	{

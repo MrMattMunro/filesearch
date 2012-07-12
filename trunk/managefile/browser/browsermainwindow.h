@@ -81,9 +81,10 @@ public slots:
     void slotHome();
     void openDocInTab(const QString &filepath);
     void openTxtInTab(const QString &filepath);
+    void fullScreen();
 signals:
-    //Êó±êË«»÷
-    void         testsingal();
+    // �˳�ȫ��
+    void         exitFullScreen();
 protected:
     void closeEvent(QCloseEvent *event);
     void resizeEvent(QResizeEvent * event);

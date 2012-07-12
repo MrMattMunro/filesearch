@@ -9,7 +9,6 @@
 
 #include "importdocdialog.h"
 #include "preferences.h"
-#include "excuteJavaUtil.h"
 #include "utils.h"
 #include "db/docdao.h"
 #include "db/dirdao.h"
@@ -224,6 +223,7 @@ int ImportDocDialog::loadFiles(QString parentPath, QStringList filter, QStandard
             }
         }
     }
+    return 0;
 }
 
 //// É¾³ýÎÄ¼þ°´Å¥

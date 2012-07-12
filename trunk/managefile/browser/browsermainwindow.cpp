@@ -857,7 +857,6 @@ void BrowserMainWindow::loadPage(const QString &page)
     QUrl url = QUrl::fromUserInput(page);
     m_tabWidget->newTab();
     loadUrl(url);
-    emit testsingal();
 }
 
 void BrowserMainWindow::openDocInTab(const QString &filepath)
@@ -872,6 +871,10 @@ void BrowserMainWindow::openTxtInTab(const QString &filepath)
     m_tabWidget->currentLineEdit()->setText(filepath);
     m_tabWidget->newTxtTab(true, filepath);
     m_tabWidget->loadDocInCurrentTab(filepath);
+}
+
+void BrowserMainWindow::fullScreen(){
+    emit exitFullScreen();
 }
 
 TabWidget *BrowserMainWindow::tabWidget() const

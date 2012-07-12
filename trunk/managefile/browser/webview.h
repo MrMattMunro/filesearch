@@ -101,6 +101,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event);
     void contextMenuEvent(QContextMenuEvent *event);
     void wheelEvent(QWheelEvent *event);
+    void mouseDoubleClickEvent(QMouseEvent *event);
 
 private slots:
     void setProgress(int progress);
@@ -109,6 +110,7 @@ private slots:
     void downloadRequested(const QNetworkRequest &request);
     void openLinkInNewTab();
     void saveToSlfile();
+    void exitFullScreen();
 
 private:
     QString m_statusBarText;

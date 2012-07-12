@@ -131,7 +131,6 @@ void SortSubDirsDialog::moveUp(){
     QItemSelectionModel *selections = tableWidget->selectionModel();
     QModelIndexList selected = selections->selectedIndexes();
 
-    int sumrow = tableWidget->rowCount();
     foreach (QModelIndex index, selected)
     {
         int row = index.row();

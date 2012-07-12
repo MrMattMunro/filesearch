@@ -17,7 +17,7 @@ Preferences::Preferences(QObject *parent)
 	QFont f(QApplication::font());
 
         QSettings s("slfile.cn", "filemanage");
-        // s.clear();
+
 	m_checkQtVersion = s.value("checkQtVersion", true).toBool();
         m_isFullScreen = s.value("isFullScreen", true).toBool();
         m_isShowClassTree = s.value("isShowClassTree", true).toBool();
@@ -128,14 +128,18 @@ Preferences::Preferences(QObject *parent)
         m_txts << "*.txt" << "*.ini" << "*.bar" << "*.inf";
         m_movies << "*.rm" << "*.rmvb" << "*.avi" << "*.mpg" << "*.mlv" << "*.mpe" << "*.mpeg" << "*.m2v";
 
-        // 初始化
-        m_defaulttoolbaritemlist << "view_tree.png" << "view_fullscreen.png" << "homepage.png" << "invite.png" << "forum.png";
-        m_defaultwaittoolbaritemlist << "document-savetomobi.png" << "document-import.png" << "document-export.png" << "plugin.png";
+        // 初始化 
+        if(m_defaulttoolbaritemlist.size() == 0){
+            m_defaulttoolbaritemlist << "view_tree.png" << "view_fullscreen.png" << "homepage.png" << "invite.png" << "forum.png";
+        }
+        if(m_defaultwaittoolbaritemlist.size() == 0){
+            m_defaultwaittoolbaritemlist << "document-savetomobi.png" << "document-import.png" << "document-export.png";
+        }
         if(m_seltoolbaritemlist.size() == 0){
             m_seltoolbaritemlist  << "view_tree.png" << "view_fullscreen.png" << "homepage.png" << "invite.png" << "forum.png";
         }
         if(m_waittoolbaritemlist.size() == 0){
-           m_waittoolbaritemlist << "document-savetomobi.png" << "document-import.png" << "document-export.png" << "plugin.png";
+           m_waittoolbaritemlist << "document-savetomobi.png" << "document-import.png" << "document-export.png";
         }
 
 }

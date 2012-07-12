@@ -101,13 +101,9 @@ bool CustomToolDialog::eventFilter(QObject *obj, QEvent *event)
                 Preferences* p = Preferences::instance();
                 QStringList defaultselitems = p->getDefaultToolbarItemList();
                 QStringList defaultWaititems = p->getDefaultWaitToolbarItemList();
-                waitItems.clear();
-                sellItems.clear();
-                sellItems.append(defaultselitems);
-                waitItems.append(defaultWaititems);
 
-                p->setSelToolbarItemList(sellItems);
-                p->setWaitToolbarItemList(waitItems);
+                p->setSelToolbarItemList(defaultselitems);
+                p->setWaitToolbarItemList(defaultWaititems);
                 update = true;
                 this->close();
             }
