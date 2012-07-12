@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QObject>
+#include <QDateTime>
 
 #include "db/database.h"
 #include "db/resultdao.h"
@@ -127,6 +128,18 @@ QList<Result> ResultDao::selectByFullEqual(const QString & keyword){
 bool ResultDao::deleteResultByDocUid(const QString & docUuid){
     QString sql = "DELETE FROM MF_RESULT WHERE DOCUMENT_GUID='%1'";
     sql = sql.arg(docUuid);
+    return Database::execSql(sql);
+}
+
+// 删除一段时间以上的t_result信息
+bool ResultDao::deleteResultByCreateDate(int minusDay){
+    // 获取系统现在的时间
+    QDateTime time = QDateTime::currentDateTime();
+    time.addDays(minusDay);
+    QString preTime = time.toString("yyyy-MM-dd hh:mm:ss");
+
+    QString sql = "DELETE FROM MF_RESULT WHERE DT_CREATED < '%1'";
+    sql = sql.arg(preTime);
     return Database::execSql(sql);
 }
 
