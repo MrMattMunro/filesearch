@@ -13,6 +13,7 @@
 #include "db/database.h"
 #include "db/doctagdao.h"
 #include "db/sqlite3.h"
+#include "sqlloader.h"
 
 // 异常情况
 void DocTagDao::exception(const QString & message)
@@ -23,21 +24,24 @@ void DocTagDao::exception(const QString & message)
 // 插入文档标签
 bool DocTagDao::insertDocTag(DocTag docTag)
 {
-    QString sql = Database::getSql("mf_insert_doctag.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_insert_doctag.sql");
     sql = sql.arg(docTag.DOCUMENT_GUID, docTag.TAG_GUID);
     return Database::execSql(sql);
 }
 // 删除文档标签
 bool DocTagDao::deleteDocTag(DocTag docTag)
 {
-    QString sql = Database::getSql("mf_delete_doctag.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_delete_doctag.sql");
     sql = sql.arg(docTag.DOCUMENT_GUID, docTag.TAG_GUID);
     return Database::execSql(sql);
 }
 // 用TagUuId 删除文档标签
 bool DocTagDao::deleteDocTagByTag(QString taguid)
 {
-    QString sql = Database::getSql("mf_delete_doctag_tag.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_delete_doctag_tag.sql");
     sql = sql.arg(taguid);
     return Database::execSql(sql);
 }
@@ -45,7 +49,8 @@ bool DocTagDao::deleteDocTagByTag(QString taguid)
 // 删除某个文档所有标签
 bool DocTagDao::deleteDocTagByDoc(QString docUuId)
 {
-    QString sql = Database::getSql("mf_delete_doctag_doc.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_delete_doctag_doc.sql");
     sql = sql.arg(docUuId);
     return Database::execSql(sql);
 }
@@ -53,7 +58,8 @@ bool DocTagDao::deleteDocTagByDoc(QString docUuId)
 // 根据Docuuid取得文档标签 连接tag表及doctag表
 QList<Tag> DocTagDao::selectTagsbyDocUuId(const QString & docUuid)
 {
-    QString sql = Database::getSql("mf_select_doctag_doc.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_select_doctag_doc.sql");
     sql = sql.arg(docUuid);
     QSqlQuery query = Database::execSelect(sql);
 

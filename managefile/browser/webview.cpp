@@ -46,6 +46,7 @@
 #include "networkaccessmanager.h"
 #include "tabwidget.h"
 #include "webview.h"
+#include "indexfile.h"
 #include "saveurldialog.h"
 #include <QtGui/QClipboard>
 #include <QtGui/QMenu>
@@ -234,6 +235,7 @@ void WebView::contextMenuEvent(QContextMenuEvent *event)
         QMenu menu(this);
         menu.addAction(tr("Save to the slfile"), this, SLOT(saveToSlfile()));
         menu.addSeparator();
+        menu.addAction(tr("Exit Full Screen"), this, SLOT(exitFullScreen()));
         menu.exec(mapToGlobal(event->pos()));
         return;
     }
@@ -252,6 +254,7 @@ void WebView::saveToSlfile()
    // title 换成uuid
 
    QString title = this->title();
+
    // curPath 用于判断根节点和子节点
    SaveUrlDialog dlg(this);
    dlg.exec();
@@ -284,7 +287,34 @@ void WebView::saveToSlfile()
        doc.MF_VERSION = 0;
        DocDao::insertDoc(doc);
        BrowserApplication::downloadManager()->download(url, doc.DOCUMENT_GUID, false);
+
+
+       QThread thread;
+       IndexFilesObj indexFilesObj;
+       indexFilesObj.moveToThread(&thread);
+
+       IndexFilesSign dummy;
+       qDebug()<<"main thread:"<< QThread::currentThreadId();
+
+       QObject::connect(&dummy, SIGNAL(sig()), &indexFilesObj, SLOT(indexfiles()));
+       thread.start();
+       // 通知主界面改变不可搜索
+       Preferences* p = Preferences::instance();
+       p->setIsIndexing(true);
+       dummy.emitsig();
    }
+
+}
+
+// 左键双击
+void WebView::mouseDoubleClickEvent(QMouseEvent *event)
+{
+  BrowserApplication::mainWindow()->fullScreen();
+}
+
+void WebView::exitFullScreen()
+{
+   BrowserApplication::mainWindow()->fullScreen();
 }
 
 void WebView::wheelEvent(QWheelEvent *event)

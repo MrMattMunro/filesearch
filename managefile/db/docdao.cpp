@@ -15,6 +15,7 @@
 #include "db/docdao.h"
 #include "db/tagdao.h"
 #include "db/sqlite3.h"
+#include "sqlloader.h"
 
 // 异常情况
 void DocDao::exception(const QString & message)
@@ -24,10 +25,10 @@ void DocDao::exception(const QString & message)
 // 插入文档
 bool DocDao::insertDoc(Doc doc)
 {
-
-    QString sql_1 = Database::getSql("mf_insert_doc_1.sql");
-    QString sql_2 = Database::getSql("mf_insert_doc_2.sql");
-    QString sql_3 = Database::getSql("mf_insert_doc_3.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql_1 = sqlLoader->getSql("mf_insert_doc_1.sql");
+    QString sql_2 = sqlLoader->getSql("mf_insert_doc_2.sql");
+    QString sql_3 = sqlLoader->getSql("mf_insert_doc_3.sql");
 
 //    sql = sql.arg(doc.DOCUMENT_GUID, doc.DOCUMENT_TITLE, doc.DIR_GUID, doc.DOCUMENT_LOCATION, doc.DOCUMENT_NAME, doc.DOCUMENT_SEO,
 //                  doc.DOCUMENT_URL, doc.DOCUMENT_AUTHOR, doc.DOCUMENT_KEYWORDS, doc.DOCUMENT_TYPE, doc.DOCUMENT_OWNER, doc.DT_CREATED,
@@ -53,28 +54,32 @@ bool DocDao::insertDoc(Doc doc)
 // 删除文档
 bool DocDao::deleteDoc(QString docUuId)
 {
-    QString sql = Database::getSql("mf_delete_doc.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_delete_doc.sql");
     sql = sql.arg("1", docUuId);
     return Database::execSql(sql);
 }
 // 恢复文档
 bool DocDao::restoreDoc(QString docUuId)
 {
-    QString sql = Database::getSql("mf_delete_doc.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_delete_doc.sql");
     sql = sql.arg("0", docUuId);
     return Database::execSql(sql);
 }
 // 删除文件夹下的文档
 bool DocDao::deleteDocByDirUid(QString dirUuId)
 {
-    QString sql = Database::getSql("mf_delete_doc_dir.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_delete_doc_dir.sql");
     sql = sql.arg("1", dirUuId);
     return Database::execSql(sql);
 }
 // 恢复文件夹下的文档
 bool DocDao::restoreDocByDirUuid(QString dirUuId)
 {
-    QString sql = Database::getSql("mf_delete_doc_dir.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_delete_doc_dir.sql");
     sql = sql.arg("0", dirUuId);
     return Database::execSql(sql);
 }
@@ -88,7 +93,8 @@ bool DocDao:: physicalDelDoc(){
 // 根据删除Flg取得文档列表
 QList<Doc> DocDao::selectDocsByDelFlg(const QString & delFlg)
 {
-    QString sql = Database::getSql("mf_select_docs_delflg.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_select_docs_delflg.sql");
     sql = sql.arg(delFlg);
     QSqlQuery query = Database::execSelect(sql);
 
@@ -127,7 +133,8 @@ QList<Doc> DocDao::selectDocsByDelFlg(const QString & delFlg)
 // 根据文件夹下所有文档
 QList<Doc> DocDao::selectDocsbyDir(const QString & dirUuid, const QString & delFlg)
 {
-    QString sql = Database::getSql("mf_select_docs_dir.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_select_docs_dir.sql");
     sql = sql.arg(dirUuid, delFlg);
     QSqlQuery query = Database::execSelect(sql);
 
@@ -164,9 +171,10 @@ QList<Doc> DocDao::selectDocsbyDir(const QString & dirUuid, const QString & delF
 }
 
 
-QList<Doc> DocDao::selectDocsByTag(const Tag & tag){
-
-    QString sql = Database::getSql("mf_select_docs_tag.sql");
+QList<Doc> DocDao::selectDocsByTag(const Tag & tag)
+{
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_select_docs_tag.sql");
     sql = sql.arg(tag.TAG_GUID);
     QSqlQuery query = Database::execSelect(sql);
 
@@ -202,9 +210,11 @@ QList<Doc> DocDao::selectDocsByTag(const Tag & tag){
     return returnList;
 }
 
-QList<Doc> DocDao::selectDocsByIndexFlag(const QString & indexFlg){
+QList<Doc> DocDao::selectDocsByIndexFlag(const QString & indexFlg)
+{
 
-    QString sql = Database::getSql("mf_select_docs_indexflg.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_select_docs_indexflg.sql");
     sql = sql.arg(indexFlg);
     QSqlQuery query = Database::execSelect(sql);
 
@@ -282,7 +292,8 @@ QList<Doc> DocDao::selectDocsByName(const QString & name){
 // 根据文档uuId获取文档
 Doc DocDao::selectDoc(const QString & uuid)
 {
-    QString sql = Database::getSql("mf_select_doc_uuid.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_select_doc_uuid.sql");
     sql = sql.arg(uuid);
     QSqlQuery query = Database::execSelect(sql);
     Doc field;
@@ -439,10 +450,10 @@ bool DocDao::updateDoc(Doc doc){
     if(doc.MF_VERSION != 0 ){
        version = doc.MF_VERSION;
     }
-
-    QString sql_1 = Database::getSql("mf_update_doc_1.sql");
-    QString sql_2 = Database::getSql("mf_update_doc_2.sql");
-    QString sql_3 = Database::getSql("mf_update_doc_3.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql_1 = sqlLoader->getSql("mf_update_doc_1.sql");
+    QString sql_2 = sqlLoader->getSql("mf_update_doc_2.sql");
+    QString sql_3 = sqlLoader->getSql("mf_update_doc_3.sql");
 
     sql_1 = sql_1.arg(docTitle, dirUuId, docLocation, docName, docSeo, docUrl, docAuthor,
                   docKeyWord, docType);
@@ -459,9 +470,6 @@ bool DocDao::updateDoc(Doc doc){
     sql.append(sql_2);
     sql.append(sql_3);
 
-    qDebug() << "sql1::" << sql_1;
-    qDebug() << "sql_2::" << sql_2;
-    qDebug() << "sql_3::" << sql_3;
 
     return Database::execSql(sql);
 }

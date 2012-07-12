@@ -13,7 +13,6 @@ SOURCES += main.cpp \
     utils.cpp \
     fileutils.cpp \
     importdocdialog.cpp \
-    excuteJavaUtil.cpp \
     mytableview.cpp \
     exportdocdialog.cpp \
     createsubdirdialog.cpp \
@@ -243,7 +242,8 @@ SOURCES += main.cpp \
     aboutdialog.cpp \
     db/resultdao.cpp \
     jvm.cpp \
-    saveurldialog.cpp
+    saveurldialog.cpp \
+    sqlloader.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -422,10 +422,11 @@ HEADERS  += mainwindow.h \
     aboutdialog.h \
     jni.h \
     jni_md.h \
-    excuteJavaUtil.h \
     db/resultdao.h \
     jvm.h \
-    saveurldialog.h
+    saveurldialog.h \
+    indexfile.h \
+    sqlloader.h
 
 RESOURCES += \
     managefile.qrc
@@ -551,6 +552,11 @@ OTHER_FILES += \
     qscintilla2/include/License.txt \
     qscintilla2/include/HFacer.py \
     qscintilla2/include/Face.py
+
+
+
+
+
 
 
 

@@ -10,10 +10,6 @@
         <file>icons/clear_table_contents.png</file>
         <file>icons/close.png</file>
         <file>icons/column.png</file>
-        <file>icons/database.png</file>
-        <file>icons/database_commit.png</file>
-        <file>icons/database_rollback.png</file>
-        <file>icons/delete_table_row.png</file>
         <file>icons/dir_close.png</file>
         <file>icons/doc.ico</file>
         <file>icons/document-export.png</file>
@@ -89,16 +85,9 @@
         <file>icons/toolbar.png</file>
         <file>icons/trigger.png</file>
         <file>icons/update_product.png</file>
-        <file>icons/view.png</file>
         <file>icons/view_fullscreen.png</file>
         <file>icons/view_tree.png</file>
         <file>icons/warning.png</file>
-        <file>icons/wizplugin_ge.png</file>
-        <file>icons/wizplugin_ie.png</file>
-        <file>icons/wizplugin_pack_ge.png</file>
-        <file>icons/wizplugin_pack_ie.png</file>
-        <file>icons/wizplugin_pin_ge.png</file>
-        <file>icons/wizplugin_pin_ie.png</file>
         <file>icons/wmv.ico</file>
         <file>icons/zhedie.png</file>
         <file>icons/xlsx.ico</file>
@@ -146,5 +135,6 @@
         <file>api/sqlite.api</file>
         <file>icons/my_account.ico</file>
         <file>icons/logo_off.png</file>
+        <file>icons/gif.ico</file>
     </qresource>
 </RCC>

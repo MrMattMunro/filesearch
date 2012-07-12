@@ -30,6 +30,7 @@
 #include "logindialog.h"
 #include "fileutils.h"
 #include "noteeditor.h"
+#include "sqlloader.h"
 #include <QDebug>
 #include <QFile>
 #include <QTextStream>
@@ -295,17 +296,16 @@ int main(int argc, char *argv[])
     }
 
     // 初始化数据库
-    Database::execSql(Database::getSql("mf_document_related.sql"));
-    Database::execSql(Database::getSql("mf_dir.sql"));
-    Database::execSql(Database::getSql("mf_document_note.sql"));
-    Database::execSql(Database::getSql("mf_document.sql"));
-    Database::execSql(Database::getSql("mf_document_related.sql"));
-    Database::execSql(Database::getSql("mf_document_tag.sql"));
-    Database::execSql(Database::getSql("mf_tag.sql"));
-    Database::execSql(Database::getSql("mf_meta.sql"));
-    Database::execSql(Database::getSql("mf_result.sql"));
-
-    qDebug()<<"main main thread:"<<QThread::currentThreadId();
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    Database::execSql(sqlLoader->getSql("mf_document_related.sql"));
+    Database::execSql(sqlLoader->getSql("mf_dir.sql"));
+    Database::execSql(sqlLoader->getSql("mf_document_note.sql"));
+    Database::execSql(sqlLoader->getSql("mf_document.sql"));
+    Database::execSql(sqlLoader->getSql("mf_document_related.sql"));
+    Database::execSql(sqlLoader->getSql("mf_document_tag.sql"));
+    Database::execSql(sqlLoader->getSql("mf_tag.sql"));
+    Database::execSql(sqlLoader->getSql("mf_meta.sql"));
+    Database::execSql(sqlLoader->getSql("mf_result.sql"));
 
     // 显示登录界面
     Preferences* p = Preferences::instance();

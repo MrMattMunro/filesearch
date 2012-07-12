@@ -14,6 +14,7 @@
 #include "db/database.h"
 #include "db/tagdao.h"
 #include "db/sqlite3.h"
+#include "sqlloader.h"
 
 // 异常情况
 void TagDao::exception(const QString & message)
@@ -23,14 +24,16 @@ void TagDao::exception(const QString & message)
 // 插入标签
 bool TagDao::insertTag(Tag tag)
 {
-    QString sql = Database::getSql("mf_insert_tag.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_insert_tag.sql");
     sql = sql.arg(tag.TAG_GUID, tag.TAG_GROUP_GUID, tag.TAG_NAME, tag.TAG_DESCRIPTION, QString::number(tag.MF_VERSION));
     return Database::execSql(sql);
 }
 // 删除标签
 bool TagDao::deleteTag(QString tagUuId)
 {
-    QString sql = Database::getSql("mf_delete_tag.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_delete_tag.sql");
     sql = sql.arg(tagUuId);
     return Database::execSql(sql);
 }
@@ -38,7 +41,8 @@ bool TagDao::deleteTag(QString tagUuId)
 // 根据父标签取得子标签
 QList<Tag> TagDao::selectTagsbyParent(const QString & groupUuid)
 {
-    QString sql = Database::getSql("mf_select_tag_group.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_select_tag_group.sql");
     sql = sql.arg(groupUuid);
     QSqlQuery query = Database::execSelect(sql);
 
@@ -73,7 +77,8 @@ void TagDao::selectAllSubTagbyTag(QList<Tag> & selTagList, const QString & tagUu
 // 根据标签uuId获取标签
 Tag TagDao::selectTag(const QString & uuid)
 {
-    QString sql = Database::getSql("mf_select_tag_uuid.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_select_tag_uuid.sql");
     sql = sql.arg(uuid);
     QSqlQuery query = Database::execSelect(sql);
 
@@ -131,7 +136,8 @@ bool TagDao::updateTag(Tag tag){
     if(tag.MF_VERSION != 0){
        tagversion = tag.MF_VERSION;
     }
-    QString sql = Database::getSql("mf_update_tag.sql");
+    SqlLoader* sqlLoader = SqlLoader::instance();
+    QString sql = sqlLoader->getSql("mf_update_tag.sql");
     sql = sql.arg(tagname, taggroupuuid, tagdesp, QString::number(tagversion), tag.TAG_GUID);
     return Database::execSql(sql);
 }

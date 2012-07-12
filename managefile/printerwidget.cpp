@@ -57,7 +57,7 @@ void PrinterWidget::printer()
 
 
         QByteArray rawdata;
-        int dwCount;
+        int dwCount = 0;
 
         char* buff=new char [BUF_LEN];
 
@@ -186,6 +186,7 @@ BOOL RawDataToPrinter(QString szPrinterName, QString lpData, DWORD dwCount)
 //    {
 //        return TRUE;
 //    }
+    return true;
 }
 
 bool RawDataToPrinter(QString printerName, QStringList *barcode)

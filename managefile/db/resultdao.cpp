@@ -14,6 +14,7 @@
 #include "db/database.h"
 #include "db/resultdao.h"
 #include "db/sqlite3.h"
+#include "sqlloader.h"
 
 // Òì³£Çé¿ö
 void ResultDao::exception(const QString & message)

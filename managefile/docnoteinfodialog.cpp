@@ -16,12 +16,8 @@ DocNoteInfoDialog::DocNoteInfoDialog(QWidget * parent,const QString & dir)
 {
 	setupUi(this);
 
-        Preferences* p = Preferences::instance();
-
         // Set UI
         // 设置目标目录
-
-
         // 列表
         model = new QStandardItemModel();
         // 新建Model

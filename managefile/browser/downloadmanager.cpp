@@ -83,6 +83,7 @@ DownloadItem::DownloadItem(QNetworkReply *reply, const QString &title, bool requ
     connect(tryAgainButton, SIGNAL(clicked()), this, SLOT(tryAgain()));
 
     init();
+
 }
 
 void DownloadItem::init()
@@ -332,7 +333,6 @@ void DownloadItem::finished()
     m_output.close();
     updateInfoLabel();
     emit statusChanged();
-    this->hide();
 }
 
 /*!
@@ -506,11 +506,13 @@ void DownloadManager::load()
         QUrl url = settings.value(key + QLatin1String("url")).toUrl();
         QString fileName = settings.value(key + QLatin1String("location")).toString();
         bool done = settings.value(key + QLatin1String("done"), true).toBool();
+        QString title = settings.value(key + QLatin1String("title"),"").toString();
         if (!url.isEmpty() && !fileName.isEmpty()) {
-            DownloadItem *item = new DownloadItem(0, "", this);
+            DownloadItem *item = new DownloadItem(0, title, false, this);
             item->m_output.setFileName(fileName);
             item->fileNameLabel->setText(QFileInfo(item->m_output.fileName()).fileName());
             item->m_url = url;
+            item->m_title = title;
             item->stopButton->setVisible(false);
             item->stopButton->setEnabled(false);
             item->tryAgainButton->setVisible(!done);
