@@ -64,12 +64,19 @@
 #include "aboutdialog.h"
 #include "logview.h"
 #include "preferencesdialog.h"
+#include "indexfile.h"
 
 extern NoteEditor *noteEditor;
 
 MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     : QMainWindow(parent, flags)
 {
+    createTrayActions();
+    createTrayIcon();
+    connect(trayIcon, SIGNAL(messageClicked()), this, SLOT(messageClicked()));
+    connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(showMaximized()));
+    trayIcon->show();
+
     initUI();
     initActions();
     initMenus();
@@ -164,22 +171,37 @@ void MainWindow::slotShowSearchSetMenu()
        return;
     }
 
+    Preferences* p = Preferences::instance();
+    QString searcheDir = p->getSearchDir();
+    QString searcheObj = p->getSearchObject();
+
+    // 设置默认
+    if(searcheDir.isEmpty()){
+        searcheDir == QString::number(ALLDOC);
+    }
+    if(searcheObj.isEmpty()){
+        searcheObj == QString::number(NAME_CONTENT);
+    }
+
     // 设置Menu
     QAction *action1 = new QAction(this);
     action1->setData(ALLDOC);
     action1->setCheckable(true);
+    action1->setChecked(searcheDir == QString::number(ALLDOC));
     action1->setText(tr("ALL Documents"));
 
     // 设置Menu
     QAction *action2 = new QAction(this);
     action2->setData(CURRENTDIR);
     action2->setCheckable(true);
+    action2->setChecked(searcheDir == QString::number(CURRENTDIR));
     action2->setText(tr("Current Directory"));
 
     // 设置Menu
     QAction *action3 = new QAction(this);
     action3->setData(CURRENTDIRINCLUESUB);
     action3->setCheckable(true);
+    action3->setChecked(searcheDir == QString::number(CURRENTDIRINCLUESUB));
     action3->setText(tr("Current Directory(Include Sub Directory)"));
 
     QActionGroup *grp = new QActionGroup( this );
@@ -191,20 +213,29 @@ void MainWindow::slotShowSearchSetMenu()
 
     // 设置Menu
     QAction *action4 = new QAction(this);
-    action4->setData(ALLTEXT);
+    action4->setData(NAME_CONTENT);
     action4->setCheckable(true);
-    action4->setText(tr("ALL Text"));
+    action4->setChecked(searcheObj == QString::number(NAME_CONTENT));
+    action4->setText(tr("Document Name And Content"));
 
     QAction *action5 = new QAction(this);
-    action5->setData(DOCNAMEONLY);
+    action5->setData(DOC_NAME);
     action5->setCheckable(true);
+    action5->setChecked(searcheObj == QString::number(DOC_NAME));
     action5->setText(tr("Document Name Only"));
+
+    QAction *action6 = new QAction(this);
+    action6->setData(DOC_CONTENT);
+    action6->setCheckable(true);
+    action6->setChecked(searcheObj == QString::number(DOC_CONTENT));
+    action6->setText(tr("Document Content Only"));
 
     QActionGroup *grp11 = new QActionGroup(this);
     grp11->setExclusive(true);
     connect(grp11, SIGNAL(selected(QAction*)), this, SLOT(setSearchObject(QAction*)));
     grp11->addAction(action4);
     grp11->addAction(action5);
+    grp11->addAction(action6);
 
 //    QAction *action6 = new QAction(this);
 //    action6->setData(WEBSEARCH);
@@ -228,8 +259,7 @@ void MainWindow::slotShowSearchSetMenu()
     m_searchSetMenu->addSeparator();
     m_searchSetMenu->addAction(action4);
     m_searchSetMenu->addAction(action5);
-//    m_searchSetMenu->addSeparator();
-//    m_searchSetMenu->addAction(action6);
+    m_searchSetMenu->addAction(action6);
     m_searchSetMenu->addSeparator();
     m_searchSetMenu->addAction(action7);
 //    m_searchSetMenu->addAction(action8);
@@ -240,8 +270,9 @@ void MainWindow::initActions()
 {
 
         // 设置搜索面板
-        m_searchSetAction = new QAction(tr("Search"), this);
+        m_searchSetAction = new QAction(Utils::getIcon("setting.ico"), tr("Search"), this);
         m_searchSetAction->setIconVisibleInMenu(false);
+        connect(m_searchSetAction, SIGNAL(triggered()), this, SLOT(slotShowSearchSetMenu()));
         m_searchSetMenu = new QMenu(this);
         m_searchSetAction->setMenu(m_searchSetMenu);
         connect(m_searchSetMenu, SIGNAL(aboutToShow()), this, SLOT(slotShowSearchSetMenu()));
@@ -493,66 +524,107 @@ void MainWindow::initToolbar()
 // 搜索关键字
 void MainWindow::dosearch(QString keyWord)
 {
+
     resultlist.clear();
     // 空则退出
     if(keyWord.isEmpty()){
        m_doctable->buildSearchResult(resultlist);
        return;
     }
-    // 名称排在前面
-    QList<Doc> docs= DocDao::selectDocsByName(keyWord);
-     // 把转换成Result
-     // 根据文件夹取得所有文件
-    for(int i = 0 ; i< docs.size(); i ++){
-         Doc doc = docs.at(i);
-         Result rst;
-         rst.DOC_UUID = doc.DOCUMENT_GUID;
-         rst.KEY_WORD = keyWord;
-         rst.FILE_PATH = doc.DOCUMENT_LOCATION;
-         rst.FILE_NAME = doc.DOCUMENT_NAME;
-         rst.DESP = "";
-         rst.CONTENT = doc.DOCUMENT_NAME;
-         rst.SHEET_NAME = "";
-         rst.DT_CREATED = doc.DT_CREATED;
-         resultlist.push_back(rst);
+
+    Preferences* p = Preferences::instance();
+    searcheObj = p->getSearchObject();
+
+    bool isSetObj = (objdirList.size() != 0);
+    // 文件名
+    if(searcheObj == QString::number(DOC_NAME) || searcheObj == QString::number(NAME_CONTENT) ){
+        // 名称排在前面
+        QList<Doc> docs= DocDao::selectDocsByName(keyWord);
+         // 把转换成Result
+         // 根据文件夹取得所有文件
+        for(int i = 0 ; i< docs.size(); i ++){
+             Doc doc = docs.at(i);
+             QString dirUuid = doc.DIR_GUID;
+             if(isSetObj){
+                 // 不包含则进行下一个
+                 if(!objdirList.contains(dirUuid)){
+                     continue;
+                 }
+             }
+
+             Result rst;
+             rst.DOC_UUID = doc.DOCUMENT_GUID;
+             rst.KEY_WORD = keyWord;
+             rst.FILE_PATH = doc.DOCUMENT_LOCATION;
+             rst.FILE_NAME = doc.DOCUMENT_NAME;
+             rst.DESP = "";
+             rst.CONTENT = doc.DOCUMENT_NAME;
+             rst.SHEET_NAME = "";
+             rst.DT_CREATED = doc.DT_CREATED;
+             resultlist.push_back(rst);
+        }
     }
 
-     // 检索内容
-     // 内容排在后面
-     // 检索数据库
-     ResultDao dao;
-     QList<Result> dbList = dao.selectByFullEqual(keyWord);
+    // 文件内容
+    if(searcheObj == QString::number(DOC_CONTENT) || searcheObj == QString::number(NAME_CONTENT) ){
+        // 检索数据库
+        ResultDao dao;
+        QList<Result> dbList = dao.selectByFullEqual(keyWord);
+        // 检索内容
+        // 内容排在后面
+        Preferences* p = Preferences::instance();
+        bool isIndexing = p->getIsIndexing();
 
-     qDebug() << "name size::" << resultlist.size();
+        if(dbList.size() == 0 && !isBusySearch && !isIndexing){
+            isBusySearch = true;
+            m_keyWord = keyWord;
+            QueryIndexFilesObj queryIndexFilesObj;
+            queryIndexFilesObj.keyWord = keyWord;
+            queryIndexFilesObj.searchType = "all";
+            QueryIIndexFilesSign dummy;
 
+            QObject::connect(&dummy, SIGNAL(sig()), &queryIndexFilesObj, SLOT(queryfiles()));
+            QObject::connect(&queryIndexFilesObj, SIGNAL(finished()), this, SLOT(nextSearchCanStart()));
+            dummy.emitsig();
+        }else{
+           if(isSetObj){
+                // 按路径排除
+                for(int i = 0 ; i< dbList.size(); i ++){
+                    Result result = dbList.at(i);
+                    Doc doc = DocDao::selectDoc(result.DOC_UUID);
+                    // 包含下添加
+                    if(objdirList.contains(doc.DIR_GUID)){
+                       resultlist.append(result);
+                    }
+                }
+            } else {
+                resultlist.append(dbList);
+            }
+        }
+    }
 
-     Preferences* p = Preferences::instance();
-     bool isIndexing = p->getIsIndexing();
-
-     if(dbList.size() == 0 && !isBusySearch && !isIndexing){
-         isBusySearch = true;
-         m_keyWord = keyWord;
-         QueryIndexFilesObj queryIndexFilesObj;
-         queryIndexFilesObj.keyWord = keyWord;
-         queryIndexFilesObj.searchType = "all";
-         QueryIIndexFilesSign dummy;
-
-         QObject::connect(&dummy, SIGNAL(sig()), &queryIndexFilesObj, SLOT(queryfiles()));
-         QObject::connect(&queryIndexFilesObj, SIGNAL(finished()), this, SLOT(nextSearchCanStart()));
-         dummy.emitsig();
-         qDebug() << "After ExcuteJavaUtil::queryIndexsize::" << resultlist.size();
-     }else{
-        resultlist.append(dbList);
-     }
      m_doctable->buildSearchResult(resultlist);
 }
 
 // 打开网络
 void MainWindow::nextSearchCanStart()
 {
-    qDebug()<<"set isBusy Search true" << QThread::currentThreadId();
     ResultDao dao;
-    resultlist.append(dao.selectByFullEqual(m_keyWord));
+
+    QList<Result> dbList = dao.selectByFullEqual(m_keyWord);
+    bool isSetObj = (objdirList.size() != 0);
+    if(isSetObj){
+         // 按路径排除
+         for(int i = 0 ; i< dbList.size(); i ++){
+             Result result = dbList.at(i);
+             Doc doc = DocDao::selectDoc(result.DOC_UUID);
+             // 包含下添加
+             if(objdirList.contains(doc.DIR_GUID)){
+                resultlist.append(result);
+             }
+         }
+     }
+
     m_doctable->buildSearchResult(resultlist);
     isBusySearch = false;
 }
@@ -892,14 +964,40 @@ void MainWindow::logoff(){
 void MainWindow::setSearchDir(QAction *action){
     int offset = action->data().toInt();
     Preferences* p = Preferences::instance();
-    p->setSearchDir(QString::number(offset));
+    QString dir = QString::number(offset);
+    p->setSearchDir(dir);
+
+    // 设置检索对象目录
+    objdirList.clear();
+    if(dir == QString::number(CURRENTDIR)){
+        QString diruuid = q_myTreeList->getCurUuid();
+        QString curtype = q_myTreeList->getCurType();
+        if(curtype == "doc" ){
+           objdirList.append(diruuid);
+        }
+    }
+    if(dir == QString::number(CURRENTDIRINCLUESUB)){
+        QString diruuid = q_myTreeList->getCurUuid();
+        QString curtype = q_myTreeList->getCurType();
+        if(curtype == "doc" ){
+            QList<Dir> dirList;
+            DirDao::selectAllSubDirbyDir(dirList, diruuid, "0");
+            DirDao::selectAllSubDirbyDir(dirList, diruuid, "1");
+            for(int i = 0 ; i< dirList.size(); i ++){
+                Dir dir = dirList.at(i);
+                objdirList.append(dir.DIR_GUID);
+            }
+        }
+    }
 }
 
 // 设置搜索对象
 void MainWindow::setSearchObject(QAction *action){
     int offset = action->data().toInt();
+    searcheObj = "";
     Preferences* p = Preferences::instance();
     p->setSearchObject(QString::number(offset));
+    searcheObj = QString::number(offset);
 }
 
 // 搜索设置
@@ -913,9 +1011,12 @@ void MainWindow::slotOpenActionUrl(QAction *action)
 
         case CURRENTDIRINCLUESUB:
 
-        case ALLTEXT:
+        case NAME_CONTENT:
 
-        case DOCNAMEONLY:
+        case DOC_NAME:
+
+        case DOC_CONTENT:
+
         case OPTION:
 
         case SAVETOFASTSEARCH:
@@ -1001,6 +1102,42 @@ void MainWindow::openDocInTab()
     }
 }
 
+// 系统托盘处理
+void MainWindow::createTrayActions()
+{
+    minimizeAction = new QAction(tr("Mi&nimize"), this);
+    connect(minimizeAction, SIGNAL(triggered()), this, SLOT(hide()));
 
+    maximizeAction = new QAction(tr("Ma&ximize"), this);
+    connect(maximizeAction, SIGNAL(triggered()), this, SLOT(showMaximized()));
 
+    restoreAction = new QAction(tr("&Restore"), this);
+    connect(restoreAction, SIGNAL(triggered()), this, SLOT(showNormal()));
 
+    quitAction = new QAction(tr("&Quit"), this);
+    connect(quitAction, SIGNAL(triggered()), this, SLOT(quit()));
+}
+
+void MainWindow::createTrayIcon()
+{
+    trayIconMenu = new QMenu(this);
+    trayIconMenu->addAction(minimizeAction);
+    trayIconMenu->addAction(maximizeAction);
+    trayIconMenu->addAction(restoreAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(quitAction);
+
+    trayIcon = new QSystemTrayIcon(Utils::getIcon("file_manager.png"), this);
+    trayIcon->setContextMenu(trayIconMenu);
+}
+void MainWindow::messageClicked()
+{
+    QMessageBox::information(0, tr("Systray"),
+                             tr("Sorry, I already gave what help I could.\n"
+                                "Maybe you should try asking a human?"));
+}
+void MainWindow::quit()
+{
+    // 退出主程序
+    QCoreApplication::exit(0);
+}

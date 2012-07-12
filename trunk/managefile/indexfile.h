@@ -85,3 +85,45 @@ class DelIndexFilesSign:public QObject {
        void sigDelIndexFile();
 
 };
+
+class QueryIndexFilesObj:public QObject {
+    Q_OBJECT
+    public:
+        QueryIndexFilesObj(){}
+        QString searchType;
+        QString keyWord;
+    public slots:
+       void queryfiles()
+       {
+          qDebug()<<"from thread slot:" << QThread::currentThreadId();
+          Jvm jvm;
+
+          QString indexpath = Utils::getLocateIndexPath();
+          QString dbpath = Utils::getLocateDbPath();
+          dbpath.append(QDir::separator()).append("MF");
+
+          QMap<QString, QString> map;
+          map.insert("searchtype",searchType);
+          map.insert("keyword",keyWord);
+          map.insert("indexpath",indexpath);
+          map.insert("dbpath",dbpath);
+          bool rtn = jvm.invokeMethod("com/searchlocal/lucene/ContentSearcher", "queryAll", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Z", map);
+          if(rtn){
+              emit finished();
+          }
+       }
+    signals:
+        void finished();
+};
+class QueryIIndexFilesSign:public QObject {
+    Q_OBJECT
+    public:
+        QueryIIndexFilesSign(QObject* parent=0):QObject(parent){
+        }
+   public slots:
+        void emitsig()   {
+           emit sig();
+        }
+   signals:
+       void sig();
+};

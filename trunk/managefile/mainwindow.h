@@ -44,6 +44,7 @@
 #include <QtGui/QTableWidget>
 #include <QtGui/QWidget>
 #include <QtWebKit/QWebView>
+#include <QSystemTrayIcon>
 #include <mytreeview.h>
 #include <mytableview.h>
 #include <browser/tabwidget.h>
@@ -59,50 +60,10 @@
 #include <requtil.h>
 #include <jvm.h>
 #include <utils.h>
+#include <db/dirdao.h>
 
 //#include "ui_mainwindow.h"
 
-class QueryIndexFilesObj:public QObject {
-    Q_OBJECT
-    public:
-        QueryIndexFilesObj(){}
-        QString searchType;
-        QString keyWord;
-    public slots:
-       void queryfiles()
-       {
-          qDebug()<<"from thread slot:" << QThread::currentThreadId();
-          Jvm jvm;
-
-          QString indexpath = Utils::getLocateIndexPath();
-          QString dbpath = Utils::getLocateDbPath();
-          dbpath.append(QDir::separator()).append("MF");
-
-          QMap<QString, QString> map;
-          map.insert("searchtype",searchType);
-          map.insert("keyword",keyWord);
-          map.insert("indexpath",indexpath);
-          map.insert("dbpath",dbpath);
-          bool rtn = jvm.invokeMethod("com/searchlocal/lucene/ContentSearcher", "queryAll", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Z", map);
-          if(rtn){
-              emit finished();
-          }
-       }
-    signals:
-        void finished();
-};
-class QueryIIndexFilesSign:public QObject {
-    Q_OBJECT
-    public:
-        QueryIIndexFilesSign(QObject* parent=0):QObject(parent){
-        }
-   public slots:
-        void emitsig()   {
-           emit sig();
-        }
-   signals:
-       void sig();
-};
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -120,11 +81,12 @@ public:
         ALLDOC = 1,
         CURRENTDIR = 2,
         CURRENTDIRINCLUESUB = 3,
-        ALLTEXT = 4,
-        DOCNAMEONLY = 5,
-        WEBSEARCH = 6,
-        OPTION = 7,
-        SAVETOFASTSEARCH = 8
+        NAME_CONTENT = 4,
+        DOC_NAME = 5,
+        DOC_CONTENT = 6,
+        WEBSEARCH = 7,
+        OPTION = 8,
+        SAVETOFASTSEARCH = 9
     };
 
 private slots:
@@ -163,6 +125,11 @@ private slots:
     void setSearchObject(QAction *action);
     void nextSearchCanStart();
     void checkNewVersion();
+
+    void createTrayActions();
+    void createTrayIcon();
+    void messageClicked();
+    void quit();
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -245,6 +212,17 @@ private:
     bool isBusySearch;
     QString m_keyWord;
     QList<Result> resultlist;
+    QList<QString> objdirList;
+    QString searcheObj;
+
+
+    QAction *minimizeAction;
+    QAction *maximizeAction;
+    QAction *restoreAction;
+    QAction *quitAction;
+
+    QSystemTrayIcon *trayIcon;
+    QMenu *trayIconMenu;
 
 };
 

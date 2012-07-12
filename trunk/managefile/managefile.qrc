@@ -126,15 +126,17 @@
         <file>icons/filesaveas.png</file>
         <file>icons/formatfixedfont.png</file>
         <file>icons/text_center.png</file>
-        <file>icons/tag.ico</file>
-        <file>icons/tags.ico</file>
         <file>icons/basket.ico</file>
         <file>icons/notes.png</file>
         <file>icons/note.png</file>
         <file>icons/sql.ico</file>
-        <file>api/sqlite.api</file>
         <file>icons/my_account.ico</file>
         <file>icons/logo_off.png</file>
         <file>icons/gif.ico</file>
+        <file>icons/jsp.ico</file>
+        <file>icons/setting.ico</file>
+        <file>icons/tags.png</file>
+        <file>icons/tag.ico</file>
+        <file>ts/managefile_zh_cn.qm</file>
     </qresource>
 </RCC>
