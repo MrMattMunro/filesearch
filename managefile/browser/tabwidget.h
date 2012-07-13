@@ -43,8 +43,7 @@
 #define TABWIDGET_H
 
 #include <QtGui/QTabBar>
-
-#include <txteditorwidget.h>
+#include <codeeditor.h>
 #include <txteditor.h>
 
 #include <QtGui/QShortcut>
@@ -181,6 +180,7 @@ public:
 
     // office
     QAxWidget *getDocWidget(QString filepath);
+
 
     QByteArray saveState() const;
     bool restoreState(const QByteArray &state);

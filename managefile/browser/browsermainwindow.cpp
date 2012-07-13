@@ -868,9 +868,8 @@ void BrowserMainWindow::openDocInTab(const QString &filepath)
 
 void BrowserMainWindow::openTxtInTab(const QString &filepath)
 {
-    m_tabWidget->currentLineEdit()->setText(filepath);
-    m_tabWidget->newTxtTab(true, filepath);
-    m_tabWidget->loadDocInCurrentTab(filepath);
+//   m_tabWidget->currentLineEdit()->setText(filepath);
+   m_tabWidget->newTxtTab(true, filepath);
 }
 
 void BrowserMainWindow::fullScreen(){

@@ -49,7 +49,7 @@ void MyTreeDelegate::paint(QPainter * painter,
 
     int width=16;
     int height=16;
-    QRect rect=option.rect;
+    QRect rect = option.rect;
     int x=rect.x() + rect.width()/2-width/2;
     int y=rect.y() + rect.height()/2-height/2;
 

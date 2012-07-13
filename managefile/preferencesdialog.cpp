@@ -15,7 +15,6 @@ for which a new license (GPL+exception) is in place.
 #include "shortcuteditordialog.h"
 #include "utils.h"
 #include "extensionmodel.h"
-#include "qscintilla2/Qt4/Qsci/qscilexersql.h"
 
 
 PrefsDataStoreWidget::PrefsDataStoreWidget(QWidget * parent)

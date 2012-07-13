@@ -3,7 +3,8 @@ TARGET = managefile
 TEMPLATE = app
 
 LIBS += C:\QtWorksapce\managefile\lib\sqlite3.lib \
-         C:\QtSDK\Symbian\tools\sbs\win32\mingw\lib\libwinspool.a
+         C:\QtSDK\Symbian\tools\sbs\win32\mingw\lib\libwinspool.a \
+         -Lc:/QtWorksapce/managefile/lib -lqjson0
 
 CONFIG+=qaxcontainer
 
@@ -70,171 +71,12 @@ SOURCES += main.cpp \
     propofdocdialog.cpp \
     sortsubdirsdialog.cpp \
     preferencesdialog.cpp \
-    qscintilla2/src/XPM.cpp \
-    qscintilla2/src/WindowAccessor.cpp \
-    qscintilla2/src/ViewStyle.cpp \
-    qscintilla2/src/UniConversion.cpp \
-    qscintilla2/src/StyleContext.cpp \
-    qscintilla2/src/Style.cpp \
-    qscintilla2/src/ScintillaBase.cpp \
-    qscintilla2/src/RunStyles.cpp \
-    qscintilla2/src/RESearch.cpp \
-    qscintilla2/src/PropSet.cpp \
-    qscintilla2/src/PositionCache.cpp \
-    qscintilla2/src/PerLine.cpp \
-    qscintilla2/src/LineMarker.cpp \
-    qscintilla2/src/LexYAML.cpp \
-    qscintilla2/src/LexVHDL.cpp \
-    qscintilla2/src/LexVerilog.cpp \
-    qscintilla2/src/LexVB.cpp \
-    qscintilla2/src/LexTeX.cpp \
-    qscintilla2/src/LexTCL.cpp \
-    qscintilla2/src/LexTAL.cpp \
-    qscintilla2/src/LexTADS3.cpp \
-    qscintilla2/src/LexTACL.cpp \
-    qscintilla2/src/LexSQL.cpp \
-    qscintilla2/src/LexSpice.cpp \
-    qscintilla2/src/LexSpecman.cpp \
-    qscintilla2/src/LexSorcus.cpp \
-    qscintilla2/src/LexSML.cpp \
-    qscintilla2/src/LexSmalltalk.cpp \
-    qscintilla2/src/LexScriptol.cpp \
-    qscintilla2/src/LexRuby.cpp \
-    qscintilla2/src/LexRebol.cpp \
-    qscintilla2/src/LexR.cpp \
-    qscintilla2/src/LexPython.cpp \
-    qscintilla2/src/LexPS.cpp \
-    qscintilla2/src/LexProgress.cpp \
-    qscintilla2/src/LexPowerShell.cpp \
-    qscintilla2/src/LexPowerPro.cpp \
-    qscintilla2/src/LexPOV.cpp \
-    qscintilla2/src/LexPLM.cpp \
-    qscintilla2/src/LexPerl.cpp \
-    qscintilla2/src/LexPB.cpp \
-    qscintilla2/src/LexPascal.cpp \
-    qscintilla2/src/LexOthers.cpp \
-    qscintilla2/src/LexOpal.cpp \
-    qscintilla2/src/LexNsis.cpp \
-    qscintilla2/src/LexNimrod.cpp \
-    qscintilla2/src/LexMySQL.cpp \
-    qscintilla2/src/LexMSSQL.cpp \
-    qscintilla2/src/LexMPT.cpp \
-    qscintilla2/src/LexMMIXAL.cpp \
-    qscintilla2/src/LexMetapost.cpp \
-    qscintilla2/src/LexMatlab.cpp \
-    qscintilla2/src/LexMagik.cpp \
-    qscintilla2/src/LexLua.cpp \
-    qscintilla2/src/LexLout.cpp \
-    qscintilla2/src/LexLisp.cpp \
-    qscintilla2/src/LexKix.cpp \
-    qscintilla2/src/LexInno.cpp \
-    qscintilla2/src/LexHTML.cpp \
-    qscintilla2/src/LexHaskell.cpp \
-    qscintilla2/src/LexGui4Cli.cpp \
-    qscintilla2/src/LexGAP.cpp \
-    qscintilla2/src/LexFortran.cpp \
-    qscintilla2/src/LexForth.cpp \
-    qscintilla2/src/LexFlagship.cpp \
-    qscintilla2/src/LexEScript.cpp \
-    qscintilla2/src/LexErlang.cpp \
-    qscintilla2/src/LexEiffel.cpp \
-    qscintilla2/src/LexD.cpp \
-    qscintilla2/src/LexCSS.cpp \
-    qscintilla2/src/LexCsound.cpp \
-    qscintilla2/src/LexCrontab.cpp \
-    qscintilla2/src/LexCPP.cpp \
-    qscintilla2/src/LexConf.cpp \
-    qscintilla2/src/LexCOBOL.cpp \
-    qscintilla2/src/LexCmake.cpp \
-    qscintilla2/src/LexCLW.cpp \
-    qscintilla2/src/LexCaml.cpp \
-    qscintilla2/src/LexBullant.cpp \
-    qscintilla2/src/LexBasic.cpp \
-    qscintilla2/src/LexBash.cpp \
-    qscintilla2/src/LexBaan.cpp \
-    qscintilla2/src/LexAVE.cpp \
-    qscintilla2/src/LexAU3.cpp \
-    qscintilla2/src/LexASY.cpp \
-    qscintilla2/src/LexAsn1.cpp \
-    qscintilla2/src/LexAsm.cpp \
-    qscintilla2/src/LexAPDL.cpp \
-    qscintilla2/src/LexAda.cpp \
-    qscintilla2/src/LexAbaqus.cpp \
-    qscintilla2/src/KeyWords.cpp \
-    qscintilla2/src/KeyMap.cpp \
-    qscintilla2/src/Indicator.cpp \
-    qscintilla2/src/ExternalLexer.cpp \
-    qscintilla2/src/Editor.cpp \
-    qscintilla2/src/DocumentAccessor.cpp \
-    qscintilla2/src/Document.cpp \
-    qscintilla2/src/Decoration.cpp \
-    qscintilla2/src/ContractionState.cpp \
-    qscintilla2/src/CharClassify.cpp \
-    qscintilla2/src/CellBuffer.cpp \
-    qscintilla2/src/CallTip.cpp \
-    qscintilla2/src/AutoComplete.cpp \
-    qscintilla2/Qt4/ScintillaQt.cpp \
-    qscintilla2/Qt4/SciClasses.cpp \
-    qscintilla2/Qt4/qscistyledtext.cpp \
-    qscintilla2/Qt4/qscistyle.cpp \
-    qscintilla2/Qt4/qsciscintillabase.cpp \
-    qscintilla2/Qt4/qsciscintilla.cpp \
-    qscintilla2/Qt4/qsciprinter.cpp \
-    qscintilla2/Qt4/qscimacro.cpp \
-    qscintilla2/Qt4/qscilexeryaml.cpp \
-    qscintilla2/Qt4/qscilexerxml.cpp \
-    qscintilla2/Qt4/qscilexervhdl.cpp \
-    qscintilla2/Qt4/qscilexerverilog.cpp \
-    qscintilla2/Qt4/qscilexertex.cpp \
-    qscintilla2/Qt4/qscilexertcl.cpp \
-    qscintilla2/Qt4/qscilexersql.cpp \
-    qscintilla2/Qt4/qscilexerspice.cpp \
-    qscintilla2/Qt4/qscilexerruby.cpp \
-    qscintilla2/Qt4/qscilexerpython.cpp \
-    qscintilla2/Qt4/qscilexerproperties.cpp \
-    qscintilla2/Qt4/qscilexerpov.cpp \
-    qscintilla2/Qt4/qscilexerpostscript.cpp \
-    qscintilla2/Qt4/qscilexerperl.cpp \
-    qscintilla2/Qt4/qscilexerpascal.cpp \
-    qscintilla2/Qt4/qscilexermakefile.cpp \
-    qscintilla2/Qt4/qscilexerlua.cpp \
-    qscintilla2/Qt4/qscilexerjavascript.cpp \
-    qscintilla2/Qt4/qscilexerjava.cpp \
-    qscintilla2/Qt4/qscilexeridl.cpp \
-    qscintilla2/Qt4/qscilexerhtml.cpp \
-    qscintilla2/Qt4/qscilexerfortran.cpp \
-    qscintilla2/Qt4/qscilexerfortran77.cpp \
-    qscintilla2/Qt4/qscilexerdiff.cpp \
-    qscintilla2/Qt4/qscilexerd.cpp \
-    qscintilla2/Qt4/qscilexercustom.cpp \
-    qscintilla2/Qt4/qscilexercss.cpp \
-    qscintilla2/Qt4/qscilexercsharp.cpp \
-    qscintilla2/Qt4/qscilexercpp.cpp \
-    qscintilla2/Qt4/qscilexercmake.cpp \
-    qscintilla2/Qt4/qscilexerbatch.cpp \
-    qscintilla2/Qt4/qscilexerbash.cpp \
-    qscintilla2/Qt4/qscilexer.cpp \
-    qscintilla2/Qt4/qscidocument.cpp \
-    qscintilla2/Qt4/qscicommandset.cpp \
-    qscintilla2/Qt4/qscicommand.cpp \
-    qscintilla2/Qt4/qsciapis.cpp \
-    qscintilla2/Qt4/qsciabstractapis.cpp \
-    qscintilla2/Qt4/PlatQt.cpp \
-    qscintilla2/Qt4/ListBoxQt.cpp \
     shortcuteditordialog.cpp \
     shortcutmodel.cpp \
     sqlkeywords.cpp \
-    txteditorwidget.cpp \
     txteditor.cpp \
     logview.cpp \
     logindialog.cpp \
-    qjson/serializerrunnable.cpp \
-    qjson/serializer.cpp \
-    qjson/qobjecthelper.cpp \
-    qjson/parserrunnable.cpp \
-    qjson/parser.cpp \
-    qjson/json_scanner.cpp \
-    qjson/json_parser.cc \
     accountdialog.cpp \
     changepwddialog.cpp \
     requtil.cpp \
@@ -243,12 +85,13 @@ SOURCES += main.cpp \
     db/resultdao.cpp \
     jvm.cpp \
     saveurldialog.cpp \
-    sqlloader.cpp
+    sqlloader.cpp \
+    codeeditor.cpp \
+    highlighter.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
     utils.h \
-    extensionmodel.h \
     fileutils.h \
     importdocdialog.h \
     mytableview.h \
@@ -311,110 +154,14 @@ HEADERS  += mainwindow.h \
     propofdocdialog.h \
     sortsubdirsdialog.h \
     preferencesdialog.h \
-    qscintilla2/src/XPM.h \
-    qscintilla2/src/ViewStyle.h \
-    qscintilla2/src/UniConversion.h \
-    qscintilla2/src/SVector.h \
-    qscintilla2/src/StyleContext.h \
-    qscintilla2/src/Style.h \
-    qscintilla2/src/SplitVector.h \
-    qscintilla2/src/ScintillaBase.h \
-    qscintilla2/src/RunStyles.h \
-    qscintilla2/src/RESearch.h \
-    qscintilla2/src/PositionCache.h \
-    qscintilla2/src/PerLine.h \
-    qscintilla2/src/Partitioning.h \
-    qscintilla2/src/LineMarker.h \
-    qscintilla2/src/KeyMap.h \
-    qscintilla2/src/Indicator.h \
-    qscintilla2/src/ExternalLexer.h \
-    qscintilla2/src/Editor.h \
-    qscintilla2/src/DocumentAccessor.h \
-    qscintilla2/src/Document.h \
-    qscintilla2/src/Decoration.h \
-    qscintilla2/src/ContractionState.h \
-    qscintilla2/src/CharClassify.h \
-    qscintilla2/src/CharacterSet.h \
-    qscintilla2/src/CellBuffer.h \
-    qscintilla2/src/CallTip.h \
-    qscintilla2/src/AutoComplete.h \
-    qscintilla2/include/WindowAccessor.h \
-    qscintilla2/include/SString.h \
-    qscintilla2/include/ScintillaWidget.h \
-    qscintilla2/include/Scintilla.h \
-    qscintilla2/include/SciLexer.h \
-    qscintilla2/include/PropSet.h \
-    qscintilla2/include/Platform.h \
-    qscintilla2/include/KeyWords.h \
-    qscintilla2/include/Accessor.h \
-    qscintilla2/Qt4/Qsci/qscistyledtext.h \
-    qscintilla2/Qt4/Qsci/qscistyle.h \
-    qscintilla2/Qt4/Qsci/qsciscintillabase.h \
-    qscintilla2/Qt4/Qsci/qsciscintilla.h \
-    qscintilla2/Qt4/Qsci/qsciprinter.h \
-    qscintilla2/Qt4/Qsci/qscimacro.h \
-    qscintilla2/Qt4/Qsci/qscilexeryaml.h \
-    qscintilla2/Qt4/Qsci/qscilexerxml.h \
-    qscintilla2/Qt4/Qsci/qscilexervhdl.h \
-    qscintilla2/Qt4/Qsci/qscilexerverilog.h \
-    qscintilla2/Qt4/Qsci/qscilexertex.h \
-    qscintilla2/Qt4/Qsci/qscilexertcl.h \
-    qscintilla2/Qt4/Qsci/qscilexersql.h \
-    qscintilla2/Qt4/Qsci/qscilexerspice.h \
-    qscintilla2/Qt4/Qsci/qscilexerruby.h \
-    qscintilla2/Qt4/Qsci/qscilexerpython.h \
-    qscintilla2/Qt4/Qsci/qscilexerproperties.h \
-    qscintilla2/Qt4/Qsci/qscilexerpov.h \
-    qscintilla2/Qt4/Qsci/qscilexerpostscript.h \
-    qscintilla2/Qt4/Qsci/qscilexerperl.h \
-    qscintilla2/Qt4/Qsci/qscilexerpascal.h \
-    qscintilla2/Qt4/Qsci/qscilexermakefile.h \
-    qscintilla2/Qt4/Qsci/qscilexerlua.h \
-    qscintilla2/Qt4/Qsci/qscilexerjavascript.h \
-    qscintilla2/Qt4/Qsci/qscilexerjava.h \
-    qscintilla2/Qt4/Qsci/qscilexeridl.h \
-    qscintilla2/Qt4/Qsci/qscilexerhtml.h \
-    qscintilla2/Qt4/Qsci/qscilexerfortran.h \
-    qscintilla2/Qt4/Qsci/qscilexerfortran77.h \
-    qscintilla2/Qt4/Qsci/qscilexerdiff.h \
-    qscintilla2/Qt4/Qsci/qscilexerd.h \
-    qscintilla2/Qt4/Qsci/qscilexercustom.h \
-    qscintilla2/Qt4/Qsci/qscilexercss.h \
-    qscintilla2/Qt4/Qsci/qscilexercsharp.h \
-    qscintilla2/Qt4/Qsci/qscilexercpp.h \
-    qscintilla2/Qt4/Qsci/qscilexercmake.h \
-    qscintilla2/Qt4/Qsci/qscilexerbatch.h \
-    qscintilla2/Qt4/Qsci/qscilexerbash.h \
-    qscintilla2/Qt4/Qsci/qscilexer.h \
-    qscintilla2/Qt4/Qsci/qsciglobal.h \
-    qscintilla2/Qt4/Qsci/qscidocument.h \
-    qscintilla2/Qt4/Qsci/qscicommandset.h \
-    qscintilla2/Qt4/Qsci/qscicommand.h \
-    qscintilla2/Qt4/Qsci/qsciapis.h \
-    qscintilla2/Qt4/Qsci/qsciabstractapis.h \
-    qscintilla2/Qt4/ScintillaQt.h \
-    qscintilla2/Qt4/SciClasses.h \
-    qscintilla2/Qt4/ListBoxQt.h \
     shortcuteditordialog.h \
     shortcutmodel.h \
     sqlkeywords.h \
     txteditor.h \
-    txteditorwidget.h \
     logview.h \
     logindialog.h \
-    qjson/stack.hh \
-    qjson/serializerrunnable.h \
     qjson/serializer.h \
-    qjson/qobjecthelper.h \
-    qjson/qjson_export.h \
-    qjson/qjson_debug.h \
-    qjson/position.hh \
-    qjson/parserrunnable.h \
-    qjson/parser_p.h \
     qjson/parser.h \
-    qjson/location.hh \
-    qjson/json_scanner.h \
-    qjson/json_parser.hh \
     accountdialog.h \
     changepwddialog.h \
     requtil.h \
@@ -426,7 +173,10 @@ HEADERS  += mainwindow.h \
     jvm.h \
     saveurldialog.h \
     indexfile.h \
-    sqlloader.h
+    sqlloader.h \
+    codeeditor.h \
+    highlighter.h \
+    qjson/qjson_export.h
 
 RESOURCES += \
     managefile.qrc
