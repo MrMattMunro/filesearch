@@ -30,7 +30,7 @@
           <number>1</number>
          </property>
          <item>
-          <widget class="TxtEditorWidget" name="sqlTextEdit"/>
+          <widget class="CodeEditor" name="sqlTextEdit"/>
          </item>
          <item>
           <widget class="QFrame" name="searchFrame">
@@ -130,9 +130,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>TxtEditorWidget</class>
-   <extends>QTextEdit</extends>
-   <header location="global">txteditorwidget.h</header>
+   <class>CodeEditor</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">codeeditor.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

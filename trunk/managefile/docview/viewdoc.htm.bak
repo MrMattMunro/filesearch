@@ -21,6 +21,7 @@ function openDoc() {
 	   alert("文件不存在, 已被删除或者移动");
 	   return
 	}
+    path ="C:\hadoop集群配置.msg"
 	// TODO当进行可读的时候,修改后会删除原来的文件
     document.all.FramerControl1.Open(path, false);
 }

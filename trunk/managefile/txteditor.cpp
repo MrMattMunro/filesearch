@@ -9,6 +9,7 @@ for which a new license (GPL+exception) is in place.
 #include <QTextStream>
 #include <QFileDialog>
 #include <QLabel>
+#include <QDebug>
 #include <QProgressDialog>
 #include <QProgressDialog>
 #include <QSqlQuery>
@@ -16,8 +17,6 @@ for which a new license (GPL+exception) is in place.
 #include <QShortcut>
 #include <QSettings>
 #include <QDateTime>
-
-#include <qscintilla2/Qt4/Qsci/qscilexer.h>
 
 #include "preferences.h"
 #include "txteditor.h"
@@ -33,7 +32,6 @@ TxtEditor::TxtEditor(QWidget * parent)
 	ui.setupUi(this);
 
 	m_fileName = QString();
-	ui.sqlTextEdit->prefsChanged();
 
         actionSearch = new QAction(Utils::getIcon("help_viewer.png"),tr("&Help"), this);
         actionSearch->setShortcut(tr("Ctrl+F"));
@@ -78,25 +76,22 @@ void TxtEditor::open(const QString &  newFile)
 		return;
 	}
 
-	int prgTmp = 0;
 	ui.sqlTextEdit->clear();
 
 	QTextStream in(&f);
 	QString line;
-	QStringList strList;
 	while (!in.atEnd())
 	{
-		line = in.readLine();
-		strList.append(line);
-		prgTmp += line.length();
+                QString temp = in.readLine();
+                line.append(temp);
+                line.append("\n");
 	}
 
+        ui.sqlTextEdit->setPlainText(line);
 	f.close();
 
 	m_fileName = newFile;
 	setFileWatcher(newFile);
-
-	ui.sqlTextEdit->append(strList.join("\n"));
 }
 
 
@@ -136,9 +131,9 @@ void TxtEditor::saveFile()
 		m_fileWatcher = 0;
 
 		QTextStream out(&f);
-		out << ui.sqlTextEdit->text();
+                // out << sqlTextEdit->text();
 		f.close();
-   	   	ui.sqlTextEdit->setModified(false);
+//   	   	sqlTextEdit->setModified(false);
 
 		setFileWatcher(m_fileName);
    	}
@@ -146,22 +141,22 @@ void TxtEditor::saveFile()
 
 bool TxtEditor::changedConfirm()
 {
-	if (ui.sqlTextEdit->isModified())
-	{
-		int ret = QMessageBox::question(this, tr("New File"),
-					tr("All you changes will be lost. Are you sure?"),
-					QMessageBox::Yes, QMessageBox::No);
+        if (ui.sqlTextEdit->document()->isModified())
+        {
+                int ret = QMessageBox::question(this, tr("New File"),
+                                        tr("All you changes will be lost. Are you sure?"),
+                                        QMessageBox::Yes, QMessageBox::No);
 	
-		if (ret == QMessageBox::No)
-			return false;
-	}
+                if (ret == QMessageBox::No)
+                        return false;
+        }
 	return true;
 }
 
 void TxtEditor::saveOnExit()
 {
-	if (!ui.sqlTextEdit->isModified())
-		return;
+        if (!ui.sqlTextEdit->document()->isModified())
+                return;
 	int ret = QMessageBox::question(this, tr("Closing SQL Editor"),
 				tr("Document has been changed. Do you want do save its content?"),
 				QMessageBox::Yes, QMessageBox::No);
@@ -198,24 +193,60 @@ void TxtEditor::actionSearch_triggered()
 
 void TxtEditor::find(QString ttf, bool forward/*, bool backward*/)
 {
-        bool found = ui.sqlTextEdit->findFirst(ttf,false,ui.caseCheckBox->isChecked(),
-									ui.wholeWordsCheckBox->isChecked(),
-									true,
-									forward);
-         ui.sqlTextEdit->highlightAllOccurrences(ttf, ui.caseCheckBox->isChecked(), ui.wholeWordsCheckBox->isChecked());
-	QPalette p = ui.searchEdit->palette();
-	p.setColor(QPalette::Active, QPalette::Base, found ? Qt::white : QColor(255, 102, 102));
-	ui.searchEdit->setPalette(p);
+         QTextDocument* document = ui.sqlTextEdit->document();
+         document->undo();
+
+         //bool found = ui.sqlTextEdit->find(ttf, QTextDocument::FindBackward);
+         // ui.sqlTextEdit->highlightAllOccurrences(ttf, ui.caseCheckBox->isChecked(), ui.wholeWordsCheckBox->isChecked());
+//         QPalette p = ui.searchEdit->palette();
+//         p.setColor(QPalette::Active, QPalette::Base, found ? Qt::white : QColor(255, 102, 102));
+//         ui.searchEdit->setPalette(p);
+
+        // bool found = ui.sqlTextEdit->find(ttf, QTextDocument::FindBackward);
+
+        // ui.sqlTextEdit->highlightAllOccurrences(ttf, ui.caseCheckBox->isChecked(), ui.wholeWordsCheckBox->isChecked());
+//        QPalette p = ui.searchEdit->palette();
+//        p.setColor(QPalette::Active, QPalette::Base, found ? Qt::white : QColor(255, 102, 102));
+//        ui.searchEdit->setPalette(p);
+
+         bool found = false;
+         QTextCursor highlightCursor(document);
+
+         QTextCursor cursor(document);
+         cursor.beginEditBlock();
+         QTextCharFormat plainFormat(highlightCursor.charFormat());
+         QTextCharFormat colorFormat=plainFormat;
+         colorFormat.setBackground(Qt::yellow);
+
+         while(!highlightCursor.isNull() && !highlightCursor.atEnd()){
+
+             highlightCursor = document->find(ttf, highlightCursor, QTextDocument::FindWholeWords);
+             qDebug() << highlightCursor.isNull();
+             if(!highlightCursor.isNull()){
+                 found=true;
+                 highlightCursor.movePosition(QTextCursor::WordRight,QTextCursor::KeepAnchor);
+                 highlightCursor.mergeCharFormat(colorFormat);
+             }
+         }
+         cursor.endEditBlock();
+}
+
+void TxtEditor::setCursorPos(int row,int col)
+{
+    QTextBlock block = ui.sqlTextEdit->document()->findBlockByLineNumber(row -1);
+    if(block.isValid()){
+      // QTextCursor cursor = QTextEdit::text;
+    }
 }
 
 void TxtEditor::searchEdit_textChanged(const QString &)
 {
-	findNext();
+       findNext();
 }
 
 void TxtEditor::findNext()
 {
-	find(ui.searchEdit->text(), true);
+      find(ui.searchEdit->text(), true);
 }
 
 void TxtEditor::findPrevious()

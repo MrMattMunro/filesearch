@@ -49,9 +49,8 @@
 #include "utils.h"
 #include "fileutils.h"
 #include "preferences.h"
-#include "txteditorwidget.h"
 #include "txteditor.h"
-
+#include "codeeditor.h"
 
 #include <QtGui/QClipboard>
 #include <QtGui/QCompleter>
@@ -556,16 +555,16 @@ TxtEditor *TabWidget::newTxtTab(bool makeCurrent, QString filepath)
     TxtEditor* widget = new TxtEditor(this);
     // widget->prefsChanged();
 
-    QStringList  strs = FileUtils::readFile(filepath);
-    QString str;
-    QString content;
-    foreach(str, strs){
-        content.append(str);
-        content.append("\n");
-    }
+//    QStringList  strs = FileUtils::readFile(filepath);
+//    QString str;
+//    QString content;
+//    foreach(str, strs){
+//        content.append(str);
+//        content.append("\n");
+//    }
 //    widget->setText(content);
-
-   widget->open(filepath);
+    widget->open(filepath);
+   // widget->setPlainText(content);
    // widget->append(content);
     QFileInfo fileinfo(filepath);
 

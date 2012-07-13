@@ -32,8 +32,6 @@
 #include "sortsubdirsdialog.h"
 #include "indexfile.h"
 
-static QModelIndex preindex;
-
 MyTreeView::MyTreeView(QString title, QWidget *parent) : treeTitle("tree"), QTreeView(parent), numSubTree(2),
     mouseStatus(true), curTitle("title")
 {
@@ -55,7 +53,7 @@ MyTreeView::MyTreeView(QString title, QWidget *parent) : treeTitle("tree"), QTre
         QStandardItem  *allTagItem = new QStandardItem(tr("AllTags"));
         allTagItem->setData("", UUID);
         allTagItem->setData("alltags", NODE_TYPE);
-        allTagItem->setData("tags.ico",  Qt::DecorationRole);
+        allTagItem->setData("tags.png",  Qt::DecorationRole);
 
         QStandardItem  *wasteasketItem = new QStandardItem(tr("WasteBasket"));
         wasteasketItem->setData("", UUID);
@@ -206,7 +204,6 @@ void MyTreeView::mousePressEvent(QMouseEvent *event)
         if( true == mouseStatus && Qt::LeftButton == event->button()){
             curPoint = event->pos();
             curIndex = indexAt(curPoint);
-
             curItem = model->itemFromIndex(curIndex);
             if(curItem){
                 curTitle = curIndex.data().toString();
@@ -241,6 +238,7 @@ void MyTreeView::mouseDoubleClickEvent(QMouseEvent *event)
                 curPoint = event->pos();
                 curIndex = indexAt(curPoint);
                 if(curIndex.isValid()){
+
                        curItem = model->itemFromIndex(curIndex);
                        curTitle = curIndex.data().toString();
                        curUuId =  qvariant_cast<QString>(curItem->data(UUID));
@@ -343,12 +341,12 @@ MyTreeView::~MyTreeView()
 
 void MyTreeView::setTreeTitle(QString title)
 {
-	model->setHeaderData(0, Qt::Horizontal, title);
+        model->setHeaderData(0, Qt::Horizontal, title);
 }
 
 void MyTreeView::setSubTreeTitle(int subTree, QString title)
 {
-	model->item(subTree)->setText(title);
+        model->item(subTree)->setText(title);
 }
 
 void MyTreeView::addItem(int subTree, QString itemName, QString path, QString icon)
@@ -390,7 +388,7 @@ bool MyTreeView::delSubItems(QStandardItem *parenItem)
 
 void MyTreeView::addItems(int subTree, QList<QString> nameList)
 {
-	QStandardItem  *parenItem = model->item(subTree);
+        QStandardItem  *parenItem = model->item(subTree);
 	QList<QStandardItem*> childItems;
 	QStandardItem  *tmpItem = NULL;
 	int   i = 0;
@@ -410,7 +408,7 @@ void MyTreeView::addItems(int subTree, QList<QString> nameList)
 
 void MyTreeView::delelteItem(int subTree, QString itemName)
 {
-	QStandardItem  *parenItem = model->item(subTree);
+        QStandardItem  *parenItem = model->item(subTree);
 	int  i = 0;
 	
 	//找出名字为itemName的子项，并将其删除
@@ -426,7 +424,7 @@ void MyTreeView::delelteItem(int subTree, QString itemName)
 
 void MyTreeView::clearTree(int subTree)
 {
-	QStandardItem  *parenItem = model->item(subTree);
+        QStandardItem  *parenItem = model->item(subTree);
 	int   i = 0;
 	for(i = parenItem->rowCount() - 1; i >= 0; i--)
 	{

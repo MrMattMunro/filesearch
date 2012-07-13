@@ -40,22 +40,6 @@ class TxtEditor : public QMainWindow
                 void open(const QString & newFile);
 
    	signals:
-		/*! \brief This signal is emitted when user clicks on the one
-		of "run" actions. It's handled in main window later.
-		\param command current SQL statement in the editor.
-		*/
-		void showSqlResult(QString command);
-		//! \brief It's emitted when the script is started
-		void sqlScriptStart();
-		/*! \brief Emitted on demand in the script.
-		Line is appended to the script output. */
-		void showSqlScriptResult(QString line);
-
-		/*! \brief Request for complete object tree refresh.
-		It's used in "Run as Script" */
-		void buildTree();
-		/*! \brief Rebuild part of the tree */
-		void rebuildViewTree(QString schema, QString name);
 
 	private:
                 Ui::TxtEditor ui;
@@ -70,6 +54,7 @@ class TxtEditor : public QMainWindow
                 void saveFile();
 
 		void find(QString ttf, bool forward/*, bool backward*/);
+                void setCursorPos(int row, int column);
 
 		//! Reset the QFileSystemWatcher for new name.
 		void setFileWatcher(const QString & newFileName);
@@ -88,7 +73,8 @@ class TxtEditor : public QMainWindow
 		void findNext();
 
 		//! \brief Watch file for changes from external apps
-		void externalFileChange(const QString & path);
+                void externalFileChange(const QString & path);
+
 
 };
 

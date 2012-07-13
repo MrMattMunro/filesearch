@@ -12,6 +12,7 @@
 #include <QDebug>
 #include <QThread>
 #include <QMap>
+#include <QLabel>
 
 #include "mytreedelegate.h"
 #include "mytreeitemmodel.h"
@@ -19,6 +20,7 @@
 #include "jvm.h"
 #include "utils.h"
 #include "preferences.h"
+
 
 class MyTreeView : public QTreeView
 {
@@ -101,10 +103,10 @@ private:
         QString               curType;  //当前节点类型
         QModelIndex           curIndex;
         QStandardItem*        curItem;
-        QStandardItemModel    *model;
+       // QStandardItemModel    *model;
         QPoint                curPoint;
         MyTreeDelegate * delegate;
-        MyTreeItemModel * themodel;
+        MyTreeItemModel * model;
 
         // 是否显示文件夹下文件
         bool isShowDocUnderSub;
@@ -148,6 +150,7 @@ private:
         QAction *clearBasket;
 
         QMenu *contextMenu;
+
 
         void treeContextMenuOpened();
         void initActions();

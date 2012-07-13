@@ -1096,9 +1096,8 @@ void MainWindow::openDocInTab()
         browser->openTxtInTab(filepath);
     } if(p->htmls().contains(suffix.toLower())){
         browser->loadPage(filepath);
-    }else{
+    }if(p->officedoc().contains(suffix.toLower())){
         browser->openDocInTab(filepath);
-
     }
 }
 

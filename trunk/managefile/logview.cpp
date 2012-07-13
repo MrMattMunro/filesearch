@@ -17,8 +17,6 @@ for which a new license (GPL+exception) is in place.
 #include <QSettings>
 #include <QDateTime>
 
-#include <qscintilla2/Qt4/Qsci/qscilexer.h>
-
 #include "preferences.h"
 #include "logview.h"
 #include "sqlkeywords.h"
@@ -33,7 +31,6 @@ LogView::LogView(QWidget * parent)
 	ui.setupUi(this);
 
 	m_fileName = QString();
-	ui.sqlTextEdit->prefsChanged();
 
         actionSearch = new QAction(Utils::getIcon("help_viewer.png"),tr("&Help"), this);
         actionSearch->setShortcut(tr("Ctrl+F"));
@@ -88,11 +85,12 @@ void LogView::open(const QString &  newFile)
 
 	QTextStream in(&f);
 	QString line;
-	QStringList strList;
+        QString str;
 	while (!in.atEnd())
 	{
 		line = in.readLine();
-		strList.append(line);
+                str.append(line);
+                str.append("\n");
 		prgTmp += line.length();
 	}
 
@@ -101,7 +99,7 @@ void LogView::open(const QString &  newFile)
 	m_fileName = newFile;
 	setFileWatcher(newFile);
 
-	ui.sqlTextEdit->append(strList.join("\n"));
+        ui.sqlTextEdit->appendPlainText(str);
 }
 
 
@@ -141,9 +139,9 @@ void LogView::saveFile()
 		m_fileWatcher = 0;
 
 		QTextStream out(&f);
-		out << ui.sqlTextEdit->text();
+                //out << ui.sqlTextEdit->text();
 		f.close();
-   	   	ui.sqlTextEdit->setModified(false);
+//   	   	ui.sqlTextEdit->setModified(false);
 
 		setFileWatcher(m_fileName);
    	}
@@ -151,22 +149,22 @@ void LogView::saveFile()
 
 bool LogView::changedConfirm()
 {
-	if (ui.sqlTextEdit->isModified())
-	{
-		int ret = QMessageBox::question(this, tr("New File"),
-					tr("All you changes will be lost. Are you sure?"),
-					QMessageBox::Yes, QMessageBox::No);
+//	if (ui.sqlTextEdit->isModified())
+//	{
+//		int ret = QMessageBox::question(this, tr("New File"),
+//					tr("All you changes will be lost. Are you sure?"),
+//					QMessageBox::Yes, QMessageBox::No);
 	
-		if (ret == QMessageBox::No)
-			return false;
-	}
+//		if (ret == QMessageBox::No)
+//			return false;
+//	}
 	return true;
 }
 
 void LogView::saveOnExit()
 {
-	if (!ui.sqlTextEdit->isModified())
-		return;
+//	if (!ui.sqlTextEdit->isModified())
+//		return;
 	int ret = QMessageBox::question(this, tr("Closing SQL Editor"),
 				tr("Document has been changed. Do you want do save its content?"),
 				QMessageBox::Yes, QMessageBox::No);
@@ -203,14 +201,12 @@ void LogView::actionSearch_triggered()
 
 void LogView::find(QString ttf, bool forward/*, bool backward*/)
 {
-        bool found = ui.sqlTextEdit->findFirst(ttf,false,ui.caseCheckBox->isChecked(),
-									ui.wholeWordsCheckBox->isChecked(),
-									true,
-									forward);
-         ui.sqlTextEdit->highlightAllOccurrences(ttf, ui.caseCheckBox->isChecked(), ui.wholeWordsCheckBox->isChecked());
-	QPalette p = ui.searchEdit->palette();
-	p.setColor(QPalette::Active, QPalette::Base, found ? Qt::white : QColor(255, 102, 102));
-	ui.searchEdit->setPalette(p);
+    bool found = ui.sqlTextEdit->find(ttf,QTextDocument::FindBackward);
+
+     //ui.sqlTextEdit->highlightAllOccurrences(ttf, ui.caseCheckBox->isChecked(), ui.wholeWordsCheckBox->isChecked());
+    QPalette p = ui.searchEdit->palette();
+    p.setColor(QPalette::Active, QPalette::Base, found ? Qt::white : QColor(255, 102, 102));
+    ui.searchEdit->setPalette(p);
 }
 
 void LogView::searchEdit_textChanged(const QString &)
