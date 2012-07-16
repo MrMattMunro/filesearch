@@ -87,7 +87,8 @@ SOURCES += main.cpp \
     saveurldialog.cpp \
     sqlloader.cpp \
     codeeditor.cpp \
-    highlighter.cpp
+    highlighter.cpp \
+    refereedialog.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -176,7 +177,8 @@ HEADERS  += mainwindow.h \
     sqlloader.h \
     codeeditor.h \
     highlighter.h \
-    qjson/qjson_export.h
+    qjson/qjson_export.h \
+    refereedialog.h
 
 RESOURCES += \
     managefile.qrc
@@ -222,7 +224,8 @@ FORMS    += mainwindow.ui \
     changepwddialog.ui \
     scoretovipdialog.ui \
     aboutdialog.ui \
-    saveurldialog.ui
+    saveurldialog.ui \
+    refereedialog.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 
@@ -301,6 +304,9 @@ OTHER_FILES += \
     qscintilla2/include/License.txt \
     qscintilla2/include/HFacer.py \
     qscintilla2/include/Face.py
+
+
+
 
 
 

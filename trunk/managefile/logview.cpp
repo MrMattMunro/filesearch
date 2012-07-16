@@ -28,158 +28,143 @@ LogView::LogView(QWidget * parent)
         : QDialog(parent),
    	  m_fileWatcher(0)
 {
-	ui.setupUi(this);
+    ui.setupUi(this);
 
-	m_fileName = QString();
+    m_fileName = QString();
 
-        actionSearch = new QAction(Utils::getIcon("help_viewer.png"),tr("&Help"), this);
-        actionSearch->setShortcut(tr("Ctrl+F"));
-        connect(actionSearch, SIGNAL(triggered()), this, SLOT(actionSearch_triggered()));
+    actionSearch = new QAction(Utils::getIcon("help_viewer.png"),tr("&Help"), this);
+    actionSearch->setShortcut(tr("Ctrl+F"));
+    connect(actionSearch, SIGNAL(triggered()), this, SLOT(actionSearch_triggered()));
 
-        ui.searchFrame->show();
+    ui.searchFrame->hide();
+    QShortcut * alternativeSQLRun = new QShortcut(this);
+    alternativeSQLRun->setKey(Qt::CTRL + Qt::Key_F);
+    connect(alternativeSQLRun, SIGNAL(activated()), this, SLOT(actionSearch_triggered()));
 
-        QShortcut * alternativeSQLRun = new QShortcut(this);
-        alternativeSQLRun->setKey(Qt::CTRL + Qt::Key_F);
-        connect(alternativeSQLRun, SIGNAL(activated()), this, SLOT(actionSearch_triggered()));
+    ui.previousToolButton->setIcon(Utils::getIcon("go-previous.png"));
+    ui.nextToolButton->setIcon(Utils::getIcon("go-next.png"));
 
-	ui.previousToolButton->setIcon(Utils::getIcon("go-previous.png"));
-	ui.nextToolButton->setIcon(Utils::getIcon("go-next.png"));
+    connect(ui.searchEdit, SIGNAL(textChanged(const QString &)), this, SLOT(searchEdit_textChanged(const QString &)));
+    connect(ui.previousToolButton, SIGNAL(clicked()), this, SLOT(findPrevious()));
+    connect(ui.nextToolButton, SIGNAL(clicked()), this, SLOT(findNext()));
+    connect(ui.searchEdit, SIGNAL(returnPressed()), this, SLOT(findNext()));
 
-        connect(parent, SIGNAL(prefsChanged()), ui.sqlTextEdit, SLOT(prefsChanged()));
-
-        connect(ui.searchEdit, SIGNAL(textChanged(const QString &)), this, SLOT(searchEdit_textChanged(const QString &)));
-	connect(ui.previousToolButton, SIGNAL(clicked()), this, SLOT(findPrevious()));
-	connect(ui.nextToolButton, SIGNAL(clicked()), this, SLOT(findNext()));
-	connect(ui.searchEdit, SIGNAL(returnPressed()), this, SLOT(findNext()));
-
-        QString logfile = Utils::getSaveLogPath().append(QDir::separator()).append("mflog.log");
-        open(logfile);
-
-        QCursor lastrow;
-        lastrow.setPos(QPoint(0, 1000));
-        ui.sqlTextEdit->setCursor(lastrow);
-
-        ui.sqlTextEdit->setWindowTitle(tr("Log Viewer"));
 }
 
 LogView::~LogView()
 {
+    QSettings settings("yarpen.cz", "sqliteman");
+    //settings.setValue("LogView/state", saveState());
 }
 
 void LogView::showEvent(QShowEvent * event)
 {
-	ui.sqlTextEdit->setFocus();
+    ui.sqlTextEdit->setFocus();
 }
 
 void LogView::open(const QString &  newFile)
 {
-	QFile f(newFile);
-	if (!f.open(QIODevice::ReadOnly | QIODevice::Text))
-	{
-		QMessageBox::warning(this, tr("Open SQL Script"), tr("Cannot open file %1").arg(newFile));
-		return;
-	}
+    QFile f(newFile);
+    if (!f.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+            QMessageBox::warning(this, tr("Open File"), tr("Cannot open file %1").arg(newFile));
+            return;
+    }
 
-	int prgTmp = 0;
-	ui.sqlTextEdit->clear();
+    QTextStream in(&f);
+    QString line;
+    while (!in.atEnd())
+    {
+            QString temp = in.readLine();
+            line.append(temp);
+            line.append("\n");
+    }
 
-	QTextStream in(&f);
-	QString line;
-        QString str;
-	while (!in.atEnd())
-	{
-		line = in.readLine();
-                str.append(line);
-                str.append("\n");
-		prgTmp += line.length();
-	}
+    ui.sqlTextEdit->setPlainText(line);
+    f.close();
 
-	f.close();
-
-	m_fileName = newFile;
-	setFileWatcher(newFile);
-
-        ui.sqlTextEdit->appendPlainText(str);
+    m_fileName = newFile;
+    setFileWatcher(newFile);
 }
 
 
 void LogView::action_Save_triggered()
 {
-	if (m_fileName.isNull())
-	{
-		actionSave_As_triggered();
-		return;
-	}
-	saveFile();
+    if (m_fileName.isNull())
+    {
+            actionSave_As_triggered();
+            return;
+    }
+    saveFile();
 }
 
 void LogView::actionSave_As_triggered()
 {
-	QString newFile = QFileDialog::getSaveFileName(this, tr("Save SQL Script"),
-			QDir::currentPath(), tr("SQL file (*.sql);;All Files (*)"));
-	if (newFile.isNull())
-		return;
-	m_fileName = newFile;
-	setFileWatcher(newFile);
-	saveFile();
+    QString newFile = QFileDialog::getSaveFileName(this, tr("Save"),
+                    QDir::currentPath(), tr("All Files (*)"));
+    if (newFile.isNull())
+            return;
+    m_fileName = newFile;
+    setFileWatcher(newFile);
+    saveFile();
 }
 
 void LogView::saveFile()
 {
-	QFile f(m_fileName);
-	if (!f.open(QIODevice::WriteOnly | QIODevice::Text))
-	{
-                QMessageBox::warning(this, tr("Save File"),
-							 tr("Cannot write into file %1").arg(m_fileName));
-	}
-	else
-	{
-   	   	// required for Win 
-	   	delete(m_fileWatcher);
-		m_fileWatcher = 0;
+    QFile f(m_fileName);
+    if (!f.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+            QMessageBox::warning(this, tr("Save File"),
+                                                     tr("Cannot write into file %1").arg(m_fileName));
+    }
+    else
+    {
+            // required for Win
+            delete(m_fileWatcher);
+            m_fileWatcher = 0;
 
-		QTextStream out(&f);
-                //out << ui.sqlTextEdit->text();
-		f.close();
-//   	   	ui.sqlTextEdit->setModified(false);
+            QTextStream out(&f);
+            // out << sqlTextEdit->text();
+            f.close();
+//   	   	sqlTextEdit->setModified(false);
 
-		setFileWatcher(m_fileName);
-   	}
+            setFileWatcher(m_fileName);
+    }
 }
 
 bool LogView::changedConfirm()
 {
-//	if (ui.sqlTextEdit->isModified())
-//	{
-//		int ret = QMessageBox::question(this, tr("New File"),
-//					tr("All you changes will be lost. Are you sure?"),
-//					QMessageBox::Yes, QMessageBox::No);
-	
-//		if (ret == QMessageBox::No)
-//			return false;
-//	}
-	return true;
+    if (ui.sqlTextEdit->document()->isModified())
+    {
+            int ret = QMessageBox::question(this, tr("New File"),
+                                    tr("All you changes will be lost. Are you sure?"),
+                                    QMessageBox::Yes, QMessageBox::No);
+
+            if (ret == QMessageBox::No)
+                    return false;
+    }
+    return true;
 }
 
 void LogView::saveOnExit()
 {
-//	if (!ui.sqlTextEdit->isModified())
-//		return;
-	int ret = QMessageBox::question(this, tr("Closing SQL Editor"),
-				tr("Document has been changed. Do you want do save its content?"),
-				QMessageBox::Yes, QMessageBox::No);
-	
-	if (ret == QMessageBox::No)
-			return;
-	if (m_fileName.isNull())
-		actionSave_As_triggered();
-	else
-		saveFile();
+    if (!ui.sqlTextEdit->document()->isModified())
+            return;
+    int ret = QMessageBox::question(this, tr("Closing SQL Editor"),
+                            tr("Document has been changed. Do you want do save its content?"),
+                            QMessageBox::Yes, QMessageBox::No);
+
+    if (ret == QMessageBox::No)
+                    return;
+    if (m_fileName.isNull())
+            actionSave_As_triggered();
+    else
+            saveFile();
 }
 
 void LogView::setFileName(const QString & fname)
 {
-	open(fname);
+    open(fname);
 }
 
 void LogView::actionSearch_triggered()
@@ -201,51 +186,67 @@ void LogView::actionSearch_triggered()
 
 void LogView::find(QString ttf, bool forward/*, bool backward*/)
 {
-    bool found = ui.sqlTextEdit->find(ttf,QTextDocument::FindBackward);
+     QTextDocument* document = ui.sqlTextEdit->document();
+     document->undo();
 
-     //ui.sqlTextEdit->highlightAllOccurrences(ttf, ui.caseCheckBox->isChecked(), ui.wholeWordsCheckBox->isChecked());
-    QPalette p = ui.searchEdit->palette();
-    p.setColor(QPalette::Active, QPalette::Base, found ? Qt::white : QColor(255, 102, 102));
-    ui.searchEdit->setPalette(p);
+     bool found = false;
+     QTextCursor highlightCursor(document);
+
+     QTextCursor cursor(document);
+     cursor.beginEditBlock();
+     QTextCharFormat plainFormat(highlightCursor.charFormat());
+     QTextCharFormat colorFormat=plainFormat;
+     colorFormat.setBackground(Qt::yellow);
+
+     while(!highlightCursor.isNull() && !highlightCursor.atEnd()){
+
+         highlightCursor = document->find(ttf, highlightCursor, QTextDocument::FindWholeWords);
+         if(!highlightCursor.isNull()){
+             found=true;
+             highlightCursor.movePosition(QTextCursor::WordRight,QTextCursor::KeepAnchor);
+             highlightCursor.mergeCharFormat(colorFormat);
+         }
+     }
+     cursor.endEditBlock();
 }
 
 void LogView::searchEdit_textChanged(const QString &)
 {
-	findNext();
+   findNext();
 }
 
 void LogView::findNext()
 {
-	find(ui.searchEdit->text(), true);
+  find(ui.searchEdit->text(), true);
 }
 
 void LogView::findPrevious()
 {
-	find(ui.searchEdit->text(), false);
+    find(ui.searchEdit->text(), false);
 }
 
 void LogView::externalFileChange(const QString & path)
 {
-   	int b = QMessageBox::information(this, tr("Unexpected File Change"),
-									 tr("Your currently edited file has been changed outside " \
-									 "this application. Do you want to reload it?"),
-									 QMessageBox::Yes | QMessageBox::No,
-									 QMessageBox::Yes);
-	if (b != QMessageBox::Yes)
-		return;
-	open(path);
+    int b = QMessageBox::information(this, tr("Unexpected File Change"),
+                                                                     tr("Your currently edited file has been changed outside " \
+                                                                     "this application. Do you want to reload it?"),
+                                                                     QMessageBox::Yes | QMessageBox::No,
+                                                                     QMessageBox::Yes);
+    if (b != QMessageBox::Yes)
+            return;
+    open(path);
 }
 
 void LogView::setFileWatcher(const QString & newFileName)
 {
-	if (m_fileWatcher)
-		m_fileWatcher->removePaths(m_fileWatcher->files());
-	else
-	{
-		m_fileWatcher = new QFileSystemWatcher(this);
-	   	connect(m_fileWatcher, SIGNAL(fileChanged(const QString &)),
-			this, SLOT(externalFileChange(const QString &)));
-	}
+    if (m_fileWatcher)
+            m_fileWatcher->removePaths(m_fileWatcher->files());
+    else
+    {
+            m_fileWatcher = new QFileSystemWatcher(this);
+            connect(m_fileWatcher, SIGNAL(fileChanged(const QString &)),
+                    this, SLOT(externalFileChange(const QString &)));
+    }
 
-	m_fileWatcher->addPath(newFileName);
+    m_fileWatcher->addPath(newFileName);
 }
