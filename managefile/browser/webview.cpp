@@ -309,7 +309,7 @@ void WebView::saveToSlfile()
 // ×ó¼üË«»÷
 void WebView::mouseDoubleClickEvent(QMouseEvent *event)
 {
-  BrowserApplication::mainWindow()->fullScreen();
+   BrowserApplication::mainWindow()->fullScreen();
 }
 
 void WebView::exitFullScreen()
@@ -386,6 +386,7 @@ void WebView::mouseReleaseEvent(QMouseEvent *event)
         }
     }
 }
+
 
 void WebView::setStatusBarText(const QString &string)
 {

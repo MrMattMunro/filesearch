@@ -216,7 +216,7 @@ bool ArgsParser::parseArgs()
 //         QString logfile = Utils::getSaveLogPath().append(QDir::separator()).append("mflog.log");
 //         QFileInfo file(logfile);
 //         if(file.exists()){
-//             if(file.size() > 10485760){
+//             if(file.size() > 1048576){
 //                 FileUtils::deleteDirectory(file);
 //             }
 //         }

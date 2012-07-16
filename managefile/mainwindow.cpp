@@ -665,6 +665,11 @@ void MainWindow::homepage()
 void MainWindow::viewLog()
 {
     LogView dlg(this);
+
+    QString logpath = Utils::getSaveLogPath();
+    logpath.append(QDir::separator()).append("mflog.log");
+    dlg.open(logpath);
+
     dlg.exec();
 }
 
@@ -1086,9 +1091,6 @@ void MainWindow::openDocInTab()
 {
     QString filepath = m_doctable->getCurFilePath();
 
-    //m_tabWidget->currentLineEdit()->setText(filepath);
-
-//    SqlEditorWidget
     // 改变NoteEditor的属性
     Preferences* p = Preferences::instance();
     QString suffix = FileUtils::suffix(filepath);

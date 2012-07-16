@@ -186,6 +186,13 @@ void TabBar::mouseMoveEvent(QMouseEvent *event)
     QTabBar::mouseMoveEvent(event);
 }
 
+// ×ó¼üË«»÷
+void TabBar::mouseDoubleClickEvent(QMouseEvent *event)
+{
+   BrowserApplication::mainWindow()->fullScreen();
+}
+
+
 // When index is -1 index chooses the current tab
 void TabWidget::reloadTab(int index)
 {

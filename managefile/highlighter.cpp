@@ -51,6 +51,7 @@
      keywordFormat.setForeground(Qt::darkBlue);
      keywordFormat.setFontWeight(QFont::Bold);
      QStringList keywordPatterns;
+     // c++  œ∏ªØ√ø÷÷”Ô—‘
      keywordPatterns << "\\bchar\\b" << "\\bclass\\b" << "\\bconst\\b"
                      << "\\bdouble\\b" << "\\benum\\b" << "\\bexplicit\\b"
                      << "\\bfriend\\b" << "\\binline\\b" << "\\bint\\b"
@@ -65,8 +66,33 @@
      keywordPatterns << "\\bList\\b" << "\\breturn\\b" << "\\btry\\b"
                      << "\\bcatch\\b" << "\\bfor\\b" << "\\bIterator\\b"
                      << "\\bnew\\b" << "\\bpackage\\b" << "\\bimport\\b"
-                     << "\\bStringBuffer\\b" << "\\bMap\\b" << "\\bString\\b";
-                     << "\\bfinal\\b" << "\\bMap\\b" << "\\bString\\b";
+                     << "\\bStringBuffer\\b" << "\\bMap\\b" << "\\bString\\b"
+                     << "\\bfinal\\b" << "\\bMap\\b" << "\\babstract\\b"
+                     << "\\bboolean\\b" << "\\bbreak\\b" << "\\bbyte\\b"
+                     << "\\bcase\\b" << "\\bswitch\\b" << "\\bbcontinue\\b"
+                     << "\\bdefault\\b" << "\\bdo\\b"
+                     << "\\belse\\b" << "\\bextends\\b" << "\\bfalse\\b"
+                     << "\\bfloat\\b" << "\\bif\\b" << "\\binstanceof\\b"
+                     << "\\binterface\\b" << "\\bnative\\b" << "\\bnull\\b"
+                     << "\\bsuper\\b" << "\\bsynchronized\\b" << "\\bthis\\b"
+                     << "\\bthrow\\b" << "\\bthrows\\b" << "\\btransient\\b"
+                     << "\\bwhile\\b" << "\\bthrows\\b" << "\\btransient\\b";
+
+     // php
+     keywordPatterns << "\\bbool\\b" << "\\bclassic\\b" << "\\bobject\\b"
+                     << "\\barray\\b" << "\\belseif\\b" << "\\bbreakf\\b"
+                     << "\\bglobal\\b" << "\\band\\b" << "\\b$argc\\b"
+                     << "\\b$argv\\b" << "\\bas\\b" << "\\bcfunction\\b"
+                     << "\\bdeclare\\b" << "\\bdie\\b" << "\\bE_ALL\\b"
+                     << "\\becho\\b" << "\\bE-ERROE\\b" << "\\bempty\\b"
+                     << "\\benddeclare\\b" << "\\bendfor\\b" << "\\bendforeach\\b"
+                     << "\\bendif\\b" << "\\bendswithc\\b" << "\\bE_PAESE\\b"
+                     << "\\beval\\b" << "\\bE-WARNING\\b" << "\\bexit\\b"
+                     << "\\bextends\\b" << "\\bFALSE\\b" << "\\bforeach\\b"
+                     << "\\bfunction\\b" << "\\b$HTTP_COOKIE_VARS\\b" << "\\bHTTP_ENV_VARS\\b"
+                     << "\\bHTTP_GET_VARS\\b" << "\\bHTTP_POST_VARS\\b" << "\\bHTTP_POST_FILES\\b"
+                     << "\\bHTTP_SERVER_VARS\\b" << "\\binclue_once\\b" << "\\bold_function\\b"
+                     << "\\bor\\b" << "\\bparents\\b" << "\\btransient\\b";
 
      foreach (const QString &pattern, keywordPatterns) {
          rule.pattern = QRegExp(pattern);
