@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Branch Property Editor</string>
+   <string>Properties of Document</string>
   </property>
   <layout class="QVBoxLayout">
    <item>

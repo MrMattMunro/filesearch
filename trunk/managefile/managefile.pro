@@ -178,7 +178,8 @@ HEADERS  += mainwindow.h \
     codeeditor.h \
     highlighter.h \
     qjson/qjson_export.h \
-    refereedialog.h
+    refereedialog.h \
+    sendmail.h
 
 RESOURCES += \
     managefile.qrc
@@ -304,6 +305,7 @@ OTHER_FILES += \
     qscintilla2/include/License.txt \
     qscintilla2/include/HFacer.py \
     qscintilla2/include/Face.py
+
 
 
 
