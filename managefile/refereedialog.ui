@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Branch Property Editor</string>
+   <string>Recommend</string>
   </property>
   <layout class="QVBoxLayout">
    <item>
@@ -27,7 +27,7 @@
      </property>
      <widget class="QWidget" name="basic">
       <attribute name="title">
-       <string>Basic</string>
+       <string>Email</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
@@ -35,16 +35,11 @@
          <property name="title">
           <string>Receive Email Address  (Please Split with &quot;,&quot;)</string>
          </property>
-         <widget class="QTextEdit" name="textEdit">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>22</y>
-            <width>371</width>
-            <height>81</height>
-           </rect>
-          </property>
-         </widget>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QTextEdit" name="emailaddr"/>
+          </item>
+         </layout>
         </widget>
        </item>
        <item>
@@ -58,16 +53,11 @@
          <property name="title">
           <string>Your Real Name</string>
          </property>
-         <widget class="QLineEdit" name="lineEdit">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>20</y>
-            <width>371</width>
-            <height>20</height>
-           </rect>
-          </property>
-         </widget>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QLineEdit" name="realname"/>
+          </item>
+         </layout>
         </widget>
        </item>
        <item>
@@ -81,16 +71,11 @@
          <property name="title">
           <string>Email Title</string>
          </property>
-         <widget class="QLineEdit" name="lineEdit_2">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>20</y>
-            <width>371</width>
-            <height>20</height>
-           </rect>
-          </property>
-         </widget>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QLineEdit" name="emailtitle"/>
+          </item>
+         </layout>
         </widget>
        </item>
        <item>
@@ -98,16 +83,11 @@
          <property name="title">
           <string>Email Content</string>
          </property>
-         <widget class="QTextEdit" name="desp">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>22</y>
-            <width>375</width>
-            <height>91</height>
-           </rect>
-          </property>
-         </widget>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QTextEdit" name="content"/>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>

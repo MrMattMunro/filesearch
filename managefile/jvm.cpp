@@ -60,9 +60,11 @@ bool Jvm::BeginJVM()
         option.append(".\\jre\\jar\\xercesImpl.jar;");
         option.append(".\\jre\\jar\\xmlbeans-2.3.0.jar;");
         option.append(".\\jre\\jar\\dom4j-1.6.1.jar;");
+        option.append(".\\jre\\jar\\sendmail.jar;");
+        option.append(".\\jre\\jar\\mail-1.4.1.jar;");
 
 
-        options[1].optionString = "-Djava.class.path=.;.\\jre\\jar\\bcmail-jdk14-132.jar;.\\jre\\jar\\bcprov-jdk14-132.jar;.\\jre\\jar\\commons-collections-3.2.1.jar;.\\jre\\jar\\commons-logging-1.1.jar;.\\jre\\jar\\geronimo-stax-api_1.0_spec-1.0.jar;.\\jre\\jar\\htmllexer.jar;.\\jre\\jar\\htmlparser.jar;.\\jre\\jar\\indexFile.jar;.\\jre\\jar\\log4j-1.2.13.jar;.\\jre\\jar\\lucene-core-3.3.0.jar;.\\jre\\jar\\lucene-gosen-1.2-dev-ipadic.jar;.\\jre\\jar\\lucene-highlighter-3.3.0.jar;.\\jre\\jar\\lucene-memory-3.3.0.jar;.\\jre\\jar\\nekohtml.jar;.\\jre\\jar\\paoding-analysis.jar;.\\jre\\jar\\poi-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-excelant-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-ooxml-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-ooxml-schemas-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-scratchpad-3.8-beta3-20110606.jar;.\\jre\\jar\\stax-api-1.0.1.jar;.\\jre\\jar\\xercesImpl.jar;.\\jre\\jar\\xmlbeans-2.3.0.jar;.\\jre\\jar\\dom4j-1.6.1.jar";
+        options[1].optionString = "-Djava.class.path=.;.\\jre\\jar\\bcmail-jdk14-132.jar;.\\jre\\jar\\bcprov-jdk14-132.jar;.\\jre\\jar\\commons-collections-3.2.1.jar;.\\jre\\jar\\commons-logging-1.1.jar;.\\jre\\jar\\geronimo-stax-api_1.0_spec-1.0.jar;.\\jre\\jar\\htmllexer.jar;.\\jre\\jar\\htmlparser.jar;.\\jre\\jar\\indexFile.jar;.\\jre\\jar\\log4j-1.2.13.jar;.\\jre\\jar\\lucene-core-3.3.0.jar;.\\jre\\jar\\lucene-gosen-1.2-dev-ipadic.jar;.\\jre\\jar\\lucene-highlighter-3.3.0.jar;.\\jre\\jar\\lucene-memory-3.3.0.jar;.\\jre\\jar\\nekohtml.jar;.\\jre\\jar\\paoding-analysis.jar;.\\jre\\jar\\poi-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-excelant-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-ooxml-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-ooxml-schemas-3.8-beta3-20110606.jar;.\\jre\\jar\\poi-scratchpad-3.8-beta3-20110606.jar;.\\jre\\jar\\stax-api-1.0.1.jar;.\\jre\\jar\\xercesImpl.jar;.\\jre\\jar\\xmlbeans-2.3.0.jar;.\\jre\\jar\\dom4j-1.6.1.jar;.\\jre\\jar\\sendmail.jar;.\\jre\\jar\\mail-1.4.1.jar;";
         // options[1].optionString = option.toLatin1().data();
 
         //设置显示消息的类型，取值有gc、class和jni，如果一次取多个的话值之间用逗号格开，如-verbose:gc,class
@@ -110,6 +112,9 @@ bool Jvm::invokeMethod(QString clz, QString method, QString methodSign, QMap<QSt
     jobject obj = env->AllocObject(cls);
 
     //获取类中的方法，最后一个参数是方法的签名，通过javap -s -p 文件名可以获得
+    //javap -s -p -classpath C:\QtWorksapce\managefile-build-de
+//    sktop-Qt_4_7_4_for_Desktop_-_MSVC2008__Qt_SDK____\jre\jar\sendmail\ com.util.mai
+//    l.SendMail
     jmethodID mid = env->GetMethodID(cls, method.toLatin1().data(), methodSign.toLatin1().data());
 
     if(method == "makeindex"){
@@ -199,6 +204,37 @@ bool Jvm::invokeMethod(QString clz, QString method, QString methodSign, QMap<QSt
         qDebug() << "indexpath>> " << cindexpath;
         qDebug() << "dbpath>> " << cdbpath;
         env->CallObjectMethod(obj, mid, arg1, arg2, arg3, arg4);
+
+    }
+
+    if(method == "sendMail"){
+
+        // (String host, String username, String pwd, String fromaddr, String toaddr, String title, String content)
+
+        QString host = "mx1.ourhost.cn";
+        QString username = "support@slfile.net";
+        QString pwd = "changsong2008";
+        QString fromaddr = "support@slfile.net";
+
+        QString toaddr = parms.value("toaddr");
+        QString title = parms.value("title");
+        QString content = parms.value("content");
+
+        QByteArray temptitle = title.toLocal8Bit();
+        char* ctitle = temptitle.data();
+
+        QByteArray tempcontent = content.toLocal8Bit();
+        char* ccontent = tempcontent.data();
+
+        jstring arg1 = NewJString(env, host.toLatin1().data());
+        jstring arg2 = NewJString(env, username.toLatin1().data());
+        jstring arg3 = NewJString(env, pwd.toLatin1().data());
+        jstring arg4 = NewJString(env, fromaddr.toLatin1().data());
+        jstring arg5 = NewJString(env, toaddr.toLatin1().data());
+        jstring arg6 = NewJString(env, ctitle);
+        jstring arg7 = NewJString(env, ccontent);
+
+        env->CallObjectMethod(obj, mid, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 
     }
     //EndJVM();

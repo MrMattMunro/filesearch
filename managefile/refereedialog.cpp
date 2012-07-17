@@ -1,177 +1,125 @@
-#include "PropOfDirDialog.h"
+#include "refereedialog.h"
 
 #include <QDir>
 #include <QMessageBox>
+#include <QThread>
 #include "db/docdao.h"
 #include "db/dirdao.h"
 #include "db/relatedocdao.h"
 #include "utils.h"
+#include "preferences.h"
 
-PropOfDirDialog::PropOfDirDialog (QWidget *parent, const QString & curUuid)
-    : QDialog(parent), m_curUuid(curUuid),update(false)
+RefereeDialog::RefereeDialog (QWidget *parent, const QString & curUuid)
+    : QDialog(parent),update(false)
 {
     setupUi (this);
 
-    // 取得当前文档
-    Dir dir = DirDao::selectDir(m_curUuid);
+    // 名称
+    Preferences* p = Preferences::instance();
+    QString displayName = p->getDisplayName();
 
-    setWindowTitle (dir.DIR_NAME +" - " +tr ("Property Editor","Window caption"));
-
-
-    // 设置基本信息
-    name->setText(dir.DIR_NAME);
-    uuid->setText(dir.DIR_GUID);
-    icon->setIcon(Utils::getIcon(dir.DIR_ICON));
-
-    // 取得当前路径
-    QList<Dir> dirList;
-    DirDao::selectAllParentDirbyDir(dirList, m_curUuid);
-
-    QString slocation;
-    slocation.append(QDir::separator());
-    for (int var = dirList.length() - 1; var >= 0 ; --var) {
-        Dir dir = dirList.at(var);
-        slocation.append(dir.DIR_NAME);
-        slocation.append(QDir::separator());
+    if(displayName.isEmpty()){
+        realname->setText(tr("Please Input your real name"));
     }
-    location->setText(slocation);
-    desp->setText(dir.DIR_DESCRIPTION);
+    QString userEmail = p->getUserEmail();
 
-    // 设置保护
-    QList<Dir> selDirList;
-    DirDao::selectAllSubDirbyDir(selDirList, m_curUuid, "0");
-    DirDao::selectAllSubDirbyDir(selDirList, m_curUuid, "1");
-    dirCount->setText(QString::number(selDirList.size()));
+    emailtitle->setText(tr("Your Friend %1 recommend this Software to Manage your document").arg(displayName));
+    content->setHtml(tr("<html><body><div>hi! , your friend %1 is using slfile to manage her documents, <br>do you want to try? Use this Address(<url>http://www.slfile.net/singup.php?referee=%2<url>) to Sign up you will help you friend get 300 point score. </div></body></html>").arg(displayName).arg(userEmail));
 
-    Dir tempDir;
-    int ifileCount = 0;
-    int ifileSize = 0;
-    foreach(tempDir, selDirList){
-        QList<Doc> docs = DocDao::selectDocsbyDir(tempDir.DIR_GUID, "0");
-        QList<Doc> deldocs = DocDao::selectDocsbyDir(tempDir.DIR_GUID, "1");
-        ifileCount = docs.size() + deldocs.size() + 1;
-        Doc doc;
-        foreach(doc, docs){
-            // 计算size K
-            QFileInfo file(doc.DOCUMENT_LOCATION);
-            ifileSize = ifileSize + file.size();
-        }
-        foreach(doc, deldocs){
-            // 计算size K
-            QFileInfo file(doc.DOCUMENT_LOCATION);
-            ifileSize = ifileSize + file.size();
-        }
-    }
-    fileCount->setText(QString::number(ifileCount));
-    fileSize->setText(QString::number(ifileSize/1024).append(" K"));
+    connect(realname, SIGNAL(textChanged(QString)), this, SLOT(changeEmail(QString)));
 
-    // 密码
-    // MD5解密
-    QString dirprotect = dir.DIR_PROTECT;
-    if(dirprotect.isEmpty()){
-        // 未设置保护
-        isProtect->setChecked(false);
-        orgpwd->setText("");
-        pwd->setText("");
-        repwd->setText("");
-
-        orgpwd->setDisabled(true);
-        pwd->setDisabled(true);
-        repwd->setDisabled(true);
-    }else{
-        // 设置过保护
-        isProtect->setChecked(true);
-        orgpwd->setText("password");
-        orgpwd->setDisabled(false);
-        pwd->setDisabled(false);
-        repwd->setDisabled(false);
-    }
-
-    // 设置同步
-    localVer->setText(QString::number(dir.MF_VERSION));
-
-    // 从服务器上取出，对比Version来比较版本 利用新的来同步
-    // remoteVer->setText();
     connect(closeBtn,SIGNAL(clicked()),this, SLOT(closeBtn_clicked()));
     connect(applyBtn,SIGNAL(clicked()),this, SLOT(applyBtn_clicked()));
-    connect(isProtect,SIGNAL(clicked()),this, SLOT(setProtect()));
-
-
-    // 默认选中第一个tab
-    tabWidget->setCurrentIndex(0);
-
 }
 
-// 保护文件夹
-void PropOfDirDialog::setProtect()
+// 改变邮件内容
+void RefereeDialog::changeEmail(QString userName)
 {
-    if(orgpwd->isEnabled()){
-       orgpwd->setDisabled(true);
-    }else{
-       orgpwd->setDisabled(false);
-    }
+    // 名称
+    Preferences* p = Preferences::instance();
+    QString userEmail = p->getUserEmail();
 
-    if(pwd->isEnabled()){
-       pwd->setDisabled(true);
-    }else{
-       pwd->setDisabled(false);
-    }
-
-    if(repwd->isEnabled()){
-       repwd->setDisabled(true);
-    }else{
-       repwd->setDisabled(false);
-    }
-
+    emailtitle->setText(tr("Your Friend %1 recommend slfile to Manage document").arg(userName));
+    content->setHtml(tr("hi! , your friend %1 is using slfile to manage document, <br>do you want to try? Use this Address(<url>http://www.slfile.net/singup.php?referee=%2<url>) to Sign up you will help you friend get 300 point score.").arg(userName).arg(userEmail));
 }
 
-// 更新数据项
-void PropOfDirDialog::applyBtn_clicked()
+// 发送邮件
+void RefereeDialog::applyBtn_clicked()
 {
-     // 参数检查
-    // 取得当前文档
-    Dir dir = DirDao::selectDir(m_curUuid);
+    sendMailObj.m_successList.clear();
+    sendMailObj.m_failList.clear();
+    QString addrs = emailaddr->toPlainText();
+    if(addrs.trimmed().isEmpty()){
+        QMessageBox::warning(this, tr("Warning"), tr("The address is empty, Please Input"), QMessageBox::Yes);
+        return;
+    }
 
-     QString sorgpwd = orgpwd->text();
-     if(!sorgpwd.isEmpty()){
-        // 判断跟数据库一致
-         QString dbprotect = dir.DIR_PROTECT;
-         QString md5pwd = Utils::getMD5Str(sorgpwd);
-         if(dbprotect != md5pwd){
-             QMessageBox::warning(this, tr("Warning"), tr("The Org password is wrong, Please Confirm"), QMessageBox::Yes);
-             return;
-         }
-     }
+    QString scontent = content->toHtml();
+    if(scontent.trimmed().isEmpty()){
+        QMessageBox::warning(this,  tr("Warning") ,tr("The email content is empty, Please Input"), QMessageBox::Yes);
+        return;
+    }
 
+    QString title = emailtitle->text();
+    if(title.trimmed().isEmpty()){
+        QMessageBox::warning(this, tr("Warning"), tr("The title is empty, Please Input"), QMessageBox::Yes);
+        return;
+    }
 
-     QString srepwd = repwd->text();
-     QString spwd = pwd->text();
-     QString protectStr = "";
+    QStringList emailaddrs = addrs.split(",");
 
-     if(!srepwd.isEmpty() && !spwd.isEmpty()){
-         if(srepwd != spwd){
-             QMessageBox::warning(this, tr("Warning"), tr("The password you entered must be the same as the  former"), QMessageBox::Yes);
-             return;
-         }else{
-             protectStr =  Utils::getMD5Str(srepwd);
-         }
-     }
+    sendMailObj.toaddrs = emailaddrs;
+    sendMailObj.title = title;
+    sendMailObj.content = scontent;
 
+//    QThread thread;
+//    sendMailObj.moveToThread(&thread);
 
-     dir.DIR_NAME = name->text();
-     dir.DIR_DESCRIPTION = desp->toPlainText();
-     dir.DIR_ICON = icon->icon().name();
-     dir.DIR_PROTECT = protectStr;
-     dir.MF_VERSION = dir.MF_VERSION + 1;
+    SendMailSign dummy;
+    QObject::connect(&dummy, SIGNAL(sig()), &sendMailObj, SLOT(sendMail()));
+    QObject::connect(&sendMailObj, SIGNAL(finished()), this, SLOT(checkSuccess()));
 
-     DirDao::updateDir(dir);
+//    thread.start();
+    dummy.emitsig();
 
-     update = true;
-     this->close();
+//    update = true;
+//    this->close();
 }
 
+// 成功
+void RefereeDialog::checkSuccess()
+{
 
-void PropOfDirDialog::closeBtn_clicked()
+    // 显示发送成功的邮件
+    if(sendMailObj.m_successList.size() > 0){
+        QString email;
+        QString msg;
+        msg.append(tr("Send Mail Success !"));
+        msg.append("\n");
+        foreach(email, sendMailObj.m_successList){
+            msg.append(email);
+            msg.append("\n");
+        }
+         QMessageBox::warning(this, tr("Information"), msg, QMessageBox::Yes);
+    }
+
+     // 未发送成功的邮件
+    if(sendMailObj.m_failList.size() > 0){
+        QString email;
+        QString msg;
+        msg.append(tr("Send Mail Failed, Please check the email Address !"));
+        msg.append("\n");
+        foreach(email, sendMailObj.m_successList){
+            msg.append(email);
+            msg.append("\n");
+        }
+         QMessageBox::warning(this, tr("Warning"), msg, QMessageBox::Yes);
+    }
+
+}
+
+// 取消
+void RefereeDialog::closeBtn_clicked()
 {
     update = true;
     this->close();

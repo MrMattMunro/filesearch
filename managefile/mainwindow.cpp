@@ -61,6 +61,7 @@
 #include "db/doctagdao.h"
 #include "db/resultdao.h"
 #include "noteeditor.h"
+#include "refereedialog.h"
 #include "aboutdialog.h"
 #include "logview.h"
 #include "preferencesdialog.h"
@@ -162,6 +163,16 @@ void MainWindow::buildDocList()
         }
         m_doctable->buildDocList(docs);
    }
+}
+
+// 推荐用户
+void MainWindow::referee()
+{
+    RefereeDialog dlg(this);
+    dlg.exec();
+    if(dlg.update){
+      // 不做任何操作
+    }
 }
 
 // 搜索界面设置Menu
@@ -350,7 +361,7 @@ void MainWindow::initActions()
 
         // 邀请朋友
         inviteAction = new QAction(Utils::getIcon("invite.png"),tr("&Invite Friends..."), this);
-        connect(inviteAction, SIGNAL(triggered()), this, SLOT(about()));
+        connect(inviteAction, SIGNAL(triggered()), this, SLOT(referee()));
 
         // 论坛
         bbsAction = new QAction(Utils::getIcon("forum.png"),tr("&Forum"), this);
@@ -1094,7 +1105,7 @@ void MainWindow::openDocInTab()
     // 改变NoteEditor的属性
     Preferences* p = Preferences::instance();
     QString suffix = FileUtils::suffix(filepath);
-    if(p->sources().contains(suffix.toLower())){
+    if(p->sources().contains(suffix.toLower()) ||p->txts().contains(suffix.toLower())){
         browser->openTxtInTab(filepath);
     } if(p->htmls().contains(suffix.toLower())){
         browser->loadPage(filepath);

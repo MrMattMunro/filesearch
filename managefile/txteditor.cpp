@@ -17,6 +17,7 @@ for which a new license (GPL+exception) is in place.
 #include <QShortcut>
 #include <QSettings>
 #include <QDateTime>
+#include <QTextCodec>
 
 #include "preferences.h"
 #include "txteditor.h"
@@ -76,9 +77,10 @@ void TxtEditor::open(const QString &  newFile)
 		return;
 	}
 
-	ui.sqlTextEdit->clear();
 
+        QTextCodec *code= QTextCodec::codecForName("utf8");
 	QTextStream in(&f);
+        in.setCodec(code); // 输出流的设置编码
 	QString line;
 	while (!in.atEnd())
 	{

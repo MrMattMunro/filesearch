@@ -1,26 +1,29 @@
-#ifndef PropOfDirDialog_H
-#define PropOfDirDialog_H
+#ifndef RefereeDialog_H
+#define RefereeDialog_H
 
 #include <QDialog>
 #include <QStandardItemModel>
-#include "ui_propofdirdialog.h"
+#include "ui_refereedialog.h"
+#include "sendmail.h"
 
-class PropOfDirDialog: public QDialog, public Ui::PropOfDirDialog
+class RefereeDialog: public QDialog, public Ui::RefereeDialog
 {
         Q_OBJECT
     public:
-        PropOfDirDialog (QWidget *parent=0, const QString & dirUuid = 0);
-
+        RefereeDialog (QWidget *parent=0, const QString & dirUuid = 0);
         bool update;
-        QString m_curUuid;
-        QStandardItemModel *model;
+        QString m_tempAddr;
+        bool m_isBusying;
     private:
         QObject * m_parent;
+        SendMailObj sendMailObj;
 
     private slots:
         void closeBtn_clicked();
         void applyBtn_clicked();
-        void setProtect();
+        void checkSuccess();
+        void changeEmail(QString usrname);
+
 };
 
 #endif // 

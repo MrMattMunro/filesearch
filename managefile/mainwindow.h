@@ -111,6 +111,8 @@ private slots:
     void openDocInTab();
     void slotShowSearchSetMenu();
 
+    void referee();
+
     // À—À˜…Ë÷√
     void slotOpenActionUrl(QAction *action);
 
