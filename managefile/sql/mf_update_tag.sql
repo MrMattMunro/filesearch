@@ -1,0 +1,7 @@
+UPDATE MF_TAG 
+SET TAG_NAME='%1',
+    TAG_GROUP_GUID='%2',
+    TAG_DESCRIPTION='%3', 
+    MF_VERSION='%4', 
+    DT_MODIFIED=datetime(CURRENT_TIMESTAMP,'localtime')
+WHERE TAG_GUID='%5'
