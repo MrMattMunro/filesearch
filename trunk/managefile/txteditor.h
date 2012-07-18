@@ -38,7 +38,6 @@ class TxtEditor : public QMainWindow
 		QString fileName() { return m_fileName; };
 
                 void open(const QString & newFile);
-
    	signals:
 
 	private:

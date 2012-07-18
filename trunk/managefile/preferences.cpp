@@ -72,6 +72,8 @@ Preferences::Preferences(QObject *parent)
         // is Indexing
         m_is_indexing = s.value("isindexing", false).toBool();
 
+        m_open_doc = s.value("m_open_doc", QString()).toString();
+
 	m_recentlyUsedCount = s.value("prefs/recentlyUsedSpinBox", 5).toInt();
 	m_openLastDB = s.value("prefs/openLastDB", true).toBool();
 	m_openLastSqlFile = s.value("prefs/openLastSqlFile", true).toBool();
@@ -124,7 +126,7 @@ Preferences::Preferences(QObject *parent)
         m_htmls<< "*.html" << "*.htm";
         m_pics  << "*.jpeg" << "*.jpg" << "*.png" << "*.bmp" << "*.gif";
         m_swfs << "*.flv" << "*.swf";
-        m_sources << "*.cpp" << "*.h" << "*.hpp" << "*.c" << "*.java" << "*.js" << "*.cs" << "*.vbs" << "*.sql" << "*.rb" << "*.py" << "*.asp" << "*.aspx" << "*.jsp" << "*.php" << "*.xml";
+        m_sources << "*.cpp" << "*.h" << "*.hpp" << "*.c" <<  "*.cc" << "*.java" << "*.js" << "*.cs" << "*.vbs" << "*.sql" << "*.rb" << "*.py" << "*.asp" << "*.aspx" << "*.jsp" << "*.php" << "*.xml";
         m_txts << "*.txt" << "*.ini" << "*.bar" << "*.inf";
         m_movies << "*.rm" << "*.rmvb" << "*.avi" << "*.mpg" << "*.mlv" << "*.mpe" << "*.mpeg" << "*.m2v";
 
@@ -205,6 +207,9 @@ Preferences::~Preferences()
         settings.setValue("search/object", m_searchobject);
         // search setting end
         settings.setValue("isindexing", false);
+
+        settings.setValue("m_open_doc", m_open_doc);
+
 
 	// sql editor
 	settings.setValue("prefs/sqleditor/font", m_sqlFont);

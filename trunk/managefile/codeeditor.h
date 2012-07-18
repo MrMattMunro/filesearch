@@ -77,6 +77,7 @@ private slots:
 private:
     QWidget *lineNumberArea;
     Highlighter *highlighter;
+
 };
 
 //![codeeditordefinition]

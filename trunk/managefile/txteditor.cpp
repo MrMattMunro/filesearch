@@ -28,8 +28,9 @@ for which a new license (GPL+exception) is in place.
 
 TxtEditor::TxtEditor(QWidget * parent)
 	: QMainWindow(parent),
-   	  m_fileWatcher(0)
+          m_fileWatcher(0)
 {
+
 	ui.setupUi(this);
 
 	m_fileName = QString();

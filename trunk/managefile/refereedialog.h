@@ -5,6 +5,7 @@
 #include <QStandardItemModel>
 #include "ui_refereedialog.h"
 #include "sendmail.h"
+#include "requtil.h"
 
 class RefereeDialog: public QDialog, public Ui::RefereeDialog
 {
@@ -17,10 +18,12 @@ class RefereeDialog: public QDialog, public Ui::RefereeDialog
     private:
         QObject * m_parent;
         SendMailObj sendMailObj;
+        ReqUtil * requtil;
 
     private slots:
         void closeBtn_clicked();
         void applyBtn_clicked();
+        void doConfirmReply();
         void checkSuccess();
         void changeEmail(QString usrname);
 

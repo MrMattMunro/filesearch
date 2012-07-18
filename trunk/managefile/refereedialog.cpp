@@ -26,6 +26,8 @@ RefereeDialog::RefereeDialog (QWidget *parent, const QString & curUuid)
     emailtitle->setText(tr("Your Friend %1 recommend this Software to Manage your document").arg(displayName));
     content->setHtml(tr("<html><body><div>hi! , your friend %1 is using slfile to manage her documents, <br>do you want to try? Use this Address(<url>http://www.slfile.net/singup.php?referee=%2<url>) to Sign up you will help you friend get 300 point score. </div></body></html>").arg(displayName).arg(userEmail));
 
+    requtil = new ReqUtil(this);
+
     connect(realname, SIGNAL(textChanged(QString)), this, SLOT(changeEmail(QString)));
 
     connect(closeBtn,SIGNAL(clicked()),this, SLOT(closeBtn_clicked()));
@@ -40,14 +42,13 @@ void RefereeDialog::changeEmail(QString userName)
     QString userEmail = p->getUserEmail();
 
     emailtitle->setText(tr("Your Friend %1 recommend slfile to Manage document").arg(userName));
-    content->setHtml(tr("hi! , your friend %1 is using slfile to manage document, <br>do you want to try? Use this Address(<url>http://www.slfile.net/singup.php?referee=%2<url>) to Sign up you will help you friend get 300 point score.").arg(userName).arg(userEmail));
+    content->setHtml(tr("hi! , your friend %1 is using slfile to manage document, <br>do you want to try? Use this Address(<url>http://www.slfile.net/wp-register.php?referee=%2<url>) to Sign up you will help you friend get 300 point score.").arg(userName).arg(userEmail));
 }
 
 // 发送邮件
 void RefereeDialog::applyBtn_clicked()
 {
-    sendMailObj.m_successList.clear();
-    sendMailObj.m_failList.clear();
+
     QString addrs = emailaddr->toPlainText();
     if(addrs.trimmed().isEmpty()){
         QMessageBox::warning(this, tr("Warning"), tr("The address is empty, Please Input"), QMessageBox::Yes);
@@ -72,18 +73,47 @@ void RefereeDialog::applyBtn_clicked()
     sendMailObj.title = title;
     sendMailObj.content = scontent;
 
-//    QThread thread;
-//    sendMailObj.moveToThread(&thread);
-
     SendMailSign dummy;
     QObject::connect(&dummy, SIGNAL(sig()), &sendMailObj, SLOT(sendMail()));
     QObject::connect(&sendMailObj, SIGNAL(finished()), this, SLOT(checkSuccess()));
 
-//    thread.start();
     dummy.emitsig();
 
-//    update = true;
-//    this->close();
+    // 将邮件地址提交服务器
+
+    // 传递选择的docUuid
+    Preferences* p = Preferences::instance();
+    // 处理Setting 设置用户信息
+    QString email = p->getUserEmail();
+
+    QString surl;
+    surl.append("http://www.slfile.net/mf-friendemails.php?email=");
+    surl.append(email.trimmed());
+    surl.append("&friendemails=");
+    surl.append(addrs);
+
+
+    connect(requtil,SIGNAL(reqfinished()),this,SLOT(doConfirmReply()));
+    QUrl url= QUrl::fromEncoded(surl.toUtf8());
+    requtil->startRequest(url);
+}
+
+// 确定后处理返回串
+void RefereeDialog::doConfirmReply(){
+
+     QVariantMap varMap = requtil->getReply();
+     QVariant verror = varMap["error"];
+     QString error = qvariant_cast<QString>(verror);
+
+     if(error == "Email Is Not Existed"){
+         QMessageBox::warning(this, tr("Information"), tr("User Is Not Existed."), QMessageBox::Yes);
+         return;
+     }
+     if(error.isEmpty()){
+        // 将用户发送过得邮件保存在本地,用户用于发送文档
+
+
+     }
 }
 
 // 成功
@@ -116,6 +146,8 @@ void RefereeDialog::checkSuccess()
          QMessageBox::warning(this, tr("Warning"), msg, QMessageBox::Yes);
     }
 
+    sendMailObj.m_successList.clear();
+    sendMailObj.m_failList.clear();
 }
 
 // 取消
