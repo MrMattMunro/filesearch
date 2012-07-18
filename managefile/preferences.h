@@ -130,6 +130,11 @@ Q_OBJECT
                 void setVersion(QString v) { m_version = v; };
                 // UserInfo end
 
+                // doctable open doc start,for highlighter
+                QString getOpenDoc() { return m_open_doc; };
+                void setOpenDoc(QString v) { m_open_doc = v; };
+                // doctable sel doc end
+
                 // search setting start
                 QString getSearchDir() { return m_searchdir; };
                 void setSearchDir(QString v) { m_searchdir = v; };
@@ -304,6 +309,10 @@ Q_OBJECT
                 QString m_searchdir;
                 QString  m_searchobject;
                 // search setting end
+
+                //
+                QString m_open_doc;
+
 
                 bool m_is_indexing;
 

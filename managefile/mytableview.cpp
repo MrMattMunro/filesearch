@@ -465,6 +465,7 @@ void MyTableView::buildSearchResult(QList<Result> resultlist)
             item->setFont(QFont( "Times", 11,  QFont::Normal ));
             item->setData(filename, Qt::DisplayRole);
             item->setData(filepath, Qt::ToolTipRole);
+            item->setData(filepath, DOC_LOCATION);
 
             // 在第二个动态项中加入所有其他数据
             item->setData(lastmodifed, RESULT_DT_CREATED);
@@ -552,6 +553,10 @@ void MyTableView::mouseDoubleClickEvent(QMouseEvent *event)
                 }
 
                 changeColor(row);
+                // 设置选中的文件名称 代码文件高亮显示
+                Preferences* p = Preferences::instance();
+                p->setOpenDoc(curPath);
+
                 emit LBtnDbClk();
         }
 }
