@@ -29,14 +29,6 @@ ChangePwdDialog::ChangePwdDialog(QWidget * parent)
         // Set UI
         this->setWindowTitle(tr("Change PassWord"));
 
-        // 设定值
-        // 传递选择的docUuid
-        Preferences* p = Preferences::instance();
-
-        // 处理Setting 设置用户信息
-        QString email = p->getUserEmail();
-        QString username = p->getUserName();
-
         // 确定、取消
         connect(buttonBox, SIGNAL(accepted()), this, SLOT(confirmBtn_clicked()));
         connect(buttonBox,SIGNAL(rejected()),this,SLOT(cancelBtn_clicked()));
