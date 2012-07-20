@@ -60,7 +60,7 @@
        </rect>
       </property>
       <property name="toolTip">
-       <string>eg: *.doc,*.pdf</string>
+       <string/>
       </property>
      </widget>
     </widget>
@@ -86,8 +86,6 @@
        </rect>
       </property>
      </widget>
-     <zorder>desp</zorder>
-     <zorder>groupBox</zorder>
     </widget>
    </item>
   </layout>

@@ -23,10 +23,8 @@ RefereeDialog::RefereeDialog (QWidget *parent, const QString & curUuid)
     }
     QString userEmail = p->getUserEmail();
 
-    emailtitle->setText(tr("Your Friend %1 recommend this Software to Manage your document").arg(displayName));
-    content->setHtml(tr("<html><body><div>hi! , your friend %1 is using slfile to manage her documents, <br>do you want to try? Use this Address(<url>http://www.slfile.net/singup.php?referee=%2<url>) to Sign up you will help you friend get 300 point score. </div></body></html>").arg(displayName).arg(userEmail));
-
-    requtil = new ReqUtil(this);
+    emailtitle->setText(tr("Your Friend %1 recommend slfile to Manage document").arg(displayName));
+    content->setHtml(tr("hi! , your friend %1 is using slfile to manage document, <br>do you want to try? Use this Address <a href='http://www.slfile.net/wp-register.php?referee=%2' target='_blank'>http://www.slfile.net/wp-register.php?referee=%3</a>) to Sign up you will help you friend get 300 point score.").arg(displayName).arg(userEmail).arg(userEmail));
 
     connect(realname, SIGNAL(textChanged(QString)), this, SLOT(changeEmail(QString)));
 
@@ -42,7 +40,7 @@ void RefereeDialog::changeEmail(QString userName)
     QString userEmail = p->getUserEmail();
 
     emailtitle->setText(tr("Your Friend %1 recommend slfile to Manage document").arg(userName));
-    content->setHtml(tr("hi! , your friend %1 is using slfile to manage document, <br>do you want to try? Use this Address(<url>http://www.slfile.net/wp-register.php?referee=%2<url>) to Sign up you will help you friend get 300 point score.").arg(userName).arg(userEmail));
+    content->setHtml(tr("hi! , your friend %1 is using slfile to manage document, <br>do you want to try? Use this Address <a href='http://www.slfile.net/wp-register.php?referee=%2' target='_blank'>http://www.slfile.net/wp-register.php?referee=%3</a>) to Sign up you will help you friend get 300 point score.").arg(userName).arg(userEmail).arg(userEmail));
 }
 
 // ·¢ËÍÓÊ¼þ
@@ -92,6 +90,7 @@ void RefereeDialog::applyBtn_clicked()
     surl.append("&friendemails=");
     surl.append(addrs);
 
+    requtil = new ReqUtil(this);
 
     connect(requtil,SIGNAL(reqfinished()),this,SLOT(doConfirmReply()));
     QUrl url= QUrl::fromEncoded(surl.toUtf8());
