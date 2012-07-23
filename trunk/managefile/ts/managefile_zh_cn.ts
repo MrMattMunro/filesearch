@@ -753,7 +753,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../db/database.cpp" line="28"/>
         <source>SQL Error</source>
-        <translation type="unfinished">SQL 执行异常</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="54"/>
@@ -780,18 +780,18 @@ Do you want to reload all pages?</source>
         <location filename="../db/database.cpp" line="111"/>
         <location filename="../db/database.cpp" line="141"/>
         <source>Error while getting the fileds of %1: %2.</source>
-        <translation type="unfinished">取得域%1：%2 出错.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="166"/>
         <source>Error while the list of %1: %2.</source>
-        <translation type="unfinished">取得 %1: %2出错</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="188"/>
         <location filename="../db/database.cpp" line="205"/>
         <source>Error while the list of the system catalogue: %2.</source>
-        <translation type="unfinished">取得元素列表时出错: 2%</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="217"/>
@@ -870,22 +870,22 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../docnoteinfodialog.ui" line="51"/>
         <source>Page/sheet name:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">页/表名</translation>
     </message>
     <message>
         <location filename="../docnoteinfodialog.ui" line="61"/>
         <source>Row:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">行</translation>
     </message>
     <message>
         <location filename="../docnoteinfodialog.ui" line="71"/>
         <source>Column:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">列</translation>
     </message>
     <message>
         <location filename="../docnoteinfodialog.cpp" line="27"/>
         <source>Document Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">文档标注</translation>
     </message>
 </context>
 <context>
@@ -906,27 +906,27 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../doctagsdialog.ui" line="38"/>
         <source>...Drap your favorite tags to the document</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">拖动标签到文档</translation>
     </message>
     <message>
         <location filename="../doctagsdialog.ui" line="95"/>
         <source>Documnet&apos;s Tags</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">文档标签</translation>
     </message>
     <message>
         <location filename="../doctagsdialog.ui" line="130"/>
         <source>Add New Tag</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">增加新标签</translation>
     </message>
     <message>
         <location filename="../doctagsdialog.ui" line="142"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">添加</translation>
     </message>
     <message>
         <location filename="../doctagsdialog.cpp" line="32"/>
         <source>Add tag to the Document</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">给文档添加标签</translation>
     </message>
 </context>
 <context>
@@ -944,28 +944,28 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../doctodirdialog.cpp" line="54"/>
         <source>Copy the Document to Directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">拷贝文件到目录</translation>
     </message>
     <message>
         <location filename="../doctodirdialog.cpp" line="56"/>
         <source>Move the Document to Directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">移动文件到目录</translation>
     </message>
     <message>
         <location filename="../doctodirdialog.cpp" line="72"/>
         <location filename="../doctodirdialog.cpp" line="133"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">警告</translation>
     </message>
     <message>
         <location filename="../doctodirdialog.cpp" line="72"/>
         <source>Please Select the other Directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">请选择其他目录</translation>
     </message>
     <message>
         <location filename="../doctodirdialog.cpp" line="133"/>
         <source>Please Select an directory.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">请选择目录:</translation>
     </message>
 </context>
 <context>
@@ -973,17 +973,17 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/downloads.ui" line="13"/>
         <source>Downloads</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">下载</translation>
     </message>
     <message>
         <location filename="../browser/downloads.ui" line="33"/>
         <source>Clean up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">清除</translation>
     </message>
     <message>
         <location filename="../browser/downloads.ui" line="55"/>
         <source>0 Items</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">0 下载对象</translation>
     </message>
 </context>
 <context>
@@ -991,27 +991,27 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/downloaditem.ui" line="13"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">开始</translation>
     </message>
     <message>
         <location filename="../browser/downloaditem.ui" line="28"/>
         <source>Ico</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">图标</translation>
     </message>
     <message>
         <location filename="../browser/downloaditem.ui" line="43"/>
         <source>Filename</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">文件名</translation>
     </message>
     <message>
         <location filename="../browser/downloaditem.ui" line="90"/>
         <source>Try Again</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">重试</translation>
     </message>
     <message>
         <location filename="../browser/downloaditem.ui" line="97"/>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">停止</translation>
     </message>
     <message>
         <location filename="../browser/downloaditem.ui" line="104"/>
@@ -1021,47 +1021,47 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="128"/>
         <source>Save File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">保存文件</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="131"/>
         <source>Download canceled: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">取消下载:%1</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="217"/>
         <source>Error opening save file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">打开保存文件出错:%1</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="226"/>
         <source>Error saving: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">保存出错:%1</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="235"/>
         <source>Network Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">网络出错:%1</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="269"/>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">秒</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="272"/>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">分</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="284"/>
         <source>- %4 %5 remaining</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">- %4 %5 剩余</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="287"/>
         <source>%1 of %2 (%3/sec) %4</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 剩余 2%(%3/sec) %4</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="289"/>
@@ -1071,22 +1071,22 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="296"/>
         <source>%1 of %2 - Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">1% 中 2% 已停止</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="307"/>
         <source>bytes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bytes</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="310"/>
         <source>kB</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">kB</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="313"/>
         <source>MB</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MB</translation>
     </message>
 </context>
 <context>
@@ -1094,12 +1094,12 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="544"/>
         <source>1 Download</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">1 下载</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="544"/>
         <source>%1 Downloads</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 下载</translation>
     </message>
 </context>
 <context>
@@ -1112,72 +1112,72 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../exportconvertdialog.ui" line="33"/>
         <source>&amp;Select...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">选择</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.ui" line="40"/>
         <source>Path to Export:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">导出目录:</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.ui" line="80"/>
         <source>Convert Type:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">转换类型</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="36"/>
         <source>Convert Office to Pdf</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">将office文档转成Pdf</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="37"/>
         <source>Convert Pdf to Office</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">将Pdf文档转成Office</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="38"/>
         <source>Convert Picture to Pdf</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">将图片转成Pdf</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="39"/>
         <source>Convert Ppt to Picture</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">将Ppt转成图片</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="43"/>
         <source>Doc Export -</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">文档导出</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="57"/>
         <source>Select existing Export directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">选中存在的目录</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="58"/>
         <source>Choose a directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">选择目录</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="72"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">警告</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="72"/>
         <source>Please Select the Path to Export Into..</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">请选择目录导出...</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="117"/>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">消息</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="117"/>
         <source>Documents Exported Success!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">文档导出成功!</translation>
     </message>
 </context>
 <context>
@@ -1190,17 +1190,17 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../exportdocdialog.ui" line="33"/>
         <source>&amp;Select...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">选择</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="40"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">预览</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="71"/>
         <source>PreView Files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">预览文件</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="78"/>
@@ -1210,17 +1210,17 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../exportdocdialog.ui" line="85"/>
         <source>Create Sub Directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">创建子目录</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="111"/>
         <source>Emport From:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">源目录:</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="118"/>
         <source>Path to Export:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">导出目录:</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="132"/>
@@ -1230,7 +1230,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../exportdocdialog.ui" line="135"/>
         <source>Include Sub Directory </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">包含子目录</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="142"/>
@@ -1240,42 +1240,42 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../exportdocdialog.ui" line="149"/>
         <source>Exculde File Type</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">排除文档类型</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="44"/>
         <source>Doc Export</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">文档导出</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="61"/>
         <source>Select existing Export directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">选择一个存在的导出目录</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="62"/>
         <source>Choose a directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">选择目录</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="244"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">警告</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="244"/>
         <source>Please Select the Path to Export Into..</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">请选择导出目录...</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="282"/>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">消息</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="282"/>
         <source>Documents Exported Success!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">文档导出成功!</translation>
     </message>
 </context>
 <context>
@@ -1283,7 +1283,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/history.ui" line="13"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">历史</translation>
     </message>
     <message>
         <location filename="../browser/history.ui" line="40"/>
@@ -1293,7 +1293,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/history.ui" line="47"/>
         <source>Remove &amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">移除所有</translation>
     </message>
     <message>
         <location filename="../browser/history.cpp" line="703"/>
@@ -1303,12 +1303,12 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/history.cpp" line="705"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">复制</translation>
     </message>
     <message>
         <location filename="../browser/history.cpp" line="707"/>
         <source>Delete</source>
-        <translation type="unfinished">删除</translation>
+        <translation>删除</translation>
     </message>
 </context>
 <context>
@@ -1316,12 +1316,12 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/history.cpp" line="630"/>
         <source>Show All History</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">显示所有历史</translation>
     </message>
     <message>
         <location filename="../browser/history.cpp" line="634"/>
         <source>Clear History</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">清空历史</translation>
     </message>
 </context>
 <context>
@@ -1329,12 +1329,12 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/history.cpp" line="403"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">标题</translation>
     </message>
     <message>
         <location filename="../browser/history.cpp" line="404"/>
         <source>Address</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">地址</translation>
     </message>
 </context>
 <context>
@@ -1342,12 +1342,12 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/history.cpp" line="1036"/>
         <source>Earlier Today</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">今天早些时候</translation>
     </message>
     <message>
         <location filename="../browser/history.cpp" line="1040"/>
         <source>%1 items</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">1% 元素</translation>
     </message>
 </context>
 <context>
@@ -1360,17 +1360,17 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../importdocdialog.ui" line="33"/>
         <source>&amp;Select...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">选择</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="40"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">预览</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="52"/>
         <source>PreView Files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">预览文件</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="78"/>
@@ -1380,76 +1380,76 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../importdocdialog.ui" line="104"/>
         <source>Import Location:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">导入位置:</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="111"/>
         <source>&amp;Path to Import Into:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">文档来源目录:</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="128"/>
         <source>&amp;File Type:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">文件类型</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="139"/>
         <source>All files(*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">所有文件</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="144"/>
         <location filename="../importdocdialog.cpp" line="29"/>
         <source>All supported files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">所有支持文件</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="149"/>
         <location filename="../importdocdialog.cpp" line="30"/>
         <source>Office files(*.doc,*.docx,*.xls,*.xlsx,*.ppt,*.pptx)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Office(*.doc,*.docx,*.xls,*.xlsx,*.ppt,*.pptx)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="154"/>
         <location filename="../importdocdialog.cpp" line="31"/>
         <source>Pdf files(*.pdf)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pdf(*.pdf)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="159"/>
         <location filename="../importdocdialog.cpp" line="32"/>
         <source>Html files(*.html,*.htm)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">网页(*.html,*.htm)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="164"/>
         <location filename="../importdocdialog.cpp" line="33"/>
         <source>Picture file(*.jpeg,*.jpg,*.png,*.bmp,*.gif)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">图片(*.jpeg,*.jpg,*.png,*.bmp,*.gif)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="169"/>
         <location filename="../importdocdialog.cpp" line="34"/>
         <source>Flash files(*.flv,*.swf)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Flash(*.flv,*.swf)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="174"/>
         <location filename="../importdocdialog.cpp" line="35"/>
         <source>Source files(*.cpp,*.h,*.hpp,*.c,*.java,*.js,*.cs,*.vbs,*.sql,*.rb,*.py,*.asp,*.aspx,*.jsp,*.php,*.xml)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">代码(*.cpp,*.h,*.hpp,*.c,*.java,*.js,*.cs,*.vbs,*.sql,*.rb,*.py,*.asp,*.aspx,*.jsp,*.php,*.xml)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="179"/>
         <location filename="../importdocdialog.cpp" line="36"/>
         <source>Txt files(*.txt,*.ini,*.bar,*.inf)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">文本(*.txt,*.ini,*.bar,*.inf)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="184"/>
         <location filename="../importdocdialog.cpp" line="37"/>
         <source>Movie fies(*.rm,*.rmvb,*.avi,*.mpg,*.mlv,*.mpe,*.mpeg,*.m2v)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">影音(*.rm,*.rmvb,*.avi,*.mpg,*.mlv,*.mpe,*.mpeg,*.m2v)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="192"/>
@@ -1465,17 +1465,17 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../importdocdialog.ui" line="202"/>
         <source>Include Sub Directory </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">包含子目录</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="216"/>
         <source>Exclude File Type:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">排除文件类型</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="223"/>
         <source>Custom File Type:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">自定义文件类型:</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="230"/>
@@ -1485,32 +1485,32 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../importdocdialog.ui" line="244"/>
         <source>Create Sub Directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">创建子目录:</translation>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="54"/>
         <source>Document Import</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">文档导入</translation>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="72"/>
         <source>Select existing doc directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">选择存放文档目录</translation>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="73"/>
         <source>Choose a directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">选择目录</translation>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="88"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">警告</translation>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="88"/>
         <source>Please Select the Path to Import Into..</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">请选择目录导入文档..</translation>
     </message>
 </context>
 <context>
@@ -1518,7 +1518,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../logview.ui" line="53"/>
         <source>Search Next</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">向后</translation>
     </message>
     <message>
         <location filename="../logview.ui" line="56"/>
@@ -1528,22 +1528,22 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../logview.ui" line="63"/>
         <source>Whole Words</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">全词匹配</translation>
     </message>
     <message>
         <location filename="../logview.ui" line="73"/>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">大小写一致</translation>
     </message>
     <message>
         <location filename="../logview.ui" line="80"/>
         <source>Search:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">检索:</translation>
     </message>
     <message>
         <location filename="../logview.ui" line="87"/>
         <source>Search previous</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">向前</translation>
     </message>
     <message>
         <location filename="../logview.ui" line="90"/>
@@ -1553,7 +1553,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../logview.cpp" line="35"/>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">帮助</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="36"/>
@@ -1563,47 +1563,47 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../logview.ui" line="14"/>
         <source>Log Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Log查看</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="70"/>
         <source>Cannot open file %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">不能打开文件 %1</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="70"/>
         <source>Open File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">打开文件</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="103"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">保存</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="104"/>
         <source>All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">所有文件 (*)</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="117"/>
         <source>Save File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">保存文件</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="118"/>
         <source>Cannot write into file %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">不能写入文件 %1</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="139"/>
         <source>New File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">新建文件</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="140"/>
         <source>All you changes will be lost. Are you sure?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">所有修改将会丢失,是否确认?</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="153"/>
@@ -1613,17 +1613,17 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../logview.cpp" line="154"/>
         <source>Document has been changed. Do you want do save its content?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">文档已经被修改,是否保存?</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="230"/>
         <source>Unexpected File Change</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">外部的文件修改</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="231"/>
         <source>Your currently edited file has been changed outside this application. Do you want to reload it?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">您现在查看的文件已被外部修改,是否重新加载?</translation>
     </message>
 </context>
 <context>
@@ -1642,33 +1642,33 @@ Do you want to reload all pages?</source>
         <location filename="../logindialog.ui" line="45"/>
         <location filename="../logindialog.ui" line="136"/>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">登录</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="57"/>
         <source>UserName/Email</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">用户名/电子邮件</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="82"/>
         <source>Login Slfile</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">登陆Slfile</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="95"/>
         <location filename="../logindialog.ui" line="220"/>
         <source>PassWord</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">密码</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="120"/>
         <source>Remember Me</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">记住我</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="142"/>
         <source>Register</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">注册</translation>
     </message>
     <message utf8="true">
         <location filename="../logindialog.ui" line="154"/>
@@ -1678,18 +1678,18 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../logindialog.ui" line="167"/>
         <source>Get the Slfile Account</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">获得Slfile账号</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="180"/>
         <location filename="../logindialog.ui" line="329"/>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">电子邮件</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="202"/>
         <source>UserName</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">用户名</translation>
     </message>
     <message utf8="true">
         <location filename="../logindialog.ui" line="245"/>
@@ -1705,32 +1705,32 @@ p, li { white-space: pre-wrap; }
         <source>Click the Register button will 
 indicate that you agree and 
 acknowledge our Terms of Service</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">点击【注册】按钮表明您已经了解并通知我们的服务条款</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="270"/>
         <source>Forget Password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">忘记密码</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="290"/>
         <source>Reset Password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">重置密码</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="308"/>
         <source>Please input your Email.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">请输入Email</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="351"/>
         <source>ReSet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">重置</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="31"/>
         <source>Slfile</source>
-        <translation type="unfinished">文档管理</translation>
+        <translation type="unfinished">Slfile文档管理</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="119"/>
@@ -1740,53 +1740,53 @@ acknowledge our Terms of Service</source>
         <location filename="../logindialog.cpp" line="137"/>
         <location filename="../logindialog.cpp" line="144"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">警告</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="119"/>
         <source>Server Failed, Please Contact Administrator</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">服务器异常,请联系管理员</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="124"/>
         <source>Sign up Failed, Please Contact Administrator</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">注册失败,请联系管理员</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="128"/>
         <source> : Username/Email have existed, Please Choose an other one</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">用户名/电子邮箱已经存在,请确认</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="133"/>
         <source> : Username/Email is not existed, Please confirm</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">用户名/电子邮箱不存在,请确认.</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="137"/>
         <source> : Password is incorrect, Please confirm</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">密码不正确,请确认.</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="144"/>
         <source> : Change Password Success, &lt;br&gt;But Send Mail Failed Please Contact Administrator to get the Password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">改变密码成功, &lt;br&gt;请联系管理员获得您的新密码</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="150"/>
         <location filename="../logindialog.cpp" line="228"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">消息</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="150"/>
         <source>Sign up Successed, Please Login in</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">注册成功,请登录.</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="228"/>
         <source>ReSet Password Successed, Please Check the email to get the new password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">重置密码成功,请检查邮箱去获取新的密码</translation>
     </message>
 </context>
 <context>

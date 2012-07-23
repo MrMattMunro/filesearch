@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>868</width>
+    <width>891</width>
     <height>575</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Data Import</string>
+   <string>Import Documents</string>
   </property>
   <layout class="QGridLayout">
    <property name="margin">

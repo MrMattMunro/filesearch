@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Data Import</string>
+   <string>Use Score to Change VIP</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

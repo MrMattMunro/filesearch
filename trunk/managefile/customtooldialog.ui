@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Data Import</string>
+   <string>Custom Tools Bar</string>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
