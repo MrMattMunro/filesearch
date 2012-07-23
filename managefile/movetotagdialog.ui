@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Data Import</string>
+   <string>Move the Tag</string>
   </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
@@ -64,9 +64,6 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2"/>
   </widget>
-  <zorder>layoutWidget</zorder>
-  <zorder>layoutWidget</zorder>
-  <zorder>buttonBox</zorder>
  </widget>
  <resources/>
  <connections>
