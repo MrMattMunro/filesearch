@@ -52,8 +52,8 @@ void RelateDocDialog::contextMenuRequested(const QPoint &pos)
     selIndex = docsView->indexAt(pos);
 
     menu.addAction(tr("Open this Doc"), this, SLOT(openRelateDoc()));
-    menu.addAction(tr("Delete this Doc"), this, SLOT(deleteRelateDoc()));
-    menu.addAction(tr("Delete All Docs"), this, SLOT(deleteAllRelateDoc()));
+    menu.addAction(tr("Delete this Realted Document"), this, SLOT(deleteRelateDoc()));
+    menu.addAction(tr("Delete All Realted Documents"), this, SLOT(deleteAllRelateDoc()));
 
     menu.exec(QCursor::pos());
 }

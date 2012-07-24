@@ -38,7 +38,7 @@
       <item row="0" column="1" colspan="2">
        <widget class="QLineEdit" name="totalscore">
         <property name="toolTip">
-         <string>eg: *.doc,*.pdf</string>
+         <string/>
         </property>
         <property name="maxLength">
          <number>10</number>

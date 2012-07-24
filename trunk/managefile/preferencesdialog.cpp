@@ -86,7 +86,7 @@ PreferencesDialog::PreferencesDialog(QWidget * parent)
         QDir d("ts", "*.qm");
         m_prefsLNF->languageComboBox->addItem(tr("From Locales"));
         foreach (QString f, d.entryList())
-                m_prefsLNF->languageComboBox->addItem(f.remove("sqliteman_").remove(".qm"));
+                m_prefsLNF->languageComboBox->addItem(f.remove("managefile_").remove(".qm"));
         m_prefsLNF->languageComboBox->setCurrentIndex(prefs->GUItranslator());
 
 	m_prefsLNF->fontComboBox->setCurrentFont(prefs->GUIfont());

@@ -60,7 +60,7 @@
        </rect>
       </property>
       <property name="toolTip">
-       <string>eg: *.doc,*.pdf</string>
+       <string/>
       </property>
      </widget>
     </widget>
