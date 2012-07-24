@@ -86,7 +86,7 @@ with PreferencesDialog.
 ArgsParser::ArgsParser(int c, char ** v)
     : argc(c), argv(v), m_locale(""), m_file(QString())
 {
-    QDir d("../ts/", "*.qm");
+    QDir d("ts", "*.qm");
     int i = 1; // 0 is for system default
     foreach (QString f, d.entryList())
     {

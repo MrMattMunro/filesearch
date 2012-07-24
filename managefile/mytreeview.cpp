@@ -951,7 +951,7 @@ void MyTreeView::createRootDir()
     if(curType == "alldocs") {
         hasSelRight = true;
         bool ok;
-        QString text = QInputDialog::getText(this, m_appName, tr("New Roor Directory name:"), QLineEdit::Normal, "", &ok);
+        QString text = QInputDialog::getText(this, m_appName, tr("New Root Directory name:"), QLineEdit::Normal, "", &ok);
         if (ok && !text.isEmpty()) {
                 if (text == ""){
                   return;

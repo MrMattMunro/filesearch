@@ -6,17 +6,17 @@
     <message>
         <location filename="../aboutdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="21"/>
         <source>about:blank</source>
-        <translation type="unfinished">空</translation>
+        <translation>空</translation>
     </message>
     <message>
         <location filename="../aboutdialog.cpp" line="26"/>
         <source>Slfile</source>
-        <translation type="unfinished">文档管理</translation>
+        <translation>文档管理</translation>
     </message>
 </context>
 <context>
@@ -24,72 +24,72 @@
     <message>
         <location filename="../accountdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="32"/>
         <source>Acount Infomation</source>
-        <translation type="unfinished">账号信息</translation>
+        <translation>账号信息</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="41"/>
         <source>eg: *.doc,*.pdf</source>
-        <translation type="unfinished">例:*.doc,*.pdf</translation>
+        <translation>例:*.doc,*.pdf</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="48"/>
         <source>Name:</source>
-        <translation type="unfinished">用户名:</translation>
+        <translation>用户名:</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="55"/>
         <source>PassWord: </source>
-        <translation type="unfinished">密码:</translation>
+        <translation>密码:</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="62"/>
         <source>Type:</source>
-        <translation type="unfinished">账号类型:</translation>
+        <translation>账号类型:</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="75"/>
         <source>Change PassWord</source>
-        <translation type="unfinished">更改密码</translation>
+        <translation>更改密码</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="82"/>
         <source>Update To VIP</source>
-        <translation type="unfinished">升级到VIP</translation>
+        <translation>升级到VIP</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="89"/>
         <source>Score:</source>
-        <translation type="unfinished">积分:</translation>
+        <translation>积分:</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="103"/>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="113"/>
         <source>Use Score For VIP</source>
-        <translation type="unfinished">用积分换VIP</translation>
+        <translation>用积分换VIP</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="141"/>
         <source>Traffic</source>
-        <translation type="unfinished">网络流量</translation>
+        <translation>网络流量</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="182"/>
         <source>Store</source>
-        <translation type="unfinished">存储空间</translation>
+        <translation>存储空间</translation>
     </message>
     <message>
         <location filename="../accountdialog.cpp" line="31"/>
         <source>Account Information</source>
-        <translation type="unfinished">账户信息</translation>
+        <translation>账户信息</translation>
     </message>
 </context>
 <context>
@@ -97,12 +97,12 @@
     <message>
         <location filename="../browser/addbookmarkdialog.ui" line="13"/>
         <source>Add Bookmark</source>
-        <translation type="unfinished">加入书签</translation>
+        <translation>加入书签</translation>
     </message>
     <message>
         <location filename="../browser/addbookmarkdialog.ui" line="19"/>
         <source>Type a name for the bookmark, and choose where to keep it.</source>
-        <translation type="unfinished">请输入书签名称并选择保存位置</translation>
+        <translation>请输入书签名称并选择保存位置</translation>
     </message>
 </context>
 <context>
@@ -110,12 +110,12 @@
     <message>
         <location filename="../browser/bookmarks.ui" line="14"/>
         <source>Bookmarks</source>
-        <translation type="unfinished">书签</translation>
+        <translation>书签</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.ui" line="41"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished">移除</translation>
+        <translation>移除</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.ui" line="48"/>
@@ -125,17 +125,17 @@
     <message>
         <location filename="../browser/bookmarks.cpp" line="850"/>
         <source>Open</source>
-        <translation type="unfinished">打开</translation>
+        <translation>打开</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="853"/>
         <source>Delete</source>
-        <translation type="unfinished">删除</translation>
+        <translation>删除</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="876"/>
         <source>New Folder</source>
-        <translation type="unfinished">新建文件夹</translation>
+        <translation>新建文件夹</translation>
     </message>
 </context>
 <context>
@@ -145,68 +145,68 @@
         <location filename="../browser/bookmarks.cpp" line="264"/>
         <source>Error when loading bookmarks on line %1, column %2:
 %3</source>
-        <translation type="unfinished">打开书签出现错误 在1% 行 2% 列</translation>
+        <translation>打开书签出现错误 在1% 行 2% 列</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="119"/>
         <source>Toolbar Bookmarks</source>
-        <translation type="unfinished">标签工具栏</translation>
+        <translation>标签工具栏</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="127"/>
         <source>Menu</source>
-        <translation type="unfinished">菜单</translation>
+        <translation>菜单</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="254"/>
         <source>Open File</source>
-        <translation type="unfinished">打开文件</translation>
+        <translation>打开文件</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="256"/>
         <location filename="../browser/bookmarks.cpp" line="277"/>
         <source>XBEL (*.xbel *.xml)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="269"/>
         <source>Imported %1</source>
-        <translation type="unfinished">导入</translation>
+        <translation>导入</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="275"/>
         <source>Save File</source>
-        <translation type="unfinished">保存文件</translation>
+        <translation>保存文件</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="276"/>
         <source>%1 Bookmarks.xbel</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="283"/>
         <source>Export error</source>
-        <translation type="unfinished">导入出错</translation>
+        <translation>导入出错</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="283"/>
         <source>error saving bookmarks</source>
-        <translation type="unfinished">保存书签出错</translation>
+        <translation>保存书签出错</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="287"/>
         <source>Remove Bookmark</source>
-        <translation type="unfinished">移除书签</translation>
+        <translation>移除书签</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="321"/>
         <source>Insert Bookmark</source>
-        <translation type="unfinished">插入书签</translation>
+        <translation>插入书签</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="335"/>
         <source>Name Change</source>
-        <translation type="unfinished">改变名称</translation>
+        <translation>改变名称</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="338"/>
@@ -219,12 +219,12 @@
     <message>
         <location filename="../browser/bookmarks.cpp" line="433"/>
         <source>Title</source>
-        <translation type="unfinished">标题</translation>
+        <translation>标题</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="434"/>
         <source>Address</source>
-        <translation type="unfinished">地址</translation>
+        <translation>地址</translation>
     </message>
 </context>
 <context>
@@ -232,7 +232,7 @@
     <message>
         <location filename="../browser/bookmarks.cpp" line="881"/>
         <source>Bookmark</source>
-        <translation type="unfinished">书签</translation>
+        <translation>书签</translation>
     </message>
 </context>
 <context>
@@ -241,7 +241,7 @@
         <location filename="../browser/browserapplication.cpp" line="183"/>
         <source>There are %1 windows and %2 tabs open
 Do you want to quit anyway?</source>
-        <translation type="unfinished">已经打开2% tab页,是否确定要关闭吗?</translation>
+        <translation>已经打开2% tab页,是否确定要关闭吗?</translation>
     </message>
 </context>
 <context>
@@ -249,145 +249,145 @@ Do you want to quit anyway?</source>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="369"/>
         <source>Zoom &amp;In</source>
-        <translation type="unfinished">缩小</translation>
+        <translation>缩小</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="370"/>
         <source>Zoom &amp;Out</source>
-        <translation type="unfinished">放大</translation>
+        <translation>放大</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="371"/>
         <source>Reset &amp;Zoom</source>
-        <translation type="unfinished">重置</translation>
+        <translation>重置</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="461"/>
         <source>Navigation</source>
-        <translation type="unfinished">浏览器</translation>
+        <translation>浏览器</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="467"/>
         <source>Back</source>
-        <translation type="unfinished">后退</translation>
+        <translation>后退</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="472"/>
         <source>Forward</source>
-        <translation type="unfinished">前进</translation>
+        <translation>前进</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="556"/>
         <source>Show Status Bar</source>
-        <translation type="unfinished">显示状态栏</translation>
+        <translation>显示状态栏</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="556"/>
         <source>Hide Status Bar</source>
-        <translation type="unfinished">隐藏状态栏</translation>
+        <translation>隐藏状态栏</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="620"/>
         <source>Qt Demo Browser</source>
-        <translation type="unfinished">浏览器</translation>
+        <translation>浏览器</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="625"/>
         <source>%1 - Qt Demo Browser</source>
         <comment>Page title and Browser name</comment>
-        <translation type="unfinished">浏览器</translation>
+        <translation>浏览器</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="632"/>
         <source>About</source>
-        <translation type="unfinished">关于</translation>
+        <translation>关于</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="632"/>
         <source>Version %1&lt;p&gt;This demo demonstrates Qt&apos;s webkit facilities in action, providing an example browser for you to experiment with.&lt;p&gt;&lt;p&gt;QtWebKit is based on the Open Source WebKit Project developed at &lt;a href=&quot;http://webkit.org/&quot;&gt;http://webkit.org/&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="650"/>
         <source>Open Web Resource</source>
-        <translation type="unfinished">打开Web资源</translation>
+        <translation>打开Web资源</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="651"/>
         <source>Web Resources (*.html *.htm *.svg *.png *.gif *.svgz);;All files (*.*)</source>
-        <translation type="unfinished">Web资源(*.html *.htm *.svg *.png *.gif *.svgz);;所有文件(*.*)</translation>
+        <translation>Web资源(*.html *.htm *.svg *.png *.gif *.svgz);;所有文件(*.*)</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="683"/>
         <source>Print Document</source>
-        <translation type="unfinished">打印文档</translation>
+        <translation>打印文档</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="695"/>
         <source>Are you sure you want to turn on private browsing?</source>
-        <translation type="unfinished">您是否确认打开私密浏览器</translation>
+        <translation>您是否确认打开私密浏览器</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="696"/>
         <source>&lt;b&gt;%1&lt;/b&gt;&lt;br&gt;&lt;br&gt;When private browsing in turned on, webpages are not added to the history, items are automatically removed from the Downloads window, new cookies are not stored, current cookies can&apos;t be accessed, site icons wont be stored, session wont be saved,  and searches are not added to the pop-up menu in the Google search box.  Until you close the window, you can still click the Back and Forward buttons to return to the webpages you have opened.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="723"/>
         <source>Are you sure you want to close the window?  There are %1 tabs open</source>
-        <translation type="unfinished">确定关闭浏览器?</translation>
+        <translation>确定关闭浏览器?</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="741"/>
         <source>Find</source>
-        <translation type="unfinished">查找</translation>
+        <translation>查找</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="742"/>
         <source>Text:</source>
-        <translation type="unfinished">文本:</translation>
+        <translation>文本:</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="747"/>
         <source>&quot;%1&quot; not found.</source>
-        <translation type="unfinished">&quot;%1&quot;没有找到</translation>
+        <translation>&quot;%1&quot;没有找到</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="813"/>
         <source>Page Source of %1</source>
-        <translation type="unfinished">1% 页面代码</translation>
+        <translation>1% 页面代码</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="837"/>
         <source>Web Inspector</source>
-        <translation type="unfinished">Web观察器</translation>
+        <translation>Web观察器</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="838"/>
         <source>The web inspector will only work correctly for pages that were loaded after enabling.
 Do you want to reload all pages?</source>
-        <translation type="unfinished">Web观测器只有当页面正确打开后才能打开,您是否需要刷新所有页面?</translation>
+        <translation>Web观测器只有当页面正确打开后才能打开,您是否需要刷新所有页面?</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="898"/>
         <source>Stop loading the current page</source>
-        <translation type="unfinished">停止加载当前页面</translation>
+        <translation>停止加载当前页面</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="904"/>
         <source>Reload the current page</source>
-        <translation type="unfinished">重新加载当前页面</translation>
+        <translation>重新加载当前页面</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="950"/>
         <source>Downloads</source>
-        <translation type="unfinished">下载</translation>
+        <translation>下载</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="950"/>
         <source>Alt+Ctrl+L</source>
         <comment>Download Manager</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -395,65 +395,65 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../changepwddialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../changepwddialog.ui" line="32"/>
         <location filename="../changepwddialog.cpp" line="30"/>
         <source>Change PassWord</source>
-        <translation type="unfinished">更改密码</translation>
+        <translation>更改密码</translation>
     </message>
     <message>
         <location filename="../changepwddialog.ui" line="41"/>
         <source>eg: *.doc,*.pdf</source>
-        <translation type="unfinished">例:*.doc,*.pdf</translation>
+        <translation>例:*.doc,*.pdf</translation>
     </message>
     <message>
         <location filename="../changepwddialog.ui" line="54"/>
         <source>Old PassWord:</source>
-        <translation type="unfinished">旧密码:</translation>
+        <translation>旧密码:</translation>
     </message>
     <message>
         <location filename="../changepwddialog.ui" line="61"/>
         <source>New PassWord: </source>
-        <translation type="unfinished">新密码:</translation>
+        <translation>新密码:</translation>
     </message>
     <message>
         <location filename="../changepwddialog.ui" line="68"/>
         <source>ReInput Passwrod:</source>
-        <translation type="unfinished">重复新密码:</translation>
+        <translation>重复新密码:</translation>
     </message>
     <message>
         <location filename="../changepwddialog.cpp" line="51"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../changepwddialog.cpp" line="51"/>
         <source>The ReInput Password is not same with the New PassWord.</source>
-        <translation type="unfinished">两次输入密码不同</translation>
+        <translation>两次输入密码不同</translation>
     </message>
     <message>
         <location filename="../changepwddialog.cpp" line="85"/>
         <location filename="../changepwddialog.cpp" line="89"/>
         <location filename="../changepwddialog.cpp" line="94"/>
         <source>Information</source>
-        <translation type="unfinished">信息</translation>
+        <translation>信息</translation>
     </message>
     <message>
         <location filename="../changepwddialog.cpp" line="85"/>
         <source>Old PassWord Is Incorrect.</source>
-        <translation type="unfinished">旧密码不正确</translation>
+        <translation>旧密码不正确</translation>
     </message>
     <message>
         <location filename="../changepwddialog.cpp" line="89"/>
         <source>User Is Not Existed.</source>
-        <translation type="unfinished">用户名不存在</translation>
+        <translation>用户名不存在</translation>
     </message>
     <message>
         <location filename="../changepwddialog.cpp" line="94"/>
         <source>Change PassWord Success, Please Login in</source>
-        <translation type="unfinished">成功改变密码,请重新登录.</translation>
+        <translation>成功改变密码,请重新登录.</translation>
     </message>
 </context>
 <context>
@@ -461,7 +461,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/searchlineedit.cpp" line="56"/>
         <source>Clear</source>
-        <translation type="unfinished">清除</translation>
+        <translation>清除</translation>
     </message>
 </context>
 <context>
@@ -469,7 +469,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../Common.cpp" line="177"/>
         <source>Unknown OS</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -477,27 +477,27 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/cookiejar.cpp" line="554"/>
         <source>Website</source>
-        <translation type="unfinished">网站</translation>
+        <translation>网站</translation>
     </message>
     <message>
         <location filename="../browser/cookiejar.cpp" line="556"/>
         <source>Status</source>
-        <translation type="unfinished">状态</translation>
+        <translation>状态</translation>
     </message>
     <message>
         <location filename="../browser/cookiejar.cpp" line="576"/>
         <source>Allow</source>
-        <translation type="unfinished">容许</translation>
+        <translation>容许</translation>
     </message>
     <message>
         <location filename="../browser/cookiejar.cpp" line="585"/>
         <source>Block</source>
-        <translation type="unfinished">阻止</translation>
+        <translation>阻止</translation>
     </message>
     <message>
         <location filename="../browser/cookiejar.cpp" line="594"/>
         <source>Allow For Session</source>
-        <translation type="unfinished">容许Session</translation>
+        <translation>容许Session</translation>
     </message>
 </context>
 <context>
@@ -505,32 +505,32 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/cookiejar.cpp" line="399"/>
         <source>Website</source>
-        <translation type="unfinished">网站</translation>
+        <translation>网站</translation>
     </message>
     <message>
         <location filename="../browser/cookiejar.cpp" line="401"/>
         <source>Name</source>
-        <translation type="unfinished">名称</translation>
+        <translation>名称</translation>
     </message>
     <message>
         <location filename="../browser/cookiejar.cpp" line="403"/>
         <source>Path</source>
-        <translation type="unfinished">路径</translation>
+        <translation>路径</translation>
     </message>
     <message>
         <location filename="../browser/cookiejar.cpp" line="405"/>
         <source>Secure</source>
-        <translation type="unfinished">安全</translation>
+        <translation>安全</translation>
     </message>
     <message>
         <location filename="../browser/cookiejar.cpp" line="407"/>
         <source>Expires</source>
-        <translation type="unfinished">过期</translation>
+        <translation>过期</translation>
     </message>
     <message>
         <location filename="../browser/cookiejar.cpp" line="409"/>
         <source>Contents</source>
-        <translation type="unfinished">内容</translation>
+        <translation>内容</translation>
     </message>
 </context>
 <context>
@@ -538,17 +538,17 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/cookies.ui" line="13"/>
         <source>Cookies</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/cookies.ui" line="40"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished">移除</translation>
+        <translation>移除</translation>
     </message>
     <message>
         <location filename="../browser/cookies.ui" line="47"/>
         <source>Remove &amp;All Cookies</source>
-        <translation type="unfinished">移除所有Cookies</translation>
+        <translation>移除所有Cookies</translation>
     </message>
 </context>
 <context>
@@ -556,47 +556,47 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/cookiesexceptions.ui" line="13"/>
         <source>Cookie Exceptions</source>
-        <translation type="unfinished">Cookie 例外</translation>
+        <translation>Cookie 例外</translation>
     </message>
     <message>
         <location filename="../browser/cookiesexceptions.ui" line="19"/>
         <source>New Exception</source>
-        <translation type="unfinished">新建例外</translation>
+        <translation>新建例外</translation>
     </message>
     <message>
         <location filename="../browser/cookiesexceptions.ui" line="27"/>
         <source>Domain:</source>
-        <translation type="unfinished">域:</translation>
+        <translation>域:</translation>
     </message>
     <message>
         <location filename="../browser/cookiesexceptions.ui" line="57"/>
         <source>Block</source>
-        <translation type="unfinished">空</translation>
+        <translation>空</translation>
     </message>
     <message>
         <location filename="../browser/cookiesexceptions.ui" line="67"/>
         <source>Allow For Session</source>
-        <translation type="unfinished">容许Session</translation>
+        <translation>容许Session</translation>
     </message>
     <message>
         <location filename="../browser/cookiesexceptions.ui" line="77"/>
         <source>Allow</source>
-        <translation type="unfinished">容许</translation>
+        <translation>容许</translation>
     </message>
     <message>
         <location filename="../browser/cookiesexceptions.ui" line="89"/>
         <source>Exceptions</source>
-        <translation type="unfinished">例外</translation>
+        <translation>例外</translation>
     </message>
     <message>
         <location filename="../browser/cookiesexceptions.ui" line="114"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished">移除</translation>
+        <translation>移除</translation>
     </message>
     <message>
         <location filename="../browser/cookiesexceptions.ui" line="121"/>
         <source>Remove &amp;All</source>
-        <translation type="unfinished">移除所有</translation>
+        <translation>移除所有</translation>
     </message>
 </context>
 <context>
@@ -604,37 +604,37 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../createsubdirdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../createsubdirdialog.ui" line="75"/>
         <source>Directory Name: </source>
-        <translation type="unfinished">目录名称:</translation>
+        <translation>目录名称:</translation>
     </message>
     <message>
         <location filename="../createsubdirdialog.ui" line="82"/>
         <source>Location:</source>
-        <translation type="unfinished">位置: </translation>
+        <translation>位置: </translation>
     </message>
     <message>
         <location filename="../createsubdirdialog.ui" line="89"/>
         <source>eg: *.doc,*.pdf</source>
-        <translation type="unfinished">例:*.doc,*.pdf</translation>
+        <translation>例:*.doc,*.pdf</translation>
     </message>
     <message>
         <location filename="../createsubdirdialog.cpp" line="36"/>
         <source>Create New Sub Directory</source>
-        <translation type="unfinished">创建新的子目录</translation>
+        <translation>创建新的子目录</translation>
     </message>
     <message>
         <location filename="../createsubdirdialog.cpp" line="47"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../createsubdirdialog.cpp" line="47"/>
         <source>Please Input Directory Name: </source>
-        <translation type="unfinished">请输入目录名:</translation>
+        <translation>请输入目录名:</translation>
     </message>
 </context>
 <context>
@@ -642,32 +642,32 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../createtagdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../createtagdialog.ui" line="51"/>
         <source>Tag Name(&amp;N):</source>
-        <translation type="unfinished">标签名称:</translation>
+        <translation>标签名称:</translation>
     </message>
     <message>
         <location filename="../createtagdialog.ui" line="63"/>
         <source>eg: *.doc,*.pdf</source>
-        <translation type="unfinished">例:*.doc,*.pdf</translation>
+        <translation>例:*.doc,*.pdf</translation>
     </message>
     <message>
         <location filename="../createtagdialog.ui" line="77"/>
         <source>Description(&amp;D):</source>
-        <translation type="unfinished">描述</translation>
+        <translation>描述</translation>
     </message>
     <message>
         <location filename="../createtagdialog.cpp" line="31"/>
         <source>Create Tag</source>
-        <translation type="unfinished">新建标签</translation>
+        <translation>新建标签</translation>
     </message>
     <message>
         <location filename="../createtagdialog.cpp" line="33"/>
         <source>Create Sub Tag</source>
-        <translation type="unfinished">新建子标签</translation>
+        <translation>新建子标签</translation>
     </message>
 </context>
 <context>
@@ -675,77 +675,77 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../customtooldialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../customtooldialog.ui" line="38"/>
         <source>...Drap your favorite item to the tool bar</source>
-        <translation type="unfinished">...拖动您想需要的功能图标</translation>
+        <translation>...拖动您想需要的功能图标</translation>
     </message>
     <message>
         <location filename="../customtooldialog.ui" line="67"/>
         <source>...Or click the piture to Set the Default items to the tool bar</source>
-        <translation type="unfinished">...或者点击图片去恢复默认工具栏</translation>
+        <translation>...或者点击图片去恢复默认工具栏</translation>
     </message>
     <message>
         <location filename="../customtooldialog.ui" line="127"/>
         <source>the tool bar</source>
-        <translation type="unfinished">工具栏</translation>
+        <translation>工具栏</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="26"/>
         <source>Custom the tool bar</source>
-        <translation type="unfinished">自定义工具栏</translation>
+        <translation>自定义工具栏</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="98"/>
         <source>Are you sure that set the toolbar to default status</source>
-        <translation type="unfinished">是否确认恢复到默认工具栏?</translation>
+        <translation>是否确认恢复到默认工具栏?</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="131"/>
         <source>Show/Hide Class Tree</source>
-        <translation type="unfinished">显示/隐藏目录树</translation>
+        <translation>显示/隐藏目录树</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="140"/>
         <source>Full Screen</source>
-        <translation type="unfinished">全屏</translation>
+        <translation>全屏</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="149"/>
         <source>HomePage</source>
-        <translation type="unfinished">主页</translation>
+        <translation>主页</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="158"/>
         <source>Invite Friends...</source>
-        <translation type="unfinished">邀请朋友...</translation>
+        <translation>邀请朋友...</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="168"/>
         <source>Forum</source>
-        <translation type="unfinished">论坛</translation>
+        <translation>论坛</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="177"/>
         <source>Save To Mobile...</source>
-        <translation type="unfinished">存到移动设备...</translation>
+        <translation>存到移动设备...</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="186"/>
         <source>Import...</source>
-        <translation type="unfinished">导入...</translation>
+        <translation>导入...</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="195"/>
         <source>Export...</source>
-        <translation type="unfinished">导出...</translation>
+        <translation>导出...</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="204"/>
         <source>Plugins</source>
-        <translation type="unfinished">插件</translation>
+        <translation>插件</translation>
     </message>
 </context>
 <context>
@@ -753,95 +753,95 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../db/database.cpp" line="28"/>
         <source>SQL Error</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="54"/>
         <location filename="../db/database.cpp" line="318"/>
         <source>Error executing: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="72"/>
         <source>Cannot get databases list. %1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="87"/>
         <source>Error while dropping table %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="98"/>
         <source>Error while Excute: %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="111"/>
         <location filename="../db/database.cpp" line="141"/>
         <source>Error while getting the fileds of %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="166"/>
         <source>Error while the list of %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="188"/>
         <location filename="../db/database.cpp" line="205"/>
         <source>Error while the list of the system catalogue: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="217"/>
         <source>Error while dropping the view %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="230"/>
         <source>Error while dropping the index %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="242"/>
         <source>Unable to open file %1 for writing.</source>
-        <translation type="unfinished">不能打开数据库</translation>
+        <translation>不能打开数据库</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="254"/>
         <source>Error while exporting SQL: %1.</source>
-        <translation type="unfinished">执行SQL:%1 出错</translation>
+        <translation>执行SQL:%1 出错</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="274"/>
         <source>Error while describe object %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="291"/>
         <source>Error while dropping the trigger %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="324"/>
         <source>Not Set</source>
-        <translation type="unfinished">没有设置</translation>
+        <translation>没有设置</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="332"/>
         <source>DB driver is not valid</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="337"/>
         <source>DB type name does not equal sqlite3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="343"/>
         <source>DB handler is not valid</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -849,7 +849,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../db/dirdao.cpp" line="22"/>
         <source>SQL Error</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -857,7 +857,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../db/docdao.cpp" line="23"/>
         <source>SQL Error</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -865,27 +865,27 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../docnoteinfodialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../docnoteinfodialog.ui" line="51"/>
         <source>Page/sheet name:</source>
-        <translation type="unfinished">页/表名</translation>
+        <translation>页/表名</translation>
     </message>
     <message>
         <location filename="../docnoteinfodialog.ui" line="61"/>
         <source>Row:</source>
-        <translation type="unfinished">行</translation>
+        <translation>行</translation>
     </message>
     <message>
         <location filename="../docnoteinfodialog.ui" line="71"/>
         <source>Column:</source>
-        <translation type="unfinished">列</translation>
+        <translation>列</translation>
     </message>
     <message>
         <location filename="../docnoteinfodialog.cpp" line="27"/>
         <source>Document Notes</source>
-        <translation type="unfinished">文档标注</translation>
+        <translation>文档标注</translation>
     </message>
 </context>
 <context>
@@ -893,7 +893,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../db/doctagdao.cpp" line="21"/>
         <source>SQL Error</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -901,32 +901,32 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../doctagsdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../doctagsdialog.ui" line="38"/>
         <source>...Drap your favorite tags to the document</source>
-        <translation type="unfinished">拖动标签到文档</translation>
+        <translation>拖动标签到文档</translation>
     </message>
     <message>
         <location filename="../doctagsdialog.ui" line="95"/>
         <source>Documnet&apos;s Tags</source>
-        <translation type="unfinished">文档标签</translation>
+        <translation>文档标签</translation>
     </message>
     <message>
         <location filename="../doctagsdialog.ui" line="130"/>
         <source>Add New Tag</source>
-        <translation type="unfinished">增加新标签</translation>
+        <translation>增加新标签</translation>
     </message>
     <message>
         <location filename="../doctagsdialog.ui" line="142"/>
         <source>Add</source>
-        <translation type="unfinished">添加</translation>
+        <translation>添加</translation>
     </message>
     <message>
         <location filename="../doctagsdialog.cpp" line="32"/>
         <source>Add tag to the Document</source>
-        <translation type="unfinished">给文档添加标签</translation>
+        <translation>给文档添加标签</translation>
     </message>
 </context>
 <context>
@@ -934,38 +934,38 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../doctodirdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message utf8="true">
         <location filename="../doctodirdialog.ui" line="57"/>
         <source>新建文件夹</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../doctodirdialog.cpp" line="54"/>
         <source>Copy the Document to Directory</source>
-        <translation type="unfinished">拷贝文件到目录</translation>
+        <translation>拷贝文件到目录</translation>
     </message>
     <message>
         <location filename="../doctodirdialog.cpp" line="56"/>
         <source>Move the Document to Directory</source>
-        <translation type="unfinished">移动文件到目录</translation>
+        <translation>移动文件到目录</translation>
     </message>
     <message>
         <location filename="../doctodirdialog.cpp" line="72"/>
         <location filename="../doctodirdialog.cpp" line="133"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../doctodirdialog.cpp" line="72"/>
         <source>Please Select the other Directory</source>
-        <translation type="unfinished">请选择其他目录</translation>
+        <translation>请选择其他目录</translation>
     </message>
     <message>
         <location filename="../doctodirdialog.cpp" line="133"/>
         <source>Please Select an directory.</source>
-        <translation type="unfinished">请选择目录:</translation>
+        <translation>请选择目录:</translation>
     </message>
 </context>
 <context>
@@ -973,17 +973,17 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/downloads.ui" line="13"/>
         <source>Downloads</source>
-        <translation type="unfinished">下载</translation>
+        <translation>下载</translation>
     </message>
     <message>
         <location filename="../browser/downloads.ui" line="33"/>
         <source>Clean up</source>
-        <translation type="unfinished">清除</translation>
+        <translation>清除</translation>
     </message>
     <message>
         <location filename="../browser/downloads.ui" line="55"/>
         <source>0 Items</source>
-        <translation type="unfinished">0 下载对象</translation>
+        <translation>0 下载对象</translation>
     </message>
 </context>
 <context>
@@ -991,102 +991,102 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/downloaditem.ui" line="13"/>
         <source>Form</source>
-        <translation type="unfinished">开始</translation>
+        <translation>开始</translation>
     </message>
     <message>
         <location filename="../browser/downloaditem.ui" line="28"/>
         <source>Ico</source>
-        <translation type="unfinished">图标</translation>
+        <translation>图标</translation>
     </message>
     <message>
         <location filename="../browser/downloaditem.ui" line="43"/>
         <source>Filename</source>
-        <translation type="unfinished">文件名</translation>
+        <translation>文件名</translation>
     </message>
     <message>
         <location filename="../browser/downloaditem.ui" line="90"/>
         <source>Try Again</source>
-        <translation type="unfinished">重试</translation>
+        <translation>重试</translation>
     </message>
     <message>
         <location filename="../browser/downloaditem.ui" line="97"/>
         <source>Stop</source>
-        <translation type="unfinished">停止</translation>
+        <translation>停止</translation>
     </message>
     <message>
         <location filename="../browser/downloaditem.ui" line="104"/>
         <source>Open</source>
-        <translation type="unfinished">打开</translation>
+        <translation>打开</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="128"/>
         <source>Save File</source>
-        <translation type="unfinished">保存文件</translation>
+        <translation>保存文件</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="131"/>
         <source>Download canceled: %1</source>
-        <translation type="unfinished">取消下载:%1</translation>
+        <translation>取消下载:%1</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="217"/>
         <source>Error opening save file: %1</source>
-        <translation type="unfinished">打开保存文件出错:%1</translation>
+        <translation>打开保存文件出错:%1</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="226"/>
         <source>Error saving: %1</source>
-        <translation type="unfinished">保存出错:%1</translation>
+        <translation>保存出错:%1</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="235"/>
         <source>Network Error: %1</source>
-        <translation type="unfinished">网络出错:%1</translation>
+        <translation>网络出错:%1</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="269"/>
         <source>seconds</source>
-        <translation type="unfinished">秒</translation>
+        <translation>秒</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="272"/>
         <source>minutes</source>
-        <translation type="unfinished">分</translation>
+        <translation>分</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="284"/>
         <source>- %4 %5 remaining</source>
-        <translation type="unfinished">- %4 %5 剩余</translation>
+        <translation>- %4 %5 剩余</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="287"/>
         <source>%1 of %2 (%3/sec) %4</source>
-        <translation type="unfinished">%1 剩余 2%(%3/sec) %4</translation>
+        <translation>%1 剩余 2%(%3/sec) %4</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="289"/>
         <source>?</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="296"/>
         <source>%1 of %2 - Stopped</source>
-        <translation type="unfinished">1% 中 2% 已停止</translation>
+        <translation>1% 中 2% 已停止</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="307"/>
         <source>bytes</source>
-        <translation type="unfinished">bytes</translation>
+        <translation>bytes</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="310"/>
         <source>kB</source>
-        <translation type="unfinished">kB</translation>
+        <translation>kB</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="313"/>
         <source>MB</source>
-        <translation type="unfinished">MB</translation>
+        <translation>MB</translation>
     </message>
 </context>
 <context>
@@ -1094,12 +1094,12 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="544"/>
         <source>1 Download</source>
-        <translation type="unfinished">1 下载</translation>
+        <translation>1 下载</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="544"/>
         <source>%1 Downloads</source>
-        <translation type="unfinished">%1 下载</translation>
+        <translation>%1 下载</translation>
     </message>
 </context>
 <context>
@@ -1107,77 +1107,77 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../exportconvertdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.ui" line="33"/>
         <source>&amp;Select...</source>
-        <translation type="unfinished">选择</translation>
+        <translation>选择</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.ui" line="40"/>
         <source>Path to Export:</source>
-        <translation type="unfinished">导出目录:</translation>
+        <translation>导出目录:</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.ui" line="80"/>
         <source>Convert Type:</source>
-        <translation type="unfinished">转换类型</translation>
+        <translation>转换类型</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="36"/>
         <source>Convert Office to Pdf</source>
-        <translation type="unfinished">将office文档转成Pdf</translation>
+        <translation>将office文档转成Pdf</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="37"/>
         <source>Convert Pdf to Office</source>
-        <translation type="unfinished">将Pdf文档转成Office</translation>
+        <translation>将Pdf文档转成Office</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="38"/>
         <source>Convert Picture to Pdf</source>
-        <translation type="unfinished">将图片转成Pdf</translation>
+        <translation>将图片转成Pdf</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="39"/>
         <source>Convert Ppt to Picture</source>
-        <translation type="unfinished">将Ppt转成图片</translation>
+        <translation>将Ppt转成图片</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="43"/>
         <source>Doc Export -</source>
-        <translation type="unfinished">文档导出</translation>
+        <translation>文档导出</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="57"/>
         <source>Select existing Export directory</source>
-        <translation type="unfinished">选中存在的目录</translation>
+        <translation>选中存在的目录</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="58"/>
         <source>Choose a directory</source>
-        <translation type="unfinished">选择目录</translation>
+        <translation>选择目录</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="72"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="72"/>
         <source>Please Select the Path to Export Into..</source>
-        <translation type="unfinished">请选择目录导出...</translation>
+        <translation>请选择目录导出...</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="117"/>
         <source>Message</source>
-        <translation type="unfinished">消息</translation>
+        <translation>消息</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="117"/>
         <source>Documents Exported Success!</source>
-        <translation type="unfinished">文档导出成功!</translation>
+        <translation>文档导出成功!</translation>
     </message>
 </context>
 <context>
@@ -1185,97 +1185,97 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../exportdocdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="33"/>
         <source>&amp;Select...</source>
-        <translation type="unfinished">选择</translation>
+        <translation>选择</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="40"/>
         <source>Preview</source>
-        <translation type="unfinished">预览</translation>
+        <translation>预览</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="71"/>
         <source>PreView Files</source>
-        <translation type="unfinished">预览文件</translation>
+        <translation>预览文件</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="78"/>
         <source>Delete</source>
-        <translation type="unfinished">删除</translation>
+        <translation>删除</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="85"/>
         <source>Create Sub Directory</source>
-        <translation type="unfinished">创建子目录</translation>
+        <translation>创建子目录</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="111"/>
         <source>Emport From:</source>
-        <translation type="unfinished">源目录:</translation>
+        <translation>源目录:</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="118"/>
         <source>Path to Export:</source>
-        <translation type="unfinished">导出目录:</translation>
+        <translation>导出目录:</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="132"/>
         <source>Switch it on if the header should not be imported</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="135"/>
         <source>Include Sub Directory </source>
-        <translation type="unfinished">包含子目录</translation>
+        <translation>包含子目录</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="142"/>
         <source>eg: *.doc,*.pdf</source>
-        <translation type="unfinished">例:*.doc,*.pdf</translation>
+        <translation>例:*.doc,*.pdf</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="149"/>
         <source>Exculde File Type</source>
-        <translation type="unfinished">排除文档类型</translation>
+        <translation>排除文档类型</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="44"/>
         <source>Doc Export</source>
-        <translation type="unfinished">文档导出</translation>
+        <translation>文档导出</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="61"/>
         <source>Select existing Export directory</source>
-        <translation type="unfinished">选择一个存在的导出目录</translation>
+        <translation>选择一个存在的导出目录</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="62"/>
         <source>Choose a directory</source>
-        <translation type="unfinished">选择目录</translation>
+        <translation>选择目录</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="244"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="244"/>
         <source>Please Select the Path to Export Into..</source>
-        <translation type="unfinished">请选择导出目录...</translation>
+        <translation>请选择导出目录...</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="282"/>
         <source>Message</source>
-        <translation type="unfinished">消息</translation>
+        <translation>消息</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="282"/>
         <source>Documents Exported Success!</source>
-        <translation type="unfinished">文档导出成功!</translation>
+        <translation>文档导出成功!</translation>
     </message>
 </context>
 <context>
@@ -1283,27 +1283,27 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/history.ui" line="13"/>
         <source>History</source>
-        <translation type="unfinished">历史</translation>
+        <translation>历史</translation>
     </message>
     <message>
         <location filename="../browser/history.ui" line="40"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished">移除</translation>
+        <translation>移除</translation>
     </message>
     <message>
         <location filename="../browser/history.ui" line="47"/>
         <source>Remove &amp;All</source>
-        <translation type="unfinished">移除所有</translation>
+        <translation>移除所有</translation>
     </message>
     <message>
         <location filename="../browser/history.cpp" line="703"/>
         <source>Open</source>
-        <translation type="unfinished">打开</translation>
+        <translation>打开</translation>
     </message>
     <message>
         <location filename="../browser/history.cpp" line="705"/>
         <source>Copy</source>
-        <translation type="unfinished">复制</translation>
+        <translation>复制</translation>
     </message>
     <message>
         <location filename="../browser/history.cpp" line="707"/>
@@ -1316,12 +1316,12 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/history.cpp" line="630"/>
         <source>Show All History</source>
-        <translation type="unfinished">显示所有历史</translation>
+        <translation>显示所有历史</translation>
     </message>
     <message>
         <location filename="../browser/history.cpp" line="634"/>
         <source>Clear History</source>
-        <translation type="unfinished">清空历史</translation>
+        <translation>清空历史</translation>
     </message>
 </context>
 <context>
@@ -1329,12 +1329,12 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/history.cpp" line="403"/>
         <source>Title</source>
-        <translation type="unfinished">标题</translation>
+        <translation>标题</translation>
     </message>
     <message>
         <location filename="../browser/history.cpp" line="404"/>
         <source>Address</source>
-        <translation type="unfinished">地址</translation>
+        <translation>地址</translation>
     </message>
 </context>
 <context>
@@ -1342,12 +1342,12 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/history.cpp" line="1036"/>
         <source>Earlier Today</source>
-        <translation type="unfinished">今天早些时候</translation>
+        <translation>今天早些时候</translation>
     </message>
     <message>
         <location filename="../browser/history.cpp" line="1040"/>
         <source>%1 items</source>
-        <translation type="unfinished">1% 元素</translation>
+        <translation>1% 元素</translation>
     </message>
 </context>
 <context>
@@ -1355,162 +1355,162 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../importdocdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="33"/>
         <source>&amp;Select...</source>
-        <translation type="unfinished">选择</translation>
+        <translation>选择</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="40"/>
         <source>Preview</source>
-        <translation type="unfinished">预览</translation>
+        <translation>预览</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="52"/>
         <source>PreView Files</source>
-        <translation type="unfinished">预览文件</translation>
+        <translation>预览文件</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="78"/>
         <source>Delete</source>
-        <translation type="unfinished">删除</translation>
+        <translation>删除</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="104"/>
         <source>Import Location:</source>
-        <translation type="unfinished">导入位置:</translation>
+        <translation>导入位置:</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="111"/>
         <source>&amp;Path to Import Into:</source>
-        <translation type="unfinished">文档来源目录:</translation>
+        <translation>文档来源目录:</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="128"/>
         <source>&amp;File Type:</source>
-        <translation type="unfinished">文件类型</translation>
+        <translation>文件类型</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="139"/>
         <source>All files(*.*)</source>
-        <translation type="unfinished">所有文件</translation>
+        <translation>所有文件</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="144"/>
         <location filename="../importdocdialog.cpp" line="29"/>
         <source>All supported files</source>
-        <translation type="unfinished">所有支持文件</translation>
+        <translation>所有支持文件</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="149"/>
         <location filename="../importdocdialog.cpp" line="30"/>
         <source>Office files(*.doc,*.docx,*.xls,*.xlsx,*.ppt,*.pptx)</source>
-        <translation type="unfinished">Office(*.doc,*.docx,*.xls,*.xlsx,*.ppt,*.pptx)</translation>
+        <translation>Office(*.doc,*.docx,*.xls,*.xlsx,*.ppt,*.pptx)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="154"/>
         <location filename="../importdocdialog.cpp" line="31"/>
         <source>Pdf files(*.pdf)</source>
-        <translation type="unfinished">Pdf(*.pdf)</translation>
+        <translation>Pdf(*.pdf)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="159"/>
         <location filename="../importdocdialog.cpp" line="32"/>
         <source>Html files(*.html,*.htm)</source>
-        <translation type="unfinished">网页(*.html,*.htm)</translation>
+        <translation>网页(*.html,*.htm)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="164"/>
         <location filename="../importdocdialog.cpp" line="33"/>
         <source>Picture file(*.jpeg,*.jpg,*.png,*.bmp,*.gif)</source>
-        <translation type="unfinished">图片(*.jpeg,*.jpg,*.png,*.bmp,*.gif)</translation>
+        <translation>图片(*.jpeg,*.jpg,*.png,*.bmp,*.gif)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="169"/>
         <location filename="../importdocdialog.cpp" line="34"/>
         <source>Flash files(*.flv,*.swf)</source>
-        <translation type="unfinished">Flash(*.flv,*.swf)</translation>
+        <translation>Flash(*.flv,*.swf)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="174"/>
         <location filename="../importdocdialog.cpp" line="35"/>
         <source>Source files(*.cpp,*.h,*.hpp,*.c,*.java,*.js,*.cs,*.vbs,*.sql,*.rb,*.py,*.asp,*.aspx,*.jsp,*.php,*.xml)</source>
-        <translation type="unfinished">代码(*.cpp,*.h,*.hpp,*.c,*.java,*.js,*.cs,*.vbs,*.sql,*.rb,*.py,*.asp,*.aspx,*.jsp,*.php,*.xml)</translation>
+        <translation>代码(*.cpp,*.h,*.hpp,*.c,*.java,*.js,*.cs,*.vbs,*.sql,*.rb,*.py,*.asp,*.aspx,*.jsp,*.php,*.xml)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="179"/>
         <location filename="../importdocdialog.cpp" line="36"/>
         <source>Txt files(*.txt,*.ini,*.bar,*.inf)</source>
-        <translation type="unfinished">文本(*.txt,*.ini,*.bar,*.inf)</translation>
+        <translation>文本(*.txt,*.ini,*.bar,*.inf)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="184"/>
         <location filename="../importdocdialog.cpp" line="37"/>
         <source>Movie fies(*.rm,*.rmvb,*.avi,*.mpg,*.mlv,*.mpe,*.mpeg,*.m2v)</source>
-        <translation type="unfinished">影音(*.rm,*.rmvb,*.avi,*.mpg,*.mlv,*.mpe,*.mpeg,*.m2v)</translation>
+        <translation>影音(*.rm,*.rmvb,*.avi,*.mpg,*.mlv,*.mpe,*.mpeg,*.m2v)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="192"/>
         <location filename="../importdocdialog.ui" line="209"/>
         <source>eg: *.bsp,*.axs</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="199"/>
         <source>Switch it on if the header should not be imported</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="202"/>
         <source>Include Sub Directory </source>
-        <translation type="unfinished">包含子目录</translation>
+        <translation>包含子目录</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="216"/>
         <source>Exclude File Type:</source>
-        <translation type="unfinished">排除文件类型</translation>
+        <translation>排除文件类型</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="223"/>
         <source>Custom File Type:</source>
-        <translation type="unfinished">自定义文件类型:</translation>
+        <translation>自定义文件类型:</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="230"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="244"/>
         <source>Create Sub Directory</source>
-        <translation type="unfinished">创建子目录:</translation>
+        <translation>创建子目录:</translation>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="54"/>
         <source>Document Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="72"/>
         <source>Select existing doc directory</source>
-        <translation type="unfinished">选择存放文档目录</translation>
+        <translation>选择存放文档目录</translation>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="73"/>
         <source>Choose a directory</source>
-        <translation type="unfinished">选择目录</translation>
+        <translation>选择目录</translation>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="88"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="88"/>
         <source>Please Select the Path to Import Into..</source>
-        <translation type="unfinished">请选择目录导入文档..</translation>
+        <translation>请选择目录导入文档..</translation>
     </message>
 </context>
 <context>
@@ -1518,112 +1518,112 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../logview.ui" line="53"/>
         <source>Search Next</source>
-        <translation type="unfinished">向后</translation>
+        <translation>向后</translation>
     </message>
     <message>
         <location filename="../logview.ui" line="56"/>
         <source>F3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../logview.ui" line="63"/>
         <source>Whole Words</source>
-        <translation type="unfinished">全词匹配</translation>
+        <translation>全词匹配</translation>
     </message>
     <message>
         <location filename="../logview.ui" line="73"/>
         <source>Case Sensitive</source>
-        <translation type="unfinished">大小写一致</translation>
+        <translation>大小写一致</translation>
     </message>
     <message>
         <location filename="../logview.ui" line="80"/>
         <source>Search:</source>
-        <translation type="unfinished">检索:</translation>
+        <translation>检索:</translation>
     </message>
     <message>
         <location filename="../logview.ui" line="87"/>
         <source>Search previous</source>
-        <translation type="unfinished">向前</translation>
+        <translation>向前</translation>
     </message>
     <message>
         <location filename="../logview.ui" line="90"/>
         <source>Shift+F3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="35"/>
         <source>&amp;Help</source>
-        <translation type="unfinished">帮助</translation>
+        <translation>帮助</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="36"/>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../logview.ui" line="14"/>
         <source>Log Viewer</source>
-        <translation type="unfinished">Log查看</translation>
+        <translation>Log查看</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="70"/>
         <source>Cannot open file %1</source>
-        <translation type="unfinished">不能打开文件 %1</translation>
+        <translation>不能打开文件 %1</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="70"/>
         <source>Open File</source>
-        <translation type="unfinished">打开文件</translation>
+        <translation>打开文件</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="103"/>
         <source>Save</source>
-        <translation type="unfinished">保存</translation>
+        <translation>保存</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="104"/>
         <source>All Files (*)</source>
-        <translation type="unfinished">所有文件 (*)</translation>
+        <translation>所有文件 (*)</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="117"/>
         <source>Save File</source>
-        <translation type="unfinished">保存文件</translation>
+        <translation>保存文件</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="118"/>
         <source>Cannot write into file %1</source>
-        <translation type="unfinished">不能写入文件 %1</translation>
+        <translation>不能写入文件 %1</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="139"/>
         <source>New File</source>
-        <translation type="unfinished">新建文件</translation>
+        <translation>新建文件</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="140"/>
         <source>All you changes will be lost. Are you sure?</source>
-        <translation type="unfinished">所有修改将会丢失,是否确认?</translation>
+        <translation>所有修改将会丢失,是否确认?</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="153"/>
         <source>Closing SQL Editor</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="154"/>
         <source>Document has been changed. Do you want do save its content?</source>
-        <translation type="unfinished">文档已经被修改,是否保存?</translation>
+        <translation>文档已经被修改,是否保存?</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="230"/>
         <source>Unexpected File Change</source>
-        <translation type="unfinished">外部的文件修改</translation>
+        <translation>外部的文件修改</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="231"/>
         <source>Your currently edited file has been changed outside this application. Do you want to reload it?</source>
-        <translation type="unfinished">您现在查看的文件已被外部修改,是否重新加载?</translation>
+        <translation>您现在查看的文件已被外部修改,是否重新加载?</translation>
     </message>
 </context>
 <context>
@@ -1631,65 +1631,65 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../logindialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="21"/>
         <source>about:blank</source>
-        <translation type="unfinished">空</translation>
+        <translation>空</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="45"/>
         <location filename="../logindialog.ui" line="136"/>
         <source>Login</source>
-        <translation type="unfinished">登录</translation>
+        <translation>登录</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="57"/>
         <source>UserName/Email</source>
-        <translation type="unfinished">用户名/电子邮件</translation>
+        <translation>用户名/电子邮件</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="82"/>
         <source>Login Slfile</source>
-        <translation type="unfinished">登陆Slfile</translation>
+        <translation>登陆Slfile</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="95"/>
         <location filename="../logindialog.ui" line="220"/>
         <source>PassWord</source>
-        <translation type="unfinished">密码</translation>
+        <translation>密码</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="120"/>
         <source>Remember Me</source>
-        <translation type="unfinished">记住我</translation>
+        <translation>记住我</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="142"/>
         <source>Register</source>
-        <translation type="unfinished">注册</translation>
+        <translation>注册</translation>
     </message>
     <message utf8="true">
         <location filename="../logindialog.ui" line="154"/>
         <source>注册</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="167"/>
         <source>Get the Slfile Account</source>
-        <translation type="unfinished">获得Slfile账号</translation>
+        <translation>获得Slfile账号</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="180"/>
         <location filename="../logindialog.ui" line="329"/>
         <source>Email</source>
-        <translation type="unfinished">电子邮件</translation>
+        <translation>电子邮件</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="202"/>
         <source>UserName</source>
-        <translation type="unfinished">用户名</translation>
+        <translation>用户名</translation>
     </message>
     <message utf8="true">
         <location filename="../logindialog.ui" line="245"/>
@@ -1698,39 +1698,39 @@ Do you want to reload all pages?</source>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;宋体&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://www.slfile.net/termservice&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Terms of service&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="262"/>
         <source>Click the Register button will 
 indicate that you agree and 
 acknowledge our Terms of Service</source>
-        <translation type="unfinished">点击【注册】按钮表明您已经了解并通知我们的服务条款</translation>
+        <translation>点击【注册】按钮表明您已经了解并通知我们的服务条款</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="270"/>
         <source>Forget Password</source>
-        <translation type="unfinished">忘记密码</translation>
+        <translation>忘记密码</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="290"/>
         <source>Reset Password</source>
-        <translation type="unfinished">重置密码</translation>
+        <translation>重置密码</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="308"/>
         <source>Please input your Email.</source>
-        <translation type="unfinished">请输入Email</translation>
+        <translation>请输入Email</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="351"/>
         <source>ReSet</source>
-        <translation type="unfinished">重置</translation>
+        <translation>重置</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="31"/>
         <source>Slfile</source>
-        <translation type="unfinished">Slfile文档管理</translation>
+        <translation>Slfile文档管理</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="119"/>
@@ -1740,53 +1740,53 @@ acknowledge our Terms of Service</source>
         <location filename="../logindialog.cpp" line="137"/>
         <location filename="../logindialog.cpp" line="144"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="119"/>
         <source>Server Failed, Please Contact Administrator</source>
-        <translation type="unfinished">服务器异常,请联系管理员</translation>
+        <translation>服务器异常,请联系管理员</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="124"/>
         <source>Sign up Failed, Please Contact Administrator</source>
-        <translation type="unfinished">注册失败,请联系管理员</translation>
+        <translation>注册失败,请联系管理员</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="128"/>
         <source> : Username/Email have existed, Please Choose an other one</source>
-        <translation type="unfinished">用户名/电子邮箱已经存在,请确认</translation>
+        <translation>用户名/电子邮箱已经存在,请确认</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="133"/>
         <source> : Username/Email is not existed, Please confirm</source>
-        <translation type="unfinished">用户名/电子邮箱不存在,请确认.</translation>
+        <translation>用户名/电子邮箱不存在,请确认.</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="137"/>
         <source> : Password is incorrect, Please confirm</source>
-        <translation type="unfinished">密码不正确,请确认.</translation>
+        <translation>密码不正确,请确认.</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="144"/>
         <source> : Change Password Success, &lt;br&gt;But Send Mail Failed Please Contact Administrator to get the Password</source>
-        <translation type="unfinished">改变密码成功, &lt;br&gt;请联系管理员获得您的新密码</translation>
+        <translation>改变密码成功, &lt;br&gt;请联系管理员获得您的新密码</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="150"/>
         <location filename="../logindialog.cpp" line="228"/>
         <source>Information</source>
-        <translation type="unfinished">消息</translation>
+        <translation>消息</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="150"/>
         <source>Sign up Successed, Please Login in</source>
-        <translation type="unfinished">注册成功,请登录.</translation>
+        <translation>注册成功,请登录.</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="228"/>
         <source>ReSet Password Successed, Please Check the email to get the new password</source>
-        <translation type="unfinished">重置密码成功,请检查邮箱去获取新的密码</translation>
+        <translation>重置密码成功,请检查邮箱去获取新的密码</translation>
     </message>
 </context>
 <context>
@@ -1794,431 +1794,431 @@ acknowledge our Terms of Service</source>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>VideoFeed</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="70"/>
         <source>文件名</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="75"/>
         <source>目标位置</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="80"/>
         <source>修改时间</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="96"/>
         <source>about:blank</source>
-        <translation type="unfinished">空</translation>
+        <translation>空</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="116"/>
         <source>查看(&amp;V)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="120"/>
         <source>皮肤(&amp;V)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="128"/>
         <source>语言</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="145"/>
         <source>文件(&amp;F)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="157"/>
         <source>帮助(&amp;H)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="172"/>
         <source>工具(&amp;T)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="187"/>
         <location filename="../mainwindow.cpp" line="1129"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="192"/>
         <source>选项 </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="197"/>
         <source>查看日志</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="202"/>
         <source>导入</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="207"/>
         <source>导出</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="212"/>
         <source>文档另存为</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="217"/>
         <source>另存到移动设备</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="222"/>
         <source>退出</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="227"/>
         <source>全屏</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="232"/>
         <source>显示/隐藏分类树</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="237"/>
         <source>默认</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="242"/>
         <source>书香</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="247"/>
         <source>灰色</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="252"/>
         <source>自定义工具栏</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="257"/>
         <source>显示状态栏</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="262"/>
         <location filename="../mainwindow.ui" line="307"/>
         <source>插件管理</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="267"/>
         <source>用户手册</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="272"/>
         <source>个人首页</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="277"/>
         <source>邀请朋友</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="282"/>
         <source>用户论坛</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="287"/>
         <source>关于</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="292"/>
         <source>检查新版本</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="297"/>
         <source>选项</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="302"/>
         <source>查看日志文件</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="312"/>
         <source>简体中文</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="317"/>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="322"/>
         <source>日本語</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="312"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="371"/>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>关于</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="427"/>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>文件</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="436"/>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>查看</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="354"/>
         <location filename="../mainwindow.cpp" line="474"/>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>帮助</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="87"/>
         <source>Local File Manage</source>
-        <translation type="unfinished"></translation>
+        <translation>slfile</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="202"/>
         <source>ALL Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>所有文档</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="209"/>
         <source>Current Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>当前目录</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="216"/>
         <source>Current Directory(Include Sub Directory)</source>
-        <translation type="unfinished"></translation>
+        <translation>当前目录(包含主目录)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="230"/>
         <source>Document Name And Content</source>
-        <translation type="unfinished"></translation>
+        <translation>文档名称及内容</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="236"/>
         <source>Document Name Only</source>
-        <translation type="unfinished"></translation>
+        <translation>文档名称</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="242"/>
         <source>Document Content Only</source>
-        <translation type="unfinished"></translation>
+        <translation>文档内容</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="259"/>
         <source>Option</source>
-        <translation type="unfinished"></translation>
+        <translation>选项</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="284"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="293"/>
         <source>&amp;Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>导入</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="294"/>
         <source>Ctrl+I</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="298"/>
         <source>&amp;Export...</source>
-        <translation type="unfinished"></translation>
+        <translation>导出</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="299"/>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="303"/>
         <source>&amp;Save As...</source>
-        <translation type="unfinished"></translation>
+        <translation>另存为</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="307"/>
         <source>&amp;Save To Mobile...</source>
-        <translation type="unfinished"></translation>
+        <translation>保存到移动设备</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="311"/>
         <source>&amp;Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>退出</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="316"/>
         <source>&amp;Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>全屏</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="320"/>
         <source>&amp;Show/Hide Class Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>显示/隐藏目录树</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="321"/>
         <source>Ctrl+H</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="342"/>
         <source>&amp;Setting ToolBar</source>
-        <translation type="unfinished"></translation>
+        <translation>设置工具栏</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="346"/>
         <source>&amp;Show/Hide Tool Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>显示/隐藏工具栏</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="355"/>
         <source>F2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="359"/>
         <source>&amp;HomePage</source>
-        <translation type="unfinished"></translation>
+        <translation>主页</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="363"/>
         <source>&amp;Invite Friends...</source>
-        <translation type="unfinished"></translation>
+        <translation>邀请朋友</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="367"/>
         <source>&amp;Forum</source>
-        <translation type="unfinished"></translation>
+        <translation>论坛</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="375"/>
         <source>&amp;Update</source>
-        <translation type="unfinished"></translation>
+        <translation>更新</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="379"/>
         <source>&amp;Option</source>
-        <translation type="unfinished"></translation>
+        <translation>选项</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="380"/>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="384"/>
         <source>&amp;View Log...</source>
-        <translation type="unfinished"></translation>
+        <translation>查看日志</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="385"/>
         <source>Ctrl+L</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="394"/>
         <source>Account Information</source>
-        <translation type="unfinished">账户信息</translation>
+        <translation>账户信息</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="398"/>
         <source>Update to VIP</source>
-        <translation type="unfinished"></translation>
+        <translation>升级到VIP</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="402"/>
         <source>Logo Off</source>
-        <translation type="unfinished"></translation>
+        <translation>退出</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="458"/>
         <source>&amp;Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>工具</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="465"/>
         <source>&amp;Account</source>
-        <translation type="unfinished"></translation>
+        <translation>账号</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="502"/>
         <source>Tool Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>工具栏</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="729"/>
         <source>Note Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>备注编辑器</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1120"/>
         <source>Mi&amp;nimize</source>
-        <translation type="unfinished"></translation>
+        <translation>最小化</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1123"/>
         <source>Ma&amp;ximize</source>
-        <translation type="unfinished"></translation>
+        <translation>最大化</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1126"/>
         <source>&amp;Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>重置</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1147"/>
         <source>Systray</source>
-        <translation type="unfinished"></translation>
+        <translation>系统托盘</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1148"/>
         <source>Sorry, I already gave what help I could.
 Maybe you should try asking a human?</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2226,39 +2226,39 @@ Maybe you should try asking a human?</source>
     <message>
         <location filename="../movetodirdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message utf8="true">
         <location filename="../movetodirdialog.ui" line="57"/>
         <source>新建文件夹</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../movetodirdialog.cpp" line="45"/>
         <source>Move the Sub Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>移动到子目录</translation>
     </message>
     <message>
         <location filename="../movetodirdialog.cpp" line="57"/>
         <location filename="../movetodirdialog.cpp" line="63"/>
         <location filename="../movetodirdialog.cpp" line="108"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../movetodirdialog.cpp" line="57"/>
         <source>Please Select Need Moved Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>选择需要移动的目录</translation>
     </message>
     <message>
         <location filename="../movetodirdialog.cpp" line="63"/>
         <source>Please Select the other Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择其他目录</translation>
     </message>
     <message>
         <location filename="../movetodirdialog.cpp" line="108"/>
         <source>Please Select an directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择目录.</translation>
     </message>
 </context>
 <context>
@@ -2266,22 +2266,22 @@ Maybe you should try asking a human?</source>
     <message>
         <location filename="../movetotagdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../movetotagdialog.cpp" line="48"/>
         <source>Move the Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>移动标签</translation>
     </message>
     <message>
         <location filename="../movetotagdialog.cpp" line="60"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../movetotagdialog.cpp" line="60"/>
         <source>Please Select the other Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择另外的标签</translation>
     </message>
 </context>
 <context>
@@ -2289,157 +2289,157 @@ Maybe you should try asking a human?</source>
     <message>
         <location filename="../mytableview.cpp" line="95"/>
         <source>&amp;Open in System soft</source>
-        <translation type="unfinished"></translation>
+        <translation>以系统软件打开</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="99"/>
         <source>&amp;Open in tab page</source>
-        <translation type="unfinished"></translation>
+        <translation>在Tab页打开</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="103"/>
         <source>&amp;Open in System Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>打开资源管理器</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="107"/>
         <source>&amp;Export..</source>
-        <translation type="unfinished"></translation>
+        <translation>导出</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="111"/>
         <source>&amp;Send Email As Attachment</source>
-        <translation type="unfinished"></translation>
+        <translation>作为附件发送邮件</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="115"/>
         <source>&amp;Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>笔记</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="119"/>
         <source>&amp;Related Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>相关文档</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="123"/>
         <source>&amp;Tags</source>
-        <translation type="unfinished"></translation>
+        <translation>标签</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="127"/>
         <source>&amp;Delete(Move to the Wastebasket)</source>
-        <translation type="unfinished"></translation>
+        <translation>删除(移动到垃圾篓)</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="131"/>
         <source>&amp;Encrypt</source>
-        <translation type="unfinished"></translation>
+        <translation>加密</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="135"/>
         <source>&amp;Find and Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>查找与替换</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="139"/>
         <source>&amp;Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>全选</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="143"/>
         <source>&amp;Print</source>
-        <translation type="unfinished"></translation>
+        <translation>打印</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="147"/>
         <source>&amp;Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>高级</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="151"/>
         <source>&amp;Convert Document</source>
-        <translation type="unfinished"></translation>
+        <translation>转换文档</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="155"/>
         <source>&amp;Convert Office to Pdf</source>
-        <translation type="unfinished"></translation>
+        <translation>Office转Pdf</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="156"/>
         <source>&amp;Convert Pdf to Office</source>
-        <translation type="unfinished"></translation>
+        <translation>Pdf转Office</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="157"/>
         <source>&amp;Convert Picture to Pdf</source>
-        <translation type="unfinished"></translation>
+        <translation>图片转Pdf</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="158"/>
         <source>&amp;Convert Ppt to Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Ppt转图片</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="165"/>
         <source>&amp;Merge Document</source>
-        <translation type="unfinished"></translation>
+        <translation>合并文档</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="168"/>
         <source>&amp;Restore And Repair Document</source>
-        <translation type="unfinished"></translation>
+        <translation>修复文档</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="171"/>
         <source>&amp;Print Documents In Batch</source>
-        <translation type="unfinished"></translation>
+        <translation>批量答应文档</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="174"/>
         <source>&amp;Change format in the Document</source>
-        <translation type="unfinished"></translation>
+        <translation>改变格式</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="184"/>
         <source>&amp;Move to...</source>
-        <translation type="unfinished"></translation>
+        <translation>移动到...</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="187"/>
         <source>&amp;Copy to...</source>
-        <translation type="unfinished"></translation>
+        <translation>复制到...</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="190"/>
         <source>&amp;Option</source>
-        <translation type="unfinished"></translation>
+        <translation>选项</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="195"/>
         <source>&amp;One Row</source>
-        <translation type="unfinished"></translation>
+        <translation>一行</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="199"/>
         <source>&amp;Two Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>两行</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="203"/>
         <source>&amp;The second Row&apos;s Option</source>
-        <translation type="unfinished"></translation>
+        <translation>第二行选项...</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="204"/>
         <source>&amp;Show notes of Document on Tooltip</source>
-        <translation type="unfinished"></translation>
+        <translation>显示笔记在文档提示</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="221"/>
         <source>&amp;Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>属性</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="673"/>
@@ -2451,14 +2451,14 @@ Maybe you should try asking a human?</source>
         <location filename="../mytableview.cpp" line="1211"/>
         <location filename="../mytableview.cpp" line="1232"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="673"/>
         <location filename="../mytableview.cpp" line="691"/>
         <location filename="../mytableview.cpp" line="724"/>
         <source>Please Confirm The original file  has Deleted Or Moved. </source>
-        <translation type="unfinished"></translation>
+        <translation>请确认原始文件是否已删除或移动</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="713"/>
@@ -2467,72 +2467,72 @@ Maybe you should try asking a human?</source>
         <location filename="../mytableview.cpp" line="885"/>
         <location filename="../mytableview.cpp" line="1232"/>
         <source>Please Select an Document.</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择一个文档.</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="724"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>错误</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="897"/>
         <source>Are you sure that delete the document ?</source>
-        <translation type="unfinished"></translation>
+        <translation>是否确认删除文档?</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1016"/>
         <source>Create Date</source>
-        <translation type="unfinished"></translation>
+        <translation>创建日期</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1022"/>
         <source>Modified Date</source>
-        <translation type="unfinished"></translation>
+        <translation>修改日期</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1028"/>
         <source>Accessed Date</source>
-        <translation type="unfinished"></translation>
+        <translation>访问日期</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1034"/>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>大小</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1040"/>
         <source>Author</source>
-        <translation type="unfinished"></translation>
+        <translation>作者</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1046"/>
         <source>Read Count</source>
-        <translation type="unfinished"></translation>
+        <translation>阅读次数</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1052"/>
         <source>Related Count</source>
-        <translation type="unfinished"></translation>
+        <translation>关联次数</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1058"/>
         <source>Tags</source>
-        <translation type="unfinished"></translation>
+        <translation>标签</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1064"/>
         <source>URL</source>
-        <translation type="unfinished"></translation>
+        <translation>网址</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1070"/>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>本地位置</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1212"/>
         <source>Please Confirm The original file has Deleted Or Moved. </source>
-        <translation type="unfinished"></translation>
+        <translation>请确认原始文件是否已被删除或移动.</translation>
     </message>
 </context>
 <context>
@@ -2540,131 +2540,131 @@ Maybe you should try asking a human?</source>
     <message>
         <location filename="../mytreeview.cpp" line="47"/>
         <source>AllDocs</source>
-        <translation type="unfinished"></translation>
+        <translation>所有文件夹</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="53"/>
         <source>AllTags</source>
-        <translation type="unfinished"></translation>
+        <translation>标签</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="58"/>
         <source>WasteBasket</source>
-        <translation type="unfinished"></translation>
+        <translation>垃圾篓</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="105"/>
         <source>File Manage</source>
-        <translation type="unfinished"></translation>
+        <translation>文档管理</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="118"/>
         <source>&amp;New Sub Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>新建子文件夹</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="120"/>
         <source>&amp;Move To Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>移动到...</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="122"/>
         <location filename="../mytreeview.cpp" line="169"/>
         <source>&amp;Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>删除</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="124"/>
         <location filename="../mytreeview.cpp" line="171"/>
         <source>&amp;Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>重命名</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="128"/>
         <source>&amp;Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>导入...</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="129"/>
         <source>Ctrl+I</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="132"/>
         <source>&amp;Export...</source>
-        <translation type="unfinished"></translation>
+        <translation>导出...</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="133"/>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="136"/>
         <source>&amp;Sort SubDirs</source>
-        <translation type="unfinished"></translation>
+        <translation>子文件夹排序</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="139"/>
         <source>&amp;Show docs under sub Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>显示子文件夹文档</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="147"/>
         <location filename="../mytreeview.cpp" line="157"/>
         <source>&amp;Protect</source>
-        <translation type="unfinished"></translation>
+        <translation>保护</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="149"/>
         <location filename="../mytreeview.cpp" line="179"/>
         <source>&amp;Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>属性</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="153"/>
         <source>&amp;New Root Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>新建根文件夹</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="155"/>
         <source>&amp;Sort Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>文件夹排序</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="159"/>
         <source>&amp;Option</source>
-        <translation type="unfinished"></translation>
+        <translation>选项</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="163"/>
         <source>&amp;New Sub Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>新建子标签</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="165"/>
         <source>&amp;Move to Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>移动到标签</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="167"/>
         <source>&amp;Move to Root Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>移动到根标签</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="173"/>
         <source>&amp;Show docs under sub Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>显示子标签文档</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="183"/>
         <source>&amp;New Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>新建标签</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="187"/>
         <source>&amp;Clear Basket</source>
-        <translation type="unfinished"></translation>
+        <translation>清空垃圾篓</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="772"/>
@@ -2682,13 +2682,13 @@ Maybe you should try asking a human?</source>
         <location filename="../mytreeview.cpp" line="1142"/>
         <location filename="../mytreeview.cpp" line="1182"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="772"/>
         <location filename="../mytreeview.cpp" line="794"/>
         <source>Please Select an sub directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择一个子目录.</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="816"/>
@@ -2701,52 +2701,52 @@ Maybe you should try asking a human?</source>
         <location filename="../mytreeview.cpp" line="1081"/>
         <location filename="../mytreeview.cpp" line="1115"/>
         <source>Please Select an directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择一个目录</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="895"/>
         <source>New Directory name:</source>
-        <translation type="unfinished"></translation>
+        <translation>新建目录名称:</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="954"/>
         <source>New Roor Directory name:</source>
-        <translation type="unfinished"></translation>
+        <translation>新建根目录名称:</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="1020"/>
         <source>Are you sure you want to delete the %1 tag?</source>
-        <translation type="unfinished"></translation>
+        <translation>您是否确认删除 %1 标签</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="1044"/>
         <source>Please Select an Sub Tag.</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择一个子标签.</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="1063"/>
         <source>New Tag name:</source>
-        <translation type="unfinished"></translation>
+        <translation>新建标签名称:</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="1142"/>
         <source>Please Select an Tag.</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择一个标签.</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="1182"/>
         <source>Please Select an sub tag.</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择一个子标签.</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="1193"/>
         <source>Are you sure that delete the directory &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>您是否确定删除目录 %1 ?</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="1225"/>
         <source>Are you sure that drop the Basket ?</source>
-        <translation type="unfinished"></translation>
+        <translation>您是否确定清空垃圾篓?</translation>
     </message>
 </context>
 <context>
@@ -2754,12 +2754,12 @@ Maybe you should try asking a human?</source>
     <message>
         <location filename="../browser/networkaccessmanager.cpp" line="151"/>
         <source>&lt;qt&gt;Enter username and password for &quot;%1&quot; at %2&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/networkaccessmanager.cpp" line="175"/>
         <source>&lt;qt&gt;Connect to proxy &quot;%1&quot; using:&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/networkaccessmanager.cpp" line="199"/>
@@ -2770,7 +2770,7 @@ Maybe you should try asking a human?</source>
 %2
 
 Do you want to ignore these errors for this host?</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2778,7 +2778,7 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../db/notedao.cpp" line="22"/>
         <source>SQL Error</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2786,97 +2786,97 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../notesdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../notesdialog.ui" line="26"/>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>笔记</translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="23"/>
         <source>Positon</source>
-        <translation type="unfinished"></translation>
+        <translation>位置</translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="24"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>类型</translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="25"/>
         <source>Content</source>
-        <translation type="unfinished"></translation>
+        <translation>内容</translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="26"/>
         <source>Author</source>
-        <translation type="unfinished"></translation>
+        <translation>作者</translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="27"/>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>日期</translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="28"/>
         <source>NoteUid</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="55"/>
         <source>Add note</source>
-        <translation type="unfinished"></translation>
+        <translation>添加笔记</translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="56"/>
         <source>Delete this note</source>
-        <translation type="unfinished"></translation>
+        <translation>删除笔记</translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="57"/>
         <source>Edit this note</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑笔记</translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="58"/>
         <source>Delete All notes</source>
-        <translation type="unfinished"></translation>
+        <translation>删除所有笔记</translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="78"/>
         <source>Are you sure that delete the note ?</source>
-        <translation type="unfinished"></translation>
+        <translation>您确定要删除该笔记?</translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="150"/>
         <source>Are you sure that delete All the notes ?</source>
-        <translation type="unfinished"></translation>
+        <translation>您确定要删除所有笔记?</translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="196"/>
         <source> page</source>
-        <translation type="unfinished"></translation>
+        <translation>页</translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="199"/>
         <source>sheet </source>
-        <translation type="unfinished"></translation>
+        <translation>表</translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="205"/>
         <source> row</source>
-        <translation type="unfinished"></translation>
+        <translation>行</translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="210"/>
         <source> column</source>
-        <translation type="unfinished"></translation>
+        <translation>列</translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="215"/>
         <source>text</source>
-        <translation type="unfinished"></translation>
+        <translation>文本</translation>
     </message>
 </context>
 <context>
@@ -2884,27 +2884,27 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../browser/passworddialog.ui" line="13"/>
         <source>Authentication Required</source>
-        <translation type="unfinished"></translation>
+        <translation>需要认证</translation>
     </message>
     <message>
         <location filename="../browser/passworddialog.ui" line="21"/>
         <source>DUMMY ICON</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/passworddialog.ui" line="34"/>
         <source>INTRO TEXT DUMMY</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/passworddialog.ui" line="43"/>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/passworddialog.ui" line="53"/>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2912,27 +2912,27 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../preferencesdialog.ui" line="13"/>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>选项</translation>
     </message>
     <message>
         <location filename="../preferencesdialog.cpp" line="59"/>
         <source>Look and Feel</source>
-        <translation type="unfinished"></translation>
+        <translation>外观</translation>
     </message>
     <message>
         <location filename="../preferencesdialog.cpp" line="61"/>
         <source>  Data Store</source>
-        <translation type="unfinished"></translation>
+        <translation>数据存储</translation>
     </message>
     <message>
         <location filename="../preferencesdialog.cpp" line="63"/>
         <source>  Txt Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>文本编辑</translation>
     </message>
     <message>
         <location filename="../preferencesdialog.cpp" line="87"/>
         <source>From Locales</source>
-        <translation type="unfinished"></translation>
+        <translation>本地</translation>
     </message>
     <message>
         <location filename="../preferencesdialog.cpp" line="216"/>
@@ -2940,7 +2940,7 @@ Do you want to ignore these errors for this host?</source>
         <location filename="../preferencesdialog.cpp" line="236"/>
         <location filename="../preferencesdialog.cpp" line="246"/>
         <source>Select existing directory</source>
-        <translation type="unfinished"></translation>
+        <translation>选择目录</translation>
     </message>
 </context>
 <context>
@@ -2948,12 +2948,12 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../prefsdatastorewidget.ui" line="23"/>
         <source>Main Path</source>
-        <translation type="unfinished"></translation>
+        <translation>主目录</translation>
     </message>
     <message>
         <location filename="../prefsdatastorewidget.ui" line="35"/>
         <source>Background color of the NULL value cell</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../prefsdatastorewidget.ui" line="38"/>
@@ -2961,42 +2961,42 @@ Do you want to ignore these errors for this host?</source>
         <location filename="../prefsdatastorewidget.ui" line="115"/>
         <location filename="../prefsdatastorewidget.ui" line="134"/>
         <source>Select..</source>
-        <translation type="unfinished"></translation>
+        <translation>选择..</translation>
     </message>
     <message>
         <location filename="../prefsdatastorewidget.ui" line="45"/>
         <source>Text to be used as a NULL mark</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../prefsdatastorewidget.ui" line="58"/>
         <source>Index Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>索引保存目录</translation>
     </message>
     <message>
         <location filename="../prefsdatastorewidget.ui" line="70"/>
         <source>Background color of the BLOB value cell</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../prefsdatastorewidget.ui" line="80"/>
         <source>Text to be used as a BLOB mark</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../prefsdatastorewidget.ui" line="99"/>
         <source>Data Store</source>
-        <translation type="unfinished"></translation>
+        <translation>数据保存</translation>
     </message>
     <message>
         <location filename="../prefsdatastorewidget.ui" line="106"/>
         <source>BackUp Path</source>
-        <translation type="unfinished"></translation>
+        <translation>备份目录</translation>
     </message>
     <message>
         <location filename="../prefsdatastorewidget.ui" line="125"/>
         <source>Export Default Path</source>
-        <translation type="unfinished"></translation>
+        <translation>默认导出目录</translation>
     </message>
 </context>
 <context>
@@ -3004,47 +3004,47 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../prefseditorwidget.ui" line="29"/>
         <source>Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑器</translation>
     </message>
     <message>
         <location filename="../prefseditorwidget.ui" line="44"/>
         <source>&amp;Font:</source>
-        <translation type="unfinished"></translation>
+        <translation>字体:</translation>
     </message>
     <message>
         <location filename="../prefseditorwidget.ui" line="70"/>
         <source> pt</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../prefseditorwidget.ui" line="82"/>
         <source>Use &amp;Active Line Highlighting:</source>
-        <translation type="unfinished"></translation>
+        <translation>选中部分高亮显示</translation>
     </message>
     <message>
         <location filename="../prefseditorwidget.ui" line="89"/>
         <source>Color...</source>
-        <translation type="unfinished"></translation>
+        <translation>颜色...</translation>
     </message>
     <message>
         <location filename="../prefseditorwidget.ui" line="96"/>
         <source>Use &amp;Maximum Text Width Mark:</source>
-        <translation type="unfinished"></translation>
+        <translation>最大文本长度</translation>
     </message>
     <message>
         <location filename="../prefseditorwidget.ui" line="116"/>
         <source>Use &amp;Code Completion With Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>代码补全长度</translation>
     </message>
     <message>
         <location filename="../prefseditorwidget.ui" line="133"/>
         <source>Use Editor &amp;Shortcuts:</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑器快捷键</translation>
     </message>
     <message>
         <location filename="../prefseditorwidget.ui" line="140"/>
         <source>&amp;Define...</source>
-        <translation type="unfinished"></translation>
+        <translation>设置</translation>
     </message>
 </context>
 <context>
@@ -3052,62 +3052,62 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../prefslnfwidget.ui" line="23"/>
         <source>Look and Feel</source>
-        <translation type="unfinished"></translation>
+        <translation>外观</translation>
     </message>
     <message>
         <location filename="../prefslnfwidget.ui" line="30"/>
         <source>These features require application restart</source>
-        <translation type="unfinished"></translation>
+        <translation>部分设置需要重启软件</translation>
     </message>
     <message>
         <location filename="../prefslnfwidget.ui" line="36"/>
         <source>GUI &amp;Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>语言:</translation>
     </message>
     <message>
         <location filename="../prefslnfwidget.ui" line="46"/>
         <source>Select the application interface language</source>
-        <translation type="unfinished"></translation>
+        <translation>选择接口语言</translation>
     </message>
     <message>
         <location filename="../prefslnfwidget.ui" line="53"/>
         <source>GUI Font:</source>
-        <translation type="unfinished"></translation>
+        <translation>字体</translation>
     </message>
     <message>
         <location filename="../prefslnfwidget.ui" line="62"/>
         <source>Select application font (menu, dialogs, etc.). This option is used mainly in MS Windows systems.</source>
-        <translation type="unfinished"></translation>
+        <translation>选择软件字体(菜单,对话框,等待),这个选项一般用于Window系统</translation>
     </message>
     <message>
         <location filename="../prefslnfwidget.ui" line="69"/>
         <source> pt</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../prefslnfwidget.ui" line="95"/>
         <source>&amp;Recently Opened Documents:</source>
-        <translation type="unfinished"></translation>
+        <translation>最近打开的文档数</translation>
     </message>
     <message>
         <location filename="../prefslnfwidget.ui" line="105"/>
         <source>Count of the items in the Recent menu</source>
-        <translation type="unfinished"></translation>
+        <translation>最近使用的菜单</translation>
     </message>
     <message>
         <location filename="../prefslnfwidget.ui" line="120"/>
         <source>Remember the last used database for next application start</source>
-        <translation type="unfinished"></translation>
+        <translation>记住最后打开的文档</translation>
     </message>
     <message>
         <location filename="../prefslnfwidget.ui" line="123"/>
         <source>Ope&amp;n Last Documents on Start</source>
-        <translation type="unfinished"></translation>
+        <translation>当启动时打开最后操作的文档</translation>
     </message>
     <message>
         <location filename="../prefslnfwidget.ui" line="130"/>
         <source>Show Last Document&apos;s Notes on Start</source>
-        <translation type="unfinished"></translation>
+        <translation>实现最后打开文档的笔记</translation>
     </message>
 </context>
 <context>
@@ -3115,27 +3115,27 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../printerwidget.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../printerwidget.cpp" line="39"/>
         <source>^XA^FO10,100^BY3^BCN,100,Y,N,N^FDDD123456^FS^XZ</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../printerwidget.cpp" line="47"/>
         <source>rfgggggg</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../printerwidget.cpp" line="48"/>
         <source>sdffffffffff</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../printerwidget.cpp" line="49"/>
         <source>sdfffffffffffffffffff</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -3143,139 +3143,139 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../propofdirdialog.ui" line="20"/>
         <source>Properties Of Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>目录属性</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="30"/>
         <source>Basic</source>
-        <translation type="unfinished"></translation>
+        <translation>基本</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="42"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>名称</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="54"/>
         <source>UUID</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="66"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>图标</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="74"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="81"/>
         <source>ChangeIcon</source>
-        <translation type="unfinished"></translation>
+        <translation>改变图标</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="93"/>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>本地位置</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="105"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>描述:</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="118"/>
         <source>Advance</source>
-        <translation type="unfinished"></translation>
+        <translation>高级</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="130"/>
         <source>Count</source>
-        <translation type="unfinished"></translation>
+        <translation>统计</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="145"/>
         <source>Files Count:</source>
-        <translation type="unfinished"></translation>
+        <translation>文档数:</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="152"/>
         <source>Directory Count:</source>
-        <translation type="unfinished"></translation>
+        <translation>文件夹数:</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="159"/>
         <source>Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>大小:</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="209"/>
         <source>Protect Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>保护目录</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="227"/>
         <source>Original  Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>原始密码:</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="245"/>
         <source>Password:          </source>
-        <translation type="unfinished"></translation>
+        <translation>密码:</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="263"/>
         <source>ReInput Password:  </source>
-        <translation type="unfinished"></translation>
+        <translation>重新输入密码</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="281"/>
         <source>Synchronization </source>
-        <translation type="unfinished"></translation>
+        <translation>同步</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="293"/>
         <source>Remote Version</source>
-        <translation type="unfinished"></translation>
+        <translation>远程版本</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="317"/>
         <source>Local Version</source>
-        <translation type="unfinished"></translation>
+        <translation>本地版本</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="352"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>应用</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="359"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.cpp" line="18"/>
         <source>Property Editor</source>
         <comment>Window caption</comment>
-        <translation type="unfinished"></translation>
+        <translation>属性编辑器</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.cpp" line="141"/>
         <location filename="../propofdirdialog.cpp" line="153"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.cpp" line="141"/>
         <source>The Org password is wrong, Please Confirm</source>
-        <translation type="unfinished"></translation>
+        <translation>最初密码是错误的,请确认</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.cpp" line="153"/>
         <source>The password you entered must be the same as the  former</source>
-        <translation type="unfinished"></translation>
+        <translation>两次输入密码必须一致.</translation>
     </message>
 </context>
 <context>
@@ -3283,129 +3283,129 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../propofdocdialog.ui" line="20"/>
         <source>Properties of Document</source>
-        <translation type="unfinished"></translation>
+        <translation>文档属性</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="30"/>
         <source>Basic</source>
-        <translation type="unfinished"></translation>
+        <translation>基本</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="42"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>名称</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="54"/>
         <source>URL</source>
-        <translation type="unfinished"></translation>
+        <translation>网址</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="66"/>
         <source>UUID</source>
-        <translation type="unfinished"></translation>
+        <translation>UUID</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="78"/>
         <source>KeyWords</source>
-        <translation type="unfinished"></translation>
+        <translation>关键字</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="90"/>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>本地位置</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="106"/>
         <source>Protect</source>
-        <translation type="unfinished"></translation>
+        <translation>保护</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="114"/>
         <source>Create Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>创建日期</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="131"/>
         <source>Modified Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>修改时间</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="148"/>
         <source>Access Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>访问日期</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="178"/>
         <source>Related Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>关联文档</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="188"/>
         <source>Synchronous</source>
-        <translation type="unfinished"></translation>
+        <translation>同步</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="200"/>
         <source>Read Count</source>
-        <translation type="unfinished"></translation>
+        <translation>读取次数</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="218"/>
         <source>Owner</source>
-        <translation type="unfinished"></translation>
+        <translation>所有者</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="236"/>
         <source>Related Count</source>
-        <translation type="unfinished"></translation>
+        <translation>关联次数</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="260"/>
         <location filename="../propofdocdialog.cpp" line="61"/>
         <source>Author</source>
-        <translation type="unfinished"></translation>
+        <translation>作者</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="278"/>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>版本</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="292"/>
         <source>encrypt Document</source>
-        <translation type="unfinished"></translation>
+        <translation>加密文档</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="333"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>应用</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="340"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.cpp" line="16"/>
         <source>Property Editor</source>
         <comment>Window caption</comment>
-        <translation type="unfinished"></translation>
+        <translation>属性编辑器</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.cpp" line="62"/>
         <source>FileName</source>
-        <translation type="unfinished"></translation>
+        <translation>文档名称</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.cpp" line="63"/>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>日期</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.cpp" line="64"/>
         <source>relateDocUid</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -3413,27 +3413,27 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../propoftagdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../propoftagdialog.ui" line="51"/>
         <source>Tag Name(&amp;N):</source>
-        <translation type="unfinished"></translation>
+        <translation>标签名称:</translation>
     </message>
     <message>
         <location filename="../propoftagdialog.ui" line="63"/>
         <source>eg: *.doc,*.pdf</source>
-        <translation type="unfinished">例:*.doc,*.pdf</translation>
+        <translation>例:*.doc,*.pdf</translation>
     </message>
     <message>
         <location filename="../propoftagdialog.ui" line="77"/>
         <source>Description(&amp;D):</source>
-        <translation type="unfinished"></translation>
+        <translation>描述:</translation>
     </message>
     <message>
         <location filename="../propoftagdialog.cpp" line="31"/>
         <source>Properties Of Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>标签属性</translation>
     </message>
 </context>
 <context>
@@ -3441,27 +3441,27 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../browser/proxy.ui" line="13"/>
         <source>Proxy Authentication</source>
-        <translation type="unfinished"></translation>
+        <translation>网关代理认证</translation>
     </message>
     <message>
         <location filename="../browser/proxy.ui" line="19"/>
         <source>ICON</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/proxy.ui" line="26"/>
         <source>Connect to proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>连接代理</translation>
     </message>
     <message>
         <location filename="../browser/proxy.ui" line="36"/>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>用户名:</translation>
     </message>
     <message>
         <location filename="../browser/proxy.ui" line="46"/>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>密码</translation>
     </message>
 </context>
 <context>
@@ -3469,37 +3469,37 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../browser/xbel.cpp" line="142"/>
         <source>The file is not an XBEL version 1.0 file.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/xbel.cpp" line="220"/>
         <source>Unknown title</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../printerwidget.cpp" line="249"/>
         <source>´òÓ¡</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../printerwidget.cpp" line="249"/>
         <source>´òÓ¡Êä³öÊý¾ÝÓëÊäÈëÊý¾Ý´óÐ¡²»Ïà·û</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../printerwidget.cpp" line="249"/>
         <source>È·¶¨(&amp;E)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../main.cpp" line="256"/>
         <source>Systray</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../main.cpp" line="257"/>
         <source>I couldn&apos;t detect any system tray on this system.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -3507,59 +3507,59 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../refereedialog.ui" line="20"/>
         <source>Recommend</source>
-        <translation type="unfinished"></translation>
+        <translation>推荐</translation>
     </message>
     <message>
         <location filename="../refereedialog.ui" line="30"/>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>邮件</translation>
     </message>
     <message>
         <location filename="../refereedialog.ui" line="36"/>
         <source>Receive Email Address  (Please Split with &quot;,&quot;)</source>
-        <translation type="unfinished"></translation>
+        <translation>接受人邮件地址  (以逗号&quot;,&quot;分隔)</translation>
     </message>
     <message>
         <location filename="../refereedialog.ui" line="54"/>
         <source>Your Real Name</source>
-        <translation type="unfinished"></translation>
+        <translation>真实姓名</translation>
     </message>
     <message>
         <location filename="../refereedialog.ui" line="72"/>
         <source>Email Title</source>
-        <translation type="unfinished"></translation>
+        <translation>标题</translation>
     </message>
     <message>
         <location filename="../refereedialog.ui" line="84"/>
         <source>Email Content</source>
-        <translation type="unfinished"></translation>
+        <translation>内容</translation>
     </message>
     <message>
         <location filename="../refereedialog.ui" line="121"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>发送</translation>
     </message>
     <message>
         <location filename="../refereedialog.ui" line="128"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭</translation>
     </message>
     <message>
         <location filename="../refereedialog.cpp" line="22"/>
         <source>Please Input your real name</source>
-        <translation type="unfinished"></translation>
+        <translation>请输入您的真实姓名</translation>
     </message>
     <message>
         <location filename="../refereedialog.cpp" line="26"/>
         <location filename="../refereedialog.cpp" line="42"/>
         <source>Your Friend %1 recommend slfile to Manage document</source>
-        <translation type="unfinished"></translation>
+        <translation>您的朋友 %1 推荐slfile关联他/她的文档</translation>
     </message>
     <message>
         <location filename="../refereedialog.cpp" line="27"/>
         <location filename="../refereedialog.cpp" line="43"/>
         <source>hi! , your friend %1 is using slfile to manage document, &lt;br&gt;do you want to try? Use this Address &lt;a href=&apos;http://www.slfile.net/wp-register.php?referee=%2&apos; target=&apos;_blank&apos;&gt;http://www.slfile.net/wp-register.php?referee=%3&lt;/a&gt;) to Sign up you will help you friend get 300 point score.</source>
-        <translation type="unfinished"></translation>
+        <translation>您好, 您的朋友 %1 正在使用slfile管理文档,&lt;br&gt; 您是否需要试一下,&lt;a href=&apos;http://www.slfile.net/wp-register.php?referee=%2&apos; target=&apos;_blank&apos;&gt;http://www.slfile.net/wp-register.php?referee=%3&lt;/a&gt;) 注册将会帮您朋友  %1  获得300点积分。</translation>
     </message>
     <message>
         <location filename="../refereedialog.cpp" line="52"/>
@@ -3567,43 +3567,43 @@ Do you want to ignore these errors for this host?</source>
         <location filename="../refereedialog.cpp" line="64"/>
         <location filename="../refereedialog.cpp" line="145"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../refereedialog.cpp" line="52"/>
         <source>The address is empty, Please Input</source>
-        <translation type="unfinished"></translation>
+        <translation>地址为空,请输入</translation>
     </message>
     <message>
         <location filename="../refereedialog.cpp" line="58"/>
         <source>The email content is empty, Please Input</source>
-        <translation type="unfinished"></translation>
+        <translation>邮件内容为空,请输入</translation>
     </message>
     <message>
         <location filename="../refereedialog.cpp" line="64"/>
         <source>The title is empty, Please Input</source>
-        <translation type="unfinished"></translation>
+        <translation>标题为空,请输入</translation>
     </message>
     <message>
         <location filename="../refereedialog.cpp" line="108"/>
         <location filename="../refereedialog.cpp" line="132"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>消息</translation>
     </message>
     <message>
         <location filename="../refereedialog.cpp" line="108"/>
         <source>User Is Not Existed.</source>
-        <translation type="unfinished"></translation>
+        <translation>用户不存在</translation>
     </message>
     <message>
         <location filename="../refereedialog.cpp" line="126"/>
         <source>Send Mail Success !</source>
-        <translation type="unfinished"></translation>
+        <translation>发送邮件成功!</translation>
     </message>
     <message>
         <location filename="../refereedialog.cpp" line="139"/>
         <source>Send Mail Failed, Please check the email Address !</source>
-        <translation type="unfinished"></translation>
+        <translation>发送邮件失败,请检查邮件地址.</translation>
     </message>
 </context>
 <context>
@@ -3611,7 +3611,7 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../db/relatedocdao.cpp" line="22"/>
         <source>SQL Error</source>
-        <translation type="unfinished"></translation>
+        <translation>SQL 错误</translation>
     </message>
 </context>
 <context>
@@ -3619,67 +3619,67 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../relatedocdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../relatedocdialog.ui" line="26"/>
         <source>Related Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>关联文档</translation>
     </message>
     <message>
         <location filename="../relatedocdialog.cpp" line="24"/>
         <source>Author</source>
-        <translation type="unfinished"></translation>
+        <translation>作者</translation>
     </message>
     <message>
         <location filename="../relatedocdialog.cpp" line="25"/>
         <source>FileName</source>
-        <translation type="unfinished"></translation>
+        <translation>文档名</translation>
     </message>
     <message>
         <location filename="../relatedocdialog.cpp" line="26"/>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>日期</translation>
     </message>
     <message>
         <location filename="../relatedocdialog.cpp" line="27"/>
         <source>relateDocUid</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../relatedocdialog.cpp" line="54"/>
         <source>Open this Doc</source>
-        <translation type="unfinished"></translation>
+        <translation>打开该文档</translation>
     </message>
     <message>
         <location filename="../relatedocdialog.cpp" line="55"/>
         <source>Delete this Doc</source>
-        <translation type="unfinished"></translation>
+        <translation>删除该文档</translation>
     </message>
     <message>
         <location filename="../relatedocdialog.cpp" line="56"/>
         <source>Delete All Docs</source>
-        <translation type="unfinished"></translation>
+        <translation>删除所有关联文档</translation>
     </message>
     <message>
         <location filename="../relatedocdialog.cpp" line="76"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../relatedocdialog.cpp" line="76"/>
         <source>Please Confirm The original file  has Deleted Or Moved. </source>
-        <translation type="unfinished"></translation>
+        <translation>请确认原始文档是否已被删除或移动.</translation>
     </message>
     <message>
         <location filename="../relatedocdialog.cpp" line="87"/>
         <source>Are you sure that delete the related Doc ?</source>
-        <translation type="unfinished"></translation>
+        <translation>您是否确认删除该关联文档?</translation>
     </message>
     <message>
         <location filename="../relatedocdialog.cpp" line="126"/>
         <source>Are you sure that delete All the related docs ?</source>
-        <translation type="unfinished"></translation>
+        <translation>您是否确认删除全部的关联文档?</translation>
     </message>
 </context>
 <context>
@@ -3687,7 +3687,7 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../db/resultdao.cpp" line="23"/>
         <source>SQL Error</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -3695,27 +3695,27 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../saveurldialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message utf8="true">
         <location filename="../saveurldialog.ui" line="57"/>
         <source>新建文件夹</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../saveurldialog.cpp" line="41"/>
         <source>Save To SlFile</source>
-        <translation type="unfinished"></translation>
+        <translation>保存到Slfile</translation>
     </message>
     <message>
         <location filename="../saveurldialog.cpp" line="89"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../saveurldialog.cpp" line="89"/>
         <source>Please Select an directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择目录.</translation>
     </message>
 </context>
 <context>
@@ -3723,47 +3723,47 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../scoretovipdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../scoretovipdialog.ui" line="32"/>
         <source>ExChange Score For VIP</source>
-        <translation type="unfinished"></translation>
+        <translation>积分兑换VIP</translation>
     </message>
     <message>
         <location filename="../scoretovipdialog.ui" line="41"/>
         <source>eg: *.doc,*.pdf</source>
-        <translation type="unfinished">例:*.doc,*.pdf</translation>
+        <translation>例:*.doc,*.pdf</translation>
     </message>
     <message>
         <location filename="../scoretovipdialog.ui" line="54"/>
         <source>Total Score:</source>
-        <translation type="unfinished"></translation>
+        <translation>总积分</translation>
     </message>
     <message>
         <location filename="../scoretovipdialog.ui" line="61"/>
         <source>Input Score: </source>
-        <translation type="unfinished"></translation>
+        <translation>输入积分:</translation>
     </message>
     <message>
         <location filename="../scoretovipdialog.ui" line="68"/>
         <source>VIP Period:</source>
-        <translation type="unfinished"></translation>
+        <translation>VIP 期限:</translation>
     </message>
     <message>
         <location filename="../scoretovipdialog.ui" line="95"/>
         <source>Months           </source>
-        <translation type="unfinished"></translation>
+        <translation>月份             </translation>
     </message>
     <message>
         <location filename="../scoretovipdialog.ui" line="102"/>
         <source>Remain Score:</source>
-        <translation type="unfinished"></translation>
+        <translation>剩余积分:</translation>
     </message>
     <message>
         <location filename="../scoretovipdialog.cpp" line="29"/>
         <source>Use Score to vip</source>
-        <translation type="unfinished"></translation>
+        <translation>用积分换VIP</translation>
     </message>
     <message>
         <location filename="../scoretovipdialog.cpp" line="54"/>
@@ -3771,43 +3771,43 @@ Do you want to ignore these errors for this host?</source>
         <location filename="../scoretovipdialog.cpp" line="91"/>
         <location filename="../scoretovipdialog.cpp" line="107"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>消息</translation>
     </message>
     <message>
         <location filename="../scoretovipdialog.cpp" line="54"/>
         <source>The month is 0 . Please input score again</source>
-        <translation type="unfinished"></translation>
+        <translation>月份为0,请再次输入积分</translation>
     </message>
     <message>
         <location filename="../scoretovipdialog.cpp" line="87"/>
         <source>The server find errors when compute the score, please logo off try Again or Contact Admimistrator</source>
-        <translation type="unfinished"></translation>
+        <translation>服务器在计算积分时发生错误,请重新登录或联系管理员.</translation>
     </message>
     <message>
         <location filename="../scoretovipdialog.cpp" line="91"/>
         <source>User Is Not Existed.</source>
-        <translation type="unfinished"></translation>
+        <translation>用户不存在.</translation>
     </message>
     <message>
         <location filename="../scoretovipdialog.cpp" line="107"/>
         <source>ExChange Success.</source>
-        <translation type="unfinished"></translation>
+        <translation>兑换成功.</translation>
     </message>
     <message>
         <location filename="../scoretovipdialog.cpp" line="123"/>
         <location filename="../scoretovipdialog.cpp" line="131"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../scoretovipdialog.cpp" line="123"/>
         <source>The Input Score is 0.</source>
-        <translation type="unfinished"></translation>
+        <translation>输入积分为0</translation>
     </message>
     <message>
         <location filename="../scoretovipdialog.cpp" line="131"/>
         <source>The Input Score is Bigger than your Toatal Score.</source>
-        <translation type="unfinished"></translation>
+        <translation>输入的积分大于您所有拥有的总积分</translation>
     </message>
 </context>
 <context>
@@ -3815,7 +3815,7 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../browser/searchlineedit.cpp" line="175"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索</translation>
     </message>
 </context>
 <context>
@@ -3823,238 +3823,238 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../browser/settings.ui" line="13"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>设置</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="41"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>常规</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="47"/>
         <source>Home:</source>
-        <translation type="unfinished"></translation>
+        <translation>主页:</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="60"/>
         <source>Set to current page</source>
-        <translation type="unfinished"></translation>
+        <translation>应用到本页</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="80"/>
         <source>Remove history items:</source>
-        <translation type="unfinished"></translation>
+        <translation>移除历史:</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="91"/>
         <source>After one day</source>
-        <translation type="unfinished"></translation>
+        <translation>一天以后</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="96"/>
         <source>After one week</source>
-        <translation type="unfinished"></translation>
+        <translation>一周以后</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="101"/>
         <source>After two weeks</source>
-        <translation type="unfinished"></translation>
+        <translation>两周以后</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="106"/>
         <source>After one month</source>
-        <translation type="unfinished"></translation>
+        <translation>一月以后</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="111"/>
         <source>After one year</source>
-        <translation type="unfinished"></translation>
+        <translation>一年以后</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="116"/>
         <source>Manually</source>
-        <translation type="unfinished"></translation>
+        <translation>手动</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="124"/>
         <source>Save downloads to:</source>
-        <translation type="unfinished"></translation>
+        <translation>保存下载到:</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="137"/>
         <source>Open links from applications:</source>
-        <translation type="unfinished"></translation>
+        <translation>从应用打开链接:</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="148"/>
         <source>In a tab in the current window</source>
-        <translation type="unfinished"></translation>
+        <translation>在当前tab页打开</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="153"/>
         <source>In a new window</source>
-        <translation type="unfinished"></translation>
+        <translation>在新窗体</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="183"/>
         <source>Appearance</source>
-        <translation type="unfinished"></translation>
+        <translation>外表</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="189"/>
         <source>Standard font:</source>
-        <translation type="unfinished"></translation>
+        <translation>标准字体:</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="208"/>
         <source>Times 16</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="218"/>
         <location filename="../browser/settings.ui" line="248"/>
         <source>Select...</source>
-        <translation type="unfinished"></translation>
+        <translation>选择...</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="225"/>
         <source>Fixed-width font:</source>
-        <translation type="unfinished"></translation>
+        <translation>固定长度 字体:</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="238"/>
         <source>Courier 13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="277"/>
         <source>Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>隐私</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="283"/>
         <source>Web Content</source>
-        <translation type="unfinished"></translation>
+        <translation>网页内容</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="289"/>
         <source>Enable Plugins</source>
-        <translation type="unfinished"></translation>
+        <translation>启动插件</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="299"/>
         <source>Enable Javascript</source>
-        <translation type="unfinished"></translation>
+        <translation>启动JavaScript</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="312"/>
         <source>Cookies</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="318"/>
         <source>Accept Cookies:</source>
-        <translation type="unfinished"></translation>
+        <translation>容许Cookies:</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="329"/>
         <source>Always</source>
-        <translation type="unfinished"></translation>
+        <translation>总是</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="334"/>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>从不</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="339"/>
         <source>Only from sites you navigate to</source>
-        <translation type="unfinished"></translation>
+        <translation>仅从浏览器中导入</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="347"/>
         <source>Exceptions...</source>
-        <translation type="unfinished"></translation>
+        <translation>例外...</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="354"/>
         <source>Keep until:</source>
-        <translation type="unfinished"></translation>
+        <translation>保存一直到:</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="365"/>
         <source>They expire</source>
-        <translation type="unfinished"></translation>
+        <translation>过期</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="370"/>
         <source>I exit the application</source>
-        <translation type="unfinished"></translation>
+        <translation>在退出程序</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="375"/>
         <source>At most 90 days</source>
-        <translation type="unfinished"></translation>
+        <translation>最多90天</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="383"/>
         <source>Cookies...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="415"/>
         <source>Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>网关</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="421"/>
         <source>Enable proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>启动代理:</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="430"/>
         <source>Type:</source>
-        <translation type="unfinished">账号类型:</translation>
+        <translation>账号类型:</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="441"/>
         <source>Socks5</source>
-        <translation type="unfinished"></translation>
+        <translation>Soks5</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="446"/>
         <source>Http</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="454"/>
         <source>Host:</source>
-        <translation type="unfinished"></translation>
+        <translation>主机:</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="467"/>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>端口:</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="500"/>
         <source>User Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>用户名:</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="513"/>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>密码:</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="547"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>高级</translation>
     </message>
     <message>
         <location filename="../browser/settings.ui" line="553"/>
         <source>Style Sheet:</source>
-        <translation type="unfinished"></translation>
+        <translation>样式:</translation>
     </message>
 </context>
 <context>
@@ -4062,89 +4062,89 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../shortcuteditordialog.ui" line="13"/>
         <source>Editor Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../shortcuteditordialog.ui" line="25"/>
         <source>Define Editor Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../shortcuteditordialog.ui" line="37"/>
         <source>&amp;Import...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../shortcuteditordialog.ui" line="57"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../shortcuteditordialog.ui" line="64"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished">移除</translation>
+        <translation>移除</translation>
     </message>
     <message>
         <location filename="../shortcuteditordialog.ui" line="81"/>
         <source>R&amp;emove All</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../shortcuteditordialog.ui" line="88"/>
         <source>E&amp;xport...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../shortcuteditordialog.cpp" line="60"/>
         <location filename="../shortcuteditordialog.cpp" line="71"/>
         <source>Shortcut Error</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../shortcuteditordialog.cpp" line="61"/>
         <source>The value you entered as a key (%1) is not unique. Enter another one, please.</source>
-        <translation type="unfinished"></translation>
+        <translation>您输入的值 %1 已经存在,请输入另外一个</translation>
     </message>
     <message>
         <location filename="../shortcuteditordialog.cpp" line="72"/>
         <source>Some of key values are empty. These items will be lost. Do you want to return to the shortcut editor to fix it?</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../shortcuteditordialog.cpp" line="86"/>
         <source>Save Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../shortcuteditordialog.cpp" line="87"/>
         <location filename="../shortcuteditordialog.cpp" line="121"/>
         <source>Sqliteman Shortcuts XML (*.xml);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../shortcuteditordialog.cpp" line="94"/>
         <source>Export Error</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../shortcuteditordialog.cpp" line="94"/>
         <source>Cannot open file %1 for writting.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../shortcuteditordialog.cpp" line="120"/>
         <source>Load Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../shortcuteditordialog.cpp" line="128"/>
         <source>Load Error</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../shortcuteditordialog.cpp" line="128"/>
         <source>Cannot open file %1 for reading.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -4152,12 +4152,12 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../shortcutmodel.cpp" line="88"/>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../shortcutmodel.cpp" line="88"/>
         <source>Expanded Text</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -4165,27 +4165,27 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../sortsubdirsdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation type="unfinished">文档导入</translation>
+        <translation>文档导入</translation>
     </message>
     <message>
         <location filename="../sortsubdirsdialog.ui" line="42"/>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>向上</translation>
     </message>
     <message>
         <location filename="../sortsubdirsdialog.ui" line="49"/>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>向下</translation>
     </message>
     <message>
         <location filename="../sortsubdirsdialog.ui" line="68"/>
         <source>dir</source>
-        <translation type="unfinished"></translation>
+        <translation>目录</translation>
     </message>
     <message>
         <location filename="../sortsubdirsdialog.cpp" line="55"/>
         <source>Sort Sub Directorys</source>
-        <translation type="unfinished"></translation>
+        <translation>子文件夹排序</translation>
     </message>
 </context>
 <context>
@@ -4193,32 +4193,32 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../browser/tabwidget.cpp" line="105"/>
         <source>New &amp;Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>新建Tab</translation>
     </message>
     <message>
         <location filename="../browser/tabwidget.cpp" line="108"/>
         <source>Clone Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>复制Tab</translation>
     </message>
     <message>
         <location filename="../browser/tabwidget.cpp" line="114"/>
         <source>&amp;Close Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭Tab</translation>
     </message>
     <message>
         <location filename="../browser/tabwidget.cpp" line="118"/>
         <source>Close &amp;Other Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭其他Tab</translation>
     </message>
     <message>
         <location filename="../browser/tabwidget.cpp" line="124"/>
         <source>Reload Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>刷新</translation>
     </message>
     <message>
         <location filename="../browser/tabwidget.cpp" line="130"/>
         <source>Reload All Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>刷新全部</translation>
     </message>
 </context>
 <context>
@@ -4226,27 +4226,27 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../browser/tabwidget.cpp" line="242"/>
         <source>New &amp;Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>新建Tab</translation>
     </message>
     <message>
         <location filename="../browser/tabwidget.cpp" line="247"/>
         <source>&amp;Close Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭Tab</translation>
     </message>
     <message>
         <location filename="../browser/tabwidget.cpp" line="252"/>
         <source>Show Next Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>显示下一个Tab</translation>
     </message>
     <message>
         <location filename="../browser/tabwidget.cpp" line="261"/>
         <source>Show Previous Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>显示前一Tab</translation>
     </message>
     <message>
         <location filename="../browser/tabwidget.cpp" line="275"/>
         <source>Recently Closed Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>最近关闭的Tab</translation>
     </message>
     <message>
         <location filename="../browser/tabwidget.cpp" line="476"/>
@@ -4254,19 +4254,19 @@ Do you want to ignore these errors for this host?</source>
         <location filename="../browser/tabwidget.cpp" line="553"/>
         <location filename="../browser/tabwidget.cpp" line="621"/>
         <source>(Untitled)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/tabwidget.cpp" line="774"/>
         <source>Do you really want to close this page?</source>
-        <translation type="unfinished"></translation>
+        <translation>您是否确定关闭当前网页?</translation>
     </message>
     <message>
         <location filename="../browser/tabwidget.cpp" line="775"/>
         <source>You have modified this page and when closing it you would lose the modification.
 Do you really want to close this page?
 </source>
-        <translation type="unfinished"></translation>
+        <translation>您已经修改该页面, 当您关闭页面时将会丢失修改. 您是否确定关闭该页面?</translation>
     </message>
 </context>
 <context>
@@ -4274,7 +4274,7 @@ Do you really want to close this page?
     <message>
         <location filename="../db/tagdao.cpp" line="22"/>
         <source>SQL Error</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -4283,205 +4283,205 @@ Do you really want to close this page?
         <location filename="../texteditor.cpp" line="38"/>
         <source>Ready</source>
         <comment>Statusbar message</comment>
-        <translation type="unfinished"></translation>
+        <translation>就绪</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="39"/>
         <source>Text Editor</source>
         <comment>Text Editor Window caption</comment>
-        <translation type="unfinished"></translation>
+        <translation>文本编辑器</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="184"/>
         <source>No filename available for this note.</source>
         <comment>Statusbar message</comment>
-        <translation type="unfinished"></translation>
+        <translation>该笔记没有设置文件名</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="258"/>
         <source>Note Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>笔记动作</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="260"/>
         <source>&amp;Note</source>
         <comment>Menubar</comment>
-        <translation type="unfinished"></translation>
+        <translation>笔记</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="263"/>
         <source>&amp;Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>导入</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="271"/>
         <source>&amp;Save...</source>
-        <translation type="unfinished"></translation>
+        <translation>保存</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="279"/>
         <source>Export &amp;As... (HTML)</source>
-        <translation type="unfinished"></translation>
+        <translation>导出...(HTML)</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="284"/>
         <source>Export &amp;As...(ASCII)</source>
-        <translation type="unfinished"></translation>
+        <translation>导出...(ASCII)</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="291"/>
         <source>&amp;Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>打印</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="298"/>
         <source>&amp;Delete All</source>
-        <translation type="unfinished"></translation>
+        <translation>删除所有</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="307"/>
         <source>&amp;All notes</source>
-        <translation type="unfinished"></translation>
+        <translation>所有笔记</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="351"/>
         <source>Edit Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="354"/>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="357"/>
         <source>&amp;Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="364"/>
         <source>&amp;Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>重复</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="372"/>
         <source>Select and copy &amp;all</source>
-        <translation type="unfinished"></translation>
+        <translation>选择并复制全部</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="378"/>
         <source>&amp;Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>复制</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="385"/>
         <source>Cu&amp;t</source>
-        <translation type="unfinished"></translation>
+        <translation>剪切</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="392"/>
         <source>&amp;Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>复制</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="402"/>
         <source>Format Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>格式</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="404"/>
         <source>F&amp;ormat</source>
-        <translation type="unfinished"></translation>
+        <translation>格式</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="408"/>
         <source>&amp;Font hint</source>
-        <translation type="unfinished"></translation>
+        <translation>字体大小</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="417"/>
         <source>&amp;Richtext</source>
-        <translation type="unfinished"></translation>
+        <translation>超文本</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="451"/>
         <source>&amp;Color...</source>
-        <translation type="unfinished"></translation>
+        <translation>颜色...</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="457"/>
         <source>&amp;Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>粗体</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="465"/>
         <source>&amp;Italic</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="473"/>
         <source>&amp;Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>下划线</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="485"/>
         <source>Subs&amp;cript</source>
-        <translation type="unfinished"></translation>
+        <translation>子脚本</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="493"/>
         <source>Su&amp;perscript</source>
-        <translation type="unfinished"></translation>
+        <translation>超文本</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="505"/>
         <source>&amp;Left</source>
-        <translation type="unfinished"></translation>
+        <translation>左对齐</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="511"/>
         <source>C&amp;enter</source>
-        <translation type="unfinished"></translation>
+        <translation>中间</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="517"/>
         <source>&amp;Right</source>
-        <translation type="unfinished"></translation>
+        <translation>右对齐</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="523"/>
         <source>&amp;Justify</source>
-        <translation type="unfinished"></translation>
+        <translation>调整</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="533"/>
         <source>&amp;Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>设置</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="536"/>
         <source>Set &amp;fixed font</source>
-        <translation type="unfinished"></translation>
+        <translation>设定字体</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="541"/>
         <source>Set &amp;variable font</source>
-        <translation type="unfinished"></translation>
+        <translation>设定参数字体</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="546"/>
         <source>&amp;fixed font is default</source>
-        <translation type="unfinished"></translation>
+        <translation>设置默认字体</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="559"/>
         <source>Note Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>笔记编辑器</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="660"/>
         <source>Export Note to single file</source>
-        <translation type="unfinished"></translation>
+        <translation>作为单独文件导出笔记</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="669"/>
@@ -4490,36 +4490,36 @@ Do you really want to close this page?
 exists already.
 Do you want to overwrite it?</source>
         <comment>dialog &apos;save note as&apos;</comment>
-        <translation type="unfinished"></translation>
+        <translation>文件 %1 已经存在,是否覆盖?</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="674"/>
         <location filename="../texteditor.cpp" line="776"/>
         <source>Overwrite</source>
-        <translation type="unfinished"></translation>
+        <translation>覆盖</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="675"/>
         <location filename="../texteditor.cpp" line="777"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="693"/>
         <source>Couldn&apos;t export note </source>
         <comment>dialog &apos;save note as&apos;</comment>
-        <translation type="unfinished"></translation>
+        <translation>不能导出笔记.</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="761"/>
         <source>Export Note to single file (ASCII)</source>
-        <translation type="unfinished"></translation>
+        <translation>作为单独文件导出笔记(ASCII)</translation>
     </message>
     <message>
         <location filename="../texteditor.cpp" line="804"/>
         <source>Print</source>
         <comment>TextEditor</comment>
-        <translation type="unfinished"></translation>
+        <translation>打印</translation>
     </message>
 </context>
 <context>
@@ -4527,22 +4527,22 @@ Do you want to overwrite it?</source>
     <message>
         <location filename="../browser/toolbarsearch.cpp" line="74"/>
         <source>Google</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../browser/toolbarsearch.cpp" line="146"/>
         <source>No Recent Searches</source>
-        <translation type="unfinished"></translation>
+        <translation>没有最近搜索</translation>
     </message>
     <message>
         <location filename="../browser/toolbarsearch.cpp" line="150"/>
         <source>Recent Searches</source>
-        <translation type="unfinished"></translation>
+        <translation>最近搜索</translation>
     </message>
     <message>
         <location filename="../browser/toolbarsearch.cpp" line="157"/>
         <source>Clear Recent Searches</source>
-        <translation type="unfinished"></translation>
+        <translation>清除最近搜索</translation>
     </message>
 </context>
 <context>
@@ -4550,112 +4550,112 @@ Do you want to overwrite it?</source>
     <message>
         <location filename="../txteditor.ui" line="14"/>
         <source>TxtViewer</source>
-        <translation type="unfinished"></translation>
+        <translation>文本查看</translation>
     </message>
     <message>
         <location filename="../txteditor.ui" line="52"/>
         <source>Search Next</source>
-        <translation type="unfinished"></translation>
+        <translation>下一个</translation>
     </message>
     <message>
         <location filename="../txteditor.ui" line="55"/>
         <source>F3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../txteditor.ui" line="62"/>
         <source>Whole Words</source>
-        <translation type="unfinished"></translation>
+        <translation>全匹配</translation>
     </message>
     <message>
         <location filename="../txteditor.ui" line="72"/>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>区分大小写</translation>
     </message>
     <message>
         <location filename="../txteditor.ui" line="79"/>
         <source>Search:</source>
-        <translation type="unfinished"></translation>
+        <translation>查找:</translation>
     </message>
     <message>
         <location filename="../txteditor.ui" line="86"/>
         <source>Search previous</source>
-        <translation type="unfinished"></translation>
+        <translation>向前</translation>
     </message>
     <message>
         <location filename="../txteditor.ui" line="89"/>
         <source>Shift+F3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../txteditor.cpp" line="38"/>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>帮助</translation>
     </message>
     <message>
         <location filename="../txteditor.cpp" line="39"/>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../txteditor.cpp" line="77"/>
         <source>Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>打开</translation>
     </message>
     <message>
         <location filename="../txteditor.cpp" line="77"/>
         <source>Cannot open file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>不能打开文件 %1</translation>
     </message>
     <message>
         <location filename="../txteditor.cpp" line="113"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>保存</translation>
     </message>
     <message>
         <location filename="../txteditor.cpp" line="114"/>
         <source>All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>所有文件 (*)</translation>
     </message>
     <message>
         <location filename="../txteditor.cpp" line="127"/>
         <source>Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>保存文件</translation>
     </message>
     <message>
         <location filename="../txteditor.cpp" line="128"/>
         <source>Cannot write into file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>不能写进文件 %1</translation>
     </message>
     <message>
         <location filename="../txteditor.cpp" line="149"/>
         <source>New File</source>
-        <translation type="unfinished"></translation>
+        <translation>新建</translation>
     </message>
     <message>
         <location filename="../txteditor.cpp" line="150"/>
         <source>All you changes will be lost. Are you sure?</source>
-        <translation type="unfinished"></translation>
+        <translation>您所有修改将会丢失, 您确定?</translation>
     </message>
     <message>
         <location filename="../txteditor.cpp" line="163"/>
         <source>Closing SQL Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭</translation>
     </message>
     <message>
         <location filename="../txteditor.cpp" line="164"/>
         <source>Document has been changed. Do you want do save its content?</source>
-        <translation type="unfinished"></translation>
+        <translation>文档已经被修改,是否保存该内容</translation>
     </message>
     <message>
         <location filename="../txteditor.cpp" line="262"/>
         <source>Unexpected File Change</source>
-        <translation type="unfinished"></translation>
+        <translation>预料之外的文件修改</translation>
     </message>
     <message>
         <location filename="../txteditor.cpp" line="263"/>
         <source>Your currently edited file has been changed outside this application. Do you want to reload it?</source>
-        <translation type="unfinished"></translation>
+        <translation>您正在编辑的文件已经被修改,是否重新加载?</translation>
     </message>
 </context>
 <context>
@@ -4663,7 +4663,7 @@ Do you want to overwrite it?</source>
     <message>
         <location filename="../browser/webview.cpp" line="165"/>
         <source>Error loading page: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>打开文件出错: %1</translation>
     </message>
 </context>
 <context>
@@ -4671,17 +4671,17 @@ Do you want to overwrite it?</source>
     <message>
         <location filename="../browser/webview.cpp" line="224"/>
         <source>Open in New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>在新Tab页打开</translation>
     </message>
     <message>
         <location filename="../browser/webview.cpp" line="236"/>
         <source>Save to the slfile</source>
-        <translation type="unfinished"></translation>
+        <translation>保存到搜咯..</translation>
     </message>
     <message>
         <location filename="../browser/webview.cpp" line="238"/>
         <source>Exit Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>退出全屏</translation>
     </message>
 </context>
 </TS>
