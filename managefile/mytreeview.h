@@ -90,9 +90,18 @@ signals:
         void         LBtnClk();
         void         changeSearchState();
 protected:
-	void         mouseDoubleClickEvent(QMouseEvent *event);
-        void         mousePressEvent(QMouseEvent *event);
-//        void         changeColor();
+        void         mouseDoubleClickEvent(QMouseEvent *event);
+         void         mouseReleaseEvent(QMouseEvent *event);
+//        void         dropEvent(QDropEvent *event);
+        // 只需改变颜色
+        // void         changeColor();
+
+        //void         mouseDoubleClickEvent(QMouseEvent *event);
+        //void         mouseMoveEvent(QMouseEvent *event);
+        //void         keyPressEvent(QKeyEvent *event);
+    //#ifndef QT_NO_DRAGANDDROP
+        //void dragMoveEvent(QDragMoveEvent *event);
+    //#endif
 private:
 	int                   numSubTree;
 	bool                  mouseStatus;

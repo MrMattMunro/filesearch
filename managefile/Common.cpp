@@ -184,7 +184,7 @@ bool Common::canWrite( const QString &filename )
 	if( i.isFile() )
 		return QFile( filename ).open( QFile::WriteOnly|QFile::Append );
 #if QT_VERSION >= 0x040800
-	return QTemporaryFile( i.absolutePath().append( "/.XXXXXX" ) ).open();
+//	return QTemporaryFile( i.absolutePath().append( "/.XXXXXX" ) ).open();
 #else
 	QFile f( i.absolutePath().append( "/.XXXXXX" ) );
 	bool result = f.open( QFile::WriteOnly );

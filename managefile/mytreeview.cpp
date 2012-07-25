@@ -37,12 +37,12 @@ MyTreeView::MyTreeView(QString title, QWidget *parent) : treeTitle("tree"), QTre
 {
 	//默认两个子树的树形结构
         model = new MyTreeItemModel(parent);
-        delegate = new MyTreeDelegate(parent);
+        //delegate = new MyTreeDelegate(parent);
 
         model->setHeaderData(0, Qt::Horizontal, title);
 
         this->setModel(model);
-        this->setItemDelegate(delegate);
+        //this->setItemDelegate(delegate);
 
         QStandardItem  *allDocItem = new QStandardItem(tr("AllDocs"));
         allDocItem->setData("", UUID);  // UUid
@@ -62,12 +62,21 @@ MyTreeView::MyTreeView(QString title, QWidget *parent) : treeTitle("tree"), QTre
 
 
         //  "QTreeView::item:selected{background-color:rgb(255,255,255)}"
-        //
+
         // QCSS
         this->setStyleSheet(
                     "QTreeView::branch {image:none;}"
                     "QTreeView::item{height: 25px;}"
-                    "QTreeView::item:hover{background-color:rgb(100,100,100)}"
+                    "QTreeView {show-decoration-selected: 1;}"
+                    "QTreeView::item {border: 0px solid #d9d9d9;border-top-color: transparent;border-bottom-color: transparent;}"
+                    "QTreeView::item:hover {background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #e7effd, stop: 1 #cbdaf1);border: 1px solid #bfcde4;}"
+
+                    "QTreeView::item:selected {border: 1px solid #567dbc;}"
+
+                    "QTreeView::item:selected:active{background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6ea1f1, stop: 1 #567dbc);}"
+
+                    "QTreeView::item:selected:!active {background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6b9be8, stop: 1 #577fbf);}"
+
                     "QTreeView::branch:closed:has-children:has-siblings { image: url(:/icons/expander_normal.png);}"
                     "QTreeView::branch:has-children:!has-siblings:closed { image: url(:/icons/expander_normal.png); }"
                     "QTreeView::branch:open:has-children:has-siblings { image: url(:/icons/expander_open.png);}"
@@ -98,7 +107,6 @@ MyTreeView::MyTreeView(QString title, QWidget *parent) : treeTitle("tree"), QTre
         this->setAnimated(true);
         //this->setColumnWidth(0,160);
 
-        // TODO 实现拖动功能
 //        this->setDragEnabled(true);
 //        this->setAcceptDrops(true);
 
@@ -108,6 +116,7 @@ MyTreeView::MyTreeView(QString title, QWidget *parent) : treeTitle("tree"), QTre
         this->setSelectionBehavior(QAbstractItemView::SelectRows);
 
         this->header()->hide();
+        this->setEditTriggers(NoEditTriggers);
         initActions();
 }
 
@@ -195,57 +204,6 @@ void MyTreeView::initActions (){
                 "QMenu::item:selected{background-color:rgb(128,128,128)}"
     );
     contextMenu->hide();
-}
-
-// 单击 左键单击显示 右键单击显示菜单
-void MyTreeView::mousePressEvent(QMouseEvent *event)
-{
-        // 左键显示列表
-        if( true == mouseStatus && Qt::LeftButton == event->button()){
-            curPoint = event->pos();
-            curIndex = indexAt(curPoint);
-            curItem = model->itemFromIndex(curIndex);
-            if(curItem){
-                curTitle = curIndex.data().toString();
-                curUuId =  qvariant_cast<QString>(curItem->data(UUID));
-                curType = qvariant_cast<QString>(curItem->data(NODE_TYPE));
-                emit LBtnClk();
-                return;
-            }
-        }
-
-        // 右键显示菜单
-        if(true == mouseStatus && Qt::RightButton == event->button())
-        {
-            curPoint = event->pos();
-            curIndex = indexAt(curPoint);
-            curItem = model->itemFromIndex(curIndex);
-            if(curItem){
-                curTitle = curIndex.data().toString();
-                curUuId =  qvariant_cast<QString>(curItem->data(UUID));
-                curType = qvariant_cast<QString>(curItem->data(NODE_TYPE));
-                treeContextMenuOpened();
-            }
-        }
-}
-
-// 左键双击 打开文件夹
-void MyTreeView::mouseDoubleClickEvent(QMouseEvent *event)
-{
-
-        if(true == mouseStatus && Qt::LeftButton == event->button())
-        {
-                curPoint = event->pos();
-                curIndex = indexAt(curPoint);
-                if(curIndex.isValid()){
-
-                       curItem = model->itemFromIndex(curIndex);
-                       curTitle = curIndex.data().toString();
-                       curUuId =  qvariant_cast<QString>(curItem->data(UUID));
-                       curType = qvariant_cast<QString>(curItem->data(NODE_TYPE));
-                       showChildTree();
-                }
-        }
 }
 
 // 打开右键菜单
@@ -493,17 +451,27 @@ QPoint MyTreeView::getCurPoint(){
       return curPoint;
 }
 
+// 左键双击
+void MyTreeView::mouseDoubleClickEvent(QMouseEvent *event)
+{
 
+        if(true == mouseStatus && Qt::LeftButton == event->button())
+        {
+                curPoint = event->pos();
+                curIndex = indexAt(curPoint);
+                if(curIndex.isValid()){
+                       curItem = model->itemFromIndex(curIndex);
+                       curTitle = curIndex.data().toString();
+                       curUuId =  qvariant_cast<QString>(curItem->data(UUID));
+                       curType = qvariant_cast<QString>(curItem->data(NODE_TYPE));
+                       showChildTree();
+                }
+        }
+}
 //// 右键单击
-//void myTreeList::mousePressEvent(QMouseEvent *event)
+//void MyTreeView::mousePressEvent(QMouseEvent *event)
 //{
-
-//        // 左键退出
-//        if( Qt::LeftButton == event->button()){
-//           return;
-//        }
-
-//        if(true == mouseStatus )
+//        if(true == mouseStatus && Qt::RightButton == event->button() )
 //        {
 //                QModelIndex  index = this->currentIndex();
 //                curItem = model->itemFromIndex(index);
@@ -516,42 +484,34 @@ QPoint MyTreeView::getCurPoint(){
 //        }
 //}
 
-//// 单击
-//void MyTreeView::mouseReleaseEvent(QMouseEvent *event)
-//{
-//    // 左键退出
-//    if( Qt::LeftButton == event->button()){
+// 单击
+void MyTreeView::mouseReleaseEvent(QMouseEvent *event)
+{
+    // 左键退出
+    if( Qt::RightButton == event->button() && true == mouseStatus){
+        curPoint = event->pos();
+        curIndex= indexAt(curPoint);
 
-//        curPoint = event->pos();
-//        curIndex= indexAt(curPoint);
-//        preRow = curIndex.row();
-//        preColumn = curIndex.column();
+        curItem = model->itemFromIndex(curIndex);
+        curTitle = curIndex.data().toString();
+        curUuId =  qvariant_cast<QString>(curItem->data(UUID));
+        curType = qvariant_cast<QString>(curItem->data(NODE_TYPE));
 
-//        curItem = model->itemFromIndex(curIndex);
-//        curTitle = curIndex.data().toString();
-//        curUuId =  qvariant_cast<QString>(curItem->data(UUID));
-//        curType = qvariant_cast<QString>(curItem->data(NODE_TYPE));
-//        emit LBtnClk();
-//        return;
-//    }
+        treeContextMenuOpened();
+    }
 
-//    if(true == mouseStatus && Qt::RightButton == event->button())
-//    {
-//            curPoint = event->pos();
-//            curIndex= indexAt(curPoint);
-//            preRow = curIndex.row();
-//            preColumn = curIndex.column();
+    if(true == mouseStatus && Qt::LeftButton == event->button())
+    {
+            curPoint = event->pos();
+            curIndex= indexAt(curPoint);
 
-//            curItem = model->itemFromIndex(curIndex);
-//            curTitle = curIndex.data().toString();
-//            curUuId =  qvariant_cast<QString>(curItem->data(UUID));
-//            curType = qvariant_cast<QString>(curItem->data(NODE_TYPE));
-//            emit RBtnClk();
-//    }
-//}
-
-//// 只需改变颜色
-//void MyTreeView::changeColor(){
+            curItem = model->itemFromIndex(curIndex);
+            curTitle = curIndex.data().toString();
+            curUuId =  qvariant_cast<QString>(curItem->data(UUID));
+            curType = qvariant_cast<QString>(curItem->data(NODE_TYPE));
+            emit LBtnClk();
+    }
+}
 
 //    QBrush white = QBrush(QColor(255, 255, 255));
 //    QBrush blue = QBrush(QColor(128,128,128));
