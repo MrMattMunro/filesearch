@@ -304,7 +304,15 @@ OTHER_FILES += \
     qscintilla2/include/Scintilla.iface \
     qscintilla2/include/License.txt \
     qscintilla2/include/HFacer.py \
-    qscintilla2/include/Face.py
+    qscintilla2/include/Face.py \
+    file_manager.ico \
+    file_manager.rc
+
+RC_FILE = \
+  file_manager.rc
+
+
+
 
 
 

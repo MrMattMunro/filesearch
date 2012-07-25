@@ -289,19 +289,20 @@ void WebView::saveToSlfile()
        BrowserApplication::downloadManager()->download(url, doc.DOCUMENT_GUID, false);
 
 
-       QThread thread;
-       IndexFilesObj indexFilesObj;
-       indexFilesObj.moveToThread(&thread);
+       // TODO 暂时注释
+//       QThread thread;
+//       IndexFilesObj indexFilesObj;
+//       indexFilesObj.moveToThread(&thread);
 
-       IndexFilesSign dummy;
-       qDebug()<<"main thread:"<< QThread::currentThreadId();
+//       IndexFilesSign dummy;
+//       qDebug()<<"main thread:"<< QThread::currentThreadId();
 
-       QObject::connect(&dummy, SIGNAL(sig()), &indexFilesObj, SLOT(indexfiles()));
-       thread.start();
-       // 通知主界面改变不可搜索
-       Preferences* p = Preferences::instance();
-       p->setIsIndexing(true);
-       dummy.emitsig();
+//       QObject::connect(&dummy, SIGNAL(sig()), &indexFilesObj, SLOT(indexfiles()));
+//       thread.start();
+//       // 通知主界面改变不可搜索
+//       Preferences* p = Preferences::instance();
+//       p->setIsIndexing(true);
+//       dummy.emitsig();
    }
 
 }
