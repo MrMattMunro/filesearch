@@ -188,44 +188,44 @@ bool ArgsParser::parseArgs()
     return true;
 }
 
-//void customMessageHandler(QtMsgType type, const char *msg)
-// {
-//        QString txt;
+void customMessageHandler(QtMsgType type, const char *msg)
+ {
+        QString txt;
 
 
-//        switch (type) {
-//         //调试信息提示
-//         case QtDebugMsg:
-//                 txt = QString("%1: Debug: %2").arg(_TIME_).arg(msg);
-//                 break;
+        switch (type) {
+         //调试信息提示
+         case QtDebugMsg:
+                 txt = QString("%1: Debug: %2").arg(_TIME_).arg(msg);
+                 break;
 
-//        //一般的warning提示
-//         case QtWarningMsg:
-//                 txt = QString("%1: Warning: %2").arg(_TIME_).arg(msg);
-//         break;
-//         //严重错误提示
-//         case QtCriticalMsg:
-//                txt = QString("%1: Critical: %2").arg(_TIME_).arg(msg);
-//         break;
-//         //致命错误提示
-//         case QtFatalMsg:
-//                txt = QString("%1: Fatal: %2").arg(_TIME_).arg(msg);
-//                abort();
-//         }
+        //一般的warning提示
+         case QtWarningMsg:
+                 txt = QString("%1: Warning: %2").arg(_TIME_).arg(msg);
+         break;
+         //严重错误提示
+         case QtCriticalMsg:
+                txt = QString("%1: Critical: %2").arg(_TIME_).arg(msg);
+         break;
+         //致命错误提示
+         case QtFatalMsg:
+                txt = QString("%1: Fatal: %2").arg(_TIME_).arg(msg);
+                abort();
+         }
 
-//         QString logfile = Utils::getSaveLogPath().append(QDir::separator()).append("mflog.log");
-//         QFileInfo file(logfile);
-//         if(file.exists()){
-//             if(file.size() > 1048576){
-//                 FileUtils::deleteDirectory(file);
-//             }
-//         }
+         QString logfile = Utils::getSaveLogPath().append(QDir::separator()).append("mflog.log");
+         QFileInfo file(logfile);
+         if(file.exists()){
+             if(file.size() > 1048576){
+                 FileUtils::deleteDirectory(file);
+             }
+         }
 
-//         QFile outFile(logfile);
-//         outFile.open(QIODevice::WriteOnly | QIODevice::Append);
-//         QTextStream ts(&outFile);
-//         ts << txt << endl;
-//}
+         QFile outFile(logfile);
+         outFile.open(QIODevice::WriteOnly | QIODevice::Append);
+         QTextStream ts(&outFile);
+         ts << txt << endl;
+}
 
 // 主函数
 int main(int argc, char *argv[])
@@ -233,7 +233,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     //先注册自己的MsgHandler
-//    qInstallMsgHandler(customMessageHandler);
+    qInstallMsgHandler(customMessageHandler);
 
 
     //以后就可以像下面这样直接打日志到文件中，而且日志也会包含时间信息

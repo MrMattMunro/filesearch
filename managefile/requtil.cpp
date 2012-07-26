@@ -70,8 +70,3 @@ QVariantMap ReqUtil::getReply()
   return result;
 
 }
-
-
-
-
-

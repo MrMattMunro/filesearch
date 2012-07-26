@@ -892,9 +892,11 @@ void MainWindow::checkNewVersion()
 {
     // 启动升级程序
     qDebug() << "start update programme";
-    QProcess::startDetached(QDir::currentPath().append("updater.exe"), QStringList());
+    bool  isstart= QProcess::startDetached(QDir::currentPath().append(QDir::separator()).append("updater.exe"), QStringList());
     // 退出主程序
-    QCoreApplication::exit(0);
+    if(isstart){
+        QCoreApplication::exit(0);
+    }
 }
 
 // 全屏
