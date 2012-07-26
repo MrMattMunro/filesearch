@@ -21,7 +21,7 @@ LoginDialog::LoginDialog(QWidget * parent)
         : QDialog(parent),
           update(false)
 {
-	setupUi(this);
+         setupUi(this);
 
         connect(loginBtn, SIGNAL(clicked()), this, SLOT(loginBtn_clicked()));
         connect(registerBtn, SIGNAL(clicked()), this, SLOT(registerBtn_clicked()));
@@ -114,6 +114,8 @@ void LoginDialog::doReply()
   QString error = qvariant_cast<QString>(verror);
   QVariant susername = result["username"];
   QString name = qvariant_cast<QString>(susername);
+
+  qDebug("doReply start");
 
   if(error == "Server Errors"){
       QMessageBox::warning(this, tr("Warning"), tr("Server Failed, Please Contact Administrator"), QMessageBox::Yes);
@@ -220,6 +222,7 @@ void LoginDialog::doReply()
 
       update = true;
       this->close();
+      return;
   }
 
   // 重设置密码成功时
