@@ -28,7 +28,7 @@ MoveToDirDialog::MoveToDirDialog(QWidget * parent, const QString & uuId,const QS
           m_curUuid(uuId),
           m_dir(dir),update(false)
 {
-	setupUi(this);
+        setupUi(this);
 
         // 设置目标目录
         sourceDir->setText(m_dir);

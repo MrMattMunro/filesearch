@@ -28,15 +28,10 @@ SortSubDirsDialog::SortSubDirsDialog(QWidget * parent, const QString & uuId,cons
           m_curUuid(uuId),
           m_dir(dir),update(false)
 {
-	setupUi(this);
+        setupUi(this);
 
         // 设置目标目录
         dirlabel->setText(m_dir);
-
-        QStringList header;
-        header << "Directory Name" << "Directory Name";
-        tableWidget->setHorizontalHeaderLabels(header);
-        tableWidget->horizontalHeader()->resizeSection(0,150);
 
         tableWidget->setColumnCount(1); //设置列数为1
         tableWidget->setColumnWidth(0, tableWidget->width() * 3);
@@ -52,7 +47,9 @@ SortSubDirsDialog::SortSubDirsDialog(QWidget * parent, const QString & uuId,cons
         }
 
         this->setWindowIcon(Utils::getIcon("folder.ico"));
-        this->setWindowTitle(tr("Sort Sub Directorys"));
+        this->setWindowTitle(tr("Sort Sub Folders"));
+
+        this->tableWidget->horizontalHeader()->hide();
 
         connect(buttonBox, SIGNAL(accepted()), this, SLOT(confirmBtn_clicked()));
         connect(buttonBox,SIGNAL(rejected()),this,SLOT(cancelBtn_clicked()));

@@ -15,7 +15,7 @@
 
 NotesDialog::NotesDialog(QWidget * parent): QDialog(parent),  update(false)
 {
-	setupUi(this);
+        setupUi(this);
         // 列表
         model = new QStandardItemModel();
         // 新建Model

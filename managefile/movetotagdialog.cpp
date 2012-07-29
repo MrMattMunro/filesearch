@@ -27,21 +27,12 @@ MoveToTagDialog::MoveToTagDialog(QWidget * parent, const QString & uuId)
           m_uuId(uuId),
           update(false)
 {
-	setupUi(this);
+        setupUi(this);
 
         q_myTreeList = new MyTreeView("tag", this);
-        q_myTreeList->setStyleSheet(
-                    "QTreeView::branch {image:none;}"
-                    "QTreeView::item{height: 25px;}"
-                    "QTreeView::item:hover{background-color:rgb(100,100,100)}"
-                    "QTreeView::item:selected{background-color:rgb(128,128,128)}"
-        );
-
         // 展开根节点
         q_myTreeList->enableMouse(true);
-
         q_myTreeList->expandAll();
-
         verticalLayout_2->addWidget(q_myTreeList);
 
         this->setWindowIcon(Utils::getIcon("tag.ico"));

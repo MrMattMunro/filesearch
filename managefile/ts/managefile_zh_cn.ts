@@ -657,7 +657,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../createtagdialog.ui" line="77"/>
         <source>Description(&amp;D):</source>
-        <translation>描述</translation>
+        <translation type="unfinished">描述:</translation>
     </message>
     <message>
         <location filename="../createtagdialog.cpp" line="31"/>
@@ -2701,7 +2701,7 @@ Maybe you should try asking a human?</source>
         <location filename="../mytreeview.cpp" line="1081"/>
         <location filename="../mytreeview.cpp" line="1115"/>
         <source>Please Select an directory.</source>
-        <translation>请选择一个目录</translation>
+        <translation type="unfinished">请选择一个文件夹.</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="895"/>

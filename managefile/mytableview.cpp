@@ -190,6 +190,11 @@ void MyTableView::initActions ()
    optionOfDocTableAction = new QAction(tr("&Option"), this);
    connect(optionOfDocTableAction, SIGNAL(triggered()), this, SLOT(about()));
    option_submenu = new QMenu(this);
+   option_submenu->setStyleSheet(
+               "QMenu::item{height: 25px}"
+               "QMenu::item:hover{background-color:rgb(100,100,100)}"
+               "QMenu::item:selected{background-color:rgb(128,128,128)}"
+   );
    optionOfDocTableAction->setMenu(option_submenu);
    QString selModel = p->getTableSelMode();
    oneRowAction = new QAction(tr("&One Row"), this);
@@ -203,6 +208,7 @@ void MyTableView::initActions ()
    twoRowOptionAction = new QAction(tr("&The second Row's Option"), this);
    showNotesAction = new QAction(tr("&Show notes of Document on Tooltip"), this);
    showNotesAction->setCheckable(true);
+   showNotesAction->setChecked(p->isShowNotesOnTips());
    connect(showNotesAction, SIGNAL(triggered()), this, SLOT(setShowNotesTips()));
 
    option_submenu->addAction(oneRowAction);
@@ -1006,6 +1012,11 @@ void MyTableView::copyToDir()
 void MyTableView::secondRowSetMenu()
 {
     m_secondRowSetMenu = new QMenu(this);
+    m_secondRowSetMenu->setStyleSheet(
+                "QMenu::item{height: 25px}"
+                "QMenu::item:hover{background-color:rgb(100,100,100)}"
+                "QMenu::item:selected{background-color:rgb(128,128,128)}"
+    );
 
     Preferences* p = Preferences::instance();
     QStringList selFields = p->getTableSelField();
@@ -1108,6 +1119,7 @@ void MyTableView::updateSecRow(QList<int> types)
 {
     int rowCount = model->rowCount();
     for(int i = 0; i< rowCount; i++){
+
         if(i%2 == 1){
             QModelIndex index = model->index(i, 2);
             QStandardItem *item = model->itemFromIndex(index);
@@ -1147,7 +1159,6 @@ void MyTableView::updateSecRow(QList<int> types)
                     case LOCATION:
                        temp.append(qvariant_cast<QString>(model->data(index, DOC_LOCATION)));
                        break;
-                     ;
                  }
                 temp.append(" ");
             }

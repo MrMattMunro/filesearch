@@ -7,7 +7,6 @@ LIBS += C:\QtWorksapce\managefile\lib\sqlite3.lib \
          -Lc:/QtWorksapce/managefile/lib -lqjson0
 
 CONFIG+=qaxcontainer
-CONFIG+=release
 
 SOURCES += main.cpp \
         mainwindow.cpp \

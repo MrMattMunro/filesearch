@@ -43,13 +43,16 @@ PropOfDirDialog::PropOfDirDialog (QWidget *parent, const QString & curUuid)
     DirDao::selectAllSubDirbyDir(selDirList, m_curUuid, "1");
     dirCount->setText(QString::number(selDirList.size()));
 
+    // 加入本文件夹
+    selDirList.append(dir);
+
     Dir tempDir;
     int ifileCount = 0;
     int ifileSize = 0;
     foreach(tempDir, selDirList){
         QList<Doc> docs = DocDao::selectDocsbyDir(tempDir.DIR_GUID, "0");
         QList<Doc> deldocs = DocDao::selectDocsbyDir(tempDir.DIR_GUID, "1");
-        ifileCount = docs.size() + deldocs.size() + 1;
+        ifileCount = ifileCount + docs.size() + deldocs.size();
         Doc doc;
         foreach(doc, docs){
             // 计算size K

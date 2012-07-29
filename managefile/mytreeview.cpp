@@ -72,9 +72,7 @@ MyTreeView::MyTreeView(QString title, QWidget *parent) : treeTitle("tree"), QTre
                     "QTreeView::item:hover {background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #e7effd, stop: 1 #cbdaf1);border: 1px solid #bfcde4;}"
 
                     "QTreeView::item:selected {border: 1px solid #567dbc;}"
-
                     "QTreeView::item:selected:active{background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6ea1f1, stop: 1 #567dbc);}"
-
                     "QTreeView::item:selected:!active {background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6b9be8, stop: 1 #577fbf);}"
 
                     "QTreeView::branch:closed:has-children:has-siblings { image: url(:/icons/expander_normal.png);}"
@@ -91,7 +89,7 @@ MyTreeView::MyTreeView(QString title, QWidget *parent) : treeTitle("tree"), QTre
             loadTagByParent("", allTagItem);
         }
         if(title == "tag"){
-            model->setItem(1, 0, allTagItem);
+            model->setItem(0, 0, allTagItem);
             loadTagByParent("", allTagItem);
         }
         if(title == "doc"){
@@ -307,13 +305,13 @@ void MyTreeView::setSubTreeTitle(int subTree, QString title)
         model->item(subTree)->setText(title);
 }
 
-void MyTreeView::addItem(int subTree, QString itemName, QString path, QString icon)
+void MyTreeView::addItem(int subTree, QString itemName, QString uuid, QString type, QString icon)
 {
         QStandardItem  *parenItem = model->item(subTree);
         QStandardItem  *childItem =  new QStandardItem(itemName);
-        childItem->setData(path, UUID);
-
-        childItem->setIcon(Utils::getIcon(icon));
+        childItem->setData(uuid, UUID);
+        childItem->setData(type, NODE_TYPE);
+        childItem->setData(icon,  Qt::DecorationRole);
         parenItem->appendRow(childItem);
 }
 
@@ -883,7 +881,7 @@ void MyTreeView::sortSubDirs()
     bool hasSelRight = false;
 
     // 需选中 总节点和子节点
-    if(curType == "doc") {
+    if(curType == "doc" || curType == "alldocs" ) {
         hasSelRight = true;
         SortSubDirsDialog dlg(this, curUuid, getCurPath());
         dlg.exec();
@@ -1020,7 +1018,7 @@ void MyTreeView::renameSubTag()
     if(curType == "tag") {
         hasSelRight = true;
         bool ok;
-        QString text = QInputDialog::getText(this, m_appName, tr("New Tag name:"), QLineEdit::Normal, curTitle, &ok);
+        QString text = QInputDialog::getText(this,  tr("Rename"), tr("Rename Tag name:"), QLineEdit::Normal, curTitle, &ok);
         if (ok && !text.isEmpty()) {
                 if (text == curTitle){
                   return;
@@ -1094,7 +1092,7 @@ void MyTreeView:: moveToRoot(){
         delSubTree();
 
         // 设置主界面节点
-        addItem(1, tag.TAG_NAME, tag.TAG_GUID, "expander_normal.png");
+        addItem(1, tag.TAG_NAME, tag.TAG_GUID, "tag", "tag.ico");
 
     }
     // 如果没有选中子目录节点
@@ -1110,14 +1108,13 @@ void MyTreeView::movetoTag()
     QString curType = getCurType();
     QStandardItem* curItem = getCurItem();
     QString curTitle = getCurTitle();
-    QString curPath = getCurPath();
     QString curUuId = getCurUuid();
     bool hasSelRight = false;
 
     // 需选中 文件 子节点
     if(curType == "tag") {
         hasSelRight = true;
-        MoveToTagDialog dlg(this, curPath);
+        MoveToTagDialog dlg(this, curUuId);
         dlg.exec();
         if(dlg.update){
               // 取得子界面选中的path
@@ -1126,15 +1123,11 @@ void MyTreeView::movetoTag()
               curItem->parent()->removeRow(curItem->row());
 
               // 设置主界面的节点 (子界面新建文件夹情况下不成功)
-              setCurItemByUuid(curUuId,  curType);
+              setCurItemByUuid(mselUuId,  curType);
 
-              QString curPath = getCurPath();
-              if(!curPath.isEmpty()){
-                  QStandardItem* curItem = getCurItem();
-                  addItemByParentItem(curItem, curTitle, mselUuId, "tag", "tag.ico");
-                  curItem->setIcon(Utils::getIcon("expander_open.png"));
-                  expand(getCurIndex());
-              }
+              QStandardItem* destItem = getCurItem();
+              addItemByParentItem(destItem, curTitle, curUuId, "tag", "tag.ico");
+              expand(getCurIndex());
         }
     }
     // 如果没有选中子标签节点

@@ -261,15 +261,22 @@ bool ImportDocDialog::setProgress(int p)
 // 确定按钮
 void ImportDocDialog::confirmBtn_clicked(){
 
+    int row = model->rowCount();
+    // 如果没有选择导入目录
+    if(row == 0 ){
+       QMessageBox::warning(this, tr("Warning"), tr("No Import file. Please Confirm"), QMessageBox::Yes);
+       return;
+    }
     // 设置button disable
     buttonBox->setDisabled(true);
     fileSelBtn->setDisabled(true);
     previewBtn->setDisabled(true);
     delBtn->setDisabled(true);
 
-    int row= model->rowCount();
     // 存储每一层文件夹名 <1, dirList>
     QMap<int, QStringList> writeMap;
+    // 存储每一层文件夹名 <1, uuidList>
+    QMap<QString, QString> uuidMap;
 
     pgfilename->show();
     progressBar->show();
@@ -280,71 +287,39 @@ void ImportDocDialog::confirmBtn_clicked(){
     QString parentUuId = m_baseUuid;
 
     bool isCreateSubDir = createSubDirCheck->isChecked();
+    m_importDir = m_importDir.append(QDir::separator());
 
     if(isCreateSubDir){
         // 创建子文件夹
-        for (int var = 0; var < row; ++var) {
+        for (int var = 0; var < row; ++ var) {
 
             QStandardItem* temp = model->item(var);
             QString path = temp->text();
-            pgfilename->setText(path);
 
             QString filepath = path.left(path.lastIndexOf(QDir::separator()));
             filepath = filepath.replace("\"","");
 
             // 设置目标目录
             QString destDir = filepath.remove(0, m_importDir.length());
+
             QStringList dirs = destDir.split(QDir::separator());
-
             // 建立目录
-            for (int i = 0; i < dirs.length(); ++i) {
-                // 插入文档
-                if(i = dirs.length() - 1){
-                    QUuid docUuid = QUuid::createUuid();
-                    QFileInfo fileinfo(path);
-                    Doc doc;
-                    doc.DOCUMENT_GUID = docUuid;
-                    doc.DOCUMENT_TITLE = fileinfo.fileName();
-                    // 父目录
-                    if(parentUuId.isEmpty()){
-                       // 选择树节点UuId
-                    }
-
-                    doc.DIR_GUID = parentUuId;
-                    doc.DOCUMENT_LOCATION = path;
-                    doc.DOCUMENT_NAME = fileinfo.fileName();
-                    doc.DOCUMENT_SEO = "";
-                    doc.DOCUMENT_URL = "";
-                    doc.DOCUMENT_AUTHOR = fileinfo.owner();
-                    doc.DOCUMENT_KEYWORDS = "";
-                    doc.DOCUMENT_TYPE = "";
-                    doc.DOCUMENT_OWNER = fileinfo.owner();
-                    doc.DT_CREATED = fileinfo.created().toString("yyyy-MM-dd hh:mm:ss");
-                    doc.DT_MODIFIED = fileinfo.lastModified().toString("yyyy-MM-dd hh:mm:ss");
-                    doc.DT_ACCESSED = fileinfo.lastRead().toString("yyyy-MM-dd hh:mm:ss");
-                    doc.DOCUMENT_ICON_INDEX = 0;
-                    doc.DOCUMENT_SYNC = 0;
-                    doc.DOCUMENT_PROTECT = "";
-                    doc.DOCUMENT_ENCODE= "0";
-                    doc.DOCUMENT_READ_COUNT = 0;
-                    doc.DOCUMENT_RELATE_COUNT = 0;
-                    doc.DOCUMENT_INDEXFLG = "0";
-                    doc.DOCUMENT_OPERFLG = "";
-                    doc.DELETE_FLAG = "0";
-                    doc.MF_VERSION = 0;
-
-                    DocDao::insertDoc(doc);
+            for (int i = 0; i < dirs.length(); i++) {
+                QString tmpDir = dirs.at(i);
+                if(tmpDir.isEmpty()){
+                  continue;
+                }
+                // 第一层文件夹
+                if(i == 0){
+                   parentUuId = m_baseUuid;
                 }
 
-                  QString tmpDir = dirs.at(i);
-                  if(tmpDir.isEmpty()){
-                      continue;
-                  }
-
-                  QStringList exitedDirs = writeMap[i];
-                  if(exitedDirs.contains(tmpDir)){
-                       continue;
-                  } else {
+                QStringList exitedDirs = writeMap[i];
+                if(exitedDirs.contains(tmpDir)){
+                    // 存在的状态下
+                    parentUuId = uuidMap[tmpDir];
+                    continue;
+                } else {
                       QUuid uuid = QUuid::createUuid();
                       Dir dir;
                       dir.DIR_GUID = uuid;
@@ -354,16 +329,69 @@ void ImportDocDialog::confirmBtn_clicked(){
                       dir.DIR_ORDER = 0;
                       dir.DELETE_FLAG = '0';
                       dir.MF_VERSION = 0;
-
                       DirDao::insertDir(dir);
+
                       exitedDirs.append(tmpDir);
                       writeMap.insert(i, exitedDirs);
-                      parentUuId = uuid;
-                  }
+                      uuidMap.insert(tmpDir, uuid);
+
+                      if(i == dirs.length() - 1){
+                          uuidMap.insert(destDir, uuid);
+                      }else{
+                          parentUuId = uuid;
+                      }
+               }
             }
-            setProgress(var);
         }
 
+        // 写入文档信息
+        for (int var = 0; var < row; ++ var) {
+
+                QStandardItem* temp = model->item(var);
+                QString path = temp->text();
+                pgfilename->setText(path);
+
+                QString filepath = path.left(path.lastIndexOf(QDir::separator()));
+                filepath = filepath.replace("\"","");
+
+                // 设置目标目录
+                QString destDir = filepath.remove(0, m_importDir.length());
+                QUuid docUuid = QUuid::createUuid();
+                QFileInfo fileinfo(path);
+                Doc doc;
+                doc.DOCUMENT_GUID = docUuid;
+                doc.DOCUMENT_TITLE = fileinfo.fileName();
+
+                QString parentUUid = uuidMap[destDir];
+                if(parentUUid.isEmpty()){
+                   parentUUid = m_baseUuid;
+                }
+                doc.DIR_GUID = parentUUid;
+                doc.DOCUMENT_LOCATION = path;
+                doc.DOCUMENT_NAME = fileinfo.fileName();
+                doc.DOCUMENT_SEO = "";
+                doc.DOCUMENT_URL = "";
+                doc.DOCUMENT_AUTHOR = fileinfo.owner();
+                doc.DOCUMENT_KEYWORDS = "";
+                doc.DOCUMENT_TYPE = "";
+                doc.DOCUMENT_OWNER = fileinfo.owner();
+                doc.DT_CREATED = fileinfo.created().toString("yyyy-MM-dd hh:mm:ss");
+                doc.DT_MODIFIED = fileinfo.lastModified().toString("yyyy-MM-dd hh:mm:ss");
+                doc.DT_ACCESSED = fileinfo.lastRead().toString("yyyy-MM-dd hh:mm:ss");
+                doc.DOCUMENT_ICON_INDEX = 0;
+                doc.DOCUMENT_SYNC = 0;
+                doc.DOCUMENT_PROTECT = "";
+                doc.DOCUMENT_ENCODE= "0";
+                doc.DOCUMENT_READ_COUNT = 0;
+                doc.DOCUMENT_RELATE_COUNT = 0;
+                doc.DOCUMENT_INDEXFLG = "0";
+                doc.DOCUMENT_OPERFLG = "";
+                doc.DELETE_FLAG = "0";
+                doc.MF_VERSION = 0;
+
+                DocDao::insertDoc(doc);
+                setProgress(var);
+        }
     } else{
             // 不建立子文件夹
           for (int var = 0; var < row; ++var) {

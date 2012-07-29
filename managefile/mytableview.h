@@ -54,16 +54,16 @@ enum TableOptionSet {
 };
 
 enum SecondRowOptionSet {
-    CREATE_DATE = 1,
-    MODIFIED_DATE = 2,
-    ACCESS_DATE = 3,
-    FILE_SIZE = 4,
-    AUTHOR = 5,
-    READ_COUNT = 6,
-    RELATED_COUNT = 7,
-    TAGS = 8,
-    URL = 9,
-    LOCATION = 10
+    CREATE_DATE = 2,
+    MODIFIED_DATE = 3,
+    ACCESS_DATE = 4,
+    FILE_SIZE = 5,
+    AUTHOR = 6,
+    READ_COUNT = 7,
+    RELATED_COUNT = 8,
+    TAGS = 9,
+    URL = 10,
+    LOCATION = 11
 };
 
 class MyTableView : public QTableView

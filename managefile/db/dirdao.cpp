@@ -157,7 +157,7 @@ bool DirDao::updateDir(Dir dir){
     QString delflg = orgDir.DELETE_FLAG;
 
     if(! dir.DIR_PARENT_UUID.isEmpty()){
-       dirparentuuid = dir.DIR_DESCRIPTION;
+       dirparentuuid = dir.DIR_PARENT_UUID;
     }
 
     if(! dir.DIR_NAME.isEmpty()){

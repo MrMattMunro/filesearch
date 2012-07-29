@@ -1082,6 +1082,7 @@ void MainWindow::windowShowNoteEditor()
 
     m_doctable->hide();
     q_myTreeList->hide();
+    toolBar->hide();
 }
 
 void MainWindow::windowHideNoteEditor()
@@ -1092,6 +1093,7 @@ void MainWindow::windowHideNoteEditor()
 
     m_doctable->show();
     q_myTreeList->show();
+    toolBar->show();
 }
 
 
