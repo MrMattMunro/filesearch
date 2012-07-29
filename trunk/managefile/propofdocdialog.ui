@@ -23,7 +23,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="basic">
       <attribute name="title">
@@ -103,7 +103,7 @@
      </widget>
      <widget class="QWidget" name="time">
       <attribute name="title">
-       <string>Protect</string>
+       <string>Date</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_6">
        <item row="0" column="0">
@@ -183,25 +183,148 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Protect</string>
+      </attribute>
+      <widget class="QCheckBox" name="hideLinkIfUnselected">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>250</y>
+         <width>419</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>encrypt Document</string>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_11">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>371</width>
+         <height>211</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Set Protect Password</string>
+       </property>
+       <widget class="QCheckBox" name="isProtect_2">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>125</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Protect Document</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="layoutWidget_2">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>60</y>
+          <width>361</width>
+          <height>132</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>Original  Password:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>Password:          </string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_11">
+             <property name="text">
+              <string>ReInput Password:  </string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <widget class="QLineEdit" name="orgpwd_2">
+             <property name="echoMode">
+              <enum>QLineEdit::Password</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="pwd_2">
+             <property name="echoMode">
+              <enum>QLineEdit::Password</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="repwd_2">
+             <property name="echoMode">
+              <enum>QLineEdit::Password</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </widget>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>Synchronous</string>
+       <string>Synchronization</string>
       </attribute>
       <widget class="QGroupBox" name="groupBox_6">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>124</y>
+         <y>130</y>
          <width>395</width>
-         <height>52</height>
+         <height>91</height>
         </rect>
        </property>
        <property name="title">
-        <string>Read Count</string>
+        <string>Count</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_7">
-        <item row="0" column="0">
+        <item row="0" column="1">
          <widget class="QLineEdit" name="readcount"/>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>Read Count: </string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>Related Count</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="relatedcount"/>
         </item>
        </layout>
       </widget>
@@ -220,24 +343,6 @@
        <layout class="QGridLayout" name="gridLayout_8">
         <item row="0" column="0">
          <widget class="QLineEdit" name="owner"/>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QGroupBox" name="groupBox_8">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>182</y>
-         <width>395</width>
-         <height>52</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Related Count</string>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_9">
-        <item row="0" column="0">
-         <widget class="QLineEdit" name="relatedcount"/>
         </item>
        </layout>
       </widget>
@@ -269,28 +374,38 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>250</y>
+         <y>240</y>
          <width>391</width>
-         <height>61</height>
+         <height>81</height>
         </rect>
        </property>
        <property name="title">
         <string>Version</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_10">
-        <item row="0" column="0">
+        <item row="0" column="1">
          <widget class="QLineEdit" name="version"/>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Local Version:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="lineEdit"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>Remote Verson:</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
      </widget>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="hideLinkIfUnselected">
-     <property name="text">
-      <string>encrypt Document</string>
-     </property>
     </widget>
    </item>
    <item>

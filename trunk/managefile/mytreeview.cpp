@@ -108,7 +108,7 @@ MyTreeView::MyTreeView(QString title, QWidget *parent) : treeTitle("tree"), QTre
 //        this->setDragEnabled(true);
 //        this->setAcceptDrops(true);
 
-        m_appName = tr("File Manage");
+        m_appName = tr("Solo Local File Manage");
 
         this->setSelectionMode(QAbstractItemView::SingleSelection);
         this->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -485,7 +485,7 @@ void MyTreeView::mouseDoubleClickEvent(QMouseEvent *event)
 // µ¥»÷
 void MyTreeView::mouseReleaseEvent(QMouseEvent *event)
 {
-    // ×ó¼üÍË³ö
+    // ÓÒ¼ü
     if( Qt::RightButton == event->button() && true == mouseStatus){
         curPoint = event->pos();
         curIndex= indexAt(curPoint);
@@ -498,6 +498,7 @@ void MyTreeView::mouseReleaseEvent(QMouseEvent *event)
         treeContextMenuOpened();
     }
 
+    // ×ó¼ü
     if(true == mouseStatus && Qt::LeftButton == event->button())
     {
             curPoint = event->pos();

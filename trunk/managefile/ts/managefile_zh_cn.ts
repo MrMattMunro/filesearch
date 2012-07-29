@@ -4,9 +4,13 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../aboutdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
+    </message>
+    <message>
+        <location filename="../aboutdialog.ui" line="14"/>
+        <source>About</source>
+        <translation type="unfinished">关于</translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="21"/>
@@ -22,9 +26,13 @@
 <context>
     <name>AccountDialog</name>
     <message>
-        <location filename="../accountdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
+    </message>
+    <message>
+        <location filename="../accountdialog.ui" line="14"/>
+        <source>Acount Information</source>
+        <translation>账号信息</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="32"/>
@@ -393,20 +401,19 @@ Do you want to reload all pages?</source>
 <context>
     <name>ChangePwdDialog</name>
     <message>
-        <location filename="../changepwddialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
     </message>
     <message>
+        <location filename="../changepwddialog.ui" line="14"/>
         <location filename="../changepwddialog.ui" line="32"/>
         <location filename="../changepwddialog.cpp" line="30"/>
         <source>Change PassWord</source>
         <translation>更改密码</translation>
     </message>
     <message>
-        <location filename="../changepwddialog.ui" line="41"/>
         <source>eg: *.doc,*.pdf</source>
-        <translation>例:*.doc,*.pdf</translation>
+        <translation type="obsolete">例:*.doc,*.pdf</translation>
     </message>
     <message>
         <location filename="../changepwddialog.ui" line="54"/>
@@ -424,34 +431,34 @@ Do you want to reload all pages?</source>
         <translation>重复新密码:</translation>
     </message>
     <message>
-        <location filename="../changepwddialog.cpp" line="51"/>
+        <location filename="../changepwddialog.cpp" line="43"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../changepwddialog.cpp" line="51"/>
+        <location filename="../changepwddialog.cpp" line="43"/>
         <source>The ReInput Password is not same with the New PassWord.</source>
         <translation>两次输入密码不同</translation>
     </message>
     <message>
-        <location filename="../changepwddialog.cpp" line="85"/>
-        <location filename="../changepwddialog.cpp" line="89"/>
-        <location filename="../changepwddialog.cpp" line="94"/>
+        <location filename="../changepwddialog.cpp" line="77"/>
+        <location filename="../changepwddialog.cpp" line="81"/>
+        <location filename="../changepwddialog.cpp" line="86"/>
         <source>Information</source>
         <translation>信息</translation>
     </message>
     <message>
-        <location filename="../changepwddialog.cpp" line="85"/>
+        <location filename="../changepwddialog.cpp" line="77"/>
         <source>Old PassWord Is Incorrect.</source>
         <translation>旧密码不正确</translation>
     </message>
     <message>
-        <location filename="../changepwddialog.cpp" line="89"/>
+        <location filename="../changepwddialog.cpp" line="81"/>
         <source>User Is Not Existed.</source>
         <translation>用户名不存在</translation>
     </message>
     <message>
-        <location filename="../changepwddialog.cpp" line="94"/>
+        <location filename="../changepwddialog.cpp" line="86"/>
         <source>Change PassWord Success, Please Login in</source>
         <translation>成功改变密码,请重新登录.</translation>
     </message>
@@ -602,9 +609,13 @@ Do you want to reload all pages?</source>
 <context>
     <name>CreateSubDirDialog</name>
     <message>
-        <location filename="../createsubdirdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
+    </message>
+    <message>
+        <location filename="../createsubdirdialog.ui" line="14"/>
+        <source>Create Sub Directory</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../createsubdirdialog.ui" line="75"/>
@@ -617,9 +628,8 @@ Do you want to reload all pages?</source>
         <translation>位置: </translation>
     </message>
     <message>
-        <location filename="../createsubdirdialog.ui" line="89"/>
         <source>eg: *.doc,*.pdf</source>
-        <translation>例:*.doc,*.pdf</translation>
+        <translation type="obsolete">例:*.doc,*.pdf</translation>
     </message>
     <message>
         <location filename="../createsubdirdialog.cpp" line="36"/>
@@ -640,9 +650,8 @@ Do you want to reload all pages?</source>
 <context>
     <name>CreateTagDialog</name>
     <message>
-        <location filename="../createtagdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
     </message>
     <message>
         <location filename="../createtagdialog.ui" line="51"/>
@@ -650,9 +659,8 @@ Do you want to reload all pages?</source>
         <translation>标签名称:</translation>
     </message>
     <message>
-        <location filename="../createtagdialog.ui" line="63"/>
         <source>eg: *.doc,*.pdf</source>
-        <translation>例:*.doc,*.pdf</translation>
+        <translation type="obsolete">例:*.doc,*.pdf</translation>
     </message>
     <message>
         <location filename="../createtagdialog.ui" line="77"/>
@@ -660,6 +668,7 @@ Do you want to reload all pages?</source>
         <translation type="unfinished">描述:</translation>
     </message>
     <message>
+        <location filename="../createtagdialog.ui" line="14"/>
         <location filename="../createtagdialog.cpp" line="31"/>
         <source>Create Tag</source>
         <translation>新建标签</translation>
@@ -673,9 +682,13 @@ Do you want to reload all pages?</source>
 <context>
     <name>CustomToolDialog</name>
     <message>
-        <location filename="../customtooldialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
+    </message>
+    <message>
+        <location filename="../customtooldialog.ui" line="14"/>
+        <source>Custom Tools Bar</source>
+        <translation>自定义工具栏</translation>
     </message>
     <message>
         <location filename="../customtooldialog.ui" line="38"/>
@@ -863,9 +876,13 @@ Do you want to reload all pages?</source>
 <context>
     <name>DocNoteInfoDialog</name>
     <message>
-        <location filename="../docnoteinfodialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
+    </message>
+    <message>
+        <location filename="../docnoteinfodialog.ui" line="14"/>
+        <source>Document Note Information</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../docnoteinfodialog.ui" line="51"/>
@@ -899,9 +916,13 @@ Do you want to reload all pages?</source>
 <context>
     <name>DocTagsDialog</name>
     <message>
-        <location filename="../doctagsdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
+    </message>
+    <message>
+        <location filename="../doctagsdialog.ui" line="14"/>
+        <source>Document Tags</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../doctagsdialog.ui" line="38"/>
@@ -932,9 +953,13 @@ Do you want to reload all pages?</source>
 <context>
     <name>DocToDirDialog</name>
     <message>
-        <location filename="../doctodirdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
+    </message>
+    <message>
+        <location filename="../doctodirdialog.ui" line="14"/>
+        <source>Put Document to Directory</source>
+        <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
         <location filename="../doctodirdialog.ui" line="57"/>
@@ -1105,9 +1130,13 @@ Do you want to reload all pages?</source>
 <context>
     <name>ExportConvertDialog</name>
     <message>
-        <location filename="../exportconvertdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
+    </message>
+    <message>
+        <location filename="../exportconvertdialog.ui" line="14"/>
+        <source>Export And Convert</source>
+        <translation>导出及转换</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.ui" line="33"/>
@@ -1183,9 +1212,13 @@ Do you want to reload all pages?</source>
 <context>
     <name>ExportDocDialog</name>
     <message>
-        <location filename="../exportdocdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
+    </message>
+    <message>
+        <location filename="../exportdocdialog.ui" line="14"/>
+        <source>Document Export</source>
+        <translation>导出文档</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="33"/>
@@ -1259,6 +1292,7 @@ Do you want to reload all pages?</source>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="244"/>
+        <location filename="../exportdocdialog.cpp" line="251"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -1268,12 +1302,17 @@ Do you want to reload all pages?</source>
         <translation>请选择导出目录...</translation>
     </message>
     <message>
-        <location filename="../exportdocdialog.cpp" line="282"/>
+        <location filename="../exportdocdialog.cpp" line="251"/>
+        <source>No export file. Please Confirm</source>
+        <translation>没有导出文档,请确认.</translation>
+    </message>
+    <message>
+        <location filename="../exportdocdialog.cpp" line="287"/>
         <source>Message</source>
         <translation>消息</translation>
     </message>
     <message>
-        <location filename="../exportdocdialog.cpp" line="282"/>
+        <location filename="../exportdocdialog.cpp" line="287"/>
         <source>Documents Exported Success!</source>
         <translation>文档导出成功!</translation>
     </message>
@@ -1353,14 +1392,18 @@ Do you want to reload all pages?</source>
 <context>
     <name>ImportDocDialog</name>
     <message>
-        <location filename="../importdocdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
+    </message>
+    <message>
+        <location filename="../importdocdialog.ui" line="14"/>
+        <source>Import Documents</source>
+        <translation>导入文档</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="33"/>
         <source>&amp;Select...</source>
-        <translation>选择</translation>
+        <translation>选择...</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="40"/>
@@ -1504,6 +1547,7 @@ Do you want to reload all pages?</source>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="88"/>
+        <location filename="../importdocdialog.cpp" line="267"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -1511,6 +1555,11 @@ Do you want to reload all pages?</source>
         <location filename="../importdocdialog.cpp" line="88"/>
         <source>Please Select the Path to Import Into..</source>
         <translation>请选择目录导入文档..</translation>
+    </message>
+    <message>
+        <location filename="../importdocdialog.cpp" line="267"/>
+        <source>No Import file. Please Confirm</source>
+        <translation>没有导入文档,请确认.</translation>
     </message>
 </context>
 <context>
@@ -1629,9 +1678,8 @@ Do you want to reload all pages?</source>
 <context>
     <name>LoginDialog</name>
     <message>
-        <location filename="../logindialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="21"/>
@@ -1639,6 +1687,7 @@ Do you want to reload all pages?</source>
         <translation>空</translation>
     </message>
     <message>
+        <location filename="../logindialog.ui" line="14"/>
         <location filename="../logindialog.ui" line="45"/>
         <location filename="../logindialog.ui" line="136"/>
         <source>Login</source>
@@ -1733,58 +1782,58 @@ acknowledge our Terms of Service</source>
         <translation>Slfile文档管理</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="119"/>
-        <location filename="../logindialog.cpp" line="124"/>
-        <location filename="../logindialog.cpp" line="128"/>
-        <location filename="../logindialog.cpp" line="133"/>
-        <location filename="../logindialog.cpp" line="137"/>
-        <location filename="../logindialog.cpp" line="144"/>
+        <location filename="../logindialog.cpp" line="121"/>
+        <location filename="../logindialog.cpp" line="126"/>
+        <location filename="../logindialog.cpp" line="130"/>
+        <location filename="../logindialog.cpp" line="135"/>
+        <location filename="../logindialog.cpp" line="139"/>
+        <location filename="../logindialog.cpp" line="146"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="119"/>
+        <location filename="../logindialog.cpp" line="121"/>
         <source>Server Failed, Please Contact Administrator</source>
         <translation>服务器异常,请联系管理员</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="124"/>
+        <location filename="../logindialog.cpp" line="126"/>
         <source>Sign up Failed, Please Contact Administrator</source>
         <translation>注册失败,请联系管理员</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="128"/>
+        <location filename="../logindialog.cpp" line="130"/>
         <source> : Username/Email have existed, Please Choose an other one</source>
         <translation>用户名/电子邮箱已经存在,请确认</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="133"/>
+        <location filename="../logindialog.cpp" line="135"/>
         <source> : Username/Email is not existed, Please confirm</source>
         <translation>用户名/电子邮箱不存在,请确认.</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="137"/>
+        <location filename="../logindialog.cpp" line="139"/>
         <source> : Password is incorrect, Please confirm</source>
         <translation>密码不正确,请确认.</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="144"/>
+        <location filename="../logindialog.cpp" line="146"/>
         <source> : Change Password Success, &lt;br&gt;But Send Mail Failed Please Contact Administrator to get the Password</source>
         <translation>改变密码成功, &lt;br&gt;请联系管理员获得您的新密码</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="150"/>
-        <location filename="../logindialog.cpp" line="228"/>
+        <location filename="../logindialog.cpp" line="152"/>
+        <location filename="../logindialog.cpp" line="231"/>
         <source>Information</source>
         <translation>消息</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="150"/>
+        <location filename="../logindialog.cpp" line="152"/>
         <source>Sign up Successed, Please Login in</source>
         <translation>注册成功,请登录.</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="228"/>
+        <location filename="../logindialog.cpp" line="231"/>
         <source>ReSet Password Successed, Please Check the email to get the new password</source>
         <translation>重置密码成功,请检查邮箱去获取新的密码</translation>
     </message>
@@ -1793,8 +1842,8 @@ acknowledge our Terms of Service</source>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <source>VideoFeed</source>
-        <translation></translation>
+        <source>slfile</source>
+        <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="70"/>
@@ -1848,7 +1897,7 @@ acknowledge our Terms of Service</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="187"/>
-        <location filename="../mainwindow.cpp" line="1129"/>
+        <location filename="../mainwindow.cpp" line="1134"/>
         <source>&amp;Quit</source>
         <translation></translation>
     </message>
@@ -1991,7 +2040,7 @@ acknowledge our Terms of Service</source>
     <message>
         <location filename="../mainwindow.cpp" line="371"/>
         <source>&amp;About</source>
-        <translation>关于</translation>
+        <translation type="unfinished">关于</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="427"/>
@@ -2010,9 +2059,13 @@ acknowledge our Terms of Service</source>
         <translation>帮助</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="87"/>
         <source>Local File Manage</source>
-        <translation>slfile</translation>
+        <translation type="obsolete">slfile</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="87"/>
+        <source>Solo Local File Manage</source>
+        <translation type="unfinished">搜喽文档管理</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="202"/>
@@ -2190,32 +2243,32 @@ acknowledge our Terms of Service</source>
         <translation>工具栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="729"/>
+        <location filename="../mainwindow.cpp" line="730"/>
         <source>Note Editor</source>
         <translation>备注编辑器</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1120"/>
+        <location filename="../mainwindow.cpp" line="1125"/>
         <source>Mi&amp;nimize</source>
         <translation>最小化</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1123"/>
+        <location filename="../mainwindow.cpp" line="1128"/>
         <source>Ma&amp;ximize</source>
         <translation>最大化</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1126"/>
+        <location filename="../mainwindow.cpp" line="1131"/>
         <source>&amp;Restore</source>
         <translation>重置</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1147"/>
+        <location filename="../mainwindow.cpp" line="1152"/>
         <source>Systray</source>
         <translation>系统托盘</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1148"/>
+        <location filename="../mainwindow.cpp" line="1153"/>
         <source>Sorry, I already gave what help I could.
 Maybe you should try asking a human?</source>
         <translation></translation>
@@ -2224,9 +2277,13 @@ Maybe you should try asking a human?</source>
 <context>
     <name>MoveToDirDialog</name>
     <message>
-        <location filename="../movetodirdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
+    </message>
+    <message>
+        <location filename="../movetodirdialog.ui" line="14"/>
+        <source>Move document to Directory</source>
+        <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
         <location filename="../movetodirdialog.ui" line="57"/>
@@ -2264,22 +2321,22 @@ Maybe you should try asking a human?</source>
 <context>
     <name>MoveToTagDialog</name>
     <message>
-        <location filename="../movetotagdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
     </message>
     <message>
-        <location filename="../movetotagdialog.cpp" line="48"/>
+        <location filename="../movetotagdialog.ui" line="14"/>
+        <location filename="../movetotagdialog.cpp" line="39"/>
         <source>Move the Tag</source>
         <translation>移动标签</translation>
     </message>
     <message>
-        <location filename="../movetotagdialog.cpp" line="60"/>
+        <location filename="../movetotagdialog.cpp" line="51"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../movetotagdialog.cpp" line="60"/>
+        <location filename="../movetotagdialog.cpp" line="51"/>
         <source>Please Select the other Tag</source>
         <translation>请选择另外的标签</translation>
     </message>
@@ -2333,204 +2390,214 @@ Maybe you should try asking a human?</source>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="131"/>
+        <source>&amp;Restore</source>
+        <translation type="unfinished">还原</translation>
+    </message>
+    <message>
+        <location filename="../mytableview.cpp" line="135"/>
         <source>&amp;Encrypt</source>
         <translation>加密</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="135"/>
+        <location filename="../mytableview.cpp" line="139"/>
         <source>&amp;Find and Replace</source>
         <translation>查找与替换</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="139"/>
+        <location filename="../mytableview.cpp" line="143"/>
         <source>&amp;Select All</source>
         <translation>全选</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="143"/>
+        <location filename="../mytableview.cpp" line="147"/>
         <source>&amp;Print</source>
         <translation>打印</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="147"/>
+        <location filename="../mytableview.cpp" line="151"/>
         <source>&amp;Advanced</source>
         <translation>高级</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="151"/>
+        <location filename="../mytableview.cpp" line="155"/>
         <source>&amp;Convert Document</source>
         <translation>转换文档</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="155"/>
+        <location filename="../mytableview.cpp" line="159"/>
         <source>&amp;Convert Office to Pdf</source>
         <translation>Office转Pdf</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="156"/>
+        <location filename="../mytableview.cpp" line="160"/>
         <source>&amp;Convert Pdf to Office</source>
         <translation>Pdf转Office</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="157"/>
+        <location filename="../mytableview.cpp" line="161"/>
         <source>&amp;Convert Picture to Pdf</source>
         <translation>图片转Pdf</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="158"/>
+        <location filename="../mytableview.cpp" line="162"/>
         <source>&amp;Convert Ppt to Picture</source>
         <translation>Ppt转图片</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="165"/>
+        <location filename="../mytableview.cpp" line="169"/>
         <source>&amp;Merge Document</source>
         <translation>合并文档</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="168"/>
+        <location filename="../mytableview.cpp" line="172"/>
         <source>&amp;Restore And Repair Document</source>
         <translation>修复文档</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="171"/>
+        <location filename="../mytableview.cpp" line="175"/>
         <source>&amp;Print Documents In Batch</source>
-        <translation>批量答应文档</translation>
+        <translation type="unfinished">批量打印文档</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="174"/>
+        <location filename="../mytableview.cpp" line="178"/>
         <source>&amp;Change format in the Document</source>
         <translation>改变格式</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="184"/>
+        <location filename="../mytableview.cpp" line="188"/>
         <source>&amp;Move to...</source>
         <translation>移动到...</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="187"/>
+        <location filename="../mytableview.cpp" line="191"/>
         <source>&amp;Copy to...</source>
         <translation>复制到...</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="190"/>
+        <location filename="../mytableview.cpp" line="194"/>
         <source>&amp;Option</source>
         <translation>选项</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="195"/>
+        <location filename="../mytableview.cpp" line="204"/>
         <source>&amp;One Row</source>
         <translation>一行</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="199"/>
+        <location filename="../mytableview.cpp" line="208"/>
         <source>&amp;Two Rows</source>
         <translation>两行</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="203"/>
+        <location filename="../mytableview.cpp" line="212"/>
         <source>&amp;The second Row&apos;s Option</source>
         <translation>第二行选项...</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="204"/>
+        <location filename="../mytableview.cpp" line="213"/>
         <source>&amp;Show notes of Document on Tooltip</source>
         <translation>显示笔记在文档提示</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="221"/>
+        <location filename="../mytableview.cpp" line="231"/>
         <source>&amp;Properties</source>
         <translation>属性</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="673"/>
-        <location filename="../mytableview.cpp" line="691"/>
-        <location filename="../mytableview.cpp" line="713"/>
-        <location filename="../mytableview.cpp" line="816"/>
-        <location filename="../mytableview.cpp" line="861"/>
-        <location filename="../mytableview.cpp" line="885"/>
-        <location filename="../mytableview.cpp" line="1211"/>
-        <location filename="../mytableview.cpp" line="1232"/>
+        <location filename="../mytableview.cpp" line="682"/>
+        <location filename="../mytableview.cpp" line="700"/>
+        <location filename="../mytableview.cpp" line="722"/>
+        <location filename="../mytableview.cpp" line="825"/>
+        <location filename="../mytableview.cpp" line="870"/>
+        <location filename="../mytableview.cpp" line="894"/>
+        <location filename="../mytableview.cpp" line="1272"/>
+        <location filename="../mytableview.cpp" line="1293"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="673"/>
-        <location filename="../mytableview.cpp" line="691"/>
-        <location filename="../mytableview.cpp" line="724"/>
+        <location filename="../mytableview.cpp" line="682"/>
+        <location filename="../mytableview.cpp" line="700"/>
+        <location filename="../mytableview.cpp" line="733"/>
         <source>Please Confirm The original file  has Deleted Or Moved. </source>
         <translation>请确认原始文件是否已删除或移动</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="713"/>
-        <location filename="../mytableview.cpp" line="816"/>
-        <location filename="../mytableview.cpp" line="861"/>
-        <location filename="../mytableview.cpp" line="885"/>
-        <location filename="../mytableview.cpp" line="1232"/>
+        <location filename="../mytableview.cpp" line="722"/>
+        <location filename="../mytableview.cpp" line="825"/>
+        <location filename="../mytableview.cpp" line="870"/>
+        <location filename="../mytableview.cpp" line="894"/>
+        <location filename="../mytableview.cpp" line="1293"/>
         <source>Please Select an Document.</source>
         <translation>请选择一个文档.</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="724"/>
+        <location filename="../mytableview.cpp" line="733"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="897"/>
+        <location filename="../mytableview.cpp" line="906"/>
         <source>Are you sure that delete the document ?</source>
         <translation>是否确认删除文档?</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1016"/>
+        <location filename="../mytableview.cpp" line="952"/>
+        <source>Are you sure that restore the document ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mytableview.cpp" line="1077"/>
         <source>Create Date</source>
         <translation>创建日期</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1022"/>
+        <location filename="../mytableview.cpp" line="1083"/>
         <source>Modified Date</source>
         <translation>修改日期</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1028"/>
+        <location filename="../mytableview.cpp" line="1089"/>
         <source>Accessed Date</source>
         <translation>访问日期</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1034"/>
+        <location filename="../mytableview.cpp" line="1095"/>
         <source>Size</source>
         <translation>大小</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1040"/>
+        <location filename="../mytableview.cpp" line="1101"/>
         <source>Author</source>
         <translation>作者</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1046"/>
+        <location filename="../mytableview.cpp" line="1107"/>
         <source>Read Count</source>
         <translation>阅读次数</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1052"/>
+        <location filename="../mytableview.cpp" line="1113"/>
         <source>Related Count</source>
         <translation>关联次数</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1058"/>
+        <location filename="../mytableview.cpp" line="1119"/>
         <source>Tags</source>
         <translation>标签</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1064"/>
+        <location filename="../mytableview.cpp" line="1125"/>
         <source>URL</source>
         <translation>网址</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1070"/>
+        <location filename="../mytableview.cpp" line="1131"/>
         <source>Location</source>
         <translation>本地位置</translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1212"/>
+        <location filename="../mytableview.cpp" line="1273"/>
         <source>Please Confirm The original file has Deleted Or Moved. </source>
         <translation>请确认原始文件是否已被删除或移动.</translation>
     </message>
@@ -2553,198 +2620,211 @@ Maybe you should try asking a human?</source>
         <translation>垃圾篓</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="105"/>
+        <location filename="../mytreeview.cpp" line="111"/>
         <source>File Manage</source>
         <translation>文档管理</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="118"/>
+        <location filename="../mytreeview.cpp" line="125"/>
         <source>&amp;New Sub Dir</source>
         <translation>新建子文件夹</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="120"/>
+        <location filename="../mytreeview.cpp" line="127"/>
         <source>&amp;Move To Dir</source>
         <translation>移动到...</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="122"/>
-        <location filename="../mytreeview.cpp" line="169"/>
+        <location filename="../mytreeview.cpp" line="129"/>
+        <location filename="../mytreeview.cpp" line="176"/>
         <source>&amp;Delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="124"/>
-        <location filename="../mytreeview.cpp" line="171"/>
+        <location filename="../mytreeview.cpp" line="131"/>
+        <location filename="../mytreeview.cpp" line="178"/>
         <source>&amp;Rename</source>
         <translation>重命名</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="128"/>
+        <location filename="../mytreeview.cpp" line="135"/>
         <source>&amp;Import...</source>
         <translation>导入...</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="129"/>
+        <location filename="../mytreeview.cpp" line="136"/>
         <source>Ctrl+I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="132"/>
+        <location filename="../mytreeview.cpp" line="139"/>
         <source>&amp;Export...</source>
         <translation>导出...</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="133"/>
+        <location filename="../mytreeview.cpp" line="140"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="136"/>
+        <location filename="../mytreeview.cpp" line="143"/>
         <source>&amp;Sort SubDirs</source>
         <translation>子文件夹排序</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="139"/>
+        <location filename="../mytreeview.cpp" line="146"/>
         <source>&amp;Show docs under sub Dir</source>
         <translation>显示子文件夹文档</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="147"/>
-        <location filename="../mytreeview.cpp" line="157"/>
+        <location filename="../mytreeview.cpp" line="154"/>
+        <location filename="../mytreeview.cpp" line="164"/>
         <source>&amp;Protect</source>
         <translation>保护</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="149"/>
-        <location filename="../mytreeview.cpp" line="179"/>
+        <location filename="../mytreeview.cpp" line="156"/>
+        <location filename="../mytreeview.cpp" line="186"/>
         <source>&amp;Properties</source>
         <translation>属性</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="153"/>
+        <location filename="../mytreeview.cpp" line="160"/>
         <source>&amp;New Root Dir</source>
         <translation>新建根文件夹</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="155"/>
+        <location filename="../mytreeview.cpp" line="162"/>
         <source>&amp;Sort Dir</source>
         <translation>文件夹排序</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="159"/>
+        <location filename="../mytreeview.cpp" line="166"/>
         <source>&amp;Option</source>
         <translation>选项</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="163"/>
+        <location filename="../mytreeview.cpp" line="170"/>
         <source>&amp;New Sub Tag</source>
         <translation>新建子标签</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="165"/>
+        <location filename="../mytreeview.cpp" line="172"/>
         <source>&amp;Move to Tag</source>
         <translation>移动到标签</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="167"/>
+        <location filename="../mytreeview.cpp" line="174"/>
         <source>&amp;Move to Root Tag</source>
         <translation>移动到根标签</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="173"/>
+        <location filename="../mytreeview.cpp" line="180"/>
         <source>&amp;Show docs under sub Tag</source>
         <translation>显示子标签文档</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="183"/>
+        <location filename="../mytreeview.cpp" line="190"/>
         <source>&amp;New Tag</source>
         <translation>新建标签</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="187"/>
+        <location filename="../mytreeview.cpp" line="194"/>
         <source>&amp;Clear Basket</source>
         <translation>清空垃圾篓</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="772"/>
-        <location filename="../mytreeview.cpp" line="794"/>
-        <location filename="../mytreeview.cpp" line="816"/>
-        <location filename="../mytreeview.cpp" line="842"/>
-        <location filename="../mytreeview.cpp" line="877"/>
-        <location filename="../mytreeview.cpp" line="913"/>
-        <location filename="../mytreeview.cpp" line="939"/>
-        <location filename="../mytreeview.cpp" line="978"/>
+        <location filename="../mytreeview.cpp" line="731"/>
+        <location filename="../mytreeview.cpp" line="753"/>
+        <location filename="../mytreeview.cpp" line="775"/>
+        <location filename="../mytreeview.cpp" line="801"/>
+        <location filename="../mytreeview.cpp" line="836"/>
+        <location filename="../mytreeview.cpp" line="872"/>
+        <location filename="../mytreeview.cpp" line="898"/>
+        <location filename="../mytreeview.cpp" line="937"/>
+        <location filename="../mytreeview.cpp" line="962"/>
         <location filename="../mytreeview.cpp" line="1003"/>
-        <location filename="../mytreeview.cpp" line="1044"/>
-        <location filename="../mytreeview.cpp" line="1081"/>
-        <location filename="../mytreeview.cpp" line="1115"/>
-        <location filename="../mytreeview.cpp" line="1142"/>
-        <location filename="../mytreeview.cpp" line="1182"/>
+        <location filename="../mytreeview.cpp" line="1040"/>
+        <location filename="../mytreeview.cpp" line="1074"/>
+        <location filename="../mytreeview.cpp" line="1101"/>
+        <location filename="../mytreeview.cpp" line="1136"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="772"/>
-        <location filename="../mytreeview.cpp" line="794"/>
+        <location filename="../mytreeview.cpp" line="731"/>
+        <location filename="../mytreeview.cpp" line="753"/>
         <source>Please Select an sub directory.</source>
         <translation>请选择一个子目录.</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="816"/>
-        <location filename="../mytreeview.cpp" line="842"/>
-        <location filename="../mytreeview.cpp" line="877"/>
-        <location filename="../mytreeview.cpp" line="913"/>
-        <location filename="../mytreeview.cpp" line="939"/>
-        <location filename="../mytreeview.cpp" line="978"/>
-        <location filename="../mytreeview.cpp" line="1003"/>
-        <location filename="../mytreeview.cpp" line="1081"/>
-        <location filename="../mytreeview.cpp" line="1115"/>
+        <location filename="../mytreeview.cpp" line="775"/>
+        <location filename="../mytreeview.cpp" line="801"/>
+        <location filename="../mytreeview.cpp" line="836"/>
+        <location filename="../mytreeview.cpp" line="872"/>
+        <location filename="../mytreeview.cpp" line="898"/>
+        <location filename="../mytreeview.cpp" line="937"/>
+        <location filename="../mytreeview.cpp" line="962"/>
+        <location filename="../mytreeview.cpp" line="1040"/>
+        <location filename="../mytreeview.cpp" line="1074"/>
         <source>Please Select an directory.</source>
-        <translation type="unfinished">请选择一个文件夹.</translation>
+        <translation>请选择一个文件夹.</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="895"/>
+        <location filename="../mytreeview.cpp" line="854"/>
         <source>New Directory name:</source>
         <translation>新建目录名称:</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="954"/>
-        <source>New Roor Directory name:</source>
-        <translation>新建根目录名称:</translation>
+        <location filename="../mytreeview.cpp" line="913"/>
+        <source>New Root Directory name:</source>
+        <translation type="unfinished">新建根文件夹名称:</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1020"/>
+        <location filename="../mytreeview.cpp" line="1022"/>
+        <source>Rename</source>
+        <translation type="unfinished">重命名</translation>
+    </message>
+    <message>
+        <location filename="../mytreeview.cpp" line="1022"/>
+        <source>Rename Tag name:</source>
+        <translation>重命名标签名称:</translation>
+    </message>
+    <message>
+        <source>New Roor Directory name:</source>
+        <translation type="obsolete">新建根目录名称:</translation>
+    </message>
+    <message>
+        <location filename="../mytreeview.cpp" line="979"/>
         <source>Are you sure you want to delete the %1 tag?</source>
         <translation>您是否确认删除 %1 标签</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1044"/>
+        <location filename="../mytreeview.cpp" line="1003"/>
         <source>Please Select an Sub Tag.</source>
         <translation>请选择一个子标签.</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1063"/>
         <source>New Tag name:</source>
-        <translation>新建标签名称:</translation>
+        <translation type="obsolete">新建标签名称:</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1142"/>
+        <location filename="../mytreeview.cpp" line="1101"/>
         <source>Please Select an Tag.</source>
         <translation>请选择一个标签.</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1182"/>
+        <location filename="../mytreeview.cpp" line="1136"/>
         <source>Please Select an sub tag.</source>
         <translation>请选择一个子标签.</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1193"/>
+        <location filename="../mytreeview.cpp" line="1147"/>
         <source>Are you sure that delete the directory &quot;%1&quot;?</source>
         <translation>您是否确定删除目录 %1 ?</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1225"/>
+        <location filename="../mytreeview.cpp" line="1179"/>
         <source>Are you sure that drop the Basket ?</source>
         <translation>您是否确定清空垃圾篓?</translation>
     </message>
@@ -2784,11 +2864,11 @@ Do you want to ignore these errors for this host?</source>
 <context>
     <name>NotesDialog</name>
     <message>
-        <location filename="../notesdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
     </message>
     <message>
+        <location filename="../notesdialog.ui" line="14"/>
         <location filename="../notesdialog.ui" line="26"/>
         <source>Notes</source>
         <translation>笔记</translation>
@@ -3113,9 +3193,8 @@ Do you want to ignore these errors for this host?</source>
 <context>
     <name>PrinterWidget</name>
     <message>
-        <location filename="../printerwidget.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
     </message>
     <message>
         <location filename="../printerwidget.cpp" line="39"/>
@@ -3136,6 +3215,11 @@ Do you want to ignore these errors for this host?</source>
         <location filename="../printerwidget.cpp" line="49"/>
         <source>sdfffffffffffffffffff</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../printerwidget.ui" line="14"/>
+        <source>Printer</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3211,47 +3295,57 @@ Do you want to ignore these errors for this host?</source>
         <translation>大小:</translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.ui" line="209"/>
+        <location filename="../propofdirdialog.ui" line="202"/>
+        <source>Protect</source>
+        <translation>保护</translation>
+    </message>
+    <message>
+        <location filename="../propofdirdialog.ui" line="214"/>
+        <source>Set Protect Password</source>
+        <translation>设置保护密码</translation>
+    </message>
+    <message>
+        <location filename="../propofdirdialog.ui" line="226"/>
         <source>Protect Directory</source>
         <translation>保护目录</translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.ui" line="227"/>
+        <location filename="../propofdirdialog.ui" line="244"/>
         <source>Original  Password:</source>
         <translation>原始密码:</translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.ui" line="245"/>
+        <location filename="../propofdirdialog.ui" line="251"/>
         <source>Password:          </source>
         <translation>密码:</translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.ui" line="263"/>
+        <location filename="../propofdirdialog.ui" line="258"/>
         <source>ReInput Password:  </source>
-        <translation>重新输入密码</translation>
+        <translation type="unfinished">重新输入密码:</translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.ui" line="281"/>
+        <location filename="../propofdirdialog.ui" line="295"/>
         <source>Synchronization </source>
         <translation>同步</translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.ui" line="293"/>
+        <location filename="../propofdirdialog.ui" line="307"/>
         <source>Remote Version</source>
         <translation>远程版本</translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.ui" line="317"/>
+        <location filename="../propofdirdialog.ui" line="331"/>
         <source>Local Version</source>
         <translation>本地版本</translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.ui" line="352"/>
+        <location filename="../propofdirdialog.ui" line="366"/>
         <source>Apply</source>
         <translation>应用</translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.ui" line="359"/>
+        <location filename="../propofdirdialog.ui" line="373"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
@@ -3262,18 +3356,18 @@ Do you want to ignore these errors for this host?</source>
         <translation>属性编辑器</translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.cpp" line="141"/>
-        <location filename="../propofdirdialog.cpp" line="153"/>
+        <location filename="../propofdirdialog.cpp" line="144"/>
+        <location filename="../propofdirdialog.cpp" line="156"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.cpp" line="141"/>
+        <location filename="../propofdirdialog.cpp" line="144"/>
         <source>The Org password is wrong, Please Confirm</source>
         <translation>最初密码是错误的,请确认</translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.cpp" line="153"/>
+        <location filename="../propofdirdialog.cpp" line="156"/>
         <source>The password you entered must be the same as the  former</source>
         <translation>两次输入密码必须一致.</translation>
     </message>
@@ -3316,7 +3410,7 @@ Do you want to ignore these errors for this host?</source>
         <translation>本地位置</translation>
     </message>
     <message>
-        <location filename="../propofdocdialog.ui" line="106"/>
+        <location filename="../propofdocdialog.ui" line="188"/>
         <source>Protect</source>
         <translation>保护</translation>
     </message>
@@ -3341,48 +3435,96 @@ Do you want to ignore these errors for this host?</source>
         <translation>关联文档</translation>
     </message>
     <message>
-        <location filename="../propofdocdialog.ui" line="188"/>
         <source>Synchronous</source>
-        <translation>同步</translation>
+        <translation type="obsolete">同步</translation>
     </message>
     <message>
-        <location filename="../propofdocdialog.ui" line="200"/>
         <source>Read Count</source>
-        <translation>读取次数</translation>
+        <translation type="obsolete">读取次数</translation>
     </message>
     <message>
-        <location filename="../propofdocdialog.ui" line="218"/>
+        <location filename="../propofdocdialog.ui" line="341"/>
         <source>Owner</source>
         <translation>所有者</translation>
     </message>
     <message>
-        <location filename="../propofdocdialog.ui" line="236"/>
+        <location filename="../propofdocdialog.ui" line="322"/>
         <source>Related Count</source>
         <translation>关联次数</translation>
     </message>
     <message>
-        <location filename="../propofdocdialog.ui" line="260"/>
+        <location filename="../propofdocdialog.ui" line="213"/>
+        <source>Set Protect Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="225"/>
+        <source>Protect Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="243"/>
+        <source>Original  Password:</source>
+        <translation type="unfinished">原始密码:</translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="250"/>
+        <source>Password:          </source>
+        <translation type="unfinished">密码:</translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="257"/>
+        <source>ReInput Password:  </source>
+        <translation type="unfinished">重新输入密码</translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="294"/>
+        <source>Synchronization</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="306"/>
+        <source>Count</source>
+        <translation type="unfinished">统计</translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="315"/>
+        <source>Read Count: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="365"/>
         <location filename="../propofdocdialog.cpp" line="61"/>
         <source>Author</source>
         <translation>作者</translation>
     </message>
     <message>
-        <location filename="../propofdocdialog.ui" line="278"/>
+        <location filename="../propofdocdialog.ui" line="383"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
     <message>
-        <location filename="../propofdocdialog.ui" line="292"/>
+        <location filename="../propofdocdialog.ui" line="200"/>
         <source>encrypt Document</source>
         <translation>加密文档</translation>
     </message>
     <message>
-        <location filename="../propofdocdialog.ui" line="333"/>
+        <location filename="../propofdocdialog.ui" line="392"/>
+        <source>Local Version:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="402"/>
+        <source>Remote Verson:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="448"/>
         <source>Apply</source>
         <translation>应用</translation>
     </message>
     <message>
-        <location filename="../propofdocdialog.ui" line="340"/>
+        <location filename="../propofdocdialog.ui" line="455"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
@@ -3398,6 +3540,7 @@ Do you want to ignore these errors for this host?</source>
         <translation>文档名称</translation>
     </message>
     <message>
+        <location filename="../propofdocdialog.ui" line="106"/>
         <location filename="../propofdocdialog.cpp" line="63"/>
         <source>Date</source>
         <translation>日期</translation>
@@ -3411,9 +3554,13 @@ Do you want to ignore these errors for this host?</source>
 <context>
     <name>PropOfTagDialog</name>
     <message>
-        <location filename="../propoftagdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
+    </message>
+    <message>
+        <location filename="../propoftagdialog.ui" line="14"/>
+        <source>Properties of Tag</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../propoftagdialog.ui" line="51"/>
@@ -3421,9 +3568,8 @@ Do you want to ignore these errors for this host?</source>
         <translation>标签名称:</translation>
     </message>
     <message>
-        <location filename="../propoftagdialog.ui" line="63"/>
         <source>eg: *.doc,*.pdf</source>
-        <translation>例:*.doc,*.pdf</translation>
+        <translation type="obsolete">例:*.doc,*.pdf</translation>
     </message>
     <message>
         <location filename="../propoftagdialog.ui" line="77"/>
@@ -3617,9 +3763,13 @@ Do you want to ignore these errors for this host?</source>
 <context>
     <name>RelateDocDialog</name>
     <message>
-        <location filename="../relatedocdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
+    </message>
+    <message>
+        <location filename="../relatedocdialog.ui" line="14"/>
+        <source>Relate Documents</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../relatedocdialog.ui" line="26"/>
@@ -3653,13 +3803,21 @@ Do you want to ignore these errors for this host?</source>
     </message>
     <message>
         <location filename="../relatedocdialog.cpp" line="55"/>
-        <source>Delete this Doc</source>
-        <translation>删除该文档</translation>
+        <source>Delete this Realted Document</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../relatedocdialog.cpp" line="56"/>
+        <source>Delete All Realted Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete this Doc</source>
+        <translation type="obsolete">删除该文档</translation>
+    </message>
+    <message>
         <source>Delete All Docs</source>
-        <translation>删除所有关联文档</translation>
+        <translation type="obsolete">删除所有关联文档</translation>
     </message>
     <message>
         <location filename="../relatedocdialog.cpp" line="76"/>
@@ -3683,6 +3841,19 @@ Do you want to ignore these errors for this host?</source>
     </message>
 </context>
 <context>
+    <name>ReqUtil</name>
+    <message>
+        <location filename="../requtil.cpp" line="46"/>
+        <source>Warning</source>
+        <translation type="unfinished">警告</translation>
+    </message>
+    <message>
+        <location filename="../requtil.cpp" line="46"/>
+        <source>The Server has Errors, Please Contact the Administrator!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ResultDao</name>
     <message>
         <location filename="../db/resultdao.cpp" line="23"/>
@@ -3693,9 +3864,13 @@ Do you want to ignore these errors for this host?</source>
 <context>
     <name>SaveUrlDialog</name>
     <message>
-        <location filename="../saveurldialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
+    </message>
+    <message>
+        <location filename="../saveurldialog.ui" line="14"/>
+        <source>Save Url</source>
+        <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
         <location filename="../saveurldialog.ui" line="57"/>
@@ -3721,9 +3896,8 @@ Do you want to ignore these errors for this host?</source>
 <context>
     <name>ScoreToVipDialog</name>
     <message>
-        <location filename="../scoretovipdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
     </message>
     <message>
         <location filename="../scoretovipdialog.ui" line="32"/>
@@ -3731,9 +3905,13 @@ Do you want to ignore these errors for this host?</source>
         <translation>积分兑换VIP</translation>
     </message>
     <message>
-        <location filename="../scoretovipdialog.ui" line="41"/>
         <source>eg: *.doc,*.pdf</source>
-        <translation>例:*.doc,*.pdf</translation>
+        <translation type="obsolete">例:*.doc,*.pdf</translation>
+    </message>
+    <message>
+        <location filename="../scoretovipdialog.ui" line="14"/>
+        <source>Use Score to Change VIP</source>
+        <translation>使用积分换VIP</translation>
     </message>
     <message>
         <location filename="../scoretovipdialog.ui" line="54"/>
@@ -4163,9 +4341,13 @@ Do you want to ignore these errors for this host?</source>
 <context>
     <name>SortSubDirsDialog</name>
     <message>
-        <location filename="../sortsubdirsdialog.ui" line="14"/>
         <source>Data Import</source>
-        <translation>文档导入</translation>
+        <translation type="obsolete">文档导入</translation>
+    </message>
+    <message>
+        <location filename="../sortsubdirsdialog.ui" line="14"/>
+        <source>Sort the Sub Directorys</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../sortsubdirsdialog.ui" line="42"/>
@@ -4179,13 +4361,22 @@ Do you want to ignore these errors for this host?</source>
     </message>
     <message>
         <location filename="../sortsubdirsdialog.ui" line="68"/>
+        <source>Parent folder:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sortsubdirsdialog.ui" line="75"/>
         <source>dir</source>
         <translation>目录</translation>
     </message>
     <message>
-        <location filename="../sortsubdirsdialog.cpp" line="55"/>
         <source>Sort Sub Directorys</source>
-        <translation>子文件夹排序</translation>
+        <translation type="obsolete">子文件夹排序</translation>
+    </message>
+    <message>
+        <location filename="../sortsubdirsdialog.cpp" line="50"/>
+        <source>Sort Sub Folders</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

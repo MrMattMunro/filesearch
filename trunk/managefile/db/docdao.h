@@ -45,7 +45,7 @@ class DocDao
                 static bool restoreDocByDirUuid(QString dirUuId);
 
                 // »Ö¸´ÎÄµµ
-                bool restoreDoc(QString docUuId);
+                static bool restoreDoc(QString docUuId);
                 static Doc selectDoc(const QString & docUuId);
                 static QList<Doc> selectDocsbyDir(const QString & dirUuid,  const QString & delFlg);
                 static QList<Doc> selectDocsByDelFlg(const QString & delFlg);

@@ -5,7 +5,7 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../aboutdialog.ui" line="14"/>
-        <source>Data Import</source>
+        <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -23,7 +23,7 @@
     <name>AccountDialog</name>
     <message>
         <location filename="../accountdialog.ui" line="14"/>
-        <source>Data Import</source>
+        <source>Acount Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -394,18 +394,9 @@ Do you want to reload all pages?</source>
     <name>ChangePwdDialog</name>
     <message>
         <location filename="../changepwddialog.ui" line="14"/>
-        <source>Data Import</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../changepwddialog.ui" line="32"/>
         <location filename="../changepwddialog.cpp" line="30"/>
         <source>Change PassWord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../changepwddialog.ui" line="41"/>
-        <source>eg: *.doc,*.pdf</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -424,34 +415,34 @@ Do you want to reload all pages?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../changepwddialog.cpp" line="51"/>
+        <location filename="../changepwddialog.cpp" line="43"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../changepwddialog.cpp" line="51"/>
+        <location filename="../changepwddialog.cpp" line="43"/>
         <source>The ReInput Password is not same with the New PassWord.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../changepwddialog.cpp" line="85"/>
-        <location filename="../changepwddialog.cpp" line="89"/>
-        <location filename="../changepwddialog.cpp" line="94"/>
+        <location filename="../changepwddialog.cpp" line="77"/>
+        <location filename="../changepwddialog.cpp" line="81"/>
+        <location filename="../changepwddialog.cpp" line="86"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../changepwddialog.cpp" line="85"/>
+        <location filename="../changepwddialog.cpp" line="77"/>
         <source>Old PassWord Is Incorrect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../changepwddialog.cpp" line="89"/>
+        <location filename="../changepwddialog.cpp" line="81"/>
         <source>User Is Not Existed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../changepwddialog.cpp" line="94"/>
+        <location filename="../changepwddialog.cpp" line="86"/>
         <source>Change PassWord Success, Please Login in</source>
         <translation type="unfinished"></translation>
     </message>
@@ -603,7 +594,7 @@ Do you want to reload all pages?</source>
     <name>CreateSubDirDialog</name>
     <message>
         <location filename="../createsubdirdialog.ui" line="14"/>
-        <source>Data Import</source>
+        <source>Create Sub Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -614,11 +605,6 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../createsubdirdialog.ui" line="82"/>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../createsubdirdialog.ui" line="89"/>
-        <source>eg: *.doc,*.pdf</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -640,18 +626,8 @@ Do you want to reload all pages?</source>
 <context>
     <name>CreateTagDialog</name>
     <message>
-        <location filename="../createtagdialog.ui" line="14"/>
-        <source>Data Import</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../createtagdialog.ui" line="51"/>
         <source>Tag Name(&amp;N):</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../createtagdialog.ui" line="63"/>
-        <source>eg: *.doc,*.pdf</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -660,6 +636,7 @@ Do you want to reload all pages?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../createtagdialog.ui" line="14"/>
         <location filename="../createtagdialog.cpp" line="31"/>
         <source>Create Tag</source>
         <translation type="unfinished"></translation>
@@ -674,7 +651,7 @@ Do you want to reload all pages?</source>
     <name>CustomToolDialog</name>
     <message>
         <location filename="../customtooldialog.ui" line="14"/>
-        <source>Data Import</source>
+        <source>Custom Tools Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -864,7 +841,7 @@ Do you want to reload all pages?</source>
     <name>DocNoteInfoDialog</name>
     <message>
         <location filename="../docnoteinfodialog.ui" line="14"/>
-        <source>Data Import</source>
+        <source>Document Note Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -900,7 +877,7 @@ Do you want to reload all pages?</source>
     <name>DocTagsDialog</name>
     <message>
         <location filename="../doctagsdialog.ui" line="14"/>
-        <source>Data Import</source>
+        <source>Document Tags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -933,7 +910,7 @@ Do you want to reload all pages?</source>
     <name>DocToDirDialog</name>
     <message>
         <location filename="../doctodirdialog.ui" line="14"/>
-        <source>Data Import</source>
+        <source>Put Document to Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
@@ -1106,7 +1083,7 @@ Do you want to reload all pages?</source>
     <name>ExportConvertDialog</name>
     <message>
         <location filename="../exportconvertdialog.ui" line="14"/>
-        <source>Data Import</source>
+        <source>Export And Convert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1184,7 +1161,7 @@ Do you want to reload all pages?</source>
     <name>ExportDocDialog</name>
     <message>
         <location filename="../exportdocdialog.ui" line="14"/>
-        <source>Data Import</source>
+        <source>Document Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1259,6 +1236,7 @@ Do you want to reload all pages?</source>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="244"/>
+        <location filename="../exportdocdialog.cpp" line="251"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1268,12 +1246,17 @@ Do you want to reload all pages?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../exportdocdialog.cpp" line="282"/>
+        <location filename="../exportdocdialog.cpp" line="251"/>
+        <source>No export file. Please Confirm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../exportdocdialog.cpp" line="287"/>
         <source>Message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../exportdocdialog.cpp" line="282"/>
+        <location filename="../exportdocdialog.cpp" line="287"/>
         <source>Documents Exported Success!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1354,7 +1337,7 @@ Do you want to reload all pages?</source>
     <name>ImportDocDialog</name>
     <message>
         <location filename="../importdocdialog.ui" line="14"/>
-        <source>Data Import</source>
+        <source>Import Documents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1504,12 +1487,18 @@ Do you want to reload all pages?</source>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="88"/>
+        <location filename="../importdocdialog.cpp" line="267"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="88"/>
         <source>Please Select the Path to Import Into..</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../importdocdialog.cpp" line="267"/>
+        <source>No Import file. Please Confirm</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1629,16 +1618,12 @@ Do you want to reload all pages?</source>
 <context>
     <name>LoginDialog</name>
     <message>
-        <location filename="../logindialog.ui" line="14"/>
-        <source>Data Import</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../logindialog.ui" line="21"/>
         <source>about:blank</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../logindialog.ui" line="14"/>
         <location filename="../logindialog.ui" line="45"/>
         <location filename="../logindialog.ui" line="136"/>
         <source>Login</source>
@@ -1733,58 +1718,58 @@ acknowledge our Terms of Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="119"/>
-        <location filename="../logindialog.cpp" line="124"/>
-        <location filename="../logindialog.cpp" line="128"/>
-        <location filename="../logindialog.cpp" line="133"/>
-        <location filename="../logindialog.cpp" line="137"/>
-        <location filename="../logindialog.cpp" line="144"/>
+        <location filename="../logindialog.cpp" line="121"/>
+        <location filename="../logindialog.cpp" line="126"/>
+        <location filename="../logindialog.cpp" line="130"/>
+        <location filename="../logindialog.cpp" line="135"/>
+        <location filename="../logindialog.cpp" line="139"/>
+        <location filename="../logindialog.cpp" line="146"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="119"/>
+        <location filename="../logindialog.cpp" line="121"/>
         <source>Server Failed, Please Contact Administrator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="124"/>
+        <location filename="../logindialog.cpp" line="126"/>
         <source>Sign up Failed, Please Contact Administrator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="128"/>
+        <location filename="../logindialog.cpp" line="130"/>
         <source> : Username/Email have existed, Please Choose an other one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="133"/>
+        <location filename="../logindialog.cpp" line="135"/>
         <source> : Username/Email is not existed, Please confirm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="137"/>
+        <location filename="../logindialog.cpp" line="139"/>
         <source> : Password is incorrect, Please confirm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="144"/>
+        <location filename="../logindialog.cpp" line="146"/>
         <source> : Change Password Success, &lt;br&gt;But Send Mail Failed Please Contact Administrator to get the Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="150"/>
-        <location filename="../logindialog.cpp" line="228"/>
+        <location filename="../logindialog.cpp" line="152"/>
+        <location filename="../logindialog.cpp" line="231"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="150"/>
+        <location filename="../logindialog.cpp" line="152"/>
         <source>Sign up Successed, Please Login in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="228"/>
+        <location filename="../logindialog.cpp" line="231"/>
         <source>ReSet Password Successed, Please Check the email to get the new password</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1793,7 +1778,7 @@ acknowledge our Terms of Service</source>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <source>VideoFeed</source>
+        <source>slfile</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
@@ -1848,7 +1833,7 @@ acknowledge our Terms of Service</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="187"/>
-        <location filename="../mainwindow.cpp" line="1129"/>
+        <location filename="../mainwindow.cpp" line="1134"/>
         <source>&amp;Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2011,7 +1996,7 @@ acknowledge our Terms of Service</source>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="87"/>
-        <source>Local File Manage</source>
+        <source>Solo Local File Manage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2190,32 +2175,32 @@ acknowledge our Terms of Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="729"/>
+        <location filename="../mainwindow.cpp" line="730"/>
         <source>Note Editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1120"/>
+        <location filename="../mainwindow.cpp" line="1125"/>
         <source>Mi&amp;nimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1123"/>
+        <location filename="../mainwindow.cpp" line="1128"/>
         <source>Ma&amp;ximize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1126"/>
+        <location filename="../mainwindow.cpp" line="1131"/>
         <source>&amp;Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1147"/>
+        <location filename="../mainwindow.cpp" line="1152"/>
         <source>Systray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1148"/>
+        <location filename="../mainwindow.cpp" line="1153"/>
         <source>Sorry, I already gave what help I could.
 Maybe you should try asking a human?</source>
         <translation type="unfinished"></translation>
@@ -2225,7 +2210,7 @@ Maybe you should try asking a human?</source>
     <name>MoveToDirDialog</name>
     <message>
         <location filename="../movetodirdialog.ui" line="14"/>
-        <source>Data Import</source>
+        <source>Move document to Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
@@ -2265,21 +2250,17 @@ Maybe you should try asking a human?</source>
     <name>MoveToTagDialog</name>
     <message>
         <location filename="../movetotagdialog.ui" line="14"/>
-        <source>Data Import</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../movetotagdialog.cpp" line="48"/>
+        <location filename="../movetotagdialog.cpp" line="39"/>
         <source>Move the Tag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../movetotagdialog.cpp" line="60"/>
+        <location filename="../movetotagdialog.cpp" line="51"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../movetotagdialog.cpp" line="60"/>
+        <location filename="../movetotagdialog.cpp" line="51"/>
         <source>Please Select the other Tag</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2333,204 +2314,214 @@ Maybe you should try asking a human?</source>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="131"/>
-        <source>&amp;Encrypt</source>
+        <source>&amp;Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="135"/>
-        <source>&amp;Find and Replace</source>
+        <source>&amp;Encrypt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="139"/>
-        <source>&amp;Select All</source>
+        <source>&amp;Find and Replace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="143"/>
-        <source>&amp;Print</source>
+        <source>&amp;Select All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="147"/>
-        <source>&amp;Advanced</source>
+        <source>&amp;Print</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="151"/>
-        <source>&amp;Convert Document</source>
+        <source>&amp;Advanced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="155"/>
+        <source>&amp;Convert Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mytableview.cpp" line="159"/>
         <source>&amp;Convert Office to Pdf</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="156"/>
+        <location filename="../mytableview.cpp" line="160"/>
         <source>&amp;Convert Pdf to Office</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="157"/>
+        <location filename="../mytableview.cpp" line="161"/>
         <source>&amp;Convert Picture to Pdf</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="158"/>
+        <location filename="../mytableview.cpp" line="162"/>
         <source>&amp;Convert Ppt to Picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="165"/>
+        <location filename="../mytableview.cpp" line="169"/>
         <source>&amp;Merge Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="168"/>
+        <location filename="../mytableview.cpp" line="172"/>
         <source>&amp;Restore And Repair Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="171"/>
+        <location filename="../mytableview.cpp" line="175"/>
         <source>&amp;Print Documents In Batch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="174"/>
+        <location filename="../mytableview.cpp" line="178"/>
         <source>&amp;Change format in the Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="184"/>
+        <location filename="../mytableview.cpp" line="188"/>
         <source>&amp;Move to...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="187"/>
+        <location filename="../mytableview.cpp" line="191"/>
         <source>&amp;Copy to...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="190"/>
+        <location filename="../mytableview.cpp" line="194"/>
         <source>&amp;Option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="195"/>
+        <location filename="../mytableview.cpp" line="204"/>
         <source>&amp;One Row</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="199"/>
+        <location filename="../mytableview.cpp" line="208"/>
         <source>&amp;Two Rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="203"/>
+        <location filename="../mytableview.cpp" line="212"/>
         <source>&amp;The second Row&apos;s Option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="204"/>
+        <location filename="../mytableview.cpp" line="213"/>
         <source>&amp;Show notes of Document on Tooltip</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="221"/>
+        <location filename="../mytableview.cpp" line="231"/>
         <source>&amp;Properties</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="673"/>
-        <location filename="../mytableview.cpp" line="691"/>
-        <location filename="../mytableview.cpp" line="713"/>
-        <location filename="../mytableview.cpp" line="816"/>
-        <location filename="../mytableview.cpp" line="861"/>
-        <location filename="../mytableview.cpp" line="885"/>
-        <location filename="../mytableview.cpp" line="1211"/>
-        <location filename="../mytableview.cpp" line="1232"/>
+        <location filename="../mytableview.cpp" line="682"/>
+        <location filename="../mytableview.cpp" line="700"/>
+        <location filename="../mytableview.cpp" line="722"/>
+        <location filename="../mytableview.cpp" line="825"/>
+        <location filename="../mytableview.cpp" line="870"/>
+        <location filename="../mytableview.cpp" line="894"/>
+        <location filename="../mytableview.cpp" line="1272"/>
+        <location filename="../mytableview.cpp" line="1293"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="673"/>
-        <location filename="../mytableview.cpp" line="691"/>
-        <location filename="../mytableview.cpp" line="724"/>
+        <location filename="../mytableview.cpp" line="682"/>
+        <location filename="../mytableview.cpp" line="700"/>
+        <location filename="../mytableview.cpp" line="733"/>
         <source>Please Confirm The original file  has Deleted Or Moved. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="713"/>
-        <location filename="../mytableview.cpp" line="816"/>
-        <location filename="../mytableview.cpp" line="861"/>
-        <location filename="../mytableview.cpp" line="885"/>
-        <location filename="../mytableview.cpp" line="1232"/>
+        <location filename="../mytableview.cpp" line="722"/>
+        <location filename="../mytableview.cpp" line="825"/>
+        <location filename="../mytableview.cpp" line="870"/>
+        <location filename="../mytableview.cpp" line="894"/>
+        <location filename="../mytableview.cpp" line="1293"/>
         <source>Please Select an Document.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="724"/>
+        <location filename="../mytableview.cpp" line="733"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="897"/>
+        <location filename="../mytableview.cpp" line="906"/>
         <source>Are you sure that delete the document ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1016"/>
+        <location filename="../mytableview.cpp" line="952"/>
+        <source>Are you sure that restore the document ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mytableview.cpp" line="1077"/>
         <source>Create Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1022"/>
+        <location filename="../mytableview.cpp" line="1083"/>
         <source>Modified Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1028"/>
+        <location filename="../mytableview.cpp" line="1089"/>
         <source>Accessed Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1034"/>
+        <location filename="../mytableview.cpp" line="1095"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1040"/>
+        <location filename="../mytableview.cpp" line="1101"/>
         <source>Author</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1046"/>
+        <location filename="../mytableview.cpp" line="1107"/>
         <source>Read Count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1052"/>
+        <location filename="../mytableview.cpp" line="1113"/>
         <source>Related Count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1058"/>
+        <location filename="../mytableview.cpp" line="1119"/>
         <source>Tags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1064"/>
+        <location filename="../mytableview.cpp" line="1125"/>
         <source>URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1070"/>
+        <location filename="../mytableview.cpp" line="1131"/>
         <source>Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1212"/>
+        <location filename="../mytableview.cpp" line="1273"/>
         <source>Please Confirm The original file has Deleted Or Moved. </source>
         <translation type="unfinished"></translation>
     </message>
@@ -2553,198 +2544,203 @@ Maybe you should try asking a human?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="105"/>
+        <location filename="../mytreeview.cpp" line="111"/>
         <source>File Manage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="118"/>
+        <location filename="../mytreeview.cpp" line="125"/>
         <source>&amp;New Sub Dir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="120"/>
+        <location filename="../mytreeview.cpp" line="127"/>
         <source>&amp;Move To Dir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="122"/>
-        <location filename="../mytreeview.cpp" line="169"/>
+        <location filename="../mytreeview.cpp" line="129"/>
+        <location filename="../mytreeview.cpp" line="176"/>
         <source>&amp;Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="124"/>
-        <location filename="../mytreeview.cpp" line="171"/>
+        <location filename="../mytreeview.cpp" line="131"/>
+        <location filename="../mytreeview.cpp" line="178"/>
         <source>&amp;Rename</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="128"/>
+        <location filename="../mytreeview.cpp" line="135"/>
         <source>&amp;Import...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="129"/>
+        <location filename="../mytreeview.cpp" line="136"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="132"/>
+        <location filename="../mytreeview.cpp" line="139"/>
         <source>&amp;Export...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="133"/>
+        <location filename="../mytreeview.cpp" line="140"/>
         <source>Ctrl+E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="136"/>
+        <location filename="../mytreeview.cpp" line="143"/>
         <source>&amp;Sort SubDirs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="139"/>
+        <location filename="../mytreeview.cpp" line="146"/>
         <source>&amp;Show docs under sub Dir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="147"/>
-        <location filename="../mytreeview.cpp" line="157"/>
+        <location filename="../mytreeview.cpp" line="154"/>
+        <location filename="../mytreeview.cpp" line="164"/>
         <source>&amp;Protect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="149"/>
-        <location filename="../mytreeview.cpp" line="179"/>
+        <location filename="../mytreeview.cpp" line="156"/>
+        <location filename="../mytreeview.cpp" line="186"/>
         <source>&amp;Properties</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="153"/>
+        <location filename="../mytreeview.cpp" line="160"/>
         <source>&amp;New Root Dir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="155"/>
+        <location filename="../mytreeview.cpp" line="162"/>
         <source>&amp;Sort Dir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="159"/>
+        <location filename="../mytreeview.cpp" line="166"/>
         <source>&amp;Option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="163"/>
+        <location filename="../mytreeview.cpp" line="170"/>
         <source>&amp;New Sub Tag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="165"/>
+        <location filename="../mytreeview.cpp" line="172"/>
         <source>&amp;Move to Tag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="167"/>
+        <location filename="../mytreeview.cpp" line="174"/>
         <source>&amp;Move to Root Tag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="173"/>
+        <location filename="../mytreeview.cpp" line="180"/>
         <source>&amp;Show docs under sub Tag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="183"/>
+        <location filename="../mytreeview.cpp" line="190"/>
         <source>&amp;New Tag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="187"/>
+        <location filename="../mytreeview.cpp" line="194"/>
         <source>&amp;Clear Basket</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="772"/>
-        <location filename="../mytreeview.cpp" line="794"/>
-        <location filename="../mytreeview.cpp" line="816"/>
-        <location filename="../mytreeview.cpp" line="842"/>
-        <location filename="../mytreeview.cpp" line="877"/>
-        <location filename="../mytreeview.cpp" line="913"/>
-        <location filename="../mytreeview.cpp" line="939"/>
-        <location filename="../mytreeview.cpp" line="978"/>
+        <location filename="../mytreeview.cpp" line="731"/>
+        <location filename="../mytreeview.cpp" line="753"/>
+        <location filename="../mytreeview.cpp" line="775"/>
+        <location filename="../mytreeview.cpp" line="801"/>
+        <location filename="../mytreeview.cpp" line="836"/>
+        <location filename="../mytreeview.cpp" line="872"/>
+        <location filename="../mytreeview.cpp" line="898"/>
+        <location filename="../mytreeview.cpp" line="937"/>
+        <location filename="../mytreeview.cpp" line="962"/>
         <location filename="../mytreeview.cpp" line="1003"/>
-        <location filename="../mytreeview.cpp" line="1044"/>
-        <location filename="../mytreeview.cpp" line="1081"/>
-        <location filename="../mytreeview.cpp" line="1115"/>
-        <location filename="../mytreeview.cpp" line="1142"/>
-        <location filename="../mytreeview.cpp" line="1182"/>
+        <location filename="../mytreeview.cpp" line="1040"/>
+        <location filename="../mytreeview.cpp" line="1074"/>
+        <location filename="../mytreeview.cpp" line="1101"/>
+        <location filename="../mytreeview.cpp" line="1136"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="772"/>
-        <location filename="../mytreeview.cpp" line="794"/>
+        <location filename="../mytreeview.cpp" line="731"/>
+        <location filename="../mytreeview.cpp" line="753"/>
         <source>Please Select an sub directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="816"/>
-        <location filename="../mytreeview.cpp" line="842"/>
-        <location filename="../mytreeview.cpp" line="877"/>
-        <location filename="../mytreeview.cpp" line="913"/>
-        <location filename="../mytreeview.cpp" line="939"/>
-        <location filename="../mytreeview.cpp" line="978"/>
-        <location filename="../mytreeview.cpp" line="1003"/>
-        <location filename="../mytreeview.cpp" line="1081"/>
-        <location filename="../mytreeview.cpp" line="1115"/>
+        <location filename="../mytreeview.cpp" line="775"/>
+        <location filename="../mytreeview.cpp" line="801"/>
+        <location filename="../mytreeview.cpp" line="836"/>
+        <location filename="../mytreeview.cpp" line="872"/>
+        <location filename="../mytreeview.cpp" line="898"/>
+        <location filename="../mytreeview.cpp" line="937"/>
+        <location filename="../mytreeview.cpp" line="962"/>
+        <location filename="../mytreeview.cpp" line="1040"/>
+        <location filename="../mytreeview.cpp" line="1074"/>
         <source>Please Select an directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="895"/>
+        <location filename="../mytreeview.cpp" line="854"/>
         <source>New Directory name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="954"/>
-        <source>New Roor Directory name:</source>
+        <location filename="../mytreeview.cpp" line="913"/>
+        <source>New Root Directory name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1020"/>
+        <location filename="../mytreeview.cpp" line="1022"/>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mytreeview.cpp" line="1022"/>
+        <source>Rename Tag name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mytreeview.cpp" line="979"/>
         <source>Are you sure you want to delete the %1 tag?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1044"/>
+        <location filename="../mytreeview.cpp" line="1003"/>
         <source>Please Select an Sub Tag.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1063"/>
-        <source>New Tag name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mytreeview.cpp" line="1142"/>
+        <location filename="../mytreeview.cpp" line="1101"/>
         <source>Please Select an Tag.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1182"/>
+        <location filename="../mytreeview.cpp" line="1136"/>
         <source>Please Select an sub tag.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1193"/>
+        <location filename="../mytreeview.cpp" line="1147"/>
         <source>Are you sure that delete the directory &quot;%1&quot;?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1225"/>
+        <location filename="../mytreeview.cpp" line="1179"/>
         <source>Are you sure that drop the Basket ?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2785,10 +2781,6 @@ Do you want to ignore these errors for this host?</source>
     <name>NotesDialog</name>
     <message>
         <location filename="../notesdialog.ui" line="14"/>
-        <source>Data Import</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../notesdialog.ui" line="26"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
@@ -3113,11 +3105,6 @@ Do you want to ignore these errors for this host?</source>
 <context>
     <name>PrinterWidget</name>
     <message>
-        <location filename="../printerwidget.ui" line="14"/>
-        <source>Data Import</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../printerwidget.cpp" line="39"/>
         <source>^XA^FO10,100^BY3^BCN,100,Y,N,N^FDDD123456^FS^XZ</source>
         <translation type="unfinished"></translation>
@@ -3135,6 +3122,11 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../printerwidget.cpp" line="49"/>
         <source>sdfffffffffffffffffff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../printerwidget.ui" line="14"/>
+        <source>Printer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3211,47 +3203,57 @@ Do you want to ignore these errors for this host?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.ui" line="209"/>
+        <location filename="../propofdirdialog.ui" line="202"/>
+        <source>Protect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../propofdirdialog.ui" line="214"/>
+        <source>Set Protect Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../propofdirdialog.ui" line="226"/>
         <source>Protect Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.ui" line="227"/>
+        <location filename="../propofdirdialog.ui" line="244"/>
         <source>Original  Password:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.ui" line="245"/>
+        <location filename="../propofdirdialog.ui" line="251"/>
         <source>Password:          </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.ui" line="263"/>
+        <location filename="../propofdirdialog.ui" line="258"/>
         <source>ReInput Password:  </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.ui" line="281"/>
+        <location filename="../propofdirdialog.ui" line="295"/>
         <source>Synchronization </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.ui" line="293"/>
+        <location filename="../propofdirdialog.ui" line="307"/>
         <source>Remote Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.ui" line="317"/>
+        <location filename="../propofdirdialog.ui" line="331"/>
         <source>Local Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.ui" line="352"/>
+        <location filename="../propofdirdialog.ui" line="366"/>
         <source>Apply</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.ui" line="359"/>
+        <location filename="../propofdirdialog.ui" line="373"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3262,18 +3264,18 @@ Do you want to ignore these errors for this host?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.cpp" line="141"/>
-        <location filename="../propofdirdialog.cpp" line="153"/>
+        <location filename="../propofdirdialog.cpp" line="144"/>
+        <location filename="../propofdirdialog.cpp" line="156"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.cpp" line="141"/>
+        <location filename="../propofdirdialog.cpp" line="144"/>
         <source>The Org password is wrong, Please Confirm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdirdialog.cpp" line="153"/>
+        <location filename="../propofdirdialog.cpp" line="156"/>
         <source>The password you entered must be the same as the  former</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3316,7 +3318,7 @@ Do you want to ignore these errors for this host?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdocdialog.ui" line="106"/>
+        <location filename="../propofdocdialog.ui" line="188"/>
         <source>Protect</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3341,48 +3343,88 @@ Do you want to ignore these errors for this host?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdocdialog.ui" line="188"/>
-        <source>Synchronous</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../propofdocdialog.ui" line="200"/>
-        <source>Read Count</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../propofdocdialog.ui" line="218"/>
+        <location filename="../propofdocdialog.ui" line="341"/>
         <source>Owner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdocdialog.ui" line="236"/>
+        <location filename="../propofdocdialog.ui" line="322"/>
         <source>Related Count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdocdialog.ui" line="260"/>
+        <location filename="../propofdocdialog.ui" line="213"/>
+        <source>Set Protect Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="225"/>
+        <source>Protect Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="243"/>
+        <source>Original  Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="250"/>
+        <source>Password:          </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="257"/>
+        <source>ReInput Password:  </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="294"/>
+        <source>Synchronization</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="306"/>
+        <source>Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="315"/>
+        <source>Read Count: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="365"/>
         <location filename="../propofdocdialog.cpp" line="61"/>
         <source>Author</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdocdialog.ui" line="278"/>
+        <location filename="../propofdocdialog.ui" line="383"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdocdialog.ui" line="292"/>
+        <location filename="../propofdocdialog.ui" line="200"/>
         <source>encrypt Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdocdialog.ui" line="333"/>
+        <location filename="../propofdocdialog.ui" line="392"/>
+        <source>Local Version:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="402"/>
+        <source>Remote Verson:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../propofdocdialog.ui" line="448"/>
         <source>Apply</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../propofdocdialog.ui" line="340"/>
+        <location filename="../propofdocdialog.ui" line="455"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3398,6 +3440,7 @@ Do you want to ignore these errors for this host?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../propofdocdialog.ui" line="106"/>
         <location filename="../propofdocdialog.cpp" line="63"/>
         <source>Date</source>
         <translation type="unfinished"></translation>
@@ -3412,17 +3455,12 @@ Do you want to ignore these errors for this host?</source>
     <name>PropOfTagDialog</name>
     <message>
         <location filename="../propoftagdialog.ui" line="14"/>
-        <source>Data Import</source>
+        <source>Properties of Tag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../propoftagdialog.ui" line="51"/>
         <source>Tag Name(&amp;N):</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../propoftagdialog.ui" line="63"/>
-        <source>eg: *.doc,*.pdf</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3618,7 +3656,7 @@ Do you want to ignore these errors for this host?</source>
     <name>RelateDocDialog</name>
     <message>
         <location filename="../relatedocdialog.ui" line="14"/>
-        <source>Data Import</source>
+        <source>Relate Documents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3653,12 +3691,12 @@ Do you want to ignore these errors for this host?</source>
     </message>
     <message>
         <location filename="../relatedocdialog.cpp" line="55"/>
-        <source>Delete this Doc</source>
+        <source>Delete this Realted Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../relatedocdialog.cpp" line="56"/>
-        <source>Delete All Docs</source>
+        <source>Delete All Realted Documents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3683,6 +3721,19 @@ Do you want to ignore these errors for this host?</source>
     </message>
 </context>
 <context>
+    <name>ReqUtil</name>
+    <message>
+        <location filename="../requtil.cpp" line="46"/>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../requtil.cpp" line="46"/>
+        <source>The Server has Errors, Please Contact the Administrator!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ResultDao</name>
     <message>
         <location filename="../db/resultdao.cpp" line="23"/>
@@ -3694,7 +3745,7 @@ Do you want to ignore these errors for this host?</source>
     <name>SaveUrlDialog</name>
     <message>
         <location filename="../saveurldialog.ui" line="14"/>
-        <source>Data Import</source>
+        <source>Save Url</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
@@ -3721,18 +3772,13 @@ Do you want to ignore these errors for this host?</source>
 <context>
     <name>ScoreToVipDialog</name>
     <message>
-        <location filename="../scoretovipdialog.ui" line="14"/>
-        <source>Data Import</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../scoretovipdialog.ui" line="32"/>
         <source>ExChange Score For VIP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scoretovipdialog.ui" line="41"/>
-        <source>eg: *.doc,*.pdf</source>
+        <location filename="../scoretovipdialog.ui" line="14"/>
+        <source>Use Score to Change VIP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4164,7 +4210,7 @@ Do you want to ignore these errors for this host?</source>
     <name>SortSubDirsDialog</name>
     <message>
         <location filename="../sortsubdirsdialog.ui" line="14"/>
-        <source>Data Import</source>
+        <source>Sort the Sub Directorys</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4179,12 +4225,17 @@ Do you want to ignore these errors for this host?</source>
     </message>
     <message>
         <location filename="../sortsubdirsdialog.ui" line="68"/>
+        <source>Parent folder:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sortsubdirsdialog.ui" line="75"/>
         <source>dir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sortsubdirsdialog.cpp" line="55"/>
-        <source>Sort Sub Directorys</source>
+        <location filename="../sortsubdirsdialog.cpp" line="50"/>
+        <source>Sort Sub Folders</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

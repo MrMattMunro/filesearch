@@ -84,7 +84,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     initStatusbar();
     initToolbar();
 
-    m_appName = tr("Local File Manage");
+    m_appName = tr("Solo Local File Manage");
     isBusySearch = false;
     setContextMenuPolicy(Qt::CustomContextMenu);
 }
@@ -106,6 +106,10 @@ void MainWindow::buildDocList()
     QList<Doc> docs;
     // 显示所有垃圾桶的文件
     if(curType == "basket" ){
+        if(curUuid.isEmpty()){
+           // 点击basket根节点 选出所有文件
+           docs.append(DocDao::selectDocsByDelFlg("1"));
+        }
         if(isShowDocUnderSub){
               // 取得所有文件夹
               QList<Dir> dirs ;
@@ -115,12 +119,8 @@ void MainWindow::buildDocList()
                  Dir dir = dirs.at(i);
                  docs.append(DocDao::selectDocsbyDir(dir.DIR_GUID, "1"));
               }
-              // 取不到被删除的文件夹时,平行地取出所有文件
-              if(dirs.size() == 0){
-                  docs = DocDao::selectDocsByDelFlg("1");
-              }
         }else{
-             docs = DocDao::selectDocsbyDir(curUuid,  "1");
+             docs.append(DocDao::selectDocsbyDir(curUuid,  "1"));
         }
         m_doctable->buildDocList(docs);
         return;
@@ -686,6 +686,7 @@ void MainWindow::viewLog()
 
 void MainWindow::initUI()
 {
+
         setWindowTitle(m_appName);
 
         splitter = new QSplitter(this);
