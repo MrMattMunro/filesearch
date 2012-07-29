@@ -117,6 +117,7 @@ private slots:
        void moveToDir();
        void copyToDir();
        void delDoc();
+       void restoreDoc();
        void slotShowSecondRowContent(QAction *action);
        // 设定表单第二项选项项目
        void updateSecRow(QList<int> types);
@@ -149,6 +150,7 @@ private:
         QAction *relatedDocAction;
         QAction *tagAction;
         QAction *deleteAction;
+        QAction *restoreAction;
         QAction *encodeAction;
         QAction *findAndReplaceAction;
         QAction *selectAllAction;
@@ -157,7 +159,7 @@ private:
         QAction *advancedAction;
         QAction *convertDocAction;
         QAction *combineAction;
-        QAction *restoreAction;
+        QAction *repairAction;
         QAction *pprintAction;
         QAction *pformatChangeAction;
 

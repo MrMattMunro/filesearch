@@ -127,6 +127,10 @@ void MyTableView::initActions ()
     deleteAction = new QAction(tr("&Delete(Move to the Wastebasket)"), this);
     connect(deleteAction, SIGNAL(triggered()), this, SLOT(delDoc()));
 
+    // 还原
+    restoreAction = new QAction(tr("&Restore"), this);
+    connect(restoreAction, SIGNAL(triggered()), this, SLOT(restoreDoc()));
+
     // 加密
     encodeAction = new QAction(Utils::getIcon("vip.png"), tr("&Encrypt"), this);
     connect(encodeAction, SIGNAL(triggered()), this, SLOT(about()));
@@ -165,8 +169,8 @@ void MyTableView::initActions ()
    combineAction = new QAction(tr("&Merge Document"), this);
    connect(combineAction, SIGNAL(triggered()), this, SLOT(about()));
    // 修复文档
-   restoreAction = new QAction(tr("&Restore And Repair Document"), this);
-   connect(restoreAction, SIGNAL(triggered()), this, SLOT(about()));
+   repairAction = new QAction(tr("&Restore And Repair Document"), this);
+   connect(repairAction, SIGNAL(triggered()), this, SLOT(about()));
    // 批量打印文档
    pprintAction = new QAction(tr("&Print Documents In Batch"), this);
    connect(pprintAction, SIGNAL(triggered()), this, SLOT(about()));
@@ -175,7 +179,7 @@ void MyTableView::initActions ()
    connect(pformatChangeAction, SIGNAL(triggered()), this, SLOT(about()));
    menu_ad->addAction(convertDocAction);
    menu_ad->addAction(combineAction);
-   menu_ad->addAction(restoreAction);
+   menu_ad->addAction(repairAction);
    menu_ad->addAction(pprintAction);
    menu_ad->addAction(pformatChangeAction);
 
@@ -259,7 +263,6 @@ void MyTableView::initActions ()
 
    cmenu->addAction(moveToDirAction);
    cmenu->addAction(copyToDirAction);
-   cmenu->addAction(deleteAction);
    cmenu->addAction(optionOfDocTableAction);
    cmenu->addAction(propAction);
 }
@@ -905,10 +908,7 @@ void MyTableView::delDoc()
     if(ret == QMessageBox::Yes){
             if(!curUuid.isEmpty()){
                  // 保证右键选择的删除
-                Doc doc;
-                doc.DOCUMENT_GUID = curUuid;
-                doc.DELETE_FLAG = "1";
-                DocDao::updateDoc(doc);
+                DocDao::deleteDoc(curUuid);
 
                 model->removeRow(firstRow);
                 model->removeRow(firstRow);
@@ -922,10 +922,53 @@ void MyTableView::delDoc()
                 {
                     QStandardItem* item = model->itemFromIndex(index);
                     QString  docUuid = qvariant_cast<QString>(item->data(Qt::UserRole));
-                    Doc doc;
-                    doc.DOCUMENT_GUID = docUuid;
-                    doc.DELETE_FLAG = "1";
-                    DocDao::updateDoc(doc);
+                    DocDao::deleteDoc(docUuid);
+
+                    rowMap.insert(index.row(), 0);
+                }
+
+                int rowToDel;
+                QMapIterator<int, int> rowMapIterator(rowMap);
+                rowMapIterator.toBack();
+                while (rowMapIterator.hasPrevious())
+                {
+                    rowMapIterator.previous();
+                    rowToDel = rowMapIterator.key();
+                    model->removeRow(rowToDel);
+                }
+            }
+     }
+    if(ret == QMessageBox::No){
+           return;
+    }
+}
+
+// 恢复文档(多选恢复)
+void MyTableView::restoreDoc(){
+    // 传递选择的docUuid
+    Preferences* p = Preferences::instance();
+    p->setSelDocUid(curUuid);
+
+    int ret = QMessageBox::question(this, "", tr("Are you sure that restore the document ?"),
+                                    QMessageBox::Yes, QMessageBox::No);
+    if(ret == QMessageBox::Yes){
+            if(!curUuid.isEmpty()){
+                 // 保证右键选择的删除
+                DocDao::restoreDoc(curUuid);
+
+                model->removeRow(firstRow);
+                model->removeRow(firstRow);
+
+                // 选中的逻辑删除
+                QItemSelectionModel *selections = this->selectionModel();
+                QModelIndexList selected = selections->selectedIndexes();
+                QMap<int, int> rowMap;
+
+                foreach (QModelIndex index, selected)
+                {
+                    QStandardItem* item = model->itemFromIndex(index);
+                    QString  docUuid = qvariant_cast<QString>(item->data(Qt::UserRole));
+                    DocDao::restoreDoc(docUuid);
 
                     rowMap.insert(index.row(), 0);
                 }
@@ -955,7 +998,14 @@ void MyTableView::tableContextMenuOpened()
         // 改变颜色
         QModelIndex  index = indexAt(pos);
         QStandardItem * selrange = model->itemFromIndex(index);
-
+        Doc doc = DocDao::selectDoc(curUuid);
+        if(doc.DELETE_FLAG == "1") {
+            cmenu->removeAction(deleteAction);
+            cmenu->addAction(restoreAction);
+        }else{
+            cmenu->removeAction(restoreAction);
+            cmenu->addAction(deleteAction);
+        }
 //        selrange->setData(QBrush(QColor(185, 210, 235)), Qt::BackgroundRole);
         cmenu->exec(this->viewport()->mapToGlobal(pos));
     }

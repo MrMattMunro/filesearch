@@ -258,7 +258,7 @@ int main(int argc, char *argv[])
                                               "on this system."));
             return 1;
      }
-     QApplication::setQuitOnLastWindowClosed(false);
+    QApplication::setQuitOnLastWindowClosed(false);
 
     // 加载数据库驱动
     QApplication::addLibraryPath("./lib");
