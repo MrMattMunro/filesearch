@@ -35,7 +35,7 @@ public:
         };
 	void         setTreeTitle(QString title); //设置tree的名称
 	void         setSubTreeTitle(int subTree,QString title);
-        void         addItem(int subTree, QString itemName, QString path, QString icon); //增加item
+        void         addItem(int subTree, QString itemName, QString uid,  QString type, QString icon); //增加item
         void         addItemByParentItem(QStandardItem *parenItem, QString itemName, QString uid, QString type, QString icon); //增加item
 	void         addItems(int subTree, QList<QString> nameList);
 	void         delelteItem(int subTree, QString itemName);

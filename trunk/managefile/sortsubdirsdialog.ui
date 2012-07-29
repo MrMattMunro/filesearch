@@ -63,6 +63,13 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Parent folder:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QLabel" name="dirlabel">
       <property name="text">
        <string>dir</string>

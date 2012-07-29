@@ -27,7 +27,7 @@ ExportDocDialog::ExportDocDialog(QWidget * parent, const QString & dirUuid,const
           m_dirUuid(dirUuid),
           m_dir(dir),m_type(type),update(false)
 {
-	setupUi(this);
+        setupUi(this);
         inclueSubDirChk->setChecked(true);
         createSubDirChk->setChecked(true);
 
@@ -245,6 +245,13 @@ void ExportDocDialog::confirmBtn_clicked(){
         return;
     }
 
+    int row = model->rowCount();
+    // 如果没有选择导入目录
+    if(row == 0 ){
+       QMessageBox::warning(this, tr("Warning"), tr("No export file. Please Confirm"), QMessageBox::Yes);
+       return;
+    }
+
     // 是否创建子文件夹
     bool isCreateSubDir = createSubDirChk->isChecked();
 
@@ -256,8 +263,6 @@ void ExportDocDialog::confirmBtn_clicked(){
 
     // 目录排序
     model->sort(0, Qt::DescendingOrder);
-    // 拷贝文件
-    int row = model->rowCount();
     progressBar->setWindowModality(Qt::WindowModal);
     progressBar->setRange(0, row);
      // 取得导出的文件列表
