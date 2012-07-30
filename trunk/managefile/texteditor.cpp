@@ -17,8 +17,6 @@ QString vymName;
 
 QPrinter *printer;
 
-
-
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 
@@ -611,7 +609,6 @@ void TextEditor::editorChanged()
         state=emptyEditor;
     else
         state=filledEditor;
-
         if (state==emptyEditor)
             setState (emptyEditor);
         else
@@ -706,7 +703,7 @@ void TextEditor::textSave()
         // 插入note表
         Note note;
         note.NOTE_GUID = noteuuId;
-        // 加入docUuid 主要判断NotesDialog删除某一标注后后,再编辑保存该标注，
+        //加入docUuid 主要判断NotesDialog删除某一标注后后,再编辑保存该标注，
         //解决方法：直接关闭该窗体
         p->setSelNoteUid(noteuuId);
 
@@ -731,19 +728,11 @@ void TextEditor::textSave()
     QString text = e->toHtml(); //FIXME-3 or plaintext? check...
     QFile f( filename );
 
-    if ( !f.open( QIODevice::WriteOnly ) )
-    {
-        statusBar()->showMessage( QString("Could not write to %1").arg(filename), statusbarTime );
-        return;
-    }
-
     QTextStream t( &f );
     t << text;
     f.close();
 
     e->document()->setModified( false );
-
-    statusBar()->showMessage( QString( "Note exported as %1" ).arg( filename ), statusbarTime );
 }
 
 void TextEditor::textExportAsASCII()
