@@ -2,10 +2,13 @@
 #define TEXTEDITOR_H
 
 #include <QtGui>
+#include <QtGui>
 
 enum EditorState {inactiveEditor,emptyEditor,filledEditor};
 
 #include <notesdialog.h>
+#include <QWebView.h>
+
 
 class TextEditor :public QMainWindow
 {    Q_OBJECT
@@ -26,10 +29,9 @@ public:
     QString getFilenameHint ();
     QString getText();
 
-    bool findText(const QString &, const QTextDocument::FindFlags &); 
-    bool findText(const QString &, const QTextDocument::FindFlags &,int i); 
+    bool findText(const QString &, const QTextDocument::FindFlags &);
+    bool findText(const QString &, const QTextDocument::FindFlags &,int i);
     void setTextCursor (const QTextCursor & cursor );
-    QTextCursor getTextCursor();
 
 protected:
     void setupFileActions();
@@ -51,7 +53,7 @@ signals:
     void fontFamilyHasChanged();
     void fontSizeHasChanged();
     void showMainNotes();
-    
+
 private slots:
     void textLoad();
     void textSaveAs();
@@ -82,7 +84,7 @@ private slots:
     void showNotes ();
 
 protected:
-    QTextEdit *e;
+    QWebView *e;
     QPoint lastPos;	    // save last position of window
     QString filename;
     QString filenameHint;
@@ -98,7 +100,7 @@ protected:
     QFont varFont;
     QFont fixedFont;
     QComboBox *comboFont, *comboSize;
-    
+
     QToolBar *editToolBar;
     QAction *actionFileLoad,
     *actionFileSave,

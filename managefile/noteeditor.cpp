@@ -14,7 +14,7 @@ NoteEditor::NoteEditor()
 //    move   (settings.value ( "/satellite/noteeditor/geometry/pos", QPoint (250,50)).toPoint());
     
 //    setShowWithMain (settings.value ( "/satellite/noteeditor/showWithMain",true).toBool());
-    setShowWithMain (true);
+    //setShowWithMain (true);
     return;
 
     /*
@@ -45,8 +45,8 @@ NoteEditor::NoteEditor()
 //    QString s=settings.value ("/satellite/noteeditor/fonts/fonthintDefault","variable").toString();
 //    if (s == "fixed")
 //    {
-	actionSettingsFonthintDefault->setChecked (true);
-	e->setCurrentFont (fixedFont);
+//	actionSettingsFonthintDefault->setChecked (true);
+//	e->setCurrentFont (fixedFont);
 //    } else
 //    {
 //	actionSettingsFonthintDefault->setChecked (false);
@@ -68,10 +68,10 @@ NoteEditor::~NoteEditor()
     //settings.setValue( "/satellite/noteeditor/showWithMain",showwithmain);
 
     QString s;
-    if (actionSettingsFonthintDefault->isChecked() )
-	s="fixed";
-    else    
-	s="variable";
+//    //if (actionSettingsFonthintDefault->isChecked() )
+//	s="fixed";
+//    else
+//	s="variable";
     //settings.setValue( "/satellite/noteeditor/fonts/fonthintDefault",s );
     //settings.setValue("/satellite/noteeditor/fonts/varFont", varFont.toString() );
     //settings.setValue("/satellite/noteeditor/fonts/fixedFont", fixedFont.toString() );
@@ -80,17 +80,17 @@ NoteEditor::~NoteEditor()
 
 NoteObj NoteEditor::getNoteObj()
 {
-    NoteObj note (getText() );
-    note.setFontHint (getFontHint() );
-    note.setFilenameHint (getFilenameHint () );
-    return note;
+    NoteObj note ("" );
+//    note.setFontHint (getFontHint() );
+//    note.setFilenameHint (getFilenameHint () );
+   return note;
 }
 
 void NoteEditor::setNote (const NoteObj &note)
 {
-    setText (note.getNote() );
-    setFilenameHint (note.getFilenameHint() );
-    setFontHint (note.getFontHint() );
+//    setText (note.getNote() );
+//    setFilenameHint (note.getFilenameHint() );
+//    setFontHint (note.getFontHint() );
 }
 
 

@@ -67,7 +67,8 @@
 #include "preferencesdialog.h"
 #include "indexfile.h"
 
-extern NoteEditor *noteEditor;
+
+// extern UEditor *noteEditor;
 
 MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     : QMainWindow(parent, flags)
@@ -728,11 +729,12 @@ void MainWindow::initUI()
         //if (settings.value("/satellite/noteeditor/isDockWindow",true).toBool())
         //{
             noteEditorDW = new QDockWidget(tr("Note Editor"), this);
+            noteEditor = new UEditor(this);
             noteEditorDW->setWidget (noteEditor);
             noteEditorDW->setObjectName ("NoteEditor");
             addDockWidget(Qt::RightDockWidgetArea, noteEditorDW);
             noteEditorDW->hide();
-            noteEditor->setShowWithMain(true);
+            //noteEditor->setShowWithMain(true);
             // 从Note编辑界面打开Note
             connect(noteEditor, SIGNAL(showMainNotes()), this, SLOT(shownotes()));
 
@@ -1056,7 +1058,7 @@ void MainWindow::windowToggleNoteEditor()
     QString selNoteUid = p->getSelNoteUid();
     // 如果为空则是 清空Reset
     if(selNoteUid.isEmpty()){
-       noteEditor->reset();
+       //noteEditor->reset();
     }else{
         QString notesPath = Utils::getLocateNotesPath();
         QString filename = notesPath.append(QDir::separator());
@@ -1069,15 +1071,15 @@ void MainWindow::windowToggleNoteEditor()
               return;
         }
         QTextStream ts( &f );
-        noteEditor->setText(ts.readAll());
-        noteEditor->setFilename(filename);
+        //noteEditor->setText(ts.readAll());
+        //noteEditor->setFilename(filename);
     }
     windowShowNoteEditor();
 }
 
 void MainWindow::windowShowNoteEditor()
 {
-    noteEditor->setShowWithMain(true);
+    //noteEditor->setShowWithMain(true);
     noteEditor->show();
     noteEditorDW->show();
 
@@ -1088,7 +1090,7 @@ void MainWindow::windowShowNoteEditor()
 
 void MainWindow::windowHideNoteEditor()
 {
-    noteEditor->setShowWithMain(false);
+    //noteEditor->setShowWithMain(false);
     noteEditor->hide();
     noteEditorDW->hide();
 

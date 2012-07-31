@@ -61,6 +61,7 @@
 #include <jvm.h>
 #include <utils.h>
 #include <db/dirdao.h>
+#include "ueditor.h"
 
 //#include "ui_mainwindow.h"
 
@@ -225,6 +226,7 @@ private:
 
     QSystemTrayIcon *trayIcon;
     QMenu *trayIconMenu;
+    UEditor *noteEditor;
 
 };
 
