@@ -88,7 +88,11 @@ SOURCES += main.cpp \
     sqlloader.cpp \
     codeeditor.cpp \
     highlighter.cpp \
-    refereedialog.cpp
+    refereedialog.cpp \
+    intelliplugin.cpp \
+    shineprint.cpp \
+    ueditor.cpp \
+    printinfo.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -179,7 +183,11 @@ HEADERS  += mainwindow.h \
     highlighter.h \
     qjson/qjson_export.h \
     refereedialog.h \
-    sendmail.h
+    sendmail.h \
+    intelliplugin.h \
+    shineprint.h \
+    ueditor.h \
+    printinfo.h
 
 RESOURCES += \
     managefile.qrc
@@ -226,7 +234,8 @@ FORMS    += mainwindow.ui \
     scoretovipdialog.ui \
     aboutdialog.ui \
     saveurldialog.ui \
-    refereedialog.ui
+    refereedialog.ui \
+    ueditor.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 

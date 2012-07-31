@@ -7,6 +7,7 @@
 #include "utils.h"
 #include "db/notedao.h"
 #include "preferences.h"
+#include "intelliplugin.h"
 
 int statusbarTime;
 
@@ -23,39 +24,83 @@ QPrinter *printer;
 
 TextEditor::TextEditor()
 {
-    statusBar()->hide();    // Hide sizeGrip on default, which comes with statusBar
 
-    e = new QTextEdit( this);
+    e = new QWebView(this);
+    e->setGeometry(50, 50, 1024, 768);
+
+    e->settings()->setAttribute(QWebSettings::PluginsEnabled, true);
+    e->settings()->setAttribute(QWebSettings::JavascriptEnabled, true);
+    e->settings()->setAttribute(QWebSettings::PrivateBrowsingEnabled, true);
+
+     e->settings()->setAttribute(QWebSettings::AutoLoadImages, true);
+     e->settings()->setAttribute(QWebSettings::JavascriptEnabled, true);
+     e->settings()->setAttribute(QWebSettings::JavaEnabled, true);
+     e->settings()->setAttribute(QWebSettings::PluginsEnabled, true);
+     e->settings()->setAttribute(QWebSettings::PrivateBrowsingEnabled, true);
+     e->settings()->setAttribute(QWebSettings::JavascriptCanOpenWindows, true);
+     e->settings()->setAttribute(QWebSettings::JavascriptCanAccessClipboard, true);
+     e->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
+     e->settings()->setAttribute(QWebSettings::LinksIncludedInFocusChain, true);
+     e->settings()->setAttribute(QWebSettings::ZoomTextOnly, true);
+     e->settings()->setAttribute(QWebSettings::PrintElementBackgrounds, true);
+     e->settings()->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, true);
+     e->settings()->setAttribute(QWebSettings::OfflineWebApplicationCacheEnabled, true);
+     e->settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
+     e->settings()->setAttribute(QWebSettings::LocalStorageDatabaseEnabled, true);
+     e->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
+     e->settings()->setAttribute(QWebSettings::DnsPrefetchEnabled, true);
+     e->settings()->setAttribute(QWebSettings::XSSAuditingEnabled, true);
+     e->settings()->setAttribute(QWebSettings::AcceleratedCompositingEnabled, true);
+     e->settings()->setAttribute(QWebSettings::SpatialNavigationEnabled, true);
+     e->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls, true);
+     e->settings()->setAttribute(QWebSettings::TiledBackingStoreEnabled, true);
+     e->settings()->setAttribute(QWebSettings::FrameFlatteningEnabled, true);
+     e->settings()->setAttribute(QWebSettings::SiteSpecificQuirksEnabled, true);
+
+    e->page()->setPluginFactory(new IntelliPlugin);
+
+    QDir pathDir = Utils::directoryOf("html");
+    QString path = pathDir.absolutePath();
+    path.append(QDir::separator());
+    path.append("ueditor1_2_2");
+    path.append(QDir::separator());
+    path.append("index.html");
+    e->setObjectName(QString::fromUtf8("welcome"));
+    e->setUrl(QUrl(path));
+
     e->setFocus();
-    // e->setTextFormat(Qt::RichText);	// default
-    e->setTabStopWidth (20);		// unit is pixel
-    e->setTextColor (Qt::black);
-    e->setAutoFillBackground (true);
-    connect (e, SIGNAL( textChanged() ), this, SLOT( editorChanged() ) );
-    setCentralWidget( e );
-    statusBar()->showMessage( tr("Ready","Statusbar message"), statusbarTime);
-    setWindowTitle (vymName +" - " +tr ("Text Editor","Text Editor Window caption"));
+   // setCentralWidget( e );
+//    e = new QTextEdit( this);
+//    //e->setFocus();
+//    // //e->setTextFormat(Qt::RichText);	// default
+//    //e->setTabStopWidth (20);		// unit is pixel
+//    //e->setTextColor (Qt::black);
+//    //e->setAutoFillBackground (true);
+//    connect (e, SIGNAL( textChanged() ), this, SLOT( editorChanged() ) );
+
+//    statusBar()->showMessage( tr("Ready","Statusbar message"), statusbarTime);
+//    setWindowTitle (vymName +" - " +tr ("Text Editor","Text Editor Window caption"));
 
 
-    connect(e, SIGNAL(currentCharFormatChanged(const QTextCharFormat &)),
-            this, SLOT(formatChanged(const QTextCharFormat &)));
+//    connect(e, SIGNAL(currentCharFormatChanged(const QTextCharFormat &)),
+//            this, SLOT(formatChanged(const QTextCharFormat &)));
 
 
-    // Don't show menubar per default
-    menuBar()->hide();
+//    // Don't show menubar per default
+//    menuBar()->hide();
 
-    // Toolbars
-    setupFileActions();
-    setupEditActions();
-    setupFormatActions();
-    setupSettingsActions();
+//    // Toolbars
+//    setupFileActions();
+//    setupEditActions();
+//    setupFormatActions();
+//    setupSettingsActions();
 
-    // Various states
-    blockChangedSignal=false;
-    setInactive();
+//    // Various states
+//    blockChangedSignal=false;
+//    setInactive();
 
-    // Load Settings
-    resize (QSize(450,600));
+//    // Load Settings
+//    resize (QSize(450,600));
 
 
     /*
@@ -76,17 +121,17 @@ TextEditor::TextEditor()
     if (s == "fixed")
     {
         actionSettingsFonthintDefault->setChecked (true);
-        e->setCurrentFont (fixedFont);
+        //e->setCurrentFont (fixedFont);
     } else
     {
         actionSettingsFonthintDefault->setChecked (false);
-        e->setCurrentFont (varFont);
+        //e->setCurrentFont (varFont);
     }
     */
-    filenameHint="";
+//    filenameHint="";
 
-    // add
-    setText("");
+//    // add
+//    setText("");
 
     // Restore position of toolbars
     //restoreState (settings.value("/satellite/noteeditor/state",0).toByteArray());
@@ -103,36 +148,36 @@ TextEditor::~TextEditor()
 
 void TextEditor::reset()
 {
-    e->clear();
-    actionFormatUseFixedFont->setChecked (false);
-    actionTextBold->setChecked (false);
-    e->setFontWeight(QFont::Normal);
+//    //e->clear();
+//    actionFormatUseFixedFont->setChecked (false);
+//    actionTextBold->setChecked (false);
+//    //e->setFontWeight(QFont::Normal);
 
-    actionTextUnderline->setChecked (false);
-    e->setFontUnderline (false);
+//    actionTextUnderline->setChecked (false);
+//    //e->setFontUnderline (false);
 
-    actionTextItalic->setChecked (false);
-    e->setFontItalic (false);
+//    actionTextItalic->setChecked (false);
+//    //e->setFontItalic (false);
 
-    QPixmap pix( 16, 16 );
-    pix.fill( Qt::black );
-    actionTextColor->setIcon( pix );
-    e->setTextColor (Qt::black);
+//    QPixmap pix( 16, 16 );
+//    pix.fill( Qt::black );
+//    actionTextColor->setIcon( pix );
+//    //e->setTextColor (Qt::black);
 
-    actionAlignSubScript->setChecked (false);
-    actionAlignSuperScript->setChecked (false);
-    actionAlignLeft->setChecked (true);
-    e->setAlignment( Qt::AlignLeft );
+//    actionAlignSubScript->setChecked (false);
+//    actionAlignSuperScript->setChecked (false);
+//    actionAlignLeft->setChecked (true);
+//    //e->setAlignment( Qt::AlignLeft );
 
-    //add
-    filename = "";
+//    //add
+//    filename = "";
 }
 
 bool TextEditor::isEmpty()
 {
-    if (e->toPlainText().length()>0)
-        return false;
-    else
+//    if (e->toPlainText().length()>0)
+//        return false;
+//    else
         return true;
 }
 
@@ -206,49 +251,47 @@ QString TextEditor::getFilenameHint()
 
 QString TextEditor::getText()
 {
-    if (e->toPlainText().isEmpty())
-        return QString();
-    else
-        if (actionFormatRichText->isChecked())
-            return e->toHtml();
-        else
-            return e->toPlainText();
-    }
+//    if (e->toPlainText().isEmpty())
+//        return QString();
+//    else
+//        if (actionFormatRichText->isChecked())
+//            return //e->toHtml();
+//        else
+//            return //e->toPlainText();
+
+    return "texttext";
+}
 
 bool TextEditor::findText(const QString &t, const QTextDocument::FindFlags &flags)
 {
-    if (e->find (t,flags))
-        return true;
-    else
-        return false;
+//    if (e->find (t,flags))
+//        return true;
+//    else
+//        return false;
+    return true;
 }
 
 bool TextEditor::findText(const QString &t, const QTextDocument::FindFlags &flags, int i)
 {
     // Position at beginning
-    QTextCursor c=e->textCursor();
-    c.setPosition (0,QTextCursor::MoveAnchor);
-    e->setTextCursor (c);
+//    QTextCursor c=e->textCursor();
+//    c.setPosition (0,QTextCursor::MoveAnchor);
+//    //e->setTextCursor (c);
 
-    // Search for t
-    int j=0;
-    while (j<=i)
-    {
-        if (!e->find (t,flags)) return false;
-        j++;
-    }
+//    // Search for t
+//    int j=0;
+//    while (j<=i)
+//    {
+//        if (!e->find (t,flags)) return false;
+//        j++;
+//    }
     return true;
 
 }
 
 void TextEditor::setTextCursor (const QTextCursor &cursor)
 {
-    e->setTextCursor (cursor);
-}
-
-QTextCursor TextEditor::getTextCursor()
-{
-    return e->textCursor();
+    //e->setTextCursor (cursor);
 }
 
 void TextEditor::setupFileActions()
@@ -445,7 +488,7 @@ void TextEditor::setupFormatActions()
     formatMenu->addSeparator();
 
     QPixmap pix( 16, 16 );
-    pix.fill( e->textColor());
+//    pix.fill( e->textColor());
     a = new QAction( pix, tr( "&Color..." ), this);
     formatMenu->addAction (a);
     tb->addAction (a);
@@ -620,16 +663,16 @@ void TextEditor::editorChanged()
 void TextEditor::setText(const QString &t)
 {
     blockChangedSignal=true;
-    e->setReadOnly(false);
+    //e->setReadOnly(false);
     reset();
     if (Qt::mightBeRichText (t))
     {
-        e->setHtml(t);
+        //e->setHtml(t);
         actionFormatRichText->setChecked (true);
     } else
     {
         actionFormatUseFixedFont->setChecked (true);
-        e->setPlainText(t);
+        //e->setPlainText(t);
         actionFormatRichText->setChecked (false);
     }
     updateActions();
@@ -641,15 +684,15 @@ void TextEditor::setInactive()
     state=inactiveEditor;
     setText("");
     setState (inactiveEditor);
-    e->setReadOnly (true);
+    //e->setReadOnly (true);
 
     updateActions();
 }
 
 void TextEditor::editCopyAll()
 {
-    e->selectAll();
-    e->copy();
+    //e->selectAll();
+    //e->copy();
 }
 
 void TextEditor::textSaveAs()	//FIXME-3 Use WarningDialog
@@ -709,7 +752,7 @@ void TextEditor::textSave()
 
         QString m_docUuid = p->getSelDocUid();
         note.DOCUMENT_GUID = m_docUuid;
-        note.NOTE_CONTENT = e->toPlainText();
+        note.NOTE_CONTENT = //e->toPlainText();
         NoteDao::insertNote(note);
     }else{
         // ¸üÐÂnote±í
@@ -721,23 +764,23 @@ void TextEditor::textSave()
         note.NOTE_GUID = noteuuId;
         QString m_docUuid = p->getSelDocUid();
         note.DOCUMENT_GUID = m_docUuid;
-        note.NOTE_CONTENT = e->toPlainText();
+        note.NOTE_CONTENT = //e->toPlainText();
         NoteDao::updateNote(note);
     }
 
-    QString text = e->toHtml(); //FIXME-3 or plaintext? check...
+//    QString text = e->toHtml(); //FIXME-3 or plaintext? check...
     QFile f( filename );
 
     QTextStream t( &f );
-    t << text;
+    //t << text;
     f.close();
 
-    e->document()->setModified( false );
+    //e->document()->setModified( false );
 }
 
 void TextEditor::textExportAsASCII()
 {
-    QString text = NoteObj (e->toPlainText()).getNoteASCII();
+    //QString text = NoteObj (e->toPlainText()).getNoteASCII();
     QString fn,s;
     if (!filenameHint.isEmpty())
     {
@@ -776,7 +819,7 @@ void TextEditor::textExportAsASCII()
         else
         {
             QTextStream t( &file );
-            t << text;
+            //t << text;
             file.close();
 
             statusBar()->showMessage( QString( "Note exported as %1" ).arg( fn ), statusbarTime );
@@ -787,14 +830,14 @@ void TextEditor::textExportAsASCII()
 
 void TextEditor::textPrint()
 {
-    QTextDocument *document = e->document();
+    QTextDocument *document = 0;//e->document();
 
-    QPrintDialog dialog (printer, this);
-    dialog.setWindowTitle(tr("Print","TextEditor"));
-    if (dialog.exec() != QDialog::Accepted)
-        return;
+//    QPrintDialog dialog (printer, this);
+//    dialog.setWindowTitle(tr("Print","TextEditor"));
+//    if (dialog.exec() != QDialog::Accepted)
+//        return;
 
-    document->print(printer);
+//    document->print(printer);
 }
 
 void TextEditor::textEditUndo()
@@ -804,12 +847,12 @@ void TextEditor::textEditUndo()
 void TextEditor::toggleFonthint()
 {
     setUpdatesEnabled (false);
-    e->selectAll ();
+    //e->selectAll ();
     if (!actionFormatUseFixedFont->isChecked() )
-        e->setCurrentFont (varFont);
-    else
-        e->setCurrentFont (fixedFont);
-    e->selectAll ();
+        //e->setCurrentFont (varFont);
+    //else
+        //e->setCurrentFont (fixedFont);
+    //e->selectAll ();
     setUpdatesEnabled (true);
     repaint();
 }
@@ -818,9 +861,9 @@ void TextEditor::toggleRichText()
 {
     //setUpdatesEnabled (false);
     if (!actionFormatRichText->isChecked() )
-        e->setPlainText (e->toPlainText());
-    else
-        e->setHtml (e->toHtml());
+        //e->setPlainText (e->toPlainText());
+    //else
+        //e->setHtml (e->toHtml());
     updateActions();
 }
 
@@ -846,38 +889,39 @@ void TextEditor::setVarFont()
 
 void TextEditor::textBold()
 {
-    if ( actionTextBold->isChecked())
-        e->setFontWeight( QFont::Bold );
-    else
-        e->setFontWeight( QFont::Normal);
+    if ( actionTextBold->isChecked()){
+    }
+        //e->setFontWeight( QFont::Bold );
+    //else
+        //e->setFontWeight( QFont::Normal);
 }
 
 void TextEditor::textUnderline()
 {
-    e->setFontUnderline( actionTextUnderline->isChecked() );
+    //e->setFontUnderline( actionTextUnderline->isChecked() );
 }
 
 void TextEditor::textItalic()
 {
-    e->setFontItalic( actionTextItalic->isChecked() );
+    //e->setFontItalic( actionTextItalic->isChecked() );
 }
 
 void TextEditor::textFamily( const QString &f )
 {
-    e->setFontFamily( f );
+    //e->setFontFamily( f );
 }
 
 void TextEditor::textSize( const QString &p )
 {
-    e->setFontPointSize( p.toInt() );
+    //e->setFontPointSize( p.toInt() );
 }
 
 
 void TextEditor::textColor()
 {
-    QColor col = QColorDialog::getColor( e->textColor(), this );
-    if ( !col.isValid() ) return;
-    e->setTextColor( col );
+    //QColor col = QColorDialog::getColor( //e->textColor(), this );
+    //if ( !col.isValid() ) return;
+    //e->setTextColor( col );
     QPixmap pix( 16, 16 );
     pix.fill( Qt::black );
     actionTextColor->setIcon( pix );
@@ -885,18 +929,19 @@ void TextEditor::textColor()
 
 void TextEditor::textAlign( QAction *a )
 {
-    QTextCursor c=e->textCursor();
-    c.setPosition (3,QTextCursor::MoveAnchor);
-    e->setTextCursor (c);
+//    QTextCursor c=e->textCursor();
+//    c.setPosition (3,QTextCursor::MoveAnchor);
+//    //e->setTextCursor (c);
 
-    if ( a == actionAlignLeft )
-        e->setAlignment( Qt::AlignLeft );
-    else if ( a == actionAlignCenter )
-        e->setAlignment( Qt::AlignHCenter );
-    else if ( a == actionAlignRight )
-        e->setAlignment( Qt::AlignRight );
-    else if ( a == actionAlignJustify )
-        e->setAlignment( Qt::AlignJustify );
+    if ( a == actionAlignLeft ){
+    }
+        //e->setAlignment( Qt::AlignLeft );
+    //else if ( a == actionAlignCenter )
+        //e->setAlignment( Qt::AlignHCenter );
+    //else if ( a == actionAlignRight )
+        //e->setAlignment( Qt::AlignRight );
+    //else if ( a == actionAlignJustify )
+        //e->setAlignment( Qt::AlignJustify );
 }
 
 void TextEditor::textVAlign()
@@ -910,7 +955,7 @@ void TextEditor::textVAlign()
     } else {
         format.setVerticalAlignment(QTextCharFormat::AlignNormal);
     }
-    e->mergeCurrentCharFormat(format);
+    //e->mergeCurrentCharFormat(format);
 }
 
 
@@ -935,8 +980,8 @@ void TextEditor::colorChanged( const QColor &c )
 void TextEditor::formatChanged( const QTextCharFormat &f )
 {
     fontChanged(f.font());
-    colorChanged(f.foreground().color());
-    alignmentChanged(e->alignment());
+    //colorChanged(f.foreground().color());
+    //alignmentChanged(e->alignment());
     verticalAlignmentChanged (f.verticalAlignment());
 }
 
@@ -1037,7 +1082,7 @@ void TextEditor::setState (EditorState s)
     }
     p.setColor(QPalette::Active, static_cast<QPalette::ColorRole>(9), c);
     p.setColor(QPalette::Inactive, static_cast<QPalette::ColorRole>(9), c);
-    e->setPalette(p);
+    //e->setPalette(p);
 }
 
 
