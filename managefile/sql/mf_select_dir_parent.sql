@@ -1,1 +1,1 @@
-select * from mf_document
+delete from mf_document_note

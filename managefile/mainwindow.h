@@ -122,6 +122,7 @@ private slots:
     void windowShowNoteEditor();
     void windowHideNoteEditor();
     void shownotes();
+    void clearSelNoteUuId();
     void openUrl(QUrl url);
     void dosearch(QString keyword);
     void setSearchDir(QAction *action);

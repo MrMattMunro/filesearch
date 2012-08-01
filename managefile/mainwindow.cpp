@@ -60,15 +60,11 @@
 #include "db/docdao.h"
 #include "db/doctagdao.h"
 #include "db/resultdao.h"
-#include "noteeditor.h"
 #include "refereedialog.h"
 #include "aboutdialog.h"
 #include "logview.h"
 #include "preferencesdialog.h"
 #include "indexfile.h"
-
-
-// extern UEditor *noteEditor;
 
 MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     : QMainWindow(parent, flags)
@@ -737,13 +733,21 @@ void MainWindow::initUI()
             //noteEditor->setShowWithMain(true);
             // 从Note编辑界面打开Note
             connect(noteEditor, SIGNAL(showMainNotes()), this, SLOT(shownotes()));
+            // 关闭清空选择的Uid
+            connect(noteEditorDW, SIGNAL(closeEvent(QCloseEvent *event)), this, SLOT(clearSelNoteUuId()));
+
 
         //} else{
           //  noteEditorDW=NULL;
         //}
 
-
         setCentralWidget(splitter);
+}
+
+// 清空选择的SelNoteUuid
+void MainWindow::clearSelNoteUuId(){
+    Preferences* p = Preferences::instance();
+    p->setSelNoteUid("");
 }
 
 void MainWindow::shownotes(){
@@ -1054,26 +1058,6 @@ void MainWindow::windowToggleNoteEditor()
     Doc doc = DocDao::selectDoc(docUuid);
     noteEditorDW->setWindowTitle(doc.DOCUMENT_NAME);
     noteEditorDW->setWindowIcon(Utils::getIcon("note.png"));
-
-    QString selNoteUid = p->getSelNoteUid();
-    // 如果为空则是 清空Reset
-    if(selNoteUid.isEmpty()){
-       //noteEditor->reset();
-    }else{
-        QString notesPath = Utils::getLocateNotesPath();
-        QString filename = notesPath.append(QDir::separator());
-        filename.append(QDir::separator());
-        filename.append(selNoteUid);
-        filename.append(".html");
-        // load noteUuid
-        QFile f( filename );
-        if ( !f.open( QIODevice::ReadOnly ) ){
-              return;
-        }
-        QTextStream ts( &f );
-        //noteEditor->setText(ts.readAll());
-        //noteEditor->setFilename(filename);
-    }
     windowShowNoteEditor();
 }
 
@@ -1086,6 +1070,20 @@ void MainWindow::windowShowNoteEditor()
     m_doctable->hide();
     q_myTreeList->hide();
     toolBar->hide();
+
+    // 打开文件
+    Preferences* p = Preferences::instance();
+    QString selNoteUuid = p->getSelNoteUid();
+    // 判断是否修改笔记还是追加笔记
+    if(!selNoteUuid.isEmpty()){
+        QString notesPath = Utils::getLocateNotesPath();
+        notesPath.append(QDir::separator());
+        notesPath.append(selNoteUuid);
+        notesPath.append(".html");
+        noteEditor->open(notesPath);
+    }else{
+        noteEditor->clear();
+    }
 }
 
 void MainWindow::windowHideNoteEditor()

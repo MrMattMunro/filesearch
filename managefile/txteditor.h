@@ -41,7 +41,7 @@ class TxtEditor : public QMainWindow
    	signals:
 
 	private:
-                Ui::TxtEditor ui;
+        Ui::TxtEditor ui;
 
 		QString m_fileName;
 		QFileSystemWatcher * m_fileWatcher;
