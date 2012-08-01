@@ -29,7 +29,6 @@
 #include "db/database.h"
 #include "logindialog.h"
 #include "fileutils.h"
-#include "noteeditor.h"
 #include "sqlloader.h"
 #include <QDebug>
 #include <QFile>
@@ -37,8 +36,6 @@
 #include <QTime>
 
 #define _TIME_ qPrintable (QTime::currentTime ().toString ("hh:mm:ss:zzz"))
-
-NoteEditor    *noteEditor;	// used in Constr. of LinkableMapObj
 
 #define ARG_VERSION "--version"
 #define ARG_HELP "--help"
@@ -291,10 +288,6 @@ int main(int argc, char *argv[])
     app.installTranslator(&translator);
 
     //QString QCoreApplication::applicationDirPath () [static]
-
-    // Initialize window of NoteEditor
-    noteEditor = new NoteEditor();
-    //noteEditor->setWindowIcon (QPixmap (iconPath+ "vym-editor.png"));
 
     // 打开连接db
     Database::sessionName(DATABASE);

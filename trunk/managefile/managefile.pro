@@ -48,9 +48,6 @@ SOURCES += main.cpp \
     customtooldialog.cpp \
     exportconvertdialog.cpp \
     Common.cpp \
-    noteobj.cpp \
-    noteeditor.cpp \
-    texteditor.cpp \
     xmlobj.cpp \
     docnoteinfodialog.cpp \
     notesdialog.cpp \
@@ -90,9 +87,9 @@ SOURCES += main.cpp \
     highlighter.cpp \
     refereedialog.cpp \
     intelliplugin.cpp \
-    shineprint.cpp \
     ueditor.cpp \
-    printinfo.cpp
+    printinfo.cpp \
+    uesave.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -136,9 +133,6 @@ HEADERS  += mainwindow.h \
     customtooldialog.h \
     exportconvertdialog.h \
     Common.h \
-    noteeditor.h \
-    noteobj.h \
-    texteditor.h \
     xmlobj.h \
     docnoteinfodialog.h \
     notesdialog.h \
@@ -185,9 +179,9 @@ HEADERS  += mainwindow.h \
     refereedialog.h \
     sendmail.h \
     intelliplugin.h \
-    shineprint.h \
     ueditor.h \
-    printinfo.h
+    printinfo.h \
+    uesave.h
 
 RESOURCES += \
     managefile.qrc

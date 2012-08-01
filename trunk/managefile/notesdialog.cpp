@@ -74,13 +74,19 @@ void NotesDialog::addNote()
 // 删除备注
 void NotesDialog::deleteNote()
 {
+    QItemSelectionModel *selections = notesView->selectionModel();
+    QModelIndexList selected = selections->selectedIndexes();
+
+    if(selected.size() == 0){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Select an note."), QMessageBox::Yes);
+        return;
+    }
+
     needCloseNoteWiget = false;
     int ret = QMessageBox::question(this, "", tr("Are you sure that delete the note ?"),
                                     QMessageBox::Yes, QMessageBox::No);
     if(ret == QMessageBox::Yes){
 
-        QItemSelectionModel *selections = notesView->selectionModel();
-        QModelIndexList selected = selections->selectedIndexes();
         QMap<int, int> rowMap;
         // 删除文件
         QString notespath = Utils::getLocateNotesPath();
@@ -130,6 +136,11 @@ void NotesDialog::editNote()
 {
     QItemSelectionModel *selections = notesView->selectionModel();
     QModelIndexList selected = selections->selectedIndexes();
+
+    if(selected.size() == 0){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Select an note."), QMessageBox::Yes);
+        return;
+    }
 
     // 选择第一个
     QModelIndex index = selected.at(0);
@@ -232,5 +243,7 @@ void NotesDialog::intNotes(){
     notesView->setModel(model);
     notesView->setSelectionBehavior(QAbstractItemView::SelectRows);
     notesView->hideColumn(5);
+    // TODO 位置信息
+    notesView->hideColumn(0);
     notesView->resizeColumnsToContents();
 }

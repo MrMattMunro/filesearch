@@ -14,6 +14,7 @@ for which a new license (GPL+exception) is in place.
 #include <QProgressDialog>
 #include <QSqlQuery>
 #include <QSqlError>
+#include <QWebFrame>
 #include <QShortcut>
 #include <QSettings>
 #include <QDateTime>
@@ -47,7 +48,6 @@ UEditor::UEditor(QWidget * parent)
     view->settings()->setAttribute(QWebSettings::JavascriptEnabled, true);
 
     view->page()->setPluginFactory(new IntelliPlugin);
-    view->setGeometry(50, 50, 1024, 768);
     view->load(QUrl::fromUserInput(path));
 }
 
@@ -64,30 +64,24 @@ void UEditor::showEvent(QShowEvent * event)
 
 void UEditor::open(const QString &  newFile)
 {
-//	QFile f(newFile);
-//	if (!f.open(QIODevice::ReadOnly | QIODevice::Text))
-//	{
-//                QMessageBox::warning(this, tr("Open File"), tr("Cannot open file %1").arg(newFile));
-//		return;
-//	}
+    QFile f(newFile);
+    if (!f.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QMessageBox::warning(this, tr("Open File"), tr("Cannot open file %1").arg(newFile));
+        return;
+    }
 
-
-//        QTextCodec *code= QTextCodec::codecForName("utf8");
-//	QTextStream in(&f);
-//        in.setCodec(code); // 输出流的设置编码
-//	QString line;
-//	while (!in.atEnd())
-//	{
-//                QString temp = in.readLine();
-//                line.append(temp);
-//                line.append("\n");
-//	}
-
-//        ui.sqlTextEdit->setPlainText(line);
-//	f.close();
-
-//	m_fileName = newFile;
-//	setFileWatcher(newFile);
+    QTextCodec *code= QTextCodec::codecForName("utf8");
+    QTextStream in(&f);
+    in.setCodec(code); // 输出流的设置编码
+    QString strVal = QString("setcontent(\"%1\");").arg(in.readAll());
+    view->page()->mainFrame()->evaluateJavaScript(strVal);
+}
+// 清空编辑器
+void UEditor::clear()
+{
+    QString strVal = QString("setcontent(\"%1\");").arg("");
+    view->page()->mainFrame()->evaluateJavaScript(strVal);
 }
 
 

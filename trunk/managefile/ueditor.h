@@ -36,6 +36,7 @@ class UEditor : public QMainWindow
 		QString fileName() { return m_fileName; };
 
         void open(const QString & newFile);
+        void clear();
    	signals:
         void showMainNotes();
 	private:

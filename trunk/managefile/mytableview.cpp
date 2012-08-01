@@ -514,7 +514,6 @@ void MyTableView::buildSearchResult(QList<Result> resultlist)
     qDebug("buildResultList end");
 }
 
-
 // Show tooltip
 void MyTableView::showToolTip(const QModelIndex &index)
 {
@@ -532,7 +531,8 @@ void MyTableView::showToolTip(const QModelIndex &index)
             QList<Note> list = NoteDao::selectNotesbyDocUuId(curUuid);
             for (int var = 0; var < list.size(); ++var) {
                 Note note = list.at(var);
-                tips.append(note.NOTE_CONTENT + "\n");
+                QString notes = note.NOTE_CONTENT.trimmed();
+                tips.append(notes.length() > 200 ? notes.left(200) : notes + "\n");
             }
             QToolTip::showText(QCursor::pos(), tips);
        }
