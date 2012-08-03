@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>icon/file_manager.png</file>
+        <file>updater.ico</file>
     </qresource>
 </RCC>

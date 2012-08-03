@@ -36,7 +36,7 @@ class DownloadControl : public QObject
     signals:
         void FileDownloadFinished();
     private slots:
-            void SubPartFinished();
-            // 用户判断网络下载是否有问题
+        void SubPartFinished();
+        // 用户判断网络下载是否有问题
 
 };

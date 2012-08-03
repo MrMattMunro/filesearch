@@ -38,10 +38,16 @@ FORMS    += \
     updatedialog.ui
 
 OTHER_FILES += \
-    qjson/json_parser.yy
+    qjson/json_parser.yy \
+    updater.rc
 
 RESOURCES += \
     updater.qrc
+
+RC_FILE = \
+  updater.rc
+
+TRANSLATIONS = ts/updater_zh_cn.ts ts/updater_en.ts ts/updater_jp.ts
 
 
 
