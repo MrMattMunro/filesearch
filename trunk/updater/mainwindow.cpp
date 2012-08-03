@@ -33,7 +33,8 @@ void MainWindow::doConfirmReply(){
      Preferences* p = Preferences::instance();
      QString version = p->getVersion();
      qDebug() << "version::" << version;
-     if(newversion != version || version.isEmpty()){
+
+     if((newversion != version) || version.isEmpty()){
 //         ShowUpdateDialog dlg;
 //         dlg.exec();
           UpdateDialog dlg;
