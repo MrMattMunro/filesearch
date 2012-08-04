@@ -1,114 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
-<context>
-    <name>ReqUtil</name>
-    <message>
-        <location filename="../requtil.cpp" line="45"/>
-        <source>Warning</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../requtil.cpp" line="45"/>
-        <source>The Server has Errors, Please Contact the Administrator!</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
+<TS version="2.0" language="ja_JP">
 <context>
     <name>ShowUpdateDialog</name>
     <message>
-        <location filename="../showupdatedialog.ui" line="14"/>
-        <source>Data Import</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../showupdatedialog.cpp" line="32"/>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>アクション</translation>
     </message>
     <message>
         <location filename="../showupdatedialog.cpp" line="33"/>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイル</translation>
     </message>
     <message>
         <location filename="../showupdatedialog.cpp" line="34"/>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>ステータス</translation>
     </message>
     <message>
         <location filename="../showupdatedialog.cpp" line="37"/>
-        <source>update Slfile...</source>
-        <translation type="unfinished"></translation>
+        <source>update Solo...</source>
+        <translation>Soloを更新..</translation>
     </message>
     <message>
         <location filename="../showupdatedialog.cpp" line="82"/>
-        <location filename="../showupdatedialog.cpp" line="204"/>
+        <location filename="../showupdatedialog.cpp" line="218"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>情報</translation>
     </message>
     <message>
         <location filename="../showupdatedialog.cpp" line="82"/>
         <source>User Is Not Existed.</source>
-        <translation type="unfinished"></translation>
+        <translation>ユーザが存在していされていません。</translation>
     </message>
     <message>
-        <location filename="../showupdatedialog.cpp" line="134"/>
+        <location filename="../showupdatedialog.cpp" line="141"/>
         <source>downloading</source>
-        <translation type="unfinished"></translation>
+        <translation>ダウンロードしています...</translation>
     </message>
     <message>
-        <location filename="../showupdatedialog.cpp" line="136"/>
+        <location filename="../showupdatedialog.cpp" line="143"/>
         <source>busying</source>
-        <translation type="unfinished"></translation>
+        <translation>実行しています...</translation>
     </message>
     <message>
-        <location filename="../showupdatedialog.cpp" line="160"/>
+        <location filename="../showupdatedialog.cpp" line="167"/>
         <source>download</source>
-        <translation type="unfinished"></translation>
+        <translation>ダウンロード</translation>
     </message>
     <message>
-        <location filename="../showupdatedialog.cpp" line="162"/>
+        <location filename="../showupdatedialog.cpp" line="169"/>
         <source>done</source>
-        <translation type="unfinished"></translation>
+        <translation>完成</translation>
     </message>
     <message>
-        <location filename="../showupdatedialog.cpp" line="204"/>
+        <location filename="../showupdatedialog.cpp" line="218"/>
         <source>Server errors, can not update</source>
-        <translation type="unfinished"></translation>
+        <translation>サーバエラー、更新することはできません。</translation>
+    </message>
+    <message>
+        <location filename="../showupdatedialog.ui" line="14"/>
+        <source>Update</source>
+        <translation>更新</translation>
     </message>
 </context>
 <context>
     <name>UpdateDialog</name>
     <message>
-        <location filename="../updatedialog.ui" line="14"/>
-        <source>Data Import</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../updatedialog.ui" line="21"/>
         <source>about:blank</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
+        <location filename="../updatedialog.ui" line="14"/>
         <location filename="../updatedialog.ui" line="44"/>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>更新</translation>
     </message>
     <message>
         <location filename="../updatedialog.ui" line="64"/>
         <source>Next Time</source>
-        <translation type="unfinished"></translation>
+        <translation>ネクスト·タイム</translation>
     </message>
     <message>
         <location filename="../updatedialog.ui" line="84"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>無視</translation>
     </message>
     <message>
         <location filename="../updatedialog.cpp" line="25"/>
-        <source>Slfile</source>
-        <translation type="unfinished"></translation>
+        <source>Solo</source>
+        <translation>Solo</translation>
     </message>
 </context>
 </TS>
