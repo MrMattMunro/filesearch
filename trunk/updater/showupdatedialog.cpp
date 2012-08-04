@@ -23,7 +23,7 @@ ShowUpdateDialog::ShowUpdateDialog(QWidget * parent)
         : QDialog(parent),
           update(false)
 {
-	setupUi(this);
+        setupUi(this);
 
         // 列表
         model = new QStandardItemModel();
@@ -33,8 +33,8 @@ ShowUpdateDialog::ShowUpdateDialog(QWidget * parent)
         model->setHeaderData(1,Qt::Horizontal,tr("File"));
         model->setHeaderData(2,Qt::Horizontal,tr("Status"));
 
-        this->setWindowIcon(Utils::getIcon("file_manager.png"));
-        this->setWindowTitle(tr("update Slfile..."));
+        this->setWindowIcon(Utils::getIcon("updater.ico"));
+        this->setWindowTitle(tr("update Solo..."));
         updatefiles();
 
         connect(buttonBox, SIGNAL(accepted()), this, SLOT(confirmBtn_clicked()));
@@ -100,9 +100,16 @@ void ShowUpdateDialog::doConfirmReply(){
         server = qvariant_cast<QString>(vserver);
         qDebug() << "server::" << server;
 
+
+        QVariant vvseron= varMap["newversion"];
+        newversion = qvariant_cast<QString>(vvseron);
+        qDebug() << "newversion::" << newversion;
+
         QVariant vtestfile = varMap["testfile"];
         QString testfile = qvariant_cast<QString>(vtestfile);
         qDebug() << "testfile::" << testfile;
+
+        // downloadfiles();
 
         // 检查服务器是否正常
         QString surl(server);
@@ -143,15 +150,15 @@ void ShowUpdateDialog::downloadfiles(){
         DownloadControl *control = new DownloadControl(0, &locfileinfo);
         QEventLoop loop;
         QObject::connect(control, SIGNAL(FileDownloadFinished()),&loop, SLOT(quit()));
-        QObject::connect(control, SIGNAL(serverError()),this, SLOT(servererror()));
 
         url= QUrl::fromEncoded(surl.toUtf8());
         qint64 size = control->GetFileSize(url);
         // 1M 为一个数据块
-        int pointCount = size / 1024*1024;
+        int pointCount = 1;
+        if( size > 1048576 ){
+           pointCount = ( size / 1048576);
+        }
         qDebug() << "pointCount::" << pointCount;
-
-        pointCount = (pointCount == 0? 1 : pointCount);
         control->StartFileDownload(surl, pointCount);
 
         loop.exec();
@@ -182,6 +189,10 @@ void ShowUpdateDialog::downloadfiles(){
        pos = pos + 1;
        progressBar->setValue(pos);
     }
+
+    // 更新完成后 写入本地最新版本
+    Preferences* p = Preferences::instance();
+    p->setVersion(newversion);
 }
 
 // 用户判断网络下载是否有问题
@@ -196,6 +207,9 @@ void ShowUpdateDialog::checkTestFile()
        }else{
            downloadfiles();
        }
+    }else{
+         // 为空时
+         downloadfiles();
     }
 }
 

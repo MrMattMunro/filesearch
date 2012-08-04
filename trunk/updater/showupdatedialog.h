@@ -45,6 +45,7 @@ class ShowUpdateDialog : public QDialog, public Ui::ShowUpdateDialog
                 bool httpRequestAborted;
 
                 QString server;
+                QString newversion;
                 QVariantList updatelist;
                 QVariantList dellist;
                 QFileInfo locfileinfo;

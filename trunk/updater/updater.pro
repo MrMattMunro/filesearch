@@ -39,7 +39,10 @@ FORMS    += \
 
 OTHER_FILES += \
     qjson/json_parser.yy \
-    updater.rc
+    updater.rc \
+    ts/updater_en.ts \
+    ts/updater_jp.ts \
+    ts/updater_zh_cn.ts
 
 RESOURCES += \
     updater.qrc

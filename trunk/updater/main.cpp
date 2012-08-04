@@ -1,6 +1,7 @@
 #include <QtGui/QApplication>
 #include <QProcess>
 #include <QDir>
+#include <QTranslator>
 #include "mainwindow.h"
 #include "utils.h"
 
@@ -14,14 +15,14 @@ int main(int argc, char *argv[])
     // 设置窗口图标
     app.setWindowIcon(Utils::getIcon("updater.ico"));
     // 多语言设置
-    QString ret = QLocale::system().name();
+    QString lang = QLocale::system().name();
     QTranslator translator;
-    QString localTranslator = Utils::getTranslator(ret.left(2));
+    QString localTranslator = Utils::getTranslator(lang.left(2));
     translator.load(localTranslator);
     app.installTranslator(&translator);
 
     // 重新启动
-    int ret = a.exec();
+    int ret = app.exec();
     // 启动主程序
     if (ret == 773) {
         qDebug() << "start main programme";
