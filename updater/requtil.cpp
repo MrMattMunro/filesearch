@@ -37,14 +37,14 @@ void ReqUtil::httpReadyRead()
         if (file){
             QByteArray bytes = reply->readAll();
             file->write(bytes);
-            QString string;
-            string = QString(bytes);
-            // ÅÐ¶ÏÊÇ·ñ404Òì³£
-            // http://go.microsoft.com/fwlink/?linkid=8180">Microsoft ???</a>&ldquo;HTTP&rdquo;&ldquo;404
-            if(string.indexOf("404") != -1 && string.indexOf("HTML") != -1 ){
-                QMessageBox::warning(this, tr("Warning"), tr("The Server has Errors, Please Contact the Administrator!"), QMessageBox::Yes);
-                QCoreApplication::exit(773);
-            }
+//            QString string;
+//            string = QString(bytes);
+//            // ÅÐ¶ÏÊÇ·ñ404Òì³£
+//            // http://go.microsoft.com/fwlink/?linkid=8180">Microsoft ???</a>&ldquo;HTTP&rdquo;&ldquo;404
+//            if(string.indexOf("404") != -1 && string.indexOf("HTML") != -1 ){
+//                QMessageBox::warning(this, tr("Warning"), tr("The Server has Errors, Please Contact the Administrator!"), QMessageBox::Yes);
+//                QCoreApplication::exit(773);
+//            }
         }
     }
 }

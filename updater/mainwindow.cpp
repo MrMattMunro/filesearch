@@ -35,8 +35,6 @@ void MainWindow::doConfirmReply(){
      qDebug() << "version::" << version;
 
      if((newversion != version) || version.isEmpty()){
-//         ShowUpdateDialog dlg;
-//         dlg.exec();
           UpdateDialog dlg;
           dlg.exec();
      }else{

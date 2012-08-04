@@ -20,9 +20,9 @@ UpdateDialog::UpdateDialog(QWidget * parent)
         : QDialog(parent),
           update(false)
 {
-	setupUi(this);
-        this->setWindowIcon(Utils::getIcon("file_manager.png"));
-        this->setWindowTitle(tr("Slfile"));
+        setupUi(this);
+        this->setWindowIcon(Utils::getIcon("udpater.ico"));
+        this->setWindowTitle(tr("Solo"));
 
         QString url;
         url.append("http://www.slfile.net/bootstrap/changelog_");
