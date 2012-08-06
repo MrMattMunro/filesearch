@@ -122,7 +122,6 @@ private slots:
     void windowShowNoteEditor();
     void windowHideNoteEditor();
     void shownotes();
-    void clearSelNoteUuId();
     void openUrl(QUrl url);
     void dosearch(QString keyword);
     void setSearchDir(QAction *action);
@@ -133,6 +132,7 @@ private slots:
     void createTrayActions();
     void createTrayIcon();
     void messageClicked();
+    void setAutoStart();
     void quit();
 
 protected:
@@ -223,6 +223,7 @@ private:
     QAction *minimizeAction;
     QAction *maximizeAction;
     QAction *restoreAction;
+    QAction *autoStartAction;
     QAction *quitAction;
 
     QSystemTrayIcon *trayIcon;

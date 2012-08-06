@@ -6,7 +6,10 @@ LIBS += C:\QtWorksapce\managefile\lib\sqlite3.lib \
          C:\QtSDK\Symbian\tools\sbs\win32\mingw\lib\libwinspool.a \
          -Lc:/QtWorksapce/managefile/lib -lqjson0
 
+win32:LIBS += -lshell32 -lole32 -luser32
+
 CONFIG+=qaxcontainer
+CONFIG+=release
 
 SOURCES += main.cpp \
         mainwindow.cpp \
@@ -88,8 +91,8 @@ SOURCES += main.cpp \
     refereedialog.cpp \
     intelliplugin.cpp \
     ueditor.cpp \
-    printinfo.cpp \
-    uesave.cpp
+    uesave.cpp \
+    single_application.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -180,8 +183,8 @@ HEADERS  += mainwindow.h \
     sendmail.h \
     intelliplugin.h \
     ueditor.h \
-    printinfo.h \
-    uesave.h
+    uesave.h \
+    single_application.h
 
 RESOURCES += \
     managefile.qrc
@@ -313,6 +316,7 @@ OTHER_FILES += \
 
 RC_FILE = \
   file_manager.rc
+
 
 
 

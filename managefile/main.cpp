@@ -33,6 +33,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QTextStream>
+#include "single_application.h"
 #include <QTime>
 
 #define _TIME_ qPrintable (QTime::currentTime ().toString ("hh:mm:ss:zzz"))
@@ -227,7 +228,13 @@ void customMessageHandler(QtMsgType type, const char *msg)
 // 主函数
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+    SingleApplication app(argc, argv, "7yz2_2d");
+
+    if (app.isRunning())
+    {
+        // app.sendMessage("There is an other Solo instance runing."));
+        return 0;
+    }
 
     //先注册自己的MsgHandler
     qInstallMsgHandler(customMessageHandler);
@@ -248,6 +255,8 @@ int main(int argc, char *argv[])
       return 0;
     }
 
+    SingleApplication::addLibraryPath("./plugins");
+
     // 设置系统右下图标
     if (!QSystemTrayIcon::isSystemTrayAvailable()) {
             QMessageBox::critical(0, QObject::tr("Systray"),
@@ -255,14 +264,14 @@ int main(int argc, char *argv[])
                                               "on this system."));
             return 1;
      }
-    QApplication::setQuitOnLastWindowClosed(false);
+    SingleApplication::setQuitOnLastWindowClosed(false);
 
     // 加载数据库驱动
-    QApplication::addLibraryPath("./lib");
-    qDebug() << "my library path : " << app.libraryPaths();
-    QLibrary sqlib("sqlite3.dll");
-    sqlib.load();
-    qDebug() << "my library loaded" << sqlib.isLoaded();
+//    QApplication::addLibraryPath("./lib");
+//    qDebug() << "my library path : " << app.libraryPaths();
+//    QLibrary sqlib("sqlite3.dll");
+//    sqlib.load();
+//    qDebug() << "my library loaded" << sqlib.isLoaded();
 
     // 设置数据库文件
     QString dbpath = Utils::getLocatePath().append(QDir::separator()).append("db");
@@ -337,6 +346,8 @@ int main(int argc, char *argv[])
        MainWindow w;
        w.setLocale(cli.localeCode());
        w.showMaximized();
+
+       // QObject::connect(&app, SIGNAL(messageAvailable(QString)), w, SLOT(receiveMessage(QString)));
 
        // 重新启动
        int ret = app.exec();

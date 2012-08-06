@@ -108,7 +108,7 @@ MyTreeView::MyTreeView(QString title, QWidget *parent) : treeTitle("tree"), QTre
 //        this->setDragEnabled(true);
 //        this->setAcceptDrops(true);
 
-        m_appName = tr("Solo Local File Manage");
+        m_appName = tr("Solo Local File Manager");
 
         this->setSelectionMode(QAbstractItemView::SingleSelection);
         this->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -489,13 +489,13 @@ void MyTreeView::mouseReleaseEvent(QMouseEvent *event)
     if( Qt::RightButton == event->button() && true == mouseStatus){
         curPoint = event->pos();
         curIndex= indexAt(curPoint);
-
-        curItem = model->itemFromIndex(curIndex);
-        curTitle = curIndex.data().toString();
-        curUuId =  qvariant_cast<QString>(curItem->data(UUID));
-        curType = qvariant_cast<QString>(curItem->data(NODE_TYPE));
-
-        treeContextMenuOpened();
+        if(curIndex.isValid()){
+                curItem = model->itemFromIndex(curIndex);
+                curTitle = curIndex.data().toString();
+                curUuId =  qvariant_cast<QString>(curItem->data(UUID));
+                curType = qvariant_cast<QString>(curItem->data(NODE_TYPE));
+                treeContextMenuOpened();
+        }
     }
 
     // ×ó¼ü
@@ -503,12 +503,13 @@ void MyTreeView::mouseReleaseEvent(QMouseEvent *event)
     {
             curPoint = event->pos();
             curIndex= indexAt(curPoint);
-
-            curItem = model->itemFromIndex(curIndex);
-            curTitle = curIndex.data().toString();
-            curUuId =  qvariant_cast<QString>(curItem->data(UUID));
-            curType = qvariant_cast<QString>(curItem->data(NODE_TYPE));
-            emit LBtnClk();
+            if(curIndex.isValid()){
+                curItem = model->itemFromIndex(curIndex);
+                curTitle = curIndex.data().toString();
+                curUuId =  qvariant_cast<QString>(curItem->data(UUID));
+                curType = qvariant_cast<QString>(curItem->data(NODE_TYPE));
+                emit LBtnClk();
+            }
     }
 }
 

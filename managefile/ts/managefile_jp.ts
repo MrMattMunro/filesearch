@@ -1833,7 +1833,7 @@ acknowledge our Terms of Service</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="187"/>
-        <location filename="../mainwindow.cpp" line="1134"/>
+        <location filename="../mainwindow.cpp" line="1140"/>
         <source>&amp;Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1969,238 +1969,238 @@ acknowledge our Terms of Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="312"/>
+        <location filename="../mainwindow.cpp" line="309"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="371"/>
+        <location filename="../mainwindow.cpp" line="368"/>
         <source>&amp;About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="427"/>
+        <location filename="../mainwindow.cpp" line="424"/>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="436"/>
+        <location filename="../mainwindow.cpp" line="433"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="354"/>
-        <location filename="../mainwindow.cpp" line="474"/>
+        <location filename="../mainwindow.cpp" line="351"/>
+        <location filename="../mainwindow.cpp" line="471"/>
         <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="87"/>
-        <source>Solo Local File Manage</source>
+        <location filename="../mainwindow.cpp" line="84"/>
+        <source>Solo Local File Manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="202"/>
+        <location filename="../mainwindow.cpp" line="199"/>
         <source>ALL Documents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="209"/>
+        <location filename="../mainwindow.cpp" line="206"/>
         <source>Current Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="216"/>
+        <location filename="../mainwindow.cpp" line="213"/>
         <source>Current Directory(Include Sub Directory)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="230"/>
+        <location filename="../mainwindow.cpp" line="227"/>
         <source>Document Name And Content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="236"/>
+        <location filename="../mainwindow.cpp" line="233"/>
         <source>Document Name Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="242"/>
+        <location filename="../mainwindow.cpp" line="239"/>
         <source>Document Content Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="259"/>
+        <location filename="../mainwindow.cpp" line="256"/>
         <source>Option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="284"/>
+        <location filename="../mainwindow.cpp" line="281"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="293"/>
+        <location filename="../mainwindow.cpp" line="290"/>
         <source>&amp;Import...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="294"/>
+        <location filename="../mainwindow.cpp" line="291"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="298"/>
+        <location filename="../mainwindow.cpp" line="295"/>
         <source>&amp;Export...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="299"/>
+        <location filename="../mainwindow.cpp" line="296"/>
         <source>Ctrl+E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="303"/>
+        <location filename="../mainwindow.cpp" line="300"/>
         <source>&amp;Save As...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="307"/>
+        <location filename="../mainwindow.cpp" line="304"/>
         <source>&amp;Save To Mobile...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="311"/>
+        <location filename="../mainwindow.cpp" line="308"/>
         <source>&amp;Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="316"/>
+        <location filename="../mainwindow.cpp" line="313"/>
         <source>&amp;Full Screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="320"/>
+        <location filename="../mainwindow.cpp" line="317"/>
         <source>&amp;Show/Hide Class Tree</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="321"/>
+        <location filename="../mainwindow.cpp" line="318"/>
         <source>Ctrl+H</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="342"/>
+        <location filename="../mainwindow.cpp" line="339"/>
         <source>&amp;Setting ToolBar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="346"/>
+        <location filename="../mainwindow.cpp" line="343"/>
         <source>&amp;Show/Hide Tool Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="355"/>
+        <location filename="../mainwindow.cpp" line="352"/>
         <source>F2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="359"/>
+        <location filename="../mainwindow.cpp" line="356"/>
         <source>&amp;HomePage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="363"/>
+        <location filename="../mainwindow.cpp" line="360"/>
         <source>&amp;Invite Friends...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="367"/>
+        <location filename="../mainwindow.cpp" line="364"/>
         <source>&amp;Forum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="375"/>
+        <location filename="../mainwindow.cpp" line="372"/>
         <source>&amp;Update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="379"/>
+        <location filename="../mainwindow.cpp" line="376"/>
         <source>&amp;Option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="380"/>
+        <location filename="../mainwindow.cpp" line="377"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="384"/>
+        <location filename="../mainwindow.cpp" line="381"/>
         <source>&amp;View Log...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="385"/>
+        <location filename="../mainwindow.cpp" line="382"/>
         <source>Ctrl+L</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="394"/>
+        <location filename="../mainwindow.cpp" line="391"/>
         <source>Account Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="398"/>
+        <location filename="../mainwindow.cpp" line="395"/>
         <source>Update to VIP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="402"/>
+        <location filename="../mainwindow.cpp" line="399"/>
         <source>Logo Off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="458"/>
+        <location filename="../mainwindow.cpp" line="455"/>
         <source>&amp;Tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="465"/>
+        <location filename="../mainwindow.cpp" line="462"/>
         <source>&amp;Account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="502"/>
+        <location filename="../mainwindow.cpp" line="499"/>
         <source>Tool Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="730"/>
+        <location filename="../mainwindow.cpp" line="728"/>
         <source>Note Editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1125"/>
+        <location filename="../mainwindow.cpp" line="1131"/>
         <source>Mi&amp;nimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1128"/>
+        <location filename="../mainwindow.cpp" line="1134"/>
         <source>Ma&amp;ximize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1131"/>
+        <location filename="../mainwindow.cpp" line="1137"/>
         <source>&amp;Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1152"/>
+        <location filename="../mainwindow.cpp" line="1158"/>
         <source>Systray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1153"/>
+        <location filename="../mainwindow.cpp" line="1159"/>
         <source>Sorry, I already gave what help I could.
 Maybe you should try asking a human?</source>
         <translation type="unfinished"></translation>
@@ -2544,11 +2544,6 @@ Maybe you should try asking a human?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="111"/>
-        <source>File Manage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../mytreeview.cpp" line="125"/>
         <source>&amp;New Sub Dir</source>
         <translation type="unfinished"></translation>
@@ -2720,6 +2715,11 @@ Maybe you should try asking a human?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../mytreeview.cpp" line="111"/>
+        <source>Solo Local File Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../mytreeview.cpp" line="1003"/>
         <source>Please Select an Sub Tag.</source>
         <translation type="unfinished"></translation>
@@ -2836,37 +2836,49 @@ Do you want to ignore these errors for this host?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="78"/>
+        <location filename="../notesdialog.cpp" line="81"/>
+        <location filename="../notesdialog.cpp" line="141"/>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../notesdialog.cpp" line="81"/>
+        <location filename="../notesdialog.cpp" line="141"/>
+        <source>Please Select an note.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../notesdialog.cpp" line="86"/>
         <source>Are you sure that delete the note ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="150"/>
+        <location filename="../notesdialog.cpp" line="161"/>
         <source>Are you sure that delete All the notes ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="196"/>
+        <location filename="../notesdialog.cpp" line="207"/>
         <source> page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="199"/>
+        <location filename="../notesdialog.cpp" line="210"/>
         <source>sheet </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="205"/>
+        <location filename="../notesdialog.cpp" line="216"/>
         <source> row</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="210"/>
+        <location filename="../notesdialog.cpp" line="221"/>
         <source> column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="215"/>
+        <location filename="../notesdialog.cpp" line="226"/>
         <source>text</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3530,12 +3542,12 @@ Do you want to ignore these errors for this host?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="256"/>
+        <location filename="../main.cpp" line="253"/>
         <source>Systray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="257"/>
+        <location filename="../main.cpp" line="254"/>
         <source>I couldn&apos;t detect any system tray on this system.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4329,251 +4341,6 @@ Do you really want to close this page?
     </message>
 </context>
 <context>
-    <name>TextEditor</name>
-    <message>
-        <location filename="../texteditor.cpp" line="38"/>
-        <source>Ready</source>
-        <comment>Statusbar message</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="39"/>
-        <source>Text Editor</source>
-        <comment>Text Editor Window caption</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="184"/>
-        <source>No filename available for this note.</source>
-        <comment>Statusbar message</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="258"/>
-        <source>Note Actions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="260"/>
-        <source>&amp;Note</source>
-        <comment>Menubar</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="263"/>
-        <source>&amp;Import...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="271"/>
-        <source>&amp;Save...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="279"/>
-        <source>Export &amp;As... (HTML)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="284"/>
-        <source>Export &amp;As...(ASCII)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="291"/>
-        <source>&amp;Print...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="298"/>
-        <source>&amp;Delete All</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="307"/>
-        <source>&amp;All notes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="351"/>
-        <source>Edit Actions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="354"/>
-        <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="357"/>
-        <source>&amp;Undo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="364"/>
-        <source>&amp;Redo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="372"/>
-        <source>Select and copy &amp;all</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="378"/>
-        <source>&amp;Copy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="385"/>
-        <source>Cu&amp;t</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="392"/>
-        <source>&amp;Paste</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="402"/>
-        <source>Format Actions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="404"/>
-        <source>F&amp;ormat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="408"/>
-        <source>&amp;Font hint</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="417"/>
-        <source>&amp;Richtext</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="451"/>
-        <source>&amp;Color...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="457"/>
-        <source>&amp;Bold</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="465"/>
-        <source>&amp;Italic</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="473"/>
-        <source>&amp;Underline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="485"/>
-        <source>Subs&amp;cript</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="493"/>
-        <source>Su&amp;perscript</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="505"/>
-        <source>&amp;Left</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="511"/>
-        <source>C&amp;enter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="517"/>
-        <source>&amp;Right</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="523"/>
-        <source>&amp;Justify</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="533"/>
-        <source>&amp;Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="536"/>
-        <source>Set &amp;fixed font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="541"/>
-        <source>Set &amp;variable font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="546"/>
-        <source>&amp;fixed font is default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="559"/>
-        <source>Note Editor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="660"/>
-        <source>Export Note to single file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="669"/>
-        <location filename="../texteditor.cpp" line="771"/>
-        <source>The file %1
-exists already.
-Do you want to overwrite it?</source>
-        <comment>dialog &apos;save note as&apos;</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="674"/>
-        <location filename="../texteditor.cpp" line="776"/>
-        <source>Overwrite</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="675"/>
-        <location filename="../texteditor.cpp" line="777"/>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="693"/>
-        <source>Couldn&apos;t export note </source>
-        <comment>dialog &apos;save note as&apos;</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="761"/>
-        <source>Export Note to single file (ASCII)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="804"/>
-        <source>Print</source>
-        <comment>TextEditor</comment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ToolbarSearch</name>
     <message>
         <location filename="../browser/toolbarsearch.cpp" line="74"/>
@@ -4706,6 +4473,29 @@ Do you want to overwrite it?</source>
     <message>
         <location filename="../txteditor.cpp" line="263"/>
         <source>Your currently edited file has been changed outside this application. Do you want to reload it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>UEditor</name>
+    <message>
+        <location filename="../ueditor.ui" line="14"/>
+        <source>TxtViewer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ueditor.ui" line="50"/>
+        <source>about:blank</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ueditor.cpp" line="74"/>
+        <source>Open File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ueditor.cpp" line="74"/>
+        <source>Cannot open file %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

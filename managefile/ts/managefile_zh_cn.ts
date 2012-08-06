@@ -10,7 +10,7 @@
     <message>
         <location filename="../aboutdialog.ui" line="14"/>
         <source>About</source>
-        <translation type="unfinished">关于</translation>
+        <translation>关于</translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="21"/>
@@ -615,7 +615,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../createsubdirdialog.ui" line="14"/>
         <source>Create Sub Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>创建子文件夹</translation>
     </message>
     <message>
         <location filename="../createsubdirdialog.ui" line="75"/>
@@ -665,7 +665,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../createtagdialog.ui" line="77"/>
         <source>Description(&amp;D):</source>
-        <translation type="unfinished">描述:</translation>
+        <translation>描述:</translation>
     </message>
     <message>
         <location filename="../createtagdialog.ui" line="14"/>
@@ -882,7 +882,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../docnoteinfodialog.ui" line="14"/>
         <source>Document Note Information</source>
-        <translation type="unfinished"></translation>
+        <translation>文档笔记信息</translation>
     </message>
     <message>
         <location filename="../docnoteinfodialog.ui" line="51"/>
@@ -922,7 +922,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../doctagsdialog.ui" line="14"/>
         <source>Document Tags</source>
-        <translation type="unfinished"></translation>
+        <translation>文档标签</translation>
     </message>
     <message>
         <location filename="../doctagsdialog.ui" line="38"/>
@@ -959,7 +959,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../doctodirdialog.ui" line="14"/>
         <source>Put Document to Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>将文档放入目录</translation>
     </message>
     <message utf8="true">
         <location filename="../doctodirdialog.ui" line="57"/>
@@ -1843,7 +1843,7 @@ acknowledge our Terms of Service</source>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>slfile</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="70"/>
@@ -1897,7 +1897,7 @@ acknowledge our Terms of Service</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="187"/>
-        <location filename="../mainwindow.cpp" line="1134"/>
+        <location filename="../mainwindow.cpp" line="1140"/>
         <source>&amp;Quit</source>
         <translation></translation>
     </message>
@@ -2033,28 +2033,28 @@ acknowledge our Terms of Service</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="312"/>
+        <location filename="../mainwindow.cpp" line="309"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="371"/>
+        <location filename="../mainwindow.cpp" line="368"/>
         <source>&amp;About</source>
-        <translation type="unfinished">关于</translation>
+        <translation>关于</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="427"/>
+        <location filename="../mainwindow.cpp" line="424"/>
         <source>&amp;File</source>
         <translation>文件</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="436"/>
+        <location filename="../mainwindow.cpp" line="433"/>
         <source>&amp;View</source>
         <translation>查看</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="354"/>
-        <location filename="../mainwindow.cpp" line="474"/>
+        <location filename="../mainwindow.cpp" line="351"/>
+        <location filename="../mainwindow.cpp" line="471"/>
         <source>&amp;Help</source>
         <translation>帮助</translation>
     </message>
@@ -2063,212 +2063,216 @@ acknowledge our Terms of Service</source>
         <translation type="obsolete">slfile</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="87"/>
         <source>Solo Local File Manage</source>
-        <translation type="unfinished">搜喽文档管理</translation>
+        <translation type="obsolete">搜喽文档管理</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="202"/>
+        <location filename="../mainwindow.cpp" line="84"/>
+        <source>Solo Local File Manager</source>
+        <translation>搜咯文档管理</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="199"/>
         <source>ALL Documents</source>
         <translation>所有文档</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="209"/>
+        <location filename="../mainwindow.cpp" line="206"/>
         <source>Current Directory</source>
         <translation>当前目录</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="216"/>
+        <location filename="../mainwindow.cpp" line="213"/>
         <source>Current Directory(Include Sub Directory)</source>
         <translation>当前目录(包含主目录)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="230"/>
+        <location filename="../mainwindow.cpp" line="227"/>
         <source>Document Name And Content</source>
         <translation>文档名称及内容</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="236"/>
+        <location filename="../mainwindow.cpp" line="233"/>
         <source>Document Name Only</source>
         <translation>文档名称</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="242"/>
+        <location filename="../mainwindow.cpp" line="239"/>
         <source>Document Content Only</source>
         <translation>文档内容</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="259"/>
+        <location filename="../mainwindow.cpp" line="256"/>
         <source>Option</source>
         <translation>选项</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="284"/>
+        <location filename="../mainwindow.cpp" line="281"/>
         <source>Search</source>
         <translation>搜索</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="293"/>
+        <location filename="../mainwindow.cpp" line="290"/>
         <source>&amp;Import...</source>
         <translation>导入</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="294"/>
+        <location filename="../mainwindow.cpp" line="291"/>
         <source>Ctrl+I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="298"/>
+        <location filename="../mainwindow.cpp" line="295"/>
         <source>&amp;Export...</source>
         <translation>导出</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="299"/>
+        <location filename="../mainwindow.cpp" line="296"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="303"/>
+        <location filename="../mainwindow.cpp" line="300"/>
         <source>&amp;Save As...</source>
         <translation>另存为</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="307"/>
+        <location filename="../mainwindow.cpp" line="304"/>
         <source>&amp;Save To Mobile...</source>
         <translation>保存到移动设备</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="311"/>
+        <location filename="../mainwindow.cpp" line="308"/>
         <source>&amp;Exit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="316"/>
+        <location filename="../mainwindow.cpp" line="313"/>
         <source>&amp;Full Screen</source>
         <translation>全屏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="320"/>
+        <location filename="../mainwindow.cpp" line="317"/>
         <source>&amp;Show/Hide Class Tree</source>
         <translation>显示/隐藏目录树</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="321"/>
+        <location filename="../mainwindow.cpp" line="318"/>
         <source>Ctrl+H</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="342"/>
+        <location filename="../mainwindow.cpp" line="339"/>
         <source>&amp;Setting ToolBar</source>
         <translation>设置工具栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="346"/>
+        <location filename="../mainwindow.cpp" line="343"/>
         <source>&amp;Show/Hide Tool Bar</source>
         <translation>显示/隐藏工具栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="355"/>
+        <location filename="../mainwindow.cpp" line="352"/>
         <source>F2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="359"/>
+        <location filename="../mainwindow.cpp" line="356"/>
         <source>&amp;HomePage</source>
         <translation>主页</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="363"/>
+        <location filename="../mainwindow.cpp" line="360"/>
         <source>&amp;Invite Friends...</source>
         <translation>邀请朋友</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="367"/>
+        <location filename="../mainwindow.cpp" line="364"/>
         <source>&amp;Forum</source>
         <translation>论坛</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="375"/>
+        <location filename="../mainwindow.cpp" line="372"/>
         <source>&amp;Update</source>
         <translation>更新</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="379"/>
+        <location filename="../mainwindow.cpp" line="376"/>
         <source>&amp;Option</source>
         <translation>选项</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="380"/>
+        <location filename="../mainwindow.cpp" line="377"/>
         <source>Ctrl+O</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="384"/>
+        <location filename="../mainwindow.cpp" line="381"/>
         <source>&amp;View Log...</source>
         <translation>查看日志</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="385"/>
+        <location filename="../mainwindow.cpp" line="382"/>
         <source>Ctrl+L</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="394"/>
+        <location filename="../mainwindow.cpp" line="391"/>
         <source>Account Information</source>
         <translation>账户信息</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="398"/>
+        <location filename="../mainwindow.cpp" line="395"/>
         <source>Update to VIP</source>
         <translation>升级到VIP</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="402"/>
+        <location filename="../mainwindow.cpp" line="399"/>
         <source>Logo Off</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="458"/>
+        <location filename="../mainwindow.cpp" line="455"/>
         <source>&amp;Tool</source>
         <translation>工具</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="465"/>
+        <location filename="../mainwindow.cpp" line="462"/>
         <source>&amp;Account</source>
         <translation>账号</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="502"/>
+        <location filename="../mainwindow.cpp" line="499"/>
         <source>Tool Bar</source>
         <translation>工具栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="730"/>
+        <location filename="../mainwindow.cpp" line="728"/>
         <source>Note Editor</source>
         <translation>备注编辑器</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1125"/>
+        <location filename="../mainwindow.cpp" line="1131"/>
         <source>Mi&amp;nimize</source>
         <translation>最小化</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1128"/>
+        <location filename="../mainwindow.cpp" line="1134"/>
         <source>Ma&amp;ximize</source>
         <translation>最大化</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1131"/>
+        <location filename="../mainwindow.cpp" line="1137"/>
         <source>&amp;Restore</source>
         <translation>重置</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1152"/>
+        <location filename="../mainwindow.cpp" line="1158"/>
         <source>Systray</source>
         <translation>系统托盘</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1153"/>
+        <location filename="../mainwindow.cpp" line="1159"/>
         <source>Sorry, I already gave what help I could.
 Maybe you should try asking a human?</source>
         <translation></translation>
@@ -2283,7 +2287,7 @@ Maybe you should try asking a human?</source>
     <message>
         <location filename="../movetodirdialog.ui" line="14"/>
         <source>Move document to Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>移动文档到目录</translation>
     </message>
     <message utf8="true">
         <location filename="../movetodirdialog.ui" line="57"/>
@@ -2391,7 +2395,7 @@ Maybe you should try asking a human?</source>
     <message>
         <location filename="../mytableview.cpp" line="131"/>
         <source>&amp;Restore</source>
-        <translation type="unfinished">还原</translation>
+        <translation>还原</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="135"/>
@@ -2456,7 +2460,7 @@ Maybe you should try asking a human?</source>
     <message>
         <location filename="../mytableview.cpp" line="175"/>
         <source>&amp;Print Documents In Batch</source>
-        <translation type="unfinished">批量打印文档</translation>
+        <translation>批量打印文档</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="178"/>
@@ -2544,7 +2548,7 @@ Maybe you should try asking a human?</source>
     <message>
         <location filename="../mytableview.cpp" line="952"/>
         <source>Are you sure that restore the document ?</source>
-        <translation type="unfinished"></translation>
+        <translation>是否确认还原文档?</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1077"/>
@@ -2620,9 +2624,13 @@ Maybe you should try asking a human?</source>
         <translation>垃圾篓</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="111"/>
         <source>File Manage</source>
-        <translation>文档管理</translation>
+        <translation type="obsolete">文档管理</translation>
+    </message>
+    <message>
+        <location filename="../mytreeview.cpp" line="111"/>
+        <source>Solo Local File Manager</source>
+        <translation>搜咯文档管理</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="125"/>
@@ -2778,12 +2786,12 @@ Maybe you should try asking a human?</source>
     <message>
         <location filename="../mytreeview.cpp" line="913"/>
         <source>New Root Directory name:</source>
-        <translation type="unfinished">新建根文件夹名称:</translation>
+        <translation>新建根文件夹名称:</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="1022"/>
         <source>Rename</source>
-        <translation type="unfinished">重命名</translation>
+        <translation>重命名</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="1022"/>
@@ -2924,37 +2932,49 @@ Do you want to ignore these errors for this host?</source>
         <translation>删除所有笔记</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="78"/>
+        <location filename="../notesdialog.cpp" line="81"/>
+        <location filename="../notesdialog.cpp" line="141"/>
+        <source>Warning</source>
+        <translation>警告</translation>
+    </message>
+    <message>
+        <location filename="../notesdialog.cpp" line="81"/>
+        <location filename="../notesdialog.cpp" line="141"/>
+        <source>Please Select an note.</source>
+        <translation>请选择一个笔记.</translation>
+    </message>
+    <message>
+        <location filename="../notesdialog.cpp" line="86"/>
         <source>Are you sure that delete the note ?</source>
         <translation>您确定要删除该笔记?</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="150"/>
+        <location filename="../notesdialog.cpp" line="161"/>
         <source>Are you sure that delete All the notes ?</source>
         <translation>您确定要删除所有笔记?</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="196"/>
+        <location filename="../notesdialog.cpp" line="207"/>
         <source> page</source>
         <translation>页</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="199"/>
+        <location filename="../notesdialog.cpp" line="210"/>
         <source>sheet </source>
         <translation>表</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="205"/>
+        <location filename="../notesdialog.cpp" line="216"/>
         <source> row</source>
         <translation>行</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="210"/>
+        <location filename="../notesdialog.cpp" line="221"/>
         <source> column</source>
         <translation>列</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="215"/>
+        <location filename="../notesdialog.cpp" line="226"/>
         <source>text</source>
         <translation>文本</translation>
     </message>
@@ -3219,7 +3239,7 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../printerwidget.ui" line="14"/>
         <source>Printer</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -3322,7 +3342,7 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../propofdirdialog.ui" line="258"/>
         <source>ReInput Password:  </source>
-        <translation type="unfinished">重新输入密码:</translation>
+        <translation>重新输入密码:</translation>
     </message>
     <message>
         <location filename="../propofdirdialog.ui" line="295"/>
@@ -3455,42 +3475,42 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../propofdocdialog.ui" line="213"/>
         <source>Set Protect Password</source>
-        <translation type="unfinished"></translation>
+        <translation>设置保护密码</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="225"/>
         <source>Protect Document</source>
-        <translation type="unfinished"></translation>
+        <translation>保护文档</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="243"/>
         <source>Original  Password:</source>
-        <translation type="unfinished">原始密码:</translation>
+        <translation>原始密码:</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="250"/>
         <source>Password:          </source>
-        <translation type="unfinished">密码:</translation>
+        <translation>密码:</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="257"/>
         <source>ReInput Password:  </source>
-        <translation type="unfinished">重新输入密码</translation>
+        <translation>重新输入密码</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="294"/>
         <source>Synchronization</source>
-        <translation type="unfinished"></translation>
+        <translation>同步</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="306"/>
         <source>Count</source>
-        <translation type="unfinished">统计</translation>
+        <translation>统计</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="315"/>
         <source>Read Count: </source>
-        <translation type="unfinished"></translation>
+        <translation>阅读次数:</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="365"/>
@@ -3511,12 +3531,12 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../propofdocdialog.ui" line="392"/>
         <source>Local Version:</source>
-        <translation type="unfinished"></translation>
+        <translation>本地版本:</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="402"/>
         <source>Remote Verson:</source>
-        <translation type="unfinished"></translation>
+        <translation>远程版本:</translation>
     </message>
     <message>
         <location filename="../propofdocdialog.ui" line="448"/>
@@ -3560,7 +3580,7 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../propoftagdialog.ui" line="14"/>
         <source>Properties of Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>标签属性</translation>
     </message>
     <message>
         <location filename="../propoftagdialog.ui" line="51"/>
@@ -3638,12 +3658,12 @@ Do you want to ignore these errors for this host?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="256"/>
+        <location filename="../main.cpp" line="253"/>
         <source>Systray</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="257"/>
+        <location filename="../main.cpp" line="254"/>
         <source>I couldn&apos;t detect any system tray on this system.</source>
         <translation></translation>
     </message>
@@ -3769,7 +3789,7 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../relatedocdialog.ui" line="14"/>
         <source>Relate Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>关联文档</translation>
     </message>
     <message>
         <location filename="../relatedocdialog.ui" line="26"/>
@@ -3804,12 +3824,12 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../relatedocdialog.cpp" line="55"/>
         <source>Delete this Realted Document</source>
-        <translation type="unfinished"></translation>
+        <translation>是否删除该关联文档</translation>
     </message>
     <message>
         <location filename="../relatedocdialog.cpp" line="56"/>
         <source>Delete All Realted Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>删除所有关联文档</translation>
     </message>
     <message>
         <source>Delete this Doc</source>
@@ -3845,12 +3865,12 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../requtil.cpp" line="46"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../requtil.cpp" line="46"/>
         <source>The Server has Errors, Please Contact the Administrator!</source>
-        <translation type="unfinished"></translation>
+        <translation>服务器异常,请联系管理员!</translation>
     </message>
 </context>
 <context>
@@ -3870,7 +3890,7 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../saveurldialog.ui" line="14"/>
         <source>Save Url</source>
-        <translation type="unfinished"></translation>
+        <translation>保存URL</translation>
     </message>
     <message utf8="true">
         <location filename="../saveurldialog.ui" line="57"/>
@@ -4347,7 +4367,7 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../sortsubdirsdialog.ui" line="14"/>
         <source>Sort the Sub Directorys</source>
-        <translation type="unfinished"></translation>
+        <translation>子文件夹排序</translation>
     </message>
     <message>
         <location filename="../sortsubdirsdialog.ui" line="42"/>
@@ -4362,7 +4382,7 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../sortsubdirsdialog.ui" line="68"/>
         <source>Parent folder:</source>
-        <translation type="unfinished"></translation>
+        <translation>父文件夹</translation>
     </message>
     <message>
         <location filename="../sortsubdirsdialog.ui" line="75"/>
@@ -4376,7 +4396,7 @@ Do you want to ignore these errors for this host?</source>
     <message>
         <location filename="../sortsubdirsdialog.cpp" line="50"/>
         <source>Sort Sub Folders</source>
-        <translation type="unfinished"></translation>
+        <translation>子文件夹排序</translation>
     </message>
 </context>
 <context>
@@ -4471,246 +4491,193 @@ Do you really want to close this page?
 <context>
     <name>TextEditor</name>
     <message>
-        <location filename="../texteditor.cpp" line="38"/>
         <source>Ready</source>
         <comment>Statusbar message</comment>
-        <translation>就绪</translation>
+        <translation type="obsolete">就绪</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="39"/>
         <source>Text Editor</source>
         <comment>Text Editor Window caption</comment>
-        <translation>文本编辑器</translation>
+        <translation type="obsolete">文本编辑器</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="184"/>
         <source>No filename available for this note.</source>
         <comment>Statusbar message</comment>
-        <translation>该笔记没有设置文件名</translation>
+        <translation type="obsolete">该笔记没有设置文件名</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="258"/>
         <source>Note Actions</source>
-        <translation>笔记动作</translation>
+        <translation type="obsolete">笔记动作</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="260"/>
         <source>&amp;Note</source>
         <comment>Menubar</comment>
-        <translation>笔记</translation>
+        <translation type="obsolete">笔记</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="263"/>
         <source>&amp;Import...</source>
-        <translation>导入</translation>
+        <translation type="obsolete">导入</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="271"/>
         <source>&amp;Save...</source>
-        <translation>保存</translation>
+        <translation type="obsolete">保存</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="279"/>
         <source>Export &amp;As... (HTML)</source>
-        <translation>导出...(HTML)</translation>
+        <translation type="obsolete">导出...(HTML)</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="284"/>
         <source>Export &amp;As...(ASCII)</source>
-        <translation>导出...(ASCII)</translation>
+        <translation type="obsolete">导出...(ASCII)</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="291"/>
         <source>&amp;Print...</source>
-        <translation>打印</translation>
+        <translation type="obsolete">打印</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="298"/>
         <source>&amp;Delete All</source>
-        <translation>删除所有</translation>
+        <translation type="obsolete">删除所有</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="307"/>
         <source>&amp;All notes</source>
-        <translation>所有笔记</translation>
+        <translation type="obsolete">所有笔记</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="351"/>
         <source>Edit Actions</source>
-        <translation>编辑</translation>
+        <translation type="obsolete">编辑</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="354"/>
         <source>&amp;Edit</source>
-        <translation>编辑</translation>
+        <translation type="obsolete">编辑</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="357"/>
         <source>&amp;Undo</source>
-        <translation>取消</translation>
+        <translation type="obsolete">取消</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="364"/>
         <source>&amp;Redo</source>
-        <translation>重复</translation>
+        <translation type="obsolete">重复</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="372"/>
         <source>Select and copy &amp;all</source>
-        <translation>选择并复制全部</translation>
+        <translation type="obsolete">选择并复制全部</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="378"/>
         <source>&amp;Copy</source>
-        <translation>复制</translation>
+        <translation type="obsolete">复制</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="385"/>
         <source>Cu&amp;t</source>
-        <translation>剪切</translation>
+        <translation type="obsolete">剪切</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="392"/>
         <source>&amp;Paste</source>
-        <translation>复制</translation>
+        <translation type="obsolete">复制</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="402"/>
         <source>Format Actions</source>
-        <translation>格式</translation>
+        <translation type="obsolete">格式</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="404"/>
         <source>F&amp;ormat</source>
-        <translation>格式</translation>
+        <translation type="obsolete">格式</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="408"/>
         <source>&amp;Font hint</source>
-        <translation>字体大小</translation>
+        <translation type="obsolete">字体大小</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="417"/>
         <source>&amp;Richtext</source>
-        <translation>超文本</translation>
+        <translation type="obsolete">超文本</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="451"/>
         <source>&amp;Color...</source>
-        <translation>颜色...</translation>
+        <translation type="obsolete">颜色...</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="457"/>
         <source>&amp;Bold</source>
-        <translation>粗体</translation>
+        <translation type="obsolete">粗体</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="465"/>
-        <source>&amp;Italic</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../texteditor.cpp" line="473"/>
         <source>&amp;Underline</source>
-        <translation>下划线</translation>
+        <translation type="obsolete">下划线</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="485"/>
         <source>Subs&amp;cript</source>
-        <translation>子脚本</translation>
+        <translation type="obsolete">子脚本</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="493"/>
         <source>Su&amp;perscript</source>
-        <translation>超文本</translation>
+        <translation type="obsolete">超文本</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="505"/>
         <source>&amp;Left</source>
-        <translation>左对齐</translation>
+        <translation type="obsolete">左对齐</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="511"/>
         <source>C&amp;enter</source>
-        <translation>中间</translation>
+        <translation type="obsolete">中间</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="517"/>
         <source>&amp;Right</source>
-        <translation>右对齐</translation>
+        <translation type="obsolete">右对齐</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="523"/>
         <source>&amp;Justify</source>
-        <translation>调整</translation>
+        <translation type="obsolete">调整</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="533"/>
         <source>&amp;Settings</source>
-        <translation>设置</translation>
+        <translation type="obsolete">设置</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="536"/>
         <source>Set &amp;fixed font</source>
-        <translation>设定字体</translation>
+        <translation type="obsolete">设定字体</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="541"/>
         <source>Set &amp;variable font</source>
-        <translation>设定参数字体</translation>
+        <translation type="obsolete">设定参数字体</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="546"/>
         <source>&amp;fixed font is default</source>
-        <translation>设置默认字体</translation>
+        <translation type="obsolete">设置默认字体</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="559"/>
         <source>Note Editor</source>
-        <translation>笔记编辑器</translation>
+        <translation type="obsolete">笔记编辑器</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="660"/>
         <source>Export Note to single file</source>
-        <translation>作为单独文件导出笔记</translation>
+        <translation type="obsolete">作为单独文件导出笔记</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="669"/>
-        <location filename="../texteditor.cpp" line="771"/>
         <source>The file %1
 exists already.
 Do you want to overwrite it?</source>
         <comment>dialog &apos;save note as&apos;</comment>
-        <translation>文件 %1 已经存在,是否覆盖?</translation>
+        <translation type="obsolete">文件 %1 已经存在,是否覆盖?</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="674"/>
-        <location filename="../texteditor.cpp" line="776"/>
         <source>Overwrite</source>
-        <translation>覆盖</translation>
+        <translation type="obsolete">覆盖</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="675"/>
-        <location filename="../texteditor.cpp" line="777"/>
         <source>Cancel</source>
-        <translation>取消</translation>
+        <translation type="obsolete">取消</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="693"/>
         <source>Couldn&apos;t export note </source>
         <comment>dialog &apos;save note as&apos;</comment>
-        <translation>不能导出笔记.</translation>
+        <translation type="obsolete">不能导出笔记.</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="761"/>
         <source>Export Note to single file (ASCII)</source>
-        <translation>作为单独文件导出笔记(ASCII)</translation>
+        <translation type="obsolete">作为单独文件导出笔记(ASCII)</translation>
     </message>
     <message>
-        <location filename="../texteditor.cpp" line="804"/>
         <source>Print</source>
         <comment>TextEditor</comment>
-        <translation>打印</translation>
+        <translation type="obsolete">打印</translation>
     </message>
 </context>
 <context>
@@ -4847,6 +4814,29 @@ Do you want to overwrite it?</source>
         <location filename="../txteditor.cpp" line="263"/>
         <source>Your currently edited file has been changed outside this application. Do you want to reload it?</source>
         <translation>您正在编辑的文件已经被修改,是否重新加载?</translation>
+    </message>
+</context>
+<context>
+    <name>UEditor</name>
+    <message>
+        <location filename="../ueditor.ui" line="14"/>
+        <source>TxtViewer</source>
+        <translation>文本查看</translation>
+    </message>
+    <message>
+        <location filename="../ueditor.ui" line="50"/>
+        <source>about:blank</source>
+        <translation>空</translation>
+    </message>
+    <message>
+        <location filename="../ueditor.cpp" line="74"/>
+        <source>Open File</source>
+        <translation>打开文件</translation>
+    </message>
+    <message>
+        <location filename="../ueditor.cpp" line="74"/>
+        <source>Cannot open file %1</source>
+        <translation>不能打开文件 %1</translation>
     </message>
 </context>
 <context>

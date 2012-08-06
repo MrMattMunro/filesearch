@@ -29,8 +29,8 @@ class UEditor : public QMainWindow
 	Q_OBJECT
 
 	public:
-                UEditor(QWidget * parent = 0);
-                ~UEditor();
+        UEditor(QWidget * parent = 0);
+        ~UEditor();
 		void saveOnExit();
 		void setFileName(const QString & fname);
 		QString fileName() { return m_fileName; };

@@ -81,7 +81,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     initStatusbar();
     initToolbar();
 
-    m_appName = tr("Solo Local File Manage");
+    m_appName = tr("Solo Local File Manager");
     isBusySearch = false;
     setContextMenuPolicy(Qt::CustomContextMenu);
 }
@@ -717,6 +717,7 @@ void MainWindow::initUI()
         connect(m_doctable, SIGNAL(LBtnDbClk()), this, SLOT(openDocInTab()));
         connect(m_doctable, SIGNAL(showAddNoteWidget()), this, SLOT(windowToggleNoteEditor()));
         connect(m_doctable, SIGNAL(hideNoteWidget()), this, SLOT(windowHideNoteEditor()));
+
         connect(m_doctable, SIGNAL(reloadTagTree()), q_myTreeList, SLOT(reloadTagTree()));
 
 
@@ -730,12 +731,12 @@ void MainWindow::initUI()
             noteEditorDW->setObjectName ("NoteEditor");
             addDockWidget(Qt::RightDockWidgetArea, noteEditorDW);
             noteEditorDW->hide();
+
+            noteEditorDW->setWindowFlags(Qt::FramelessWindowHint);
+
             //noteEditor->setShowWithMain(true);
             // 从Note编辑界面打开Note
             connect(noteEditor, SIGNAL(showMainNotes()), this, SLOT(shownotes()));
-            // 关闭清空选择的Uid
-            connect(noteEditorDW, SIGNAL(closeEvent(QCloseEvent *event)), this, SLOT(clearSelNoteUuId()));
-
 
         //} else{
           //  noteEditorDW=NULL;
@@ -744,11 +745,6 @@ void MainWindow::initUI()
         setCentralWidget(splitter);
 }
 
-// 清空选择的SelNoteUuid
-void MainWindow::clearSelNoteUuId(){
-    Preferences* p = Preferences::instance();
-    p->setSelNoteUid("");
-}
 
 void MainWindow::shownotes(){
     m_doctable->showNoteDialog();
@@ -926,6 +922,12 @@ void MainWindow::fullScreen()
     }else{
        toolBar->hide();
     }
+
+    if(menuBar()->isHidden()){
+       menuBar()->show();
+    }else{
+       menuBar()->hide();
+    }
 }
 
 // 显示/隐藏分类树
@@ -1058,6 +1060,7 @@ void MainWindow::windowToggleNoteEditor()
     Doc doc = DocDao::selectDoc(docUuid);
     noteEditorDW->setWindowTitle(doc.DOCUMENT_NAME);
     noteEditorDW->setWindowIcon(Utils::getIcon("note.png"));
+
     windowShowNoteEditor();
 }
 
@@ -1070,6 +1073,8 @@ void MainWindow::windowShowNoteEditor()
     m_doctable->hide();
     q_myTreeList->hide();
     toolBar->hide();
+    menuBar()->hide();
+
 
     // 打开文件
     Preferences* p = Preferences::instance();
@@ -1095,6 +1100,7 @@ void MainWindow::windowHideNoteEditor()
     m_doctable->show();
     q_myTreeList->show();
     toolBar->show();
+    menuBar()->show();
 }
 
 
@@ -1133,6 +1139,15 @@ void MainWindow::createTrayActions()
 
     quitAction = new QAction(tr("&Quit"), this);
     connect(quitAction, SIGNAL(triggered()), this, SLOT(quit()));
+
+    autoStartAction = new QAction(tr("&Auto Start"), this);
+    autoStartAction->setCheckable(true);
+    autoStartAction->setChecked(Utils::getAutoRunStatus());
+    connect(autoStartAction, SIGNAL(triggered()), this, SLOT(setAutoStart()));
+}
+void MainWindow::setAutoStart()
+{
+   Utils::setAutoRunStatus(quitAction->isChecked());
 }
 
 void MainWindow::createTrayIcon()
@@ -1142,11 +1157,15 @@ void MainWindow::createTrayIcon()
     trayIconMenu->addAction(maximizeAction);
     trayIconMenu->addAction(restoreAction);
     trayIconMenu->addSeparator();
+    // TODO
+    // trayIconMenu->addAction(autoStartAction);
+    // trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);
 
     trayIcon = new QSystemTrayIcon(Utils::getIcon("file_manager.png"), this);
     trayIcon->setContextMenu(trayIconMenu);
 }
+
 void MainWindow::messageClicked()
 {
     QMessageBox::information(0, tr("Systray"),

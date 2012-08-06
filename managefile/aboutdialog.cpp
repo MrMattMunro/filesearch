@@ -23,7 +23,7 @@ AboutDialog::AboutDialog(QWidget * parent)
 {
 	setupUi(this);
         this->setWindowIcon(Utils::getIcon("file_manager.png"));
-        this->setWindowTitle(tr("Slfile"));
+        this->setWindowTitle(tr("Solo"));
 
         QDir pathDir = Utils::directoryOf("html");
         QString path = pathDir.absolutePath();

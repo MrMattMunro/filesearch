@@ -123,8 +123,8 @@ BrowserApplication::BrowserApplication(QObject *parent)
 
 #ifndef QT_NO_OPENSSL
     if (!QSslSocket::supportsSsl()) {
-    QMessageBox::information(0, "Demo Browser",
-                 "This system does not support OpenSSL. SSL websites will not be available.");
+//        QMessageBox::information(0, "Demo Browser",
+//                 "This system does not support OpenSSL. SSL websites will not be available.");
     }
 #endif
 
