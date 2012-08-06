@@ -18,7 +18,7 @@ Preferences::Preferences(QObject *parent)
 
         QSettings s("slfile.cn", "filemanage");
 
-	m_checkQtVersion = s.value("checkQtVersion", true).toBool();
+        m_checkQtVersion = s.value("checkQtVersion", true).toBool();
         m_isFullScreen = s.value("isFullScreen", true).toBool();
         m_isShowClassTree = s.value("isShowClassTree", true).toBool();
         m_isShowToolBar = s.value("isShowToolBar", true).toBool();
@@ -149,7 +149,7 @@ Preferences::Preferences(QObject *parent)
 Preferences::~Preferences()
 {
         QSettings settings("slfile.cn", "filemanage");
-	settings.setValue("checkQtVersion", m_checkQtVersion);
+        settings.setValue("checkQtVersion", m_checkQtVersion);
         settings.setValue("isFullScreen", m_isFullScreen);
         settings.setValue("isShowClassTree", m_isShowClassTree);
         settings.setValue("isShowToolBar", m_isShowToolBar);
@@ -162,7 +162,9 @@ Preferences::~Preferences()
         settings.setValue("defaultWaitToolbarItemList", m_defaultwaittoolbaritemlist);
 
         settings.setValue("notes/selDocUid", m_notedocuid);
-        settings.setValue("notes/selNoteUid", m_selnoteuid);
+
+        // ¹Ø±ÕÊ±Çå¿Õ
+        settings.setValue("notes/selNoteUid", "");
 
         settings.setValue("table/selMode", m_tableselmode);
         settings.setValue("table/showNotesOnTips", m_isShowNotesOnTips);

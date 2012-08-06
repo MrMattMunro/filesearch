@@ -34,6 +34,7 @@ UEditor::UEditor(QWidget * parent)
 {
 
 	ui.setupUi(this);
+    this->setWindowFlags(Qt::FramelessWindowHint);
 
     QDir pathDir = Utils::directoryOf("html");
     QString path = pathDir.absolutePath();
@@ -46,9 +47,12 @@ UEditor::UEditor(QWidget * parent)
     view = ui.webView;
     view->settings()->setAttribute(QWebSettings::PluginsEnabled, true);
     view->settings()->setAttribute(QWebSettings::JavascriptEnabled, true);
+    view->settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
+
 
     view->page()->setPluginFactory(new IntelliPlugin);
     view->load(QUrl::fromUserInput(path));
+    view->show();
 }
 
 UEditor::~UEditor()
@@ -74,7 +78,16 @@ void UEditor::open(const QString &  newFile)
     QTextCodec *code= QTextCodec::codecForName("utf8");
     QTextStream in(&f);
     in.setCodec(code); // 输出流的设置编码
-    QString strVal = QString("setcontent(\"%1\");").arg(in.readAll());
+    QString content = in.readAll();
+
+    QString tmpcontent(content);
+    tmpcontent = tmpcontent.replace("\"","\'");
+    QString strVal = QString("setcontent(\"%1\");").arg(tmpcontent);
+
+    //QString strVal = QString("ue.setContent(\"%1\");").arg(content);
+    f.close();
+    // evaluateJavaScript 执行串中包含中文将传不过去
+
     view->page()->mainFrame()->evaluateJavaScript(strVal);
 }
 // 清空编辑器

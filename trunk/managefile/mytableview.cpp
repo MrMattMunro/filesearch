@@ -545,28 +545,30 @@ void MyTableView::mouseDoubleClickEvent(QMouseEvent *event)
 
         if(true == mouseStatus && Qt::LeftButton == event->button())
         {
-
                 curPoint = event->pos();
                 QModelIndex  index = indexAt(curPoint);
-                curItem = model->itemFromIndex(index);
-                int row = index.row();
+                if(index.isValid()){
+                    curItem = model->itemFromIndex(index);
+                    int row = index.row();
 
-                QStandardItem *pathItem = model->item(row, 2);
-                if(pathItem){
-                    curPath = qvariant_cast<QString>(pathItem->data(DOC_LOCATION));
+                    QStandardItem *pathItem = model->item(row, 2);
+                    if(pathItem){
+                        curPath = qvariant_cast<QString>(pathItem->data(DOC_LOCATION));
+                    }
+
+                    QStandardItem *uuidItem = model->item(row, 0);
+                    if(uuidItem){
+                        curUuid = qvariant_cast<QString>(uuidItem->data(Qt::UserRole));
+                    }
+
+                    changeColor(row);
+                    // 设置选中的文件名称 代码文件高亮显示
+                    Preferences* p = Preferences::instance();
+                    p->setOpenDoc(curPath);
+
+                    emit LBtnDbClk();
                 }
 
-                QStandardItem *uuidItem = model->item(row, 0);
-                if(uuidItem){
-                    curUuid = qvariant_cast<QString>(uuidItem->data(Qt::UserRole));
-                }
-
-                changeColor(row);
-                // 设置选中的文件名称 代码文件高亮显示
-                Preferences* p = Preferences::instance();
-                p->setOpenDoc(curPath);
-
-                emit LBtnDbClk();
         }
 }
 // 右键单击
@@ -575,29 +577,32 @@ void MyTableView::mousePressEvent(QMouseEvent *event)
 
         curPoint = event->pos();
         QModelIndex  index = indexAt(curPoint);
-        int row = index.row();
 
-        curItem = model->itemFromIndex(index);
+        if(index.isValid()){
+            int row = index.row();
 
-        QStandardItem *pathItem = model->item(row, 2);
-        if(pathItem){
-            curPath = qvariant_cast<QString>(pathItem->data(DOC_LOCATION));
-        }
+            curItem = model->itemFromIndex(index);
 
-        QStandardItem *uuidItem = model->item(row, 0);
-        if(uuidItem){
-             curUuid = qvariant_cast<QString>(uuidItem->data(Qt::UserRole));
-        }
-        // 左键退出
-        if( Qt::LeftButton == event->button()){  
-            changeColor(row);
-            return;
-        }
-        // 右键显示菜单
-        if(true == mouseStatus )
-        {
-            changeColor(row);
-            tableContextMenuOpened();
+            QStandardItem *pathItem = model->item(row, 2);
+            if(pathItem){
+                curPath = qvariant_cast<QString>(pathItem->data(DOC_LOCATION));
+            }
+
+            QStandardItem *uuidItem = model->item(row, 0);
+            if(uuidItem){
+                 curUuid = qvariant_cast<QString>(uuidItem->data(Qt::UserRole));
+            }
+            // 左键退出
+            if( Qt::LeftButton == event->button()){
+                changeColor(row);
+                return;
+            }
+            // 右键显示菜单
+            if(true == mouseStatus )
+            {
+                changeColor(row);
+                tableContextMenuOpened();
+            }
         }
 }
 

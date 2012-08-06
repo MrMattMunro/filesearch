@@ -8,6 +8,7 @@
 #include <db/resultdao.h>
 #include <QTextCodec>
 #include <QThread>
+#include <QMessageBox>
 
 JNIEnv* Jvm::env = NULL;
 JavaVM* Jvm::jvm = NULL;
@@ -82,9 +83,15 @@ bool Jvm::BeginJVM()
         path.append("\\jre\\bin\\client\\jvm.dll");
 
         HINSTANCE hInstance = ::LoadLibraryA(path.toLocal8Bit().constData());
+        // HINSTANCE hInstance = ::LoadLibraryW(path.toStdWString().c_str());
         if (hInstance == NULL)
         {
-            qDebug() << "indexFiles hInstance == NULL";
+            qDebug() << "LoadLibraryW hInstance == NULL";
+            hInstance = LoadLibraryEx(path.toStdWString().c_str(), NULL, LOAD_LIBRARY_AS_DATAFILE);
+        }
+        if (hInstance == NULL)
+        {
+            qDebug() << "LoadLibraryEx hInstance == NULL";
             return false;
         }
         //取得里面的JNI_CreateJavaVM函数指针

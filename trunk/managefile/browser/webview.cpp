@@ -233,7 +233,7 @@ void WebView::contextMenuEvent(QContextMenuEvent *event)
         return;
     }else{
         QMenu menu(this);
-        menu.addAction(tr("Save to the slfile"), this, SLOT(saveToSlfile()));
+        menu.addAction(tr("Save to the Solo"), this, SLOT(saveToSlfile()));
         menu.addSeparator();
         menu.addAction(tr("Exit Full Screen"), this, SLOT(exitFullScreen()));
         menu.exec(mapToGlobal(event->pos()));

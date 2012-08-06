@@ -42,6 +42,9 @@ QString getMD5Str(const QString & str);
 QString getSysOs();
 QString getIPAddress();
 QString getSysLang();
+QString getStartUpPath();
+void setAutoRunStatus(bool bAutoRun);
+bool getAutoRunStatus();
 
 };
 

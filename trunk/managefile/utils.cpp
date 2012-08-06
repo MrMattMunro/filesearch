@@ -15,7 +15,10 @@ for which a new license (GPL+exception) is in place.
 #include <QCryptographicHash>
 #include <QSysInfo>
 #include <QNetworkInterface>
-
+#ifdef Q_WS_WIN
+#include <windows.h>
+#include <shlobj.h>
+#endif
 
 #include "utils.h"
 
@@ -260,6 +263,79 @@ QString Utils::getSysLang()
 {
     return QLocale::system().name().left(2);
 }
+
+// 获取程序启动快捷方式
+QString Utils::getStartUpPath()
+{
+    QString strPath;
+ #ifdef Q_WS_WIN
+    LPITEMIDLIST    pidl;
+    LPMALLOC        pShellMalloc;
+    wchar_t         szDir[1024];
+    if (SUCCEEDED(SHGetMalloc(&pShellMalloc)))
+   {
+       if (SUCCEEDED(SHGetSpecialFolderLocation(NULL, CSIDL_STARTUP, &pidl)))
+       {
+          if (SHGetPathFromIDList(pidl, szDir))
+         {
+               strPath = QString::fromWCharArray(szDir) + "\\Solo.lnk";
+           }
+            pShellMalloc->Free(pidl);
+       }
+       pShellMalloc->Release();
+   }
+#endif
+    return strPath;
+}
+
+// 设置是否自动运行
+void Utils::setAutoRunStatus(bool bAutoRun)//{{{
+{
+   QString strExe = QApplication::applicationFilePath();
+   QString strLink = getStartUpPath();
+   if (bAutoRun)
+   {
+#ifdef Q_WS_WIN
+        HRESULT hr = CoInitialize(NULL);
+       if (SUCCEEDED(hr))
+       {
+            IShellLink *pisl;
+            hr = CoCreateInstance(CLSID_ShellLink, NULL,
+                    CLSCTX_INPROC_SERVER, IID_IShellLink, (void**)&pisl);
+            if (SUCCEEDED(hr))
+           {
+               IPersistFile* pIPF;
+
+               //这里是我们要创建快捷方式的原始文件地址
+                pisl->SetPath(strExe.toStdWString().c_str());
+               hr = pisl->QueryInterface(IID_IPersistFile, (void**)&pIPF);
+               if (SUCCEEDED(hr))
+                {
+                   //这里是我们要创建快捷方式的目标地址
+                   pIPF->Save(strLink.toStdWString().c_str(), FALSE);
+                   pIPF->Release();
+                }
+               pisl->Release();
+            }
+            CoUninitialize();
+       }
+#endif
+    }
+    else
+    {
+        QFile::remove(strLink);
+    }
+}//}}}
+
+// 获取自动运行状态
+bool Utils::getAutoRunStatus()//{{{
+{
+   QString strLink = getStartUpPath();
+   bool bAutoRun = QFile::exists(strLink);
+   return bAutoRun;
+}//}}}
+
+
 
 
 
