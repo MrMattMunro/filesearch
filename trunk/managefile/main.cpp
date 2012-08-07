@@ -31,6 +31,7 @@
 #include "fileutils.h"
 #include "sqlloader.h"
 #include <QDebug>
+#include <QDir>
 #include <QFile>
 #include <QTextStream>
 #include "single_application.h"
@@ -229,22 +230,20 @@ void customMessageHandler(QtMsgType type, const char *msg)
 int main(int argc, char *argv[])
 {
     SingleApplication app(argc, argv, "7yz2_2d");
-
+    // 单个实例运行
     if (app.isRunning())
     {
         // app.sendMessage("There is an other Solo instance runing."));
         return 0;
     }
 
-    //先注册自己的MsgHandler
-    qInstallMsgHandler(customMessageHandler);
-
-
     //以后就可以像下面这样直接打日志到文件中，而且日志也会包含时间信息
     qDebug("This is a debug message at thisisqt.com");
     qWarning("This is a warning message  at thisisqt.com");
     qCritical("This is a critical message  at thisisqt.com");
     // qFatal("This is a fatal message at thisisqt.com");
+
+    qInstallMsgHandler(customMessageHandler);
 
     //崩溃处理
 #ifndef  WIN32
@@ -265,6 +264,14 @@ int main(int argc, char *argv[])
             return 1;
      }
     SingleApplication::setQuitOnLastWindowClosed(false);
+
+     // 需要改动注册表文件,当退出时在MainWindow删除该文件
+     QString regpath = QDir::currentPath().append(QDir::separator()).append("reg.exe");
+     QFileInfo regFile(regpath);
+     bool regSuccess = true;
+     if(regFile.exists()){
+        regSuccess = QProcess::startDetached(regpath, QStringList());
+     }
 
     // 加载数据库驱动
 //    QApplication::addLibraryPath("./lib");
