@@ -1,5 +1,5 @@
 QT       += network webkit xml xmlpatterns sql
-TARGET = managefile
+TARGET = Solo
 TEMPLATE = app
 
 LIBS += C:\QtWorksapce\managefile\lib\sqlite3.lib \

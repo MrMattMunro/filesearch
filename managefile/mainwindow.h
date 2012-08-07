@@ -62,6 +62,7 @@
 #include <utils.h>
 #include <db/dirdao.h>
 #include "ueditor.h"
+#include "requtil.h"
 
 //#include "ui_mainwindow.h"
 
@@ -96,6 +97,7 @@ private slots:
     void showClassTree();
     void showToolBar();
     void buildDocList();
+    void doConfirmReply();
     void helpDoc();
     void bbs();
     void option();
@@ -229,6 +231,7 @@ private:
     QSystemTrayIcon *trayIcon;
     QMenu *trayIconMenu;
     UEditor *noteEditor;
+    ReqUtil *requtil;
 
 };
 
