@@ -7,9 +7,12 @@
 #include <preferences.h>
 #include <utils.h>
 #include <db/notedao.h>
+#include <db/docdao.h>
 #include <QUuid>
 #include <QApplication>
+#include <QTextDocument>
 #include <QTextCodec>
+#include "indexfile.h"
 
 extern QWebView* view;
 class QWebFrame;
@@ -28,11 +31,24 @@ UeSave::~UeSave()
 // 从页面js调用
 void UeSave::save(QString content, QString plainText)
 {
+     // 清除空格
+     plainText = plainText.trimmed();
+     content = content.trimmed();
+
      Preferences* p = Preferences::instance();
      QString selNoteUuid = p->getSelNoteUid();
 
+     // 保证note不为空
+     QString notename = plainText.left(plainText.length() > 20 ? 20: plainText.length());
+     notename = notename.replace(" ","");
+
+     if(notename.trimmed().isEmpty()){
+         QString m_docUuid = p->getSelDocUid();
+         Doc doc = DocDao::selectDoc(m_docUuid);
+         notename = doc.DOCUMENT_NAME + tr("_note");
+     }
+
      // 判断是否修改笔记还是追加笔记
-     QString notesPath = Utils::getLocateNotesPath();
      if(selNoteUuid.isEmpty()){
          selNoteUuid = QUuid::createUuid().toString();
          // 插入note表
@@ -43,20 +59,37 @@ void UeSave::save(QString content, QString plainText)
          p->setSelNoteUid(selNoteUuid);
 
          QString m_docUuid = p->getSelDocUid();
+         note.NOTE_NAME = notename;
          note.DOCUMENT_GUID = m_docUuid;
          note.NOTE_CONTENT = plainText;
+         note.PAGE = 0;
+         note.ROW = 0;
+         note.COLUMN = 0;
          NoteDao::insertNote(note);
      }else{
-         Note note;
-         note.NOTE_GUID = selNoteUuid;
-         QString m_docUuid = p->getSelDocUid();
-         note.DOCUMENT_GUID = m_docUuid;
+         Note note = NoteDao::selectNote(selNoteUuid);
+         QString notesPath = Utils::getLocateNotesPath();
+         QString delfilename = notesPath.append(QDir::separator());
+         delfilename.append(note.NOTE_NAME);
+         delfilename.append(".html");
+
+         QFileInfo file(delfilename);
+         if(file.exists()){
+             QFile::remove(delfilename);
+         }
+
+         note.NOTE_NAME = notename;
          note.NOTE_CONTENT = plainText;
          NoteDao::updateNote(note);
+
+         // 删除index
+         DelIndexFilesObj delindexFilesObj;
+         delindexFilesObj.delIndexfile(delfilename, note.NOTE_GUID);
      }
 
+     QString notesPath = Utils::getLocateNotesPath();
      QString filename = notesPath.append(QDir::separator());
-     filename.append(selNoteUuid);
+     filename.append(notename);
      filename.append(".html");
 
      QFile f( filename );
@@ -64,8 +97,10 @@ void UeSave::save(QString content, QString plainText)
      {
          f.open(QIODevice::WriteOnly);
      }else{
-         // 删除新建
-         f.deleteLater();
+         QFileInfo file(filename);
+         if(file.exists()){
+             QFile::remove(filename);
+         }
          f.open(QIODevice::WriteOnly);
      }
 
@@ -76,7 +111,15 @@ void UeSave::save(QString content, QString plainText)
      t << content;
      f.close();
 
-     // 页面消息 TODO 多语言不可以
-     view->page()->mainFrame()->evaluateJavaScript("savesuccess();");
-}
+     // 加入index
+     IndexFilesObj indexFilesObj;
+     Doc doc;
+     doc.DOCUMENT_GUID = p->getSelNoteUid();
+     doc.DOCUMENT_LOCATION = filename;
+     indexFilesObj.indexfile(doc);
 
+     // 页面消息
+     QString success = tr("save success");
+     QString strVal = QString("savesuccess(\"%1\");").arg(success);
+     view->page()->mainFrame()->evaluateJavaScript(strVal);
+}

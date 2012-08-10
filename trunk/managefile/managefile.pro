@@ -9,7 +9,7 @@ LIBS += C:\QtWorksapce\managefile\lib\sqlite3.lib \
 win32:LIBS += -lshell32 -lole32 -luser32
 
 CONFIG+=qaxcontainer
-CONFIG+=release
+#CONFIG+=release
 
 SOURCES += main.cpp \
         mainwindow.cpp \
@@ -92,7 +92,8 @@ SOURCES += main.cpp \
     intelliplugin.cpp \
     ueditor.cpp \
     uesave.cpp \
-    single_application.cpp
+    single_application.cpp \
+    optofsearchdialog.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -184,7 +185,8 @@ HEADERS  += mainwindow.h \
     intelliplugin.h \
     ueditor.h \
     uesave.h \
-    single_application.h
+    single_application.h \
+    optofsearchdialog.h
 
 RESOURCES += \
     managefile.qrc
@@ -232,7 +234,8 @@ FORMS    += mainwindow.ui \
     aboutdialog.ui \
     saveurldialog.ui \
     refereedialog.ui \
-    ueditor.ui
+    ueditor.ui \
+    optofsearchdialog.ui
 
 TRANSLATIONS = ts/managefile_zh_cn.ts ts/managefile_en.ts ts/managefile_jp.ts
 

@@ -1048,72 +1048,72 @@ Do you want to reload all pages?</source>
         <translation>打开</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="128"/>
+        <location filename="../browser/downloadmanager.cpp" line="131"/>
         <source>Save File</source>
         <translation>保存文件</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="131"/>
+        <location filename="../browser/downloadmanager.cpp" line="134"/>
         <source>Download canceled: %1</source>
         <translation>取消下载:%1</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="217"/>
+        <location filename="../browser/downloadmanager.cpp" line="241"/>
         <source>Error opening save file: %1</source>
         <translation>打开保存文件出错:%1</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="226"/>
+        <location filename="../browser/downloadmanager.cpp" line="250"/>
         <source>Error saving: %1</source>
         <translation>保存出错:%1</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="235"/>
+        <location filename="../browser/downloadmanager.cpp" line="259"/>
         <source>Network Error: %1</source>
         <translation>网络出错:%1</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="269"/>
+        <location filename="../browser/downloadmanager.cpp" line="293"/>
         <source>seconds</source>
         <translation>秒</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="272"/>
+        <location filename="../browser/downloadmanager.cpp" line="296"/>
         <source>minutes</source>
         <translation>分</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="284"/>
+        <location filename="../browser/downloadmanager.cpp" line="308"/>
         <source>- %4 %5 remaining</source>
         <translation>- %4 %5 剩余</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="287"/>
+        <location filename="../browser/downloadmanager.cpp" line="311"/>
         <source>%1 of %2 (%3/sec) %4</source>
         <translation>%1 剩余 2%(%3/sec) %4</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="289"/>
+        <location filename="../browser/downloadmanager.cpp" line="313"/>
         <source>?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="296"/>
+        <location filename="../browser/downloadmanager.cpp" line="320"/>
         <source>%1 of %2 - Stopped</source>
         <translation>1% 中 2% 已停止</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="307"/>
+        <location filename="../browser/downloadmanager.cpp" line="331"/>
         <source>bytes</source>
         <translation>bytes</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="310"/>
+        <location filename="../browser/downloadmanager.cpp" line="334"/>
         <source>kB</source>
         <translation>kB</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="313"/>
+        <location filename="../browser/downloadmanager.cpp" line="337"/>
         <source>MB</source>
         <translation>MB</translation>
     </message>
@@ -1121,12 +1121,12 @@ Do you want to reload all pages?</source>
 <context>
     <name>DownloadManager</name>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="544"/>
+        <location filename="../browser/downloadmanager.cpp" line="572"/>
         <source>1 Download</source>
         <translation>1 下载</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="544"/>
+        <location filename="../browser/downloadmanager.cpp" line="572"/>
         <source>%1 Downloads</source>
         <translation>%1 下载</translation>
     </message>
@@ -1901,7 +1901,7 @@ acknowledge our Terms of Service</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="187"/>
-        <location filename="../mainwindow.cpp" line="1181"/>
+        <location filename="../mainwindow.cpp" line="1209"/>
         <source>&amp;Quit</source>
         <translation></translation>
     </message>
@@ -2037,28 +2037,28 @@ acknowledge our Terms of Service</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="342"/>
+        <location filename="../mainwindow.cpp" line="346"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="401"/>
+        <location filename="../mainwindow.cpp" line="405"/>
         <source>&amp;About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="457"/>
+        <location filename="../mainwindow.cpp" line="461"/>
         <source>&amp;File</source>
         <translation>文件</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="466"/>
+        <location filename="../mainwindow.cpp" line="470"/>
         <source>&amp;View</source>
         <translation>查看</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="384"/>
-        <location filename="../mainwindow.cpp" line="504"/>
+        <location filename="../mainwindow.cpp" line="388"/>
+        <location filename="../mainwindow.cpp" line="508"/>
         <source>&amp;Help</source>
         <translation>帮助</translation>
     </message>
@@ -2071,217 +2071,227 @@ acknowledge our Terms of Service</source>
         <translation type="obsolete">搜喽文档管理</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="117"/>
+        <location filename="../mainwindow.cpp" line="88"/>
         <source>Solo Local File Manager</source>
         <translation>搜咯文档管理</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="232"/>
+        <location filename="../mainwindow.cpp" line="235"/>
         <source>ALL Documents</source>
         <translation>所有文档</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="239"/>
+        <location filename="../mainwindow.cpp" line="242"/>
         <source>Current Directory</source>
         <translation>当前目录</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="246"/>
+        <location filename="../mainwindow.cpp" line="249"/>
         <source>Current Directory(Include Sub Directory)</source>
         <translation>当前目录(包含主目录)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="260"/>
+        <location filename="../mainwindow.cpp" line="263"/>
         <source>Document Name And Content</source>
         <translation>文档名称及内容</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="266"/>
+        <location filename="../mainwindow.cpp" line="269"/>
         <source>Document Name Only</source>
         <translation>文档名称</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="272"/>
+        <location filename="../mainwindow.cpp" line="275"/>
         <source>Document Content Only</source>
         <translation>文档内容</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="289"/>
+        <location filename="../mainwindow.cpp" line="292"/>
         <source>Option</source>
         <translation>选项</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="314"/>
+        <location filename="../mainwindow.cpp" line="318"/>
         <source>Search</source>
         <translation>搜索</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="323"/>
+        <location filename="../mainwindow.cpp" line="327"/>
         <source>&amp;Import...</source>
         <translation>导入</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="324"/>
+        <location filename="../mainwindow.cpp" line="328"/>
         <source>Ctrl+I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="328"/>
+        <location filename="../mainwindow.cpp" line="332"/>
         <source>&amp;Export...</source>
         <translation>导出</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="329"/>
+        <location filename="../mainwindow.cpp" line="333"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="333"/>
+        <location filename="../mainwindow.cpp" line="337"/>
         <source>&amp;Save As...</source>
         <translation>另存为</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="337"/>
+        <location filename="../mainwindow.cpp" line="341"/>
         <source>&amp;Save To Mobile...</source>
         <translation>保存到移动设备</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="341"/>
+        <location filename="../mainwindow.cpp" line="345"/>
         <source>&amp;Exit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="346"/>
+        <location filename="../mainwindow.cpp" line="350"/>
         <source>&amp;Full Screen</source>
         <translation>全屏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="350"/>
+        <location filename="../mainwindow.cpp" line="354"/>
         <source>&amp;Show/Hide Class Tree</source>
         <translation>显示/隐藏目录树</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="351"/>
+        <location filename="../mainwindow.cpp" line="355"/>
         <source>Ctrl+H</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="372"/>
+        <location filename="../mainwindow.cpp" line="376"/>
         <source>&amp;Setting ToolBar</source>
         <translation>设置工具栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="376"/>
+        <location filename="../mainwindow.cpp" line="380"/>
         <source>&amp;Show/Hide Tool Bar</source>
         <translation>显示/隐藏工具栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="385"/>
+        <location filename="../mainwindow.cpp" line="389"/>
         <source>F2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="389"/>
+        <location filename="../mainwindow.cpp" line="393"/>
         <source>&amp;HomePage</source>
         <translation>主页</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="393"/>
+        <location filename="../mainwindow.cpp" line="397"/>
         <source>&amp;Invite Friends...</source>
         <translation>邀请朋友</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="397"/>
+        <location filename="../mainwindow.cpp" line="401"/>
         <source>&amp;Forum</source>
         <translation>论坛</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="405"/>
+        <location filename="../mainwindow.cpp" line="409"/>
         <source>&amp;Update</source>
         <translation>更新</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="409"/>
+        <location filename="../mainwindow.cpp" line="413"/>
         <source>&amp;Option</source>
         <translation>选项</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="410"/>
+        <location filename="../mainwindow.cpp" line="414"/>
         <source>Ctrl+O</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="414"/>
+        <location filename="../mainwindow.cpp" line="418"/>
         <source>&amp;View Log...</source>
         <translation>查看日志</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="415"/>
+        <location filename="../mainwindow.cpp" line="419"/>
         <source>Ctrl+L</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="424"/>
+        <location filename="../mainwindow.cpp" line="428"/>
         <source>Account Information</source>
         <translation>账户信息</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="428"/>
+        <location filename="../mainwindow.cpp" line="432"/>
         <source>Update to VIP</source>
         <translation>升级到VIP</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="432"/>
+        <location filename="../mainwindow.cpp" line="436"/>
         <source>Logo Off</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="488"/>
+        <location filename="../mainwindow.cpp" line="492"/>
         <source>&amp;Tool</source>
         <translation>工具</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="495"/>
+        <location filename="../mainwindow.cpp" line="499"/>
         <source>&amp;Account</source>
         <translation>账号</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="532"/>
+        <location filename="../mainwindow.cpp" line="536"/>
         <source>Tool Bar</source>
         <translation>工具栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="761"/>
+        <location filename="../mainwindow.cpp" line="765"/>
         <source>Note Editor</source>
         <translation>备注编辑器</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1172"/>
+        <location filename="../mainwindow.cpp" line="1173"/>
+        <source>Warning</source>
+        <translation>警告</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1173"/>
+        <source>Please Confirm The original file  has Deleted Or Moved. </source>
+        <translation>请确认原始文件是否已被删除或移动.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1200"/>
         <source>Mi&amp;nimize</source>
         <translation>最小化</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1175"/>
+        <location filename="../mainwindow.cpp" line="1203"/>
         <source>Ma&amp;ximize</source>
         <translation>最大化</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1178"/>
+        <location filename="../mainwindow.cpp" line="1206"/>
         <source>&amp;Restore</source>
         <translation>重置</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1184"/>
+        <location filename="../mainwindow.cpp" line="1212"/>
         <source>&amp;Auto Start</source>
         <translation>自动启动</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1212"/>
+        <location filename="../mainwindow.cpp" line="1240"/>
         <source>Systray</source>
         <translation>系统托盘</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1213"/>
+        <location filename="../mainwindow.cpp" line="1241"/>
         <source>Sorry, I already gave what help I could.
 Maybe you should try asking a human?</source>
         <translation></translation>
@@ -2891,101 +2901,195 @@ Do you want to ignore these errors for this host?</source>
         <translation>笔记</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="23"/>
         <source>Positon</source>
-        <translation>位置</translation>
+        <translation type="obsolete">位置</translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="24"/>
+        <source>Name</source>
+        <translation>名称</translation>
+    </message>
+    <message>
+        <location filename="../notesdialog.cpp" line="25"/>
         <source>Type</source>
         <translation>类型</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="25"/>
+        <location filename="../notesdialog.cpp" line="26"/>
         <source>Content</source>
         <translation>内容</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="26"/>
+        <location filename="../notesdialog.cpp" line="27"/>
         <source>Author</source>
         <translation>作者</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="27"/>
+        <location filename="../notesdialog.cpp" line="28"/>
         <source>Date</source>
         <translation>日期</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="28"/>
+        <location filename="../notesdialog.cpp" line="29"/>
         <source>NoteUid</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="55"/>
+        <location filename="../notesdialog.cpp" line="56"/>
         <source>Add note</source>
         <translation>添加笔记</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="56"/>
+        <location filename="../notesdialog.cpp" line="57"/>
         <source>Delete this note</source>
         <translation>删除笔记</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="57"/>
+        <location filename="../notesdialog.cpp" line="58"/>
         <source>Edit this note</source>
         <translation>编辑笔记</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="58"/>
+        <location filename="../notesdialog.cpp" line="59"/>
         <source>Delete All notes</source>
         <translation>删除所有笔记</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="81"/>
-        <location filename="../notesdialog.cpp" line="141"/>
+        <location filename="../notesdialog.cpp" line="82"/>
+        <location filename="../notesdialog.cpp" line="150"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="81"/>
-        <location filename="../notesdialog.cpp" line="141"/>
+        <location filename="../notesdialog.cpp" line="82"/>
+        <location filename="../notesdialog.cpp" line="150"/>
         <source>Please Select an note.</source>
         <translation>请选择一个笔记.</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="86"/>
+        <location filename="../notesdialog.cpp" line="87"/>
         <source>Are you sure that delete the note ?</source>
         <translation>您确定要删除该笔记?</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="161"/>
+        <location filename="../notesdialog.cpp" line="170"/>
         <source>Are you sure that delete All the notes ?</source>
         <translation>您确定要删除所有笔记?</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="207"/>
         <source> page</source>
-        <translation>页</translation>
+        <translation type="obsolete">页</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="210"/>
         <source>sheet </source>
-        <translation>表</translation>
+        <translation type="obsolete">表</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="216"/>
         <source> row</source>
-        <translation>行</translation>
+        <translation type="obsolete">行</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="221"/>
         <source> column</source>
-        <translation>列</translation>
+        <translation type="obsolete">列</translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="226"/>
+        <location filename="../notesdialog.cpp" line="238"/>
         <source>text</source>
         <translation>文本</translation>
+    </message>
+</context>
+<context>
+    <name>OptOfSearchDialog</name>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="20"/>
+        <source>Properties Of Directory</source>
+        <translation>目录属性</translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="30"/>
+        <source>Basic</source>
+        <translation>基本</translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="42"/>
+        <location filename="../optofsearchdialog.cpp" line="84"/>
+        <location filename="../optofsearchdialog.cpp" line="143"/>
+        <source>Information</source>
+        <translation>信息</translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="50"/>
+        <source>Have Index file Count:</source>
+        <translation>已加入索引文档数:</translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="57"/>
+        <source>Waiting Index file Count:</source>
+        <translation>待加入索引文档数:</translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="93"/>
+        <source>Update Index file</source>
+        <translation>更新索引</translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="106"/>
+        <source>ReCreate Index file</source>
+        <translation>重建索引</translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="149"/>
+        <source>Close</source>
+        <translation>关闭</translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="19"/>
+        <source>Option of Search</source>
+        <translation>选项</translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="46"/>
+        <source>Warning</source>
+        <translation>警告</translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="46"/>
+        <source>There is no document waiting for indexed</source>
+        <translation>没有需要索引的文档</translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="52"/>
+        <source>Do you really want to update index?</source>
+        <translation>是否确定更新索引?</translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="53"/>
+        <source>Update Index file will cost time.
+Do you really want to update the index file?
+</source>
+        <translation>更新索引文件需要花费一定时间.\n 您是否确定更新索引?</translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="84"/>
+        <source>Update Index file Success.</source>
+        <translation>更新索引文件成功.</translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="101"/>
+        <source>Do you really want to recreate index file?</source>
+        <translation>是否确定重建索引?</translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="102"/>
+        <source>ReCreate Index file will cost time.
+Do you really want to recreate the index file?
+</source>
+        <translation>重建索引文件需要花费一定时间.\n 您是否确定重建索引?</translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="143"/>
+        <source>ReCreate Index file Success.</source>
+        <translation>重建索引文件成功.</translation>
     </message>
 </context>
 <context>
@@ -4849,6 +4953,19 @@ Do you want to overwrite it?</source>
     </message>
 </context>
 <context>
+    <name>UeSave</name>
+    <message>
+        <location filename="../uesave.cpp" line="48"/>
+        <source>_note</source>
+        <translation>_笔记</translation>
+    </message>
+    <message>
+        <location filename="../uesave.cpp" line="122"/>
+        <source>save success</source>
+        <translation>保存成功</translation>
+    </message>
+</context>
+<context>
     <name>WebPage</name>
     <message>
         <location filename="../browser/webview.cpp" line="165"/>
@@ -4864,7 +4981,7 @@ Do you want to overwrite it?</source>
         <translation>在新Tab页打开</translation>
     </message>
     <message>
-        <location filename="../browser/webview.cpp" line="236"/>
+        <location filename="../browser/webview.cpp" line="241"/>
         <source>Save to the Solo</source>
         <translation>保存到搜咯</translation>
     </message>
@@ -4873,7 +4990,7 @@ Do you want to overwrite it?</source>
         <translation type="obsolete">保存到搜咯..</translation>
     </message>
     <message>
-        <location filename="../browser/webview.cpp" line="238"/>
+        <location filename="../browser/webview.cpp" line="243"/>
         <source>Exit Full Screen</source>
         <translation>退出全屏</translation>
     </message>

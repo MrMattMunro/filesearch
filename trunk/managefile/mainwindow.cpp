@@ -56,11 +56,13 @@
 #include "utils.h"
 #include "fileutils.h"
 #include "db/tagdao.h"
+#include "db/notedao.h"
 #include "db/dirdao.h"
 #include "db/docdao.h"
 #include "db/doctagdao.h"
 #include "db/resultdao.h"
 #include "refereedialog.h"
+#include "optofsearchdialog.h"
 #include "aboutdialog.h"
 #include "logview.h"
 #include "preferencesdialog.h"
@@ -70,6 +72,23 @@
 MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     : QMainWindow(parent, flags)
 {
+    // 正常启动
+    createTrayActions();
+    createTrayIcon();
+    connect(trayIcon, SIGNAL(messageClicked()), this, SLOT(messageClicked()));
+    connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(showMaximized()));
+    trayIcon->show();
+
+    initUI();
+    initActions();
+    initMenus();
+    initStatusbar();
+    initToolbar();
+
+    m_appName = tr("Solo Local File Manager");
+    isBusySearch = false;
+    setContextMenuPolicy(Qt::CustomContextMenu);
+
     // 获得服务器是否需要启动升级程序
     QString surl;
     surl.append("http://www.slfile.net/mf-getnewversion.php");
@@ -101,22 +120,6 @@ void MainWindow::doConfirmReply(){
         }
     }
 
-    // 正常启动
-    createTrayActions();
-    createTrayIcon();
-    connect(trayIcon, SIGNAL(messageClicked()), this, SLOT(messageClicked()));
-    connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(showMaximized()));
-    trayIcon->show();
-
-    initUI();
-    initActions();
-    initMenus();
-    initStatusbar();
-    initToolbar();
-
-    m_appName = tr("Solo Local File Manager");
-    isBusySearch = false;
-    setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
 // 生成文档列表
@@ -287,6 +290,7 @@ void MainWindow::slotShowSearchSetMenu()
     action7->setData(OPTION);
     action7->setCheckable(false);
     action7->setText(tr("Option"));
+    connect(action7, SIGNAL(triggered()), this, SLOT(optionOfSearch()));
 
 //    QAction *action8 = new QAction(this);
 //    action8->setData(SAVETOFASTSEARCH);
@@ -1068,6 +1072,13 @@ void MainWindow::setSearchObject(QAction *action){
     searcheObj = QString::number(offset);
 }
 
+// 设置搜索
+void MainWindow::optionOfSearch(){
+    OptOfSearchDialog* dlg = new OptOfSearchDialog(this);
+    dlg->exec();
+}
+
+
 // 搜索设置
 void MainWindow::slotOpenActionUrl(QAction *action)
 {
@@ -1124,7 +1135,8 @@ void MainWindow::windowShowNoteEditor()
     if(!selNoteUuid.isEmpty()){
         QString notesPath = Utils::getLocateNotesPath();
         notesPath.append(QDir::separator());
-        notesPath.append(selNoteUuid);
+        Note note = NoteDao::selectNote(selNoteUuid);
+        notesPath.append(note.NOTE_NAME);
         notesPath.append(".html");
         noteEditor->open(notesPath);
     }else{
@@ -1152,10 +1164,26 @@ void MainWindow::windowHideNoteEditor()
 // 以tab页打开Doc
 void MainWindow::openDocInTab()
 {
-    QString filepath = m_doctable->getCurFilePath();
-
     // 改变NoteEditor的属性
     Preferences* p = Preferences::instance();
+    QString filepath = m_doctable->getCurFilePath();
+
+    QFileInfo fileInfo(filepath);
+    if(!fileInfo.exists()){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Confirm The original file  has Deleted Or Moved. "), QMessageBox::Yes);
+        return;
+    }
+
+    QString curUuid = m_doctable->getCurUuid();
+    Note note = NoteDao::selectNote(curUuid);
+    if( ! note.NOTE_GUID.isEmpty()){
+        // 打开的是笔记
+        p->setSelDocUid(note.DOCUMENT_GUID);
+        p->setSelNoteUid(curUuid);
+        windowToggleNoteEditor();
+        return;
+    }
+
     QString suffix = FileUtils::suffix(filepath);
     if(p->sources().contains(suffix.toLower()) ||p->txts().contains(suffix.toLower())){
         browser->openTxtInTab(filepath);

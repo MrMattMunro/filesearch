@@ -50,12 +50,12 @@ TxtEditor::TxtEditor(QWidget * parent)
 	QSettings settings("yarpen.cz", "sqliteman");
         restoreState(settings.value("TxtEditor/state").toByteArray());
 
-        connect(parent, SIGNAL(prefsChanged()), ui.sqlTextEdit, SLOT(prefsChanged()));
+      connect(parent, SIGNAL(prefsChanged()), ui.sqlTextEdit, SLOT(prefsChanged()));
 
-        connect(ui.searchEdit, SIGNAL(textChanged(const QString &)), this, SLOT(searchEdit_textChanged(const QString &)));
-	connect(ui.previousToolButton, SIGNAL(clicked()), this, SLOT(findPrevious()));
-	connect(ui.nextToolButton, SIGNAL(clicked()), this, SLOT(findNext()));
-	connect(ui.searchEdit, SIGNAL(returnPressed()), this, SLOT(findNext()));
+      connect(ui.searchEdit, SIGNAL(textChanged(const QString &)), this, SLOT(searchEdit_textChanged(const QString &)));
+      connect(ui.previousToolButton, SIGNAL(clicked()), this, SLOT(findPrevious()));
+      connect(ui.nextToolButton, SIGNAL(clicked()), this, SLOT(findNext()));
+      connect(ui.searchEdit, SIGNAL(returnPressed()), this, SLOT(findNext()));
 }
 
 TxtEditor::~TxtEditor()

@@ -1179,58 +1179,60 @@ void MyTreeView::dropBasket()
     int ret = QMessageBox::question(this, "",
                                     tr("Are you sure that drop the Basket ?"),
                                     QMessageBox::Yes, QMessageBox::No);
-    if(ret == QMessageBox::Yes){
-       QStandardItem *parenItem = model->item(2);
-       delSubItems(parenItem);
-
-       QList<Doc> deldocs = DocDao::selectDocsByDelFlg("1");
-       Doc doc;
-
-       // 删除索引文件
-       // 后台运行Thread
-       QThread thread;
-       DelIndexFilesObj indexFilesObj;
-       indexFilesObj.moveToThread(&thread);
-
-       DelIndexFilesSign dummy;
-       qDebug()<<"main thread:"<< QThread::currentThreadId();
-
-       QObject::connect(&dummy, SIGNAL(sigDelIndexFile()), &indexFilesObj, SLOT(delIndexfiles()));
-       thread.start();
-       dummy.emitDelIndexFile();
-
-       QString notePath = Utils::getLocateNotesPath();
-       foreach (doc, deldocs) {
-           // 删除文档附属的标注
-           QList<Note> notes = NoteDao::selectNotesbyDocUuId(doc.DOCUMENT_GUID);
-           Note note;
-           foreach (note, notes) {
-               QString noteUuId = note.NOTE_GUID;
-               // 删除note文件
-               QString filepath = notePath;
-               filepath.append(QDir::separator());
-               filepath.append(noteUuId);
-               filepath.append(".html");
-               QFileInfo file(filepath);
-               if(file.exists()){
-                   QFile::remove(filepath);
-               }
-           }
-           NoteDao::deleteNoteByDoc(doc.DOCUMENT_GUID);
-
-           // 删除关联文档
-           RelateDocDao::deleteRelateDocByDocUuId(doc.DOCUMENT_GUID);
-           // 删除文档Tag
-           DocTagDao::deleteDocTagByDoc(doc.DOCUMENT_GUID);
-       }
-
-       DirDao::physicalDelDir();
-       DocDao::physicalDelDoc();
-    }
-
     if(ret == QMessageBox::No){
-       return;
+        return;
     }
+
+    // 删除索引文件
+    // 后台运行Thread
+    QThread thread;
+    DelIndexFilesObj indexFilesObj;
+    indexFilesObj.moveToThread(&thread);
+
+    DelIndexFilesSign dummy;
+    qDebug()<<"main thread:"<< QThread::currentThreadId();
+
+    QObject::connect(&dummy, SIGNAL(sigDelIndexFile()), &indexFilesObj, SLOT(delIndexfiles()));
+    thread.start();
+    dummy.emitDelIndexFile();
+
+    QStandardItem *parenItem = model->item(2);
+    delSubItems(parenItem);
+
+    QList<Doc> deldocs = DocDao::selectDocsByDelFlg("1");
+    Doc doc;
+
+    QString notePath = Utils::getLocateNotesPath();
+    DelIndexFilesObj noteindexFilesObj;
+    foreach (doc, deldocs) {
+       // 删除文档附属的标注
+       QList<Note> notes = NoteDao::selectNotesbyDocUuId(doc.DOCUMENT_GUID);
+       Note note;
+       foreach (note, notes) {
+           QString noteName = note.NOTE_NAME;
+           // 删除note文件
+           QString filepath = notePath;
+           filepath.append(QDir::separator());
+           filepath.append(noteName);
+           filepath.append(".html");
+           QFileInfo file(filepath);
+           if(file.exists()){
+               QFile::remove(filepath);
+           }
+           // 删除笔记索引
+           noteindexFilesObj.delIndexfile(filepath, note.NOTE_GUID);
+       }
+       NoteDao::deleteNoteByDoc(doc.DOCUMENT_GUID);
+
+       // 删除关联文档
+       RelateDocDao::deleteRelateDocByDocUuId(doc.DOCUMENT_GUID);
+       // 删除文档Tag
+       DocTagDao::deleteDocTagByDoc(doc.DOCUMENT_GUID);
+    }
+
+    DirDao::physicalDelDir();
+    DocDao::physicalDelDoc();
+
 }
 
 

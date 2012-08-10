@@ -6,17 +6,17 @@
     <message>
         <location filename="../aboutdialog.ui" line="14"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>について</translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="21"/>
         <source>about:blank</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../aboutdialog.cpp" line="26"/>
         <source>Solo</source>
-        <translation type="unfinished"></translation>
+        <translation>Solo</translation>
     </message>
 </context>
 <context>
@@ -24,72 +24,72 @@
     <message>
         <location filename="../accountdialog.ui" line="14"/>
         <source>Acount Information</source>
-        <translation type="unfinished"></translation>
+        <translation>口座情報</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="32"/>
         <source>Acount Infomation</source>
-        <translation type="unfinished"></translation>
+        <translation>口座情報</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="41"/>
         <source>eg: *.doc,*.pdf</source>
-        <translation type="unfinished"></translation>
+        <translation>eg: *.doc,*.pdf</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="48"/>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>名前:</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="55"/>
         <source>PassWord: </source>
-        <translation type="unfinished"></translation>
+        <translation>パスワード:</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="62"/>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>タイプ:</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="75"/>
         <source>Change PassWord</source>
-        <translation type="unfinished"></translation>
+        <translation>パスワードを変更する</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="82"/>
         <source>Update To VIP</source>
-        <translation type="unfinished"></translation>
+        <translation>VIPを購入する</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="89"/>
         <source>Score:</source>
-        <translation type="unfinished"></translation>
+        <translation>スコア</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="103"/>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="113"/>
         <source>Use Score For VIP</source>
-        <translation type="unfinished"></translation>
+        <translation>スコアでVIPを購入する</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="141"/>
         <source>Traffic</source>
-        <translation type="unfinished"></translation>
+        <translation>トラフィック</translation>
     </message>
     <message>
         <location filename="../accountdialog.ui" line="182"/>
         <source>Store</source>
-        <translation type="unfinished"></translation>
+        <translation>保存</translation>
     </message>
     <message>
         <location filename="../accountdialog.cpp" line="31"/>
         <source>Account Information</source>
-        <translation type="unfinished"></translation>
+        <translation>口座情報</translation>
     </message>
 </context>
 <context>
@@ -97,12 +97,12 @@
     <message>
         <location filename="../browser/addbookmarkdialog.ui" line="13"/>
         <source>Add Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>ブックマークに追加</translation>
     </message>
     <message>
         <location filename="../browser/addbookmarkdialog.ui" line="19"/>
         <source>Type a name for the bookmark, and choose where to keep it.</source>
-        <translation type="unfinished"></translation>
+        <translation>ブックマークの名前を入力し、それを維持する場所を選択します。</translation>
     </message>
 </context>
 <context>
@@ -110,32 +110,32 @@
     <message>
         <location filename="../browser/bookmarks.ui" line="14"/>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>ブックマーク</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.ui" line="41"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>削除（＆R）</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.ui" line="48"/>
         <source>Add Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>フォルダを追加</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="850"/>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>開く</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="853"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>削除</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="876"/>
         <source>New Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>新規フォルダ</translation>
     </message>
 </context>
 <context>
@@ -145,73 +145,73 @@
         <location filename="../browser/bookmarks.cpp" line="264"/>
         <source>Error when loading bookmarks on line %1, column %2:
 %3</source>
-        <translation type="unfinished"></translation>
+        <translation>ブックマークをロードする時、エラーを発生しました　行%1、列%2  %3</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="119"/>
         <source>Toolbar Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>ツールバーのブックマーク</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="127"/>
         <source>Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>メニュー</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="254"/>
         <source>Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルを開く</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="256"/>
         <location filename="../browser/bookmarks.cpp" line="277"/>
         <source>XBEL (*.xbel *.xml)</source>
-        <translation type="unfinished"></translation>
+        <translation>XBEL (*.xbel *.xml)</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="269"/>
         <source>Imported %1</source>
-        <translation type="unfinished"></translation>
+        <translation>インポート %1</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="275"/>
         <source>Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルを保存する</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="276"/>
         <source>%1 Bookmarks.xbel</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Bookmarks.xbel</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="283"/>
         <source>Export error</source>
-        <translation type="unfinished"></translation>
+        <translation>エクスポートエラー</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="283"/>
         <source>error saving bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>ブックマークを保存する時、エラーを発生しました</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="287"/>
         <source>Remove Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>ブックマークを削除</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="321"/>
         <source>Insert Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>ブックマークを挿入</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="335"/>
         <source>Name Change</source>
-        <translation type="unfinished"></translation>
+        <translation>名前の変更</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="338"/>
         <source>Address Change</source>
-        <translation type="unfinished"></translation>
+        <translation>アドレスの変更</translation>
     </message>
 </context>
 <context>
@@ -219,12 +219,12 @@
     <message>
         <location filename="../browser/bookmarks.cpp" line="433"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>タイトル</translation>
     </message>
     <message>
         <location filename="../browser/bookmarks.cpp" line="434"/>
         <source>Address</source>
-        <translation type="unfinished"></translation>
+        <translation>アドレス</translation>
     </message>
 </context>
 <context>
@@ -232,7 +232,7 @@
     <message>
         <location filename="../browser/bookmarks.cpp" line="881"/>
         <source>Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>ブックマーク</translation>
     </message>
 </context>
 <context>
@@ -241,7 +241,8 @@
         <location filename="../browser/browserapplication.cpp" line="183"/>
         <source>There are %1 windows and %2 tabs open
 Do you want to quit anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ウィンドウにはまた　％2のタブを開いがあります。
+とにかく閉じたいですか?</translation>
     </message>
 </context>
 <context>
@@ -249,145 +250,146 @@ Do you want to quit anyway?</source>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="369"/>
         <source>Zoom &amp;In</source>
-        <translation type="unfinished"></translation>
+        <translation>ズームイン</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="370"/>
         <source>Zoom &amp;Out</source>
-        <translation type="unfinished"></translation>
+        <translation>ズームアウト</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="371"/>
         <source>Reset &amp;Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>ズームをリセット</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="461"/>
         <source>Navigation</source>
-        <translation type="unfinished"></translation>
+        <translation>ナビゲーション</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="467"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>バック</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="472"/>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>フォワード</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="556"/>
         <source>Show Status Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>ステータスバーを表示</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="556"/>
         <source>Hide Status Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>ステータスバーを非表示</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="620"/>
         <source>Qt Demo Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Qtのデモ·ブラウザ</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="625"/>
         <source>%1 - Qt Demo Browser</source>
         <comment>Page title and Browser name</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1  -  Qtのデモ·ブラウザ</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="632"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>関して</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="632"/>
         <source>Version %1&lt;p&gt;This demo demonstrates Qt&apos;s webkit facilities in action, providing an example browser for you to experiment with.&lt;p&gt;&lt;p&gt;QtWebKit is based on the Open Source WebKit Project developed at &lt;a href=&quot;http://webkit.org/&quot;&gt;http://webkit.org/&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>バージョン%1&lt;p&gt;このデモでは、を試してあなたのための例では、ブラウザを提供し、アクションでQtのWebKitの機能を示しています。&lt;P&gt;&lt;P&gt; QtWebKitは、&lt;a href=&quot;http://webkit.org/&quot;&gt;http://webkit.org/&lt;/a&gt;.を参照してください。</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="650"/>
         <source>Open Web Resource</source>
-        <translation type="unfinished"></translation>
+        <translation>Webリソースを開く</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="651"/>
         <source>Web Resources (*.html *.htm *.svg *.png *.gif *.svgz);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Webリソース(*.html *.htm *.svg *.png *.gif *.svgz);;すべてのファイル(*.*)</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="683"/>
         <source>Print Document</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメントを印刷</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="695"/>
         <source>Are you sure you want to turn on private browsing?</source>
-        <translation type="unfinished"></translation>
+        <translation>プライベートブラウジングをオンにしてもよろしいですか？</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="696"/>
         <source>&lt;b&gt;%1&lt;/b&gt;&lt;br&gt;&lt;br&gt;When private browsing in turned on, webpages are not added to the history, items are automatically removed from the Downloads window, new cookies are not stored, current cookies can&apos;t be accessed, site icons wont be stored, session wont be saved,  and searches are not added to the pop-up menu in the Google search box.  Until you close the window, you can still click the Back and Forward buttons to return to the webpages you have opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;は%1&lt;/ b&gt;の&lt;BR&gt; &lt;BR&gt;をオンにプライベートブラウジングは、Webページは履歴に追加されていない場合、アイテムは自動的にダウンロードウィンドウから削除され、新しいCookieが保存されていないため、現在のクッキーはできませんアクセスでき、サイトのアイコンが格納される文句を言わないと、セッションが保存され文句を言わないと、検索はGoogleの検索ボックスのポップアップメニューに追加されません。ウィンドウを閉じるまで、あなたはまだあなたが開いているWebページに戻るには、[戻る]ボタンと[進む]ボタンをクリックすることもできます。</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="723"/>
         <source>Are you sure you want to close the window?  There are %1 tabs open</source>
-        <translation type="unfinished"></translation>
+        <translation>ウィンドウを閉じてもよろしいですか？ %1 は、オープン1つのタブがあります</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="741"/>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>検索</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="742"/>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation>テキスト:</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="747"/>
         <source>&quot;%1&quot; not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;%1&quot;が見つかりませんでした。</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="813"/>
         <source>Page Source of %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 のページのソース</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="837"/>
         <source>Web Inspector</source>
-        <translation type="unfinished"></translation>
+        <translation>Webインスペクタ</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="838"/>
         <source>The web inspector will only work correctly for pages that were loaded after enabling.
 Do you want to reload all pages?</source>
-        <translation type="unfinished"></translation>
+        <translation>Webインスペクタには、only有効にした後でロードされたページのために正常に動作します。
+あなたはすべてのページをリロードしますか？</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="898"/>
         <source>Stop loading the current page</source>
-        <translation type="unfinished"></translation>
+        <translation>現在のページの読み込みを中止</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="904"/>
         <source>Reload the current page</source>
-        <translation type="unfinished"></translation>
+        <translation>現在のページをリロード</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="950"/>
         <source>Downloads</source>
-        <translation type="unfinished"></translation>
+        <translation>ダウンロード</translation>
     </message>
     <message>
         <location filename="../browser/browsermainwindow.cpp" line="950"/>
         <source>Alt+Ctrl+L</source>
         <comment>Download Manager</comment>
-        <translation type="unfinished"></translation>
+        <translation>Alt+Ctrl+L</translation>
     </message>
 </context>
 <context>
@@ -397,54 +399,54 @@ Do you want to reload all pages?</source>
         <location filename="../changepwddialog.ui" line="32"/>
         <location filename="../changepwddialog.cpp" line="30"/>
         <source>Change PassWord</source>
-        <translation type="unfinished"></translation>
+        <translation>パスワードを変更</translation>
     </message>
     <message>
         <location filename="../changepwddialog.ui" line="54"/>
         <source>Old PassWord:</source>
-        <translation type="unfinished"></translation>
+        <translation>古いパスワード:</translation>
     </message>
     <message>
         <location filename="../changepwddialog.ui" line="61"/>
         <source>New PassWord: </source>
-        <translation type="unfinished"></translation>
+        <translation>新しいパスワード:</translation>
     </message>
     <message>
         <location filename="../changepwddialog.ui" line="68"/>
         <source>ReInput Passwrod:</source>
-        <translation type="unfinished"></translation>
+        <translation>再入力パスワー：</translation>
     </message>
     <message>
         <location filename="../changepwddialog.cpp" line="43"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../changepwddialog.cpp" line="43"/>
         <source>The ReInput Password is not same with the New PassWord.</source>
-        <translation type="unfinished"></translation>
+        <translation>再入力パスワード新規パスワードと同じではありません。</translation>
     </message>
     <message>
         <location filename="../changepwddialog.cpp" line="77"/>
         <location filename="../changepwddialog.cpp" line="81"/>
         <location filename="../changepwddialog.cpp" line="86"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>情報</translation>
     </message>
     <message>
         <location filename="../changepwddialog.cpp" line="77"/>
         <source>Old PassWord Is Incorrect.</source>
-        <translation type="unfinished"></translation>
+        <translation>古いパスワードが正しくありません。</translation>
     </message>
     <message>
         <location filename="../changepwddialog.cpp" line="81"/>
         <source>User Is Not Existed.</source>
-        <translation type="unfinished"></translation>
+        <translation>ユーザが存在していされていません。</translation>
     </message>
     <message>
         <location filename="../changepwddialog.cpp" line="86"/>
         <source>Change PassWord Success, Please Login in</source>
-        <translation type="unfinished"></translation>
+        <translation>パスワードの変更が成功しました、ログインしてください。</translation>
     </message>
 </context>
 <context>
@@ -452,7 +454,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/searchlineedit.cpp" line="56"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>クリア</translation>
     </message>
 </context>
 <context>
@@ -460,7 +462,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../Common.cpp" line="177"/>
         <source>Unknown OS</source>
-        <translation type="unfinished"></translation>
+        <translation>不明なOS</translation>
     </message>
 </context>
 <context>
@@ -468,27 +470,27 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/cookiejar.cpp" line="554"/>
         <source>Website</source>
-        <translation type="unfinished"></translation>
+        <translation>ウェブサイト</translation>
     </message>
     <message>
         <location filename="../browser/cookiejar.cpp" line="556"/>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>ステータス</translation>
     </message>
     <message>
         <location filename="../browser/cookiejar.cpp" line="576"/>
         <source>Allow</source>
-        <translation type="unfinished"></translation>
+        <translation>許可</translation>
     </message>
     <message>
         <location filename="../browser/cookiejar.cpp" line="585"/>
         <source>Block</source>
-        <translation type="unfinished"></translation>
+        <translation>ブロック</translation>
     </message>
     <message>
         <location filename="../browser/cookiejar.cpp" line="594"/>
         <source>Allow For Session</source>
-        <translation type="unfinished"></translation>
+        <translation>セッションを可能にする</translation>
     </message>
 </context>
 <context>
@@ -496,32 +498,32 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/cookiejar.cpp" line="399"/>
         <source>Website</source>
-        <translation type="unfinished"></translation>
+        <translation>ウェブサイト</translation>
     </message>
     <message>
         <location filename="../browser/cookiejar.cpp" line="401"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>名前</translation>
     </message>
     <message>
         <location filename="../browser/cookiejar.cpp" line="403"/>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>パス</translation>
     </message>
     <message>
         <location filename="../browser/cookiejar.cpp" line="405"/>
         <source>Secure</source>
-        <translation type="unfinished"></translation>
+        <translation>確保</translation>
     </message>
     <message>
         <location filename="../browser/cookiejar.cpp" line="407"/>
         <source>Expires</source>
-        <translation type="unfinished"></translation>
+        <translation>有効期限が切れる</translation>
     </message>
     <message>
         <location filename="../browser/cookiejar.cpp" line="409"/>
         <source>Contents</source>
-        <translation type="unfinished"></translation>
+        <translation>中身</translation>
     </message>
 </context>
 <context>
@@ -529,17 +531,17 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/cookies.ui" line="13"/>
         <source>Cookies</source>
-        <translation type="unfinished"></translation>
+        <translation>Cookies</translation>
     </message>
     <message>
         <location filename="../browser/cookies.ui" line="40"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>削除（＆R）</translation>
     </message>
     <message>
         <location filename="../browser/cookies.ui" line="47"/>
         <source>Remove &amp;All Cookies</source>
-        <translation type="unfinished"></translation>
+        <translation>すべてのCookieを削除します</translation>
     </message>
 </context>
 <context>
@@ -547,47 +549,47 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/cookiesexceptions.ui" line="13"/>
         <source>Cookie Exceptions</source>
-        <translation type="unfinished"></translation>
+        <translation>クッキーの例外</translation>
     </message>
     <message>
         <location filename="../browser/cookiesexceptions.ui" line="19"/>
         <source>New Exception</source>
-        <translation type="unfinished"></translation>
+        <translation>新しい例外</translation>
     </message>
     <message>
         <location filename="../browser/cookiesexceptions.ui" line="27"/>
         <source>Domain:</source>
-        <translation type="unfinished"></translation>
+        <translation>ドメイン：</translation>
     </message>
     <message>
         <location filename="../browser/cookiesexceptions.ui" line="57"/>
         <source>Block</source>
-        <translation type="unfinished"></translation>
+        <translation>ブロック</translation>
     </message>
     <message>
         <location filename="../browser/cookiesexceptions.ui" line="67"/>
         <source>Allow For Session</source>
-        <translation type="unfinished"></translation>
+        <translation>セッションを可能</translation>
     </message>
     <message>
         <location filename="../browser/cookiesexceptions.ui" line="77"/>
         <source>Allow</source>
-        <translation type="unfinished"></translation>
+        <translation>許可</translation>
     </message>
     <message>
         <location filename="../browser/cookiesexceptions.ui" line="89"/>
         <source>Exceptions</source>
-        <translation type="unfinished"></translation>
+        <translation>例外</translation>
     </message>
     <message>
         <location filename="../browser/cookiesexceptions.ui" line="114"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>削除</translation>
     </message>
     <message>
         <location filename="../browser/cookiesexceptions.ui" line="121"/>
         <source>Remove &amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation>すべてを削除</translation>
     </message>
 </context>
 <context>
@@ -595,32 +597,32 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../createsubdirdialog.ui" line="14"/>
         <source>Create Sub Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>サブディレクトリを作成</translation>
     </message>
     <message>
         <location filename="../createsubdirdialog.ui" line="75"/>
         <source>Directory Name: </source>
-        <translation type="unfinished"></translation>
+        <translation>ディレクトリ名：</translation>
     </message>
     <message>
         <location filename="../createsubdirdialog.ui" line="82"/>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>場所：</translation>
     </message>
     <message>
         <location filename="../createsubdirdialog.cpp" line="36"/>
         <source>Create New Sub Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>新しいサブディレクトリを作成</translation>
     </message>
     <message>
         <location filename="../createsubdirdialog.cpp" line="47"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../createsubdirdialog.cpp" line="47"/>
         <source>Please Input Directory Name: </source>
-        <translation type="unfinished"></translation>
+        <translation>ディレクトリ名を入力してください</translation>
     </message>
 </context>
 <context>
@@ -628,23 +630,23 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../createtagdialog.ui" line="51"/>
         <source>Tag Name(&amp;N):</source>
-        <translation type="unfinished"></translation>
+        <translation>タグの名前：</translation>
     </message>
     <message>
         <location filename="../createtagdialog.ui" line="77"/>
         <source>Description(&amp;D):</source>
-        <translation type="unfinished"></translation>
+        <translation>説明：</translation>
     </message>
     <message>
         <location filename="../createtagdialog.ui" line="14"/>
         <location filename="../createtagdialog.cpp" line="31"/>
         <source>Create Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>タグを作成</translation>
     </message>
     <message>
         <location filename="../createtagdialog.cpp" line="33"/>
         <source>Create Sub Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>サブタグを作成</translation>
     </message>
 </context>
 <context>
@@ -652,77 +654,77 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../customtooldialog.ui" line="14"/>
         <source>Custom Tools Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>カスタムツールバー</translation>
     </message>
     <message>
         <location filename="../customtooldialog.ui" line="38"/>
         <source>...Drap your favorite item to the tool bar</source>
-        <translation type="unfinished"></translation>
+        <translation>...ツールバーにお気に入りのアイテムをドラッグします。</translation>
     </message>
     <message>
         <location filename="../customtooldialog.ui" line="67"/>
         <source>...Or click the piture to Set the Default items to the tool bar</source>
-        <translation type="unfinished"></translation>
+        <translation>...また画像をクリックでツール·バーにデフォルトの項目を設定する</translation>
     </message>
     <message>
         <location filename="../customtooldialog.ui" line="127"/>
         <source>the tool bar</source>
-        <translation type="unfinished"></translation>
+        <translation>ツール·バー</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="26"/>
         <source>Custom the tool bar</source>
-        <translation type="unfinished"></translation>
+        <translation>カスタムツールバー</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="98"/>
         <source>Are you sure that set the toolbar to default status</source>
-        <translation type="unfinished"></translation>
+        <translation>デフォルトの状態にツールバーを設定してよろしいですか？</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="131"/>
         <source>Show/Hide Class Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>クラスツリーの表示/非表示</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="140"/>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>フルスクリーン</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="149"/>
         <source>HomePage</source>
-        <translation type="unfinished"></translation>
+        <translation>ホームページ</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="158"/>
         <source>Invite Friends...</source>
-        <translation type="unfinished"></translation>
+        <translation>友達をお勧め...</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="168"/>
         <source>Forum</source>
-        <translation type="unfinished"></translation>
+        <translation>フォーラム</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="177"/>
         <source>Save To Mobile...</source>
-        <translation type="unfinished"></translation>
+        <translation>携帯に保存...</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="186"/>
         <source>Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>インポート...</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="195"/>
         <source>Export...</source>
-        <translation type="unfinished"></translation>
+        <translation>エクスポート...</translation>
     </message>
     <message>
         <location filename="../customtooldialog.cpp" line="204"/>
         <source>Plugins</source>
-        <translation type="unfinished"></translation>
+        <translation>プラグイン</translation>
     </message>
 </context>
 <context>
@@ -730,95 +732,95 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../db/database.cpp" line="28"/>
         <source>SQL Error</source>
-        <translation type="unfinished"></translation>
+        <translation>SQL Error</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="54"/>
         <location filename="../db/database.cpp" line="318"/>
         <source>Error executing: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>実行エラー： %1</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="72"/>
         <source>Cannot get databases list. %1</source>
-        <translation type="unfinished"></translation>
+        <translation>データベースのリストを取得することはできません。%1</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="87"/>
         <source>Error while dropping table %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1：テーブル%2を削除する際にエラーが発生しました。</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="98"/>
         <source>Error while Excute: %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: %2を実行する時、エラーが発生しました</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="111"/>
         <location filename="../db/database.cpp" line="141"/>
         <source>Error while getting the fileds of %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: %2.のフィールドを取得中にエラー。</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="166"/>
         <source>Error while the list of %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>エラー%1のリスト中：%2.</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="188"/>
         <location filename="../db/database.cpp" line="205"/>
         <source>Error while the list of the system catalogue: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>システム·カタログのリストを取得する時、エラーが発生しました</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="217"/>
         <source>Error while dropping the view %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>ビュー%1: %2.を削除する時、エラーが発生しました。</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="230"/>
         <source>Error while dropping the index %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>インデックス%1: %2.を削除する時、エラーが発生しました。</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="242"/>
         <source>Unable to open file %1 for writing.</source>
-        <translation type="unfinished"></translation>
+        <translation>書き込み用にファイル %1を開くことができません。</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="254"/>
         <source>Error while exporting SQL: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>SQL: %1.をエクスポートする時,エラーが発生しました。</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="274"/>
         <source>Error while describe object %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>オブジェクト %1: %2.％1を記述している間にエラーが発生しました。</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="291"/>
         <source>Error while dropping the trigger %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>エラートリガ %1: %2.を削除する時、エラーを発生しました。</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="324"/>
         <source>Not Set</source>
-        <translation type="unfinished"></translation>
+        <translation>設定されていません。</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="332"/>
         <source>DB driver is not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>DBドライバが有効ではありません。</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="337"/>
         <source>DB type name does not equal sqlite3</source>
-        <translation type="unfinished"></translation>
+        <translation>DBのタイプ名は同じsqlite3をしません</translation>
     </message>
     <message>
         <location filename="../db/database.cpp" line="343"/>
         <source>DB handler is not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>DBハンドラは有効ではありません。</translation>
     </message>
 </context>
 <context>
@@ -826,7 +828,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../db/dirdao.cpp" line="22"/>
         <source>SQL Error</source>
-        <translation type="unfinished"></translation>
+        <translation>SQLエラー</translation>
     </message>
 </context>
 <context>
@@ -834,7 +836,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../db/docdao.cpp" line="23"/>
         <source>SQL Error</source>
-        <translation type="unfinished"></translation>
+        <translation>SQLエラー</translation>
     </message>
 </context>
 <context>
@@ -842,27 +844,27 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../docnoteinfodialog.ui" line="14"/>
         <source>Document Note Information</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメント·ノート情報</translation>
     </message>
     <message>
         <location filename="../docnoteinfodialog.ui" line="51"/>
         <source>Page/sheet name:</source>
-        <translation type="unfinished"></translation>
+        <translation>ページ/シート名：</translation>
     </message>
     <message>
         <location filename="../docnoteinfodialog.ui" line="61"/>
         <source>Row:</source>
-        <translation type="unfinished"></translation>
+        <translation>行：</translation>
     </message>
     <message>
         <location filename="../docnoteinfodialog.ui" line="71"/>
         <source>Column:</source>
-        <translation type="unfinished"></translation>
+        <translation>カラム：</translation>
     </message>
     <message>
         <location filename="../docnoteinfodialog.cpp" line="27"/>
         <source>Document Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメントのノート</translation>
     </message>
 </context>
 <context>
@@ -870,7 +872,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../db/doctagdao.cpp" line="21"/>
         <source>SQL Error</source>
-        <translation type="unfinished"></translation>
+        <translation>SQLエラー</translation>
     </message>
 </context>
 <context>
@@ -878,32 +880,32 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../doctagsdialog.ui" line="14"/>
         <source>Document Tags</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメントのタグ</translation>
     </message>
     <message>
         <location filename="../doctagsdialog.ui" line="38"/>
         <source>...Drap your favorite tags to the document</source>
-        <translation type="unfinished"></translation>
+        <translation>...ドキュメントにお気に入りタグをドラッグします。</translation>
     </message>
     <message>
         <location filename="../doctagsdialog.ui" line="95"/>
         <source>Documnet&apos;s Tags</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメントのタグ</translation>
     </message>
     <message>
         <location filename="../doctagsdialog.ui" line="130"/>
         <source>Add New Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>新しいタグを追加</translation>
     </message>
     <message>
         <location filename="../doctagsdialog.ui" line="142"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>追加</translation>
     </message>
     <message>
         <location filename="../doctagsdialog.cpp" line="32"/>
         <source>Add tag to the Document</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメントにタグを追加</translation>
     </message>
 </context>
 <context>
@@ -911,38 +913,38 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../doctodirdialog.ui" line="14"/>
         <source>Put Document to Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>ディレクトリにドキュメントを置く</translation>
     </message>
     <message utf8="true">
         <location filename="../doctodirdialog.ui" line="57"/>
         <source>新建文件夹</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../doctodirdialog.cpp" line="54"/>
         <source>Copy the Document to Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>ディレクトリにドキュメントをコピーします。</translation>
     </message>
     <message>
         <location filename="../doctodirdialog.cpp" line="56"/>
         <source>Move the Document to Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>ディレクトリにドキュメントを移動する</translation>
     </message>
     <message>
         <location filename="../doctodirdialog.cpp" line="72"/>
         <location filename="../doctodirdialog.cpp" line="133"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../doctodirdialog.cpp" line="72"/>
         <source>Please Select the other Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>他のディレクトリを選択してください</translation>
     </message>
     <message>
         <location filename="../doctodirdialog.cpp" line="133"/>
         <source>Please Select an directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>ディレクトリを選択してください。</translation>
     </message>
 </context>
 <context>
@@ -950,17 +952,17 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/downloads.ui" line="13"/>
         <source>Downloads</source>
-        <translation type="unfinished"></translation>
+        <translation>ダウンロード</translation>
     </message>
     <message>
         <location filename="../browser/downloads.ui" line="33"/>
         <source>Clean up</source>
-        <translation type="unfinished"></translation>
+        <translation>クリーンアップ</translation>
     </message>
     <message>
         <location filename="../browser/downloads.ui" line="55"/>
         <source>0 Items</source>
-        <translation type="unfinished"></translation>
+        <translation>0アイテム</translation>
     </message>
 </context>
 <context>
@@ -968,115 +970,115 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/downloaditem.ui" line="13"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>フォーム</translation>
     </message>
     <message>
         <location filename="../browser/downloaditem.ui" line="28"/>
         <source>Ico</source>
-        <translation type="unfinished"></translation>
+        <translation>イコー</translation>
     </message>
     <message>
         <location filename="../browser/downloaditem.ui" line="43"/>
         <source>Filename</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイル名</translation>
     </message>
     <message>
         <location filename="../browser/downloaditem.ui" line="90"/>
         <source>Try Again</source>
-        <translation type="unfinished"></translation>
+        <translation>もう一度</translation>
     </message>
     <message>
         <location filename="../browser/downloaditem.ui" line="97"/>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>停止</translation>
     </message>
     <message>
         <location filename="../browser/downloaditem.ui" line="104"/>
         <source>Open</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../browser/downloadmanager.cpp" line="128"/>
-        <source>Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>開く</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="131"/>
+        <source>Save File</source>
+        <translation>ファイルを保存する</translation>
+    </message>
+    <message>
+        <location filename="../browser/downloadmanager.cpp" line="134"/>
         <source>Download canceled: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセルダウンロード：%1</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="217"/>
+        <location filename="../browser/downloadmanager.cpp" line="241"/>
         <source>Error opening save file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイル%1を開く際にエラーが発生しました。</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="226"/>
+        <location filename="../browser/downloadmanager.cpp" line="250"/>
         <source>Error saving: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>保存する時、エラーを発生しました： %1</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="235"/>
+        <location filename="../browser/downloadmanager.cpp" line="259"/>
         <source>Network Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ネットワークエラー : %1</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="269"/>
+        <location filename="../browser/downloadmanager.cpp" line="293"/>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../browser/downloadmanager.cpp" line="272"/>
-        <source>minutes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../browser/downloadmanager.cpp" line="284"/>
-        <source>- %4 %5 remaining</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../browser/downloadmanager.cpp" line="287"/>
-        <source>%1 of %2 (%3/sec) %4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../browser/downloadmanager.cpp" line="289"/>
-        <source>?</source>
-        <translation type="unfinished"></translation>
+        <translation>秒</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="296"/>
-        <source>%1 of %2 - Stopped</source>
-        <translation type="unfinished"></translation>
+        <source>minutes</source>
+        <translation>分</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="307"/>
-        <source>bytes</source>
-        <translation type="unfinished"></translation>
+        <location filename="../browser/downloadmanager.cpp" line="308"/>
+        <source>- %4 %5 remaining</source>
+        <translation>- %4 %5- 残り</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="310"/>
-        <source>kB</source>
-        <translation type="unfinished"></translation>
+        <location filename="../browser/downloadmanager.cpp" line="311"/>
+        <source>%1 of %2 (%3/sec) %4</source>
+        <translation>%2 の%11（%3/sec）%4</translation>
     </message>
     <message>
         <location filename="../browser/downloadmanager.cpp" line="313"/>
+        <source>?</source>
+        <translation>?</translation>
+    </message>
+    <message>
+        <location filename="../browser/downloadmanager.cpp" line="320"/>
+        <source>%1 of %2 - Stopped</source>
+        <translation>%2の%1  - 停止</translation>
+    </message>
+    <message>
+        <location filename="../browser/downloadmanager.cpp" line="331"/>
+        <source>bytes</source>
+        <translation>bytes</translation>
+    </message>
+    <message>
+        <location filename="../browser/downloadmanager.cpp" line="334"/>
+        <source>kB</source>
+        <translation>kB</translation>
+    </message>
+    <message>
+        <location filename="../browser/downloadmanager.cpp" line="337"/>
         <source>MB</source>
-        <translation type="unfinished"></translation>
+        <translation>MB</translation>
     </message>
 </context>
 <context>
     <name>DownloadManager</name>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="544"/>
+        <location filename="../browser/downloadmanager.cpp" line="572"/>
         <source>1 Download</source>
-        <translation type="unfinished"></translation>
+        <translation>1ダウンロード</translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="544"/>
+        <location filename="../browser/downloadmanager.cpp" line="572"/>
         <source>%1 Downloads</source>
-        <translation type="unfinished"></translation>
+        <translation>%1のダウンロード</translation>
     </message>
 </context>
 <context>
@@ -1084,77 +1086,77 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../exportconvertdialog.ui" line="14"/>
         <source>Export And Convert</source>
-        <translation type="unfinished"></translation>
+        <translation>エクスポートおよび変換</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.ui" line="33"/>
         <source>&amp;Select...</source>
-        <translation type="unfinished"></translation>
+        <translation>選択（&amp;S）...</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.ui" line="40"/>
         <source>Path to Export:</source>
-        <translation type="unfinished"></translation>
+        <translation>エクスポートパス：</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.ui" line="80"/>
         <source>Convert Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>変換タイプ：</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="36"/>
         <source>Convert Office to Pdf</source>
-        <translation type="unfinished"></translation>
+        <translation>PDFファイルにOfficeを変換</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="37"/>
         <source>Convert Pdf to Office</source>
-        <translation type="unfinished"></translation>
+        <translation>オフィスにPDFに変換</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="38"/>
         <source>Convert Picture to Pdf</source>
-        <translation type="unfinished"></translation>
+        <translation>PDFに画像を変換</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="39"/>
         <source>Convert Ppt to Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>画像にPPT変換</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="43"/>
         <source>Doc Export -</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメントのエクスポート</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="57"/>
         <source>Select existing Export directory</source>
-        <translation type="unfinished"></translation>
+        <translation>既存のエクスポート·ディレクトリを選択します。</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="58"/>
         <source>Choose a directory</source>
-        <translation type="unfinished"></translation>
+        <translation>ディレクトリを選択します</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="72"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="72"/>
         <source>Please Select the Path to Export Into..</source>
-        <translation type="unfinished"></translation>
+        <translation>エクスポートするパスを選択してください..</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="117"/>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>メッセージ</translation>
     </message>
     <message>
         <location filename="../exportconvertdialog.cpp" line="117"/>
         <source>Documents Exported Success!</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメントのエクスポート成功！</translation>
     </message>
 </context>
 <context>
@@ -1162,103 +1164,103 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../exportdocdialog.ui" line="14"/>
         <source>Document Export</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメントのエクスポート</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="33"/>
         <source>&amp;Select...</source>
-        <translation type="unfinished"></translation>
+        <translation>選択（&amp;S）...</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="40"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>プレビュー</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="71"/>
         <source>PreView Files</source>
-        <translation type="unfinished"></translation>
+        <translation>プレビューファイル</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="78"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>削除</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="85"/>
         <source>Create Sub Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>サブディレクトリを作成します。</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="111"/>
         <source>Emport From:</source>
-        <translation type="unfinished"></translation>
+        <translation>エクスポートパス</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="118"/>
         <source>Path to Export:</source>
-        <translation type="unfinished"></translation>
+        <translation>エクスポートするパス：</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="132"/>
         <source>Switch it on if the header should not be imported</source>
-        <translation type="unfinished"></translation>
+        <translation>ヘッダをインポートする必要がない場合はそれを切り替える</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="135"/>
         <source>Include Sub Directory </source>
-        <translation type="unfinished"></translation>
+        <translation>サブディレクトリが含まれ</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="142"/>
         <source>eg: *.doc,*.pdf</source>
-        <translation type="unfinished"></translation>
+        <translation>eg: *.doc,*.pdf</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.ui" line="149"/>
         <source>Exculde File Type</source>
-        <translation type="unfinished"></translation>
+        <translation>除外のファイルタイプ</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="44"/>
         <source>Doc Export</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメントのエクスポート</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="61"/>
         <source>Select existing Export directory</source>
-        <translation type="unfinished"></translation>
+        <translation>既存のエクスポート·ディレクトリを選択します。</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="62"/>
         <source>Choose a directory</source>
-        <translation type="unfinished"></translation>
+        <translation>ディレクトリを選択します</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="244"/>
         <location filename="../exportdocdialog.cpp" line="251"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="244"/>
         <source>Please Select the Path to Export Into..</source>
-        <translation type="unfinished"></translation>
+        <translation>エクスポートパスを選択してください..</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="251"/>
         <source>No export file. Please Confirm</source>
-        <translation type="unfinished"></translation>
+        <translation>エクスポート·ファイルがありません。確認してください</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="287"/>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>メッセージ</translation>
     </message>
     <message>
         <location filename="../exportdocdialog.cpp" line="287"/>
         <source>Documents Exported Success!</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメントのエクスポート成功！</translation>
     </message>
 </context>
 <context>
@@ -1266,32 +1268,32 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/history.ui" line="13"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>歴史</translation>
     </message>
     <message>
         <location filename="../browser/history.ui" line="40"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>削除（&amp;Re）</translation>
     </message>
     <message>
         <location filename="../browser/history.ui" line="47"/>
         <source>Remove &amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation>すべてを削除</translation>
     </message>
     <message>
         <location filename="../browser/history.cpp" line="703"/>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>開く</translation>
     </message>
     <message>
         <location filename="../browser/history.cpp" line="705"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>コピー</translation>
     </message>
     <message>
         <location filename="../browser/history.cpp" line="707"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>削除</translation>
     </message>
 </context>
 <context>
@@ -1299,12 +1301,12 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/history.cpp" line="630"/>
         <source>Show All History</source>
-        <translation type="unfinished"></translation>
+        <translation>すべての履歴を表示</translation>
     </message>
     <message>
         <location filename="../browser/history.cpp" line="634"/>
         <source>Clear History</source>
-        <translation type="unfinished"></translation>
+        <translation>履歴をクリア</translation>
     </message>
 </context>
 <context>
@@ -1312,12 +1314,12 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/history.cpp" line="403"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>タイトル</translation>
     </message>
     <message>
         <location filename="../browser/history.cpp" line="404"/>
         <source>Address</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1325,12 +1327,12 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../browser/history.cpp" line="1036"/>
         <source>Earlier Today</source>
-        <translation type="unfinished"></translation>
+        <translation>今日の前</translation>
     </message>
     <message>
         <location filename="../browser/history.cpp" line="1040"/>
         <source>%1 items</source>
-        <translation type="unfinished"></translation>
+        <translation>%1アイテム</translation>
     </message>
 </context>
 <context>
@@ -1338,168 +1340,168 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../importdocdialog.ui" line="14"/>
         <source>Import Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>インポートドキュメント</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="33"/>
         <source>&amp;Select...</source>
-        <translation type="unfinished"></translation>
+        <translation>選択（&amp;S）...</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="40"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>プレビュー</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="52"/>
         <source>PreView Files</source>
-        <translation type="unfinished"></translation>
+        <translation>プレビューファイル</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="78"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>削除</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="104"/>
         <source>Import Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>インポート場所：</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="111"/>
         <source>&amp;Path to Import Into:</source>
-        <translation type="unfinished"></translation>
+        <translation>インポートパス：</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="128"/>
         <source>&amp;File Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルタイプ：</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="139"/>
         <source>All files(*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>すべてのファイル(*.*)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="144"/>
         <location filename="../importdocdialog.cpp" line="29"/>
         <source>All supported files</source>
-        <translation type="unfinished"></translation>
+        <translation>すべてのサポートできるファイル</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="149"/>
         <location filename="../importdocdialog.cpp" line="30"/>
         <source>Office files(*.doc,*.docx,*.xls,*.xlsx,*.ppt,*.pptx)</source>
-        <translation type="unfinished"></translation>
+        <translation>Officeファイル(*.doc,*.docx,*.xls,*.xlsx,*.ppt,*.pptx)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="154"/>
         <location filename="../importdocdialog.cpp" line="31"/>
         <source>Pdf files(*.pdf)</source>
-        <translation type="unfinished"></translation>
+        <translation>pdfファイル(*.pdf)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="159"/>
         <location filename="../importdocdialog.cpp" line="32"/>
         <source>Html files(*.html,*.htm)</source>
-        <translation type="unfinished"></translation>
+        <translation>htmlファイル(*.html,*.htm)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="164"/>
         <location filename="../importdocdialog.cpp" line="33"/>
         <source>Picture file(*.jpeg,*.jpg,*.png,*.bmp,*.gif)</source>
-        <translation type="unfinished"></translation>
+        <translation>画像ファイル(*.jpeg,*.jpg,*.png,*.bmp,*.gif)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="169"/>
         <location filename="../importdocdialog.cpp" line="34"/>
         <source>Flash files(*.flv,*.swf)</source>
-        <translation type="unfinished"></translation>
+        <translation>Flashファイル(*.flv,*.swf)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="174"/>
         <location filename="../importdocdialog.cpp" line="35"/>
         <source>Source files(*.cpp,*.h,*.hpp,*.c,*.java,*.js,*.cs,*.vbs,*.sql,*.rb,*.py,*.asp,*.aspx,*.jsp,*.php,*.xml)</source>
-        <translation type="unfinished"></translation>
+        <translation>ソースファイル(*.cpp,*.h,*.hpp,*.c,*.java,*.js,*.cs,*.vbs,*.sql,*.rb,*.py,*.asp,*.aspx,*.jsp,*.php,*.xml)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="179"/>
         <location filename="../importdocdialog.cpp" line="36"/>
         <source>Txt files(*.txt,*.ini,*.bar,*.inf)</source>
-        <translation type="unfinished"></translation>
+        <translation>txtファイル(*.txt,*.ini,*.bar,*.inf)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="184"/>
         <location filename="../importdocdialog.cpp" line="37"/>
         <source>Movie fies(*.rm,*.rmvb,*.avi,*.mpg,*.mlv,*.mpe,*.mpeg,*.m2v)</source>
-        <translation type="unfinished"></translation>
+        <translation>映画(*.rm,*.rmvb,*.avi,*.mpg,*.mlv,*.mpe,*.mpeg,*.m2v)</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="192"/>
         <location filename="../importdocdialog.ui" line="209"/>
         <source>eg: *.bsp,*.axs</source>
-        <translation type="unfinished"></translation>
+        <translation>eg: *.bsp,*.axs</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="199"/>
         <source>Switch it on if the header should not be imported</source>
-        <translation type="unfinished"></translation>
+        <translation>ヘッダをインポートする必要がない場合はそれを切り替える</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="202"/>
         <source>Include Sub Directory </source>
-        <translation type="unfinished"></translation>
+        <translation>サブディレクトリが含まれ</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="216"/>
         <source>Exclude File Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>除外のファイルタイプ：</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="223"/>
         <source>Custom File Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>カスタムファイルタイプ：</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="230"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="244"/>
         <source>Create Sub Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>サブディレクトリを作成</translation>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="54"/>
         <source>Document Import</source>
-        <translation type="unfinished"></translation>
+        <translation>インポートドキュメント</translation>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="72"/>
         <source>Select existing doc directory</source>
-        <translation type="unfinished"></translation>
+        <translation>既存のディレクトリを選択します。</translation>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="73"/>
         <source>Choose a directory</source>
-        <translation type="unfinished"></translation>
+        <translation>ディレクトリを選択します</translation>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="88"/>
         <location filename="../importdocdialog.cpp" line="267"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="88"/>
         <source>Please Select the Path to Import Into..</source>
-        <translation type="unfinished"></translation>
+        <translation>インポートパスを選択してください..</translation>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="267"/>
         <source>No Import file. Please Confirm</source>
-        <translation type="unfinished"></translation>
+        <translation>インポート·ファイルがありません。確認してください</translation>
     </message>
 </context>
 <context>
@@ -1507,112 +1509,112 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../logview.ui" line="53"/>
         <source>Search Next</source>
-        <translation type="unfinished"></translation>
+        <translation>次へ</translation>
     </message>
     <message>
         <location filename="../logview.ui" line="56"/>
         <source>F3</source>
-        <translation type="unfinished"></translation>
+        <translation>F3</translation>
     </message>
     <message>
         <location filename="../logview.ui" line="63"/>
         <source>Whole Words</source>
-        <translation type="unfinished"></translation>
+        <translation>全体</translation>
     </message>
     <message>
         <location filename="../logview.ui" line="73"/>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>大小文字区別</translation>
     </message>
     <message>
         <location filename="../logview.ui" line="80"/>
         <source>Search:</source>
-        <translation type="unfinished"></translation>
+        <translation>検索：</translation>
     </message>
     <message>
         <location filename="../logview.ui" line="87"/>
         <source>Search previous</source>
-        <translation type="unfinished"></translation>
+        <translation>前へ</translation>
     </message>
     <message>
         <location filename="../logview.ui" line="90"/>
         <source>Shift+F3</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+F3</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="35"/>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>ヘルプ</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="36"/>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+F</translation>
     </message>
     <message>
         <location filename="../logview.ui" line="14"/>
         <source>Log Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>ログビューア</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="70"/>
         <source>Cannot open file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイル%1を開くことはできません。</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="70"/>
         <source>Open File</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="103"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>保存</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="104"/>
         <source>All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>すべてのファイル(*.*)</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="117"/>
         <source>Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルを保存する</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="118"/>
         <source>Cannot write into file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>書き込み用にファイル %1を開くことができません。</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="139"/>
         <source>New File</source>
-        <translation type="unfinished"></translation>
+        <translation>新規ファイル</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="140"/>
         <source>All you changes will be lost. Are you sure?</source>
-        <translation type="unfinished"></translation>
+        <translation>すべての変更は失われます。よろしいですか？</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="153"/>
         <source>Closing SQL Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>SQLエディタを閉じる</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="154"/>
         <source>Document has been changed. Do you want do save its content?</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメントが変更されています。その内容を保存してよろしいですか？</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="230"/>
         <source>Unexpected File Change</source>
-        <translation type="unfinished"></translation>
+        <translation>予期しないファイルの変更</translation>
     </message>
     <message>
         <location filename="../logview.cpp" line="231"/>
         <source>Your currently edited file has been changed outside this application. Do you want to reload it?</source>
-        <translation type="unfinished"></translation>
+        <translation>現在編集中のファイルは外部で変更されました。リロードしますか？</translation>
     </message>
 </context>
 <context>
@@ -1620,61 +1622,61 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../logindialog.ui" line="21"/>
         <source>about:blank</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="14"/>
         <location filename="../logindialog.ui" line="45"/>
         <location filename="../logindialog.ui" line="136"/>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>ログイン</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="57"/>
         <source>UserName/Email</source>
-        <translation type="unfinished"></translation>
+        <translation>ユーザー名/メール</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="82"/>
         <source>Login Slfile</source>
-        <translation type="unfinished"></translation>
+        <translation>ログインSolo</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="95"/>
         <location filename="../logindialog.ui" line="220"/>
         <source>PassWord</source>
-        <translation type="unfinished"></translation>
+        <translation>パスワード</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="120"/>
         <source>Remember Me</source>
-        <translation type="unfinished"></translation>
+        <translation>ログイン情報保存</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="142"/>
         <source>Register</source>
-        <translation type="unfinished"></translation>
+        <translation>登録</translation>
     </message>
     <message utf8="true">
         <location filename="../logindialog.ui" line="154"/>
         <source>注册</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="167"/>
         <source>Get the Slfile Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Soloアカウントを取得する</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="180"/>
         <location filename="../logindialog.ui" line="329"/>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>メール</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="202"/>
         <source>UserName</source>
-        <translation type="unfinished"></translation>
+        <translation>ユーザー名</translation>
     </message>
     <message utf8="true">
         <location filename="../logindialog.ui" line="245"/>
@@ -1683,39 +1685,45 @@ Do you want to reload all pages?</source>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;宋体&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://www.slfile.net/termservice&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Terms of service&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;宋体&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://www.slfile.net/termservice&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;利用規約&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="262"/>
         <source>Click the Register button will 
 indicate that you agree and 
 acknowledge our Terms of Service</source>
-        <translation type="unfinished"></translation>
+        <translation>[登録]ボタンをクリックしますと
+あなたが同意したことを示す
+サービスの利用規約を認める</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="270"/>
         <source>Forget Password</source>
-        <translation type="unfinished"></translation>
+        <translation>パスワードを忘れた場合</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="290"/>
         <source>Reset Password</source>
-        <translation type="unfinished"></translation>
+        <translation>パスワードをリセット</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="308"/>
         <source>Please input your Email.</source>
-        <translation type="unfinished"></translation>
+        <translation>メールを入力してください。</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="351"/>
         <source>ReSet</source>
-        <translation type="unfinished"></translation>
+        <translation>リセット</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="31"/>
         <source>Slfile</source>
-        <translation type="unfinished"></translation>
+        <translation>Solo</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="121"/>
@@ -1725,53 +1733,53 @@ acknowledge our Terms of Service</source>
         <location filename="../logindialog.cpp" line="139"/>
         <location filename="../logindialog.cpp" line="146"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="121"/>
         <source>Server Failed, Please Contact Administrator</source>
-        <translation type="unfinished"></translation>
+        <translation>サーバに障害が発生し、管理者に連絡してください</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="126"/>
         <source>Sign up Failed, Please Contact Administrator</source>
-        <translation type="unfinished"></translation>
+        <translation>サインアップが失敗しました、管理者に問い合わせてください。</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="130"/>
         <source> : Username/Email have existed, Please Choose an other one</source>
-        <translation type="unfinished"></translation>
+        <translation>ユーザー名/メールに存在していた、別のものを選択して下さい</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="135"/>
         <source> : Username/Email is not existed, Please confirm</source>
-        <translation type="unfinished"></translation>
+        <translation>ユーザー名/メールが存在しませんが、ご確認ください。</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="139"/>
         <source> : Password is incorrect, Please confirm</source>
-        <translation type="unfinished"></translation>
+        <translation>パスワードが間違っている、確認してください。</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="146"/>
         <source> : Change Password Success, &lt;br&gt;But Send Mail Failed Please Contact Administrator to get the Password</source>
-        <translation type="unfinished"></translation>
+        <translation>パスワードを変更するのが成功しましたが&lt;br&gt;、メールの送信に失敗しましたパスワードを取得するために管理者に連絡してください</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="152"/>
         <location filename="../logindialog.cpp" line="231"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>情報</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="152"/>
         <source>Sign up Successed, Please Login in</source>
-        <translation type="unfinished"></translation>
+        <translation>成功サインアップでログインしてください</translation>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="231"/>
         <source>ReSet Password Successed, Please Check the email to get the new password</source>
-        <translation type="unfinished"></translation>
+        <translation>パスワードのリセットが成功し、新しいパスワードを取得するためにメールをチェックしてください。</translation>
     </message>
 </context>
 <context>
@@ -1779,436 +1787,447 @@ acknowledge our Terms of Service</source>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>slfile</source>
-        <translation type="unfinished"></translation>
+        <translation>Solo</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="70"/>
         <source>文件名</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイル名</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="75"/>
         <source>目标位置</source>
-        <translation type="unfinished"></translation>
+        <translation>ターゲットの位置</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="80"/>
         <source>修改时间</source>
-        <translation type="unfinished"></translation>
+        <translation>変更時間</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="96"/>
         <source>about:blank</source>
-        <translation type="unfinished"></translation>
+        <translation>about:blank</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="116"/>
         <source>查看(&amp;V)</source>
-        <translation type="unfinished"></translation>
+        <translation>ビュー</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="120"/>
         <source>皮肤(&amp;V)</source>
-        <translation type="unfinished"></translation>
+        <translation>スキン</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="128"/>
         <source>语言</source>
-        <translation type="unfinished"></translation>
+        <translation>言語</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="145"/>
         <source>文件(&amp;F)</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイル</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="157"/>
         <source>帮助(&amp;H)</source>
-        <translation type="unfinished"></translation>
+        <translation>ヘルプ</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="172"/>
         <source>工具(&amp;T)</source>
-        <translation type="unfinished"></translation>
+        <translation>ツール</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="187"/>
-        <location filename="../mainwindow.cpp" line="1181"/>
+        <location filename="../mainwindow.cpp" line="1209"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>終了</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="192"/>
         <source>选项 </source>
-        <translation type="unfinished"></translation>
+        <translation>オプション</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="197"/>
         <source>查看日志</source>
-        <translation type="unfinished"></translation>
+        <translation>ログを表示</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="202"/>
         <source>导入</source>
-        <translation type="unfinished"></translation>
+        <translation>インポート</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="207"/>
         <source>导出</source>
-        <translation type="unfinished"></translation>
+        <translation>エクスポート</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="212"/>
         <source>文档另存为</source>
-        <translation type="unfinished"></translation>
+        <translation>名前を付けて保存</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="217"/>
         <source>另存到移动设备</source>
-        <translation type="unfinished"></translation>
+        <translation>モバイルデバイスに保存</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="222"/>
         <source>退出</source>
-        <translation type="unfinished"></translation>
+        <translation>終了</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="227"/>
         <source>全屏</source>
-        <translation type="unfinished"></translation>
+        <translation>全画面</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="232"/>
         <source>显示/隐藏分类树</source>
-        <translation type="unfinished"></translation>
+        <translation>分類ツリー表示/非表示</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="237"/>
         <source>默认</source>
-        <translation type="unfinished"></translation>
+        <translation>デフォルト</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="242"/>
         <source>书香</source>
-        <translation type="unfinished"></translation>
+        <translation>学術的な</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="247"/>
         <source>灰色</source>
-        <translation type="unfinished"></translation>
+        <translation>グレー</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="252"/>
         <source>自定义工具栏</source>
-        <translation type="unfinished"></translation>
+        <translation>カスタムツールバー</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="257"/>
         <source>显示状态栏</source>
-        <translation type="unfinished"></translation>
+        <translation>ステータスバーが表示</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="262"/>
         <location filename="../mainwindow.ui" line="307"/>
         <source>插件管理</source>
-        <translation type="unfinished"></translation>
+        <translation>プラグインマネージャー</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="267"/>
         <source>用户手册</source>
-        <translation type="unfinished"></translation>
+        <translation>ユーザーズマニュアル</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="272"/>
         <source>个人首页</source>
-        <translation type="unfinished"></translation>
+        <translation>ホームページ</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="277"/>
         <source>邀请朋友</source>
-        <translation type="unfinished"></translation>
+        <translation>友人にお勧め</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="282"/>
         <source>用户论坛</source>
-        <translation type="unfinished"></translation>
+        <translation>ユーザーフォーラム</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="287"/>
         <source>关于</source>
-        <translation type="unfinished"></translation>
+        <translation>にていて</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="292"/>
         <source>检查新版本</source>
-        <translation type="unfinished"></translation>
+        <translation>新しいバージョンをチェック</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="297"/>
         <source>选项</source>
-        <translation type="unfinished"></translation>
+        <translation>オプション</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="302"/>
         <source>查看日志文件</source>
-        <translation type="unfinished"></translation>
+        <translation>ログファイルを表示</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="312"/>
         <source>简体中文</source>
-        <translation type="unfinished"></translation>
+        <translation>簡体字中国語</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="317"/>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>English</translation>
     </message>
     <message utf8="true">
         <location filename="../mainwindow.ui" line="322"/>
         <source>日本語</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="342"/>
-        <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="401"/>
-        <source>&amp;About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="457"/>
-        <source>&amp;File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="466"/>
-        <source>&amp;View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="384"/>
-        <location filename="../mainwindow.cpp" line="504"/>
-        <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="117"/>
-        <source>Solo Local File Manager</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="232"/>
-        <source>ALL Documents</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="239"/>
-        <source>Current Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="246"/>
-        <source>Current Directory(Include Sub Directory)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="260"/>
-        <source>Document Name And Content</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="266"/>
-        <source>Document Name Only</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="272"/>
-        <source>Document Content Only</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="289"/>
-        <source>Option</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="314"/>
-        <source>Search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="323"/>
-        <source>&amp;Import...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="324"/>
-        <source>Ctrl+I</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="328"/>
-        <source>&amp;Export...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="329"/>
-        <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="333"/>
-        <source>&amp;Save As...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="337"/>
-        <source>&amp;Save To Mobile...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="341"/>
-        <source>&amp;Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>日本語</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="346"/>
-        <source>&amp;Full Screen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="350"/>
-        <source>&amp;Show/Hide Class Tree</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="351"/>
-        <source>Ctrl+H</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="372"/>
-        <source>&amp;Setting ToolBar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="376"/>
-        <source>&amp;Show/Hide Tool Bar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="385"/>
-        <source>F2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="389"/>
-        <source>&amp;HomePage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="393"/>
-        <source>&amp;Invite Friends...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="397"/>
-        <source>&amp;Forum</source>
-        <translation type="unfinished"></translation>
+        <source>Ctrl+Q</source>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="405"/>
-        <source>&amp;Update</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;About</source>
+        <translation>＆について</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="461"/>
+        <source>&amp;File</source>
+        <translation>ファイル</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="470"/>
+        <source>&amp;View</source>
+        <translation>ビュー</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="388"/>
+        <location filename="../mainwindow.cpp" line="508"/>
+        <source>&amp;Help</source>
+        <translation>ヘルプ</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="88"/>
+        <source>Solo Local File Manager</source>
+        <translation>Solo</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="235"/>
+        <source>ALL Documents</source>
+        <translation>すべてのドキュメント</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="242"/>
+        <source>Current Directory</source>
+        <translation>カレントディレクトリ</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="249"/>
+        <source>Current Directory(Include Sub Directory)</source>
+        <translation>カレントディレクトリ（サブディレクトリを含む）</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="263"/>
+        <source>Document Name And Content</source>
+        <translation>ドキュメントの名前と内容</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="269"/>
+        <source>Document Name Only</source>
+        <translation>ドキュメント名のみ</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="275"/>
+        <source>Document Content Only</source>
+        <translation>ドキュメント内容のみ</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="292"/>
+        <source>Option</source>
+        <translation>オプション</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="318"/>
+        <source>Search</source>
+        <translation>検索</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="327"/>
+        <source>&amp;Import...</source>
+        <translation>インポート...</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="328"/>
+        <source>Ctrl+I</source>
+        <translation>Ctrl+I</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="332"/>
+        <source>&amp;Export...</source>
+        <translation>エクスポート...</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="333"/>
+        <source>Ctrl+E</source>
+        <translation>Ctrl+E</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="337"/>
+        <source>&amp;Save As...</source>
+        <translation>名前を付けて保存...</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="341"/>
+        <source>&amp;Save To Mobile...</source>
+        <translation>携帯に保存...</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="345"/>
+        <source>&amp;Exit</source>
+        <translation>終了</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="350"/>
+        <source>&amp;Full Screen</source>
+        <translation>フルスクリーン</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="354"/>
+        <source>&amp;Show/Hide Class Tree</source>
+        <translation>クラスツリーの表示/非表示</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="355"/>
+        <source>Ctrl+H</source>
+        <translation>Ctrl+H</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="376"/>
+        <source>&amp;Setting ToolBar</source>
+        <translation>ツールバーの設定</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="380"/>
+        <source>&amp;Show/Hide Tool Bar</source>
+        <translation>ツール·バーの表示/非表示</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="389"/>
+        <source>F2</source>
+        <translation>F2</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="393"/>
+        <source>&amp;HomePage</source>
+        <translation>ホームページ</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="397"/>
+        <source>&amp;Invite Friends...</source>
+        <translation>友達をお勧め...</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="401"/>
+        <source>&amp;Forum</source>
+        <translation>フォーラム</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="409"/>
-        <source>&amp;Option</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Update</source>
+        <translation>アップデート</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="410"/>
-        <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <location filename="../mainwindow.cpp" line="413"/>
+        <source>&amp;Option</source>
+        <translation>オプション</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="414"/>
+        <source>Ctrl+O</source>
+        <translation>Ctrl+O</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="418"/>
         <source>&amp;View Log...</source>
-        <translation type="unfinished"></translation>
+        <translation>ログを表示...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="415"/>
+        <location filename="../mainwindow.cpp" line="419"/>
         <source>Ctrl+L</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="424"/>
-        <source>Account Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+L</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="428"/>
-        <source>Update to VIP</source>
-        <translation type="unfinished"></translation>
+        <source>Account Information</source>
+        <translation>口座情報</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="432"/>
+        <source>Update to VIP</source>
+        <translation>VIPを購入する</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="436"/>
         <source>Logo Off</source>
-        <translation type="unfinished"></translation>
+        <translation>ロゴオフ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="488"/>
+        <location filename="../mainwindow.cpp" line="492"/>
         <source>&amp;Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>ツール</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="495"/>
+        <location filename="../mainwindow.cpp" line="499"/>
         <source>&amp;Account</source>
-        <translation type="unfinished"></translation>
+        <translation>アカウント</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="532"/>
+        <location filename="../mainwindow.cpp" line="536"/>
         <source>Tool Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>ツール·バー</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="761"/>
+        <location filename="../mainwindow.cpp" line="765"/>
         <source>Note Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>メモエディタ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1172"/>
+        <location filename="../mainwindow.cpp" line="1173"/>
+        <source>Warning</source>
+        <translation>警告</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1173"/>
+        <source>Please Confirm The original file  has Deleted Or Moved. </source>
+        <translation>元のファイルが削除または移動されている確認してください。</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1200"/>
         <source>Mi&amp;nimize</source>
-        <translation type="unfinished"></translation>
+        <translation>最小化</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1175"/>
+        <location filename="../mainwindow.cpp" line="1203"/>
         <source>Ma&amp;ximize</source>
-        <translation type="unfinished"></translation>
+        <translation>最大化</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1178"/>
+        <location filename="../mainwindow.cpp" line="1206"/>
         <source>&amp;Restore</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="1184"/>
-        <source>&amp;Auto Start</source>
-        <translation type="unfinished"></translation>
+        <translation>リストア</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1212"/>
-        <source>Systray</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Auto Start</source>
+        <translation>オートスタート</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1213"/>
+        <location filename="../mainwindow.cpp" line="1240"/>
+        <source>Systray</source>
+        <translation>トレイ</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1241"/>
         <source>Sorry, I already gave what help I could.
 Maybe you should try asking a human?</source>
-        <translation type="unfinished"></translation>
+        <translation>申し訳ありませんが、私はすでに私は可能性に役立つかました。
+多分あなたは人間に聞いてみましょうか？</translation>
     </message>
 </context>
 <context>
@@ -2216,39 +2235,39 @@ Maybe you should try asking a human?</source>
     <message>
         <location filename="../movetodirdialog.ui" line="14"/>
         <source>Move document to Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>ディレクトリにドキュメントを移動する</translation>
     </message>
     <message utf8="true">
         <location filename="../movetodirdialog.ui" line="57"/>
         <source>新建文件夹</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../movetodirdialog.cpp" line="45"/>
         <source>Move the Sub Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>サブディレクトリを移動する</translation>
     </message>
     <message>
         <location filename="../movetodirdialog.cpp" line="57"/>
         <location filename="../movetodirdialog.cpp" line="63"/>
         <location filename="../movetodirdialog.cpp" line="108"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../movetodirdialog.cpp" line="57"/>
         <source>Please Select Need Moved Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>移動ディレクトリを選択してください</translation>
     </message>
     <message>
         <location filename="../movetodirdialog.cpp" line="63"/>
         <source>Please Select the other Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>他のディレクトリを選択してください</translation>
     </message>
     <message>
         <location filename="../movetodirdialog.cpp" line="108"/>
         <source>Please Select an directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>ディレクトリを選択してください。</translation>
     </message>
 </context>
 <context>
@@ -2257,17 +2276,17 @@ Maybe you should try asking a human?</source>
         <location filename="../movetotagdialog.ui" line="14"/>
         <location filename="../movetotagdialog.cpp" line="39"/>
         <source>Move the Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>タグを移動</translation>
     </message>
     <message>
         <location filename="../movetotagdialog.cpp" line="51"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../movetotagdialog.cpp" line="51"/>
         <source>Please Select the other Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>他のタグを選択してください</translation>
     </message>
 </context>
 <context>
@@ -2275,162 +2294,162 @@ Maybe you should try asking a human?</source>
     <message>
         <location filename="../mytableview.cpp" line="95"/>
         <source>&amp;Open in System soft</source>
-        <translation type="unfinished"></translation>
+        <translation>システムソフトで開く</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="99"/>
         <source>&amp;Open in tab page</source>
-        <translation type="unfinished"></translation>
+        <translation>タブページで開く</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="103"/>
         <source>&amp;Open in System Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>システムエクスプローラで開く</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="107"/>
         <source>&amp;Export..</source>
-        <translation type="unfinished"></translation>
+        <translation>エクスポート...</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="111"/>
         <source>&amp;Send Email As Attachment</source>
-        <translation type="unfinished"></translation>
+        <translation>添付ファイルとしてメールを送信</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="115"/>
         <source>&amp;Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>ノート</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="119"/>
         <source>&amp;Related Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>関連ドキュメント</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="123"/>
         <source>&amp;Tags</source>
-        <translation type="unfinished"></translation>
+        <translation>タグ</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="127"/>
         <source>&amp;Delete(Move to the Wastebasket)</source>
-        <translation type="unfinished"></translation>
+        <translation>削除（ごみ箱に移動します）</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="131"/>
         <source>&amp;Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>リストア</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="135"/>
         <source>&amp;Encrypt</source>
-        <translation type="unfinished"></translation>
+        <translation>暗号化</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="139"/>
         <source>&amp;Find and Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>検索と置換</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="143"/>
         <source>&amp;Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>すべてを選択</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="147"/>
         <source>&amp;Print</source>
-        <translation type="unfinished"></translation>
+        <translation>プリント</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="151"/>
         <source>&amp;Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>高級</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="155"/>
         <source>&amp;Convert Document</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメントを変換</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="159"/>
         <source>&amp;Convert Office to Pdf</source>
-        <translation type="unfinished"></translation>
+        <translation>PDFファイルにOfficeを変換</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="160"/>
         <source>&amp;Convert Pdf to Office</source>
-        <translation type="unfinished"></translation>
+        <translation>オフィスにPDFに変換</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="161"/>
         <source>&amp;Convert Picture to Pdf</source>
-        <translation type="unfinished"></translation>
+        <translation>PDFに画像を変換</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="162"/>
         <source>&amp;Convert Ppt to Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>画像にPPT変換</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="169"/>
         <source>&amp;Merge Document</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメントをマージ</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="172"/>
         <source>&amp;Restore And Repair Document</source>
-        <translation type="unfinished"></translation>
+        <translation>復元と修復ドキュメント</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="175"/>
         <source>&amp;Print Documents In Batch</source>
-        <translation type="unfinished"></translation>
+        <translation>バッチでドキュメントを印刷</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="178"/>
         <source>&amp;Change format in the Document</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメントの書式を変更</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="188"/>
         <source>&amp;Move to...</source>
-        <translation type="unfinished"></translation>
+        <translation>移動...</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="191"/>
         <source>&amp;Copy to...</source>
-        <translation type="unfinished"></translation>
+        <translation>コピー...</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="194"/>
         <source>&amp;Option</source>
-        <translation type="unfinished"></translation>
+        <translation>オプション</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="204"/>
         <source>&amp;One Row</source>
-        <translation type="unfinished"></translation>
+        <translation>1行</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="208"/>
         <source>&amp;Two Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>二列</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="212"/>
         <source>&amp;The second Row&apos;s Option</source>
-        <translation type="unfinished"></translation>
+        <translation>2行目オプション</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="213"/>
         <source>&amp;Show notes of Document on Tooltip</source>
-        <translation type="unfinished"></translation>
+        <translation>ツールチップでのドキュメントのノートを表示</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="231"/>
         <source>&amp;Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>プロパティ</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="687"/>
@@ -2442,14 +2461,14 @@ Maybe you should try asking a human?</source>
         <location filename="../mytableview.cpp" line="1277"/>
         <location filename="../mytableview.cpp" line="1298"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="687"/>
         <location filename="../mytableview.cpp" line="705"/>
         <location filename="../mytableview.cpp" line="738"/>
         <source>Please Confirm The original file  has Deleted Or Moved. </source>
-        <translation type="unfinished"></translation>
+        <translation>元のファイルが削除または移動されている確認してください。</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="727"/>
@@ -2458,77 +2477,77 @@ Maybe you should try asking a human?</source>
         <location filename="../mytableview.cpp" line="899"/>
         <location filename="../mytableview.cpp" line="1298"/>
         <source>Please Select an Document.</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメントを選択してください。</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="738"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>エラー</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="911"/>
         <source>Are you sure that delete the document ?</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメントを削除してよろしいですか？</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="957"/>
         <source>Are you sure that restore the document ?</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメントをリストアしてよろしいですか？</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1082"/>
         <source>Create Date</source>
-        <translation type="unfinished"></translation>
+        <translation>作成日</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1088"/>
         <source>Modified Date</source>
-        <translation type="unfinished"></translation>
+        <translation>更新日</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1094"/>
         <source>Accessed Date</source>
-        <translation type="unfinished"></translation>
+        <translation>アクセス日</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1100"/>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>サイズ</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1106"/>
         <source>Author</source>
-        <translation type="unfinished"></translation>
+        <translation>作成者</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1112"/>
         <source>Read Count</source>
-        <translation type="unfinished"></translation>
+        <translation>リードカウント</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1118"/>
         <source>Related Count</source>
-        <translation type="unfinished"></translation>
+        <translation>関連のカウント</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1124"/>
         <source>Tags</source>
-        <translation type="unfinished"></translation>
+        <translation>タグ</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1130"/>
         <source>URL</source>
-        <translation type="unfinished"></translation>
+        <translation>URL</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1136"/>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>場所</translation>
     </message>
     <message>
         <location filename="../mytableview.cpp" line="1278"/>
         <source>Please Confirm The original file has Deleted Or Moved. </source>
-        <translation type="unfinished"></translation>
+        <translation>元のファイルが削除または移動されている確認してください。</translation>
     </message>
 </context>
 <context>
@@ -2536,126 +2555,126 @@ Maybe you should try asking a human?</source>
     <message>
         <location filename="../mytreeview.cpp" line="47"/>
         <source>AllDocs</source>
-        <translation type="unfinished"></translation>
+        <translation>すべてのドキュメント</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="53"/>
         <source>AllTags</source>
-        <translation type="unfinished"></translation>
+        <translation>すべてのタグ</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="58"/>
         <source>WasteBasket</source>
-        <translation type="unfinished"></translation>
+        <translation>ごみ箱</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="125"/>
         <source>&amp;New Sub Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>サブディレクトリを作成</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="127"/>
         <source>&amp;Move To Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>ディレクトリに移動</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="129"/>
         <location filename="../mytreeview.cpp" line="176"/>
         <source>&amp;Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>削除</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="131"/>
         <location filename="../mytreeview.cpp" line="178"/>
         <source>&amp;Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>名前を変更</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="135"/>
         <source>&amp;Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>インポート...</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="136"/>
         <source>Ctrl+I</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+I</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="139"/>
         <source>&amp;Export...</source>
-        <translation type="unfinished"></translation>
+        <translation>エクスポート...</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="140"/>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+E</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="143"/>
         <source>&amp;Sort SubDirs</source>
-        <translation type="unfinished"></translation>
+        <translation>サブディレクトリをソート</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="146"/>
         <source>&amp;Show docs under sub Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>サブディレクトリの下ドキュメントを表示</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="154"/>
         <location filename="../mytreeview.cpp" line="164"/>
         <source>&amp;Protect</source>
-        <translation type="unfinished"></translation>
+        <translation>保護</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="156"/>
         <location filename="../mytreeview.cpp" line="186"/>
         <source>&amp;Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>プロパティ</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="160"/>
         <source>&amp;New Root Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>ルートディレクトリを作成</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="162"/>
         <source>&amp;Sort Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>ディレクトリをソート</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="166"/>
         <source>&amp;Option</source>
-        <translation type="unfinished"></translation>
+        <translation>オプション</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="170"/>
         <source>&amp;New Sub Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>サブタグを作成</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="172"/>
         <source>&amp;Move to Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>タグに移動</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="174"/>
         <source>&amp;Move to Root Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>ルートタグに移動</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="180"/>
         <source>&amp;Show docs under sub Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>サブタグの下ドキュメントを表示</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="190"/>
         <source>&amp;New Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>タグを作成</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="194"/>
         <source>&amp;Clear Basket</source>
-        <translation type="unfinished"></translation>
+        <translation>ごみ箱をクリア</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="732"/>
@@ -2673,13 +2692,13 @@ Maybe you should try asking a human?</source>
         <location filename="../mytreeview.cpp" line="1102"/>
         <location filename="../mytreeview.cpp" line="1137"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="732"/>
         <location filename="../mytreeview.cpp" line="754"/>
         <source>Please Select an sub directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>サブディレクトリを選択してください。</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="776"/>
@@ -2692,62 +2711,62 @@ Maybe you should try asking a human?</source>
         <location filename="../mytreeview.cpp" line="1041"/>
         <location filename="../mytreeview.cpp" line="1075"/>
         <source>Please Select an directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>ディレクトリを選択してください。</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="855"/>
         <source>New Directory name:</source>
-        <translation type="unfinished"></translation>
+        <translation>新規ディレクトリ名：</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="914"/>
         <source>New Root Directory name:</source>
-        <translation type="unfinished"></translation>
+        <translation>新規ルートディレクトリ名：</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="1023"/>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>名前を変更</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="1023"/>
         <source>Rename Tag name:</source>
-        <translation type="unfinished"></translation>
+        <translation>タグの名前：</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="980"/>
         <source>Are you sure you want to delete the %1 tag?</source>
-        <translation type="unfinished"></translation>
+        <translation>タグ%1を削除してよろしいですか？</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="111"/>
         <source>Solo Local File Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Solo</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="1004"/>
         <source>Please Select an Sub Tag.</source>
-        <translation type="unfinished"></translation>
+        <translation>タグを選択してください。</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="1102"/>
         <source>Please Select an Tag.</source>
-        <translation type="unfinished"></translation>
+        <translation>タグを選択してください。</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="1137"/>
         <source>Please Select an sub tag.</source>
-        <translation type="unfinished"></translation>
+        <translation>タグを選択してください。</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="1148"/>
         <source>Are you sure that delete the directory &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>ドキュメントを削除してよろしいですか？</translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="1180"/>
         <source>Are you sure that drop the Basket ?</source>
-        <translation type="unfinished"></translation>
+        <translation>ごみ箱をクリアしてもよろしいですか？</translation>
     </message>
 </context>
 <context>
@@ -2791,100 +2810,174 @@ Do you want to ignore these errors for this host?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="23"/>
-        <source>Positon</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../notesdialog.cpp" line="24"/>
-        <source>Type</source>
+        <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="25"/>
-        <source>Content</source>
+        <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="26"/>
-        <source>Author</source>
+        <source>Content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="27"/>
-        <source>Date</source>
+        <source>Author</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="28"/>
+        <source>Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../notesdialog.cpp" line="29"/>
         <source>NoteUid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="55"/>
+        <location filename="../notesdialog.cpp" line="56"/>
         <source>Add note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="56"/>
+        <location filename="../notesdialog.cpp" line="57"/>
         <source>Delete this note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="57"/>
+        <location filename="../notesdialog.cpp" line="58"/>
         <source>Edit this note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="58"/>
+        <location filename="../notesdialog.cpp" line="59"/>
         <source>Delete All notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="81"/>
-        <location filename="../notesdialog.cpp" line="141"/>
+        <location filename="../notesdialog.cpp" line="82"/>
+        <location filename="../notesdialog.cpp" line="150"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="81"/>
-        <location filename="../notesdialog.cpp" line="141"/>
+        <location filename="../notesdialog.cpp" line="82"/>
+        <location filename="../notesdialog.cpp" line="150"/>
         <source>Please Select an note.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="86"/>
+        <location filename="../notesdialog.cpp" line="87"/>
         <source>Are you sure that delete the note ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="161"/>
+        <location filename="../notesdialog.cpp" line="170"/>
         <source>Are you sure that delete All the notes ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="207"/>
-        <source> page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../notesdialog.cpp" line="210"/>
-        <source>sheet </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../notesdialog.cpp" line="216"/>
-        <source> row</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../notesdialog.cpp" line="221"/>
-        <source> column</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../notesdialog.cpp" line="226"/>
+        <location filename="../notesdialog.cpp" line="238"/>
         <source>text</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OptOfSearchDialog</name>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="20"/>
+        <source>Properties Of Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="30"/>
+        <source>Basic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="42"/>
+        <location filename="../optofsearchdialog.cpp" line="84"/>
+        <location filename="../optofsearchdialog.cpp" line="143"/>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="50"/>
+        <source>Have Index file Count:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="57"/>
+        <source>Waiting Index file Count:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="93"/>
+        <source>Update Index file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="106"/>
+        <source>ReCreate Index file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="149"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="19"/>
+        <source>Option of Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="46"/>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="46"/>
+        <source>There is no document waiting for indexed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="52"/>
+        <source>Do you really want to update index?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="53"/>
+        <source>Update Index file will cost time.
+Do you really want to update the index file?
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="84"/>
+        <source>Update Index file Success.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="101"/>
+        <source>Do you really want to recreate index file?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="102"/>
+        <source>ReCreate Index file will cost time.
+Do you really want to recreate the index file?
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="143"/>
+        <source>ReCreate Index file Success.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4505,6 +4598,19 @@ Do you really want to close this page?
     </message>
 </context>
 <context>
+    <name>UeSave</name>
+    <message>
+        <location filename="../uesave.cpp" line="48"/>
+        <source>_note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../uesave.cpp" line="122"/>
+        <source>save success</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>WebPage</name>
     <message>
         <location filename="../browser/webview.cpp" line="165"/>
@@ -4520,12 +4626,12 @@ Do you really want to close this page?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/webview.cpp" line="236"/>
+        <location filename="../browser/webview.cpp" line="241"/>
         <source>Save to the Solo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/webview.cpp" line="238"/>
+        <location filename="../browser/webview.cpp" line="243"/>
         <source>Exit Full Screen</source>
         <translation type="unfinished"></translation>
     </message>

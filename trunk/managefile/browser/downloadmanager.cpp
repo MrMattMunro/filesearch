@@ -55,6 +55,7 @@
 #include <QtGui/QHeaderView>
 #include <QtGui/QFileIconProvider>
 #include <utils.h>
+#include <db/docdao.h>
 
 #include <QtCore/QDebug>
 
@@ -65,9 +66,10 @@
     It moves the data from the QNetworkReply into the QFile as well
     as update the information/progressbar and report errors.
  */
-DownloadItem::DownloadItem(QNetworkReply *reply, const QString &title, bool requestFileName, QWidget *parent)
+DownloadItem::DownloadItem(QNetworkReply *reply, const QString &docuuid, const QString &title, bool requestFileName, QWidget *parent)
     : QWidget(parent)
     , m_reply(reply)
+    , m_docuuid(docuuid)
     , m_title(title)
     , m_requestFileName(requestFileName)
     , m_bytesReceived(0)
@@ -124,6 +126,7 @@ void DownloadItem::getFileName()
     QString defaultFileName = saveFileName(downloadpath);
 
     QString fileName = defaultFileName;
+
     if (m_requestFileName) {
         fileName = QFileDialog::getSaveFileName(this, tr("Save File"), defaultFileName);
         if (fileName.isEmpty()) {
@@ -134,8 +137,9 @@ void DownloadItem::getFileName()
     }
     m_output.setFileName(fileName);
     fileNameLabel->setText(QFileInfo(m_output.fileName()).fileName());
-    if (m_requestFileName)
+    if (m_requestFileName){
         downloadReadyRead();
+    }
 }
 
 QString DownloadItem::saveFileName(const QString &directory) const
@@ -149,18 +153,38 @@ QString DownloadItem::saveFileName(const QString &directory) const
     if(endName.isEmpty() || endName.endsWith("php") || endName.endsWith("jsp")
             || endName.endsWith("html") || endName.endsWith("htm")
             || endName.endsWith("do")){
-        // 根据网页标题来命名
+        // 根据网页标题来命名 uuid
         baseName = m_title;
         endName = "html";
     }
 
     QString name = directory + QDir::separator() + baseName + QLatin1Char('.') + endName;
+
+    QString tmpdocName;
+    bool isExist = false;
     if (QFile::exists(name)) {
+        isExist = true;
         // already exists, don't overwrite
         int i = 1;
         do {
-            name = directory + baseName + QLatin1Char('-') + QString::number(i++) + QLatin1Char('.') + endName;
+           QString tempdownloadpath = Utils::getLocateDownloadPath();
+           tmpdocName =  m_title + QLatin1Char('-') + QString::number(i++) + QLatin1Char('.') + endName;
+           name = tempdownloadpath + QDir::separator() + tmpdocName;
+
         } while (QFile::exists(name));
+    }
+    // 更新数据库
+    if(isExist){
+          Doc doc;
+          doc.DOCUMENT_GUID = m_docuuid;
+          doc.DOCUMENT_LOCATION = name;
+          doc.DOCUMENT_NAME = tmpdocName;
+          doc.DOCUMENT_ICON_INDEX = 0;
+          doc.DOCUMENT_SYNC = 0;
+          doc.DOCUMENT_READ_COUNT = 0;
+          doc.DOCUMENT_RELATE_COUNT = 0;
+          doc.MF_VERSION = 0;
+          DocDao::updateDoc(doc);
     }
     return name;
 }
@@ -378,14 +402,14 @@ int DownloadManager::activeDownloads() const
     return count;
 }
 
-void DownloadManager::download(const QNetworkRequest &request, const QString &title, bool requestFileName)
+void DownloadManager::download(const QNetworkRequest &request, const QString &docuuid, const QString title, bool requestFileName)
 {
     if (request.url().isEmpty())
         return;
-    handleUnsupportedContent(m_manager->get(request), title, requestFileName);
+    handleUnsupportedContent(m_manager->get(request), docuuid, title, requestFileName);
 }
 
-void DownloadManager::handleUnsupportedContent(QNetworkReply *reply, const QString &title, bool requestFileName)
+void DownloadManager::handleUnsupportedContent(QNetworkReply *reply, const QString &docuuid, const QString title, bool requestFileName)
 {
     if (!reply || reply->url().isEmpty())
         return;
@@ -396,7 +420,7 @@ void DownloadManager::handleUnsupportedContent(QNetworkReply *reply, const QStri
         return;
 
     qDebug() << "DownloadManager::handleUnsupportedContent" << reply->url() << "requestFileName" << requestFileName;
-    DownloadItem *item = new DownloadItem(reply, title, requestFileName, this);
+    DownloadItem *item = new DownloadItem(reply, docuuid, title, requestFileName, this);
     addItem(item);
 }
 
@@ -475,6 +499,7 @@ void DownloadManager::save() const
         settings.setValue(key + QLatin1String("location"), QFileInfo(m_downloads[i]->m_output).filePath());
         settings.setValue(key + QLatin1String("done"), m_downloads[i]->downloadedSuccessfully());
         settings.setValue(key + QLatin1String("title"), m_downloads[i]->m_title);
+        settings.setValue(key + QLatin1String("docuuid"), m_downloads[i]->m_docuuid);
     }
     int i = m_downloads.count();
     QString key = QString(QLatin1String("download_%1_")).arg(i);
@@ -483,6 +508,7 @@ void DownloadManager::save() const
         settings.remove(key + QLatin1String("location"));
         settings.remove(key + QLatin1String("done"));
         settings.remove(key + QLatin1String("title"));
+        settings.remove(key + QLatin1String("docuuid"));
         key = QString(QLatin1String("download_%1_")).arg(++i);
     }
 }
@@ -507,11 +533,13 @@ void DownloadManager::load()
         QString fileName = settings.value(key + QLatin1String("location")).toString();
         bool done = settings.value(key + QLatin1String("done"), true).toBool();
         QString title = settings.value(key + QLatin1String("title"),"").toString();
+        QString docuuid = settings.value(key + QLatin1String("docuuid"),"").toString();
         if (!url.isEmpty() && !fileName.isEmpty()) {
-            DownloadItem *item = new DownloadItem(0, title, false, this);
+            DownloadItem *item = new DownloadItem(0, docuuid, title, false, this);
             item->m_output.setFileName(fileName);
             item->fileNameLabel->setText(QFileInfo(item->m_output.fileName()).fileName());
             item->m_url = url;
+            item->m_docuuid = docuuid;
             item->m_title = title;
             item->stopButton->setVisible(false);
             item->stopButton->setEnabled(false);

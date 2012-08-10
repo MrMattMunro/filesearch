@@ -26,7 +26,7 @@ bool NoteDao::insertNote(Note note)
 {
     SqlLoader* sqlLoader = SqlLoader::instance();
     QString sql = sqlLoader->getSql("mf_insert_note.sql");
-    sql = sql.arg(note.NOTE_GUID, note.DOCUMENT_GUID, note.NOTE_CONTENT, note.NOTE_OWNER
+    sql = sql.arg(note.NOTE_GUID, note.DOCUMENT_GUID, note.NOTE_NAME, note.NOTE_CONTENT, note.NOTE_OWNER
                   , QString::number(note.PAGE), note.SHEETPAGE,  QString::number(note.ROW),  QString::number(note.COLUMN));
     return Database::execSql(sql);
 }
@@ -60,13 +60,14 @@ QList<Note> NoteDao::selectNotesbyDocUuId(const QString & docUuid)
             Note field;
             field.NOTE_GUID = query.value(0).toString();
             field.DOCUMENT_GUID = query.value(1).toString();
-            field.NOTE_CONTENT = query.value(2).toString();
-            field.NOTE_OWNER = query.value(3).toString();
-            field.PAGE = query.value(4).toInt();
-            field.SHEETPAGE = query.value(5).toString();
-            field.ROW = query.value(6).toInt();
-            field.COLUMN = query.value(7).toInt();
-            field.DT_MODIFIED = query.value(8).toString();
+            field.NOTE_NAME = query.value(2).toString();
+            field.NOTE_CONTENT = query.value(3).toString();
+            field.NOTE_OWNER = query.value(4).toString();
+            field.PAGE = query.value(5).toInt();
+            field.SHEETPAGE = query.value(6).toString();
+            field.ROW = query.value(7).toInt();
+            field.COLUMN = query.value(8).toInt();
+            field.DT_MODIFIED = query.value(9).toString();
             returnList.append(field);
     }
     return returnList;
@@ -80,19 +81,20 @@ Note NoteDao::selectNote(const QString & uuid)
     sql = sql.arg(uuid);
     QSqlQuery query = Database::execSelect(sql);
 
+    Note field;
     while (query.next()){
-            Note field;
             field.NOTE_GUID = query.value(0).toString();
             field.DOCUMENT_GUID = query.value(1).toString();
-            field.NOTE_CONTENT = query.value(2).toString();
-            field.NOTE_OWNER = query.value(3).toString();
-            field.PAGE = query.value(4).toInt();
-            field.SHEETPAGE = query.value(5).toString();
-            field.ROW = query.value(6).toInt();
-            field.COLUMN = query.value(7).toInt();
-            field.DT_MODIFIED = query.value(8).toString();
-            return field;
+            field.NOTE_NAME = query.value(2).toString();
+            field.NOTE_CONTENT = query.value(3).toString();
+            field.NOTE_OWNER = query.value(4).toString();
+            field.PAGE = query.value(5).toInt();
+            field.SHEETPAGE = query.value(6).toString();
+            field.ROW = query.value(7).toInt();
+            field.COLUMN = query.value(8).toInt();
+            field.DT_MODIFIED = query.value(9).toString();
     }
+    return field;
 }
 
 // ¸üÐÂ±¸×¢
@@ -102,6 +104,7 @@ bool NoteDao::updateNote(Note note){
     Note orgNote = selectNote(note.NOTE_GUID);
 
     QString docUuId = orgNote.DOCUMENT_GUID;
+    QString noteName = orgNote.NOTE_NAME;
     QString noteContent = orgNote.NOTE_CONTENT;
     QString noteOwner = orgNote.NOTE_OWNER;
     int page = orgNote.PAGE;
@@ -111,6 +114,10 @@ bool NoteDao::updateNote(Note note){
 
     if(! note.DOCUMENT_GUID.isEmpty()){
        docUuId = note.DOCUMENT_GUID;
+    }
+
+    if(! note.NOTE_NAME.isEmpty()){
+       noteName = note.NOTE_NAME;
     }
 
     if(! note.NOTE_CONTENT.isEmpty()){
@@ -139,7 +146,7 @@ bool NoteDao::updateNote(Note note){
 
     SqlLoader* sqlLoader = SqlLoader::instance();
     QString sql = sqlLoader->getSql("mf_update_note.sql");
-    sql = sql.arg(docUuId, noteContent, noteOwner, QString::number(page),
+    sql = sql.arg(docUuId, noteName, noteContent, noteOwner, QString::number(page),
                   sheetpage, QString::number(row), QString::number(column), note.NOTE_GUID);
     return Database::execSql(sql);
 
