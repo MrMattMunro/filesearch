@@ -15,7 +15,6 @@ signals:
 
 public slots:
     void save(QString content, QString plaintxt);
-
 private:
 
 };

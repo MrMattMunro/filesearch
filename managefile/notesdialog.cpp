@@ -12,6 +12,7 @@
 #include "fileutils.h"
 #include "db/notedao.h"
 #include "db/docdao.h"
+#include "indexfile.h"
 
 NotesDialog::NotesDialog(QWidget * parent): QDialog(parent),  update(false)
 {
@@ -20,7 +21,7 @@ NotesDialog::NotesDialog(QWidget * parent): QDialog(parent),  update(false)
         model = new QStandardItemModel();
         // 新建Model
         model->setColumnCount(6);
-        model->setHeaderData(0,Qt::Horizontal,tr("Positon"));
+        model->setHeaderData(0,Qt::Horizontal,tr("Name"));
         model->setHeaderData(1,Qt::Horizontal,tr("Type"));
         model->setHeaderData(2,Qt::Horizontal,tr("Content"));
         model->setHeaderData(3,Qt::Horizontal,tr("Author"));
@@ -99,17 +100,25 @@ void NotesDialog::deleteNote()
 
             QStandardItem* item = model->item(index.row(), 5);
             QString noteuuid = qvariant_cast<QString>(item->data(Qt::DisplayRole));
-            NoteDao::deleteNote(noteuuid);
+
             if(noteuuid == p->getSelNoteUid()){
-              needCloseNoteWiget = true;
+               needCloseNoteWiget = true;
             }
 
-            noteuuid.append(".html");
-            noteuuid.prepend(QDir::separator());
-            QFileInfo file(noteuuid.prepend(notespath));
+            //删除Note文件
+            Note note = NoteDao::selectNote(noteuuid);
+            QString notename = note.NOTE_NAME;
+            notename.append(".html");
+            notename.prepend(QDir::separator());
+            QFileInfo file(notename.prepend(notespath));
             if(file.exists()){
                 FileUtils::deleteDirectory(file);
             }
+            // 删除note记录
+            NoteDao::deleteNote(noteuuid);
+            // 删除index
+            DelIndexFilesObj indexFilesObj;
+            indexFilesObj.delIndexfile(notename, note.NOTE_GUID);
         }
 
         int rowToDel;
@@ -166,15 +175,18 @@ void NotesDialog::deleteAllNote()
                 QList<Note> notes = NoteDao::selectNotesbyDocUuId(m_docUuid);
                 // 列出子目录文件
                 QString notespath = Utils::getLocateNotesPath();
+                DelIndexFilesObj indexFilesObj;
                 for (int var = 0; var < notes.length(); ++var) {
                          Note note = notes.at(var);
-                         QString uuid = note.NOTE_GUID;
-                         uuid.append(".html");
-                         uuid.prepend(QDir::separator());
-                         QFileInfo file(uuid.prepend(notespath));
+                         QString name = note.NOTE_NAME;
+                         name.append(".html");
+                         name.prepend(QDir::separator());
+                         QFileInfo file(name.prepend(notespath));
                          if(file.exists()){
                              FileUtils::deleteDirectory(file);
                          }
+                         // 删除index
+                         indexFilesObj.delIndexfile(name, note.NOTE_GUID);
                 }
                 // 删除Notes
                 NoteDao::deleteNoteByDoc(m_docUuid);
@@ -200,29 +212,29 @@ void NotesDialog::intNotes(){
     // 列出子目录文件
     for (int var = 0; var < notes.length(); ++var) {
              Note note = notes.at(var);
-             // 形成位置信息
-             QString position;
-             if(note.PAGE != 0){
-                 position.append(QString::number(note.PAGE));
-                 position.append(tr(" page"));
-             }
-             if(!note.SHEETPAGE.isEmpty()){
-                 position.append(tr("sheet "));
-                 position.append(note.SHEETPAGE);
+             // 形成位置信息 TODO
+//             QString position;
+//             if(note.PAGE != 0){
+//                 position.append(QString::number(note.PAGE));
+//                 position.append(tr(" page"));
+//             }
+//             if(!note.SHEETPAGE.isEmpty()){
+//                 position.append(tr("sheet "));
+//                 position.append(note.SHEETPAGE);
 
-             }
-             if(note.ROW != 0){
-                 position.append(QString::number(note.ROW));
-                 position.append(tr(" row"));
-             }
+//             }
+//             if(note.ROW != 0){
+//                 position.append(QString::number(note.ROW));
+//                 position.append(tr(" row"));
+//             }
 
-             if(note.COLUMN != 0){
-                 position.append(QString::number(note.COLUMN));
-                 position.append(tr(" column"));
-             }
+//             if(note.COLUMN != 0){
+//                 position.append(QString::number(note.COLUMN));
+//                 position.append(tr(" column"));
+//             }
 
              QList<QStandardItem*> items;
-             QStandardItem* iposition = new QStandardItem(position);
+             QStandardItem* name = new QStandardItem(note.NOTE_NAME);
              QStandardItem* type = new QStandardItem(tr("text"));
              QString tmp = note.NOTE_CONTENT;
              tmp = (tmp.length() > 50 ? tmp.left(50).append("...") : tmp);
@@ -231,7 +243,7 @@ void NotesDialog::intNotes(){
              QStandardItem* dtmodify = new QStandardItem(note.DT_MODIFIED);
              QStandardItem* noteguid = new QStandardItem(note.NOTE_GUID);
 
-             items << iposition ;
+             items << name ;
              items << type;
              items << content;
              items << owner;
@@ -244,6 +256,6 @@ void NotesDialog::intNotes(){
     notesView->setSelectionBehavior(QAbstractItemView::SelectRows);
     notesView->hideColumn(5);
     // TODO 位置信息
-    notesView->hideColumn(0);
+    // notesView->hideColumn(0);
     notesView->resizeColumnsToContents();
 }

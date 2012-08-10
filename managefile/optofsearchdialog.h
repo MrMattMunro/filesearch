@@ -1,26 +1,25 @@
-#ifndef PropOfDirDialog_H
-#define PropOfDirDialog_H
+#ifndef OptOfSearchDialog_H
+#define OptOfSearchDialog_H
 
 #include <QDialog>
 #include <QStandardItemModel>
-#include "ui_propofdirdialog.h"
+#include "ui_optofsearchdialog.h"
 
-class PropOfDirDialog: public QDialog, public Ui::PropOfDirDialog
+class OptOfSearchDialog: public QDialog, public Ui::OptOfSearchDialog
 {
         Q_OBJECT
     public:
-        PropOfDirDialog (QWidget *parent=0, const QString & dirUuid = 0);
+        OptOfSearchDialog (QWidget *parent=0);
 
         bool update;
-        QString m_curUuid;
-        QStandardItemModel *model;
+        int sumofindexfile;
     private:
         QObject * m_parent;
 
     private slots:
         void closeBtn_clicked();
-        void applyBtn_clicked();
-        void setProtect();
+        void updateBtn_clicked();
+        void reCreateBtn_clicked();
 };
 
 #endif // 

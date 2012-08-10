@@ -220,19 +220,24 @@ void WebView::contextMenuEvent(QContextMenuEvent *event)
     QWebHitTestResult r = page()->mainFrame()->hitTestContent(event->pos());
     if (!r.linkUrl().isEmpty()) {
         QMenu menu(this);
-        menu.addAction(pageAction(QWebPage::OpenLinkInNewWindow));
+//        menu.addAction(pageAction(QWebPage::OpenLinkInNewWindow));
         menu.addAction(tr("Open in New Tab"), this, SLOT(openLinkInNewTab()));
         menu.addSeparator();
         menu.addAction(pageAction(QWebPage::DownloadLinkToDisk));
         // Add link to bookmarks...
         menu.addSeparator();
         menu.addAction(pageAction(QWebPage::CopyLinkToClipboard));
-        if (page()->settings()->testAttribute(QWebSettings::DeveloperExtrasEnabled))
-            menu.addAction(pageAction(QWebPage::InspectElement));
+        menu.addAction(pageAction(QWebPage::Copy));
+        if (page()->settings()->testAttribute(QWebSettings::DeveloperExtrasEnabled)){
+           menu.addAction(pageAction(QWebPage::InspectElement));
+        }
+
         menu.exec(mapToGlobal(event->pos()));
         return;
     }else{
         QMenu menu(this);
+        menu.addAction(pageAction(QWebPage::Copy));
+        menu.addSeparator();
         menu.addAction(tr("Save to the Solo"), this, SLOT(saveToSlfile()));
         menu.addSeparator();
         menu.addAction(tr("Exit Full Screen"), this, SLOT(exitFullScreen()));
@@ -286,7 +291,7 @@ void WebView::saveToSlfile()
        doc.DELETE_FLAG = "0";
        doc.MF_VERSION = 0;
        DocDao::insertDoc(doc);
-       BrowserApplication::downloadManager()->download(url, doc.DOCUMENT_GUID, false);
+       BrowserApplication::downloadManager()->download(url, doc.DOCUMENT_GUID, this->title(), false);
 
 
        // TODO ÔÝÊ±×¢ÊÍ

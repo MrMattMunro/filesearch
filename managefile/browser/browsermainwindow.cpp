@@ -600,7 +600,7 @@ void BrowserMainWindow::slotSelectLineEdit()
 
 void BrowserMainWindow::slotFileSaveAs()
 {
-    BrowserApplication::downloadManager()->download(currentTab()->url(), "",  true);
+    BrowserApplication::downloadManager()->download(currentTab()->url(), "", "",  true);
 }
 
 void BrowserMainWindow::slotPreferences()

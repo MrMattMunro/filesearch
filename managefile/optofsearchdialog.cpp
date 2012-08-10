@@ -1,182 +1,157 @@
-#include "PropOfDirDialog.h"
+#include "optOfsearchdialog.h"
 
 #include <QDir>
 #include <QMessageBox>
+#include <QThread>
 #include "db/docdao.h"
 #include "db/dirdao.h"
 #include "db/relatedocdao.h"
 #include "utils.h"
+#include "indexfile.h"
+#include "fileutils.h"
 
-PropOfDirDialog::PropOfDirDialog (QWidget *parent, const QString & curUuid)
-    : QDialog(parent), m_curUuid(curUuid),update(false)
+OptOfSearchDialog::OptOfSearchDialog (QWidget *parent)
+    : QDialog(parent), update(false)
 {
     setupUi (this);
 
     // 取得当前文档
-    Dir dir = DirDao::selectDir(m_curUuid);
+    setWindowTitle (tr("Option of Search"));
 
-    setWindowTitle (dir.DIR_NAME +" - " +tr ("Property Editor","Window caption"));
+    int indexdoc = DocDao::selectCountByIndexflg("1");
+    int waitindexdoc = DocDao::selectCountByIndexflg("0");
 
-
-    // 设置基本信息
-    name->setText(dir.DIR_NAME);
-    uuid->setText(dir.DIR_GUID);
-    icon->setIcon(Utils::getIcon(dir.DIR_ICON));
-
-    // 取得当前路径
-    QList<Dir> dirList;
-    DirDao::selectAllParentDirbyDir(dirList, m_curUuid);
-
-    QString slocation;
-    slocation.append(QDir::separator());
-    for (int var = dirList.length() - 1; var >= 0 ; --var) {
-        Dir dir = dirList.at(var);
-        slocation.append(dir.DIR_NAME);
-        slocation.append(QDir::separator());
-    }
-    location->setText(slocation);
-    desp->setText(dir.DIR_DESCRIPTION);
-
-    // 设置保护
-    QList<Dir> selDirList;
-    DirDao::selectAllSubDirbyDir(selDirList, m_curUuid, "0");
-    DirDao::selectAllSubDirbyDir(selDirList, m_curUuid, "1");
-    dirCount->setText(QString::number(selDirList.size()));
-
-    // 加入本文件夹
-    selDirList.append(dir);
-
-    Dir tempDir;
-    int ifileCount = 0;
-    int ifileSize = 0;
-    foreach(tempDir, selDirList){
-        QList<Doc> docs = DocDao::selectDocsbyDir(tempDir.DIR_GUID, "0");
-        QList<Doc> deldocs = DocDao::selectDocsbyDir(tempDir.DIR_GUID, "1");
-        ifileCount = ifileCount + docs.size() + deldocs.size();
-        Doc doc;
-        foreach(doc, docs){
-            // 计算size K
-            QFileInfo file(doc.DOCUMENT_LOCATION);
-            ifileSize = ifileSize + file.size();
-        }
-        foreach(doc, deldocs){
-            // 计算size K
-            QFileInfo file(doc.DOCUMENT_LOCATION);
-            ifileSize = ifileSize + file.size();
-        }
-    }
-    fileCount->setText(QString::number(ifileCount));
-    fileSize->setText(QString::number(ifileSize/1024).append(" K"));
-
-    // 密码
-    // MD5解密
-    QString dirprotect = dir.DIR_PROTECT;
-    if(dirprotect.isEmpty()){
-        // 未设置保护
-        isProtect->setChecked(false);
-        orgpwd->setText("");
-        pwd->setText("");
-        repwd->setText("");
-
-        orgpwd->setDisabled(true);
-        pwd->setDisabled(true);
-        repwd->setDisabled(true);
-    }else{
-        // 设置过保护
-        isProtect->setChecked(true);
-        orgpwd->setText("password");
-        orgpwd->setDisabled(false);
-        pwd->setDisabled(false);
-        repwd->setDisabled(false);
-    }
-
-    // 设置同步
-    localVer->setText(QString::number(dir.MF_VERSION));
-
-    // 从服务器上取出，对比Version来比较版本 利用新的来同步
-    // remoteVer->setText();
+    indexedfileCount->setText(QString::number(indexdoc));
+    waitIndexfileCount->setText(QString::number(waitindexdoc));
     connect(closeBtn,SIGNAL(clicked()),this, SLOT(closeBtn_clicked()));
-    connect(applyBtn,SIGNAL(clicked()),this, SLOT(applyBtn_clicked()));
-    connect(isProtect,SIGNAL(clicked()),this, SLOT(setProtect()));
 
-
+    progressBar->hide();
     // 默认选中第一个tab
     tabWidget->setCurrentIndex(0);
 
+    connect(updateBtn,SIGNAL(clicked()),this, SLOT(updateBtn_clicked()));
+    connect(reCreateBtn,SIGNAL(clicked()),this, SLOT(reCreateBtn_clicked()));
 }
 
-// 保护文件夹
-void PropOfDirDialog::setProtect()
-{
-    if(orgpwd->isEnabled()){
-       orgpwd->setDisabled(true);
-    }else{
-       orgpwd->setDisabled(false);
-    }
-
-    if(pwd->isEnabled()){
-       pwd->setDisabled(true);
-    }else{
-       pwd->setDisabled(false);
-    }
-
-    if(repwd->isEnabled()){
-       repwd->setDisabled(true);
-    }else{
-       repwd->setDisabled(false);
-    }
-
-}
-
-// 更新数据项
-void PropOfDirDialog::applyBtn_clicked()
-{
-     // 参数检查
-    // 取得当前文档
-    Dir dir = DirDao::selectDir(m_curUuid);
-
-     QString sorgpwd = orgpwd->text();
-     if(!sorgpwd.isEmpty()){
-        // 判断跟数据库一致
-         QString dbprotect = dir.DIR_PROTECT;
-         QString md5pwd = Utils::getMD5Str(sorgpwd);
-         if(dbprotect != md5pwd){
-             QMessageBox::warning(this, tr("Warning"), tr("The Org password is wrong, Please Confirm"), QMessageBox::Yes);
-             return;
-         }
-     }
-
-
-     QString srepwd = repwd->text();
-     QString spwd = pwd->text();
-     QString protectStr = "";
-
-     if(!srepwd.isEmpty() && !spwd.isEmpty()){
-         if(srepwd != spwd){
-             QMessageBox::warning(this, tr("Warning"), tr("The password you entered must be the same as the  former"), QMessageBox::Yes);
-             return;
-         }else{
-             protectStr =  Utils::getMD5Str(srepwd);
-         }
-     }
-
-
-     dir.DIR_NAME = name->text();
-     dir.DIR_DESCRIPTION = desp->toPlainText();
-     dir.DIR_ICON = icon->icon().name();
-     dir.DIR_PROTECT = protectStr;
-     dir.MF_VERSION = dir.MF_VERSION + 1;
-
-     DirDao::updateDir(dir);
-
-     update = true;
-     this->close();
-}
-
-
-void PropOfDirDialog::closeBtn_clicked()
+void OptOfSearchDialog::closeBtn_clicked()
 {
     update = true;
     this->close();
 }
+
+void OptOfSearchDialog::updateBtn_clicked()
+{
+   int waitindexdoc = DocDao::selectCountByIndexflg("0");
+   if(waitindexdoc == 0){
+       QMessageBox::warning(this, tr("Warning"), tr("There is no document waiting for indexed"), QMessageBox::Yes);
+       return;
+   }
+
+   QMessageBox closeConfirmation(this);
+   closeConfirmation.setWindowFlags(Qt::Sheet);
+   closeConfirmation.setWindowTitle(tr("Do you really want to update index?"));
+   closeConfirmation.setInformativeText(tr("Update Index file will cost time.\n"
+                                            "Do you really want to update the index file?\n"));
+   closeConfirmation.setIcon(QMessageBox::Question);
+   closeConfirmation.addButton(QMessageBox::Yes);
+   closeConfirmation.addButton(QMessageBox::No);
+   closeConfirmation.setEscapeButton(QMessageBox::No);
+   if (closeConfirmation.exec() == QMessageBox::No){
+      return;
+   }
+   updateBtn->setDisabled(true);
+   reCreateBtn->setDisabled(true);
+   closeBtn->setDisabled(true);
+
+   progressBar->show();
+   progressBar->setWindowModality(Qt::WindowModal);
+   progressBar->setRange(0, waitindexdoc);
+
+   QList<Doc> waitindexdocList = DocDao::selectDocsByIndexFlag("0");
+   // 设置正在建立索引标记
+   Preferences* p = Preferences::instance();
+   p->setIsIndexing(true);
+
+   IndexFilesObj indexFilesObj;
+   for (int var = 0; var < waitindexdocList.size(); ++var) {
+       Doc doc = waitindexdocList.at(var);
+       indexFilesObj.indexfile(doc);
+       progressBar->setValue(var);
+   }
+   progressBar->setValue(waitindexdoc);
+   p->setIsIndexing(false);
+
+   QMessageBox::information(this, tr("Information"), tr("Update Index file Success."), QMessageBox::Yes, QMessageBox::Yes);
+   // 更新界面
+   int uindexdoc = DocDao::selectCountByIndexflg("1");
+   int uwaitindexdoc = DocDao::selectCountByIndexflg("0");
+
+   indexedfileCount->setText(QString::number(uindexdoc));
+   waitIndexfileCount->setText(QString::number(uwaitindexdoc));
+
+   updateBtn->setDisabled(false);
+   reCreateBtn->setDisabled(false);
+   closeBtn->setDisabled(false);
+}
+
+void OptOfSearchDialog::reCreateBtn_clicked()
+{
+    QMessageBox closeConfirmation(this);
+    closeConfirmation.setWindowFlags(Qt::Sheet);
+    closeConfirmation.setWindowTitle(tr("Do you really want to recreate index file?"));
+    closeConfirmation.setInformativeText(tr("ReCreate Index file will cost time.\n"
+                                             "Do you really want to recreate the index file?\n"));
+    closeConfirmation.setIcon(QMessageBox::Question);
+    closeConfirmation.addButton(QMessageBox::Yes);
+    closeConfirmation.addButton(QMessageBox::No);
+    closeConfirmation.setEscapeButton(QMessageBox::No);
+    if (closeConfirmation.exec() == QMessageBox::No){
+       return;
+    }
+    // 更新所有文件到未建立索引状态
+    DocDao::updateDocIndexflg("0");
+
+    updateBtn->setDisabled(true);
+    reCreateBtn->setDisabled(true);
+    closeBtn->setDisabled(true);
+
+    // 删除索引目录
+    QString indexpath = Utils::getLocateIndexPath();
+    FileUtils::removeDirectory(indexpath);
+
+    // 设置正在建立索引标记
+    Preferences* p = Preferences::instance();
+    p->setIsIndexing(true);
+
+    QList<Doc> waitindexdocList = DocDao::selectDocsByIndexFlag("0");
+    progressBar->show();
+    progressBar->setWindowModality(Qt::WindowModal);
+    progressBar->setRange(0, waitindexdocList.size());
+    int sumofindexfile = waitindexdocList.size();
+
+    IndexFilesObj indexFilesObj;
+    for (int var = 0; var < waitindexdocList.size(); ++var) {
+        QThread::currentThread()->wait(100);
+        Doc doc = waitindexdocList.at(var);
+        indexFilesObj.indexfile(doc);
+        progressBar->setValue(var);
+    }
+
+    progressBar->setValue(sumofindexfile);
+    p->setIsIndexing(false);
+
+    QMessageBox::information(this, tr("Information"), tr("ReCreate Index file Success."), QMessageBox::Yes, QMessageBox::Yes);
+    // 更新界面
+    int uindexdoc = DocDao::selectCountByIndexflg("1");
+    int uwaitindexdoc = DocDao::selectCountByIndexflg("0");
+
+    indexedfileCount->setText(QString::number(uindexdoc));
+    waitIndexfileCount->setText(QString::number(uwaitindexdoc));
+
+    updateBtn->setDisabled(false);
+    reCreateBtn->setDisabled(false);
+    closeBtn->setDisabled(false);
+
+}
+
 

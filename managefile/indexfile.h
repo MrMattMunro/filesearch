@@ -30,6 +30,22 @@ class IndexFilesObj:public QObject {
                p->setIsIndexing(false);
            }
        }
+       void indexfile(Doc doc)
+       {
+           Jvm jvm;
+           QString indexpath = Utils::getLocateIndexPath();
+           QMap<QString, QString> map;
+           map.insert("indexpath",indexpath);
+
+           QString dbpath = Utils::getLocateDbPath();
+           dbpath.append(QDir::separator()).append("MF");
+           map.insert("dbpath",dbpath);
+
+           map.insert("docuuid",doc.DOCUMENT_GUID);
+           map.insert("filepath",doc.DOCUMENT_LOCATION);
+
+           jvm.invokeMethod("com/searchlocal/lucene/IndexMaker", "makeindex", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Z", map);
+       }
 };
 class IndexFilesSign:public QObject {
     Q_OBJECT
@@ -70,6 +86,20 @@ class DelIndexFilesObj:public QObject {
                 map.insert("filepath",doc.DOCUMENT_LOCATION);
                 jvm.invokeMethod("com/searchlocal/lucene/IndexMaker", "deleteIndex", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Z", map);
            }
+       }
+       void delIndexfile(QString filepath, QString docUuid)
+       {
+           Jvm jvm;
+           QString indexpath = Utils::getLocateIndexPath();
+           QMap<QString, QString> map;
+           map.insert("indexpath",indexpath);
+
+           QString dbpath = Utils::getLocateDbPath();
+           dbpath.append(QDir::separator()).append("MF");
+           map.insert("dbpath",dbpath);
+           map.insert("docuuid", docUuid);
+           map.insert("filepath", filepath);
+           jvm.invokeMethod("com/searchlocal/lucene/IndexMaker", "deleteIndex", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Z", map);
        }
 };
 class DelIndexFilesSign:public QObject {

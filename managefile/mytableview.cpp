@@ -532,7 +532,7 @@ void MyTableView::showToolTip(const QModelIndex &index)
             for (int var = 0; var < list.size(); ++var) {
                 Note note = list.at(var);
                 QString notes = note.NOTE_CONTENT.trimmed();
-                tips.append(notes.length() > 200 ? notes.left(200) : notes + "\n");
+                tips.append(notes.length() > 100 ? notes.left(100) : notes + "\n");
             }
             QToolTip::showText(QCursor::pos(), tips);
        }

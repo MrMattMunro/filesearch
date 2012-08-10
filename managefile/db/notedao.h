@@ -8,6 +8,7 @@ typedef struct
 {
         QString NOTE_GUID;
         QString DOCUMENT_GUID;
+        QString NOTE_NAME;
         QString NOTE_CONTENT;
         QString NOTE_OWNER;
         int PAGE;

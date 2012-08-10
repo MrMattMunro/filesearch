@@ -128,6 +128,7 @@ private slots:
     void dosearch(QString keyword);
     void setSearchDir(QAction *action);
     void setSearchObject(QAction *action);
+    void optionOfSearch();
     void nextSearchCanStart();
     void checkNewVersion();
 

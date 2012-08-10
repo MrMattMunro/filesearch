@@ -90,6 +90,30 @@ bool DocDao:: physicalDelDoc(){
     return Database::execSql(sql);
 }
 
+// 根据是否建立索引Flag来文件个数
+int DocDao:: selectCountByIndexflg(const QString & indexflg){
+    QString sql;
+    sql.append("SELECT COUNT(*) FROM MF_DOCUMENT WHERE DOCUMENT_INDEXFLG='%1'");
+    sql = sql.arg(indexflg);
+
+    QSqlQuery query = Database::execSelect(sql);
+
+    int rtn;
+    while (query.next()){
+        rtn = query.value(0).toInt();
+    }
+    return rtn;
+}
+
+// 设置所有文档的索引状态
+bool DocDao:: updateDocIndexflg(const QString & indexflg){
+    QString sql;
+    sql.append("UPDATE MF_DOCUMENT SET DOCUMENT_INDEXFLG = '%1' ");
+    sql = sql.arg(indexflg);
+
+    return Database::execSql(sql);
+}
+
 // 根据删除Flg取得文档列表
 QList<Doc> DocDao::selectDocsByDelFlg(const QString & delFlg)
 {

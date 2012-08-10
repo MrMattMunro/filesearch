@@ -55,6 +55,10 @@ class DocDao
                 static QList<Doc> selectDocsByName(const QString & name);
                 static bool physicalDelDoc();
 
+                static int selectCountByIndexflg(const QString & indexflg);
+
+                static bool updateDocIndexflg(const QString & indexflg);
+
         private:
                 static void exception(const QString & message);
 };

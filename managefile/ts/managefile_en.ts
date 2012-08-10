@@ -996,72 +996,72 @@ Do you want to reload all pages?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="128"/>
+        <location filename="../browser/downloadmanager.cpp" line="131"/>
         <source>Save File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="131"/>
+        <location filename="../browser/downloadmanager.cpp" line="134"/>
         <source>Download canceled: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="217"/>
+        <location filename="../browser/downloadmanager.cpp" line="241"/>
         <source>Error opening save file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="226"/>
+        <location filename="../browser/downloadmanager.cpp" line="250"/>
         <source>Error saving: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="235"/>
+        <location filename="../browser/downloadmanager.cpp" line="259"/>
         <source>Network Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="269"/>
+        <location filename="../browser/downloadmanager.cpp" line="293"/>
         <source>seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="272"/>
+        <location filename="../browser/downloadmanager.cpp" line="296"/>
         <source>minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="284"/>
+        <location filename="../browser/downloadmanager.cpp" line="308"/>
         <source>- %4 %5 remaining</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="287"/>
+        <location filename="../browser/downloadmanager.cpp" line="311"/>
         <source>%1 of %2 (%3/sec) %4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="289"/>
+        <location filename="../browser/downloadmanager.cpp" line="313"/>
         <source>?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="296"/>
+        <location filename="../browser/downloadmanager.cpp" line="320"/>
         <source>%1 of %2 - Stopped</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="307"/>
+        <location filename="../browser/downloadmanager.cpp" line="331"/>
         <source>bytes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="310"/>
+        <location filename="../browser/downloadmanager.cpp" line="334"/>
         <source>kB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="313"/>
+        <location filename="../browser/downloadmanager.cpp" line="337"/>
         <source>MB</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1069,12 +1069,12 @@ Do you want to reload all pages?</source>
 <context>
     <name>DownloadManager</name>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="544"/>
+        <location filename="../browser/downloadmanager.cpp" line="572"/>
         <source>1 Download</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/downloadmanager.cpp" line="544"/>
+        <location filename="../browser/downloadmanager.cpp" line="572"/>
         <source>%1 Downloads</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1833,7 +1833,7 @@ acknowledge our Terms of Service</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="187"/>
-        <location filename="../mainwindow.cpp" line="1181"/>
+        <location filename="../mainwindow.cpp" line="1209"/>
         <source>&amp;Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1969,243 +1969,253 @@ acknowledge our Terms of Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="342"/>
+        <location filename="../mainwindow.cpp" line="346"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="401"/>
+        <location filename="../mainwindow.cpp" line="405"/>
         <source>&amp;About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="457"/>
+        <location filename="../mainwindow.cpp" line="461"/>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="466"/>
+        <location filename="../mainwindow.cpp" line="470"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="384"/>
-        <location filename="../mainwindow.cpp" line="504"/>
+        <location filename="../mainwindow.cpp" line="388"/>
+        <location filename="../mainwindow.cpp" line="508"/>
         <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="117"/>
+        <location filename="../mainwindow.cpp" line="88"/>
         <source>Solo Local File Manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="232"/>
+        <location filename="../mainwindow.cpp" line="235"/>
         <source>ALL Documents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="239"/>
+        <location filename="../mainwindow.cpp" line="242"/>
         <source>Current Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="246"/>
+        <location filename="../mainwindow.cpp" line="249"/>
         <source>Current Directory(Include Sub Directory)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="260"/>
+        <location filename="../mainwindow.cpp" line="263"/>
         <source>Document Name And Content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="266"/>
+        <location filename="../mainwindow.cpp" line="269"/>
         <source>Document Name Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="272"/>
+        <location filename="../mainwindow.cpp" line="275"/>
         <source>Document Content Only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="289"/>
+        <location filename="../mainwindow.cpp" line="292"/>
         <source>Option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="314"/>
+        <location filename="../mainwindow.cpp" line="318"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="323"/>
+        <location filename="../mainwindow.cpp" line="327"/>
         <source>&amp;Import...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="324"/>
+        <location filename="../mainwindow.cpp" line="328"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="328"/>
+        <location filename="../mainwindow.cpp" line="332"/>
         <source>&amp;Export...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="329"/>
+        <location filename="../mainwindow.cpp" line="333"/>
         <source>Ctrl+E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="333"/>
+        <location filename="../mainwindow.cpp" line="337"/>
         <source>&amp;Save As...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="337"/>
+        <location filename="../mainwindow.cpp" line="341"/>
         <source>&amp;Save To Mobile...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="341"/>
+        <location filename="../mainwindow.cpp" line="345"/>
         <source>&amp;Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="346"/>
+        <location filename="../mainwindow.cpp" line="350"/>
         <source>&amp;Full Screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="350"/>
+        <location filename="../mainwindow.cpp" line="354"/>
         <source>&amp;Show/Hide Class Tree</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="351"/>
+        <location filename="../mainwindow.cpp" line="355"/>
         <source>Ctrl+H</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="372"/>
+        <location filename="../mainwindow.cpp" line="376"/>
         <source>&amp;Setting ToolBar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="376"/>
+        <location filename="../mainwindow.cpp" line="380"/>
         <source>&amp;Show/Hide Tool Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="385"/>
+        <location filename="../mainwindow.cpp" line="389"/>
         <source>F2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="389"/>
+        <location filename="../mainwindow.cpp" line="393"/>
         <source>&amp;HomePage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="393"/>
+        <location filename="../mainwindow.cpp" line="397"/>
         <source>&amp;Invite Friends...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="397"/>
+        <location filename="../mainwindow.cpp" line="401"/>
         <source>&amp;Forum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="405"/>
+        <location filename="../mainwindow.cpp" line="409"/>
         <source>&amp;Update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="409"/>
+        <location filename="../mainwindow.cpp" line="413"/>
         <source>&amp;Option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="410"/>
+        <location filename="../mainwindow.cpp" line="414"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="414"/>
+        <location filename="../mainwindow.cpp" line="418"/>
         <source>&amp;View Log...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="415"/>
+        <location filename="../mainwindow.cpp" line="419"/>
         <source>Ctrl+L</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="424"/>
+        <location filename="../mainwindow.cpp" line="428"/>
         <source>Account Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="428"/>
+        <location filename="../mainwindow.cpp" line="432"/>
         <source>Update to VIP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="432"/>
+        <location filename="../mainwindow.cpp" line="436"/>
         <source>Logo Off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="488"/>
+        <location filename="../mainwindow.cpp" line="492"/>
         <source>&amp;Tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="495"/>
+        <location filename="../mainwindow.cpp" line="499"/>
         <source>&amp;Account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="532"/>
+        <location filename="../mainwindow.cpp" line="536"/>
         <source>Tool Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="761"/>
+        <location filename="../mainwindow.cpp" line="765"/>
         <source>Note Editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1172"/>
+        <location filename="../mainwindow.cpp" line="1173"/>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1173"/>
+        <source>Please Confirm The original file  has Deleted Or Moved. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1200"/>
         <source>Mi&amp;nimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1175"/>
+        <location filename="../mainwindow.cpp" line="1203"/>
         <source>Ma&amp;ximize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1178"/>
+        <location filename="../mainwindow.cpp" line="1206"/>
         <source>&amp;Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1184"/>
+        <location filename="../mainwindow.cpp" line="1212"/>
         <source>&amp;Auto Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1212"/>
+        <location filename="../mainwindow.cpp" line="1240"/>
         <source>Systray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1213"/>
+        <location filename="../mainwindow.cpp" line="1241"/>
         <source>Sorry, I already gave what help I could.
 Maybe you should try asking a human?</source>
         <translation type="unfinished"></translation>
@@ -2791,100 +2801,174 @@ Do you want to ignore these errors for this host?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="23"/>
-        <source>Positon</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../notesdialog.cpp" line="24"/>
-        <source>Type</source>
+        <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="25"/>
-        <source>Content</source>
+        <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="26"/>
-        <source>Author</source>
+        <source>Content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="27"/>
-        <source>Date</source>
+        <source>Author</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../notesdialog.cpp" line="28"/>
+        <source>Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../notesdialog.cpp" line="29"/>
         <source>NoteUid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="55"/>
+        <location filename="../notesdialog.cpp" line="56"/>
         <source>Add note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="56"/>
+        <location filename="../notesdialog.cpp" line="57"/>
         <source>Delete this note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="57"/>
+        <location filename="../notesdialog.cpp" line="58"/>
         <source>Edit this note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="58"/>
+        <location filename="../notesdialog.cpp" line="59"/>
         <source>Delete All notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="81"/>
-        <location filename="../notesdialog.cpp" line="141"/>
+        <location filename="../notesdialog.cpp" line="82"/>
+        <location filename="../notesdialog.cpp" line="150"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="81"/>
-        <location filename="../notesdialog.cpp" line="141"/>
+        <location filename="../notesdialog.cpp" line="82"/>
+        <location filename="../notesdialog.cpp" line="150"/>
         <source>Please Select an note.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="86"/>
+        <location filename="../notesdialog.cpp" line="87"/>
         <source>Are you sure that delete the note ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="161"/>
+        <location filename="../notesdialog.cpp" line="170"/>
         <source>Are you sure that delete All the notes ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notesdialog.cpp" line="207"/>
-        <source> page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../notesdialog.cpp" line="210"/>
-        <source>sheet </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../notesdialog.cpp" line="216"/>
-        <source> row</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../notesdialog.cpp" line="221"/>
-        <source> column</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../notesdialog.cpp" line="226"/>
+        <location filename="../notesdialog.cpp" line="238"/>
         <source>text</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OptOfSearchDialog</name>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="20"/>
+        <source>Properties Of Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="30"/>
+        <source>Basic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="42"/>
+        <location filename="../optofsearchdialog.cpp" line="84"/>
+        <location filename="../optofsearchdialog.cpp" line="143"/>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="50"/>
+        <source>Have Index file Count:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="57"/>
+        <source>Waiting Index file Count:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="93"/>
+        <source>Update Index file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="106"/>
+        <source>ReCreate Index file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.ui" line="149"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="19"/>
+        <source>Option of Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="46"/>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="46"/>
+        <source>There is no document waiting for indexed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="52"/>
+        <source>Do you really want to update index?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="53"/>
+        <source>Update Index file will cost time.
+Do you really want to update the index file?
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="84"/>
+        <source>Update Index file Success.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="101"/>
+        <source>Do you really want to recreate index file?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="102"/>
+        <source>ReCreate Index file will cost time.
+Do you really want to recreate the index file?
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../optofsearchdialog.cpp" line="143"/>
+        <source>ReCreate Index file Success.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4505,6 +4589,19 @@ Do you really want to close this page?
     </message>
 </context>
 <context>
+    <name>UeSave</name>
+    <message>
+        <location filename="../uesave.cpp" line="48"/>
+        <source>_note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../uesave.cpp" line="122"/>
+        <source>save success</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>WebPage</name>
     <message>
         <location filename="../browser/webview.cpp" line="165"/>
@@ -4520,12 +4617,12 @@ Do you really want to close this page?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/webview.cpp" line="236"/>
+        <location filename="../browser/webview.cpp" line="241"/>
         <source>Save to the Solo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../browser/webview.cpp" line="238"/>
+        <location filename="../browser/webview.cpp" line="243"/>
         <source>Exit Full Screen</source>
         <translation type="unfinished"></translation>
     </message>

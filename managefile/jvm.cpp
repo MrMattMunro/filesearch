@@ -124,33 +124,63 @@ bool Jvm::invokeMethod(QString clz, QString method, QString methodSign, QMap<QSt
 //    l.SendMail
     jmethodID mid = env->GetMethodID(cls, method.toLatin1().data(), methodSign.toLatin1().data());
 
+
     if(method == "makeindex"){
-        Doc file;
         DocDao dao;
-        QList<Doc> docList = dao.selectDocsByIndexFlag("0");
         QString idexpath = parms.value("indexpath");
         QString dbpath = parms.value("dbpath");
 
-        QByteArray tempindexpath = idexpath.toLocal8Bit();
-        char* cindexpath = tempindexpath.data();
+        QString filepath = parms.value("filepath");
+        // È«²¿Ö´ÐÐ
+        if(filepath.isEmpty()){
+            QList<Doc> docList = dao.selectDocsByIndexFlag("0");
+            QByteArray tempindexpath = idexpath.toLocal8Bit();
+            char* cindexpath = tempindexpath.data();
 
-        QByteArray tempdbpath = dbpath.toLocal8Bit();
-        char* cdbpath = tempdbpath.data();
+            QByteArray tempdbpath = dbpath.toLocal8Bit();
+            char* cdbpath = tempdbpath.data();
 
-        jstring arg1 = NewJString(env, cindexpath);
-        jstring arg4 = NewJString(env, cdbpath);
-        foreach(file, docList){
-            qDebug() << "index file ---" << file.DOCUMENT_LOCATION;
+            jstring arg1 = NewJString(env, cindexpath);
+            jstring arg4 = NewJString(env, cdbpath);
+            Doc file;
+            foreach(file, docList){
+                qDebug() << "index file ---" << file.DOCUMENT_LOCATION;
 
-            QByteArray tempfilepath = file.DOCUMENT_LOCATION.toLocal8Bit();
+                QByteArray tempfilepath = file.DOCUMENT_LOCATION.toLocal8Bit();
+                char* filepath = tempfilepath.data();
+
+                jstring arg2 = NewJString(env, filepath);
+                jstring arg3 = NewJString(env, file.DOCUMENT_GUID.toLatin1().data());
+                env->CallObjectMethod(obj, mid, arg1, arg2, arg3, arg4);
+
+                file.DOCUMENT_INDEXFLG = "1";
+                DocDao::updateDoc(file);
+            }
+        }else{
+            QString docuuid = parms.value("docuuid");
+
+            QByteArray tempindexpath = idexpath.toLocal8Bit();
+            char* cindexpath = tempindexpath.data();
+
+            QByteArray tempdbpath = dbpath.toLocal8Bit();
+            char* cdbpath = tempdbpath.data();
+
+            jstring arg1 = NewJString(env, cindexpath);
+            jstring arg4 = NewJString(env, cdbpath);
+
+            qDebug() << "index file ---" << filepath;
+
+            QByteArray tempfilepath = filepath.toLocal8Bit();
             char* filepath = tempfilepath.data();
 
             jstring arg2 = NewJString(env, filepath);
-            jstring arg3 = NewJString(env, file.DOCUMENT_GUID.toLatin1().data());
+            jstring arg3 = NewJString(env, docuuid.toLatin1().data());
             env->CallObjectMethod(obj, mid, arg1, arg2, arg3, arg4);
 
-            file.DOCUMENT_INDEXFLG = "1";
-            DocDao::updateDoc(file);
+            Doc doc;
+            doc.DOCUMENT_GUID = docuuid;
+            doc.DOCUMENT_INDEXFLG = "1";
+            DocDao::updateDoc(doc);
         }
     }
 
