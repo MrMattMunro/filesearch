@@ -38,7 +38,7 @@ SaveUrlDialog::SaveUrlDialog(QWidget * parent)
         verticalLayout_2->addWidget(q_myTreeList);
 
         this->setWindowIcon(Utils::getIcon("folder.ico"));
-        this->setWindowTitle(tr("Save To SlFile"));
+        this->setWindowTitle(tr("Save To Solo"));
 
         connect(buttonBox, SIGNAL(accepted()), this, SLOT(confirmBtn_clicked()));
         connect(buttonBox,SIGNAL(rejected()),this,SLOT(cancelBtn_clicked()));

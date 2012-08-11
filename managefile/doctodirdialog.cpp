@@ -80,10 +80,8 @@ void DocToDirDialog::confirmBtn_clicked(){
         DocDao::insertDoc(doc);
     }else{
         // ÒÆ¶¯
-        Doc tempdoc;
-        tempdoc.DOCUMENT_GUID = m_selDocUuid;
-        tempdoc.DIR_GUID = curUuid;
-        DocDao::updateDoc(tempdoc);
+        doc.DIR_GUID = curUuid;
+        DocDao::updateDoc(doc);
     }
 
     update = true;

@@ -982,7 +982,7 @@ Do you want to reload all pages?</source>
     </message>
     <message>
         <location filename="../doctodirdialog.cpp" line="72"/>
-        <location filename="../doctodirdialog.cpp" line="133"/>
+        <location filename="../doctodirdialog.cpp" line="131"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -992,7 +992,7 @@ Do you want to reload all pages?</source>
         <translation>请选择其他目录</translation>
     </message>
     <message>
-        <location filename="../doctodirdialog.cpp" line="133"/>
+        <location filename="../doctodirdialog.cpp" line="131"/>
         <source>Please Select an directory.</source>
         <translation>请选择目录:</translation>
     </message>
@@ -1703,9 +1703,8 @@ Do you want to reload all pages?</source>
         <translation>用户名/电子邮件</translation>
     </message>
     <message>
-        <location filename="../logindialog.ui" line="82"/>
         <source>Login Slfile</source>
-        <translation>登陆Slfile</translation>
+        <translation type="obsolete">登陆Slfile</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="95"/>
@@ -1729,9 +1728,18 @@ Do you want to reload all pages?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../logindialog.ui" line="167"/>
         <source>Get the Slfile Account</source>
-        <translation>获得Slfile账号</translation>
+        <translation type="obsolete">获得Slfile账号</translation>
+    </message>
+    <message>
+        <location filename="../logindialog.ui" line="82"/>
+        <source>Login Solo</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../logindialog.ui" line="167"/>
+        <source>Get the Solo Account</source>
+        <translation>获得Solo账号</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="180"/>
@@ -1781,63 +1789,67 @@ acknowledge our Terms of Service</source>
         <translation>重置</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="31"/>
         <source>Slfile</source>
-        <translation>Slfile文档管理</translation>
+        <translation type="obsolete">Slfile文档管理</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="121"/>
-        <location filename="../logindialog.cpp" line="126"/>
-        <location filename="../logindialog.cpp" line="130"/>
-        <location filename="../logindialog.cpp" line="135"/>
-        <location filename="../logindialog.cpp" line="139"/>
-        <location filename="../logindialog.cpp" line="146"/>
+        <location filename="../logindialog.cpp" line="31"/>
+        <source>Solo</source>
+        <translation>搜咯</translation>
+    </message>
+    <message>
+        <location filename="../logindialog.cpp" line="124"/>
+        <location filename="../logindialog.cpp" line="129"/>
+        <location filename="../logindialog.cpp" line="133"/>
+        <location filename="../logindialog.cpp" line="138"/>
+        <location filename="../logindialog.cpp" line="142"/>
+        <location filename="../logindialog.cpp" line="149"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="121"/>
+        <location filename="../logindialog.cpp" line="124"/>
         <source>Server Failed, Please Contact Administrator</source>
         <translation>服务器异常,请联系管理员</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="126"/>
+        <location filename="../logindialog.cpp" line="129"/>
         <source>Sign up Failed, Please Contact Administrator</source>
         <translation>注册失败,请联系管理员</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="130"/>
+        <location filename="../logindialog.cpp" line="133"/>
         <source> : Username/Email have existed, Please Choose an other one</source>
         <translation>用户名/电子邮箱已经存在,请确认</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="135"/>
+        <location filename="../logindialog.cpp" line="138"/>
         <source> : Username/Email is not existed, Please confirm</source>
         <translation>用户名/电子邮箱不存在,请确认.</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="139"/>
+        <location filename="../logindialog.cpp" line="142"/>
         <source> : Password is incorrect, Please confirm</source>
         <translation>密码不正确,请确认.</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="146"/>
+        <location filename="../logindialog.cpp" line="149"/>
         <source> : Change Password Success, &lt;br&gt;But Send Mail Failed Please Contact Administrator to get the Password</source>
         <translation>改变密码成功, &lt;br&gt;请联系管理员获得您的新密码</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="152"/>
-        <location filename="../logindialog.cpp" line="231"/>
+        <location filename="../logindialog.cpp" line="155"/>
+        <location filename="../logindialog.cpp" line="234"/>
         <source>Information</source>
         <translation>消息</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="152"/>
+        <location filename="../logindialog.cpp" line="155"/>
         <source>Sign up Successed, Please Login in</source>
         <translation>注册成功,请登录.</translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="231"/>
+        <location filename="../logindialog.cpp" line="234"/>
         <source>ReSet Password Successed, Please Check the email to get the new password</source>
         <translation>重置密码成功,请检查邮箱去获取新的密码</translation>
     </message>
@@ -1845,195 +1857,12 @@ acknowledge our Terms of Service</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.ui" line="14"/>
-        <source>slfile</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="70"/>
-        <source>文件名</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="75"/>
-        <source>目标位置</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="80"/>
-        <source>修改时间</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="96"/>
         <source>about:blank</source>
-        <translation>空</translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="116"/>
-        <source>查看(&amp;V)</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="120"/>
-        <source>皮肤(&amp;V)</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="128"/>
-        <source>语言</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="145"/>
-        <source>文件(&amp;F)</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="157"/>
-        <source>帮助(&amp;H)</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="172"/>
-        <source>工具(&amp;T)</source>
-        <translation></translation>
+        <translation type="obsolete">空</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="187"/>
-        <location filename="../mainwindow.cpp" line="1209"/>
+        <location filename="../mainwindow.cpp" line="1210"/>
         <source>&amp;Quit</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="192"/>
-        <source>选项 </source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="197"/>
-        <source>查看日志</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="202"/>
-        <source>导入</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="207"/>
-        <source>导出</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="212"/>
-        <source>文档另存为</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="217"/>
-        <source>另存到移动设备</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="222"/>
-        <source>退出</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="227"/>
-        <source>全屏</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="232"/>
-        <source>显示/隐藏分类树</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="237"/>
-        <source>默认</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="242"/>
-        <source>书香</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="247"/>
-        <source>灰色</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="252"/>
-        <source>自定义工具栏</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="257"/>
-        <source>显示状态栏</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="262"/>
-        <location filename="../mainwindow.ui" line="307"/>
-        <source>插件管理</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="267"/>
-        <source>用户手册</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="272"/>
-        <source>个人首页</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="277"/>
-        <source>邀请朋友</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="282"/>
-        <source>用户论坛</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="287"/>
-        <source>关于</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="292"/>
-        <source>检查新版本</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="297"/>
-        <source>选项</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="302"/>
-        <source>查看日志文件</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="312"/>
-        <source>简体中文</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="317"/>
-        <source>English</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="322"/>
-        <source>日本語</source>
         <translation></translation>
     </message>
     <message>
@@ -2256,42 +2085,42 @@ acknowledge our Terms of Service</source>
         <translation>备注编辑器</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1173"/>
+        <location filename="../mainwindow.cpp" line="1184"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1173"/>
+        <location filename="../mainwindow.cpp" line="1184"/>
         <source>Please Confirm The original file  has Deleted Or Moved. </source>
         <translation>请确认原始文件是否已被删除或移动.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1200"/>
+        <location filename="../mainwindow.cpp" line="1201"/>
         <source>Mi&amp;nimize</source>
         <translation>最小化</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1203"/>
+        <location filename="../mainwindow.cpp" line="1204"/>
         <source>Ma&amp;ximize</source>
         <translation>最大化</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1206"/>
+        <location filename="../mainwindow.cpp" line="1207"/>
         <source>&amp;Restore</source>
         <translation>重置</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1212"/>
+        <location filename="../mainwindow.cpp" line="1213"/>
         <source>&amp;Auto Start</source>
         <translation>自动启动</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1240"/>
+        <location filename="../mainwindow.cpp" line="1241"/>
         <source>Systray</source>
         <translation>系统托盘</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1241"/>
+        <location filename="../mainwindow.cpp" line="1242"/>
         <source>Sorry, I already gave what help I could.
 Maybe you should try asking a human?</source>
         <translation></translation>
@@ -2766,15 +2595,15 @@ Maybe you should try asking a human?</source>
         <location filename="../mytreeview.cpp" line="776"/>
         <location filename="../mytreeview.cpp" line="802"/>
         <location filename="../mytreeview.cpp" line="837"/>
-        <location filename="../mytreeview.cpp" line="873"/>
-        <location filename="../mytreeview.cpp" line="899"/>
-        <location filename="../mytreeview.cpp" line="938"/>
-        <location filename="../mytreeview.cpp" line="963"/>
-        <location filename="../mytreeview.cpp" line="1004"/>
-        <location filename="../mytreeview.cpp" line="1041"/>
-        <location filename="../mytreeview.cpp" line="1075"/>
-        <location filename="../mytreeview.cpp" line="1102"/>
-        <location filename="../mytreeview.cpp" line="1137"/>
+        <location filename="../mytreeview.cpp" line="872"/>
+        <location filename="../mytreeview.cpp" line="898"/>
+        <location filename="../mytreeview.cpp" line="937"/>
+        <location filename="../mytreeview.cpp" line="962"/>
+        <location filename="../mytreeview.cpp" line="1003"/>
+        <location filename="../mytreeview.cpp" line="1040"/>
+        <location filename="../mytreeview.cpp" line="1074"/>
+        <location filename="../mytreeview.cpp" line="1101"/>
+        <location filename="../mytreeview.cpp" line="1136"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -2788,12 +2617,12 @@ Maybe you should try asking a human?</source>
         <location filename="../mytreeview.cpp" line="776"/>
         <location filename="../mytreeview.cpp" line="802"/>
         <location filename="../mytreeview.cpp" line="837"/>
-        <location filename="../mytreeview.cpp" line="873"/>
-        <location filename="../mytreeview.cpp" line="899"/>
-        <location filename="../mytreeview.cpp" line="938"/>
-        <location filename="../mytreeview.cpp" line="963"/>
-        <location filename="../mytreeview.cpp" line="1041"/>
-        <location filename="../mytreeview.cpp" line="1075"/>
+        <location filename="../mytreeview.cpp" line="872"/>
+        <location filename="../mytreeview.cpp" line="898"/>
+        <location filename="../mytreeview.cpp" line="937"/>
+        <location filename="../mytreeview.cpp" line="962"/>
+        <location filename="../mytreeview.cpp" line="1040"/>
+        <location filename="../mytreeview.cpp" line="1074"/>
         <source>Please Select an directory.</source>
         <translation>请选择一个文件夹.</translation>
     </message>
@@ -2803,17 +2632,17 @@ Maybe you should try asking a human?</source>
         <translation>新建目录名称:</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="914"/>
+        <location filename="../mytreeview.cpp" line="913"/>
         <source>New Root Directory name:</source>
         <translation>新建根文件夹名称:</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1023"/>
+        <location filename="../mytreeview.cpp" line="1022"/>
         <source>Rename</source>
         <translation>重命名</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1023"/>
+        <location filename="../mytreeview.cpp" line="1022"/>
         <source>Rename Tag name:</source>
         <translation>重命名标签名称:</translation>
     </message>
@@ -2822,12 +2651,12 @@ Maybe you should try asking a human?</source>
         <translation type="obsolete">新建根目录名称:</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="980"/>
+        <location filename="../mytreeview.cpp" line="979"/>
         <source>Are you sure you want to delete the %1 tag?</source>
         <translation>您是否确认删除 %1 标签</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1004"/>
+        <location filename="../mytreeview.cpp" line="1003"/>
         <source>Please Select an Sub Tag.</source>
         <translation>请选择一个子标签.</translation>
     </message>
@@ -2836,22 +2665,22 @@ Maybe you should try asking a human?</source>
         <translation type="obsolete">新建标签名称:</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1102"/>
+        <location filename="../mytreeview.cpp" line="1101"/>
         <source>Please Select an Tag.</source>
         <translation>请选择一个标签.</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1137"/>
+        <location filename="../mytreeview.cpp" line="1136"/>
         <source>Please Select an sub tag.</source>
         <translation>请选择一个子标签.</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1148"/>
+        <location filename="../mytreeview.cpp" line="1147"/>
         <source>Are you sure that delete the directory &quot;%1&quot;?</source>
         <translation>您是否确定删除目录 %1 ?</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1180"/>
+        <location filename="../mytreeview.cpp" line="1179"/>
         <source>Are you sure that drop the Basket ?</source>
         <translation>您是否确定清空垃圾篓?</translation>
     </message>
@@ -3067,7 +2896,7 @@ Do you want to ignore these errors for this host?</source>
         <source>Update Index file will cost time.
 Do you really want to update the index file?
 </source>
-        <translation>更新索引文件需要花费一定时间.\n 您是否确定更新索引?</translation>
+        <translation>更新索引文件需要花费一定时间. 您是否确定更新索引?</translation>
     </message>
     <message>
         <location filename="../optofsearchdialog.cpp" line="84"/>
@@ -3084,7 +2913,7 @@ Do you really want to update the index file?
         <source>ReCreate Index file will cost time.
 Do you really want to recreate the index file?
 </source>
-        <translation>重建索引文件需要花费一定时间.\n 您是否确定重建索引?</translation>
+        <translation>重建索引文件需要花费一定时间. 您是否确定重建索引?</translation>
     </message>
     <message>
         <location filename="../optofsearchdialog.cpp" line="143"/>
@@ -3825,6 +3654,8 @@ Do you really want to recreate the index file?
     </message>
     <message>
         <location filename="../refereedialog.cpp" line="22"/>
+        <location filename="../refereedialog.cpp" line="69"/>
+        <location filename="../refereedialog.cpp" line="70"/>
         <source>Please Input your real name</source>
         <translation>请输入您的真实姓名</translation>
     </message>
@@ -3844,7 +3675,8 @@ Do you really want to recreate the index file?
         <location filename="../refereedialog.cpp" line="52"/>
         <location filename="../refereedialog.cpp" line="58"/>
         <location filename="../refereedialog.cpp" line="64"/>
-        <location filename="../refereedialog.cpp" line="145"/>
+        <location filename="../refereedialog.cpp" line="70"/>
+        <location filename="../refereedialog.cpp" line="156"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -3864,23 +3696,23 @@ Do you really want to recreate the index file?
         <translation>标题为空,请输入</translation>
     </message>
     <message>
-        <location filename="../refereedialog.cpp" line="108"/>
-        <location filename="../refereedialog.cpp" line="132"/>
+        <location filename="../refereedialog.cpp" line="119"/>
+        <location filename="../refereedialog.cpp" line="143"/>
         <source>Information</source>
         <translation>消息</translation>
     </message>
     <message>
-        <location filename="../refereedialog.cpp" line="108"/>
+        <location filename="../refereedialog.cpp" line="119"/>
         <source>User Is Not Existed.</source>
         <translation>用户不存在</translation>
     </message>
     <message>
-        <location filename="../refereedialog.cpp" line="126"/>
+        <location filename="../refereedialog.cpp" line="137"/>
         <source>Send Mail Success !</source>
         <translation>发送邮件成功!</translation>
     </message>
     <message>
-        <location filename="../refereedialog.cpp" line="139"/>
+        <location filename="../refereedialog.cpp" line="150"/>
         <source>Send Mail Failed, Please check the email Address !</source>
         <translation>发送邮件失败,请检查邮件地址.</translation>
     </message>
@@ -4011,9 +3843,13 @@ Do you really want to recreate the index file?
         <translation></translation>
     </message>
     <message>
-        <location filename="../saveurldialog.cpp" line="41"/>
         <source>Save To SlFile</source>
-        <translation>保存到Slfile</translation>
+        <translation type="obsolete">保存到Slfile</translation>
+    </message>
+    <message>
+        <location filename="../saveurldialog.cpp" line="41"/>
+        <source>Save To Solo</source>
+        <translation>保存到搜咯</translation>
     </message>
     <message>
         <location filename="../saveurldialog.cpp" line="89"/>
@@ -4960,7 +4796,7 @@ Do you want to overwrite it?</source>
         <translation>_笔记</translation>
     </message>
     <message>
-        <location filename="../uesave.cpp" line="122"/>
+        <location filename="../uesave.cpp" line="124"/>
         <source>save success</source>
         <translation>保存成功</translation>
     </message>

@@ -45,7 +45,6 @@ QString getSysLang();
 QString getStartUpPath();
 void setAutoRunStatus(bool bAutoRun);
 bool getAutoRunStatus();
-
 };
 
 #endif

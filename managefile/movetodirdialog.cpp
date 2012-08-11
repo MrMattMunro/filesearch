@@ -65,9 +65,9 @@ void MoveToDirDialog::confirmBtn_clicked(){
     }
 
     // 删除原有目录及节点
-    Dir dir;
-    dir.DIR_GUID = m_curUuid;
+    Dir dir = DirDao::selectDir(m_curUuid);
     dir.DIR_PARENT_UUID = curUuid;
+    dir.MF_VERSION = dir.MF_VERSION + 1;
     m_toUuid = curUuid;
     DirDao::updateDir(dir);
     update = true;

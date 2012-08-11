@@ -102,6 +102,8 @@ QString Utils::getTranslator(const QString & localeName)
     return QString("%1/managefile_%2.qm").arg(TRANSLATION_DIR).arg(local);
 }
 
+
+
 bool Utils::updateObjectTree(const QString & sql)
 {
 	if (sql.isNull())

@@ -102,6 +102,7 @@ PropOfDocDialog::PropOfDocDialog (QWidget *parent, const QString & curUuid)
     readcount->setReadOnly(true);
     relatedcount->setReadOnly(true);
     version->setReadOnly(true);
+    title->setReadOnly(true);
 
     connect(closeBtn,SIGNAL(clicked()),this, SLOT(closeBtn_clicked()));
     connect(applyBtn,SIGNAL(clicked()),this, SLOT(applyBtn_clicked()));
@@ -113,11 +114,8 @@ PropOfDocDialog::PropOfDocDialog (QWidget *parent, const QString & curUuid)
 // 更新数据项
 void PropOfDocDialog::applyBtn_clicked()
 {
-     Doc doc;
-     doc.DOCUMENT_GUID = m_curUuid;
+    Doc doc = DocDao::selectDoc(m_curUuid);
     // 更新数据项
-    // 标题
-    doc.DOCUMENT_NAME = title->text();
     // keyWords
     doc.DOCUMENT_KEYWORDS = keywords->text();
 
@@ -130,6 +128,8 @@ void PropOfDocDialog::applyBtn_clicked()
     doc.DOCUMENT_AUTHOR = author->text();
     // owner
     doc.DOCUMENT_OWNER = owner->text();
+    // version
+    doc.MF_VERSION = doc.MF_VERSION + 1;
     DocDao::updateDoc(doc);
 
     update = true;

@@ -67,7 +67,8 @@ QList<Note> NoteDao::selectNotesbyDocUuId(const QString & docUuid)
             field.SHEETPAGE = query.value(6).toString();
             field.ROW = query.value(7).toInt();
             field.COLUMN = query.value(8).toInt();
-            field.DT_MODIFIED = query.value(9).toString();
+            field.MF_VERSION = query.value(9).toInt();
+            field.DT_MODIFIED = query.value(10).toString();
             returnList.append(field);
     }
     return returnList;
@@ -92,7 +93,8 @@ Note NoteDao::selectNote(const QString & uuid)
             field.SHEETPAGE = query.value(6).toString();
             field.ROW = query.value(7).toInt();
             field.COLUMN = query.value(8).toInt();
-            field.DT_MODIFIED = query.value(9).toString();
+            field.MF_VERSION = query.value(9).toInt();
+            field.DT_MODIFIED = query.value(10).toString();
     }
     return field;
 }
@@ -111,6 +113,7 @@ bool NoteDao::updateNote(Note note){
     QString sheetpage = orgNote.SHEETPAGE;
     int row = orgNote.ROW;
     int column = orgNote.COLUMN;
+    int version = orgNote.MF_VERSION;
 
     if(! note.DOCUMENT_GUID.isEmpty()){
        docUuId = note.DOCUMENT_GUID;
@@ -144,10 +147,14 @@ bool NoteDao::updateNote(Note note){
        column = note.COLUMN;
     }
 
+    if(note.MF_VERSION != 0){
+       version = note.MF_VERSION;
+    }
+
     SqlLoader* sqlLoader = SqlLoader::instance();
     QString sql = sqlLoader->getSql("mf_update_note.sql");
     sql = sql.arg(docUuId, noteName, noteContent, noteOwner, QString::number(page),
-                  sheetpage, QString::number(row), QString::number(column), note.NOTE_GUID);
+                  sheetpage, QString::number(row), QString::number(version), note.NOTE_GUID);
     return Database::execSql(sql);
 
       return true;

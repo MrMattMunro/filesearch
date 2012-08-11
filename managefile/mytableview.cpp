@@ -376,7 +376,7 @@ void MyTableView::buildDocList(QList<Doc> doclist)
                 secitems.append(item);
 
                 item = new QStandardItem();
-                item->setData("", Qt::DisplayRole);
+                item->setData("", Qt::DecorationRole);
                 secitems.append(item);
 
                 // 动态的第二项

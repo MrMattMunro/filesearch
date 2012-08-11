@@ -79,7 +79,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Login Slfile</string>
+        <string>Login Solo</string>
        </property>
       </widget>
       <widget class="QGroupBox" name="groupBox_2">
@@ -164,7 +164,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>Get the Slfile Account</string>
+        <string>Get the Solo Account</string>
        </property>
       </widget>
       <widget class="QGroupBox" name="groupBox_3">
