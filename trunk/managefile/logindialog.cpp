@@ -28,13 +28,16 @@ LoginDialog::LoginDialog(QWidget * parent)
         connect(resetBtn, SIGNAL(clicked()), this, SLOT(resetBtn_clicked()));
 
         this->setWindowIcon(Utils::getIcon("file_manager.png"));
-        this->setWindowTitle(tr("Slfile"));
+        this->setWindowTitle(tr("Solo"));
         tabWidget->setCurrentIndex(0);
 
+        QString lange = Utils::getSysLang();
         QDir pathDir = Utils::directoryOf("html");
         QString path = pathDir.absolutePath();
         path.append(QDir::separator());
-        path.append("welcome.html");
+        path.append("welcome_");
+        path.append(lange);
+        path.append(".html");
 
         welcome->load(QUrl::fromUserInput(path));
         m_action = "";

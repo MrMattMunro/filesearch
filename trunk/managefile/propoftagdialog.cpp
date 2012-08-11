@@ -42,13 +42,12 @@ PropOfTagDialog::PropOfTagDialog(QWidget * parent, const QString & uuid, const Q
 // 更新
 void PropOfTagDialog::confirmBtn_clicked(){
     // 插入数据库
-    Tag tag;
-    tag.TAG_GUID = m_tagUuId;
+    Tag tag = TagDao::selectTag(m_tagUuId);
     tag.TAG_NAME = tagName->text();
     m_tagname = tag.TAG_NAME;
     tag.TAG_DESCRIPTION = desp->toPlainText();
     m_desp = tag.TAG_NAME;
-    tag.MF_VERSION = 1;
+    tag.MF_VERSION = tag.MF_VERSION + 1;
 
     bool success  = TagDao::updateTag(tag);
     if(success){

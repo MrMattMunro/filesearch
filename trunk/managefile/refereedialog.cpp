@@ -65,6 +65,15 @@ void RefereeDialog::applyBtn_clicked()
         return;
     }
 
+    QString name = realname->text();
+    if(title.trimmed().isEmpty() || name == tr("Please Input your real name")){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Input your real name"), QMessageBox::Yes);
+        return;
+    }
+
+    sendMailObj.m_successList.clear();
+    sendMailObj.m_failList.clear();
+
     QStringList emailaddrs = addrs.split(",");
 
     sendMailObj.toaddrs = emailaddrs;
@@ -89,6 +98,8 @@ void RefereeDialog::applyBtn_clicked()
     surl.append(email.trimmed());
     surl.append("&friendemails=");
     surl.append(addrs);
+    surl.append("&username=");
+    surl.append(name);
 
     requtil = new ReqUtil(this);
 
@@ -145,8 +156,7 @@ void RefereeDialog::checkSuccess()
          QMessageBox::warning(this, tr("Warning"), msg, QMessageBox::Yes);
     }
 
-    sendMailObj.m_successList.clear();
-    sendMailObj.m_failList.clear();
+
 }
 
 // È¡Ïû

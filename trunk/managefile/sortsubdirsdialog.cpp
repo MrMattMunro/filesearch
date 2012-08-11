@@ -68,8 +68,8 @@ void SortSubDirsDialog::confirmBtn_clicked(){
         QTableWidgetItem *item = tableWidget->item(var, 0);
         QString uuId = qvariant_cast<QString>(item->data(Qt::UserRole));
         // 删除原有目录及节点
-        Dir dir;
-        dir.DIR_GUID = uuId;
+        Dir dir = DirDao::selectDir(uuId);
+        dir.MF_VERSION = dir.MF_VERSION + 1;
         dir.DIR_ORDER =  var + 1;
         DirDao::updateDir(dir);
     }

@@ -9,7 +9,7 @@ LIBS += C:\QtWorksapce\managefile\lib\sqlite3.lib \
 win32:LIBS += -lshell32 -lole32 -luser32
 
 CONFIG+=qaxcontainer
-#CONFIG+=release
+CONFIG+=release
 
 SOURCES += main.cpp \
         mainwindow.cpp \
@@ -191,7 +191,7 @@ HEADERS  += mainwindow.h \
 RESOURCES += \
     managefile.qrc
 
-FORMS    += mainwindow.ui \
+FORMS    += \
     preferencesdialog.ui \
     importdocdialog.ui \
     exportdocdialog.ui \

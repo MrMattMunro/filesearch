@@ -380,7 +380,7 @@ void ImportDocDialog::confirmBtn_clicked(){
                 doc.DT_ACCESSED = fileinfo.lastRead().toString("yyyy-MM-dd hh:mm:ss");
                 doc.DOCUMENT_ICON_INDEX = 0;
                 doc.DOCUMENT_SYNC = 0;
-                doc.DOCUMENT_PROTECT = "";
+                doc.DOCUMENT_PROTECT = "0";
                 doc.DOCUMENT_ENCODE= "0";
                 doc.DOCUMENT_READ_COUNT = 0;
                 doc.DOCUMENT_RELATE_COUNT = 0;
@@ -420,12 +420,12 @@ void ImportDocDialog::confirmBtn_clicked(){
                 doc.DT_ACCESSED = fileinfo.lastRead().toString("yyyy-MM-dd hh:mm:ss");
                 doc.DOCUMENT_ICON_INDEX = 0;
                 doc.DOCUMENT_SYNC = 0;
-                doc.DOCUMENT_PROTECT = "";
+                doc.DOCUMENT_PROTECT = "0";
                 doc.DOCUMENT_ENCODE= "0";
                 doc.DOCUMENT_READ_COUNT = 0;
                 doc.DOCUMENT_RELATE_COUNT = 0;
                 doc.DOCUMENT_INDEXFLG = "0";
-                doc.DOCUMENT_OPERFLG = "";
+                doc.DOCUMENT_OPERFLG = "0";
                 doc.DELETE_FLAG = "0";
                 doc.MF_VERSION = 0;
 

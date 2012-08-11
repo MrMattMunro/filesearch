@@ -860,10 +860,9 @@ void MyTreeView::renameSubDir()
                 // 改变树节点
                 curItem->setData(text, Qt::DisplayRole);
                 // 改变目录名称
-                Dir dir;
-                dir.DIR_GUID = getCurUuid();
+                Dir dir = DirDao::selectDir(getCurUuid());
                 dir.DIR_NAME = text;
-                dir.MF_VERSION = 0;
+                dir.MF_VERSION = dir.MF_VERSION + 1;
                 dir.DIR_ORDER = 0;
                 DirDao::updateDir(dir);
         }
@@ -1029,8 +1028,8 @@ void MyTreeView::renameSubTag()
                 curItem->setData(text, Qt::DisplayRole);
                 // 改变标签名称
                 // 删除Tag
-                Tag tag;
-                tag.TAG_GUID = curUuId;
+                Tag tag = TagDao::selectTag(curUuId);
+                tag.MF_VERSION = tag.MF_VERSION + 1;
                 tag.TAG_NAME = text;
                 TagDao::updateTag(tag);
         }

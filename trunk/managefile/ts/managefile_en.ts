@@ -930,7 +930,7 @@ Do you want to reload all pages?</source>
     </message>
     <message>
         <location filename="../doctodirdialog.cpp" line="72"/>
-        <location filename="../doctodirdialog.cpp" line="133"/>
+        <location filename="../doctodirdialog.cpp" line="131"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
@@ -940,7 +940,7 @@ Do you want to reload all pages?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../doctodirdialog.cpp" line="133"/>
+        <location filename="../doctodirdialog.cpp" line="131"/>
         <source>Please Select an directory.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1635,11 +1635,6 @@ Do you want to reload all pages?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.ui" line="82"/>
-        <source>Login Slfile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../logindialog.ui" line="95"/>
         <location filename="../logindialog.ui" line="220"/>
         <source>PassWord</source>
@@ -1661,8 +1656,13 @@ Do you want to reload all pages?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../logindialog.ui" line="82"/>
+        <source>Login Solo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../logindialog.ui" line="167"/>
-        <source>Get the Slfile Account</source>
+        <source>Get the Solo Account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1714,62 +1714,62 @@ acknowledge our Terms of Service</source>
     </message>
     <message>
         <location filename="../logindialog.cpp" line="31"/>
-        <source>Slfile</source>
+        <source>Solo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="121"/>
-        <location filename="../logindialog.cpp" line="126"/>
-        <location filename="../logindialog.cpp" line="130"/>
-        <location filename="../logindialog.cpp" line="135"/>
-        <location filename="../logindialog.cpp" line="139"/>
-        <location filename="../logindialog.cpp" line="146"/>
+        <location filename="../logindialog.cpp" line="124"/>
+        <location filename="../logindialog.cpp" line="129"/>
+        <location filename="../logindialog.cpp" line="133"/>
+        <location filename="../logindialog.cpp" line="138"/>
+        <location filename="../logindialog.cpp" line="142"/>
+        <location filename="../logindialog.cpp" line="149"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="121"/>
+        <location filename="../logindialog.cpp" line="124"/>
         <source>Server Failed, Please Contact Administrator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="126"/>
+        <location filename="../logindialog.cpp" line="129"/>
         <source>Sign up Failed, Please Contact Administrator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="130"/>
+        <location filename="../logindialog.cpp" line="133"/>
         <source> : Username/Email have existed, Please Choose an other one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="135"/>
+        <location filename="../logindialog.cpp" line="138"/>
         <source> : Username/Email is not existed, Please confirm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="139"/>
+        <location filename="../logindialog.cpp" line="142"/>
         <source> : Password is incorrect, Please confirm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="146"/>
+        <location filename="../logindialog.cpp" line="149"/>
         <source> : Change Password Success, &lt;br&gt;But Send Mail Failed Please Contact Administrator to get the Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="152"/>
-        <location filename="../logindialog.cpp" line="231"/>
+        <location filename="../logindialog.cpp" line="155"/>
+        <location filename="../logindialog.cpp" line="234"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="152"/>
+        <location filename="../logindialog.cpp" line="155"/>
         <source>Sign up Successed, Please Login in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logindialog.cpp" line="231"/>
+        <location filename="../logindialog.cpp" line="234"/>
         <source>ReSet Password Successed, Please Check the email to get the new password</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1777,195 +1777,8 @@ acknowledge our Terms of Service</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.ui" line="14"/>
-        <source>slfile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="70"/>
-        <source>文件名</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="75"/>
-        <source>目标位置</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="80"/>
-        <source>修改时间</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="96"/>
-        <source>about:blank</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="116"/>
-        <source>查看(&amp;V)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="120"/>
-        <source>皮肤(&amp;V)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="128"/>
-        <source>语言</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="145"/>
-        <source>文件(&amp;F)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="157"/>
-        <source>帮助(&amp;H)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="172"/>
-        <source>工具(&amp;T)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="187"/>
-        <location filename="../mainwindow.cpp" line="1209"/>
+        <location filename="../mainwindow.cpp" line="1210"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="192"/>
-        <source>选项 </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="197"/>
-        <source>查看日志</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="202"/>
-        <source>导入</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="207"/>
-        <source>导出</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="212"/>
-        <source>文档另存为</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="217"/>
-        <source>另存到移动设备</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="222"/>
-        <source>退出</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="227"/>
-        <source>全屏</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="232"/>
-        <source>显示/隐藏分类树</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="237"/>
-        <source>默认</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="242"/>
-        <source>书香</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="247"/>
-        <source>灰色</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="252"/>
-        <source>自定义工具栏</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="257"/>
-        <source>显示状态栏</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="262"/>
-        <location filename="../mainwindow.ui" line="307"/>
-        <source>插件管理</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="267"/>
-        <source>用户手册</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="272"/>
-        <source>个人首页</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="277"/>
-        <source>邀请朋友</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="282"/>
-        <source>用户论坛</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="287"/>
-        <source>关于</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="292"/>
-        <source>检查新版本</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="297"/>
-        <source>选项</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="302"/>
-        <source>查看日志文件</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="312"/>
-        <source>简体中文</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="317"/>
-        <source>English</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../mainwindow.ui" line="322"/>
-        <source>日本語</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2180,42 +1993,42 @@ acknowledge our Terms of Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1173"/>
+        <location filename="../mainwindow.cpp" line="1184"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1173"/>
+        <location filename="../mainwindow.cpp" line="1184"/>
         <source>Please Confirm The original file  has Deleted Or Moved. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1200"/>
+        <location filename="../mainwindow.cpp" line="1201"/>
         <source>Mi&amp;nimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1203"/>
+        <location filename="../mainwindow.cpp" line="1204"/>
         <source>Ma&amp;ximize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1206"/>
+        <location filename="../mainwindow.cpp" line="1207"/>
         <source>&amp;Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1212"/>
+        <location filename="../mainwindow.cpp" line="1213"/>
         <source>&amp;Auto Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1240"/>
+        <location filename="../mainwindow.cpp" line="1241"/>
         <source>Systray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1241"/>
+        <location filename="../mainwindow.cpp" line="1242"/>
         <source>Sorry, I already gave what help I could.
 Maybe you should try asking a human?</source>
         <translation type="unfinished"></translation>
@@ -2673,15 +2486,15 @@ Maybe you should try asking a human?</source>
         <location filename="../mytreeview.cpp" line="776"/>
         <location filename="../mytreeview.cpp" line="802"/>
         <location filename="../mytreeview.cpp" line="837"/>
-        <location filename="../mytreeview.cpp" line="873"/>
-        <location filename="../mytreeview.cpp" line="899"/>
-        <location filename="../mytreeview.cpp" line="938"/>
-        <location filename="../mytreeview.cpp" line="963"/>
-        <location filename="../mytreeview.cpp" line="1004"/>
-        <location filename="../mytreeview.cpp" line="1041"/>
-        <location filename="../mytreeview.cpp" line="1075"/>
-        <location filename="../mytreeview.cpp" line="1102"/>
-        <location filename="../mytreeview.cpp" line="1137"/>
+        <location filename="../mytreeview.cpp" line="872"/>
+        <location filename="../mytreeview.cpp" line="898"/>
+        <location filename="../mytreeview.cpp" line="937"/>
+        <location filename="../mytreeview.cpp" line="962"/>
+        <location filename="../mytreeview.cpp" line="1003"/>
+        <location filename="../mytreeview.cpp" line="1040"/>
+        <location filename="../mytreeview.cpp" line="1074"/>
+        <location filename="../mytreeview.cpp" line="1101"/>
+        <location filename="../mytreeview.cpp" line="1136"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2695,12 +2508,12 @@ Maybe you should try asking a human?</source>
         <location filename="../mytreeview.cpp" line="776"/>
         <location filename="../mytreeview.cpp" line="802"/>
         <location filename="../mytreeview.cpp" line="837"/>
-        <location filename="../mytreeview.cpp" line="873"/>
-        <location filename="../mytreeview.cpp" line="899"/>
-        <location filename="../mytreeview.cpp" line="938"/>
-        <location filename="../mytreeview.cpp" line="963"/>
-        <location filename="../mytreeview.cpp" line="1041"/>
-        <location filename="../mytreeview.cpp" line="1075"/>
+        <location filename="../mytreeview.cpp" line="872"/>
+        <location filename="../mytreeview.cpp" line="898"/>
+        <location filename="../mytreeview.cpp" line="937"/>
+        <location filename="../mytreeview.cpp" line="962"/>
+        <location filename="../mytreeview.cpp" line="1040"/>
+        <location filename="../mytreeview.cpp" line="1074"/>
         <source>Please Select an directory.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2710,22 +2523,22 @@ Maybe you should try asking a human?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="914"/>
+        <location filename="../mytreeview.cpp" line="913"/>
         <source>New Root Directory name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1023"/>
+        <location filename="../mytreeview.cpp" line="1022"/>
         <source>Rename</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1023"/>
+        <location filename="../mytreeview.cpp" line="1022"/>
         <source>Rename Tag name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="980"/>
+        <location filename="../mytreeview.cpp" line="979"/>
         <source>Are you sure you want to delete the %1 tag?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2735,27 +2548,27 @@ Maybe you should try asking a human?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1004"/>
+        <location filename="../mytreeview.cpp" line="1003"/>
         <source>Please Select an Sub Tag.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1102"/>
+        <location filename="../mytreeview.cpp" line="1101"/>
         <source>Please Select an Tag.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1137"/>
+        <location filename="../mytreeview.cpp" line="1136"/>
         <source>Please Select an sub tag.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1148"/>
+        <location filename="../mytreeview.cpp" line="1147"/>
         <source>Are you sure that delete the directory &quot;%1&quot;?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1180"/>
+        <location filename="../mytreeview.cpp" line="1179"/>
         <source>Are you sure that drop the Basket ?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3685,6 +3498,8 @@ Do you really want to recreate the index file?
     </message>
     <message>
         <location filename="../refereedialog.cpp" line="22"/>
+        <location filename="../refereedialog.cpp" line="69"/>
+        <location filename="../refereedialog.cpp" line="70"/>
         <source>Please Input your real name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3704,7 +3519,8 @@ Do you really want to recreate the index file?
         <location filename="../refereedialog.cpp" line="52"/>
         <location filename="../refereedialog.cpp" line="58"/>
         <location filename="../refereedialog.cpp" line="64"/>
-        <location filename="../refereedialog.cpp" line="145"/>
+        <location filename="../refereedialog.cpp" line="70"/>
+        <location filename="../refereedialog.cpp" line="156"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3724,23 +3540,23 @@ Do you really want to recreate the index file?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../refereedialog.cpp" line="108"/>
-        <location filename="../refereedialog.cpp" line="132"/>
+        <location filename="../refereedialog.cpp" line="119"/>
+        <location filename="../refereedialog.cpp" line="143"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../refereedialog.cpp" line="108"/>
+        <location filename="../refereedialog.cpp" line="119"/>
         <source>User Is Not Existed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../refereedialog.cpp" line="126"/>
+        <location filename="../refereedialog.cpp" line="137"/>
         <source>Send Mail Success !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../refereedialog.cpp" line="139"/>
+        <location filename="../refereedialog.cpp" line="150"/>
         <source>Send Mail Failed, Please check the email Address !</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3856,7 +3672,7 @@ Do you really want to recreate the index file?
     </message>
     <message>
         <location filename="../saveurldialog.cpp" line="41"/>
-        <source>Save To SlFile</source>
+        <source>Save To Solo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4596,7 +4412,7 @@ Do you really want to close this page?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../uesave.cpp" line="122"/>
+        <location filename="../uesave.cpp" line="124"/>
         <source>save success</source>
         <translation type="unfinished"></translation>
     </message>

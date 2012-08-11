@@ -65,6 +65,7 @@ void UeSave::save(QString content, QString plainText)
          note.PAGE = 0;
          note.ROW = 0;
          note.COLUMN = 0;
+         note.MF_VERSION = 0;
          NoteDao::insertNote(note);
      }else{
          Note note = NoteDao::selectNote(selNoteUuid);
@@ -80,6 +81,7 @@ void UeSave::save(QString content, QString plainText)
 
          note.NOTE_NAME = notename;
          note.NOTE_CONTENT = plainText;
+         note.MF_VERSION = note.MF_VERSION + 1;
          NoteDao::updateNote(note);
 
          // É¾³ýindex

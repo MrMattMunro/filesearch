@@ -64,8 +64,6 @@
 #include "ueditor.h"
 #include "requtil.h"
 
-//#include "ui_mainwindow.h"
-
 class MainWindow : public QMainWindow
 {
     Q_OBJECT

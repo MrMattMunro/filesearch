@@ -269,7 +269,7 @@ void WebView::saveToSlfile()
        doc.DOCUMENT_GUID = QUuid::createUuid();
        doc.DOCUMENT_TITLE = title;
        doc.DIR_GUID = dlg.m_toUuid;
-       doc.DOCUMENT_LOCATION = locate.append(QDir::separator()).append(doc.DOCUMENT_GUID).append(".html");
+       doc.DOCUMENT_LOCATION = locate.append(QDir::separator()).append(title).append(".html");
        doc.DOCUMENT_NAME = title.append(".html");
        doc.DOCUMENT_SEO = "";
        doc.DOCUMENT_URL = surl;
@@ -277,13 +277,13 @@ void WebView::saveToSlfile()
        doc.DOCUMENT_KEYWORDS = "";
        doc.DOCUMENT_TYPE = "html";
        doc.DOCUMENT_OWNER = "";
-       doc.DT_CREATED = "";
-       doc.DT_MODIFIED = "";
-       doc.DT_ACCESSED = "";
+       doc.DT_CREATED = QDate::currentDate().toString("yyyy-MM-dd hh:mm:ss");
+       doc.DT_MODIFIED = QDate::currentDate().toString("yyyy-MM-dd hh:mm:ss");
+       doc.DT_ACCESSED = QDate::currentDate().toString("yyyy-MM-dd hh:mm:ss");
        doc.DOCUMENT_ICON_INDEX = 0;
        doc.DOCUMENT_SYNC = 0;
-       doc.DOCUMENT_PROTECT = "";
-       doc.DOCUMENT_ENCODE = "";
+       doc.DOCUMENT_PROTECT = "0";
+       doc.DOCUMENT_ENCODE = "0";
        doc.DOCUMENT_READ_COUNT = 1;
        doc.DOCUMENT_RELATE_COUNT = 0;
        doc.DOCUMENT_INDEXFLG = "0";
@@ -292,7 +292,6 @@ void WebView::saveToSlfile()
        doc.MF_VERSION = 0;
        DocDao::insertDoc(doc);
        BrowserApplication::downloadManager()->download(url, doc.DOCUMENT_GUID, this->title(), false);
-
 
        // TODO ÔİÊ±×¢ÊÍ
 //       QThread thread;

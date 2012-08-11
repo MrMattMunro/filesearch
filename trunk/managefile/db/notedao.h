@@ -15,6 +15,7 @@ typedef struct
         QString SHEETPAGE;
         int ROW;
         int COLUMN;
+        int MF_VERSION;
         QString  DT_MODIFIED;
 }Note;
 

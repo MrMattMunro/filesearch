@@ -1127,7 +1127,6 @@ void MainWindow::windowShowNoteEditor()
     toolBar->hide();
     menuBar()->hide();
 
-
     // 打开文件
     Preferences* p = Preferences::instance();
     QString selNoteUuid = p->getSelNoteUid();
@@ -1166,21 +1165,23 @@ void MainWindow::openDocInTab()
 {
     // 改变NoteEditor的属性
     Preferences* p = Preferences::instance();
-    QString filepath = m_doctable->getCurFilePath();
-
-    QFileInfo fileInfo(filepath);
-    if(!fileInfo.exists()){
-        QMessageBox::warning(this, tr("Warning"), tr("Please Confirm The original file  has Deleted Or Moved. "), QMessageBox::Yes);
-        return;
-    }
-
     QString curUuid = m_doctable->getCurUuid();
+
     Note note = NoteDao::selectNote(curUuid);
     if( ! note.NOTE_GUID.isEmpty()){
         // 打开的是笔记
         p->setSelDocUid(note.DOCUMENT_GUID);
         p->setSelNoteUid(curUuid);
         windowToggleNoteEditor();
+        return;
+    }
+
+
+    Doc doc = DocDao::selectDoc(curUuid);
+    QString filepath = doc.DOCUMENT_LOCATION;
+    QFileInfo fileInfo(filepath);
+    if(!fileInfo.exists()){
+        QMessageBox::warning(this, tr("Warning"), tr("Please Confirm The original file  has Deleted Or Moved. "), QMessageBox::Yes);
         return;
     }
 
