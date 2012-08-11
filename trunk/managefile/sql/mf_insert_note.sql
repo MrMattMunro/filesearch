@@ -1,1 +1,1 @@
-INSERT INTO MF_DOCUMENT_NOTE VALUES('%1','%2','%3','%4','%5','%6','%7', '%8',datetime(CURRENT_TIMESTAMP,'localtime'))
+INSERT INTO MF_DOCUMENT_NOTE VALUES('%1','%2','%3','%4','%5','%6','%7', '%8', '0','%9',datetime(CURRENT_TIMESTAMP,'localtime'))
