@@ -74,6 +74,7 @@ Preferences::Preferences(QObject *parent)
 
         m_open_doc = s.value("m_open_doc", QString()).toString();
 
+
 	m_recentlyUsedCount = s.value("prefs/recentlyUsedSpinBox", 5).toInt();
 	m_openLastDB = s.value("prefs/openLastDB", true).toBool();
 	m_openLastSqlFile = s.value("prefs/openLastSqlFile", true).toBool();

@@ -3,6 +3,7 @@
 
 #include <QCoreApplication>
 #include <QList>
+#include <QMap>
 
 typedef struct
 {

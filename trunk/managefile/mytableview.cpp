@@ -26,6 +26,7 @@
 #include "db/docdao.h"
 #include "db/doctagdao.h"
 #include "db/notedao.h"
+#include "db/dirdao.h"
 #include "db/resultdao.h"
 #include "printerwidget.h"
 #include "QSettings"
@@ -959,7 +960,36 @@ void MyTableView::restoreDoc(){
     if(ret == QMessageBox::Yes){
             if(!curUuid.isEmpty()){
                  // 保证右键选择的删除
-                DocDao::restoreDoc(curUuid);
+                Doc doc = DocDao::selectDoc(curUuid);
+                QString dirUUid = doc.DIR_GUID;
+
+                // 得到一目录树
+                QList<Dir> parentDirs;
+                DirDao::selectAllParentDirbyDir(parentDirs, dirUUid);
+                Dir curDir = DirDao::selectDir(dirUUid);
+                parentDirs.append(curDir);
+
+                bool hasNotExistParentDir = false;
+                Dir dir;
+                for (int var = 0; var < parentDirs.size(); var++) {
+                    // 文件夹
+                    dir = parentDirs.at(var);
+                    QString delFlg = dir.DELETE_FLAG;
+                    if(delFlg == "1"){
+                        hasNotExistParentDir = true;
+                        break;
+                    }
+                }
+                // 如果所有目录都存在
+                if(!hasNotExistParentDir){
+                   DocDao::restoreDoc(curUuid);
+                }else{
+                  // 重新选择目录
+                    DocToDirDialog dlg(this, curPath, curUuid, false);
+                    dlg.exec();
+                    if(dlg.update){
+                    }
+                }
 
                 model->removeRow(firstRow);
                 model->removeRow(firstRow);

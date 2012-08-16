@@ -142,18 +142,22 @@ void MainWindow::buildDocList()
         if(curUuid.isEmpty()){
            // 点击basket根节点 选出所有文件
            docs.append(DocDao::selectDocsByDelFlg("1"));
-        }
-        if(isShowDocUnderSub){
-              // 取得所有文件夹
-              QList<Dir> dirs ;
-              DirDao::selectAllSubDirbyDir(dirs, curUuid, "1");
-              // 根据文件夹取得所有文件
-              for(int i = 0 ; i< dirs.size(); i ++){
-                 Dir dir = dirs.at(i);
-                 docs.append(DocDao::selectDocsbyDir(dir.DIR_GUID, "1"));
-              }
         }else{
-             docs.append(DocDao::selectDocsbyDir(curUuid,  "1"));
+            if(isShowDocUnderSub){
+                  // 取得当前目录下的文档
+                  docs.append(DocDao::selectDocsbyDir(curUuid, "1"));
+
+                  // 取得所有文件夹
+                  QList<Dir> dirs ;
+                  DirDao::selectAllSubDirbyDir(dirs, curUuid, "1");
+                  // 根据文件夹取得所有文件
+                  for(int i = 0 ; i< dirs.size(); i ++){
+                     Dir dir = dirs.at(i);
+                     docs.append(DocDao::selectDocsbyDir(dir.DIR_GUID, "1"));
+                  }
+            }else{
+                 docs.append(DocDao::selectDocsbyDir(curUuid,  "1"));
+            }
         }
         m_doctable->buildDocList(docs);
         return;
@@ -162,8 +166,12 @@ void MainWindow::buildDocList()
     if(curType == "tag" ){
         // 传递选择的docUuid
         if(isShowDocUnderSub){
-              // 取得所有子标签
+              // 当前标签
               QList<Tag> tags ;
+              Tag tag;
+              tag.TAG_GUID = curUuid;
+              tags.append(tag);
+              // 取得所有子标签
               TagDao::selectAllSubTagbyTag(tags, curUuid);
               // 根据文件夹取得所有文件
               for(int i = 0 ; i< tags.size(); i ++){
@@ -789,6 +797,11 @@ void MainWindow::shownotes(){
 
 MainWindow::~MainWindow()
 {
+
+    Preferences* p = Preferences::instance();
+    p->setLastSelDirs(q_myTreeList->getCurUuid());
+    p->setLastSelTags(q_myTreeList->getCurUuid());
+
     Preferences::deleteInstance();
 
     // 删除Reg.exe文件
@@ -913,17 +926,18 @@ void MainWindow::upateToolBar(QStringList waitItems, QStringList selItems)
              toolBar->removeAction(exportAction);
            }
     }
-    // 插件管理
-    if(selItems.contains("plugin.png") && ! waitItems.contains("plugin.png")){
-         if(!actions.contains(pluginAction)){
-               toolBar->addAction(pluginAction);
-          }
-    }
-    if(! selItems.contains("plugin.png") && waitItems.contains("plugin.png")){
-         if(actions.contains(pluginAction)){
-             toolBar->removeAction(pluginAction);
-          }
-    }
+//    // 插件管理
+//    if(selItems.contains("plugin.png") && ! waitItems.contains("plugin.png")){
+//         if(!actions.contains(pluginAction)){
+//               toolBar->addAction(pluginAction);
+//          }
+//    }
+//    if(! selItems.contains("plugin.png") && waitItems.contains("plugin.png")){
+//         if(actions.contains(pluginAction)){
+//             toolBar->removeAction(pluginAction);
+//          }
+//    }
+
     toolBar->update();
 }
 

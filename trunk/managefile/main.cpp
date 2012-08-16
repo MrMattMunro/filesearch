@@ -30,6 +30,7 @@
 #include "logindialog.h"
 #include "fileutils.h"
 #include "sqlloader.h"
+#include "jvm.h"
 #include <QDebug>
 #include <QDir>
 #include <QFile>
@@ -238,9 +239,9 @@ int main(int argc, char *argv[])
     }
 
     //以后就可以像下面这样直接打日志到文件中，而且日志也会包含时间信息
-    qDebug("This is a debug message at thisisqt.com");
-    qWarning("This is a warning message  at thisisqt.com");
-    qCritical("This is a critical message  at thisisqt.com");
+//    qDebug("This is a debug message at thisisqt.com");
+//    qWarning("This is a warning message  at thisisqt.com");
+//    qCritical("This is a critical message  at thisisqt.com");
     // qFatal("This is a fatal message at thisisqt.com");
 
     qInstallMsgHandler(customMessageHandler);
@@ -293,8 +294,12 @@ int main(int argc, char *argv[])
       dirfile->close();
     }
 
+    // 设置正在搜索标志位
     Preferences* pre = Preferences::instance();
     pre->setIsIndexing(false);
+
+    // 初始化JVM 提高第一次搜索数据
+    Jvm::BeginJVM();
 
     // 设置窗口图标
     app.setWindowIcon(Utils::getIcon("file_manager.png"));
