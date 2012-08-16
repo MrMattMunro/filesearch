@@ -14,6 +14,7 @@ for which a new license (GPL+exception) is in place.
 #include <QFont>
 #include <QVariant>
 
+
 class Preferences : public QObject
 {
 Q_OBJECT
@@ -29,124 +30,125 @@ Q_OBJECT
 
 		bool checkQtVersion() { return m_checkQtVersion; };
 
-                bool isFullScreen() { return m_isFullScreen; };
-                void setFullScreen(bool v) { m_isFullScreen = v;  };
+        bool isFullScreen() { return m_isFullScreen; };
+        void setFullScreen(bool v) { m_isFullScreen = v;  };
 
-                bool isShowClassTree() { return m_isShowClassTree; };
-                void setShowClassTree(bool v) { m_isShowClassTree = v;  };
+        bool isShowClassTree() { return m_isShowClassTree; };
+        void setShowClassTree(bool v) { m_isShowClassTree = v;  };
 
-                bool isShowToolBar() { return m_isShowToolBar; };
-                void setShowToolBar(bool v) { m_isShowToolBar = v;  };
+        bool isShowToolBar() { return m_isShowToolBar; };
+        void setShowToolBar(bool v) { m_isShowToolBar = v;  };
 
-                bool isShowDocUnderSub() { return m_isShowDocUnderSub; };
-                void setShowDocUnderSub(bool v) { m_isShowDocUnderSub = v;  };
+        bool isShowDocUnderSub() { return m_isShowDocUnderSub; };
+        void setShowDocUnderSub(bool v) { m_isShowDocUnderSub = v;  };
 
-                bool isShowDocUnderSubTag() { return m_isShowDocUnderSubTag; };
-                void setShowDocUnderSubTag(bool v) { m_isShowDocUnderSubTag = v;  };
+        bool isShowDocUnderSubTag() { return m_isShowDocUnderSubTag; };
+        void setShowDocUnderSubTag(bool v) { m_isShowDocUnderSubTag = v;  };
 
-                QStringList getSelToolbarItemList() { return m_seltoolbaritemlist; };
-                void setSelToolbarItemList(QStringList v) { m_seltoolbaritemlist = v;  };
+        QStringList getSelToolbarItemList() { return m_seltoolbaritemlist; };
+        void setSelToolbarItemList(QStringList v) { m_seltoolbaritemlist = v;  };
 
-                QStringList getWaitToolbarItemList() { return m_waittoolbaritemlist; };
-                void setWaitToolbarItemList(QStringList v) { m_waittoolbaritemlist = v;  };
+        QStringList getWaitToolbarItemList() { return m_waittoolbaritemlist; };
+        void setWaitToolbarItemList(QStringList v) { m_waittoolbaritemlist = v;  };
 
-                QStringList getDefaultToolbarItemList() { return m_defaulttoolbaritemlist; };
-                void setDefaulttoolbaritemlist(QStringList v) { m_defaulttoolbaritemlist = v;  };
+        QStringList getDefaultToolbarItemList() { return m_defaulttoolbaritemlist; };
+        void setDefaulttoolbaritemlist(QStringList v) { m_defaulttoolbaritemlist = v;  };
 
-                QStringList getDefaultWaitToolbarItemList() { return m_defaultwaittoolbaritemlist; };
-                void setDefaultWaittoolbaritemlist(QStringList v) { m_defaultwaittoolbaritemlist = v;  };
+        QStringList getDefaultWaitToolbarItemList() { return m_defaultwaittoolbaritemlist; };
+        void setDefaultWaittoolbaritemlist(QStringList v) { m_defaultwaittoolbaritemlist = v;  };
 
-                QString getSelDocUid() { return m_notedocuid; };
-                void setSelDocUid(QString v) { m_notedocuid = v; };
+        QString getSelDocUid() { return m_notedocuid; };
+        void setSelDocUid(QString v) { m_notedocuid = v; };
 
-                QString getSelNoteUid() { return m_selnoteuid; };
-                void setSelNoteUid(QString v) { m_selnoteuid = v; };
+        QString getSelNoteUid() { return m_selnoteuid; };
+        void setSelNoteUid(QString v) { m_selnoteuid = v; };
 
-                QString getTableSelMode() { return m_tableselmode; };
-                void setTableSelMode(QString v) { m_tableselmode = v; };
+        QString getTableSelMode() { return m_tableselmode; };
+        void setTableSelMode(QString v) { m_tableselmode = v; };
 
-                bool isShowNotesOnTips() { return m_isShowNotesOnTips; };
-                void setShowNotesOnTips(bool v) { m_isShowNotesOnTips = v;  };
+        bool isShowNotesOnTips() { return m_isShowNotesOnTips; };
+        void setShowNotesOnTips(bool v) { m_isShowNotesOnTips = v;  };
 
-                QStringList getTableSelField() { return m_tableselfield; };
-                void setTableSelField(QStringList v) { m_tableselfield = v; };
+        QStringList getTableSelField() { return m_tableselfield; };
+        void setTableSelField(QStringList v) { m_tableselfield = v; };
 
-                QString getMainPath() { return m_mainpath; };
-                void setMainPath(QString v) { m_mainpath = v; };
-                QString getIndexPath() { return m_indexpath; };
-                void setIndexPath(QString v) { m_indexpath = v; };
-                QString getBackPath() { return m_backpath; };
-                void setBackPath(QString v) { m_backpath = v; };
-                QString getExportPath() { return m_exportpath; };
-                void setExportPath(QString v) { m_exportpath = v; };
+        QString getMainPath() { return m_mainpath; };
+        void setMainPath(QString v) { m_mainpath = v; };
+        QString getIndexPath() { return m_indexpath; };
+        void setIndexPath(QString v) { m_indexpath = v; };
+        QString getBackPath() { return m_backpath; };
+        void setBackPath(QString v) { m_backpath = v; };
+        QString getExportPath() { return m_exportpath; };
+        void setExportPath(QString v) { m_exportpath = v; };
 
-                // UserInfo start
-                QString getUserEmail() { return m_useremail; };
-                void setUserEmail(QString v) { m_useremail = v; };
+        // UserInfo start
+        QString getUserEmail() { return m_useremail; };
+        void setUserEmail(QString v) { m_useremail = v; };
 
-                QString getUserName() { return m_username; };
-                void setUserName(QString v) { m_username = v; };
+        QString getUserName() { return m_username; };
+        void setUserName(QString v) { m_username = v; };
 
-                QString getDisplayName() { return m_displayname; };
-                void setDisplayName(QString v) { m_displayname = v; };
+        QString getDisplayName() { return m_displayname; };
+        void setDisplayName(QString v) { m_displayname = v; };
 
-                QString getScore() { return m_score; };
-                void setScore(QString v) { m_score = v; };
+        QString getScore() { return m_score; };
+        void setScore(QString v) { m_score = v; };
 
-                QString getDtExpired() { return m_dt_expired; };
-                void setDtExpired(QString v) { m_dt_expired = v; };
+        QString getDtExpired() { return m_dt_expired; };
+        void setDtExpired(QString v) { m_dt_expired = v; };
 
-                QString getType() { return m_type; };
-                void setType(QString v) { m_type = v; };
+        QString getType() { return m_type; };
+        void setType(QString v) { m_type = v; };
 
-                QString getStoreLimit() { return m_store_limit; };
-                void setStoreLimit(QString v) { m_store_limit = v; };
+        QString getStoreLimit() { return m_store_limit; };
+        void setStoreLimit(QString v) { m_store_limit = v; };
 
-                QString getStoreUsed() { return m_store_used; };
-                void setStoreUsed(QString v) { m_store_used = v; };
+        QString getStoreUsed() { return m_store_used; };
+        void setStoreUsed(QString v) { m_store_used = v; };
 
-                QString getTrafficLimit() { return m_traffic_limit; };
-                void setTrafficLimit(QString v) { m_traffic_limit = v; };
+        QString getTrafficLimit() { return m_traffic_limit; };
+        void setTrafficLimit(QString v) { m_traffic_limit = v; };
 
-                QString getTrafficUsed() { return m_traffic_used; };
-                void setTrafficUsed(QString v) { m_traffic_used = v; };
+        QString getTrafficUsed() { return m_traffic_used; };
+        void setTrafficUsed(QString v) { m_traffic_used = v; };
 
-                QString getLastSelTags() { return m_last_sel_tags; };
-                void setLastSelTags(QString v) { m_last_sel_tags = v; };
+        QString getLastSelTags() { return m_last_sel_tags; };
+        void setLastSelTags(QString v) { m_last_sel_tags = v; };
 
-                QString getLastSelDirs() { return m_last_sel_dirs; };
-                void setLastSelDirs(QString v) { m_last_sel_dirs = v; };
+        QString getLastSelDirs() { return m_last_sel_dirs; };
+        void setLastSelDirs(QString v) { m_last_sel_dirs = v; };
 
-                QString getLastOpenDocs() { return m_last_open_docs; };
-                void setLastOpenDocs(QString v) { m_last_open_docs = v; };
+        QString getLastOpenDocs() { return m_last_open_docs; };
+        void setLastOpenDocs(QString v) { m_last_open_docs = v; };
 
-                QString getLastOpenNotes() { return m_last_open_notes; };
-                void setLastOpenNotes(QString v) { m_last_open_notes = v; };
+        QString getLastOpenNotes() { return m_last_open_notes; };
+        void setLastOpenNotes(QString v) { m_last_open_notes = v; };
 
-                QString getLastOpenUrls() { return m_last_open_urls; };
-                void setLastOpenUrls(QString v) { m_last_open_urls = v; };
+        QString getLastOpenUrls() { return m_last_open_urls; };
+        void setLastOpenUrls(QString v) { m_last_open_urls = v; };
 
-                QString getVersion() { return m_version; };
-                void setVersion(QString v) { m_version = v; };
-                // UserInfo end
+        QString getVersion() { return m_version; };
+        void setVersion(QString v) { m_version = v; };
+        // UserInfo end
 
-                // doctable open doc start,for highlighter
-                QString getOpenDoc() { return m_open_doc; };
-                void setOpenDoc(QString v) { m_open_doc = v; };
-                // doctable sel doc end
+        // doctable open doc start,for highlighter
+        QString getOpenDoc() { return m_open_doc; };
+        void setOpenDoc(QString v) { m_open_doc = v; };
+        // doctable sel doc end
 
-                // search setting start
-                QString getSearchDir() { return m_searchdir; };
-                void setSearchDir(QString v) { m_searchdir = v; };
+        // search setting start
+        QString getSearchDir() { return m_searchdir; };
+        void setSearchDir(QString v) { m_searchdir = v; };
 
-                QString getSearchObject() { return m_searchobject; };
-                void setSearchObject(QString v) { m_searchobject = v; };
-                // search setting end
+        QString getSearchObject() { return m_searchobject; };
+        void setSearchObject(QString v) { m_searchobject = v; };
+        // search setting end
 
-                // index state start
-                bool getIsIndexing() { return m_is_indexing; };
-                void setIsIndexing(bool v) { m_is_indexing = v; };
-                // index state end
+        // index state start
+        bool getIsIndexing() { return m_is_indexing; };
+        void setIsIndexing(bool v) { m_is_indexing = v; };
+        // index state end
+
 
 
 		int recentlyUsedCount() { return m_recentlyUsedCount; };

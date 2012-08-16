@@ -783,6 +783,10 @@ void TabWidget::closeTab(int index)
         }
         hasFocus = tab->hasFocus();
 
+        // TODO 根据 tab->title();选则文件,比较数据库里的最后修改时间和文件
+        // 本身的时间 如果修改过,则放入mf_meta数据表 DOC_UPLOAD DOC_DOWLOAD DOC_DELETE
+        // 启动定时线程去上传,下载文件 固定操作个数(减少资源消耗)
+
         QWebSettings *globalSettings = QWebSettings::globalSettings();
         if (!globalSettings->testAttribute(QWebSettings::PrivateBrowsingEnabled)) {
             m_recentlyClosedTabsAction->setEnabled(true);

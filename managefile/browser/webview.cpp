@@ -277,9 +277,9 @@ void WebView::saveToSlfile()
        doc.DOCUMENT_KEYWORDS = "";
        doc.DOCUMENT_TYPE = "html";
        doc.DOCUMENT_OWNER = "";
-       doc.DT_CREATED = QDate::currentDate().toString("yyyy-MM-dd hh:mm:ss");
-       doc.DT_MODIFIED = QDate::currentDate().toString("yyyy-MM-dd hh:mm:ss");
-       doc.DT_ACCESSED = QDate::currentDate().toString("yyyy-MM-dd hh:mm:ss");
+       doc.DT_CREATED = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+       doc.DT_MODIFIED = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+       doc.DT_ACCESSED = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
        doc.DOCUMENT_ICON_INDEX = 0;
        doc.DOCUMENT_SYNC = 0;
        doc.DOCUMENT_PROTECT = "0";

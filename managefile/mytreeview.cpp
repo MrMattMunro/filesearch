@@ -33,33 +33,14 @@
 #include "indexfile.h"
 
 MyTreeView::MyTreeView(QString title, QWidget *parent) : treeTitle("tree"), QTreeView(parent), numSubTree(2),
-    mouseStatus(true), curTitle("title")
+    mouseStatus(true), curTitle(title)
 {
 	//默认两个子树的树形结构
-        model = new MyTreeItemModel(parent);
+        model = new MyTreeItemModel(this);
         //delegate = new MyTreeDelegate(parent);
-
-        model->setHeaderData(0, Qt::Horizontal, title);
-
+//        model->setHeaderData(0, Qt::Horizontal, title);
         this->setModel(model);
         //this->setItemDelegate(delegate);
-
-        QStandardItem  *allDocItem = new QStandardItem(tr("AllDocs"));
-        allDocItem->setData("", UUID);  // UUid
-        allDocItem->setData("alldocs", NODE_TYPE); // Type
-        allDocItem->setData("folder.ico",  Qt::DecorationRole);
-
-
-        QStandardItem  *allTagItem = new QStandardItem(tr("AllTags"));
-        allTagItem->setData("", UUID);
-        allTagItem->setData("alltags", NODE_TYPE);
-        allTagItem->setData("tags.png",  Qt::DecorationRole);
-
-        QStandardItem  *wasteasketItem = new QStandardItem(tr("WasteBasket"));
-        wasteasketItem->setData("", UUID);
-        wasteasketItem->setData("basket", NODE_TYPE);
-        wasteasketItem->setData("basket.ico",  Qt::DecorationRole);
-
 
         //  "QTreeView::item:selected{background-color:rgb(255,255,255)}"
 
@@ -81,25 +62,7 @@ MyTreeView::MyTreeView(QString title, QWidget *parent) : treeTitle("tree"), QTre
                     "QTreeView::branch:open:has-children:!has-siblings { image: url(:/icons/expander_open.png); }"
         );
 
-        if(title == "all"){
-            model->setItem(0,0,allDocItem);
-            model->setItem(1,0,allTagItem);
-            model->setItem(2,0,wasteasketItem);
-            loadDirs("", allDocItem);
-            loadTagByParent("", allTagItem);
-        }
-        if(title == "tag"){
-            model->setItem(0, 0, allTagItem);
-            loadTagByParent("", allTagItem);
-        }
-        if(title == "doc"){
-            model->setItem(0, 0, allDocItem);
-            loadDirs("", allDocItem);
-        }
-        if(title == "basket"){
-            model->setItem(0, 0, wasteasketItem);
-            loadDelDirs("", wasteasketItem);
-        }
+        initTree();
 
         this->setMouseTracking(true);
         this->setAnimated(true);
@@ -116,6 +79,59 @@ MyTreeView::MyTreeView(QString title, QWidget *parent) : treeTitle("tree"), QTre
         this->header()->hide();
         this->setEditTriggers(NoEditTriggers);
         initActions();
+
+        if(lastdirIndex.isValid()){
+           this->expand(lastdirIndex);
+
+        }
+        if(lasttagIndex.isValid()){
+           this->expand(lasttagIndex);
+        }
+        this->expandToDepth(2);
+}
+
+// 打开右键菜单
+void MyTreeView::initTree()
+{
+    QStandardItem  *allDocItem = new QStandardItem(tr("AllDocs"));
+    allDocItem->setData("", UUID);  // UUid
+    allDocItem->setData("alldocs", NODE_TYPE); // Type
+    allDocItem->setData("folder.ico",  Qt::DecorationRole);
+
+
+    QStandardItem  *allTagItem = new QStandardItem(tr("AllTags"));
+    allTagItem->setData("", UUID);
+    allTagItem->setData("alltags", NODE_TYPE);
+    allTagItem->setData("tags.png",  Qt::DecorationRole);
+
+    QStandardItem  *wasteasketItem = new QStandardItem(tr("WasteBasket"));
+    wasteasketItem->setData("", UUID);
+    wasteasketItem->setData("basket", NODE_TYPE);
+    wasteasketItem->setData("basket.ico",  Qt::DecorationRole);
+
+    Preferences* p = Preferences::instance();
+    lastdirUuid = p->getLastSelDirs();
+    lasttagUuid = p->getLastSelTags();
+
+    if(curTitle == "all"){
+        model->setItem(0,0,allDocItem);
+        model->setItem(1,0,allTagItem);
+        model->setItem(2,0,wasteasketItem);
+        loadDirs("", allDocItem);
+        loadTagByParent("", allTagItem);
+    }
+    if(curTitle == "tag"){
+        model->setItem(0, 0, allTagItem);
+        loadTagByParent("", allTagItem);
+    }
+    if(curTitle == "doc"){
+        model->setItem(0, 0, allDocItem);
+        loadDirs("", allDocItem);
+    }
+    if(curTitle == "basket"){
+        model->setItem(0, 0, wasteasketItem);
+        loadDelDirs("", wasteasketItem);
+    }
 }
 
 // Action 数据
@@ -165,6 +181,11 @@ void MyTreeView::initActions (){
     connect(protectRootDir, SIGNAL(triggered()), this, SLOT(about()));
     optionOfDir= new QAction(tr("&Option"), this);
     connect(optionOfDir, SIGNAL(triggered()), this, SLOT(properties()));
+    refreshDir= new QAction(tr("&Refresh"), this);
+    connect(refreshDir, SIGNAL(triggered()), this, SLOT(refresh()));
+
+    restoreA= new QAction(tr("&ReStore"), this);
+    connect(restoreA, SIGNAL(triggered()), this, SLOT(restoreDir()));
 
     //Tag ContextMenu
     makeSubTag= new QAction(tr("&New Sub Tag"), this);
@@ -222,24 +243,36 @@ void MyTreeView::tableTree_currentItemChanged()
         QString type = getCurType();
         QString uuid = getCurUuid();
 
+         QString delFlg;
+        if(!uuid.isEmpty() && type == "basket" ){
+            Dir dir = DirDao::selectDir(uuid);
+            delFlg = dir.DELETE_FLAG;
+        }
         // 如果选择Root
         if(type == "alldocs"){
             contextMenu->addAction(makeRootDir);
+            contextMenu->addSeparator();
+            contextMenu->addAction(refreshDir);
             contextMenu->addSeparator();
             contextMenu->addAction(dirSort);
             contextMenu->addSeparator();
             contextMenu->addAction(protectRootDir);
             contextMenu->addSeparator();
             contextMenu->addAction(optionOfDir);
+
         } else if(type == "alltags"){
             //Tag ContextMenu
             contextMenu->addAction(makeTag);
+            contextMenu->addSeparator();
+            contextMenu->addAction(refreshDir);
             contextMenu->addSeparator();
             contextMenu->addAction(showSubDirTag);
             contextMenu->addAction(propOfTag);
             contextMenu->addSeparator();
         }  else if(type == "tag"){
             contextMenu->addAction(makeSubTag);
+            contextMenu->addSeparator();
+            contextMenu->addAction(refreshDir);
             contextMenu->addSeparator();
             contextMenu->addAction(moveToTag);
             contextMenu->addAction(moveToRootTag);
@@ -252,6 +285,8 @@ void MyTreeView::tableTree_currentItemChanged()
        }  else if(type == "doc"){
             contextMenu->addAction(makeSubDir);
             contextMenu->addSeparator();
+            contextMenu->addAction(refreshDir);
+            contextMenu->addSeparator();
             contextMenu->addAction(moveToDir);
             contextMenu->addAction(delDir);
             contextMenu->addAction(renameDir);
@@ -266,24 +301,16 @@ void MyTreeView::tableTree_currentItemChanged()
             contextMenu->addAction(protectDir);
             contextMenu->addAction(subDirSort);
             contextMenu->addAction(propOfDir);
+
         } else if(type == "basket" && uuid.isEmpty()){
             contextMenu->addAction(clearBasket);
-        } else if(type == "basket" && ! uuid.isEmpty()){
-            contextMenu->addAction(makeSubDir);
             contextMenu->addSeparator();
-            contextMenu->addAction(moveToDir);
-            contextMenu->addAction(delDir);
-            contextMenu->addAction(renameDir);
+            contextMenu->addAction(refreshDir);
+        } else if(type == "basket" && delFlg == "1"){
+            contextMenu->addAction(restoreA);
             contextMenu->addSeparator();
-            contextMenu->addAction(importDir);
-            contextMenu->addAction(exportDir);
+            contextMenu->addAction(refreshDir);
             contextMenu->addSeparator();
-            contextMenu->addAction(subDirSort);
-            contextMenu->addSeparator();
-            contextMenu->addAction(showSubDirDoc);
-            contextMenu->addAction(subDirSort);
-            contextMenu->addAction(protectDir);
-            contextMenu->addAction(subDirSort);
             contextMenu->addAction(propOfDir);
         }
         return;
@@ -292,7 +319,7 @@ void MyTreeView::tableTree_currentItemChanged()
 
 MyTreeView::~MyTreeView()
 {
-        delete model;
+     delete model;
 }
 
 void MyTreeView::setTreeTitle(QString title)
@@ -315,18 +342,19 @@ void MyTreeView::addItem(int subTree, QString itemName, QString uuid, QString ty
         parenItem->appendRow(childItem);
 }
 
-void MyTreeView::addItemByParentItem(QStandardItem *parentItem, QString itemName, QString uuid, QString type, QString icon)
+QStandardItem* MyTreeView::addItemByParentItem(QStandardItem *parentItem, QString itemName, QString uuid, QString type, QString icon)
 {
         QStandardItem  *childItem =  new QStandardItem(itemName);
         childItem->setData(uuid, UUID);
         childItem->setData(type, NODE_TYPE);
         childItem->setData(icon,  Qt::DecorationRole);
         parentItem->appendRow(childItem);
+        return childItem;
 }
 
 bool MyTreeView::delSubItems(QStandardItem *parenItem)
 {
-    // 清除直接点
+    // 清除子节点
     int rows = parenItem->rowCount();
     int columns = parenItem->columnCount();
     for(int i = 0; i < rows; i++)
@@ -513,26 +541,6 @@ void MyTreeView::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
-//    QBrush white = QBrush(QColor(255, 255, 255));
-//    QBrush blue = QBrush(QColor(128,128,128));
-
-
-//    if(preindex.isValid()){
-//        QStandardItem* item = model->itemFromIndex(preindex);
-//        if(item){
-//            item->setData(white, Qt::BackgroundRole);
-//        }
-//    }
-
-//    if(curIndex.isValid()){
-//        QStandardItem* item = model->itemFromIndex(curIndex);
-//        if(item){
-//            item->setData(blue, Qt::BackgroundRole);
-//        }
-//    }
-//    preindex = curIndex;
-//}
-
 //// 根据文件父目录取得子目录树结构
 void MyTreeView::loadDirs(QString dirUuId,  QStandardItem *curItem){
 
@@ -546,7 +554,13 @@ void MyTreeView::loadDirs(QString dirUuId,  QStandardItem *curItem){
             if(icon.isEmpty()){
                 icon = "folder.ico";
             }
-            addItemByParentItem(curItem, dir.DIR_NAME, dir.DIR_GUID, "doc", icon);
+            QStandardItem* child = addItemByParentItem(curItem, dir.DIR_NAME, dir.DIR_GUID, "doc", icon);
+
+            if(dirUuId == lastdirUuid){
+                lastdirIndex = curItem->index();
+                this->expand(lastdirIndex);
+            }
+            loadDirs(dir.DIR_GUID, child);
     }
 }
 
@@ -563,7 +577,9 @@ void MyTreeView::loadDelDirs(QString dirUuId,  QStandardItem *curItem){
         if(icon.isEmpty()){
             icon = "folder.ico";
         }
-        addItemByParentItem(curItem, dir.DIR_NAME, dir.DIR_GUID, "basket", icon);
+        QStandardItem* child = addItemByParentItem(curItem, dir.DIR_NAME, dir.DIR_GUID, "basket", icon);
+
+        loadDelDirs(dir.DIR_GUID, child);
     }
 }
 //
@@ -584,19 +600,16 @@ void MyTreeView::loadTagByParent(QString tagUuId, QStandardItem *curItem){
     for(int i = 0; i < tags.count(); i++)
     {
             Tag tag = tags.at(i);
-            addItemByParentItem(curItem, tag.TAG_NAME, tag.TAG_GUID, "tag", "tag.ico");
+            QStandardItem* child = addItemByParentItem(curItem, tag.TAG_NAME, tag.TAG_GUID, "tag", "tag.ico");
+
+            QString tmpUuid = tag.TAG_GUID;
+            loadTagByParent(tmpUuid, child);
     }
 }
 
 // 打开当前树节点
 void MyTreeView::showChildTree()
 {
-
-    QString curUId = getCurUuid();
-    QStandardItem* curItem = getCurItem();
-    QModelIndex curIndex = getCurIndex();
-
-    QString type = qvariant_cast<QString>(curItem->data(NODE_TYPE));
     // 设置打开状态
     if(isExpanded(curIndex)){
        collapse(curIndex);
@@ -608,16 +621,16 @@ void MyTreeView::showChildTree()
        return;
     }
 
-    if(type == "doc" || type == "alldocs"){
-       loadDirs(curUId, curItem);
+    if(curType == "doc" || curType == "alldocs" ){
+       loadDirs(curUuId, curItem);
     }
 
-    if(type == "tag" || type == "alltags"){
-       loadTagByParent(curUId, curItem);
+    if(curType == "tag" || curType == "alltags" ){
+       loadTagByParent(curUuId, curItem);
     }
 
-    if(type == "basket"){
-       loadDelDirs(curUId, curItem);
+    if(curType == "basket"){
+       loadDelDirs(curUuId, curItem);
     }
 }
 
@@ -695,6 +708,14 @@ void MyTreeView::setShowSubTagDoc()
 // 打开导入界面
 void MyTreeView::importDlg()
 {
+    // 判断是否正在建立索引
+    Preferences* p = Preferences::instance();
+    bool isIndexing = p->getIsIndexing();
+    if(isIndexing){
+        QMessageBox::warning(this, tr("Warning"), tr("The index is busying. Please try later"), QMessageBox::Yes);
+        return;
+    }
+
     QString curType = getCurType();
     QString uuId = getCurUuid();
     bool hasSelRight = false;
@@ -763,7 +784,7 @@ void MyTreeView::properties()
     bool hasSelRight = false;
 
     // 需选中子节点
-    if(curType == "doc") {
+    if(curType == "doc" || curType == "basket" ) {
         hasSelRight = true;
         PropOfDirDialog dlg(this, curUuId);
         dlg.exec();
@@ -777,6 +798,80 @@ void MyTreeView::properties()
         return;
     }
 }
+
+// 刷新选中树结构
+void MyTreeView::refresh()
+{
+    // 清除所有子节点
+    delSubItems(curItem);
+    showChildTree();
+    // 展开
+    QModelIndex index = getCurIndex();
+    if(index.isValid()){
+      expand(index);
+    }
+}
+
+// 恢复文件夹  TODO 暂时无法解决 该功能屏蔽
+void MyTreeView::restoreDir()
+{
+   // 清除所有子节点
+   QString uuid = getCurUuid();
+   QString title = getCurTitle();
+
+   MoveToDirDialog dlg(this, uuid, getCurPath());
+   dlg.exec();
+   if(dlg.update){
+         // 取得子界面选中的path
+         QString toDirUuid = dlg.m_toUuid;
+         // 删除主界面选中的节点
+         curItem->parent()->removeRow(curItem->row());
+
+         // 设置主界面的节点 (子界面新建文件夹情况下不成功)
+         setCurItemByUuid(toDirUuid, "doc");
+         addItemByParentItem(curItem, title, uuid, "doc", "folder.ico");
+         expand(getCurIndex());
+
+         // 设置所有子节点
+         QList<Doc> docs;
+         QList<Dir> allSubDirs;
+         allSubDirs.append(DirDao::selectDir(uuid));
+         DirDao::selectAllSubDirbyDir(allSubDirs, uuid, "1");
+         // 逻辑恢复子文件夹
+         for (int var = 0; var < allSubDirs.size(); var++) {
+             // 文件夹
+             Dir dir = allSubDirs.at(var);
+             if( dir.DELETE_FLAG == "1"){
+                 dir.DELETE_FLAG = "0";
+                 dir.MF_VERSION = dir.MF_VERSION + 1;
+                 DirDao::updateDir(dir);
+             }
+             // 取得删除的文档
+             docs.append(DocDao::selectDocsbyDir(dir.DIR_GUID, "1"));
+         }
+
+         QList<Dir> allnormalSubDirs;
+         DirDao::selectAllSubDirbyDir(allnormalSubDirs, uuid, "0");
+         // 逻辑恢复子文件夹
+         for (int var = 0; var < allnormalSubDirs.size(); var++) {
+             // 文件夹
+             Dir dir = allnormalSubDirs.at(var);
+             // 取得删除的文档
+             docs.append(DocDao::selectDocsbyDir(dir.DIR_GUID, "1"));
+         }
+
+         // 恢复文件
+         for (int var = 0; var < docs.size(); var++) {
+             // 文件
+             Doc doc = docs.at(var);
+             // 取得删除的文档
+             doc.DELETE_FLAG = "0";
+             doc.MF_VERSION = doc.MF_VERSION + 1;
+             DocDao::updateDoc(doc);
+         }
+   }
+}
+
 // 创建子文件夹
 void MyTreeView::createSubDir()
 {
@@ -1087,6 +1182,7 @@ void MyTreeView:: moveToRoot(){
         Tag tag = TagDao::selectTag(curUuid);
         hasSelRight = true;
         tag.TAG_GROUP_GUID = "";
+        tag.MF_VERSION = tag.MF_VERSION + 1;
         TagDao::updateTag(tag);
         // 重新load的标签树
         // 删除当前的节点

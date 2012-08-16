@@ -197,14 +197,14 @@ QListWidgetItem* CustomToolDialog::getToolbarItemByText(const QString & text)
         return exportItem;
     }
 
-   // 插件管理
-   if(text == "plugin.png"){
-       QListWidgetItem *pluginItem = new QListWidgetItem;
-       pluginItem->setIcon(Utils::getIcon("plugin.png"));
-       pluginItem->setText(tr("Plugins"));
-       pluginItem->setData(Qt::UserRole, "plugin.png");
-       return pluginItem;
-   }
+//   // 插件管理
+//   if(text == "plugin.png"){
+//       QListWidgetItem *pluginItem = new QListWidgetItem;
+//       pluginItem->setIcon(Utils::getIcon("plugin.png"));
+//       pluginItem->setText(tr("Plugins"));
+//       pluginItem->setData(Qt::UserRole, "plugin.png");
+//       return pluginItem;
+//   }
 
 }
 

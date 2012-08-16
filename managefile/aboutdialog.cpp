@@ -21,14 +21,17 @@ AboutDialog::AboutDialog(QWidget * parent)
         : QDialog(parent),
           update(false)
 {
-	setupUi(this);
+        setupUi(this);
         this->setWindowIcon(Utils::getIcon("file_manager.png"));
         this->setWindowTitle(tr("Solo"));
 
+        QString lange = Utils::getSysLang();
         QDir pathDir = Utils::directoryOf("html");
         QString path = pathDir.absolutePath();
         path.append(QDir::separator());
-        path.append("about.html");
+        path.append("about_");
+        path.append(lange);
+        path.append(".html");
 
         about->load(QUrl::fromUserInput(path));
         connect(buttonBox,SIGNAL(rejected()),this,SLOT(closeBtn_clicked()));

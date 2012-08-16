@@ -27,7 +27,7 @@ SaveUrlDialog::SaveUrlDialog(QWidget * parent)
 	  m_parent(parent),
           update(false)
 {
-	setupUi(this);
+        setupUi(this);
 
         q_myTreeList = new MyTreeView("doc", this);
         // 展开根节点

@@ -178,7 +178,7 @@ private:
     QAction *checkNewAction;
     QAction *optionAction;
     QAction *viewLogAction;
-    QAction *pluginAction;
+//    QAction *pluginAction;
 //    QAction *languageAction;
 //    QAction *cnAction;
 //    QAction *enAction;

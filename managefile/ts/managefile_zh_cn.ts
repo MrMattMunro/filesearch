@@ -760,9 +760,8 @@ Do you want to reload all pages?</source>
         <translation>导出...</translation>
     </message>
     <message>
-        <location filename="../customtooldialog.cpp" line="204"/>
         <source>Plugins</source>
-        <translation>插件</translation>
+        <translation type="obsolete">插件</translation>
     </message>
 </context>
 <context>
@@ -1734,7 +1733,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../logindialog.ui" line="82"/>
         <source>Login Solo</source>
-        <translation></translation>
+        <translation>登录Solo</translation>
     </message>
     <message>
         <location filename="../logindialog.ui" line="167"/>
@@ -1861,33 +1860,33 @@ acknowledge our Terms of Service</source>
         <translation type="obsolete">空</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1210"/>
+        <location filename="../mainwindow.cpp" line="1224"/>
         <source>&amp;Quit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="346"/>
+        <location filename="../mainwindow.cpp" line="354"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="405"/>
+        <location filename="../mainwindow.cpp" line="413"/>
         <source>&amp;About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="461"/>
+        <location filename="../mainwindow.cpp" line="469"/>
         <source>&amp;File</source>
         <translation>文件</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="470"/>
+        <location filename="../mainwindow.cpp" line="478"/>
         <source>&amp;View</source>
         <translation>查看</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="388"/>
-        <location filename="../mainwindow.cpp" line="508"/>
+        <location filename="../mainwindow.cpp" line="396"/>
+        <location filename="../mainwindow.cpp" line="516"/>
         <source>&amp;Help</source>
         <translation>帮助</translation>
     </message>
@@ -1905,222 +1904,222 @@ acknowledge our Terms of Service</source>
         <translation>搜咯文档管理</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="235"/>
+        <location filename="../mainwindow.cpp" line="243"/>
         <source>ALL Documents</source>
         <translation>所有文档</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="242"/>
+        <location filename="../mainwindow.cpp" line="250"/>
         <source>Current Directory</source>
         <translation>当前目录</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="249"/>
+        <location filename="../mainwindow.cpp" line="257"/>
         <source>Current Directory(Include Sub Directory)</source>
         <translation>当前目录(包含主目录)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="263"/>
+        <location filename="../mainwindow.cpp" line="271"/>
         <source>Document Name And Content</source>
         <translation>文档名称及内容</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="269"/>
+        <location filename="../mainwindow.cpp" line="277"/>
         <source>Document Name Only</source>
         <translation>文档名称</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="275"/>
+        <location filename="../mainwindow.cpp" line="283"/>
         <source>Document Content Only</source>
         <translation>文档内容</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="292"/>
+        <location filename="../mainwindow.cpp" line="300"/>
         <source>Option</source>
         <translation>选项</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="318"/>
+        <location filename="../mainwindow.cpp" line="326"/>
         <source>Search</source>
         <translation>搜索</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="327"/>
+        <location filename="../mainwindow.cpp" line="335"/>
         <source>&amp;Import...</source>
         <translation>导入</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="328"/>
+        <location filename="../mainwindow.cpp" line="336"/>
         <source>Ctrl+I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="332"/>
+        <location filename="../mainwindow.cpp" line="340"/>
         <source>&amp;Export...</source>
         <translation>导出</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="333"/>
+        <location filename="../mainwindow.cpp" line="341"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="337"/>
+        <location filename="../mainwindow.cpp" line="345"/>
         <source>&amp;Save As...</source>
         <translation>另存为</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="341"/>
+        <location filename="../mainwindow.cpp" line="349"/>
         <source>&amp;Save To Mobile...</source>
         <translation>保存到移动设备</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="345"/>
+        <location filename="../mainwindow.cpp" line="353"/>
         <source>&amp;Exit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="350"/>
+        <location filename="../mainwindow.cpp" line="358"/>
         <source>&amp;Full Screen</source>
         <translation>全屏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="354"/>
+        <location filename="../mainwindow.cpp" line="362"/>
         <source>&amp;Show/Hide Class Tree</source>
         <translation>显示/隐藏目录树</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="355"/>
+        <location filename="../mainwindow.cpp" line="363"/>
         <source>Ctrl+H</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="376"/>
+        <location filename="../mainwindow.cpp" line="384"/>
         <source>&amp;Setting ToolBar</source>
         <translation>设置工具栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="380"/>
+        <location filename="../mainwindow.cpp" line="388"/>
         <source>&amp;Show/Hide Tool Bar</source>
         <translation>显示/隐藏工具栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="389"/>
+        <location filename="../mainwindow.cpp" line="397"/>
         <source>F2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="393"/>
+        <location filename="../mainwindow.cpp" line="401"/>
         <source>&amp;HomePage</source>
         <translation>主页</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="397"/>
+        <location filename="../mainwindow.cpp" line="405"/>
         <source>&amp;Invite Friends...</source>
         <translation>邀请朋友</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="401"/>
+        <location filename="../mainwindow.cpp" line="409"/>
         <source>&amp;Forum</source>
         <translation>论坛</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="409"/>
+        <location filename="../mainwindow.cpp" line="417"/>
         <source>&amp;Update</source>
         <translation>更新</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="413"/>
+        <location filename="../mainwindow.cpp" line="421"/>
         <source>&amp;Option</source>
         <translation>选项</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="414"/>
+        <location filename="../mainwindow.cpp" line="422"/>
         <source>Ctrl+O</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="418"/>
+        <location filename="../mainwindow.cpp" line="426"/>
         <source>&amp;View Log...</source>
         <translation>查看日志</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="419"/>
+        <location filename="../mainwindow.cpp" line="427"/>
         <source>Ctrl+L</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="428"/>
+        <location filename="../mainwindow.cpp" line="436"/>
         <source>Account Information</source>
         <translation>账户信息</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="432"/>
+        <location filename="../mainwindow.cpp" line="440"/>
         <source>Update to VIP</source>
         <translation>升级到VIP</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="436"/>
+        <location filename="../mainwindow.cpp" line="444"/>
         <source>Logo Off</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="492"/>
+        <location filename="../mainwindow.cpp" line="500"/>
         <source>&amp;Tool</source>
         <translation>工具</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="499"/>
+        <location filename="../mainwindow.cpp" line="507"/>
         <source>&amp;Account</source>
         <translation>账号</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="536"/>
+        <location filename="../mainwindow.cpp" line="544"/>
         <source>Tool Bar</source>
         <translation>工具栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="765"/>
+        <location filename="../mainwindow.cpp" line="773"/>
         <source>Note Editor</source>
         <translation>备注编辑器</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1184"/>
+        <location filename="../mainwindow.cpp" line="1198"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1184"/>
+        <location filename="../mainwindow.cpp" line="1198"/>
         <source>Please Confirm The original file  has Deleted Or Moved. </source>
         <translation>请确认原始文件是否已被删除或移动.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1201"/>
+        <location filename="../mainwindow.cpp" line="1215"/>
         <source>Mi&amp;nimize</source>
         <translation>最小化</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1204"/>
+        <location filename="../mainwindow.cpp" line="1218"/>
         <source>Ma&amp;ximize</source>
         <translation>最大化</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1207"/>
+        <location filename="../mainwindow.cpp" line="1221"/>
         <source>&amp;Restore</source>
         <translation>重置</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1213"/>
+        <location filename="../mainwindow.cpp" line="1227"/>
         <source>&amp;Auto Start</source>
         <translation>自动启动</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1241"/>
+        <location filename="../mainwindow.cpp" line="1255"/>
         <source>Systray</source>
         <translation>系统托盘</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1242"/>
+        <location filename="../mainwindow.cpp" line="1256"/>
         <source>Sorry, I already gave what help I could.
 Maybe you should try asking a human?</source>
         <translation></translation>
@@ -2457,17 +2456,17 @@ Maybe you should try asking a human?</source>
 <context>
     <name>MyTreeView</name>
     <message>
-        <location filename="../mytreeview.cpp" line="47"/>
+        <location filename="../mytreeview.cpp" line="96"/>
         <source>AllDocs</source>
         <translation>所有文件夹</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="53"/>
+        <location filename="../mytreeview.cpp" line="102"/>
         <source>AllTags</source>
         <translation>标签</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="58"/>
+        <location filename="../mytreeview.cpp" line="107"/>
         <source>WasteBasket</source>
         <translation>垃圾篓</translation>
     </message>
@@ -2476,173 +2475,178 @@ Maybe you should try asking a human?</source>
         <translation type="obsolete">文档管理</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="111"/>
+        <location filename="../mytreeview.cpp" line="74"/>
         <source>Solo Local File Manager</source>
         <translation>搜咯文档管理</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="125"/>
+        <location filename="../mytreeview.cpp" line="141"/>
         <source>&amp;New Sub Dir</source>
         <translation>新建子文件夹</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="127"/>
+        <location filename="../mytreeview.cpp" line="143"/>
         <source>&amp;Move To Dir</source>
         <translation>移动到...</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="129"/>
-        <location filename="../mytreeview.cpp" line="176"/>
+        <location filename="../mytreeview.cpp" line="145"/>
+        <location filename="../mytreeview.cpp" line="195"/>
         <source>&amp;Delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="131"/>
-        <location filename="../mytreeview.cpp" line="178"/>
+        <location filename="../mytreeview.cpp" line="147"/>
+        <location filename="../mytreeview.cpp" line="197"/>
         <source>&amp;Rename</source>
         <translation>重命名</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="135"/>
+        <location filename="../mytreeview.cpp" line="151"/>
         <source>&amp;Import...</source>
         <translation>导入...</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="136"/>
+        <location filename="../mytreeview.cpp" line="152"/>
         <source>Ctrl+I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="139"/>
+        <location filename="../mytreeview.cpp" line="155"/>
         <source>&amp;Export...</source>
         <translation>导出...</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="140"/>
+        <location filename="../mytreeview.cpp" line="156"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="143"/>
+        <location filename="../mytreeview.cpp" line="159"/>
         <source>&amp;Sort SubDirs</source>
         <translation>子文件夹排序</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="146"/>
+        <location filename="../mytreeview.cpp" line="162"/>
         <source>&amp;Show docs under sub Dir</source>
         <translation>显示子文件夹文档</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="154"/>
-        <location filename="../mytreeview.cpp" line="164"/>
+        <location filename="../mytreeview.cpp" line="170"/>
+        <location filename="../mytreeview.cpp" line="180"/>
         <source>&amp;Protect</source>
         <translation>保护</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="156"/>
-        <location filename="../mytreeview.cpp" line="186"/>
+        <location filename="../mytreeview.cpp" line="172"/>
+        <location filename="../mytreeview.cpp" line="205"/>
         <source>&amp;Properties</source>
         <translation>属性</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="160"/>
+        <location filename="../mytreeview.cpp" line="176"/>
         <source>&amp;New Root Dir</source>
         <translation>新建根文件夹</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="162"/>
+        <location filename="../mytreeview.cpp" line="178"/>
         <source>&amp;Sort Dir</source>
         <translation>文件夹排序</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="166"/>
+        <location filename="../mytreeview.cpp" line="182"/>
         <source>&amp;Option</source>
         <translation>选项</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="170"/>
+        <location filename="../mytreeview.cpp" line="184"/>
+        <source>&amp;Refresh</source>
+        <translation>刷新</translation>
+    </message>
+    <message>
+        <location filename="../mytreeview.cpp" line="189"/>
         <source>&amp;New Sub Tag</source>
         <translation>新建子标签</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="172"/>
+        <location filename="../mytreeview.cpp" line="191"/>
         <source>&amp;Move to Tag</source>
         <translation>移动到标签</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="174"/>
+        <location filename="../mytreeview.cpp" line="193"/>
         <source>&amp;Move to Root Tag</source>
         <translation>移动到根标签</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="180"/>
+        <location filename="../mytreeview.cpp" line="199"/>
         <source>&amp;Show docs under sub Tag</source>
         <translation>显示子标签文档</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="190"/>
+        <location filename="../mytreeview.cpp" line="209"/>
         <source>&amp;New Tag</source>
         <translation>新建标签</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="194"/>
+        <location filename="../mytreeview.cpp" line="213"/>
         <source>&amp;Clear Basket</source>
         <translation>清空垃圾篓</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="732"/>
-        <location filename="../mytreeview.cpp" line="754"/>
-        <location filename="../mytreeview.cpp" line="776"/>
-        <location filename="../mytreeview.cpp" line="802"/>
-        <location filename="../mytreeview.cpp" line="837"/>
-        <location filename="../mytreeview.cpp" line="872"/>
-        <location filename="../mytreeview.cpp" line="898"/>
-        <location filename="../mytreeview.cpp" line="937"/>
+        <location filename="../mytreeview.cpp" line="747"/>
+        <location filename="../mytreeview.cpp" line="769"/>
+        <location filename="../mytreeview.cpp" line="791"/>
+        <location filename="../mytreeview.cpp" line="827"/>
+        <location filename="../mytreeview.cpp" line="862"/>
+        <location filename="../mytreeview.cpp" line="897"/>
+        <location filename="../mytreeview.cpp" line="923"/>
         <location filename="../mytreeview.cpp" line="962"/>
-        <location filename="../mytreeview.cpp" line="1003"/>
-        <location filename="../mytreeview.cpp" line="1040"/>
-        <location filename="../mytreeview.cpp" line="1074"/>
-        <location filename="../mytreeview.cpp" line="1101"/>
-        <location filename="../mytreeview.cpp" line="1136"/>
+        <location filename="../mytreeview.cpp" line="987"/>
+        <location filename="../mytreeview.cpp" line="1028"/>
+        <location filename="../mytreeview.cpp" line="1065"/>
+        <location filename="../mytreeview.cpp" line="1099"/>
+        <location filename="../mytreeview.cpp" line="1127"/>
+        <location filename="../mytreeview.cpp" line="1162"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="732"/>
-        <location filename="../mytreeview.cpp" line="754"/>
+        <location filename="../mytreeview.cpp" line="747"/>
+        <location filename="../mytreeview.cpp" line="769"/>
         <source>Please Select an sub directory.</source>
         <translation>请选择一个子目录.</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="776"/>
-        <location filename="../mytreeview.cpp" line="802"/>
-        <location filename="../mytreeview.cpp" line="837"/>
-        <location filename="../mytreeview.cpp" line="872"/>
-        <location filename="../mytreeview.cpp" line="898"/>
-        <location filename="../mytreeview.cpp" line="937"/>
+        <location filename="../mytreeview.cpp" line="791"/>
+        <location filename="../mytreeview.cpp" line="827"/>
+        <location filename="../mytreeview.cpp" line="862"/>
+        <location filename="../mytreeview.cpp" line="897"/>
+        <location filename="../mytreeview.cpp" line="923"/>
         <location filename="../mytreeview.cpp" line="962"/>
-        <location filename="../mytreeview.cpp" line="1040"/>
-        <location filename="../mytreeview.cpp" line="1074"/>
+        <location filename="../mytreeview.cpp" line="987"/>
+        <location filename="../mytreeview.cpp" line="1065"/>
+        <location filename="../mytreeview.cpp" line="1099"/>
         <source>Please Select an directory.</source>
         <translation>请选择一个文件夹.</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="855"/>
+        <location filename="../mytreeview.cpp" line="880"/>
         <source>New Directory name:</source>
         <translation>新建目录名称:</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="913"/>
+        <location filename="../mytreeview.cpp" line="938"/>
         <source>New Root Directory name:</source>
         <translation>新建根文件夹名称:</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1022"/>
+        <location filename="../mytreeview.cpp" line="1047"/>
         <source>Rename</source>
         <translation>重命名</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1022"/>
+        <location filename="../mytreeview.cpp" line="1047"/>
         <source>Rename Tag name:</source>
         <translation>重命名标签名称:</translation>
     </message>
@@ -2651,12 +2655,12 @@ Maybe you should try asking a human?</source>
         <translation type="obsolete">新建根目录名称:</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="979"/>
+        <location filename="../mytreeview.cpp" line="1004"/>
         <source>Are you sure you want to delete the %1 tag?</source>
         <translation>您是否确认删除 %1 标签</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1003"/>
+        <location filename="../mytreeview.cpp" line="1028"/>
         <source>Please Select an Sub Tag.</source>
         <translation>请选择一个子标签.</translation>
     </message>
@@ -2665,22 +2669,22 @@ Maybe you should try asking a human?</source>
         <translation type="obsolete">新建标签名称:</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1101"/>
+        <location filename="../mytreeview.cpp" line="1127"/>
         <source>Please Select an Tag.</source>
         <translation>请选择一个标签.</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1136"/>
+        <location filename="../mytreeview.cpp" line="1162"/>
         <source>Please Select an sub tag.</source>
         <translation>请选择一个子标签.</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1147"/>
+        <location filename="../mytreeview.cpp" line="1173"/>
         <source>Are you sure that delete the directory &quot;%1&quot;?</source>
         <translation>您是否确定删除目录 %1 ?</translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1179"/>
+        <location filename="../mytreeview.cpp" line="1205"/>
         <source>Are you sure that drop the Basket ?</source>
         <translation>您是否确定清空垃圾篓?</translation>
     </message>

@@ -35,8 +35,8 @@ public:
         };
 	void         setTreeTitle(QString title); //设置tree的名称
 	void         setSubTreeTitle(int subTree,QString title);
-        void         addItem(int subTree, QString itemName, QString uid,  QString type, QString icon); //增加item
-        void         addItemByParentItem(QStandardItem *parenItem, QString itemName, QString uid, QString type, QString icon); //增加item
+    void         addItem(int subTree, QString itemName, QString uid,  QString type, QString icon); //增加item
+    QStandardItem* addItemByParentItem(QStandardItem *parenItem, QString itemName, QString uid, QString type, QString icon); //增加item
 	void         addItems(int subTree, QList<QString> nameList);
 	void         delelteItem(int subTree, QString itemName);
         bool         delSubItems(QStandardItem *parenItem);
@@ -58,7 +58,8 @@ public:
         void         loadDelDirs(QString dirUuId,  QStandardItem *curItem);
         void         showImportDlg();
         void         showExportDlg();
-
+        QModelIndex lastdirIndex;
+        QModelIndex lasttagIndex;
 private slots:
         void         showChildTree();
         void         reloadTagTree();
@@ -76,6 +77,8 @@ private slots:
         void setShowSubDirDoc();
         void setShowSubTagDoc();
         void properties();
+        void refresh();
+        void restoreDir();
 
         void newTag();
         void deleteTag();
@@ -136,12 +139,15 @@ private:
         QAction *showSubDirDoc;
         QAction *protectDir;
         QAction *propOfDir;
+        QAction *refreshDir;
+        QAction *restoreA;
 
         //Root ContextMenu
         QAction *makeRootDir;
         QAction *dirSort;
         QAction *protectRootDir;
         QAction *optionOfDir;
+
 
         //Tag ContextMenu
         QAction *makeSubTag;
@@ -160,8 +166,14 @@ private:
 
         QMenu *contextMenu;
 
+        QString lastdirUuid;
+        QString lasttagUuid;
+
+
+
 
         void treeContextMenuOpened();
+        void initTree();
         void initActions();
 
 };

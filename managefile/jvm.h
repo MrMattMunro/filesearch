@@ -29,10 +29,10 @@ class Jvm : public QObject
                // Jvm(QObject * parent = 0);
                 ~Jvm();
                 bool invokeMethod(QString clz, QString method, QString methodSign, QMap<QString, QString> parms);
-
+                static bool BeginJVM();
+                static bool EndJVM();
         private:
-             static bool BeginJVM();
-             static bool EndJVM();
+
              //输出java异常信息
              static JNIEnv* env;
              static JavaVM* jvm;

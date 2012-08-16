@@ -76,11 +76,14 @@ void DocToDirDialog::confirmBtn_clicked(){
     // ¿½±´
     if(m_isCopy){
         doc.DOCUMENT_GUID = QUuid::createUuid().toString();
+        doc.DELETE_FLAG = "0";
         doc.DIR_GUID = curUuid;
         DocDao::insertDoc(doc);
     }else{
         // ÒÆ¶¯
         doc.DIR_GUID = curUuid;
+        doc.DELETE_FLAG = "0";
+        doc.MF_VERSION = doc.MF_VERSION + 1;
         DocDao::updateDoc(doc);
     }
 
