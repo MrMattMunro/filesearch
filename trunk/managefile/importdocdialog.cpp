@@ -19,7 +19,7 @@ ImportDocDialog::ImportDocDialog(QWidget * parent, const QString & baseUuid, con
           m_baseUuid(baseUuid),
           m_baseDir(basedir), update(false)
 {
-	setupUi(this);
+        setupUi(this);
         inclueSubDirCheck->setChecked(true);
         createSubDirCheck->setChecked(false);
 
@@ -56,6 +56,8 @@ ImportDocDialog::ImportDocDialog(QWidget * parent, const QString & baseUuid, con
         progressBar->hide();
         pgfilename->hide();
         cancelled = false;
+
+        previewView->horizontalHeader()->setVisible(false);
 
         connect(fileSelBtn, SIGNAL(clicked()), this, SLOT(fileSelBtn_clicked()));
         connect(previewBtn, SIGNAL(clicked()), this, SLOT(previewBtn_clicked()));

@@ -925,7 +925,7 @@ Do you want to reload all pages?</source>
     </message>
     <message>
         <location filename="../doctodirdialog.cpp" line="72"/>
-        <location filename="../doctodirdialog.cpp" line="131"/>
+        <location filename="../doctodirdialog.cpp" line="134"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
@@ -935,7 +935,7 @@ Do you want to reload all pages?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../doctodirdialog.cpp" line="131"/>
+        <location filename="../doctodirdialog.cpp" line="134"/>
         <source>Please Select an directory.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1471,28 +1471,28 @@ Do you want to reload all pages?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../importdocdialog.cpp" line="72"/>
+        <location filename="../importdocdialog.cpp" line="74"/>
         <source>Select existing doc directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../importdocdialog.cpp" line="73"/>
+        <location filename="../importdocdialog.cpp" line="75"/>
         <source>Choose a directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../importdocdialog.cpp" line="88"/>
-        <location filename="../importdocdialog.cpp" line="267"/>
+        <location filename="../importdocdialog.cpp" line="90"/>
+        <location filename="../importdocdialog.cpp" line="269"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../importdocdialog.cpp" line="88"/>
+        <location filename="../importdocdialog.cpp" line="90"/>
         <source>Please Select the Path to Import Into..</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../importdocdialog.cpp" line="267"/>
+        <location filename="../importdocdialog.cpp" line="269"/>
         <source>No Import file. Please Confirm</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2049,7 +2049,7 @@ Maybe you should try asking a human?</source>
     <message>
         <location filename="../movetodirdialog.cpp" line="57"/>
         <location filename="../movetodirdialog.cpp" line="63"/>
-        <location filename="../movetodirdialog.cpp" line="108"/>
+        <location filename="../movetodirdialog.cpp" line="109"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2064,7 +2064,7 @@ Maybe you should try asking a human?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../movetodirdialog.cpp" line="108"/>
+        <location filename="../movetodirdialog.cpp" line="109"/>
         <source>Please Select an directory.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2091,260 +2091,260 @@ Maybe you should try asking a human?</source>
 <context>
     <name>MyTableView</name>
     <message>
-        <location filename="../mytableview.cpp" line="95"/>
+        <location filename="../mytableview.cpp" line="96"/>
         <source>&amp;Open in System soft</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="99"/>
+        <location filename="../mytableview.cpp" line="100"/>
         <source>&amp;Open in tab page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="103"/>
+        <location filename="../mytableview.cpp" line="104"/>
         <source>&amp;Open in System Explorer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="107"/>
+        <location filename="../mytableview.cpp" line="108"/>
         <source>&amp;Export..</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="111"/>
+        <location filename="../mytableview.cpp" line="112"/>
         <source>&amp;Send Email As Attachment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="115"/>
+        <location filename="../mytableview.cpp" line="116"/>
         <source>&amp;Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="119"/>
+        <location filename="../mytableview.cpp" line="120"/>
         <source>&amp;Related Documents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="123"/>
+        <location filename="../mytableview.cpp" line="124"/>
         <source>&amp;Tags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="127"/>
+        <location filename="../mytableview.cpp" line="128"/>
         <source>&amp;Delete(Move to the Wastebasket)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="131"/>
+        <location filename="../mytableview.cpp" line="132"/>
         <source>&amp;Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="135"/>
+        <location filename="../mytableview.cpp" line="136"/>
         <source>&amp;Encrypt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="139"/>
+        <location filename="../mytableview.cpp" line="140"/>
         <source>&amp;Find and Replace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="143"/>
+        <location filename="../mytableview.cpp" line="144"/>
         <source>&amp;Select All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="147"/>
+        <location filename="../mytableview.cpp" line="148"/>
         <source>&amp;Print</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="151"/>
+        <location filename="../mytableview.cpp" line="152"/>
         <source>&amp;Advanced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="155"/>
+        <location filename="../mytableview.cpp" line="156"/>
         <source>&amp;Convert Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="159"/>
+        <location filename="../mytableview.cpp" line="160"/>
         <source>&amp;Convert Office to Pdf</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="160"/>
+        <location filename="../mytableview.cpp" line="161"/>
         <source>&amp;Convert Pdf to Office</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="161"/>
+        <location filename="../mytableview.cpp" line="162"/>
         <source>&amp;Convert Picture to Pdf</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="162"/>
+        <location filename="../mytableview.cpp" line="163"/>
         <source>&amp;Convert Ppt to Picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="169"/>
+        <location filename="../mytableview.cpp" line="170"/>
         <source>&amp;Merge Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="172"/>
+        <location filename="../mytableview.cpp" line="173"/>
         <source>&amp;Restore And Repair Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="175"/>
+        <location filename="../mytableview.cpp" line="176"/>
         <source>&amp;Print Documents In Batch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="178"/>
+        <location filename="../mytableview.cpp" line="179"/>
         <source>&amp;Change format in the Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="188"/>
+        <location filename="../mytableview.cpp" line="189"/>
         <source>&amp;Move to...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="191"/>
+        <location filename="../mytableview.cpp" line="192"/>
         <source>&amp;Copy to...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="194"/>
+        <location filename="../mytableview.cpp" line="195"/>
         <source>&amp;Option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="204"/>
+        <location filename="../mytableview.cpp" line="205"/>
         <source>&amp;One Row</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="208"/>
+        <location filename="../mytableview.cpp" line="209"/>
         <source>&amp;Two Rows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="212"/>
+        <location filename="../mytableview.cpp" line="213"/>
         <source>&amp;The second Row&apos;s Option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="213"/>
+        <location filename="../mytableview.cpp" line="214"/>
         <source>&amp;Show notes of Document on Tooltip</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="231"/>
+        <location filename="../mytableview.cpp" line="232"/>
         <source>&amp;Properties</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="687"/>
-        <location filename="../mytableview.cpp" line="705"/>
-        <location filename="../mytableview.cpp" line="727"/>
-        <location filename="../mytableview.cpp" line="830"/>
-        <location filename="../mytableview.cpp" line="875"/>
-        <location filename="../mytableview.cpp" line="899"/>
-        <location filename="../mytableview.cpp" line="1277"/>
-        <location filename="../mytableview.cpp" line="1298"/>
+        <location filename="../mytableview.cpp" line="688"/>
+        <location filename="../mytableview.cpp" line="706"/>
+        <location filename="../mytableview.cpp" line="728"/>
+        <location filename="../mytableview.cpp" line="831"/>
+        <location filename="../mytableview.cpp" line="876"/>
+        <location filename="../mytableview.cpp" line="900"/>
+        <location filename="../mytableview.cpp" line="1307"/>
+        <location filename="../mytableview.cpp" line="1328"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="687"/>
-        <location filename="../mytableview.cpp" line="705"/>
-        <location filename="../mytableview.cpp" line="738"/>
+        <location filename="../mytableview.cpp" line="688"/>
+        <location filename="../mytableview.cpp" line="706"/>
+        <location filename="../mytableview.cpp" line="739"/>
         <source>Please Confirm The original file  has Deleted Or Moved. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="727"/>
-        <location filename="../mytableview.cpp" line="830"/>
-        <location filename="../mytableview.cpp" line="875"/>
-        <location filename="../mytableview.cpp" line="899"/>
-        <location filename="../mytableview.cpp" line="1298"/>
+        <location filename="../mytableview.cpp" line="728"/>
+        <location filename="../mytableview.cpp" line="831"/>
+        <location filename="../mytableview.cpp" line="876"/>
+        <location filename="../mytableview.cpp" line="900"/>
+        <location filename="../mytableview.cpp" line="1328"/>
         <source>Please Select an Document.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="738"/>
+        <location filename="../mytableview.cpp" line="739"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="911"/>
+        <location filename="../mytableview.cpp" line="912"/>
         <source>Are you sure that delete the document ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="957"/>
+        <location filename="../mytableview.cpp" line="958"/>
         <source>Are you sure that restore the document ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1082"/>
+        <location filename="../mytableview.cpp" line="1112"/>
         <source>Create Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1088"/>
+        <location filename="../mytableview.cpp" line="1118"/>
         <source>Modified Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1094"/>
+        <location filename="../mytableview.cpp" line="1124"/>
         <source>Accessed Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1100"/>
+        <location filename="../mytableview.cpp" line="1130"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1106"/>
+        <location filename="../mytableview.cpp" line="1136"/>
         <source>Author</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1112"/>
+        <location filename="../mytableview.cpp" line="1142"/>
         <source>Read Count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1118"/>
+        <location filename="../mytableview.cpp" line="1148"/>
         <source>Related Count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1124"/>
+        <location filename="../mytableview.cpp" line="1154"/>
         <source>Tags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1130"/>
+        <location filename="../mytableview.cpp" line="1160"/>
         <source>URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1136"/>
+        <location filename="../mytableview.cpp" line="1166"/>
         <source>Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytableview.cpp" line="1278"/>
+        <location filename="../mytableview.cpp" line="1308"/>
         <source>Please Confirm The original file has Deleted Or Moved. </source>
         <translation type="unfinished"></translation>
     </message>
@@ -2378,13 +2378,13 @@ Maybe you should try asking a human?</source>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="145"/>
-        <location filename="../mytreeview.cpp" line="195"/>
+        <location filename="../mytreeview.cpp" line="197"/>
         <source>&amp;Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="147"/>
-        <location filename="../mytreeview.cpp" line="197"/>
+        <location filename="../mytreeview.cpp" line="199"/>
         <source>&amp;Rename</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2426,7 +2426,7 @@ Maybe you should try asking a human?</source>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="172"/>
-        <location filename="../mytreeview.cpp" line="205"/>
+        <location filename="../mytreeview.cpp" line="207"/>
         <source>&amp;Properties</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2451,94 +2451,105 @@ Maybe you should try asking a human?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="189"/>
-        <source>&amp;New Sub Tag</source>
+        <location filename="../mytreeview.cpp" line="187"/>
+        <source>&amp;ReStore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="191"/>
-        <source>&amp;Move to Tag</source>
+        <source>&amp;New Sub Tag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mytreeview.cpp" line="193"/>
+        <source>&amp;Move to Tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mytreeview.cpp" line="195"/>
         <source>&amp;Move to Root Tag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="199"/>
+        <location filename="../mytreeview.cpp" line="201"/>
         <source>&amp;Show docs under sub Tag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="209"/>
+        <location filename="../mytreeview.cpp" line="211"/>
         <source>&amp;New Tag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="213"/>
+        <location filename="../mytreeview.cpp" line="215"/>
         <source>&amp;Clear Basket</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="747"/>
-        <location filename="../mytreeview.cpp" line="769"/>
-        <location filename="../mytreeview.cpp" line="791"/>
-        <location filename="../mytreeview.cpp" line="827"/>
-        <location filename="../mytreeview.cpp" line="862"/>
+        <location filename="../mytreeview.cpp" line="715"/>
+        <location filename="../mytreeview.cpp" line="753"/>
+        <location filename="../mytreeview.cpp" line="775"/>
+        <location filename="../mytreeview.cpp" line="797"/>
         <location filename="../mytreeview.cpp" line="897"/>
-        <location filename="../mytreeview.cpp" line="923"/>
-        <location filename="../mytreeview.cpp" line="962"/>
-        <location filename="../mytreeview.cpp" line="987"/>
-        <location filename="../mytreeview.cpp" line="1028"/>
-        <location filename="../mytreeview.cpp" line="1065"/>
-        <location filename="../mytreeview.cpp" line="1099"/>
-        <location filename="../mytreeview.cpp" line="1127"/>
-        <location filename="../mytreeview.cpp" line="1162"/>
+        <location filename="../mytreeview.cpp" line="932"/>
+        <location filename="../mytreeview.cpp" line="967"/>
+        <location filename="../mytreeview.cpp" line="993"/>
+        <location filename="../mytreeview.cpp" line="1032"/>
+        <location filename="../mytreeview.cpp" line="1057"/>
+        <location filename="../mytreeview.cpp" line="1098"/>
+        <location filename="../mytreeview.cpp" line="1135"/>
+        <location filename="../mytreeview.cpp" line="1169"/>
+        <location filename="../mytreeview.cpp" line="1197"/>
+        <location filename="../mytreeview.cpp" line="1232"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="747"/>
-        <location filename="../mytreeview.cpp" line="769"/>
+        <location filename="../mytreeview.cpp" line="715"/>
+        <source>The index is busying. Please try later</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mytreeview.cpp" line="753"/>
+        <location filename="../mytreeview.cpp" line="775"/>
         <source>Please Select an sub directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="791"/>
-        <location filename="../mytreeview.cpp" line="827"/>
-        <location filename="../mytreeview.cpp" line="862"/>
+        <location filename="../mytreeview.cpp" line="797"/>
         <location filename="../mytreeview.cpp" line="897"/>
-        <location filename="../mytreeview.cpp" line="923"/>
-        <location filename="../mytreeview.cpp" line="962"/>
-        <location filename="../mytreeview.cpp" line="987"/>
-        <location filename="../mytreeview.cpp" line="1065"/>
-        <location filename="../mytreeview.cpp" line="1099"/>
+        <location filename="../mytreeview.cpp" line="932"/>
+        <location filename="../mytreeview.cpp" line="967"/>
+        <location filename="../mytreeview.cpp" line="993"/>
+        <location filename="../mytreeview.cpp" line="1032"/>
+        <location filename="../mytreeview.cpp" line="1057"/>
+        <location filename="../mytreeview.cpp" line="1135"/>
+        <location filename="../mytreeview.cpp" line="1169"/>
         <source>Please Select an directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="880"/>
+        <location filename="../mytreeview.cpp" line="950"/>
         <source>New Directory name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="938"/>
+        <location filename="../mytreeview.cpp" line="1008"/>
         <source>New Root Directory name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1047"/>
+        <location filename="../mytreeview.cpp" line="1117"/>
         <source>Rename</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1047"/>
+        <location filename="../mytreeview.cpp" line="1117"/>
         <source>Rename Tag name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1004"/>
+        <location filename="../mytreeview.cpp" line="1074"/>
         <source>Are you sure you want to delete the %1 tag?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2548,27 +2559,27 @@ Maybe you should try asking a human?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1028"/>
+        <location filename="../mytreeview.cpp" line="1098"/>
         <source>Please Select an Sub Tag.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1127"/>
+        <location filename="../mytreeview.cpp" line="1197"/>
         <source>Please Select an Tag.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1162"/>
+        <location filename="../mytreeview.cpp" line="1232"/>
         <source>Please Select an sub tag.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1173"/>
+        <location filename="../mytreeview.cpp" line="1243"/>
         <source>Are you sure that delete the directory &quot;%1&quot;?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mytreeview.cpp" line="1205"/>
+        <location filename="../mytreeview.cpp" line="1275"/>
         <source>Are you sure that drop the Basket ?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3444,12 +3455,12 @@ Do you really want to recreate the index file?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="261"/>
+        <location filename="../main.cpp" line="262"/>
         <source>Systray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="262"/>
+        <location filename="../main.cpp" line="263"/>
         <source>I couldn&apos;t detect any system tray on this system.</source>
         <translation type="unfinished"></translation>
     </message>
