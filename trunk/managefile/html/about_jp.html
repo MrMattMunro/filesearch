@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>about</title>
+<link rel="stylesheet" href="lib/jquery/development-bundle/themes/base/jquery.ui.all.css">
+<script type="text/javascript" src="lib/jquery/js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="lib/jquery/plugin/jquery.blockUI.js"></script>
+<script type="text/javascript" src="lib/jquery/js/jquery-ui-1.8.16.custom.min.js"></script>
+  <SCRIPT>
+    function setVersion(localVersion, newestVersion) {
+		document.getElementById("localVersion").innerHTML = localVersion;
+		document.getElementById("newestVersion").innerHTML = newestVersion;
+	}
+	$(function() {
+		$( "#tabs" ).tabs();
+	});
+  </SCRIPT>
+ </head>
+ <body>
+<DIV class=demo>
+<DIV id=tabs>
+<UL>
+<LI><A href="#tabs-1">基本情報</A></LI>
+<LI><A href="#tabs-2">バージョン</A></LI>
+<LI><A href="#tabs-3">プラグイン</A></LI></UL>
+<DIV id=tabs-1 style="font-size:14px"><P>
+Soloドキュメント管理<br><br>
+
+警告：このソフトウェアプログラムは著作権法および国際条約により保護されています。無断で複製またはこのプログラムの一部またはすべての配布、および、厳しい民事または刑事上の制裁につながる可能性があり、法律で認められている範囲内で最大限可能な限り訴追されることとなります。</P></DIV>
+<DIV id=tabs-2 style="font-size:14px"><P>バージョン：<label id="localVersion"></label> 最新バージョン：<label id="newestVersion"></label> </P></DIV>
+<DIV id=tabs-3 style="font-size:14px">
+Qjson - do with json string<br>
+all right reserved<br><br>
+
+Sqlite - the database<br>
+D. Richard Hipp <br>
+Hwaci - Applied Software Research <br>
+all right reserved
+<br>
+</DIV>
+</DIV></DIV>
+<DIV style="DISPLAY: none" class=demo-description></DIV>
+</body>
+</html>

@@ -25,7 +25,7 @@ function openDoc() {
     document.all.FramerControl1.Open(path, false);
 }
 
- function request(paras)
+function request(paras)
     { 
         var url = location.href; 
         var paraString = url.substring(url.indexOf("?")+1,url.length).split("&"); 
@@ -45,10 +45,11 @@ $(function(){
 	openDoc();
 });
 
+
 </script>
 </head>
-<body>
-<OBJECT classid="clsid:00460182-9E5E-11D5-B7C8-B8269041DD57"  id=FramerControl1 style="LEFT: 0px; TOP: 0px; WIDTH: 100%; HEIGHT: 750px" VIEWASTEXT>
+<body scroll="no" style="WIDTH: 100%; HEIGHT: 100%;margin:0; padding:0; ">
+<OBJECT classid="clsid:00460182-9E5E-11D5-B7C8-B8269041DD57"  id=FramerControl1 style="LEFT: 0px; TOP: 0px;WIDTH: 100%; HEIGHT: 100%" VIEWASTEXT>
 	<PARAM NAME="_ExtentX" VALUE="6350">
 	<PARAM NAME="_ExtentY" VALUE="6350">
 	<PARAM NAME="BorderColor" VALUE="-2147483632">
