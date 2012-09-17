@@ -122,7 +122,6 @@ void RefereeDialog::doConfirmReply(){
      if(error.isEmpty()){
         // 将用户发送过得邮件保存在本地,用户用于发送文档
 
-
      }
 }
 

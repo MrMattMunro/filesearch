@@ -149,7 +149,15 @@ Q_OBJECT
         void setIsIndexing(bool v) { m_is_indexing = v; };
         // index state end
 
+        // splitter stat start
+        QByteArray getSplitterState() { return m_splitterState; };
+        void setSplitterState(QByteArray v) { m_splitterState = v; };
+        // splitter stat end
 
+        // index state start
+        bool getIsMinToTray() { return m_is_mintotray; };
+        void setIsMinToTray(bool v) { m_is_mintotray = v; };
+        // index state end
 
 		int recentlyUsedCount() { return m_recentlyUsedCount; };
 		void setRecentlyUsedCount(int v) { m_recentlyUsedCount = v; };
@@ -221,41 +229,41 @@ Q_OBJECT
 		int exportEol() { return m_exportEol; };
 		void setExportEol(int v) { m_exportEol = v; };
 
-                QStringList allsupported() { return m_allsupported; };
-                void setAllsupported(const QStringList & v ) { m_allsupported = v; };
+        QStringList allsupported() { return m_allsupported; };
+        void setAllsupported(const QStringList & v ) { m_allsupported = v; };
 
-                QStringList officedoc() { return m_officedoc; };
-                void setOfficedoc(const QStringList & v ) { m_officedoc = v; };
+        QStringList officedoc() { return m_officedoc; };
+        void setOfficedoc(const QStringList & v ) { m_officedoc = v; };
 
-                QStringList word() { return m_word; };
-                void setWord(const QStringList & v ) { m_word = v; };
+        QStringList word() { return m_word; };
+        void setWord(const QStringList & v ) { m_word = v; };
 
-                QStringList excel() { return m_excel; };
-                void setExcel(const QStringList & v ) { m_excel = v; };
+        QStringList excel() { return m_excel; };
+        void setExcel(const QStringList & v ) { m_excel = v; };
 
-                QStringList ppt() { return m_ppt; };
-                void setPpt(const QStringList & v ) { m_ppt = v; };
+        QStringList ppt() { return m_ppt; };
+        void setPpt(const QStringList & v ) { m_ppt = v; };
 
-                QStringList pdf() { return m_pdf; };
-                void setPdf(const QStringList & v ) { m_pdf = v; };
+        QStringList pdf() { return m_pdf; };
+        void setPdf(const QStringList & v ) { m_pdf = v; };
 
-                QStringList htmls() { return m_htmls; };
-                void setHtmls(const QStringList & v ) { m_htmls = v; };
+        QStringList htmls() { return m_htmls; };
+        void setHtmls(const QStringList & v ) { m_htmls = v; };
 
-                QStringList pics() { return m_pics; };
-                void setPics(const QStringList & v ) { m_pics = v; };
+        QStringList pics() { return m_pics; };
+        void setPics(const QStringList & v ) { m_pics = v; };
 
-                QStringList swfs() { return m_swfs; };
-                void setSwfs(const QStringList & v ) { m_swfs = v; };
+        QStringList swfs() { return m_swfs; };
+        void setSwfs(const QStringList & v ) { m_swfs = v; };
 
-                QStringList sources() { return m_sources; };
-                void setSources(const QStringList & v ) { m_sources = v; };
+        QStringList sources() { return m_sources; };
+        void setSources(const QStringList & v ) { m_sources = v; };
 
-                QStringList txts() { return m_txts; };
-                void setTxts(const QStringList & v ) { m_txts = v; };
+        QStringList txts() { return m_txts; };
+        void setTxts(const QStringList & v ) { m_txts = v; };
 
-                QStringList movies() { return m_movies; };
-                void setMovies(const QStringList & v ) { m_movies = v; };
+        QStringList movies() { return m_movies; };
+        void setMovies(const QStringList & v ) { m_movies = v; };
 
 	signals:
 		void prefsChanged();
@@ -267,56 +275,60 @@ Q_OBJECT
 		*/
 		static Preferences* _instance;
 
-                bool m_isFullScreen;
-                bool m_isShowClassTree;
-                bool m_isShowToolBar;
-                bool m_isShowDocUnderSub;
-                bool m_isShowDocUnderSubTag;
-                QStringList m_seltoolbaritemlist;
-                QStringList m_waittoolbaritemlist;
-                QStringList m_defaulttoolbaritemlist;
-                QStringList m_defaultwaittoolbaritemlist;
-                QString m_notedocuid;
-                QString m_selnoteuid;
-                QString m_tableselmode;
-                bool m_isShowNotesOnTips;
-                QStringList m_tableselfield;
+        bool m_isFullScreen;
+        bool m_isShowClassTree;
+        bool m_isShowToolBar;
+        bool m_isShowDocUnderSub;
+        bool m_isShowDocUnderSubTag;
+        QStringList m_seltoolbaritemlist;
+        QStringList m_waittoolbaritemlist;
+        QStringList m_defaulttoolbaritemlist;
+        QStringList m_defaultwaittoolbaritemlist;
+        QString m_notedocuid;
+        QString m_selnoteuid;
+        QString m_tableselmode;
+        bool m_isShowNotesOnTips;
+        QStringList m_tableselfield;
 
-                // pref data
-                QString m_mainpath;
-                QString m_indexpath;
-                QString m_backpath;
-                QString m_exportpath;
+        // pref data
+        QString m_mainpath;
+        QString m_indexpath;
+        QString m_backpath;
+        QString m_exportpath;
 
-                // userinfo start
-                QString m_useremail;
-                QString m_username;
-                QString m_displayname;
-                QString m_score;
-                QString m_dt_expired;
-                QString m_type;
-                QString m_store_limit;
-                QString m_store_used;
-                QString m_traffic_limit;
-                QString m_traffic_used;
-                QString m_last_sel_tags;
-                QString m_last_sel_dirs;
-                QString m_last_open_docs;
-                QString m_last_open_notes;
-                QString m_last_open_urls;
-                QString m_version;
-                // userinfo end
+        // userinfo start
+        QString m_useremail;
+        QString m_username;
+        QString m_displayname;
+        QString m_score;
+        QString m_dt_expired;
+        QString m_type;
+        QString m_store_limit;
+        QString m_store_used;
+        QString m_traffic_limit;
+        QString m_traffic_used;
+        QString m_last_sel_tags;
+        QString m_last_sel_dirs;
+        QString m_last_open_docs;
+        QString m_last_open_notes;
+        QString m_last_open_urls;
+        QString m_version;
+        // userinfo end
 
-                // search setting start
-                QString m_searchdir;
-                QString  m_searchobject;
-                // search setting end
+        // search setting start
+        QString m_searchdir;
+        QString  m_searchobject;
+        // search setting end
 
-                //
-                QString m_open_doc;
+        //
+        QString m_open_doc;
 
+        bool m_is_indexing;
 
-                bool m_is_indexing;
+        // ΩÁ√Êstate
+        QByteArray m_splitterState;
+
+        bool m_is_mintotray;
 
 		bool m_checkQtVersion;
 
@@ -350,27 +362,27 @@ Q_OBJECT
 		bool m_exportHeaders;
 		QString m_exportEncoding;
 		int m_exportEol;
-                // extensions
-                bool m_allowExtensionLoading;
-                QStringList m_extensionList;
+        // extensions
+        bool m_allowExtensionLoading;
+        QStringList m_extensionList;
 
 		// used in MultieditDialog
 		QString m_dateTimeFormat;
 
-                QStringList m_allsupported;
+        QStringList m_allsupported;
 
-                QStringList m_officedoc;
-                QStringList m_word;
-                QStringList m_excel;
-                QStringList m_ppt;
+        QStringList m_officedoc;
+        QStringList m_word;
+        QStringList m_excel;
+        QStringList m_ppt;
 
-                QStringList m_pdf;
-                QStringList m_htmls;
-                QStringList m_pics;
-                QStringList m_swfs;
-                QStringList m_sources;
-                QStringList m_txts;
-                QStringList m_movies;
+        QStringList m_pdf;
+        QStringList m_htmls;
+        QStringList m_pics;
+        QStringList m_swfs;
+        QStringList m_sources;
+        QStringList m_txts;
+        QStringList m_movies;
 };
 
 #endif

@@ -22,7 +22,7 @@
         <translation type="obsolete">文档管理</translation>
     </message>
     <message>
-        <location filename="../aboutdialog.cpp" line="26"/>
+        <location filename="../aboutdialog.cpp" line="28"/>
         <source>Solo</source>
         <translation>搜咯</translation>
     </message>
@@ -1436,7 +1436,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../importdocdialog.ui" line="128"/>
         <source>&amp;File Type:</source>
-        <translation>文件类型</translation>
+        <translation>文件类型:</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="139"/>
@@ -1516,7 +1516,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../importdocdialog.ui" line="216"/>
         <source>Exclude File Type:</source>
-        <translation>排除文件类型</translation>
+        <translation>排除文件类型:</translation>
     </message>
     <message>
         <location filename="../importdocdialog.ui" line="223"/>
@@ -1531,7 +1531,7 @@ Do you want to reload all pages?</source>
     <message>
         <location filename="../importdocdialog.ui" line="244"/>
         <source>Create Sub Directory</source>
-        <translation>创建子目录:</translation>
+        <translation>创建子目录</translation>
     </message>
     <message>
         <location filename="../importdocdialog.cpp" line="54"/>
@@ -1860,9 +1860,9 @@ acknowledge our Terms of Service</source>
         <translation type="obsolete">空</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1224"/>
+        <location filename="../mainwindow.cpp" line="1256"/>
         <source>&amp;Quit</source>
-        <translation></translation>
+        <translation>退出</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="354"/>
@@ -1935,6 +1935,7 @@ acknowledge our Terms of Service</source>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="300"/>
+        <location filename="../mainwindow.cpp" line="1247"/>
         <source>Option</source>
         <translation>选项</translation>
     </message>
@@ -2079,47 +2080,52 @@ acknowledge our Terms of Service</source>
         <translation>工具栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="773"/>
+        <location filename="../mainwindow.cpp" line="774"/>
         <source>Note Editor</source>
         <translation>备注编辑器</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1198"/>
+        <location filename="../mainwindow.cpp" line="1221"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1198"/>
+        <location filename="../mainwindow.cpp" line="1221"/>
         <source>Please Confirm The original file  has Deleted Or Moved. </source>
         <translation>请确认原始文件是否已被删除或移动.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1215"/>
+        <location filename="../mainwindow.cpp" line="1239"/>
         <source>Mi&amp;nimize</source>
         <translation>最小化</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1218"/>
+        <location filename="../mainwindow.cpp" line="1242"/>
+        <source>Mi&amp;nimize To Tray</source>
+        <translation>最小化到托盘</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1250"/>
         <source>Ma&amp;ximize</source>
         <translation>最大化</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1221"/>
+        <location filename="../mainwindow.cpp" line="1253"/>
         <source>&amp;Restore</source>
         <translation>重置</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1227"/>
+        <location filename="../mainwindow.cpp" line="1259"/>
         <source>&amp;Auto Start</source>
         <translation>自动启动</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1255"/>
+        <location filename="../mainwindow.cpp" line="1299"/>
         <source>Systray</source>
         <translation>系统托盘</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1256"/>
+        <location filename="../mainwindow.cpp" line="1300"/>
         <source>Sorry, I already gave what help I could.
 Maybe you should try asking a human?</source>
         <translation></translation>
@@ -3691,7 +3697,7 @@ Do you really want to recreate the index file?
         <location filename="../refereedialog.cpp" line="58"/>
         <location filename="../refereedialog.cpp" line="64"/>
         <location filename="../refereedialog.cpp" line="70"/>
-        <location filename="../refereedialog.cpp" line="156"/>
+        <location filename="../refereedialog.cpp" line="155"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -3712,7 +3718,7 @@ Do you really want to recreate the index file?
     </message>
     <message>
         <location filename="../refereedialog.cpp" line="119"/>
-        <location filename="../refereedialog.cpp" line="143"/>
+        <location filename="../refereedialog.cpp" line="142"/>
         <source>Information</source>
         <translation>消息</translation>
     </message>
@@ -3722,12 +3728,12 @@ Do you really want to recreate the index file?
         <translation>用户不存在</translation>
     </message>
     <message>
-        <location filename="../refereedialog.cpp" line="137"/>
+        <location filename="../refereedialog.cpp" line="136"/>
         <source>Send Mail Success !</source>
         <translation>发送邮件成功!</translation>
     </message>
     <message>
-        <location filename="../refereedialog.cpp" line="150"/>
+        <location filename="../refereedialog.cpp" line="149"/>
         <source>Send Mail Failed, Please check the email Address !</source>
         <translation>发送邮件失败,请检查邮件地址.</translation>
     </message>
@@ -3823,12 +3829,12 @@ Do you really want to recreate the index file?
 <context>
     <name>ReqUtil</name>
     <message>
-        <location filename="../requtil.cpp" line="66"/>
+        <location filename="../requtil.cpp" line="73"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../requtil.cpp" line="66"/>
+        <location filename="../requtil.cpp" line="73"/>
         <source>The Server has Errors, Please Contact the Administrator!</source>
         <translation>服务器异常,请联系管理员!</translation>
     </message>
