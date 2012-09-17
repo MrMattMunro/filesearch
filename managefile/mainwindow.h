@@ -132,12 +132,14 @@ private slots:
 
     void createTrayActions();
     void createTrayIcon();
+    void setMinimizeToTray();
     void messageClicked();
     void setAutoStart();
     void quit();
 
 protected:
     void closeEvent(QCloseEvent *event);
+    void changeEvent(QEvent *event);
 
 private:
     QActionGroup *m_feedGroup;
@@ -222,13 +224,16 @@ private:
 
 
     QAction *minimizeAction;
+    QAction *minimizeToTrayAction;
     QAction *maximizeAction;
+    QAction *trayoptionAction;
     QAction *restoreAction;
     QAction *autoStartAction;
     QAction *quitAction;
 
     QSystemTrayIcon *trayIcon;
     QMenu *trayIconMenu;
+    QMenu *trayOptionMenu;
     UEditor *noteEditor;
     ReqUtil *requtil;
 

@@ -25,9 +25,12 @@ class AboutDialog : public QDialog, public Ui::AboutDialog
 	public:
                 AboutDialog(QWidget * parent = 0);
                 bool update;
-        private:
+    private:
+                ReqUtil * requtil;
+
         private slots:
                 void closeBtn_clicked();
+                void doConfirmReply();
 
         signals:
 

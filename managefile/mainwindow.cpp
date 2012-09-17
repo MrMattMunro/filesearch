@@ -729,6 +729,8 @@ void MainWindow::viewLog()
 void MainWindow::initUI()
 {
 
+        Preferences* p = Preferences::instance();
+
         setWindowTitle(m_appName);
 
         splitter = new QSplitter(this);
@@ -756,7 +758,6 @@ void MainWindow::initUI()
 
         connect(browser, SIGNAL(exitFullScreen()), this, SLOT(fullScreen()));
         connect(q_myTreeList, SIGNAL(LBtnClk()), this, SLOT(buildDocList()));
-
 
         // 后期需要调用主界面的动作
         connect(m_doctable, SIGNAL(LBtnDbClk()), this, SLOT(openDocInTab()));
@@ -787,6 +788,12 @@ void MainWindow::initUI()
           //  noteEditorDW=NULL;
         //}
 
+        bool succes = splitter->restoreState(p->getSplitterState());
+        if( !succes ) {
+            splitter->setStretchFactor(0, 0);
+            splitter->setStretchFactor(1, 1);
+            splitter->setStretchFactor(2, 1);
+        }
         setCentralWidget(splitter);
 }
 
@@ -801,6 +808,7 @@ MainWindow::~MainWindow()
     Preferences* p = Preferences::instance();
     p->setLastSelDirs(q_myTreeList->getCurUuid());
     p->setLastSelTags(q_myTreeList->getCurUuid());
+    p->setSplitterState(splitter->saveState());
 
     Preferences::deleteInstance();
 
@@ -812,10 +820,25 @@ MainWindow::~MainWindow()
         QFile::remove(regFile.fileName());
     }
 }
-
+//关闭到托盘
 void MainWindow::closeEvent(QCloseEvent * e)
 {
+     e->ignore();
      Preferences::deleteInstance();
+     this->hide();
+}
+
+//最小化到托盘
+void MainWindow::changeEvent(QEvent *e){
+    Preferences* p = Preferences::instance();
+    if( ! p->getIsMinToTray()){
+       e->ignore();
+       return;
+    }
+     if((e->type()==QEvent::WindowStateChange)&&this->isMinimized())
+    {
+      QTimer::singleShot(100, this, SLOT(close()));
+   }
 }
 
 // 自定义工具栏
@@ -1212,8 +1235,17 @@ void MainWindow::openDocInTab()
 // 系统托盘处理
 void MainWindow::createTrayActions()
 {
+    Preferences* p = Preferences::instance();
     minimizeAction = new QAction(tr("Mi&nimize"), this);
     connect(minimizeAction, SIGNAL(triggered()), this, SLOT(hide()));
+
+    minimizeToTrayAction = new QAction(tr("Mi&nimize To Tray"), this);
+    minimizeToTrayAction->setCheckable(true);
+    minimizeToTrayAction->setChecked(p->getIsMinToTray());
+    connect(minimizeToTrayAction, SIGNAL(triggered()), this, SLOT(setMinimizeToTray()));
+
+    trayoptionAction = new QAction(tr("Option"), this);
+    connect(trayoptionAction, SIGNAL(triggered()), this, SLOT(hide()));
 
     maximizeAction = new QAction(tr("Ma&ximize"), this);
     connect(maximizeAction, SIGNAL(triggered()), this, SLOT(showMaximized()));
@@ -1229,9 +1261,16 @@ void MainWindow::createTrayActions()
     autoStartAction->setChecked(Utils::getAutoRunStatus());
     connect(autoStartAction, SIGNAL(triggered()), this, SLOT(setAutoStart()));
 }
+
 void MainWindow::setAutoStart()
 {
+
    Utils::setAutoRunStatus(quitAction->isChecked());
+}
+void MainWindow::setMinimizeToTray()
+{
+   Preferences* p = Preferences::instance();
+   p->setIsMinToTray(minimizeToTrayAction->isChecked());
 }
 
 void MainWindow::createTrayIcon()
@@ -1239,12 +1278,17 @@ void MainWindow::createTrayIcon()
     trayIconMenu = new QMenu(this);
     trayIconMenu->addAction(minimizeAction);
     trayIconMenu->addAction(maximizeAction);
-    trayIconMenu->addAction(restoreAction);
     trayIconMenu->addSeparator();
-    // TODO
-    // trayIconMenu->addAction(autoStartAction);
-    // trayIconMenu->addSeparator();
+    trayIconMenu->addAction(trayoptionAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(restoreAction);
+
     trayIconMenu->addAction(quitAction);
+
+    trayOptionMenu = new QMenu(this);
+    trayOptionMenu->addAction(minimizeToTrayAction);
+    trayoptionAction->setMenu(trayOptionMenu);
+
 
     trayIcon = new QSystemTrayIcon(Utils::getIcon("file_manager.png"), this);
     trayIcon->setContextMenu(trayIconMenu);

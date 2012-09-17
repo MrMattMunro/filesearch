@@ -74,6 +74,10 @@ Preferences::Preferences(QObject *parent)
 
         m_open_doc = s.value("m_open_doc", QString()).toString();
 
+        // ΩÁ√Êstate
+        m_splitterState = s.value("splitterstate").toByteArray();
+
+        m_is_mintotray = s.value("mintotray", false).toBool();
 
 	m_recentlyUsedCount = s.value("prefs/recentlyUsedSpinBox", 5).toInt();
 	m_openLastDB = s.value("prefs/openLastDB", true).toBool();
@@ -213,10 +217,12 @@ Preferences::~Preferences()
 
         settings.setValue("m_open_doc", m_open_doc);
 
+        settings.setValue("splitterstate", m_splitterState);
+        settings.setValue("mintotray", m_is_mintotray);
 
 	// sql editor
 	settings.setValue("prefs/sqleditor/font", m_sqlFont);
-        settings.setValue("prefs/sqleditor/fontSize", m_sqlFontSize);
+    settings.setValue("prefs/sqleditor/fontSize", m_sqlFontSize);
 	settings.setValue("prefs/sqleditor/useActiveHighlightCheckBox", m_activeHighlighting);
 	settings.setValue("prefs/sqleditor/activeHighlightButton", m_activeHighlightColor);
 	settings.setValue("prefs/sqleditor/useTextWidthMarkCheckBox", m_textWidthMark);

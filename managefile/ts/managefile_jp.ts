@@ -14,7 +14,7 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../aboutdialog.cpp" line="26"/>
+        <location filename="../aboutdialog.cpp" line="28"/>
         <source>Solo</source>
         <translation>Solo</translation>
     </message>
@@ -1840,7 +1840,7 @@ acknowledge our Terms of Service</source>
         <translation type="obsolete">ツール</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1224"/>
+        <location filename="../mainwindow.cpp" line="1256"/>
         <source>&amp;Quit</source>
         <translation>終了</translation>
     </message>
@@ -2011,6 +2011,7 @@ acknowledge our Terms of Service</source>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="300"/>
+        <location filename="../mainwindow.cpp" line="1247"/>
         <source>Option</source>
         <translation>オプション</translation>
     </message>
@@ -2155,47 +2156,52 @@ acknowledge our Terms of Service</source>
         <translation>ツール·バー</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="773"/>
+        <location filename="../mainwindow.cpp" line="774"/>
         <source>Note Editor</source>
         <translation>メモエディタ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1198"/>
+        <location filename="../mainwindow.cpp" line="1221"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1198"/>
+        <location filename="../mainwindow.cpp" line="1221"/>
         <source>Please Confirm The original file  has Deleted Or Moved. </source>
         <translation>元のファイルが削除または移動されている確認してください。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1215"/>
+        <location filename="../mainwindow.cpp" line="1239"/>
         <source>Mi&amp;nimize</source>
         <translation>最小化</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1218"/>
+        <location filename="../mainwindow.cpp" line="1242"/>
+        <source>Mi&amp;nimize To Tray</source>
+        <translation>トレイに最小化</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1250"/>
         <source>Ma&amp;ximize</source>
         <translation>最大化</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1221"/>
+        <location filename="../mainwindow.cpp" line="1253"/>
         <source>&amp;Restore</source>
         <translation>リストア</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1227"/>
+        <location filename="../mainwindow.cpp" line="1259"/>
         <source>&amp;Auto Start</source>
         <translation>オートスタート</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1255"/>
+        <location filename="../mainwindow.cpp" line="1299"/>
         <source>Systray</source>
         <translation>トレイ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1256"/>
+        <location filename="../mainwindow.cpp" line="1300"/>
         <source>Sorry, I already gave what help I could.
 Maybe you should try asking a human?</source>
         <translation>申し訳ありませんが、私はすでに私は可能性に役立つかました。
@@ -3712,7 +3718,7 @@ Do you really want to recreate the index file?
         <location filename="../refereedialog.cpp" line="58"/>
         <location filename="../refereedialog.cpp" line="64"/>
         <location filename="../refereedialog.cpp" line="70"/>
-        <location filename="../refereedialog.cpp" line="156"/>
+        <location filename="../refereedialog.cpp" line="155"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -3733,7 +3739,7 @@ Do you really want to recreate the index file?
     </message>
     <message>
         <location filename="../refereedialog.cpp" line="119"/>
-        <location filename="../refereedialog.cpp" line="143"/>
+        <location filename="../refereedialog.cpp" line="142"/>
         <source>Information</source>
         <translation>情報</translation>
     </message>
@@ -3743,12 +3749,12 @@ Do you really want to recreate the index file?
         <translation>ユーザが存在していされていません。</translation>
     </message>
     <message>
-        <location filename="../refereedialog.cpp" line="137"/>
+        <location filename="../refereedialog.cpp" line="136"/>
         <source>Send Mail Success !</source>
         <translation>メールを送信成功！</translation>
     </message>
     <message>
-        <location filename="../refereedialog.cpp" line="150"/>
+        <location filename="../refereedialog.cpp" line="149"/>
         <source>Send Mail Failed, Please check the email Address !</source>
         <translation>メールの送信が失敗しました、メールアドレスを確認してください！</translation>
     </message>
@@ -3832,12 +3838,12 @@ Do you really want to recreate the index file?
 <context>
     <name>ReqUtil</name>
     <message>
-        <location filename="../requtil.cpp" line="66"/>
+        <location filename="../requtil.cpp" line="73"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../requtil.cpp" line="66"/>
+        <location filename="../requtil.cpp" line="73"/>
         <source>The Server has Errors, Please Contact the Administrator!</source>
         <translation>サーバに障害が発生し、管理者に連絡してください</translation>
     </message>
