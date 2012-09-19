@@ -920,6 +920,12 @@ void MyTreeView::moveDir()
               curItem->parent()->removeRow(curItem->row());
 
               // 设置主界面的节点 (子界面新建文件夹情况下不成功)
+              if(dlg.m_newUuid != ""){
+                  //子界面有新建文件夹情况,刷新
+                  setCurItemByUuid(dlg.m_parent_newUuid, curType);
+                  refresh();
+              }
+
               setCurItemByUuid(toDirUuid, curType);
 
               QStandardItem* curItem = getCurItem();
@@ -933,7 +939,6 @@ void MyTreeView::moveDir()
         return;
     }
 }
-
 
 // 改变子文件夹名称
 void MyTreeView::renameSubDir()

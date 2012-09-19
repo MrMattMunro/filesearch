@@ -16,6 +16,8 @@ class MoveToDirDialog : public QDialog, public Ui::MoveToDirDialog
                 QString m_curUuid;
                 QString m_toUuid;
                 QString m_seldir;
+                QString m_newUuid;
+                QString m_parent_newUuid;
 	private:
                 QObject * m_parent;
                 MyTreeView *q_myTreeList;

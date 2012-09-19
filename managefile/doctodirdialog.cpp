@@ -32,7 +32,7 @@ DocToDirDialog::DocToDirDialog(QWidget * parent, const QString & docName, const 
           m_selDocUuid(docUuid),
           m_isCopy(isCopy), update(false)
 {
-	setupUi(this);
+        setupUi(this);
 
         // 设置文件名
         QFileInfo file(m_docName);

@@ -63,15 +63,36 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>7</x>
-     <y>9</y>
+     <x>10</x>
+     <y>10</y>
      <width>331</width>
-     <height>620</height>
+     <height>461</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
+    <property name="topMargin">
+     <number>10</number>
+    </property>
+    <property name="rightMargin">
+     <number>10</number>
+    </property>
+    <property name="bottomMargin">
+     <number>20</number>
+    </property>
     <item>
      <widget class="QLabel" name="sourceDir">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
        <string/>
       </property>
