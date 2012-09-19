@@ -26,7 +26,7 @@ CreateSubDirDialog::CreateSubDirDialog(QWidget * parent, const QString & curUuid
           m_curUuid(curUuid),
           m_dir(dir),update(false)
 {
-	setupUi(this);
+        setupUi(this);
 
         // Set UI
         // 设置目标目录

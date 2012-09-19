@@ -65,13 +65,19 @@
     <rect>
      <x>7</x>
      <y>9</y>
-     <width>331</width>
-     <height>620</height>
+     <width>341</width>
+     <height>461</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <widget class="QLabel" name="sourceDoc">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
        <string/>
       </property>

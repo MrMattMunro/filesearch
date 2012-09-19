@@ -41,6 +41,8 @@ MoveToDirDialog::MoveToDirDialog(QWidget * parent, const QString & uuId,const QS
 
         verticalLayout_2->addWidget(q_myTreeList);
 
+        m_newUuid = "";
+
         this->setWindowIcon(Utils::getIcon("folder.ico"));
         this->setWindowTitle(tr("Move the Sub Directory"));
 
@@ -96,12 +98,13 @@ void MoveToDirDialog::newDirBtn_clicked(){
         dlg.exec();
         if(dlg.update){
             // 刷新选中的树
-            QString tempPath = "";
-            //tempPath.append(QDir::separator()).append(dlg.dirName->text());
+            m_newUuid = dlg.m_newUuid;
 
+            m_parent_newUuid = q_myTreeList->getCurUuid();
             QStandardItem* curItem = q_myTreeList->getCurItem();
-            q_myTreeList->addItemByParentItem(curItem, dlg.dirName->text(), tempPath, "doc", "folder.ico");
+            q_myTreeList->addItemByParentItem(curItem, dlg.dirName->text(), m_newUuid, "doc", "folder.ico");
             q_myTreeList->expand(q_myTreeList->getCurIndex());
+
         }
     }
     // 如果没有选中子目录节点
