@@ -33,7 +33,7 @@ MoveToTagDialog::MoveToTagDialog(QWidget * parent, const QString & uuId)
         // 展开根节点
         q_myTreeList->enableMouse(true);
         q_myTreeList->expandAll();
-        verticalLayout_2->addWidget(q_myTreeList);
+        tagLayout->addWidget(q_myTreeList);
 
         this->setWindowIcon(Utils::getIcon("tag.ico"));
         this->setWindowTitle(tr("Move the Tag"));

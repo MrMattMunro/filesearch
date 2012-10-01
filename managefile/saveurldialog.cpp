@@ -35,7 +35,7 @@ SaveUrlDialog::SaveUrlDialog(QWidget * parent)
 
         q_myTreeList->expandAll();
 
-        verticalLayout_2->addWidget(q_myTreeList);
+        treeLayout->addWidget(q_myTreeList);
 
         this->setWindowIcon(Utils::getIcon("folder.ico"));
         this->setWindowTitle(tr("Save To Solo"));

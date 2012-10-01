@@ -22,7 +22,7 @@
      <height>41</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="movetoTagBtn">
     <item>
      <widget class="QDialogButtonBox" name="buttonBox">
       <property name="sizePolicy">
@@ -62,7 +62,7 @@
      <height>441</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2"/>
+   <layout class="QVBoxLayout" name="movtoTagTree"/>
   </widget>
  </widget>
  <resources/>

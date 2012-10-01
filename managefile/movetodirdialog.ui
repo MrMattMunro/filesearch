@@ -22,7 +22,7 @@
      <height>191</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="movetoDirbtn">
     <item>
      <widget class="QDialogButtonBox" name="buttonBox">
       <property name="sizePolicy">
@@ -69,7 +69,7 @@
      <height>461</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QVBoxLayout" name="movetoDirTree">
     <property name="topMargin">
      <number>10</number>
     </property>

@@ -35,7 +35,7 @@
      <height>101</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="sortSubDirsBtn">
     <item>
      <widget class="QPushButton" name="moveUpBtn">
       <property name="text">
@@ -61,7 +61,7 @@
      <height>411</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QVBoxLayout" name="sortSubDirsTree">
     <item>
      <widget class="QLabel" name="label">
       <property name="text">
