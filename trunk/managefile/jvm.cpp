@@ -297,7 +297,7 @@ string Jvm::JStringToCString (JNIEnv *env, jstring str)// (jstring str, LPTSTR d
     ZeroMemory(w_buffer,(len+1)*sizeof(wchar_t));
     //使用GetStringChars而不是GetStringUTFChars
     const jchar * jcharString = env->GetStringChars(str, 0);
-    wcscpy(w_buffer,jcharString);
+    //wcscpy(w_buffer,jcharString);
     env->ReleaseStringChars(str,jcharString);
     ZeroMemory(c_buffer,(2*len+1)*sizeof(char));
     //调用字符编码转换函数(Win32 API)将UNICODE转为ASCII编码格式字符串
@@ -317,12 +317,12 @@ jstring Jvm::NewJString(JNIEnv *env, char *str)
     }
     int slen = strlen(str);
     jchar* buffer = new jchar[slen];
-    int len = MultiByteToWideChar(CP_ACP, 0, str, strlen(str),buffer,slen);
-    if(len>0 && len < slen)
-    {
-        buffer[len] = 0;
-    }
-    jstring js = env->NewString(buffer,len);
+//    int len = MultiByteToWideChar(CP_ACP, 0, str, strlen(str),buffer,slen);
+//    if(len>0 && len < slen)
+//    {
+//        buffer[len] = 0;
+//    }
+    jstring js = env->NewString(buffer,slen);
     delete [] buffer;
     return js;
 }
