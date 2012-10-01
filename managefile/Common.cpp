@@ -472,161 +472,161 @@ bool Common::noNativeFileDialog() const
 
 QStringList Common::packages( const QStringList &names, bool withName )
 {
-	QStringList packages;
-#if defined(Q_OS_WIN)
-	QString path = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
-#if 1
-	int count = applicationOs().contains( "64" ) ? 4 : 2;
-	for( int i = 0; i < count; ++i )
-	{
-		HKEY reg = i % 2 == 0 ? HKEY_CURRENT_USER : HKEY_LOCAL_MACHINE;
-		REGSAM param = KEY_READ|(i >= 2 ? KEY_WOW64_32KEY : KEY_WOW64_64KEY);
-		HKEY key;
-		long result = RegOpenKeyEx( reg, (const wchar_t*)(path.utf16()), 0, param, &key );
-		if( result != ERROR_SUCCESS )
-			continue;
+//	QStringList packages;
+//#if defined(Q_OS_WIN)
+//	QString path = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
+//#if 1
+//	int count = applicationOs().contains( "64" ) ? 4 : 2;
+//	for( int i = 0; i < count; ++i )
+//	{
+//		HKEY reg = i % 2 == 0 ? HKEY_CURRENT_USER : HKEY_LOCAL_MACHINE;
+//		REGSAM param = KEY_READ|(i >= 2 ? KEY_WOW64_32KEY : KEY_WOW64_64KEY);
+//		HKEY key;
+//		long result = RegOpenKeyEx( reg, (const wchar_t*)(path.utf16()), 0, param, &key );
+//		if( result != ERROR_SUCCESS )
+//			continue;
 
-		DWORD numSubgroups = 0, maxSubgroupSize = 0;
-		result = RegQueryInfoKey( key, 0, 0, 0, &numSubgroups, &maxSubgroupSize, 0, 0, 0, 0, 0, 0 );
-		if( result != ERROR_SUCCESS )
-		{
-			RegCloseKey( key );
-			continue;
-		}
+//		DWORD numSubgroups = 0, maxSubgroupSize = 0;
+//		result = RegQueryInfoKey( key, 0, 0, 0, &numSubgroups, &maxSubgroupSize, 0, 0, 0, 0, 0, 0 );
+//		if( result != ERROR_SUCCESS )
+//		{
+//			RegCloseKey( key );
+//			continue;
+//		}
 
-		for( DWORD j = 0; j < numSubgroups; ++j )
-		{
-			DWORD groupSize = maxSubgroupSize + 1;
-			QString group( groupSize, 0 );
-			result = RegEnumKeyEx( key, j, (wchar_t*)(group.data()), &groupSize, 0, 0, 0, 0 );
-			if( result != ERROR_SUCCESS )
-				continue;
-			group.resize( groupSize );
+//		for( DWORD j = 0; j < numSubgroups; ++j )
+//		{
+//			DWORD groupSize = maxSubgroupSize + 1;
+//			QString group( groupSize, 0 );
+//			result = RegEnumKeyEx( key, j, (wchar_t*)(group.data()), &groupSize, 0, 0, 0, 0 );
+//			if( result != ERROR_SUCCESS )
+//				continue;
+//			group.resize( groupSize );
 
-			HKEY subkey;
-			QString subpath = path + "\\" + group;
-			result = RegOpenKeyEx( reg, (const wchar_t*)(subpath.utf16()), 0, param, &subkey );
-			if( result != ERROR_SUCCESS )
-				continue;
+//			HKEY subkey;
+//			QString subpath = path + "\\" + group;
+//			result = RegOpenKeyEx( reg, (const wchar_t*)(subpath.utf16()), 0, param, &subkey );
+//			if( result != ERROR_SUCCESS )
+//				continue;
 
-			DWORD numKeys = 0, maxKeySize = 0, maxValueSize = 0;
-			result = RegQueryInfoKey( subkey, 0, 0, 0, 0, 0, 0, &numKeys, &maxKeySize, &maxValueSize, 0, 0 );
-			if( result != ERROR_SUCCESS )
-			{
-				RegCloseKey( subkey );
-				continue;
-			}
+//			DWORD numKeys = 0, maxKeySize = 0, maxValueSize = 0;
+//			result = RegQueryInfoKey( subkey, 0, 0, 0, 0, 0, 0, &numKeys, &maxKeySize, &maxValueSize, 0, 0 );
+//			if( result != ERROR_SUCCESS )
+//			{
+//				RegCloseKey( subkey );
+//				continue;
+//			}
 
-			QString name;
-			QString version;
-			QString type;
-			for( DWORD k = 0; k < numKeys; ++k )
-			{
-				DWORD dataType = 0;
-				DWORD keySize = maxKeySize + 1;
-				DWORD dataSize = maxValueSize;
-				QString key( keySize, 0 );
-				QByteArray data( dataSize, 0 );
+//			QString name;
+//			QString version;
+//			QString type;
+//			for( DWORD k = 0; k < numKeys; ++k )
+//			{
+//				DWORD dataType = 0;
+//				DWORD keySize = maxKeySize + 1;
+//				DWORD dataSize = maxValueSize;
+//				QString key( keySize, 0 );
+//				QByteArray data( dataSize, 0 );
 
-				result = RegEnumValue( subkey, k, (wchar_t*)(key.data()), &keySize, 0,
-					&dataType, (unsigned char*)data.data(), &dataSize );
-				if( result != ERROR_SUCCESS )
-					continue;
-				key.resize( keySize );
-				data.resize( dataSize );
+//				result = RegEnumValue( subkey, k, (wchar_t*)(key.data()), &keySize, 0,
+//					&dataType, (unsigned char*)data.data(), &dataSize );
+//				if( result != ERROR_SUCCESS )
+//					continue;
+//				key.resize( keySize );
+//				data.resize( dataSize );
 
-				QString value;
-				switch( dataType )
-				{
-				case REG_SZ:
-					value = QString::fromUtf16( (const ushort*)data.constData() );
-					break;
-				default: continue;
-				}
+//				QString value;
+//				switch( dataType )
+//				{
+//				case REG_SZ:
+//					value = QString::fromUtf16( (const ushort*)data.constData() );
+//					break;
+//				default: continue;
+//				}
 
-				if( key == "DisplayName" ) name = value;
-				if( key == "DisplayVersion" ) version = value;
-				if( key == "ReleaseType" ) type = value;
-			}
-			RegCloseKey( subkey );
+//				if( key == "DisplayName" ) name = value;
+//				if( key == "DisplayVersion" ) version = value;
+//				if( key == "ReleaseType" ) type = value;
+//			}
+//			RegCloseKey( subkey );
 
-			if( !type.contains( "Update", Qt::CaseInsensitive ) &&
-				name.contains( QRegExp( names.join( "|" ), Qt::CaseInsensitive ) ) )
-				packages << packageName( name, version, withName );
-		}
-		RegCloseKey( key );
-	}
-	packages.removeDuplicates();
-#else // problems on 64bit windows
-	Q_FOREACH( const QString &group, QStringList() << "HKEY_LOCAL_MACHINE" << "HKEY_CURRENT_USER" )
-	{
-		QSettings s( group + "\\" + path, QSettings::NativeFormat );
-		Q_FOREACH( const QString &key, s.childGroups() )
-		{
-			QString name = s.value( key + "/DisplayName" ).toString();
-			QString version = s.value( key + "/DisplayVersion" ).toString();
-			QString type = s.value( key + "/ReleaseType" ).toString();
-			if( !type.contains( "Update", Qt::CaseInsensitive ) &&
-				name.contains( QRegExp( names.join( "|" ), Qt::CaseInsensitive ) ) )
-				packages << packageName( name, version, withName );
-		}
-	}
-#endif
-#elif defined(Q_OS_MAC)
-	QProcess p;
+//			if( !type.contains( "Update", Qt::CaseInsensitive ) &&
+//				name.contains( QRegExp( names.join( "|" ), Qt::CaseInsensitive ) ) )
+//				packages << packageName( name, version, withName );
+//		}
+//		RegCloseKey( key );
+//	}
+//	packages.removeDuplicates();
+//#else // problems on 64bit windows
+//	Q_FOREACH( const QString &group, QStringList() << "HKEY_LOCAL_MACHINE" << "HKEY_CURRENT_USER" )
+//	{
+//		QSettings s( group + "\\" + path, QSettings::NativeFormat );
+//		Q_FOREACH( const QString &key, s.childGroups() )
+//		{
+//			QString name = s.value( key + "/DisplayName" ).toString();
+//			QString version = s.value( key + "/DisplayVersion" ).toString();
+//			QString type = s.value( key + "/ReleaseType" ).toString();
+//			if( !type.contains( "Update", Qt::CaseInsensitive ) &&
+//				name.contains( QRegExp( names.join( "|" ), Qt::CaseInsensitive ) ) )
+//				packages << packageName( name, version, withName );
+//		}
+//	}
+//#endif
+//#elif defined(Q_OS_MAC)
+//	QProcess p;
 
-	Q_FOREACH( const QString &name, names )
-	{
-		p.start( "pkgutil", QStringList() << "--pkg-info-plist" << "ee.sk.idcard." + name );
-		p.waitForFinished();
+//	Q_FOREACH( const QString &name, names )
+//	{
+//		p.start( "pkgutil", QStringList() << "--pkg-info-plist" << "ee.sk.idcard." + name );
+//		p.waitForFinished();
 
-		QString result;
-		QXmlStreamReader xml( &p );
-		while( xml.readNext() != QXmlStreamReader::Invalid )
-		{
-			if( !xml.isStartElement() || xml.name() != "key" || xml.readElementText() != "pkg-version" )
-				continue;
-			xml.readNextStartElement();
-			result = packageName( name, xml.readElementText(), withName );
-			break;
-		}
-		if( !result.isEmpty() )
-		{
-			packages << result;
-			continue;
-		}
+//		QString result;
+//		QXmlStreamReader xml( &p );
+//		while( xml.readNext() != QXmlStreamReader::Invalid )
+//		{
+//			if( !xml.isStartElement() || xml.name() != "key" || xml.readElementText() != "pkg-version" )
+//				continue;
+//			xml.readNextStartElement();
+//			result = packageName( name, xml.readElementText(), withName );
+//			break;
+//		}
+//		if( !result.isEmpty() )
+//		{
+//			packages << result;
+//			continue;
+//		}
 
-		QStringList params = QStringList() << "read";
-		if( QFile::exists( "/Applications/" + name + ".app/Contents/Info.plist" ) )
-			params << "/Applications/" + name + ".app/Contents/Info" << "CFBundleShortVersionString";
-		else if( QFile::exists( "/var/db/receipts/ee.sk.idcard." + name + ".plist" ) )
-			params << "/var/db/receipts/ee.sk.idcard." + name << "PackageVersion";
-		else if( QFile::exists( "/Library/Receipts/" + name + ".pkg/Contents/Info.plist" ) )
-			params << "/Library/Receipts/" + name + ".pkg/Contents/Info" << "CFBundleShortVersionString";
-		else
-			continue;
+//		QStringList params = QStringList() << "read";
+//		if( QFile::exists( "/Applications/" + name + ".app/Contents/Info.plist" ) )
+//			params << "/Applications/" + name + ".app/Contents/Info" << "CFBundleShortVersionString";
+//		else if( QFile::exists( "/var/db/receipts/ee.sk.idcard." + name + ".plist" ) )
+//			params << "/var/db/receipts/ee.sk.idcard." + name << "PackageVersion";
+//		else if( QFile::exists( "/Library/Receipts/" + name + ".pkg/Contents/Info.plist" ) )
+//			params << "/Library/Receipts/" + name + ".pkg/Contents/Info" << "CFBundleShortVersionString";
+//		else
+//			continue;
 
-		p.start( "defaults", params );
-		p.waitForFinished();
-		packages << packageName( name, QString::fromLocal8Bit( p.readAll().trimmed() ), withName );
-	}
-#elif defined(Q_OS_LINUX)
-	QProcess p;
+//		p.start( "defaults", params );
+//		p.waitForFinished();
+//		packages << packageName( name, QString::fromLocal8Bit( p.readAll().trimmed() ), withName );
+//	}
+//#elif defined(Q_OS_LINUX)
+//	QProcess p;
 
-	Q_FOREACH( const QString &name, names )
-	{
-		p.start( "dpkg-query", QStringList() << "-W" << "-f=${Version}" << name );
-		if( !p.waitForStarted() && p.error() == QProcess::FailedToStart )
-		{
-			p.start( "rpm", QStringList() << "-q" << "--qf" << "%{VERSION}" << name );
-			p.waitForStarted();
-		}
-		p.waitForFinished();
-		if( !p.exitCode() )
-			packages << packageName( name, QString::fromLocal8Bit( p.readAll().trimmed() ), withName );
-	}
-#endif
-	return packages;
+//	Q_FOREACH( const QString &name, names )
+//	{
+//		p.start( "dpkg-query", QStringList() << "-W" << "-f=${Version}" << name );
+//		if( !p.waitForStarted() && p.error() == QProcess::FailedToStart )
+//		{
+//			p.start( "rpm", QStringList() << "-q" << "--qf" << "%{VERSION}" << name );
+//			p.waitForStarted();
+//		}
+//		p.waitForFinished();
+//		if( !p.exitCode() )
+//			packages << packageName( name, QString::fromLocal8Bit( p.readAll().trimmed() ), withName );
+//	}
+//#endif
+//	return packages;
 }
 
 

@@ -33,12 +33,12 @@ QString Database::getSql(QString sqlfile)
     QFile file(sqlfile);
     // 打开文件
     if(!file.exists()){
-      return -1;
+        return "";
     }
     if(!file.open(QIODevice::ReadOnly|QIODevice::Text))
     {
         qDebug() << "Open file failure :: " << sqlfile;
-        return -1;
+        return "";
     }
     QTextStream fs(&file);
     QString fileContent (fs.readAll());

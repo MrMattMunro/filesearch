@@ -53,7 +53,7 @@ void MyTreeDelegate::paint(QPainter * painter,
     int x=rect.x() + rect.width()/2-width/2;
     int y=rect.y() + rect.height()/2-height/2;
 
-    painter->drawPixmap(x, y, star.pixmap(16,16, QIcon.Normal, QIcon.Off));
+    //painter->drawPixmap(x, y, star.pixmap(16,16, QIcon.Normal, QIcon.Off));
     qDebug("paint end");
 }
 

@@ -1067,7 +1067,7 @@ void MyTableView::selectAllDoc()
 // 打印选中文件
 void MyTableView::print()
 {
-    PrinterWidget diew = new PrinterWidget(this);
+    PrinterWidget diew(this);
     diew.printer();
 }
 
