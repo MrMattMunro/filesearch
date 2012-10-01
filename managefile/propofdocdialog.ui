@@ -53,7 +53,7 @@
          <property name="title">
           <string>URL</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout">
+         <layout class="QGridLayout" name="urlGridLayout">
           <item row="0" column="0">
            <widget class="QLineEdit" name="url"/>
           </item>
@@ -171,7 +171,6 @@
         </spacer>
        </item>
       </layout>
-      <zorder>verticalSpacer_2</zorder>
      </widget>
      <widget class="QWidget" name="relatedocs">
       <attribute name="title">

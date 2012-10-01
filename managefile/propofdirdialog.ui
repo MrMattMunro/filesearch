@@ -104,7 +104,7 @@
          <property name="title">
           <string>Description</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout">
+         <layout class="QGridLayout" name="despgridLayout">
           <item row="0" column="0">
            <widget class="QTextEdit" name="desp"/>
           </item>
@@ -129,7 +129,7 @@
        <property name="title">
         <string>Count</string>
        </property>
-       <widget class="QWidget" name="layoutWidget">
+       <widget class="QWidget" name="spacelayoutWidget">
         <property name="geometry">
          <rect>
           <x>20</x>

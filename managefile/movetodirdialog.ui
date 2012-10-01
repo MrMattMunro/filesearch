@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Move document to Directory</string>
   </property>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QWidget" name="MoveToDirWidget">
    <property name="geometry">
     <rect>
      <x>350</x>
