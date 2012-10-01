@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Move the Tag</string>
   </property>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QWidget" name="MoveToTagWidget">
    <property name="geometry">
     <rect>
      <x>190</x>

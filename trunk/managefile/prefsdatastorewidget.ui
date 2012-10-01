@@ -105,7 +105,7 @@
      <property name="title">
       <string>BackUp Path</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout">
+     <layout class="QGridLayout" name="backPathGridLayout">
       <item row="0" column="0">
        <widget class="QLineEdit" name="backPath"/>
       </item>

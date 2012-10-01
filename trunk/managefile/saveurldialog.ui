@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Save Url</string>
   </property>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QWidget" name="SaveUrlLayoutWidget">
    <property name="geometry">
     <rect>
      <x>350</x>
