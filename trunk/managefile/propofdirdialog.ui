@@ -23,7 +23,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>3</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="basic">
       <attribute name="title">
@@ -31,7 +31,7 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout_5">
        <item row="0" column="0">
-        <widget class="QGroupBox" name="groupBox">
+        <widget class="QGroupBox" name="nameGroupBox">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -49,7 +49,7 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QGroupBox" name="groupBox_3">
+        <widget class="QGroupBox" name="uuidGroupBox">
          <property name="title">
           <string>UUID</string>
          </property>
@@ -61,7 +61,7 @@
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QGroupBox" name="groupBox_4">
+        <widget class="QGroupBox" name="iconGroupBox">
          <property name="title">
           <string>Icon</string>
          </property>
@@ -88,7 +88,7 @@
         </widget>
        </item>
        <item row="3" column="0">
-        <widget class="QGroupBox" name="groupBox_5">
+        <widget class="QGroupBox" name="locGroupBox">
          <property name="title">
           <string>Location</string>
          </property>
@@ -100,7 +100,7 @@
         </widget>
        </item>
        <item row="4" column="0">
-        <widget class="QGroupBox" name="groupBox_2">
+        <widget class="QGroupBox" name="despGroupBox">
          <property name="title">
           <string>Description</string>
          </property>
@@ -117,7 +117,7 @@
       <attribute name="title">
        <string>Advance</string>
       </attribute>
-      <widget class="QGroupBox" name="groupBox_6">
+      <widget class="QGroupBox" name="countGroupBox">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -138,7 +138,7 @@
           <height>91</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <layout class="QVBoxLayout" name="nameLayout">
          <item>
           <widget class="QLabel" name="label_2">
            <property name="text">
@@ -171,7 +171,7 @@
           <height>91</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
+        <layout class="QVBoxLayout" name="valueLayout">
          <item>
           <widget class="QLabel" name="fileCount">
            <property name="text">
@@ -201,7 +201,7 @@
       <attribute name="title">
        <string>Protect</string>
       </attribute>
-      <widget class="QGroupBox" name="groupBox_8">
+      <widget class="QGroupBox" name="protectGroupBox">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -235,9 +235,9 @@
           <height>132</height>
          </rect>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <layout class="QHBoxLayout" name="protectPwd">
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout_5">
+          <layout class="QVBoxLayout" name="labelArea">
            <item>
             <widget class="QLabel" name="label_5">
              <property name="text">
@@ -262,7 +262,7 @@
           </layout>
          </item>
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout_6">
+          <layout class="QVBoxLayout" name="valueArea">
            <item>
             <widget class="QLineEdit" name="orgpwd">
              <property name="echoMode">
@@ -294,7 +294,7 @@
       <attribute name="title">
        <string>Synchronization </string>
       </attribute>
-      <widget class="QGroupBox" name="groupBox_7">
+      <widget class="QGroupBox" name="remoteVerGroupBox">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -312,7 +312,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QGroupBox" name="groupBox_9">
+      <widget class="QGroupBox" name="locVerGroupBox">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -340,7 +340,7 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="_2">
+    <layout class="QHBoxLayout" name="mainLayout">
      <property name="spacing">
       <number>6</number>
      </property>

@@ -39,7 +39,7 @@ MoveToDirDialog::MoveToDirDialog(QWidget * parent, const QString & uuId,const QS
 
         q_myTreeList->expandAll();
 
-        verticalLayout_2->addWidget(q_myTreeList);
+        treeLayout->addWidget(q_myTreeList);
 
         m_newUuid = "";
 

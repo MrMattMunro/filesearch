@@ -93,7 +93,8 @@ SOURCES += main.cpp \
     ueditor.cpp \
     uesave.cpp \
     single_application.cpp \
-    optofsearchdialog.cpp
+    optofsearchdialog.cpp \
+    excuteJavaUtil.cpp
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -186,7 +187,8 @@ HEADERS  += mainwindow.h \
     ueditor.h \
     uesave.h \
     single_application.h \
-    optofsearchdialog.h
+    optofsearchdialog.h \
+    excuteJavaUtil.h
 
 RESOURCES += \
     managefile.qrc
@@ -319,6 +321,8 @@ OTHER_FILES += \
 
 RC_FILE = \
   file_manager.rc
+
+
 
 
 

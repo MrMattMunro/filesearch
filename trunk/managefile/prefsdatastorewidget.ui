@@ -18,7 +18,7 @@
     <number>6</number>
    </property>
    <item row="1" column="0">
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="mainpathGB">
      <property name="title">
       <string>Main Path</string>
      </property>
@@ -53,7 +53,7 @@
     </widget>
    </item>
    <item row="2" column="0">
-    <widget class="QGroupBox" name="groupBox_2">
+    <widget class="QGroupBox" name="indexSavePathGB">
      <property name="title">
       <string>Index Save Path</string>
      </property>
@@ -101,7 +101,7 @@
     </widget>
    </item>
    <item row="3" column="0">
-    <widget class="QGroupBox" name="groupBox_3">
+    <widget class="QGroupBox" name="backUpPathGB">
      <property name="title">
       <string>BackUp Path</string>
      </property>
@@ -120,7 +120,7 @@
     </widget>
    </item>
    <item row="4" column="0">
-    <widget class="QGroupBox" name="groupBox_4">
+    <widget class="QGroupBox" name="exportDefaultPathGB">
      <property name="title">
       <string>Export Default Path</string>
      </property>

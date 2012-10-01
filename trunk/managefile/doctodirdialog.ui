@@ -22,7 +22,7 @@
      <height>191</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="btnLayout">
+   <layout class="QVBoxLayout" name="docToDirBtn">
     <item>
      <widget class="QDialogButtonBox" name="buttonBox">
       <property name="sizePolicy">
@@ -69,7 +69,7 @@
      <height>461</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="dirLayout">
+   <layout class="QVBoxLayout" name="docToDirTree">
     <item>
      <widget class="QLabel" name="sourceDoc">
       <property name="font">
