@@ -47,7 +47,7 @@ DocToDirDialog::DocToDirDialog(QWidget * parent, const QString & docName, const 
 
         q_myTreeList->expandAll();
 
-        verticalLayout_2->addWidget(q_myTreeList);
+        dirLayout->addWidget(q_myTreeList);
 
         this->setWindowIcon(Utils::getIcon("folder.ico"));
         if(m_isCopy){

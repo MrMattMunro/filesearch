@@ -22,7 +22,7 @@
      <height>191</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="btnLayout">
     <item>
      <widget class="QDialogButtonBox" name="buttonBox">
       <property name="sizePolicy">
@@ -69,7 +69,7 @@
      <height>461</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QVBoxLayout" name="dirLayout">
     <item>
      <widget class="QLabel" name="sourceDoc">
       <property name="font">
