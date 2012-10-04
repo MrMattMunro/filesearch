@@ -19,6 +19,7 @@
 #include "relatedocdialog.h"
 #include "doctagsdialog.h"
 #include "propofdocdialog.h"
+#include "tableresult.h"
 #include "db/docdao.h"
 #include "db/resultdao.h"
 
@@ -74,7 +75,7 @@ public:
         ~MyTableView(){}
 
         void buildDocList(QList<Doc> doclist);
-        void buildSearchResult(QList<Result> resultlist);
+        void buildSearchResult(QList<TableResult> resultlist);
         QPoint getCurPoint();               // 取得当前鼠标点击位置
         QString getCurUuid();
         void    enableMouse(bool yesOrNo);  //设置鼠标相应

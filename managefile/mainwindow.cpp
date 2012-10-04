@@ -581,7 +581,8 @@ void MainWindow::dosearch(QString keyWord)
     resultlist.clear();
     // 空则退出
     if(keyWord.isEmpty()){
-       m_doctable->buildSearchResult(resultlist);
+       // 需要将resultList 改成tableResultList
+       // m_doctable->buildSearchResult(resultlist);
        return;
     }
 
@@ -655,8 +656,8 @@ void MainWindow::dosearch(QString keyWord)
             }
         }
     }
-
-     m_doctable->buildSearchResult(resultlist);
+     // TODO 需要将ResultList改成Resutl
+     //m_doctable->buildSearchResult(resultlist);
 }
 
 // 打开网络
@@ -677,8 +678,8 @@ void MainWindow::nextSearchCanStart()
              }
          }
      }
-
-    m_doctable->buildSearchResult(resultlist);
+    // TODO 需要将reusltList改成tableResultList
+    // m_doctable->buildSearchResult(resultlist);
     isBusySearch = false;
 }
 
