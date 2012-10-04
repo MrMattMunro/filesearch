@@ -472,7 +472,7 @@ bool Common::noNativeFileDialog() const
 
 QStringList Common::packages( const QStringList &names, bool withName )
 {
-//	QStringList packages;
+QStringList packages;
 //#if defined(Q_OS_WIN)
 //	QString path = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
 //#if 1
@@ -626,7 +626,7 @@ QStringList Common::packages( const QStringList &names, bool withName )
 //			packages << packageName( name, QString::fromLocal8Bit( p.readAll().trimmed() ), withName );
 //	}
 //#endif
-//	return packages;
+   return packages;
 }
 
 
