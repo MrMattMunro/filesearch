@@ -93,15 +93,11 @@ SOURCES += main.cpp \
     ueditor.cpp \
     uesave.cpp \
     single_application.cpp \
-<<<<<<< .mine
     optofsearchdialog.cpp \
     resultview.cpp \
     resultdelegate.cpp \
     tableresult.cpp
-=======
-    optofsearchdialog.cpp \
-    excuteJavaUtil.cpp
->>>>>>> .r558
+
 
 HEADERS  += mainwindow.h \
     preferences.h \
@@ -194,15 +190,11 @@ HEADERS  += mainwindow.h \
     ueditor.h \
     uesave.h \
     single_application.h \
-<<<<<<< .mine
     optofsearchdialog.h \
     resultdelegate.h \
     resultview.h \
     tableresult.h
-=======
-    optofsearchdialog.h \
-    excuteJavaUtil.h
->>>>>>> .r558
+
 
 RESOURCES += \
     managefile.qrc
