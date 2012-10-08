@@ -63,6 +63,7 @@
 #include <db/dirdao.h>
 #include "ueditor.h"
 #include "requtil.h"
+#include "tableresultview.h"
 
 class MainWindow : public QMainWindow
 {
@@ -153,6 +154,7 @@ private:
     QSplitter * splitter;
     QToolBar *toolBar;
     MyTableView *m_doctable;
+    TableResultView *m_resultview;
     MyTreeView *q_myTreeList;
     // ¿Õ°×ÇøÓò
     QWidget *sapcewidget;

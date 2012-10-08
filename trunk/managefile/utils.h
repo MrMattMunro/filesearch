@@ -14,6 +14,8 @@ for which a new license (GPL+exception) is in place.
 #include <QListWidgetItem>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <document.h>
+#include <db/docdao.h>
 
 //! Various helper functions
 namespace Utils {
@@ -45,6 +47,7 @@ QString getSysLang();
 QString getStartUpPath();
 void setAutoRunStatus(bool bAutoRun);
 bool getAutoRunStatus();
+Document convertDoc(Doc doc);
 };
 
 #endif

@@ -96,7 +96,8 @@ SOURCES += main.cpp \
     optofsearchdialog.cpp \
     resultview.cpp \
     resultdelegate.cpp \
-    tableresult.cpp
+    tableresult.cpp \
+    document.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -192,9 +193,11 @@ HEADERS  += mainwindow.h \
     single_application.h \
     optofsearchdialog.h \
     resultdelegate.h \
-    resultview.h \
-    tableresult.h
+    tableresult.h \
+    tableresultview.h \
+    document.h
 
+INCLUDEPATH += C:\Program Files\Microsoft SDKs\Windows\v5.0\Include
 
 RESOURCES += \
     managefile.qrc
