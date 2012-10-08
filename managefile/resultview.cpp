@@ -1,4 +1,4 @@
-#include "resultview.h"
+#include "tableresultview.h"
 #include "tableresult.h"
 #include "db/resultdao.h"
 

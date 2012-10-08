@@ -337,6 +337,11 @@ bool Utils::getAutoRunStatus()//{{{
    return bAutoRun;
 }//}}}
 
+Document Utils::convertDoc(Doc doc){
+    Document document = new Document();
+
+}
+
 
 
 

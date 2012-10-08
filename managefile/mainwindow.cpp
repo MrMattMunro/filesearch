@@ -744,9 +744,12 @@ void MainWindow::initUI()
         q_myTreeList->enableMouse(true);
 
         m_doctable = new MyTableView(this);
+        m_resultview = new TableResultView(this);
 
         splitter->addWidget(q_myTreeList);
         splitter->addWidget(m_doctable);
+        //splitter->addWidget(m_resultview);
+
 
         BrowserApplication* applcation = BrowserApplication::instance();
         browser = applcation->newMainWindow(splitter);
