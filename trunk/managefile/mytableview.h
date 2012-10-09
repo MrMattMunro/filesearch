@@ -1,7 +1,6 @@
 #ifndef  _MYTABLEVIEW_H_
 #define  _MYTABLEVIEW_H_
 
-
 #include<QTableView>
 #include<QItemDelegate>
 #include<QPixmap>
@@ -75,7 +74,7 @@ public:
         ~MyTableView(){}
 
         void buildDocList(QList<Doc> doclist);
-        void buildSearchResult(QList<TableResult> resultlist);
+        void buildSearchResult(QList<Result> resultlist);
         QPoint getCurPoint();               // 取得当前鼠标点击位置
         QString getCurUuid();
         void    enableMouse(bool yesOrNo);  //设置鼠标相应
@@ -92,7 +91,6 @@ protected:
         void  resizeEvent(QResizeEvent * event);
         void  mouseDoubleClickEvent(QMouseEvent *event);
         void  mousePressEvent(QMouseEvent *event);
-        void  changeColor(int row);     //鼠标移动事件
 signals:
         //鼠标双击
         void         LBtnDbClk();
@@ -120,16 +118,15 @@ private slots:
        void delDoc();
        void restoreDoc();
        void slotShowSecondRowContent(QAction *action);
-       // 设定表单第二项选项项目
-       void updateSecRow(QList<int> types);
-       // 设定表单选项Menu
-       QString getTagNames(int row);
+
+
        void slotShowTableOption(QAction *action);
        void showToolTip(const QModelIndex &index);
        void propOfDoc();
        // 显示文档属性
        QString getAvailableField(Doc doc);
        void setShowNotesTips();
+       void setCurUuidByIndex(QModelIndex index);
 
 private:
         MyTableDelegate * delegate;

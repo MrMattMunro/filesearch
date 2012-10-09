@@ -4,19 +4,6 @@
 #include <QString>
 #include <QMetaType>
 
-
-//QString DOC_UUID;
-//QString KEY_WORD;
-//QString FILE_TYPE;
-//QString FILE_PATH;
-//QString FILE_NAME;
-//QString DESP;
-//QString CONTENT;
-//QString SHEET_NAME;
-//int ROW_NB;
-//int PAGE;
-//QString DT_CREATED;
-
 class TableResult
 {
 public:

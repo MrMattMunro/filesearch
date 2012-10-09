@@ -8,13 +8,13 @@ Document::Document(const QString &docuuid, const QString &doctitle,
          const QString &diruuid, const QString &docloc, const QString &docname,
          const QString &docseo, const QString &docurl, const QString &docauthor,
          const QString &dockeyword, const QString &doctype,const QString &docowner,
-         const QString &dtcreated, const QString &dtaccessed,  const int &dociconindex,
+         const QString &dtcreated, const QString &dtmodified, const QString &dtaccessed,  const int &dociconindex,
          const int docsync,  const QString &docprotect,  const QString &docencode, const int readcount,
          const int relatecount, const QString &indexflg,const QString &openflg,const QString &delflg,
          const int version) :
         _docuuid(docuuid), _doctitle(doctitle),_diruuid(diruuid),_docloc(docloc), _docname(docname),
         _docseo(docseo),_docurl(docurl),_docauthor(docauthor),_dockeyword(dockeyword), _doctype(doctype),
-        _docowner(docowner), _dtcreated(dtcreated),_dtaccessed(dtaccessed),_dociconindex(dociconindex),
+        _docowner(docowner), _dtcreated(dtcreated), _dtmodified(dtmodified), _dtaccessed(dtaccessed),_dociconindex(dociconindex),
         _docsync(docsync), _docprotect(docprotect),_docencode(docencode),_readcount(readcount),
         _relatecount(relatecount), _indexflg(indexflg), _openflg(openflg), _delflg(delflg),
         _version(version)
@@ -104,6 +104,13 @@ void Document::setDtCreated(const QString &dtcreated){
 }
 QString Document::dtCreated() const{
      return _dtcreated;
+}
+
+void Document::setDtModified(const QString &dtmodified){
+     _dtmodified = dtmodified;
+}
+QString Document::dtModified() const{
+     return _dtmodified;
 }
 
 void Document::setDtAccessed(const QString &dtaccessed){

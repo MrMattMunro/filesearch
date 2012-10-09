@@ -244,7 +244,7 @@ int main(int argc, char *argv[])
 //    qCritical("This is a critical message  at thisisqt.com");
     // qFatal("This is a fatal message at thisisqt.com");
 
-    qInstallMsgHandler(customMessageHandler);
+   // qInstallMsgHandler(customMessageHandler);
 
     //±¿¿£¥¶¿Ì
 #ifndef  WIN32
