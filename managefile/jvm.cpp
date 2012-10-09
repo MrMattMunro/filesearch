@@ -322,7 +322,7 @@ jstring Jvm::NewJString(JNIEnv *env, char *str)
     {
         buffer[len] = 0;
     }
-    jstring js = env->NewString(buffer,slen);
+    jstring js = env->NewString(buffer,len);
     delete [] buffer;
     return js;
 }

@@ -338,8 +338,50 @@ bool Utils::getAutoRunStatus()//{{{
 }//}}}
 
 Document Utils::convertDoc(Doc doc){
-    Document document = new Document();
+    Document document;
+    document.setDocuuid(doc.DOCUMENT_GUID);
+    document.setDocTitle(doc.DOCUMENT_TITLE);
+    document.setDirUuid(doc.DIR_GUID);
+    document.setDocLoc(doc.DOCUMENT_LOCATION);
+    document.setDocName(doc.DOCUMENT_NAME);
+    document.setDocSeo(doc.DOCUMENT_SEO);
+    document.setDocUrl(doc.DOCUMENT_URL);
+    document.setDocAuthor(doc.DOCUMENT_AUTHOR);
+    document.setDocKeyWord(doc.DOCUMENT_KEYWORDS);
+    document.setDocType(doc.DOCUMENT_TYPE);
+    document.setDocOwner(doc.DOCUMENT_OWNER);
+    document.setDtCreated(doc.DT_CREATED);
+    document.setDtModified(doc.DT_MODIFIED);
+    document.setDtAccessed(doc.DT_ACCESSED);
+    document.setDocIconIndex(doc.DOCUMENT_ICON_INDEX);
+    document.setDocSync(doc.DOCUMENT_SYNC);
+    document.setDocProtect(doc.DOCUMENT_PROTECT);
+    document.setDocEncode(doc.DOCUMENT_ENCODE);
+    document.setReadCount(doc.DOCUMENT_READ_COUNT);
+    document.setRelateCount(doc.DOCUMENT_RELATE_COUNT);
+    document.setIndexFlg(doc.DOCUMENT_INDEXFLG);
+    document.setOpenFlg(doc.DOCUMENT_OPERFLG);
+    document.setDelFlg(doc.DELETE_FLAG);
+    document.setVersion(doc.MF_VERSION);
 
+    return document;
+}
+
+TableResult Utils::convertResult(Result result){
+    TableResult tableResult;
+    tableResult.setDocuuid(result.DOC_UUID);
+    tableResult.setKeyword(result.KEY_WORD);
+    tableResult.setFiletype(result.FILE_TYPE);
+    tableResult.setFilepath(result.FILE_PATH);
+    tableResult.setFilename(result.FILE_NAME);
+    tableResult.setDesp(result.DESP);
+    tableResult.setContent(result.CONTENT);
+    tableResult.setSheetname(result.SHEET_NAME);
+    tableResult.setRownb(result.ROW_NB);
+    tableResult.setPage(result.PAGE);
+    tableResult.setDtcreatede(result.DT_CREATED);
+
+    return tableResult;
 }
 
 

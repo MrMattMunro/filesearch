@@ -581,8 +581,7 @@ void MainWindow::dosearch(QString keyWord)
     resultlist.clear();
     // 空则退出
     if(keyWord.isEmpty()){
-       // 需要将resultList 改成tableResultList
-       // m_doctable->buildSearchResult(resultlist);
+       m_doctable->buildSearchResult(resultlist);
        return;
     }
 
@@ -656,8 +655,7 @@ void MainWindow::dosearch(QString keyWord)
             }
         }
     }
-     // TODO 需要将ResultList改成Resutl
-     //m_doctable->buildSearchResult(resultlist);
+     m_doctable->buildSearchResult(resultlist);
 }
 
 // 打开网络
@@ -678,8 +676,7 @@ void MainWindow::nextSearchCanStart()
              }
          }
      }
-    // TODO 需要将reusltList改成tableResultList
-    // m_doctable->buildSearchResult(resultlist);
+    m_doctable->buildSearchResult(resultlist);
     isBusySearch = false;
 }
 
@@ -744,12 +741,9 @@ void MainWindow::initUI()
         q_myTreeList->enableMouse(true);
 
         m_doctable = new MyTableView(this);
-        m_resultview = new TableResultView(this);
 
         splitter->addWidget(q_myTreeList);
         splitter->addWidget(m_doctable);
-        //splitter->addWidget(m_resultview);
-
 
         BrowserApplication* applcation = BrowserApplication::instance();
         browser = applcation->newMainWindow(splitter);

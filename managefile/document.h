@@ -38,10 +38,10 @@ public:
            const QString &diruuid, const QString &docloc, const QString &docname,
            const QString &docseo, const QString &docurl, const QString &docauthor,
            const QString &dockeyword, const QString &doctype,const QString &docowner,
-           const QString &dtcreated, const QString &dtaccessed,  const int &dociconindex,
-           const int docsync,  const QString &docprotect,  const QString &docencode, const int readcount,
-           const int relatecount, const QString &indexflg,const QString &openflg,const QString &delflg,
-           const int version);
+           const QString &dtcreated,  const QString &dtmodified, const QString &dtaccessed,
+           const int &dociconindex, const int docsync,  const QString &docprotect,
+           const QString &docencode, const int readcount,const int relatecount, const QString &indexflg,
+           const QString &openflg,const QString &delflg, const int version);
     virtual ~Document() { ; }
 
     void setDocuuid(const QString &docuuid);
@@ -79,6 +79,9 @@ public:
 
     void setDtCreated(const QString &dtcreated);
     QString dtCreated() const;
+
+    void setDtModified(const QString &dtmodified);
+    QString dtModified() const;
 
     void setDtAccessed(const QString &dtaccessed);
     QString dtAccessed() const;
@@ -128,6 +131,7 @@ private:
     QString _doctype;
     QString _docowner;
     QString _dtcreated;
+    QString _dtmodified;
     QString _dtaccessed;
     int _dociconindex;
     int _docsync;

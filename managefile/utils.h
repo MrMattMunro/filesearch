@@ -15,7 +15,9 @@ for which a new license (GPL+exception) is in place.
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <document.h>
+#include <tableresult.h>
 #include <db/docdao.h>
+#include <db/resultdao.h>
 
 //! Various helper functions
 namespace Utils {
@@ -48,6 +50,7 @@ QString getStartUpPath();
 void setAutoRunStatus(bool bAutoRun);
 bool getAutoRunStatus();
 Document convertDoc(Doc doc);
+TableResult convertResult(Result result);
 };
 
 #endif

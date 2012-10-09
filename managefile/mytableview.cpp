@@ -15,7 +15,7 @@
 #include"fileUtils.h"
 #include "preferences.h"
 #include "utils.h"
-#include "resultview.h"
+#include "tableresultview.h"
 #include "exportconvertdialog.h"
 #include "doctodirdialog.h"
 #include "relatedocdialog.h"
@@ -32,12 +32,9 @@
 #include "printerwidget.h"
 #include "QSettings"
 
-static int preRow;
-static int firstRow;
-static int secRow;
 MyTableView::MyTableView(QWidget * parent) : QTableView(parent), mouseStatus(true)
 {
-    delegate = new MyTableDelegate(parent);
+    delegate = new MyTableDelegate(this);
     model = new MyTableItemModel(parent);
 
     this->setItemDelegate(delegate);
@@ -278,12 +275,8 @@ void MyTableView::resizeEvent(QResizeEvent * event){
 void MyTableView::buildDocList(QList<Doc> doclist)
 {
     Preferences* p = Preferences::instance();
-
     model->clear();
-//    delete model;
     qDebug("buildDocList start");
-
-//    model = new MyTableItemModel();
 
     // 取得选择模式
     QString selModel = p->getTableSelMode();
@@ -291,233 +284,61 @@ void MyTableView::buildDocList(QList<Doc> doclist)
 
     for (int var = 0; var < doclist.size(); ++var) {
          Doc doc = doclist.at(var);
-         QString docUuid = doc.DOCUMENT_GUID;
 
-         QString filename = doc.DOCUMENT_NAME;
-         int dotpos = filename.lastIndexOf(".");
+         Document document = Utils::convertDoc(doc);
+         QStandardItem* item = new QStandardItem();
+         item->setData(QVariant::fromValue(document), Qt::DisplayRole);
 
-         QString icon = filename.right(filename.length() - dotpos - 1).toLower();
-         QString dotsuffix = filename.right(filename.length() - dotpos);
-         QString suffix = "*" + dotsuffix;
+         model->appendRow(item);
 
          if(intselModel == ONE_ROW){
-             // 第一行
-             QList<QStandardItem*> items;
-
-             QStandardItem* item = new QStandardItem();
-             item->setData(docUuid, Qt::UserRole);
-             items.append(item);
-             // 支持的文件类型
-             if(p->word().contains(suffix, Qt::CaseInsensitive)
-                     || p->excel().contains(suffix, Qt::CaseInsensitive)
-                     || p->ppt().contains(suffix, Qt::CaseInsensitive)
-                     || p->pdf().contains(suffix, Qt::CaseInsensitive)
-                     || p->htmls().contains(suffix, Qt::CaseInsensitive)
-                     || p->pics().contains(suffix, Qt::CaseInsensitive)
-                     || p->swfs().contains(suffix, Qt::CaseInsensitive)
-                     || p->sources().contains(suffix, Qt::CaseInsensitive)
-                     || p->txts().contains(suffix, Qt::CaseInsensitive)
-                     || p->movies().contains(suffix, Qt::CaseInsensitive)
-                     || p->ppt().contains(suffix, Qt::CaseInsensitive)
-                     || p->ppt().contains(suffix, Qt::CaseInsensitive)){
-
-                item = new QStandardItem();
-                icon = icon.append(".ico");
-                item->setData(icon,  Qt::DecorationRole);
-                items.append(item);
-
-                item = new QStandardItem();
-                item->setBackground(QBrush(QColor(255, 255, 255)));
-                item->setTextAlignment(Qt::AlignLeft);
-                item->setFont(QFont( "Times", 10,  QFont::Normal ));
-                item->setData(filename, Qt::DisplayRole);
-                items.append(item);
-             }
-
-             if(p->allsupported().contains(suffix, Qt::CaseInsensitive)){
-                 model->appendRow(items);
-             }
+            this->setRowHeight(var, 25);
          } else {
-             // 第一行
-             QList<QStandardItem*> items;
-             // 第二行
-             QList<QStandardItem*> secitems;
-
-             QStandardItem* item = new QStandardItem();
-             item->setData(docUuid, Qt::UserRole);
-             items.append(item);
-             // 支持的文件类型
-             if(p->word().contains(suffix, Qt::CaseInsensitive)
-                     || p->excel().contains(suffix, Qt::CaseInsensitive)
-                     || p->ppt().contains(suffix, Qt::CaseInsensitive)
-                     || p->pdf().contains(suffix, Qt::CaseInsensitive)
-                     || p->htmls().contains(suffix, Qt::CaseInsensitive)
-                     || p->pics().contains(suffix, Qt::CaseInsensitive)
-                     || p->swfs().contains(suffix, Qt::CaseInsensitive)
-                     || p->sources().contains(suffix, Qt::CaseInsensitive)
-                     || p->txts().contains(suffix, Qt::CaseInsensitive)
-                     || p->movies().contains(suffix, Qt::CaseInsensitive)
-                     || p->ppt().contains(suffix, Qt::CaseInsensitive)
-                     || p->ppt().contains(suffix, Qt::CaseInsensitive)){
-
-                item = new QStandardItem();
-                icon = icon.append(".ico");
-                item->setData(icon,  Qt::DecorationRole);
-                items.append(item);
-
-                item = new QStandardItem();
-                item->setBackground(QBrush(QColor(255, 255, 255)));
-                item->setTextAlignment(Qt::AlignLeft);
-                item->setFont(QFont( "Times", 11,  QFont::Normal ));
-                item->setData(filename, Qt::DisplayRole);
-                items.append(item);
-                item->setData(doc.DOCUMENT_LOCATION, DOC_LOCATION);
-
-                item = new QStandardItem();
-                item->setData(docUuid, Qt::UserRole);
-                secitems.append(item);
-
-                item = new QStandardItem();
-                item->setData("", Qt::DecorationRole);
-                secitems.append(item);
-
-                // 动态的第二项
-                item = new QStandardItem();
-                item->setData(getAvailableField(doc), Qt::DisplayRole);
-                item->setFont(QFont( "Times", 8,  QFont::Light ));
-                item->setTextAlignment(Qt::AlignTop);
-                secitems.append(item);
-
-                // 在第二个动态项中加入所有其他数据
-                item->setData(doc.DT_CREATED , DOC_CREATE_DATE);
-                item->setData(doc.DT_MODIFIED, DOC_MODIFIED_DATE);
-                item->setData(doc.DT_ACCESSED, DOC_ACCESS_DATE);
-                // 计算size K
-                QFileInfo file(doc.DOCUMENT_LOCATION);
-                item->setData(QString::number(file.size() / 1000)+ "K", DOC_SIZE);
-                item->setData(doc.DOCUMENT_AUTHOR, DOC_AUTHOR);
-                item->setData(doc.DOCUMENT_READ_COUNT, DOC_READ_COUNT);
-                item->setData(doc.DOCUMENT_RELATE_COUNT, DOC_RELATED_COUNT);
-
-                item->setData(doc.DOCUMENT_URL, DOC_URL);
-                item->setData(doc.DOCUMENT_LOCATION, DOC_LOCATION);
-             }
-
-             if(p->allsupported().contains(suffix, Qt::CaseInsensitive)){
-                 model->appendRow(items);
-                 model->appendRow(secitems);
-             }
-
+            this->setRowHeight(var, 65);
          }
     }
-    this->hideColumn(0);
     // 设置各列比例,使其占满全行
     int tablewidth = this->width();
-    this->setColumnWidth(1, 20);
-    this->setColumnWidth(2, tablewidth);
+    this->setColumnWidth(0, tablewidth);
 
     qDebug("buildDocList end");
 }
 
-void MyTableView::buildSearchResult(QList<TableResult> resultlist)
+bool sortResult(const  Result &p1, const Result &p2)
 {
+    return p1.FILE_NAME <  p2.FILE_NAME;
+}
 
-    TableResultView w;
-    w.setTableResult(resultlist);
+void MyTableView::buildSearchResult(QList<Result> resultlist)
+{
+    model->clear();
+    qDebug("buildResultList start");
 
-//    qDebug("buildResultList start");
-//    model->clear();
-//    Preferences* p = Preferences::instance();
-//    for (int var = 0; var < resultlist.size(); ++var) {
-//         Result result = resultlist.at(var);
-//         QString docUuid = result.DOC_UUID;
-//         QString filename = result.FILE_NAME;
-//         QString filepath = result.FILE_PATH;
-//         QString sheetname = result.SHEET_NAME;
-//         QString desp = result.DESP;
-//         QString content = result.CONTENT;
-//         int page = result.PAGE;
-//         int rownb = result.ROW_NB;
-//         QString lastmodifed = result.DT_CREATED;
+    qSort(resultlist.begin(), resultlist.end(), sortResult);
+    QString letter = "";
+    for(int i = 0; i < resultlist.size(); i ++)
+    {
+        Result result = resultlist.at(i);
 
-//         int dotpos = filename.lastIndexOf(".");
-//         QString icon = filename.right(filename.length() - dotpos - 1).toLower();
-//         QString dotsuffix = filename.right(filename.length() - dotpos);
-//         QString suffix = "*" + dotsuffix;
+        TableResult tableResult = Utils::convertResult(result);
 
-//         // 第一行
-//         QList<QStandardItem*> items;
-//         // 第二行
-//         QList<QStandardItem*> secitems;
+        if(letter != tableResult.filename())
+        {
+            letter = tableResult.filename();
+            QStandardItem *item = new QStandardItem(letter);
+            model->appendRow(item);
+        }
 
-//         QStandardItem* item = new QStandardItem();
-//         item->setData(docUuid, Qt::UserRole);
-//         items.append(item);
+        QStandardItem *item = new QStandardItem();
+        item->setData(QVariant::fromValue(tableResult), Qt::DisplayRole);
+        model->appendRow(item);
+    }
 
-//         // 支持的文件类型
-//         if(p->word().contains(suffix, Qt::CaseInsensitive)
-//                 || p->excel().contains(suffix, Qt::CaseInsensitive)
-//                 || p->ppt().contains(suffix, Qt::CaseInsensitive)
-//                 || p->pdf().contains(suffix, Qt::CaseInsensitive)
-//                 || p->htmls().contains(suffix, Qt::CaseInsensitive)
-//                 || p->pics().contains(suffix, Qt::CaseInsensitive)
-//                 || p->swfs().contains(suffix, Qt::CaseInsensitive)
-//                 || p->sources().contains(suffix, Qt::CaseInsensitive)
-//                 || p->txts().contains(suffix, Qt::CaseInsensitive)
-//                 || p->movies().contains(suffix, Qt::CaseInsensitive)
-//                 || p->ppt().contains(suffix, Qt::CaseInsensitive)
-//                 || p->ppt().contains(suffix, Qt::CaseInsensitive)){
+    // 设置各列比例,使其占满全行
+    int tablewidth = this->width();
+    this->setColumnWidth(0, tablewidth);
 
-//            // 第一行
-//            QStandardItem* item = new QStandardItem();
-//            icon = icon.append(".ico");
-//            item->setData(icon,  Qt::DecorationRole);
-//            items.append(item);
-
-//            item = new QStandardItem();
-//            item->setBackground(QBrush(QColor(255, 255, 255)));
-//            item->setTextAlignment(Qt::AlignLeft);
-//            item->setFont(QFont( "Times", 11,  QFont::Normal ));
-//            item->setData(filename, Qt::DisplayRole);
-//            item->setData(filepath, Qt::ToolTipRole);
-//            item->setData(filepath, DOC_LOCATION);
-
-//            // 在第二个动态项中加入所有其他数据
-//            item->setData(lastmodifed, RESULT_DT_CREATED);
-//            item->setData(sheetname, RESULT_SHEET_NAME);
-//            item->setData(page, RESULT_PAGE);
-//            item->setData(rownb, RESULT_ROW_NB);
-//            items.append(item);
-
-//             // 第二行
-//            item = new QStandardItem();
-//            item->setData(docUuid, Qt::UserRole);
-//            secitems.append(item);
-
-//            item = new QStandardItem();
-//            item->setData("", Qt::DisplayRole);
-//            secitems.append(item);
-
-//            // 动态的第二项
-//            item = new QStandardItem();
-//            item->setText(desp + "  " + content);
-//            // item->setData(desp + content, Qt::DisplayRole);
-//            item->setFont(QFont( "Times", 9,  QFont::Light ));
-//            item->setTextAlignment(Qt::AlignTop);
-//            secitems.append(item);
-//         }
-
-//         if(p->allsupported().contains(suffix, Qt::CaseInsensitive)){
-//             model->appendRow(items);
-//             model->appendRow(secitems);
-//         }
-//    }
-//    this->hideColumn(0);
-//    // 设置各列比例,使其占满全行
-//    int tablewidth = this->width();
-//    this->setColumnWidth(1, 20);
-//    this->setColumnWidth(2, tablewidth);
-//    qDebug("buildResultList end");
+    qDebug("buildResultList end");
 }
 
 // Show tooltip
@@ -529,9 +350,7 @@ void MyTableView::showToolTip(const QModelIndex &index)
     Preferences* p = Preferences::instance();
     bool isShowNotes = p->isShowNotesOnTips();
     if(isShowNotes){
-       int row = index.row();
-       QStandardItem *uuidItem = model->item(row, 0);
-       curUuid = qvariant_cast<QString>(uuidItem->data(Qt::UserRole));
+       setCurUuidByIndex(index);
        if(! curUuid.isEmpty()){
             QString tips;
             QList<Note> list = NoteDao::selectNotesbyDocUuId(curUuid);
@@ -554,20 +373,10 @@ void MyTableView::mouseDoubleClickEvent(QMouseEvent *event)
                 curPoint = event->pos();
                 QModelIndex  index = indexAt(curPoint);
                 if(index.isValid()){
+
+                    setCurUuidByIndex(index);
                     curItem = model->itemFromIndex(index);
-                    int row = index.row();
 
-                    QStandardItem *pathItem = model->item(row, 2);
-                    if(pathItem){
-                        curPath = qvariant_cast<QString>(pathItem->data(DOC_LOCATION));
-                    }
-
-                    QStandardItem *uuidItem = model->item(row, 0);
-                    if(uuidItem){
-                        curUuid = qvariant_cast<QString>(uuidItem->data(Qt::UserRole));
-                    }
-
-                    changeColor(row);
                     // 设置选中的文件名称 代码文件高亮显示
                     Preferences* p = Preferences::instance();
                     p->setOpenDoc(curPath);
@@ -585,83 +394,18 @@ void MyTableView::mousePressEvent(QMouseEvent *event)
         QModelIndex  index = indexAt(curPoint);
 
         if(index.isValid()){
-            int row = index.row();
-
+            setCurUuidByIndex(index);
             curItem = model->itemFromIndex(index);
-
-            QStandardItem *pathItem = model->item(row, 2);
-            if(pathItem){
-                curPath = qvariant_cast<QString>(pathItem->data(DOC_LOCATION));
-            }
-
-            QStandardItem *uuidItem = model->item(row, 0);
-            if(uuidItem){
-                 curUuid = qvariant_cast<QString>(uuidItem->data(Qt::UserRole));
-            }
             // 左键退出
             if( Qt::LeftButton == event->button()){
-                changeColor(row);
                 return;
             }
             // 右键显示菜单
             if(true == mouseStatus )
             {
-                changeColor(row);
                 tableContextMenuOpened();
             }
         }
-}
-
-// 只需改变颜色
-void MyTableView::changeColor(int curRow){
-
-
-    int columnCount = model->columnCount();
-    if(columnCount == 0){
-        return;
-    }
-
-    QBrush white = QBrush(QColor(255, 255, 255));
-    QBrush blue = QBrush(QColor(185, 210, 235));
-
-    if(preRow %2 == 0 ){
-       firstRow = preRow;
-       secRow = firstRow + 1;
-    }else{
-        secRow = preRow;
-        firstRow = secRow - 1;
-    }
-
-    for(int i = 0; i< columnCount; i ++){
-       QStandardItem *item = model->item(firstRow, i);
-       if(item){
-           item->setData(white, Qt::BackgroundRole);
-       }
-       item = model->item(secRow, i);
-       if(item){
-           item->setData(white, Qt::BackgroundRole);
-       }
-    }
-
-    if(curRow %2 == 0 ){
-       firstRow = curRow;
-       secRow = firstRow + 1;
-    }else{
-        secRow = curRow;
-        firstRow = secRow - 1;
-    }
-    for(int i = 0; i< columnCount; i ++){
-        QStandardItem *item = model->item(firstRow, i);
-        if(item){
-            item->setData(blue, Qt::BackgroundRole);
-        }
-        item = model->item(secRow, i);
-        if(item){
-            item->setData(blue, Qt::BackgroundRole);
-        }
-    }
-
-    preRow = curRow;
 }
 
 QPoint MyTableView::getCurPoint(){
@@ -921,8 +665,8 @@ void MyTableView::delDoc()
                  // 保证右键选择的删除
                 DocDao::deleteDoc(curUuid);
 
-                model->removeRow(firstRow);
-                model->removeRow(firstRow);
+//                model->removeRow(firstRow);
+//                model->removeRow(firstRow);
 
                 // 选中的逻辑删除
                 QItemSelectionModel *selections = this->selectionModel();
@@ -996,8 +740,8 @@ void MyTableView::restoreDoc(){
                     }
                 }
 
-                model->removeRow(firstRow);
-                model->removeRow(firstRow);
+//                model->removeRow(firstRow);
+//                model->removeRow(firstRow);
 
                 // 选中的逻辑删除
                 QItemSelectionModel *selections = this->selectionModel();
@@ -1201,76 +945,11 @@ void MyTableView::slotShowSecondRowContent(QAction* action)
     Preferences* p = Preferences::instance();
     p->setTableSelField(selFields);
 
-    updateSecRow(selField);
+    // updateSecRow(selField);
+
+    this->repaint();
 }
 
-// 设定表单第二项选项项目
-void MyTableView::updateSecRow(QList<int> types)
-{
-    int rowCount = model->rowCount();
-    for(int i = 0; i< rowCount; i++){
-
-        if(i%2 == 1){
-            QModelIndex index = model->index(i, 2);
-            QStandardItem *item = model->itemFromIndex(index);
-
-            QString temp = "";
-            // 表示第二行显示
-            int type;
-            foreach(type, types){
-                switch (type) {
-                    case CREATE_DATE:
-                       temp.append(qvariant_cast<QString>(model->data(index, DOC_CREATE_DATE)));
-                       break;
-                    case MODIFIED_DATE:
-                       temp.append(qvariant_cast<QString>(model->data(index, DOC_MODIFIED_DATE)));
-                       break;
-                    case ACCESS_DATE:
-                       temp.append(qvariant_cast<QString>(model->data(index, DOC_ACCESS_DATE)));
-                       break;
-                    case FILE_SIZE:
-                       temp.append(qvariant_cast<QString>(model->data(index, DOC_SIZE)));
-                        break;
-                    case AUTHOR:
-                       temp.append(qvariant_cast<QString>(model->data(index, DOC_AUTHOR)));
-                       break;
-                    case READ_COUNT:
-                       temp.append(qvariant_cast<QString>(model->data(index, DOC_READ_COUNT)));
-                        break;
-                    case RELATED_COUNT:
-                       temp.append( qvariant_cast<QString>(model->data(index, DOC_RELATED_COUNT)));
-                       break;
-                    case TAGS:
-                       temp.append(getTagNames(i));
-                       break;
-                    case URL:
-                       temp.append(qvariant_cast<QString>(model->data(index, DOC_URL)));
-                       break;
-                    case LOCATION:
-                       temp.append(qvariant_cast<QString>(model->data(index, DOC_LOCATION)));
-                       break;
-                 }
-                temp.append(" ");
-            }
-            item->setData(temp, Qt::DisplayRole);
-        }
-    }
-}
-// 设定表单选项Menu
-QString MyTableView::getTagNames(int row)
-{
-    QModelIndex uuIdindex = model->index(row, 0);
-    QStandardItem *uuIditem = model->itemFromIndex(uuIdindex);
-    QString docuuid = qvariant_cast<QString>(uuIditem->data(Qt::UserRole));
-    QList<Tag> sellitems = DocTagDao::selectTagsbyDocUuId(docuuid);
-    QString temp;
-    for (int var = 0; var < sellitems.length(); ++var) {
-        Tag tag = sellitems.at(var);
-        temp.append(tag.TAG_NAME);
-        temp.append("/");
-    }
-    return temp;
-}
 
 // 设定表单选项Menu
 void MyTableView::slotShowTableOption(QAction* action)
@@ -1396,6 +1075,22 @@ QString MyTableView::getAvailableField(Doc doc)
 
     return temp;
 }
+// 显示文档属性
+void MyTableView::setCurUuidByIndex(QModelIndex index){
+
+    if(index.data().canConvert<Document>()){
+            Document tp = index.data().value<Document>();
+            curUuid = tp.docUuid();
+            curPath = tp.docLoc();
+    } else{
+        if(index.data().canConvert<TableResult>()){
+            TableResult tp = index.data().value<TableResult>();
+            curUuid = tp.docuuid();
+            curPath = tp.filepath();
+        }
+    }
+}
+
 
 
 

@@ -26,7 +26,7 @@ void TableResultView::setTableResult(QList<TableResult> &tableResult)
     setModel(NULL);
     _model->clear();
 
-    // qSort(TableResult.begin(), TableResult.end(), sortTableResult);
+    qSort(tableResult.begin(), tableResult.end(), sortTableResult);
     QString letter = "";
     for(int i = 0; i < tableResult.size(); i ++)
     {

@@ -6,26 +6,26 @@
 QVariant MyTableItemModel::data(const QModelIndex & index, int role) const
 {
     //qDebug ("MyTableItemModel data start");
-    int column= index.column();
+ //   int column= index.column();
 //    int row = index.row();
 
 //     if(column == 0){
 //       QString uuid =  qvariant_cast<QString> (QStandardItemModel::data(index, Qt::UserRole));
 //    }
 
-    if( column == 1 && role == Qt::DecorationRole){
-       QString ico =  qvariant_cast<QString> (QStandardItemModel::data(index, Qt::DecorationRole));
-       return Utils::getIcon(ico);
-    }
+//    if( column == 1 && role == Qt::DecorationRole){
+//       QString ico =  qvariant_cast<QString> (QStandardItemModel::data(index, Qt::DecorationRole));
+//       return Utils::getIcon(ico);
+//    }
 
-    if(role == Qt::DisplayRole){
-       return QStandardItemModel::data(index, role);
-    }
+//    if(role == Qt::DisplayRole){
+//       return QStandardItemModel::data(index, role);
+//    }
 
-    // 改变背景色
-    if (Qt::BackgroundColorRole == role){
-        return QStandardItemModel::data(index,  role);
-    }
+//    // 改变背景色
+//    if (Qt::BackgroundColorRole == role){
+//        return QStandardItemModel::data(index,  role);
+//    }
 
     return QStandardItemModel::data(index,  role);
 }
