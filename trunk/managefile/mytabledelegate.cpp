@@ -20,10 +20,7 @@ void MyTableDelegate::paint(QPainter * painter,
                            const QStyleOptionViewItem & option,
                            const QModelIndex & index) const
 {
-
-
     if(index.data().canConvert<Document>()){
-        qDebug() << "canConvert ";
         paintRow(painter, option, index);
     } else{
         if(index.data().canConvert<TableResult>()){
@@ -32,131 +29,6 @@ void MyTableDelegate::paint(QPainter * painter,
            paintResultHeadRow(painter, option, index);
         }
     }
-
-//    // 正常数据
-//    if(index.column() ==  0){
-//        QItemDelegate::paint(painter, option, index);
-//        return;
-//    }
-
-//   // qDebug("MyTableDelegate paint start");
-
-//    int row = index.row();
-//    int column = index.column();
-
-//    const QAbstractItemModel * model= index.model();
-//    QMap<int, QVariant> valuemap = model->itemData(index);
-
-////    QList<QVariant> values = valuemap.values();
-////    QList<int> keys = valuemap.keys();
-
-//    // ICON
-//    int y = (row -1) * 40;
-//    if(column = 1){
-//        QItemDelegate::paint(painter, option, index);
-//        return;
-//    }
-
-//    QFont pathfont("Arial",8, QFont::Light,true);
-//    QFont namefont("Arial", 12, QFont::Black, true);
-//    if(column = 2){
-//        painter->setFont(namefont);
-//        QString createdate = qvariant_cast<QString> (valuemap.value(Qt::DisplayRole));
-//        painter->setPen(QColor(0,0,0));
-//        painter->drawText(QRectF(20, y, 300, 15),Qt::AlignLeft, createdate);
-//        return;
-//    }
-
-
-////    QRect rect= option.rect;
-////    int y = rect.y() + rect.height()/2;
-
-
-
-
-
-
-//   // qDebug() << row;
-//    //qDebug() << column;
-
-////    //qDebug("MyTableDelegate paint start 1 end");
-////    if(keys.size() <= 0 || values.size() <= 0 ){
-////        return;
-////    }
-////    //qDebug("MyTableDelegate paint start 2 end");
-////    int key;
-
-
-////    if(valuemap.contains(DOC_ICON)){
-////        QString temp = qvariant_cast<QString> (valuemap.value(DOC_ICON));
-////        QIcon icon = Utils::getIcon(temp);
-////        painter->drawPixmap(0, y, icon.pixmap(16,16, QIcon.Normal, QIcon.Off));
-////    }
-////    if(valuemap.contains(DOC_NAME)){
-////        painter->setFont(namefont);
-////        QString createdate = qvariant_cast<QString> (valuemap.value(DOC_NAME));
-////        painter->setPen(QColor(0,0,0));
-////        painter->drawText(QRectF(20, y, 300, 15),Qt::AlignLeft, createdate);
-////    }
-////    if(valuemap.contains(DOC_LOCATION)){
-////        painter->setFont(pathfont);
-////        QString createdate = qvariant_cast<QString> (valuemap.value(DOC_LOCATION));
-////        painter->setPen(QColor(51,102,205));
-////        painter->drawText(QRectF(0, y + 15 ,600, 15),Qt::AlignLeft, createdate);
-////    }
-
-
-////        if(key = DOC_NOTES ){
-////            QString createdate = qvariant_cast<QString> (valuemap.value(key));
-////            painter->setPen(QColor(51,102,205));
-////            painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, createdate);
-////        }
-
-////        if(key = DOC_CREATE_DATE ){
-////            QString createdate = qvariant_cast<QString> (valuemap.value(key));
-////            painter->setPen(QColor(51,102,205));
-////            painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, createdate);
-////        }
-////        if(key = DOC_MODIFIED_DATE ){
-////            QString modifydate = qvariant_cast<QString> (valuemap.value(key));
-////            painter->setPen(QColor(51,102,205));
-////            painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, modifydate);
-////        }
-////        if(key = DOC_ACCESS_DATE ){
-////            QString accessdate = qvariant_cast<QString> (valuemap.value(key));
-////            painter->setPen(QColor(51,102,205));
-////            painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, accessdate);
-////        }
-////        if(key = DOC_SIZE ){
-////           QString size = qvariant_cast<QString> (valuemap.value(key));
-////           painter->setPen(QColor(51,102,205));
-////           painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, size);
-////        }
-////        if(key = DOC_AUTHOR ){
-////           QString author = qvariant_cast<QString> (valuemap.value(key));
-////           painter->setPen(QColor(51,102,205));
-////           painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, author);
-////        }
-////        if(key = DOC_READ_COUNT ){
-////           QString readcount = qvariant_cast<QString> (valuemap.value(key));
-////           painter->setPen(QColor(51,102,205));
-////           painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, readcount);
-////        }
-////        if(key = DOC_RELATED_COUNT ){
-////           QString relatecount = qvariant_cast<QString> (valuemap.value(key));
-////           painter->setPen(QColor(51,102,205));
-////           painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, relatecount);
-////        }
-////        if(key = DOC_TAGS ){
-////           QString tags = qvariant_cast<QString> (valuemap.value(key));
-////           painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, tags);
-////        }
-////        if(key = DOC_URL ){
-////           QString url = qvariant_cast<QString> (valuemap.value(key));
-////           painter->drawText(QRectF(5, y + 15 ,300,20),Qt::AlignLeft, url);
-////        }
-
-//    QItemDelegate::paint(painter, option, index);
     return;
 }
 
@@ -220,12 +92,19 @@ void MyTableDelegate::paintRow(QPainter *painter, const QStyleOptionViewItem &op
     }
     textFont.setFamily("Helvetica Neue");
     painter->setFont(textFont);
-    qDebug() << "document local  " << tp.docLoc();
     painter->drawText(nametextRect, Qt::AlignLeft|Qt::AlignVCenter, tp.docName());
 
     // 动态第二行
     Preferences* p = Preferences::instance();
     QStringList fields = p->getTableSelField();
+    // 默认情况下
+    if(fields.length() == 0){
+       fields.append(QString::number(CREATE_DATE));
+       fields.append(QString::number(MODIFIED_DATE));
+       fields.append(QString::number(TAGS));
+       fields.append(QString::number(URL));
+       fields.append(QString::number(LOCATION));
+    }
     QString field;
 
     int y = option.rect.y();
@@ -268,7 +147,7 @@ void MyTableDelegate::paintRow(QPainter *painter, const QStyleOptionViewItem &op
 
            QString size =  QString::number(file.size() / 1000).append("K");
            QRect textRect(x, y, option.rect.width()-10, option.rect.height());
-           painter->setPen(QColor(39, 39, 39));
+           painter->setPen(QColor(51,102,205));
            painter->drawText(textRect, Qt::AlignLeft|Qt::AlignVCenter, size);
            x = x + size.length() * 7;
         }
@@ -289,7 +168,7 @@ void MyTableDelegate::paintRow(QPainter *painter, const QStyleOptionViewItem &op
             painter->setFont(textFont);
 
             QRect textRect(x, y, option.rect.width()-10, option.rect.height());
-            painter->setPen(QColor(39, 39, 39));
+            painter->setPen(QColor(51,102,205));
             painter->drawText(textRect, Qt::AlignLeft|Qt::AlignVCenter, QString::number(tp.readcount()));
             x = x + 10;
         }
@@ -298,7 +177,7 @@ void MyTableDelegate::paintRow(QPainter *painter, const QStyleOptionViewItem &op
             painter->setFont(textFont);
 
             QRect textRect(x, y, option.rect.width()-10, option.rect.height());
-            painter->setPen(QColor(39, 39, 39));
+            painter->setPen(QColor(51,102,205));
             painter->drawText(textRect, Qt::AlignLeft|Qt::AlignVCenter,  QString::number(tp.relateCount()));
             x = x + 10;
         }
@@ -337,7 +216,7 @@ void MyTableDelegate::paintRow(QPainter *painter, const QStyleOptionViewItem &op
             painter->setFont(textFont);
 
             QRect textRect(option.rect.x() + 30, y + 20, option.rect.width()-10, option.rect.height());
-            painter->setPen(QColor(39, 39, 39));
+            painter->setPen(QColor(51,102,205));
             painter->drawText(textRect, Qt::AlignLeft|Qt::AlignVCenter, tp.docLoc());
             x = x + 25;
         }

@@ -14,7 +14,7 @@ Preferences* Preferences::_instance = 0;
 Preferences::Preferences(QObject *parent)
  : QObject(parent)
 {
-	QFont f(QApplication::font());
+        QFont f(QApplication::font());
 
         QSettings s("slfile.cn", "filemanage");
 
