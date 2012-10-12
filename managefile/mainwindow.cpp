@@ -229,10 +229,10 @@ void MainWindow::slotShowSearchSetMenu()
 
     // …Ë÷√ƒ¨»œ
     if(searcheDir.isEmpty()){
-        searcheDir == QString::number(ALLDOC);
+        searcheDir = QString::number(ALLDOC);
     }
     if(searcheObj.isEmpty()){
-        searcheObj == QString::number(NAME_CONTENT);
+        searcheObj = QString::number(NAME_CONTENT);
     }
 
     // …Ë÷√Menu

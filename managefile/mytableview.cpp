@@ -269,7 +269,7 @@ void MyTableView::initActions ()
 // 窗口大小调节各列的长度
 void MyTableView::resizeEvent(QResizeEvent * event){
     int tablewidth = this->width();
-    this->setColumnWidth(2, tablewidth * 1- 20);
+    this->setColumnWidth(0, tablewidth);
 }
 
 void MyTableView::buildDocList(QList<Doc> doclist)
@@ -665,8 +665,7 @@ void MyTableView::delDoc()
                  // 保证右键选择的删除
                 DocDao::deleteDoc(curUuid);
 
-//                model->removeRow(firstRow);
-//                model->removeRow(firstRow);
+                model->removeRow(curItem->row());
 
                 // 选中的逻辑删除
                 QItemSelectionModel *selections = this->selectionModel();
@@ -740,8 +739,8 @@ void MyTableView::restoreDoc(){
                     }
                 }
 
-//                model->removeRow(firstRow);
-//                model->removeRow(firstRow);
+                model->removeRow(curItem->row());
+
 
                 // 选中的逻辑删除
                 QItemSelectionModel *selections = this->selectionModel();
