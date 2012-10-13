@@ -184,20 +184,25 @@ void MyTableDelegate::paintRow(QPainter *painter, const QStyleOptionViewItem &op
         if(selFied == TAGS){
            // È¡µÃTags
             QList<Tag> sellitems = DocTagDao::selectTagsbyDocUuId(tp.docUuid());
-            QString tags;
             for (int var = 0; var < sellitems.length(); ++var) {
-                Tag tag = sellitems.at(var);
-                tags.append(tag.TAG_NAME);
-                tags.append("/");
-            }
-            if(tags.length() != 0){
-                textFont.setPixelSize(12);
-                painter->setFont(textFont);
+                 Tag tag = sellitems.at(var);
 
-                QRect textRect(x, y, option.rect.width()-10, option.rect.height());
-                painter->setPen(QColor(39, 39, 39));
-                painter->drawText(textRect, Qt::AlignLeft|Qt::AlignVCenter,tags);
-                x = x + sellitems.length() * 30;
+                 int len = tag.TAG_NAME.length();
+                 QBrush bruch(Qt::FDiagPattern);
+                 QRectF rectangle(x, y + 20, 10 * len, 20);
+                 bruch.setStyle(Qt::NoBrush);
+
+                 painter->setBrush(bruch);
+                 painter->drawRect(rectangle);
+
+                 textFont.setPixelSize(11);
+                 //textFont.setWeight(QFont::Bold);
+                 painter->setFont(textFont);
+
+                 QRect textRect(x, y, option.rect.width()-10, option.rect.height());
+                 painter->setPen(QColor(39, 39, 39));
+                 painter->drawText(textRect, Qt::AlignLeft|Qt::AlignVCenter, tag.TAG_NAME);
+                 x = x + sellitems.length() * 20;
             }
         }
         if(selFied == URL){
