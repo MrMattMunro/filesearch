@@ -189,20 +189,19 @@ void MyTableDelegate::paintRow(QPainter *painter, const QStyleOptionViewItem &op
 
                  int len = tag.TAG_NAME.length();
                  QBrush bruch(Qt::FDiagPattern);
-                 QRectF rectangle(x, y + 20, 10 * len, 20);
+                 QRectF rectangle(x, y + 25, 13 * len, 17);
                  bruch.setStyle(Qt::NoBrush);
 
                  painter->setBrush(bruch);
                  painter->drawRect(rectangle);
 
                  textFont.setPixelSize(11);
-                 //textFont.setWeight(QFont::Bold);
                  painter->setFont(textFont);
 
-                 QRect textRect(x, y, option.rect.width()-10, option.rect.height());
+                 QRect textRect(x, y, option.rect.width()- 10, option.rect.height());
                  painter->setPen(QColor(39, 39, 39));
                  painter->drawText(textRect, Qt::AlignLeft|Qt::AlignVCenter, tag.TAG_NAME);
-                 x = x + sellitems.length() * 20;
+                 x = x + len * 15;
             }
         }
         if(selFied == URL){
