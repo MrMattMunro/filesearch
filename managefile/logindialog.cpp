@@ -26,6 +26,8 @@ LoginDialog::LoginDialog(QWidget * parent)
         connect(loginBtn, SIGNAL(clicked()), this, SLOT(loginBtn_clicked()));
         connect(registerBtn, SIGNAL(clicked()), this, SLOT(registerBtn_clicked()));
         connect(resetBtn, SIGNAL(clicked()), this, SLOT(resetBtn_clicked()));
+        connect(authCodeBtn, SIGNAL(clicked()), this, SLOT(getAuthCode()));
+
 
         this->setWindowIcon(Utils::getIcon("file_manager.png"));
         this->setWindowTitle(tr("Solo"));
@@ -86,6 +88,20 @@ void LoginDialog::registerBtn_clicked()
     surl.append("&lang=");
     QString lang = Utils::getSysLang();
     surl.append(lang);
+
+    requtil = new ReqUtil(this);
+    connect(requtil,SIGNAL(reqfinished()),this,SLOT(doReply()));
+
+    QUrl url= QUrl::fromEncoded(surl.toUtf8());
+    requtil->startRequest(url);
+}
+
+// 取得金山快盘授权码
+void LoginDialog::getAuthCode(){
+    m_action = "reset";
+    QString surl;
+    surl.append("http://www.slfile.net/mf-forgetpwd.php?email=");
+    surl.append(usremail->text().trimmed());
 
     requtil = new ReqUtil(this);
     connect(requtil,SIGNAL(reqfinished()),this,SLOT(doReply()));

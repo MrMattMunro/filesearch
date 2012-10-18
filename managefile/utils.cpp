@@ -21,6 +21,7 @@ for which a new license (GPL+exception) is in place.
 #endif
 
 #include "utils.h"
+#include "publicfun.h"
 
 #define ICON_DIR ":/icons"
 #define TRANSLATION_DIR ":/ts"
@@ -125,11 +126,17 @@ QString Utils::getLocatePath()
     return locpath;
 }
 
-QString Utils::getLocateDownloadPath()
+QString Utils::getLocateDownloadPath(QString basepath)
 {
-    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-    locpath.append(QDir::separator()).append("slfile");
-    locpath.append(QDir::separator()).append("download");
+    QString locpath;
+    if(basepath.length() == 0){
+        locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+        locpath.append(QDir::separator()).append("slfile");
+        locpath.append(QDir::separator()).append("download");
+    }else{
+        locpath = basepath.append(QDir::separator()).append("download");
+    }
+
     QDir *dir=new QDir(locpath);
     if(!dir->exists()){
        dir->mkdir(locpath);
@@ -137,11 +144,17 @@ QString Utils::getLocateDownloadPath()
     return locpath;
 }
 
-QString Utils::getLocateNotesPath()
+QString Utils::getLocateNotesPath(QString basepath)
 {
-    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-    locpath.append(QDir::separator()).append("slfile");
-    locpath.append(QDir::separator()).append("note");
+    QString locpath;
+    if(basepath.length() == 0){
+        locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+        locpath.append(QDir::separator()).append("slfile");
+        locpath.append(QDir::separator()).append("note");
+    }else{
+        locpath = basepath.append(QDir::separator()).append("note");
+    }
+
     QDir *dir=new QDir(locpath);
     if(!dir->exists()){
        dir->mkdir(locpath);
@@ -149,11 +162,17 @@ QString Utils::getLocateNotesPath()
     return locpath;
 }
 
-QString Utils::getLocateIndexPath()
-{
-    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-    locpath.append(QDir::separator()).append("slfile");
-    locpath.append(QDir::separator()).append("index");
+QString Utils::getLocateIndexPath(QString basepath)
+{   
+    QString locpath;
+    if(basepath.length() == 0){
+        locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+        locpath.append(QDir::separator()).append("slfile");
+        locpath.append(QDir::separator()).append("index");
+    }else{
+        locpath = basepath.append(QDir::separator()).append("index");
+    }
+
     QDir *dir=new QDir(locpath);
     if(!dir->exists()){
        dir->mkdir(locpath);
@@ -161,11 +180,17 @@ QString Utils::getLocateIndexPath()
     return locpath;
 }
 
-QString Utils::getLocateDbPath()
+QString Utils::getLocateDbPath(QString basepath)
 {
-    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-    locpath.append(QDir::separator()).append("slfile");
-    locpath.append(QDir::separator()).append("db");
+    QString locpath;
+    if(basepath.length() == 0){
+        locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+        locpath.append(QDir::separator()).append("slfile");
+        locpath.append(QDir::separator()).append("db");
+    }else{
+        locpath = basepath.append(QDir::separator()).append("db");
+    }
+
     QDir *dir=new QDir(locpath);
     if(!dir->exists()){
        dir->mkdir(locpath);
@@ -173,11 +198,17 @@ QString Utils::getLocateDbPath()
     return locpath;
 }
 
-QString Utils::getSavePagePath()
+QString Utils::getSavePagePath(QString basepath)
 {
-    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-    locpath.append(QDir::separator()).append("slfile");
-    locpath.append(QDir::separator()).append("page");
+    QString locpath;
+    if(basepath.length() == 0){
+        locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+        locpath.append(QDir::separator()).append("slfile");
+        locpath.append(QDir::separator()).append("page");
+    }else{
+        locpath = basepath.append(QDir::separator()).append("page");
+    }
+
     QDir *dir=new QDir(locpath);
     if(!dir->exists()){
        dir->mkdir(locpath);
@@ -185,11 +216,17 @@ QString Utils::getSavePagePath()
     return locpath;
 }
 
-QString Utils::getSaveDocPath()
+QString Utils::getSaveDocPath(QString basepath)
 {
-    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-    locpath.append(QDir::separator()).append("slfile");
-    locpath.append(QDir::separator()).append("doc");
+    QString locpath;
+    if(basepath.length() == 0){
+        locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+        locpath.append(QDir::separator()).append("slfile");
+        locpath.append(QDir::separator()).append("doc");
+    }else{
+        locpath = basepath.append(QDir::separator()).append("doc");
+    }
+
     QDir *dir=new QDir(locpath);
     if(!dir->exists()){
        dir->mkdir(locpath);
@@ -197,11 +234,17 @@ QString Utils::getSaveDocPath()
     return locpath;
 }
 
-QString Utils::getSaveLogPath()
+QString Utils::getSaveLogPath(QString basepath)
 {
-    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-    locpath.append(QDir::separator()).append("slfile");
-    locpath.append(QDir::separator()).append("log");
+    QString locpath;
+    if(basepath.length() == 0){
+        locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+        locpath.append(QDir::separator()).append("slfile");
+        locpath.append(QDir::separator()).append("log");
+    }else{
+        locpath = basepath.append(QDir::separator()).append("log");
+    }
+
     QDir *dir=new QDir(locpath);
     if(!dir->exists()){
        dir->mkdir(locpath);
@@ -209,11 +252,17 @@ QString Utils::getSaveLogPath()
     return locpath;
 }
 
-QString Utils::getBackUpPath()
+QString Utils::getBackUpPath(QString basepath)
 {
-    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-    locpath.append(QDir::separator()).append("slfile");
-    locpath.append(QDir::separator()).append("bakup");
+    QString locpath;
+    if(basepath.length() == 0){
+        locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+        locpath.append(QDir::separator()).append("slfile");
+        locpath.append(QDir::separator()).append("backup");
+    }else{
+        locpath = basepath.append(QDir::separator()).append("backup");
+    }
+
     QDir *dir=new QDir(locpath);
     if(!dir->exists()){
        dir->mkdir(locpath);
@@ -384,6 +433,135 @@ TableResult Utils::convertResult(Result result){
     return tableResult;
 }
 
+//hmacSha1算法实现
+QString Utils::hmacSha1(QByteArray key, QByteArray baseString)
+{
+    int blockSize = 64; // HMAC-SHA-1 block size, defined in SHA-1 standard
+    if (key.length() > blockSize) { // if key is longer than block size (64), reduce key length with SHA-1 compression
+        key = QCryptographicHash::hash(key, QCryptographicHash::Sha1);
+    }
+
+    QByteArray innerPadding(blockSize, char(0x36)); // initialize inner padding with char "6"
+    QByteArray outerPadding(blockSize, char(0x5c)); // initialize outer padding with char "\"
+    // ascii characters 0x36 ("6") and 0x5c ("\") are selected because they have large
+    // Hamming distance (http://en.wikipedia.org/wiki/Hamming_distance)
+
+    for (int i = 0; i < key.length(); i++) {
+        innerPadding[i] = innerPadding[i] ^ key.at(i); // XOR operation between every byte in key and innerpadding, of key length
+        outerPadding[i] = outerPadding[i] ^ key.at(i); // XOR operation between every byte in key and outerpadding, of key length
+    }
+    QByteArray total = outerPadding;
+    QByteArray part = innerPadding;
+    part.append(baseString);
+    total.append(QCryptographicHash::hash(part, QCryptographicHash::Sha1));
+    QByteArray hashed = QCryptographicHash::hash(total, QCryptographicHash::Sha1);
+    //return  hashed.toBase64();//原版的不返回url编码的
+
+    QString signatureStr=hashed.toBase64(); //这里返回url编码
+    return QUrl::toPercentEncoding(signatureStr);
+}
+
+
+//返回随机数 oauth_nonce
+QString Utils::getRandNonce()
+{
+    QTime time= QTime::currentTime();
+    qsrand(time.msec()+time.second()*1000);
+    return QString().number(qrand());
+}
+
+//返回当前时间
+QString Utils::getTimeStamp()
+{
+    time_t curTime=time(0);
+    return QString().number(curTime);
+}
+
+//去除url编码
+QString Utils::removeUrlEncode(const QString &urlStr)
+{
+    QUrl url;
+    url.setEncodedUrl(urlStr.toAscii());
+    return url.toString();
+}
+
+
+QString Utils::stringToUnicode(QString str)
+{
+    // 这里传来的字符串一定要加tr，main函数里可以加 QTextCodec::setCodecForTr(QTextCodec::codecForLocale());
+    //  例如：str=tr("你好");
+    const QChar *q;
+    QChar qtmp;
+    QString str0, strout;
+    int num;
+    q=str.unicode();
+    int len=str.count();
+    for(int i=0;i<len;i++)
+    {   qtmp =(QChar)*q++;
+        num= qtmp.unicode();
+        if(num<255)
+            strout+="00"; //英文或数字前加"00"
+
+        str0=str0.setNum(num,16);//变成十六进制数
+
+        strout+=str0;
+    }
+    return strout;
+}
+
+QString Utils::unicodeToString(QString str)
+{
+    //例如 str="4F60597D";
+    int temp[400];
+    QChar qchar[100];
+    QString strOut;
+    bool ok;
+    int count=str.count();
+    int len=count/4;
+    for(int i=0;i<count;i+=4)
+    {
+     temp[i] = str.mid(i,4).toInt(&ok,16);//每四位转化为16进制整型
+     qchar[i/4] = temp[i];
+     QString str0(qchar, len);
+     strOut=str0;
+    }
+    return strOut;
+}
+
+QString Utils::getKpanRoot()
+{
+    QStringList<QString> roots;
+    roots.append("C:\\");
+    roots.append("D:\\");
+    roots.append("E:\\");
+    roots.append("F:\\");
+    roots.append("G:\\");
+    roots.append("H:\\");
+    roots.append("I:\\");
+    roots.append("J:\\");
+    roots.append("K:\\");
+    roots.append("L:\\");
+
+    for (int var = 0; var < roots.size(); ++var) {
+         QString root = roots.at(var);
+         root.append("快盘");
+         QFile file(root);
+         if(file.exists()){
+             return root;
+         }
+    }
+}
+
+//QString Utils::s2q(const QString &s)
+//{
+////    return QString(QString::fromLocal8Bit(s.c_str()));
+//    return "";
+//}
+
+//QString Utils::q2s(const QString &s)
+//{
+//    return QString((const char *)s.toLocal8Bit());
+//}
 
 
 
