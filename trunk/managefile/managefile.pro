@@ -97,7 +97,9 @@ SOURCES += main.cpp \
     resultview.cpp \
     resultdelegate.cpp \
     tableresult.cpp \
-    document.cpp
+    document.cpp \
+    kpsdk.cpp \
+    kpan.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -195,7 +197,10 @@ HEADERS  += mainwindow.h \
     resultdelegate.h \
     tableresult.h \
     tableresultview.h \
-    document.h
+    document.h \
+    kpsdk.h \
+    publicfun.h \
+    kpan.h
 
 INCLUDEPATH += C:\Program Files\Microsoft SDKs\Windows\v5.0\Include
 

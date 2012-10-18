@@ -28,7 +28,10 @@ Q_OBJECT
 		static QColor stdLightColor() { return QColor(255, 254, 205); };
 		static QColor stdDarkColor() { return QColor(225, 237, 255); };
 
-		bool checkQtVersion() { return m_checkQtVersion; };
+		bool checkQtVersion() { return m_checkQtVersion; }; 
+
+        bool isKpanUser() { return m_isKpanUser; };
+        void setKpanUser(bool v) { m_isKpanUser = v;  };
 
         bool isFullScreen() { return m_isFullScreen; };
         void setFullScreen(bool v) { m_isFullScreen = v;  };
@@ -274,6 +277,8 @@ Q_OBJECT
 		instance().
 		*/
 		static Preferences* _instance;
+
+        bool m_isKpanUser;
 
         bool m_isFullScreen;
         bool m_isShowClassTree;

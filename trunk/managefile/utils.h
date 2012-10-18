@@ -22,35 +22,45 @@ for which a new license (GPL+exception) is in place.
 //! Various helper functions
 namespace Utils {
 	
-/*! A set of helper functions for simpler code
-*/
-QIcon getIcon(const QString & fileName);
-QPixmap getPixmap(const QString & fileName);
+    /*! A set of helper functions for simpler code
+    */
+    QIcon getIcon(const QString & fileName);
+    QPixmap getPixmap(const QString & fileName);
 
-QString getTranslator(const QString & localeName);
+    QString getTranslator(const QString & localeName);
 
-//! \brief Check if the object tre should be refileld depending on sql statement
-bool updateObjectTree(const QString & sql);
-QString getLocatePath();
-QString getLocateDownloadPath();
-QString getLocateNotesPath();
-QString getLocateIndexPath();
-QString getLocateDbPath();
-QString getSavePagePath();
-QString getSaveDocPath();
-QString getSaveLogPath();
-QString getBackUpPath();
-QString getDirNameByPath(const QString & path);
-QDir directoryOf(const QString & subdir);
-QString getMD5Str(const QString & str);
-QString getSysOs();
-QString getIPAddress();
-QString getSysLang();
-QString getStartUpPath();
-void setAutoRunStatus(bool bAutoRun);
-bool getAutoRunStatus();
-Document convertDoc(Doc doc);
-TableResult convertResult(Result result);
+    //! \brief Check if the object tre should be refileld depending on sql statement
+    bool updateObjectTree(const QString & sql);
+    QString getLocatePath();
+    QString getLocateDownloadPath(QString basepath);
+    QString getLocateNotesPath(QString basepath);
+    QString getLocateIndexPath(QString basepath);
+    QString getLocateDbPath(QString basepath);
+    QString getSavePagePath(QString basepath);
+    QString getSaveDocPath(QString basepath);
+    QString getSaveLogPath(QString basepath);
+    QString getBackUpPath(QString basepath);
+    QString getDirNameByPath(const QString & path);
+    QDir directoryOf(const QString & subdir);
+    QString getMD5Str(const QString & str);
+    QString getSysOs();
+    QString getIPAddress();
+    QString getSysLang();
+    QString getStartUpPath();
+    void setAutoRunStatus(bool bAutoRun);
+    bool getAutoRunStatus();
+    Document convertDoc(Doc doc);
+    TableResult convertResult(Result result);
+
+    // ½ðÉ½¿ìÅÌAPI
+    QString hmacSha1(QByteArray key, QByteArray baseString);
+    QString getRandNonce();
+    QString getTimeStamp();
+    QString removeUrlEncode(const QString &urlStr);
+    QString stringToUnicode(QString str);
+    QString unicodeToString(QString str);
+//    QString s2q(const QString &s);
+//    QString q2s(const QString &s);
 };
 
 #endif
