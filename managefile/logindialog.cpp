@@ -15,6 +15,8 @@
 #include "utils.h"
 #include "db/docdao.h"
 #include "db/dirdao.h"
+#include "kpan.h"
+#include "publicfun.h"
 
 // 登录界面
 LoginDialog::LoginDialog(QWidget * parent)
@@ -98,16 +100,21 @@ void LoginDialog::registerBtn_clicked()
 
 // 取得金山快盘授权码
 void LoginDialog::getAuthCode(){
-    m_action = "reset";
-    QString surl;
-    surl.append("http://www.slfile.net/mf-forgetpwd.php?email=");
-    surl.append(usremail->text().trimmed());
 
-    requtil = new ReqUtil(this);
-    connect(requtil,SIGNAL(reqfinished()),this,SLOT(doReply()));
+//    应用名 consumer_key consumer_secret 应用信息 应用状态 操作管理
+//    slfile xc65W7KagK62hRR0 KTozzHuMHvIFAcCj 查看详情 开发中 提交审核 删除
+    QString tmpOauthToken;
+    QString tmpOauthTokenSecret;
+    QString authoriseUrl;
+    Kpan::kpReqTmpToken(tmpOauthToken, tmpOauthTokenSecret, authoriseUrl, consumer_key, consumerSecret);
 
-    QUrl url= QUrl::fromEncoded(surl.toUtf8());
-    requtil->startRequest(url);
+
+    QString oauth_token;
+    QString oauth_token_secret;
+    QString user_id;
+    QString charged_dir;
+    Kpan::kpAccessToken(oauth_token, oauth_token_secret, user_id, charged_dir, consumer_key,consumerSecret,
+                tmpOauthToken, tmpOauthTokenSecret);
 }
 
 // 重置
