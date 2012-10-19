@@ -2,6 +2,19 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="en_US">
 <context>
+    <name>MainWindow</name>
+    <message>
+        <location filename="../mainwindow.cpp" line="53"/>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="53"/>
+        <source>Solo&apos;s Version is already the latest.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ShowUpdateDialog</name>
     <message>
         <location filename="../showupdatedialog.cpp" line="32"/>
@@ -25,7 +38,8 @@
     </message>
     <message>
         <location filename="../showupdatedialog.cpp" line="82"/>
-        <location filename="../showupdatedialog.cpp" line="218"/>
+        <location filename="../showupdatedialog.cpp" line="88"/>
+        <location filename="../showupdatedialog.cpp" line="305"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
@@ -35,27 +49,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../showupdatedialog.cpp" line="141"/>
+        <location filename="../showupdatedialog.cpp" line="88"/>
+        <source>Solo&apos;s Version is already the latest.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../showupdatedialog.cpp" line="158"/>
+        <location filename="../showupdatedialog.cpp" line="236"/>
         <source>downloading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../showupdatedialog.cpp" line="143"/>
+        <location filename="../showupdatedialog.cpp" line="160"/>
+        <location filename="../showupdatedialog.cpp" line="238"/>
         <source>busying</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../showupdatedialog.cpp" line="167"/>
+        <location filename="../showupdatedialog.cpp" line="184"/>
+        <location filename="../showupdatedialog.cpp" line="262"/>
         <source>download</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../showupdatedialog.cpp" line="169"/>
+        <location filename="../showupdatedialog.cpp" line="186"/>
+        <location filename="../showupdatedialog.cpp" line="214"/>
+        <location filename="../showupdatedialog.cpp" line="264"/>
         <source>done</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../showupdatedialog.cpp" line="218"/>
+        <location filename="../showupdatedialog.cpp" line="212"/>
+        <source>delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../showupdatedialog.cpp" line="305"/>
         <source>Server errors, can not update</source>
         <translation type="unfinished"></translation>
     </message>

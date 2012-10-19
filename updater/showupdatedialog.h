@@ -35,6 +35,7 @@ class ShowUpdateDialog : public QDialog, public Ui::ShowUpdateDialog
 	public:
                 ShowUpdateDialog(QWidget * parent = 0);
                 bool update;
+                QString regfilepath;
                 QStandardItemModel *model;
         private:
                 QUrl url;
@@ -48,6 +49,8 @@ class ShowUpdateDialog : public QDialog, public Ui::ShowUpdateDialog
                 QString newversion;
                 QVariantList updatelist;
                 QVariantList dellist;
+                QVariantList reglist;
+
                 QFileInfo locfileinfo;
 
                 ReqUtil * requtil;

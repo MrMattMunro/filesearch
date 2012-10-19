@@ -8,6 +8,9 @@ QT += core gui network webkit
 TARGET = updater
 TEMPLATE = app
 
+win32:LIBS += -lshell32 -lole32 -luser32
+
+
 LIBS += -Lc:/QtWorksapce/updater/lib -lqjson0
 
 SOURCES += main.cpp\
@@ -19,7 +22,8 @@ SOURCES += main.cpp\
     fileutils.cpp \
     utils.cpp \
     downloadcontrol.cpp \
-    download.cpp
+    download.cpp \
+    single_application.cpp
 
 HEADERS  += mainwindow.h \
     updatedialog.h \
@@ -31,7 +35,8 @@ HEADERS  += mainwindow.h \
     utils.h \
     qjson/serializer.h \
     download.h \
-    downloadcontrol.h
+    downloadcontrol.h \
+    single_application.h
 
 FORMS    += \
     showupdatedialog.ui \

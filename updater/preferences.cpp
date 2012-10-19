@@ -18,7 +18,7 @@ Preferences::Preferences(QObject *parent)
 
         QSettings s("slfile.cn", "filemanage");
         // s.clear();
-	m_checkQtVersion = s.value("checkQtVersion", true).toBool();
+        m_checkQtVersion = s.value("checkQtVersion", true).toBool();
         m_isFullScreen = s.value("isFullScreen", true).toBool();
         m_isShowClassTree = s.value("isShowClassTree", true).toBool();
         m_isShowToolBar = s.value("isShowToolBar", true).toBool();
@@ -135,7 +135,7 @@ Preferences::Preferences(QObject *parent)
 Preferences::~Preferences()
 {
         QSettings settings("slfile.cn", "filemanage");
-	settings.setValue("checkQtVersion", m_checkQtVersion);
+    settings.setValue("checkQtVersion", m_checkQtVersion);
         settings.setValue("isFullScreen", m_isFullScreen);
         settings.setValue("isShowClassTree", m_isShowClassTree);
         settings.setValue("isShowToolBar", m_isShowToolBar);
@@ -185,7 +185,11 @@ Preferences::~Preferences()
         settings.setValue("userinfo/lastopendocs", m_last_open_docs);
         settings.setValue("userinfo/lastopennotes",  m_last_open_notes);
         settings.setValue("userinfo/lastopenurls", m_last_open_urls);
+        // TODO
         settings.setValue("userinfo/version", m_version);
+
+       // settings.setValue("userinfo/version", "");
+
         // userinfo end
 
 	// sql editor
