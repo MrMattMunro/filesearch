@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>updater.ico</file>
+        <file>ts/updater_en.qm</file>
+        <file>ts/updater_jp.qm</file>
+        <file>ts/updater_zh_cn.qm</file>
     </qresource>
 </RCC>

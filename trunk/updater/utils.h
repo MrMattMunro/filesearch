@@ -42,6 +42,7 @@ QString getSysOs();
 QString getIPAddress();
 QString getSysLang();
 
+
 };
 
 #endif

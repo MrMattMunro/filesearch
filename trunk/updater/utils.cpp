@@ -15,7 +15,10 @@ for which a new license (GPL+exception) is in place.
 #include <QCryptographicHash>
 #include <QSysInfo>
 #include <QNetworkInterface>
-
+#ifdef Q_WS_WIN
+    #include <windows.h>
+    #include <shlobj.h>
+#endif
 
 #include "utils.h"
 
@@ -248,7 +251,6 @@ QString Utils::getSysLang()
 {
     return QLocale::system().name().left(2);
 }
-
 
 
 

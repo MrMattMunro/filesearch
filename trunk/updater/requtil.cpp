@@ -9,6 +9,7 @@
 #include <QTextCodec>
 #include <qjson/parser.h>
 #include <qjson/serializer.h>
+#include <QSslError>
 #include <QCoreApplication>
 
 #include "requtil.h"
@@ -19,40 +20,55 @@
 ReqUtil::ReqUtil(QWidget * parent)
 {
     manager=new QNetworkAccessManager(this);
+    loop = new QEventLoop;
 }
 
 //链接请求
 void ReqUtil::startRequest(QUrl url)
 {
+
     reply = manager->get(QNetworkRequest(url));
     connect(reply,SIGNAL(finished()),this,SLOT(httpFinished()));  //下载完成后
     connect(reply,SIGNAL(readyRead()),this,SLOT(httpReadyRead())); //有可用数据时
+    // 判断异常
+    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),this, SLOT(slotError(QNetworkReply::NetworkError)));
+    connect(reply, SIGNAL(sslErrors(QList<QSslError>)), this, SLOT(slotSslErrors(QList<QSslError>)));
+
+    connect(reply,SIGNAL(finished()),loop,SLOT(quit()));  // 退出循环
+    loop->exec();
 }
 
+// 出错
+void ReqUtil::slotError(QNetworkReply::NetworkError error)
+{
+     hasError = true;
+}
+// 出错
+void ReqUtil::slotSslErrors(QList<QSslError> temp)
+{
+     hasError = true;
+}
+//有可用数据
+bool ReqUtil::getError()
+{
+     return hasError;
+}
 //有可用数据
 void ReqUtil::httpReadyRead()
 {
-    file = new QFile("temp.json");
-    if(file->open(QIODevice::WriteOnly)){
-        if (file){
-            QByteArray bytes = reply->readAll();
-            file->write(bytes);
-//            QString string;
-//            string = QString(bytes);
-//            // 判断是否404异常
-//            // http://go.microsoft.com/fwlink/?linkid=8180">Microsoft ???</a>&ldquo;HTTP&rdquo;&ldquo;404
-//            if(string.indexOf("404") != -1 && string.indexOf("HTML") != -1 ){
-//                QMessageBox::warning(this, tr("Warning"), tr("The Server has Errors, Please Contact the Administrator!"), QMessageBox::Yes);
-//                QCoreApplication::exit(773);
-//            }
-        }
-    }
+
+    rtnStr = reply->readAll();
+    QString rtnString = QString(rtnStr);
+    // 判断是否404异常
+    qDebug() << "rtnString::" << rtnString;
+
 }
 // 完成下载
 void ReqUtil::httpFinished()
  {
-     file->flush();
-     file->close();
+     if(reply->error()){
+        hasError = true;
+     }
      reply->deleteLater();
      reply = 0;
      emit reqfinished();
@@ -61,11 +77,11 @@ void ReqUtil::httpFinished()
 QVariantMap ReqUtil::getReply()
 {
 
-  QJson::Parser parser;
-  bool ok;
-  QVariantMap result = parser.parse(file,&ok).toMap();
-  delete file;
-  file = 0;
-  return result;
-
+    QJson::Parser parser;
+    bool ok;
+    QVariantMap result = parser.parse(rtnStr,&ok).toMap();
+    QString rtnString = QString(rtnStr);
+    // 判断是否404异常
+    qDebug() << "rtnString::" << rtnString;
+    return result;
 }

@@ -15,6 +15,8 @@ public:
     ~MainWindow();
 private slots:
     void doConfirmReply();
+protected:
+    void closeEvent(QCloseEvent *event);
 private:
     ReqUtil * requtil;
 };

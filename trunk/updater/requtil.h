@@ -16,6 +16,8 @@ for which a new license (GPL+exception) is in place.
 #include <QNetworkReply>
 #include <QNetworkAccessManager>
 #include <QWidget>
+#include <QSslError>
+#include <QEventLoop>
 
 /*! \brief Import data into table using various importer types.
 \note XML import requires Qt library at least in the 4.3.0 version.
@@ -23,22 +25,27 @@ for which a new license (GPL+exception) is in place.
 */
 class ReqUtil : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
+    public:
                 ReqUtil(QWidget * parent = 0);
                 void startRequest(QUrl url);
                 QVariantMap getReply();
+                bool getError();
         private:
                 QNetworkAccessManager *manager;
                 QNetworkReply *reply;
                 QUrl url;     //存储网络地址
-                QFile* file;  //文件指针
-                QString m_action;
+                bool hasError;
+                QEventLoop *loop;
+                QByteArray rtnStr;
 
-	private slots:
+    private slots:
                 void httpFinished();  //完成下载后的处理
                 void httpReadyRead();  //接收到数据时的处理
+                void slotError(QNetworkReply::NetworkError error);
+                //有可用数据
+                void slotSslErrors(QList<QSslError> temp);
         signals:
                void reqfinished();
 

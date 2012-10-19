@@ -2,6 +2,19 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="zh_CN">
 <context>
+    <name>MainWindow</name>
+    <message>
+        <location filename="../mainwindow.cpp" line="53"/>
+        <source>Information</source>
+        <translation>消息</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="53"/>
+        <source>Solo&apos;s Version is already the latest.</source>
+        <translation>搜咯已经是最新版本.</translation>
+    </message>
+</context>
+<context>
     <name>ShowUpdateDialog</name>
     <message>
         <location filename="../showupdatedialog.cpp" line="32"/>
@@ -25,7 +38,8 @@
     </message>
     <message>
         <location filename="../showupdatedialog.cpp" line="82"/>
-        <location filename="../showupdatedialog.cpp" line="218"/>
+        <location filename="../showupdatedialog.cpp" line="88"/>
+        <location filename="../showupdatedialog.cpp" line="305"/>
         <source>Information</source>
         <translation>消息</translation>
     </message>
@@ -35,27 +49,42 @@
         <translation>用户不存在.</translation>
     </message>
     <message>
-        <location filename="../showupdatedialog.cpp" line="141"/>
+        <location filename="../showupdatedialog.cpp" line="88"/>
+        <source>Solo&apos;s Version is already the latest.</source>
+        <translation>搜咯已经是最新版本.</translation>
+    </message>
+    <message>
+        <location filename="../showupdatedialog.cpp" line="158"/>
+        <location filename="../showupdatedialog.cpp" line="236"/>
         <source>downloading</source>
         <translation>正在下载..</translation>
     </message>
     <message>
-        <location filename="../showupdatedialog.cpp" line="143"/>
+        <location filename="../showupdatedialog.cpp" line="160"/>
+        <location filename="../showupdatedialog.cpp" line="238"/>
         <source>busying</source>
         <translation>正在执行...</translation>
     </message>
     <message>
-        <location filename="../showupdatedialog.cpp" line="167"/>
+        <location filename="../showupdatedialog.cpp" line="184"/>
+        <location filename="../showupdatedialog.cpp" line="262"/>
         <source>download</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="../showupdatedialog.cpp" line="169"/>
+        <location filename="../showupdatedialog.cpp" line="186"/>
+        <location filename="../showupdatedialog.cpp" line="214"/>
+        <location filename="../showupdatedialog.cpp" line="264"/>
         <source>done</source>
         <translation>完成</translation>
     </message>
     <message>
-        <location filename="../showupdatedialog.cpp" line="218"/>
+        <location filename="../showupdatedialog.cpp" line="212"/>
+        <source>delete</source>
+        <translation>删除</translation>
+    </message>
+    <message>
+        <location filename="../showupdatedialog.cpp" line="305"/>
         <source>Server errors, can not update</source>
         <translation>服务器异常,暂时不能升级.</translation>
     </message>
