@@ -126,17 +126,11 @@ QString Utils::getLocatePath()
     return locpath;
 }
 
-QString Utils::getLocateDownloadPath(QString basepath)
+QString Utils::getLocateDownloadPath()
 {
-    QString locpath;
-    if(basepath.length() == 0){
-        locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-        locpath.append(QDir::separator()).append("slfile");
-        locpath.append(QDir::separator()).append("download");
-    }else{
-        locpath = basepath.append(QDir::separator()).append("download");
-    }
-
+    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    locpath.append(QDir::separator()).append("slfile");
+    locpath.append(QDir::separator()).append("download");
     QDir *dir=new QDir(locpath);
     if(!dir->exists()){
        dir->mkdir(locpath);
@@ -144,17 +138,11 @@ QString Utils::getLocateDownloadPath(QString basepath)
     return locpath;
 }
 
-QString Utils::getLocateNotesPath(QString basepath)
+QString Utils::getLocateNotesPath()
 {
-    QString locpath;
-    if(basepath.length() == 0){
-        locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-        locpath.append(QDir::separator()).append("slfile");
-        locpath.append(QDir::separator()).append("note");
-    }else{
-        locpath = basepath.append(QDir::separator()).append("note");
-    }
-
+    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    locpath.append(QDir::separator()).append("slfile");
+    locpath.append(QDir::separator()).append("note");
     QDir *dir=new QDir(locpath);
     if(!dir->exists()){
        dir->mkdir(locpath);
@@ -162,17 +150,11 @@ QString Utils::getLocateNotesPath(QString basepath)
     return locpath;
 }
 
-QString Utils::getLocateIndexPath(QString basepath)
-{   
-    QString locpath;
-    if(basepath.length() == 0){
-        locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-        locpath.append(QDir::separator()).append("slfile");
-        locpath.append(QDir::separator()).append("index");
-    }else{
-        locpath = basepath.append(QDir::separator()).append("index");
-    }
-
+QString Utils::getLocateIndexPath()
+{
+    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    locpath.append(QDir::separator()).append("slfile");
+    locpath.append(QDir::separator()).append("index");
     QDir *dir=new QDir(locpath);
     if(!dir->exists()){
        dir->mkdir(locpath);
@@ -180,17 +162,11 @@ QString Utils::getLocateIndexPath(QString basepath)
     return locpath;
 }
 
-QString Utils::getLocateDbPath(QString basepath)
+QString Utils::getLocateDbPath()
 {
-    QString locpath;
-    if(basepath.length() == 0){
-        locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-        locpath.append(QDir::separator()).append("slfile");
-        locpath.append(QDir::separator()).append("db");
-    }else{
-        locpath = basepath.append(QDir::separator()).append("db");
-    }
-
+    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    locpath.append(QDir::separator()).append("slfile");
+    locpath.append(QDir::separator()).append("db");
     QDir *dir=new QDir(locpath);
     if(!dir->exists()){
        dir->mkdir(locpath);
@@ -198,17 +174,11 @@ QString Utils::getLocateDbPath(QString basepath)
     return locpath;
 }
 
-QString Utils::getSavePagePath(QString basepath)
+QString Utils::getSavePagePath()
 {
-    QString locpath;
-    if(basepath.length() == 0){
-        locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-        locpath.append(QDir::separator()).append("slfile");
-        locpath.append(QDir::separator()).append("page");
-    }else{
-        locpath = basepath.append(QDir::separator()).append("page");
-    }
-
+    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    locpath.append(QDir::separator()).append("slfile");
+    locpath.append(QDir::separator()).append("page");
     QDir *dir=new QDir(locpath);
     if(!dir->exists()){
        dir->mkdir(locpath);
@@ -216,17 +186,11 @@ QString Utils::getSavePagePath(QString basepath)
     return locpath;
 }
 
-QString Utils::getSaveDocPath(QString basepath)
+QString Utils::getSaveDocPath()
 {
-    QString locpath;
-    if(basepath.length() == 0){
-        locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-        locpath.append(QDir::separator()).append("slfile");
-        locpath.append(QDir::separator()).append("doc");
-    }else{
-        locpath = basepath.append(QDir::separator()).append("doc");
-    }
-
+    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    locpath.append(QDir::separator()).append("slfile");
+    locpath.append(QDir::separator()).append("doc");
     QDir *dir=new QDir(locpath);
     if(!dir->exists()){
        dir->mkdir(locpath);
@@ -234,17 +198,11 @@ QString Utils::getSaveDocPath(QString basepath)
     return locpath;
 }
 
-QString Utils::getSaveLogPath(QString basepath)
+QString Utils::getSaveLogPath()
 {
-    QString locpath;
-    if(basepath.length() == 0){
-        locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-        locpath.append(QDir::separator()).append("slfile");
-        locpath.append(QDir::separator()).append("log");
-    }else{
-        locpath = basepath.append(QDir::separator()).append("log");
-    }
-
+    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    locpath.append(QDir::separator()).append("slfile");
+    locpath.append(QDir::separator()).append("log");
     QDir *dir=new QDir(locpath);
     if(!dir->exists()){
        dir->mkdir(locpath);
@@ -252,17 +210,11 @@ QString Utils::getSaveLogPath(QString basepath)
     return locpath;
 }
 
-QString Utils::getBackUpPath(QString basepath)
+QString Utils::getBackUpPath()
 {
-    QString locpath;
-    if(basepath.length() == 0){
-        locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-        locpath.append(QDir::separator()).append("slfile");
-        locpath.append(QDir::separator()).append("backup");
-    }else{
-        locpath = basepath.append(QDir::separator()).append("backup");
-    }
-
+    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    locpath.append(QDir::separator()).append("slfile");
+    locpath.append(QDir::separator()).append("bakup");
     QDir *dir=new QDir(locpath);
     if(!dir->exists()){
        dir->mkdir(locpath);

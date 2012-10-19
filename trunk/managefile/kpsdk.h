@@ -6,8 +6,6 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QTextCodec>
-#include <QFile>
-#include <QEventLoop>
 #include "publicfun.h"
 
 typedef struct _auTokenJson

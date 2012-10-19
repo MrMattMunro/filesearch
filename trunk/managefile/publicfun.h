@@ -83,4 +83,9 @@ enum EnumUsrInfoIndex   //用户信息
 
 #define BYTE_TO_MB_UNIT           (1024*1024UL)
 
+// slfile
+#define consumer_key            "xc65W7KagK62hRR0"
+#define consumer_secret         "KTozzHuMHvIFAcCj"
+
+
 #endif // PUBLICFUN_H

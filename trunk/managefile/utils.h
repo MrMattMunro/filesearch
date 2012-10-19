@@ -32,14 +32,14 @@ namespace Utils {
     //! \brief Check if the object tre should be refileld depending on sql statement
     bool updateObjectTree(const QString & sql);
     QString getLocatePath();
-    QString getLocateDownloadPath(QString basepath);
-    QString getLocateNotesPath(QString basepath);
-    QString getLocateIndexPath(QString basepath);
-    QString getLocateDbPath(QString basepath);
-    QString getSavePagePath(QString basepath);
-    QString getSaveDocPath(QString basepath);
-    QString getSaveLogPath(QString basepath);
-    QString getBackUpPath(QString basepath);
+    QString getLocateDownloadPath();
+    QString getLocateNotesPath();
+    QString getLocateIndexPath();
+    QString getLocateDbPath();
+    QString getSavePagePath();
+    QString getSaveDocPath();
+    QString getSaveLogPath();
+    QString getBackUpPath();
     QString getDirNameByPath(const QString & path);
     QDir directoryOf(const QString & subdir);
     QString getMD5Str(const QString & str);

@@ -23,7 +23,7 @@ int Kpan::kpReqTmpToken(QString &tmpOauthToken,QString &tmpOauthTokenSecret,\
     tmpOauthTokenSecret=kp->mTmpTokenSecret;
     authoriseUrl = QString(KP_AUTHORISE_SRC_URL).append(tmpOauthToken);
 
-    int ret=kp->mRet;
+    int ret = kp->mRet;
     delete kp;
     return ret;
 }
@@ -44,8 +44,8 @@ int Kpan::kpAccessToken(QString &oauth_token, QString &oauth_token_secret,\
     kp->mTmpToken=tmpOauthToken;
     kp->mTmpTokenSecret=tmpOauthTokenSecret;
     kp->reqAcessToken();
-    oauth_token=kp->mAuTokenInfo.auToken;
-    oauth_token_secret=kp->mAuTokenInfo.auTokenSecret;
+    oauth_token = kp->mAuTokenInfo.auToken;
+    oauth_token_secret = kp->mAuTokenInfo.auTokenSecret;
     user_id=kp->mAuTokenInfo.usrID;
     charged_dir=kp->mAuTokenInfo.chargedDir;
 
