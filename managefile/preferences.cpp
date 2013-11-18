@@ -72,15 +72,18 @@ Preferences::Preferences(QObject *parent)
         m_searchobject = s.value("search/object", QString()).toString();
         // search setting end
 
-        // is Indexing
+        // 是否正在索引
         m_is_indexing = s.value("isindexing", false).toBool();
-
         m_open_doc = s.value("m_open_doc", QString()).toString();
 
-        // 界面state
+        // 界面状态信息
         m_splitterState = s.value("splitterstate").toByteArray();
-
+        // 是否最小化
         m_is_mintotray = s.value("mintotray", false).toBool();
+        // 服务器信息
+        m_address= s.value("server/address", QString()).toString();
+        m_port= s.value("server/port", 8080).toInt();
+
 
 	m_recentlyUsedCount = s.value("prefs/recentlyUsedSpinBox", 5).toInt();
 	m_openLastDB = s.value("prefs/openLastDB", true).toBool();
@@ -219,11 +222,14 @@ Preferences::~Preferences()
         settings.setValue("search/object", m_searchobject);
         // search setting end
         settings.setValue("isindexing", false);
-
         settings.setValue("m_open_doc", m_open_doc);
 
         settings.setValue("splitterstate", m_splitterState);
         settings.setValue("mintotray", m_is_mintotray);
+
+        // 服务器信息
+        settings.setValue("server/address", m_address);
+        settings.setValue("server/port", m_port);
 
 	// sql editor
 	settings.setValue("prefs/sqleditor/font", m_sqlFont);

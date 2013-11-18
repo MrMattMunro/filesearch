@@ -15,6 +15,7 @@
 #include <QMap>
 #include <db/docdao.h>
 
+#define CP_ACP  0
 using namespace std;
 
 /*! \brief A model for extensions dipslay.

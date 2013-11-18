@@ -27,6 +27,7 @@
 #include "preferences.h"
 #include "utils.h"
 #include "db/database.h"
+#include "xmlrpc/client.h"
 #include "logindialog.h"
 #include "fileutils.h"
 #include "sqlloader.h"
@@ -256,7 +257,6 @@ int main(int argc, char *argv[])
     }
 
     SingleApplication::addLibraryPath("./plugins");
-
     // 设置系统右下图标
     if (!QSystemTrayIcon::isSystemTrayAvailable()) {
             QMessageBox::critical(0, QObject::tr("Systray"),
@@ -297,6 +297,10 @@ int main(int argc, char *argv[])
     // 设置正在搜索标志位
     Preferences* pre = Preferences::instance();
     pre->setIsIndexing(false);
+
+    // 设置服务器信息 TODO 需要改为从服务器端获取
+    pre->setAddress("192.168.1.103");
+    pre->setPort(8080);
 
     // 初始化JVM 提高第一次搜索数据
     Jvm::BeginJVM();

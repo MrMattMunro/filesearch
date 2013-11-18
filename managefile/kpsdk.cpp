@@ -1,3 +1,5 @@
+#include <QDebug>
+
 #include "kpsdk.h"
 #include "utils.h"
 
@@ -5,7 +7,7 @@ KpSDK::KpSDK(QObject *parent) :
     QObject(parent)
 {
     manager = new QNetworkAccessManager(this);
-    eLoop=new QEventLoop;
+    eLoop = new QEventLoop(this);
     mRet=-1;
     mIsAppPath=true;
     mIsToRecyle=true;
@@ -47,12 +49,12 @@ int KpSDK::openFile(QByteArray &buf, const QString &filePath)
 //发送请求
 void KpSDK::reqReqTmpToken()
 {
-    QString reqTokenUrl=buildReqTknUrl(mConsumerKey,mConsumerSecret);
+    QString reqTokenUrl=buildReqTknUrl(mConsumerKey, mConsumerSecret);
     inputUrl.setEncodedUrl(reqTokenUrl.toAscii());
     request.setUrl(inputUrl);
     mReqTknReply = manager->get(request);
 
-
+    qDebug() << "inputUrl" << inputUrl;
     connect(mReqTknReply, SIGNAL(finished()), eLoop, SLOT(quit()));
     eLoop->exec();
     reqTknReplyFinished();
@@ -92,9 +94,10 @@ QString KpSDK::getReqTknSignature(QString &paraStr, const QString &consKeyStr, c
 //收到临时oauth_token和secret反馈完成
 void KpSDK::reqTknReplyFinished()
 {
-    mRet=mReqTknReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    mRet= mReqTknReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     QByteArray getBuf=mReqTknReply->readAll();
 
+    qDebug() << "mRet:" << mRet;
     if(KP_CORRECT_RESULT==mRet)//返回正确
     {
         QList<QByteArray> list=getBuf.simplified().split('"');
@@ -102,8 +105,7 @@ void KpSDK::reqTknReplyFinished()
         mTmpToken=list.at(TMP_TOKEN_INDEX);
         //setAuthorise(mTmpToken);//进行鉴权
 
-    }
-    else
+    } else
     {
         mTmpToken="NULL";
         mTmpTokenSecret="NULL";
@@ -174,6 +176,7 @@ void KpSDK::acesTknReplyFinished()
 {
     mRet=mAcesTknReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     QByteArray getBuf=mAcesTknReply->readAll();
+    qDebug() << "mRet:" << mRet;
     if(KP_CORRECT_RESULT==mRet)//返回正确
     {
         QList<QByteArray> list=getBuf.simplified().split('"');
@@ -257,6 +260,7 @@ void KpSDK::usrInfoReplyFinished()
     mRet=mUsrInfoReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     QByteArray getBuf=mUsrInfoReply->readAll();
     //qDebug()<<getBuf;
+    qDebug() << "mRet:" << mRet;
     if(KP_CORRECT_RESULT==mRet)//返回正确
     {
         QList<QByteArray> list=getBuf.split('"');
@@ -394,6 +398,7 @@ void KpSDK::reqCreateFloder()
                                                  mIsAppPath,mCreateFolderPath);
     inputUrl.setEncodedUrl(createFolderUrl.toAscii());
     request.setUrl(inputUrl);
+    qDebug()<< "reqCreateFloder:" << inputUrl;
     mCreateFolderReply=manager->get(request);
 //    connect(mCreateFolderReply,SIGNAL(readyRead()),this,SLOT(createFolderReadReady()));
     //    connect(mCreateFolderReply,SIGNAL(finished()),this,SLOT(createFolderReplyFinished()));
@@ -450,7 +455,7 @@ QString KpSDK::getCreateFolderSignature(QString &paraStr, const QString &consKey
     paraStr.append(FOLDER_ROOT);
     if(isAppPath)
     {
-        paraStr.append("app_folder");
+        paraStr.append("slfile");
     }
     else
     {
@@ -468,6 +473,9 @@ void KpSDK::createFolderReplyFinished()
 {
     mRet=mCreateFolderReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     QByteArray getBuf=mCreateFolderReply->readAll();
+
+    qDebug() << "createFolderReplyFinished mRet:" << mRet;
+
     mJsonBuf.clear();
     mJsonBuf.append(getBuf);
     mCreateFolderReply->deleteLater();
@@ -808,6 +816,7 @@ void KpSDK::getUploadLocateFinished()
 {
     mRet=mUploadLocateReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     QByteArray getBuf=mUploadLocateReply->readAll();
+    qDebug() << "mRet:" << mRet;
     if(KP_CORRECT_RESULT==mRet)
     {
         QList<QByteArray> list=getBuf.split('"');
@@ -1067,6 +1076,7 @@ void KpSDK::dwnFileRealReplyFinished()
 {
     mRet=mDwnFileRealReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     // 返回正确
+    qDebug() << "mRet:" << mRet;
     if(KP_CORRECT_RESULT==mRet)
     {
         if (dwnFile!=NULL) dwnFile->write(mDwnFileRealReply->readAll());

@@ -1,10 +1,8 @@
 #include <utils.h>
 
-
+#include <QDebug>
 #include "kpsdk.h"
 #include "kpan.h"
-
-
 
 //获取临时token、secret和认证url
 //输入：consumerKey    consumerSecret
@@ -19,9 +17,16 @@ int Kpan::kpReqTmpToken(QString &tmpOauthToken,QString &tmpOauthTokenSecret,\
     kp->mConsumerSecret=consumerSecret;
     kp->reqReqTmpToken();
 
+    qDebug() << "consumerKey1 :" << consumerKey;
+    qDebug() << "consumerSecret1 : " <<  consumerSecret;
+
     tmpOauthToken=kp->mTmpToken;
     tmpOauthTokenSecret=kp->mTmpTokenSecret;
     authoriseUrl = QString(KP_AUTHORISE_SRC_URL).append(tmpOauthToken);
+
+    qDebug() << "tmpOauthToken1 : " << tmpOauthToken;
+    qDebug() << "tmpOauthTokenSecret1 : " <<  tmpOauthTokenSecret;
+    qDebug() << "authoriseUrl1 : " <<  authoriseUrl;
 
     int ret = kp->mRet;
     delete kp;
@@ -195,8 +200,7 @@ int Kpan::kpMvFile(QString &jsonMvFile,\
 //输入: consumerKey consumerSecret  oauthToken    oauthTokenSecret    isAppPath   fromPath    toPath
 //isAppPath 若应用访问权限路径为kuaipan则为false,否为true
 //输出：jsonMvFile
-int Kpan::kpCpFile(QString &jsonCpFile,\
-                                              const QString &consumerKey,const QString &consumerSecret,\
+int Kpan::kpCpFile(QString &jsonCpFile, const QString &consumerKey,const QString &consumerSecret,\
                                               const QString &oauthToken,const QString &oauthTokenSecret,
                                               const bool   &isAppPath, \
                                               const QString &fromPath, const QString &toPath

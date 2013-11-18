@@ -33,19 +33,19 @@ public:
             NODE_TYPE = Qt::UserRole + 2
 
         };
-	void         setTreeTitle(QString title); //设置tree的名称
-	void         setSubTreeTitle(int subTree,QString title);
-    void         addItem(int subTree, QString itemName, QString uid,  QString type, QString icon); //增加item
-    QStandardItem* addItemByParentItem(QStandardItem *parenItem, QString itemName, QString uid, QString type, QString icon); //增加item
-	void         addItems(int subTree, QList<QString> nameList);
-	void         delelteItem(int subTree, QString itemName);
+        void         setTreeTitle(QString title); //设置tree的名称
+        void         setSubTreeTitle(int subTree,QString title);
+        void         addItem(int subTree, QString itemName, QString uid,  QString type, QString icon); //增加item
+        QStandardItem* addItemByParentItem(QStandardItem *parenItem, QString itemName, QString uid, QString type, QString icon); //增加item
+        void         addItems(int subTree, QList<QString> nameList);
+        void         delelteItem(int subTree, QString itemName);
         bool         delSubItems(QStandardItem *parenItem);
         void         clearTree(int subTree);//清空所有的item
-	void         enableMouse(bool yesOrNo);  //设置鼠标相应
-	bool         getMouseStatus();   //查看是可以使用鼠标
-	QString      getCurTitle();  //获取当前鼠标双击的title
+        void         enableMouse(bool yesOrNo);  //设置鼠标相应
+        bool         getMouseStatus();   //查看是可以使用鼠标
+        QString      getCurTitle();  //获取当前鼠标双击的title
         QString      getCurPath();   //获取当前鼠标双击的路径
-	QModelIndex  getCurIndex();
+        QModelIndex  getCurIndex();
         QStandardItem* getCurItem(); // 获取当前双击节点
         QPoint       getCurPoint();  // 获取当前点击位置
         QString      getCurUuid();   // 获取当前UuId

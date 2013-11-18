@@ -317,7 +317,7 @@ jstring Jvm::NewJString(JNIEnv *env, char *str)
     }
     int slen = strlen(str);
     jchar* buffer = new jchar[slen];
-    int len = MultiByteToWideChar(CP_ACP, 0, str, strlen(str),buffer,slen);
+    int len = MultiByteToWideChar(0, 0, str, strlen(str),buffer,slen);
     if(len>0 && len < slen)
     {
         buffer[len] = 0;

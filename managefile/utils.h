@@ -59,6 +59,7 @@ namespace Utils {
     QString removeUrlEncode(const QString &urlStr);
     QString stringToUnicode(QString str);
     QString unicodeToString(QString str);
+    QString getKpanRoot();
 //    QString s2q(const QString &s);
 //    QString q2s(const QString &s);
 };

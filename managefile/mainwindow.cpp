@@ -89,7 +89,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     isBusySearch = false;
     setContextMenuPolicy(Qt::CustomContextMenu);
 
-    // 获得服务器是否需要启动升级程序
+    // 获得服务器是否需要启动升级程序 并获得服务器信息
     QString surl;
     surl.append("http://www.slfile.net/mf-getnewversion.php");
     requtil = new ReqUtil(this);
@@ -795,7 +795,7 @@ void MainWindow::initUI()
         setCentralWidget(splitter);
 }
 
-
+// 打开笔记
 void MainWindow::shownotes(){
     m_doctable->showNoteDialog();
 }

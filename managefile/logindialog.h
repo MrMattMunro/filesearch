@@ -13,6 +13,8 @@ for which a new license (GPL+exception) is in place.
 
 #include <QStandardItemModel>
 #include "requtil.h"
+#include "kpan.h"
+#include "xmlrpc/client.h"
 
 /*! \brief Import data into table using various importer types.
 \note XML import requires Qt library at least in the 4.3.0 version.
@@ -28,11 +30,16 @@ class LoginDialog : public QDialog, public Ui::LoginDialog
         private:
                 QString m_action;
                 ReqUtil * requtil;
+                Kpan* kpan;
+                Client* c;
 	private slots:
                 void loginBtn_clicked();
                 void registerBtn_clicked();
                 void resetBtn_clicked();
                 void doReply();
+                void getAuthCode();
+                void loginReply();
+                void createAccountReply();
 
         signals:
                 //确定按钮点击
