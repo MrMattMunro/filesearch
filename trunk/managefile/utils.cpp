@@ -482,7 +482,8 @@ QString Utils::unicodeToString(QString str)
 
 QString Utils::getKpanRoot()
 {
-    QStringList<QString> roots;
+    QStringList roots;
+
     roots.append("C:\\");
     roots.append("D:\\");
     roots.append("E:\\");

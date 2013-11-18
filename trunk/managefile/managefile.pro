@@ -99,7 +99,13 @@ SOURCES += main.cpp \
     tableresult.cpp \
     document.cpp \
     kpsdk.cpp \
-    kpan.cpp
+    kpan.cpp \
+    xmlrpc/xmlrpcconv.cpp \
+    xmlrpc/xmlrpcclient.cpp \
+    xmlrpc/httpsclient.cpp \
+    xmlrpc/httpclient.cpp \
+    xmlrpc/clientprotocol.cpp \
+    xmlrpc/client.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -200,7 +206,13 @@ HEADERS  += mainwindow.h \
     document.h \
     kpsdk.h \
     publicfun.h \
-    kpan.h
+    kpan.h \
+    xmlrpc/xmlrpcconv.h \
+    xmlrpc/xmlrpcclient.h \
+    xmlrpc/httpsclient.h \
+    xmlrpc/httpclient.h \
+    xmlrpc/clientprotocol.h \
+    xmlrpc/client.h
 
 INCLUDEPATH += C:\Program Files\Microsoft SDKs\Windows\v5.0\Include
 

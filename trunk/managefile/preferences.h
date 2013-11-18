@@ -162,6 +162,13 @@ Q_OBJECT
         void setIsMinToTray(bool v) { m_is_mintotray = v; };
         // index state end
 
+        // Server start
+        QString getAddress() { return m_address; };
+        void setAddress(QString v) { m_address = v; };
+        quint16 getPort() { return m_port; };
+        void setPort(quint16 v) { m_port = v; };
+        // Server end
+
 		int recentlyUsedCount() { return m_recentlyUsedCount; };
 		void setRecentlyUsedCount(int v) { m_recentlyUsedCount = v; };
 
@@ -327,16 +334,18 @@ Q_OBJECT
 
         //
         QString m_open_doc;
-
+        //
         bool m_is_indexing;
 
         // 界面state
         QByteArray m_splitterState;
-
         bool m_is_mintotray;
 
-		bool m_checkQtVersion;
+        // 服务器信息
+        QString m_address;
+        quint16 m_port;
 
+        bool m_checkQtVersion;
 		int m_recentlyUsedCount;
 		bool m_openLastDB;
 		bool m_openLastSqlFile;

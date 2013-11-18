@@ -25,7 +25,7 @@ AccountDialog::AccountDialog(QWidget * parent)
         : QDialog(parent),
           update(false)
 {
-	setupUi(this);
+        setupUi(this);
 
         // Set UI
         this->setWindowTitle(tr("Account Information"));
@@ -50,9 +50,9 @@ AccountDialog::AccountDialog(QWidget * parent)
         }
         QString score = p->getScore();
         QString stype = p->getType();
-        if(stype == "b6e70zfef3"){
+        if(stype == "vip"){
             QString dtExpired = p->getDtExpired();
-            stype = "VIP ";
+            stype = "vip ";
             stype.append(" ");
             stype.append(dtExpired);
         }else{
