@@ -39,7 +39,7 @@
  **
  ****************************************************************************/
 
- #include <QtGui>
+ #include <QtWidgets>
 
  #include "highlighter.h"
  #include "preferences.h"

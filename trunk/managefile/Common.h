@@ -26,6 +26,9 @@
 
 #include <QEvent>
 #include <QObject>
+#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
+#   include <QUrlQuery>
+#endif
 
 struct ApplicationStruct;
 class QSslCertificate;
@@ -57,7 +60,7 @@ public:
 
 public Q_SLOTS:
 	void browse( const QUrl &url );
-        void mailTo( const QUrl &url );
+        void mailTo( const QUrlQuery &url );
 
 private:
 	static quint8 cardsOrderScore( const QChar &c );

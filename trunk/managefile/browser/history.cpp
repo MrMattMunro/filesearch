@@ -1,38 +1,38 @@
 /****************************************************************************
 **
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
-** All rights reserved.
-** Contact: Nokia Corporation (qt-info@nokia.com)
+** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+** Contact: http://www.qt-project.org/legal
 **
 ** This file is part of the demonstration applications of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:LGPL$
-** GNU Lesser General Public License Usage
-** This file may be used under the terms of the GNU Lesser General Public
-** License version 2.1 as published by the Free Software Foundation and
-** appearing in the file LICENSE.LGPL included in the packaging of this
-** file. Please review the following information to ensure the GNU Lesser
-** General Public License version 2.1 requirements will be met:
-** http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and Digia.  For licensing terms and
+** conditions see http://qt.digia.com/licensing.  For further information
+** use the contact form at http://qt.digia.com/contact-us.
 **
-** In addition, as a special exception, Nokia gives you certain additional
-** rights. These rights are described in the Nokia Qt LGPL Exception
+** GNU Lesser General Public License Usage
+** Alternatively, this file may be used under the terms of the GNU Lesser
+** General Public License version 2.1 as published by the Free Software
+** Foundation and appearing in the file LICENSE.LGPL included in the
+** packaging of this file.  Please review the following information to
+** ensure the GNU Lesser General Public License version 2.1 requirements
+** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+**
+** In addition, as a special exception, Digia gives you certain additional
+** rights.  These rights are described in the Digia Qt LGPL Exception
 ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
 **
 ** GNU General Public License Usage
-** Alternatively, this file may be used under the terms of the GNU General
-** Public License version 3.0 as published by the Free Software Foundation
-** and appearing in the file LICENSE.GPL included in the packaging of this
-** file. Please review the following information to ensure the GNU General
-** Public License version 3.0 requirements will be met:
-** http://www.gnu.org/copyleft/gpl.html.
-**
-** Other Usage
-** Alternatively, this file may be used in accordance with the terms and
-** conditions contained in a signed written agreement between you and Nokia.
-**
-**
-**
+** Alternatively, this file may be used under the terms of the GNU
+** General Public License version 3.0 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.  Please review the following information to
+** ensure the GNU General Public License version 3.0 requirements will be
+** met: http://www.gnu.org/copyleft/gpl.html.
 **
 **
 ** $QT_END_LICENSE$
@@ -56,11 +56,11 @@
 
 #include <QtGui/QClipboard>
 #include <QtGui/QDesktopServices>
-#include <QtGui/QHeaderView>
-#include <QtGui/QStyle>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QStyle>
 
-#include <QtWebKit/QWebHistoryInterface>
-#include <QtWebKit/QWebSettings>
+#include <QWebHistoryInterface>
+#include <QWebSettings>
 
 #include <QtCore/QDebug>
 
@@ -239,7 +239,7 @@ void HistoryManager::load()
 {
     loadSettings();
 
-    QFile historyFile(QDesktopServices::storageLocation(QDesktopServices::DataLocation)
+    QFile historyFile(QStandardPaths::writableLocation(QStandardPaths::DataLocation)
         + QLatin1String("/history"));
     if (!historyFile.exists())
         return;
@@ -318,7 +318,7 @@ void HistoryManager::save()
     if (first == m_history.count() - 1)
         saveAll = true;
 
-    QString directory = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    QString directory = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     if (directory.isEmpty())
         directory = QDir::homePath() + QLatin1String("/.") + QCoreApplication::applicationName();
     if (!QFile::exists(directory)) {
@@ -380,7 +380,8 @@ HistoryModel::HistoryModel(HistoryManager *history, QObject *parent)
 
 void HistoryModel::historyReset()
 {
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 void HistoryModel::entryAdded()
@@ -537,7 +538,7 @@ QModelIndex HistoryMenuModel::mapToSource(const QModelIndex &proxyIndex) const
     if (!proxyIndex.isValid())
         return QModelIndex();
 
-    if (proxyIndex.internalId() == -1) {
+    if (proxyIndex.internalId() == quintptr(-1)) {
         int bumpedItems = bumpedRows();
         if (proxyIndex.row() < bumpedItems)
             return m_treeModel->index(proxyIndex.row(), proxyIndex.column(), m_treeModel->index(0, 0));
@@ -558,7 +559,7 @@ QModelIndex HistoryMenuModel::index(int row, int column, const QModelIndex &pare
         || parent.column() > 0)
         return QModelIndex();
     if (!parent.isValid())
-        return createIndex(row, column, -1);
+        return createIndex(row, column, quintptr(-1));
 
     QModelIndex treeIndexParent = mapToSource(parent);
 
@@ -786,7 +787,8 @@ QVariant HistoryFilterModel::headerData(int section, Qt::Orientation orientation
 void HistoryFilterModel::sourceReset()
 {
     m_loaded = false;
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 int HistoryFilterModel::rowCount(const QModelIndex &parent) const
@@ -917,8 +919,10 @@ bool HistoryFilterModel::removeRows(int row, int count, const QModelIndex &paren
     connect(sourceModel(), SIGNAL(rowsRemoved(QModelIndex,int,int)),
                 this, SLOT(sourceRowsRemoved(QModelIndex,int,int)));
     m_loaded = false;
-    if (oldCount - count != rowCount())
-        reset();
+    if (oldCount - count != rowCount()) {
+        beginResetModel();
+        endResetModel();
+    }
     return true;
 }
 
@@ -976,7 +980,7 @@ QModelIndex HistoryCompletionModel::index(int row, int column, const QModelIndex
     if (row < 0 || row >= rowCount(parent)
         || column < 0 || column >= columnCount(parent))
         return QModelIndex();
-    return createIndex(row, column, 0);
+    return createIndex(row, column);
 }
 
 QModelIndex HistoryCompletionModel::parent(const QModelIndex &) const
@@ -1004,12 +1008,14 @@ void HistoryCompletionModel::setSourceModel(QAbstractItemModel *newSourceModel)
                 this, SLOT(sourceReset()));
     }
 
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 void HistoryCompletionModel::sourceReset()
 {
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 HistoryTreeModel::HistoryTreeModel(QAbstractItemModel *sourceModel, QObject *parent)
@@ -1106,7 +1112,6 @@ int HistoryTreeModel::sourceDateRow(int row) const
     }
     return m_sourceRowCache.at(row);
 }
-
 QModelIndex HistoryTreeModel::mapToSource(const QModelIndex &proxyIndex) const
 {
     int offset = proxyIndex.internalId();
@@ -1124,7 +1129,7 @@ QModelIndex HistoryTreeModel::index(int row, int column, const QModelIndex &pare
         return QModelIndex();
 
     if (!parent.isValid())
-        return createIndex(row, column, 0);
+        return createIndex(row, column);
     return createIndex(row, column, parent.row() + 1);
 }
 
@@ -1133,7 +1138,7 @@ QModelIndex HistoryTreeModel::parent(const QModelIndex &index) const
     int offset = index.internalId();
     if (offset == 0 || !index.isValid())
         return QModelIndex();
-    return createIndex(offset - 1, 0, 0);
+    return createIndex(offset - 1, 0);
 }
 
 bool HistoryTreeModel::hasChildren(const QModelIndex &parent) const
@@ -1194,13 +1199,15 @@ void HistoryTreeModel::setSourceModel(QAbstractItemModel *newSourceModel)
                 this, SLOT(sourceRowsRemoved(QModelIndex,int,int)));
     }
 
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 void HistoryTreeModel::sourceReset()
 {
+    beginResetModel();
     m_sourceRowCache.clear();
-    reset();
+    endResetModel();
 }
 
 void HistoryTreeModel::sourceRowsInserted(const QModelIndex &parent, int start, int end)
@@ -1208,8 +1215,9 @@ void HistoryTreeModel::sourceRowsInserted(const QModelIndex &parent, int start, 
     Q_UNUSED(parent); // Avoid warnings when compiling release
     Q_ASSERT(!parent.isValid());
     if (start != 0 || start != end) {
+        beginResetModel();
         m_sourceRowCache.clear();
-        reset();
+        endResetModel();
         return;
     }
 
@@ -1253,8 +1261,9 @@ void HistoryTreeModel::sourceRowsRemoved(const QModelIndex &parent, int start, i
         it = qLowerBound(m_sourceRowCache.begin(), m_sourceRowCache.end(), i);
         // playing it safe
         if (it == m_sourceRowCache.end()) {
+            beginResetModel();
             m_sourceRowCache.clear();
-            reset();
+            endResetModel();
             return;
         }
 

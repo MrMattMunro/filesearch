@@ -21,7 +21,7 @@
 **
 ****************************************************************************/
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QtNetwork>
 #include <QtWebKit>
 #include <QtXmlPatterns>
@@ -69,7 +69,7 @@
 #include "indexfile.h"
 
 
-MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
+MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
     : QMainWindow(parent, flags)
 {
     // Õý³£Æô¶¯

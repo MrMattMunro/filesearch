@@ -1,38 +1,38 @@
 /****************************************************************************
 **
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
-** All rights reserved.
-** Contact: Nokia Corporation (qt-info@nokia.com)
+** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+** Contact: http://www.qt-project.org/legal
 **
 ** This file is part of the demonstration applications of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:LGPL$
-** GNU Lesser General Public License Usage
-** This file may be used under the terms of the GNU Lesser General Public
-** License version 2.1 as published by the Free Software Foundation and
-** appearing in the file LICENSE.LGPL included in the packaging of this
-** file. Please review the following information to ensure the GNU Lesser
-** General Public License version 2.1 requirements will be met:
-** http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and Digia.  For licensing terms and
+** conditions see http://qt.digia.com/licensing.  For further information
+** use the contact form at http://qt.digia.com/contact-us.
 **
-** In addition, as a special exception, Nokia gives you certain additional
-** rights. These rights are described in the Nokia Qt LGPL Exception
+** GNU Lesser General Public License Usage
+** Alternatively, this file may be used under the terms of the GNU Lesser
+** General Public License version 2.1 as published by the Free Software
+** Foundation and appearing in the file LICENSE.LGPL included in the
+** packaging of this file.  Please review the following information to
+** ensure the GNU Lesser General Public License version 2.1 requirements
+** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+**
+** In addition, as a special exception, Digia gives you certain additional
+** rights.  These rights are described in the Digia Qt LGPL Exception
 ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
 **
 ** GNU General Public License Usage
-** Alternatively, this file may be used under the terms of the GNU General
-** Public License version 3.0 as published by the Free Software Foundation
-** and appearing in the file LICENSE.GPL included in the packaging of this
-** file. Please review the following information to ensure the GNU General
-** Public License version 3.0 requirements will be met:
-** http://www.gnu.org/copyleft/gpl.html.
-**
-** Other Usage
-** Alternatively, this file may be used in accordance with the terms and
-** conditions contained in a signed written agreement between you and Nokia.
-**
-**
-**
+** Alternatively, this file may be used under the terms of the GNU
+** General Public License version 3.0 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.  Please review the following information to
+** ensure the GNU General Public License version 3.0 requirements will be
+** met: http://www.gnu.org/copyleft/gpl.html.
 **
 **
 ** $QT_END_LICENSE$
@@ -49,11 +49,11 @@
 #include "indexfile.h"
 #include "saveurldialog.h"
 #include <QtGui/QClipboard>
-#include <QtGui/QMenu>
-#include <QtGui/QMessageBox>
+#include <QtWidgets/QMenu>
+#include <QtWidgets/QMessageBox>
 #include <QtGui/QMouseEvent>
 #include <QUuid>
-#include <QtWebKit/QWebHitTestResult>
+#include <QWebHitTestResult>
 
 #ifndef QT_NO_UITOOLS
 #include <QtUiTools/QUiLoader>
@@ -244,29 +244,26 @@ void WebView::contextMenuEvent(QContextMenuEvent *event)
         menu.exec(mapToGlobal(event->pos()));
         return;
     }
-
     QWebView::contextMenuEvent(event);
 }
-
-// 打开保存界面
 void WebView::saveToSlfile()
 {
-   // 打开保存界面
+  
    QUrl url = page()->mainFrame()->url();
    QString locate = Utils::getLocateDownloadPath();
 
    QString surl = url.toString();
-   // title 换成uuid
+  
 
    QString title = this->title();
 
-   // curPath 用于判断根节点和子节点
+
    SaveUrlDialog dlg(this);
    dlg.exec();
    if(dlg.update){
-       // 保存网页
+
        Doc doc;
-       doc.DOCUMENT_GUID = QUuid::createUuid();
+       doc.DOCUMENT_GUID = QUuid::createUuid().toString();
        doc.DOCUMENT_TITLE = title;
        doc.DIR_GUID = dlg.m_toUuid;
        doc.DOCUMENT_LOCATION = locate.append(QDir::separator()).append(title).append(".html");
@@ -293,7 +290,7 @@ void WebView::saveToSlfile()
        DocDao::insertDoc(doc);
        BrowserApplication::downloadManager()->download(url, doc.DOCUMENT_GUID, this->title(), false);
 
-       // TODO 暂时注释
+
 //       QThread thread;
 //       IndexFilesObj indexFilesObj;
 //       indexFilesObj.moveToThread(&thread);
@@ -303,7 +300,7 @@ void WebView::saveToSlfile()
 
 //       QObject::connect(&dummy, SIGNAL(sig()), &indexFilesObj, SLOT(indexfiles()));
 //       thread.start();
-//       // 通知主界面改变不可搜索
+
 //       Preferences* p = Preferences::instance();
 //       p->setIsIndexing(true);
 //       dummy.emitsig();
@@ -311,7 +308,6 @@ void WebView::saveToSlfile()
 
 }
 
-// 左键双击
 void WebView::mouseDoubleClickEvent(QMouseEvent *event)
 {
    BrowserApplication::mainWindow()->fullScreen();
@@ -391,7 +387,6 @@ void WebView::mouseReleaseEvent(QMouseEvent *event)
         }
     }
 }
-
 
 void WebView::setStatusBarText(const QString &string)
 {

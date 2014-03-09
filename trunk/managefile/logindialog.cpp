@@ -15,7 +15,7 @@
 #include "utils.h"
 #include "db/docdao.h"
 #include "db/dirdao.h"
-#include "kpan.h"
+//#include "kpan.h"
 #include "publicfun.h"
 
 // µÇÂ¼½çÃæ
@@ -170,7 +170,7 @@ void LoginDialog::getAuthCode(){
     QString tmpOauthTokenSecret;
     QString authoriseUrl;
 
-    kpan->kpReqTmpToken(tmpOauthToken, tmpOauthTokenSecret, authoriseUrl, consumer_key, consumer_secret);
+    //kpan->kpReqTmpToken(tmpOauthToken, tmpOauthTokenSecret, authoriseUrl, consumer_key, consumer_secret);
 
     qDebug() << "getAuthCode tmpOauthToken : " << tmpOauthToken;
     qDebug() << "getAuthCode tmpOauthTokenSecret : " <<  tmpOauthTokenSecret;
@@ -184,9 +184,9 @@ void LoginDialog::getAuthCode(){
 //    kpan->kpAccessToken(oauth_token, oauth_token_secret, user_id, charged_dir, consumer_key,consumer_secret,
 //                tmpOauthToken, tmpOauthTokenSecret);
 
-    QString jsonCreateFolder;
-    kpan->kpCreateFolder(jsonCreateFolder,consumer_key,consumer_secret,  tmpOauthToken, tmpOauthTokenSecret
-                         , true, "/testdir");
+   // QString jsonCreateFolder;
+  //  kpan->kpCreateFolder(jsonCreateFolder,consumer_key,consumer_secret,  tmpOauthToken, tmpOauthTokenSecret
+  //                       , true, "/testdir");
 
 //    int Kpan::kpCreateFolder(QString &jsonCreateFolder,\
 //                                                        const QString &consumerKey,const QString &consumerSecret,\

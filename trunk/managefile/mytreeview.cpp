@@ -1017,7 +1017,7 @@ void MyTreeView::createRootDir()
                 }
                 // ²åÈëÄ¿Â¼
                 Dir dir;
-                dir.DIR_GUID = QUuid::createUuid();
+                dir.DIR_GUID = QUuid::createUuid().toString();
                 dir.DIR_PARENT_UUID = "";
                 dir.DIR_NAME = text;
                 dir.DIR_DESCRIPTION = "";

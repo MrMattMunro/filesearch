@@ -7,7 +7,7 @@
 #include <QMap>
 #include <QList>
 #include <QByteArray>
-#include <QHttpResponseHeader>
+#include <QNetworkRequest>
 
 #include <QNetworkCookieJar>
 #include <QNetworkCookie>
@@ -54,7 +54,7 @@ private:
         QString referer;
         QNetworkCookieJar cookieJar;
 
-        QHttpResponseHeader responseHeader;
+        QNetworkRequest responseHeader;
         QByteArray responseHeaderData;
         QByteArray responseBodyData;
 

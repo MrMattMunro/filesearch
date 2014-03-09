@@ -1,38 +1,38 @@
 /****************************************************************************
 **
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
-** All rights reserved.
-** Contact: Nokia Corporation (qt-info@nokia.com)
+** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+** Contact: http://www.qt-project.org/legal
 **
 ** This file is part of the demonstration applications of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:LGPL$
-** GNU Lesser General Public License Usage
-** This file may be used under the terms of the GNU Lesser General Public
-** License version 2.1 as published by the Free Software Foundation and
-** appearing in the file LICENSE.LGPL included in the packaging of this
-** file. Please review the following information to ensure the GNU Lesser
-** General Public License version 2.1 requirements will be met:
-** http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and Digia.  For licensing terms and
+** conditions see http://qt.digia.com/licensing.  For further information
+** use the contact form at http://qt.digia.com/contact-us.
 **
-** In addition, as a special exception, Nokia gives you certain additional
-** rights. These rights are described in the Nokia Qt LGPL Exception
+** GNU Lesser General Public License Usage
+** Alternatively, this file may be used under the terms of the GNU Lesser
+** General Public License version 2.1 as published by the Free Software
+** Foundation and appearing in the file LICENSE.LGPL included in the
+** packaging of this file.  Please review the following information to
+** ensure the GNU Lesser General Public License version 2.1 requirements
+** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+**
+** In addition, as a special exception, Digia gives you certain additional
+** rights.  These rights are described in the Digia Qt LGPL Exception
 ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
 **
 ** GNU General Public License Usage
-** Alternatively, this file may be used under the terms of the GNU General
-** Public License version 3.0 as published by the Free Software Foundation
-** and appearing in the file LICENSE.GPL included in the packaging of this
-** file. Please review the following information to ensure the GNU General
-** Public License version 3.0 requirements will be met:
-** http://www.gnu.org/copyleft/gpl.html.
-**
-** Other Usage
-** Alternatively, this file may be used in accordance with the terms and
-** conditions contained in a signed written agreement between you and Nokia.
-**
-**
-**
+** Alternatively, this file may be used under the terms of the GNU
+** General Public License version 3.0 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.  Please review the following information to
+** ensure the GNU General Public License version 3.0 requirements will be
+** met: http://www.gnu.org/copyleft/gpl.html.
 **
 **
 ** $QT_END_LICENSE$
@@ -50,15 +50,16 @@
 #include <QtCore/QSettings>
 #include <QtCore/QUrl>
 
-#include <QtGui/QCompleter>
+#include <QtWidgets/QCompleter>
 #include <QtGui/QDesktopServices>
 #include <QtGui/QFont>
 #include <QtGui/QFontMetrics>
-#include <QtGui/QHeaderView>
+#include <QtWidgets/QHeaderView>
 #include <QtGui/QKeyEvent>
-#include <QtGui/QSortFilterProxyModel>
+#include <QtCore/QSortFilterProxyModel>
+#include <QtNetwork/QNetworkCookie>
 
-#include <QtWebKit/QWebSettings>
+#include <QWebSettings>
 
 #include <QtCore/QDebug>
 
@@ -131,7 +132,7 @@ void CookieJar::load()
         return;
     // load cookies and exceptions
     qRegisterMetaTypeStreamOperators<QList<QNetworkCookie> >("QList<QNetworkCookie>");
-    QSettings cookieSettings(QDesktopServices::storageLocation(QDesktopServices::DataLocation) + QLatin1String("/cookies.ini"), QSettings::IniFormat);
+    QSettings cookieSettings(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1String("/cookies.ini"), QSettings::IniFormat);
     setAllCookies(qvariant_cast<QList<QNetworkCookie> >(cookieSettings.value(QLatin1String("cookies"))));
     cookieSettings.beginGroup(QLatin1String("Exceptions"));
     m_exceptions_block = cookieSettings.value(QLatin1String("block")).toStringList();
@@ -173,7 +174,7 @@ void CookieJar::save()
     if (!m_loaded)
         return;
     purgeOldCookies();
-    QString directory = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    QString directory = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     if (directory.isEmpty())
         directory = QDir::homePath() + QLatin1String("/.") + QCoreApplication::applicationName();
     if (!QFile::exists(directory)) {
@@ -186,7 +187,7 @@ void CookieJar::save()
         if (cookies.at(i).isSessionCookie())
             cookies.removeAt(i);
     }
-    cookieSettings.setValue(QLatin1String("cookies"), qVariantFromValue<QList<QNetworkCookie> >(cookies));
+    cookieSettings.setValue(QLatin1String("cookies"), QVariant::fromValue<QList<QNetworkCookie> >(cookies));
     cookieSettings.beginGroup(QLatin1String("Exceptions"));
     cookieSettings.setValue(QLatin1String("block"), m_exceptions_block);
     cookieSettings.setValue(QLatin1String("allow"), m_exceptions_allow);
@@ -478,7 +479,8 @@ bool CookieModel::removeRows(int row, int count, const QModelIndex &parent)
 
 void CookieModel::cookiesChanged()
 {
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 CookiesDialog::CookiesDialog(CookieJar *cookieJar, QWidget *parent) : QDialog(parent)
@@ -710,7 +712,8 @@ void CookiesExceptionsDialog::block()
         return;
     m_exceptionsModel->m_blockedCookies.append(domainLineEdit->text());
     m_cookieJar->setBlockedCookies(m_exceptionsModel->m_blockedCookies);
-    m_exceptionsModel->reset();
+    m_exceptionsModel->beginResetModel();
+    m_exceptionsModel->endResetModel();
 }
 
 void CookiesExceptionsDialog::allow()
@@ -719,7 +722,8 @@ void CookiesExceptionsDialog::allow()
         return;
     m_exceptionsModel->m_allowedCookies.append(domainLineEdit->text());
     m_cookieJar->setAllowedCookies(m_exceptionsModel->m_allowedCookies);
-    m_exceptionsModel->reset();
+    m_exceptionsModel->beginResetModel();
+    m_exceptionsModel->endResetModel();
 }
 
 void CookiesExceptionsDialog::allowForSession()
@@ -728,6 +732,8 @@ void CookiesExceptionsDialog::allowForSession()
         return;
     m_exceptionsModel->m_sessionCookies.append(domainLineEdit->text());
     m_cookieJar->setAllowForSessionCookies(m_exceptionsModel->m_sessionCookies);
-    m_exceptionsModel->reset();
+    m_exceptionsModel->beginResetModel();
+    m_exceptionsModel->endResetModel();
+
 }
 

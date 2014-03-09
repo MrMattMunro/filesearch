@@ -7,7 +7,6 @@
 #include <QList>
 #include <QString>
 #include <QVariant>
-#include <QHttpHeader>
 #include <QDomDocument>
 #include <QMetaMethod>
 #include <QTimerEvent>

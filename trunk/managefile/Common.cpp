@@ -36,6 +36,7 @@
 #include <QTextStream>
 #include <QUrl>
 
+
 #include <stdlib.h>
 
 #if defined(Q_OS_WIN)
@@ -291,7 +292,7 @@ QString Common::fileSize( quint64 bytes )
 	return QString( "%1 B" ).arg( bytes );
 }
 
-void Common::mailTo( const QUrl &url )
+void Common::mailTo( const QUrlQuery &url )
 {
 #if defined(Q_OS_WIN)
 	QString mail = QSettings( "HKEY_CURRENT_USER\\Software\\Clients\\Mail",
@@ -299,7 +300,7 @@ void Common::mailTo( const QUrl &url )
 	bool utf8 = QSettings( "HKEY_LOCAL_MACHINE\\Software\\Clients\\Mail\\" + mail,
 		QSettings::NativeFormat ).value( "SupportUTF8", false ).toBool();
 
-	QString file = url.queryItemValue( "attachment" );
+    QString file = url.queryItemValue( "attachment" );
 	QByteArray filePath = QDir::toNativeSeparators( file ).toLocal8Bit();
 	QByteArray fileName = QFileInfo( file ).fileName().toLocal8Bit();
 	QByteArray subject = url.queryItemValue( "subject" ).toLocal8Bit();
@@ -462,7 +463,9 @@ void Common::mailTo( const QUrl &url )
 	if( status )
 		return;
 #endif
-	QDesktopServices::openUrl( url );
+    QUrl tempUrl;
+    tempUrl.setQuery(url);
+    QDesktopServices::openUrl( tempUrl );
 }
 
 bool Common::noNativeFileDialog() const
@@ -632,23 +635,24 @@ QStringList packages;
 
 void Common::showHelp( const QString &msg, int code )
 {
-	QUrl u;
-
+    QUrlQuery query;
+    QUrl u;
 	if( code > 0 )
 	{
 		u.setUrl( "http://www.sk.ee/digidoc/support/errorinfo/" );
-		u.addQueryItem( "app", qApp->applicationName() );
-		u.addQueryItem( "appver", qApp->applicationVersion() );
-		u.addQueryItem( "code", QString::number( code ) );
+        query.addQueryItem( "app", qApp->applicationName() );
+        query.addQueryItem( "appver", qApp->applicationVersion() );
+        query.addQueryItem( "code", QString::number( code ) );
 	}
 	else
 	{
 		u.setUrl( helpUrl() );
-		u.addQueryItem( "searchquery", msg );
-		u.addQueryItem( "searchtype", "all" );
-		u.addQueryItem( "_m", "core" );
-		u.addQueryItem( "_a", "searchclient" );
+        query.addQueryItem( "searchquery", msg );
+        query.addQueryItem( "searchtype", "all" );
+        query.addQueryItem( "_m", "core" );
+        query.addQueryItem( "_a", "searchclient" );
 	}
+    u.setQuery(query);
 	QDesktopServices::openUrl( u );
 }
 

@@ -297,7 +297,9 @@ string Jvm::JStringToCString (JNIEnv *env, jstring str)// (jstring str, LPTSTR d
     ZeroMemory(w_buffer,(len+1)*sizeof(wchar_t));
     //使用GetStringChars而不是GetStringUTFChars
     const jchar * jcharString = env->GetStringChars(str, 0);
-    wcscpy(w_buffer,jcharString);
+    //wcscpy(w_buffer,jcharString);
+    memcpy(w_buffer, jcharString, len*2);
+
     env->ReleaseStringChars(str,jcharString);
     ZeroMemory(c_buffer,(2*len+1)*sizeof(char));
     //调用字符编码转换函数(Win32 API)将UNICODE转为ASCII编码格式字符串
@@ -309,22 +311,27 @@ string Jvm::JStringToCString (JNIEnv *env, jstring str)// (jstring str, LPTSTR d
     return cstr;
 }
 
-jstring Jvm::NewJString(JNIEnv *env, char *str)
+jstring Jvm::NewJString(JNIEnv *env, char *str_tmp)
 {
-    if(!env || !str)
+    jstring rtn=0;
+    int slen = (int)strlen(str_tmp);
+    unsigned short* buffer=0;
+
+    if(slen == 0)
     {
-        return 0;
+     rtn = env->NewStringUTF(str_tmp);
+    } else{
+         int length = MultiByteToWideChar(CP_ACP, 0, (LPCSTR)str_tmp, slen, NULL, 0);
+         buffer = (unsigned short*)malloc(length*2+1);
+         if(MultiByteToWideChar(CP_ACP, 0, (LPCSTR)str_tmp, slen, (LPWSTR)buffer, length) > 0){
+          rtn = env->NewString((jchar*)buffer, length);
+         }
     }
-    int slen = strlen(str);
-    jchar* buffer = new jchar[slen];
-    int len = MultiByteToWideChar(0, 0, str, strlen(str),buffer,slen);
-    if(len>0 && len < slen)
+    if(buffer)
     {
-        buffer[len] = 0;
+     free(buffer);
     }
-    jstring js = env->NewString(buffer,len);
-    delete [] buffer;
-    return js;
+    return rtn;
 }
 
 

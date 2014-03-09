@@ -1,10 +1,10 @@
-QT       += network webkit xml xmlpatterns sql
+QT       +=widgets network webkit xml xmlpatterns sql webkitwidgets
 TARGET = Solo
 TEMPLATE = app
 
-LIBS += C:\QtWorksapce\managefile\lib\sqlite3.lib \
-         C:\QtSDK\Symbian\tools\sbs\win32\mingw\lib\libwinspool.a \
-         -Lc:/QtWorksapce/managefile/lib -lqjson0
+LIBS += D:\QtWorksapce\managefile\lib\sqlite3.lib \
+         C:\Qt\Tools\mingw48_32\i686-w64-mingw32\lib\libwinspool.a \
+         -LD:/QtWorksapce/managefile/lib -lqjson0
 
 win32:LIBS += -lshell32 -lole32 -luser32
 
@@ -98,14 +98,10 @@ SOURCES += main.cpp \
     resultdelegate.cpp \
     tableresult.cpp \
     document.cpp \
-    kpsdk.cpp \
-    kpan.cpp \
-    xmlrpc/xmlrpcconv.cpp \
-    xmlrpc/xmlrpcclient.cpp \
-    xmlrpc/httpsclient.cpp \
-    xmlrpc/httpclient.cpp \
-    xmlrpc/clientprotocol.cpp \
-    xmlrpc/client.cpp
+    libmaia/maiaXmlRpcClient.cpp \
+    libmaia/maiaObject.cpp \
+    libmaia/maiaFault.cpp \
+    libmaia/client.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -204,15 +200,11 @@ HEADERS  += mainwindow.h \
     tableresult.h \
     tableresultview.h \
     document.h \
-    kpsdk.h \
     publicfun.h \
-    kpan.h \
-    xmlrpc/xmlrpcconv.h \
-    xmlrpc/xmlrpcclient.h \
-    xmlrpc/httpsclient.h \
-    xmlrpc/httpclient.h \
-    xmlrpc/clientprotocol.h \
-    xmlrpc/client.h
+    libmaia/maiaXmlRpcClient.h \
+    libmaia/maiaObject.h \
+    libmaia/maiaFault.h \
+    libmaia/client.h
 
 INCLUDEPATH += C:\Program Files\Microsoft SDKs\Windows\v5.0\Include
 
@@ -343,7 +335,12 @@ OTHER_FILES += \
     qscintilla2/include/HFacer.py \
     qscintilla2/include/Face.py \
     file_manager.ico \
-    file_manager.rc
+    file_manager.rc \
+    libmaia/maia.pro \
+    libmaia/maia.pri \
+    libmaia/LICENSE \
+    libmaia/Changelog \
+    libmaia/examples/client/client.pro
 
 RC_FILE = \
   file_manager.rc

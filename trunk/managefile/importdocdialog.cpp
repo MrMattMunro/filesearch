@@ -26,15 +26,15 @@ ImportDocDialog::ImportDocDialog(QWidget * parent, const QString & baseUuid, con
         // fileTypeCmb
         fileTypeCmb->clear();
         fileTypeCmb->insertItems(0, QStringList()
-         << QApplication::translate("ImportDocDialog", "All supported files", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ImportDocDialog", "Office files(*.doc,*.docx,*.xls,*.xlsx,*.ppt,*.pptx)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ImportDocDialog", "Pdf files(*.pdf)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ImportDocDialog", "Html files(*.html,*.htm)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ImportDocDialog", "Picture file(*.jpeg,*.jpg,*.png,*.bmp,*.gif)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ImportDocDialog", "Flash files(*.flv,*.swf)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ImportDocDialog", "Source files(*.cpp,*.h,*.hpp,*.c,*.java,*.js,*.cs,*.vbs,*.sql,*.rb,*.py,*.asp,*.aspx,*.jsp,*.php,*.xml)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ImportDocDialog", "Txt files(*.txt,*.ini,*.bar,*.inf)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ImportDocDialog", "Movie fies(*.rm,*.rmvb,*.avi,*.mpg,*.mlv,*.mpe,*.mpeg,*.m2v)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ImportDocDialog", "All supported files", 0)
+         << QApplication::translate("ImportDocDialog", "Office files(*.doc,*.docx,*.xls,*.xlsx,*.ppt,*.pptx)", 0)
+         << QApplication::translate("ImportDocDialog", "Pdf files(*.pdf)", 0)
+         << QApplication::translate("ImportDocDialog", "Html files(*.html,*.htm)", 0)
+         << QApplication::translate("ImportDocDialog", "Picture file(*.jpeg,*.jpg,*.png,*.bmp,*.gif)", 0)
+         << QApplication::translate("ImportDocDialog", "Flash files(*.flv,*.swf)", 0)
+         << QApplication::translate("ImportDocDialog", "Source files(*.cpp,*.h,*.hpp,*.c,*.java,*.js,*.cs,*.vbs,*.sql,*.rb,*.py,*.asp,*.aspx,*.jsp,*.php,*.xml)", 0)
+         << QApplication::translate("ImportDocDialog", "Txt files(*.txt,*.ini,*.bar,*.inf)", 0)
+         << QApplication::translate("ImportDocDialog", "Movie fies(*.rm,*.rmvb,*.avi,*.mpg,*.mlv,*.mpe,*.mpeg,*.m2v)", 0)
         );
 
 
@@ -324,7 +324,7 @@ void ImportDocDialog::confirmBtn_clicked(){
                 } else {
                       QUuid uuid = QUuid::createUuid();
                       Dir dir;
-                      dir.DIR_GUID = uuid;
+                      dir.DIR_GUID = uuid.toString();
                       dir.DIR_NAME = tmpDir;
                       dir.DIR_PARENT_UUID = parentUuId;
                       dir.DIR_ICON = "folder.ico";
@@ -335,12 +335,12 @@ void ImportDocDialog::confirmBtn_clicked(){
 
                       exitedDirs.append(tmpDir);
                       writeMap.insert(i, exitedDirs);
-                      uuidMap.insert(tmpDir, uuid);
+                      uuidMap.insert(tmpDir, uuid.toString());
 
                       if(i == dirs.length() - 1){
-                          uuidMap.insert(destDir, uuid);
+                          uuidMap.insert(destDir, uuid.toString());
                       }else{
-                          parentUuId = uuid;
+                          parentUuId = uuid.toString();
                       }
                }
             }
@@ -361,7 +361,7 @@ void ImportDocDialog::confirmBtn_clicked(){
                 QUuid docUuid = QUuid::createUuid();
                 QFileInfo fileinfo(path);
                 Doc doc;
-                doc.DOCUMENT_GUID = docUuid;
+                doc.DOCUMENT_GUID = docUuid.toString();
                 doc.DOCUMENT_TITLE = fileinfo.fileName();
 
                 QString parentUUid = uuidMap[destDir];
@@ -405,7 +405,7 @@ void ImportDocDialog::confirmBtn_clicked(){
                 QUuid docUuid = QUuid::createUuid();
                 QFileInfo fileinfo(path);
                 Doc doc;
-                doc.DOCUMENT_GUID = docUuid;
+                doc.DOCUMENT_GUID = docUuid.toString();
                 doc.DOCUMENT_TITLE = fileinfo.fileName();
 
                 doc.DIR_GUID = parentUuId;

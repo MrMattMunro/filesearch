@@ -32,18 +32,18 @@
 #include <QList>
 #include <QPushButton>
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QHeaderView>
-#include <QtGui/QMainWindow>
-#include <QtGui/QMenu>
-#include <QtGui/QMenuBar>
-#include <QtGui/QSplitter>
-#include <QtGui/QStatusBar>
-#include <QtGui/QTableWidget>
-#include <QtGui/QWidget>
-#include <QtWebKit/QWebView>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
+#include <QtWidgets/QMenuBar>
+#include <QtWidgets/QSplitter>
+#include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTableWidget>
+#include <QtWidgets/QWidget>
+#include <QtWebKitWidgets>
 #include <QSystemTrayIcon>
 #include <mytreeview.h>
 #include <mytableview.h>
@@ -70,7 +70,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = 0, Qt::WFlags flags = 0);
+    MainWindow(QWidget *parent = 0, Qt::WindowFlags flags = 0);
     ~MainWindow();
 
     TabWidget *tabWidget() const;

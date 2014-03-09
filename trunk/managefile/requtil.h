@@ -11,7 +11,6 @@ for which a new license (GPL+exception) is in place.
 #endif
 
 #include <QStandardItemModel>
-#include <QHttp>
 #include <QFile>
 #include <QNetworkReply>
 #include <QNetworkAccessManager>

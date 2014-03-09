@@ -1,38 +1,38 @@
 /****************************************************************************
 **
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
-** All rights reserved.
-** Contact: Nokia Corporation (qt-info@nokia.com)
+** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+** Contact: http://www.qt-project.org/legal
 **
 ** This file is part of the demonstration applications of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:LGPL$
-** GNU Lesser General Public License Usage
-** This file may be used under the terms of the GNU Lesser General Public
-** License version 2.1 as published by the Free Software Foundation and
-** appearing in the file LICENSE.LGPL included in the packaging of this
-** file. Please review the following information to ensure the GNU Lesser
-** General Public License version 2.1 requirements will be met:
-** http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and Digia.  For licensing terms and
+** conditions see http://qt.digia.com/licensing.  For further information
+** use the contact form at http://qt.digia.com/contact-us.
 **
-** In addition, as a special exception, Nokia gives you certain additional
-** rights. These rights are described in the Nokia Qt LGPL Exception
+** GNU Lesser General Public License Usage
+** Alternatively, this file may be used under the terms of the GNU Lesser
+** General Public License version 2.1 as published by the Free Software
+** Foundation and appearing in the file LICENSE.LGPL included in the
+** packaging of this file.  Please review the following information to
+** ensure the GNU Lesser General Public License version 2.1 requirements
+** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+**
+** In addition, as a special exception, Digia gives you certain additional
+** rights.  These rights are described in the Digia Qt LGPL Exception
 ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
 **
 ** GNU General Public License Usage
-** Alternatively, this file may be used under the terms of the GNU General
-** Public License version 3.0 as published by the Free Software Foundation
-** and appearing in the file LICENSE.GPL included in the packaging of this
-** file. Please review the following information to ensure the GNU General
-** Public License version 3.0 requirements will be met:
-** http://www.gnu.org/copyleft/gpl.html.
-**
-** Other Usage
-** Alternatively, this file may be used in accordance with the terms and
-** conditions contained in a signed written agreement between you and Nokia.
-**
-**
-**
+** Alternatively, this file may be used under the terms of the GNU
+** General Public License version 3.0 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.  Please review the following information to
+** ensure the GNU General Public License version 3.0 requirements will be
+** met: http://www.gnu.org/copyleft/gpl.html.
 **
 **
 ** $QT_END_LICENSE$
@@ -51,15 +51,15 @@
 #include <QtCore/QSettings>
 
 #include <QtGui/QDesktopServices>
-#include <QtGui/QFileDialog>
-#include <QtGui/QHeaderView>
-#include <QtGui/QFileIconProvider>
+#include <QtWidgets/QFileDialog>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QFileIconProvider>
 #include <utils.h>
 #include <db/docdao.h>
 
 #include <QtCore/QDebug>
 
-#include <QtWebKit/QWebSettings>
+#include <QWebSettings>
 
 /*!
     DownloadItem is a widget that is displayed in the download manager list.
@@ -85,7 +85,6 @@ DownloadItem::DownloadItem(QNetworkReply *reply, const QString &docuuid, const Q
     connect(tryAgainButton, SIGNAL(clicked()), this, SLOT(tryAgain()));
 
     init();
-
 }
 
 void DownloadItem::init()
@@ -122,6 +121,7 @@ void DownloadItem::init()
 
 void DownloadItem::getFileName()
 {
+  
     QString downloadpath = Utils::getLocateDownloadPath();
     QString defaultFileName = saveFileName(downloadpath);
 
@@ -153,7 +153,7 @@ QString DownloadItem::saveFileName(const QString &directory) const
     if(endName.isEmpty() || endName.endsWith("php") || endName.endsWith("jsp")
             || endName.endsWith("html") || endName.endsWith("htm")
             || endName.endsWith("do")){
-        // 根据网页标题来命名 uuid
+     
         baseName = m_title;
         endName = "html";
     }
@@ -173,7 +173,7 @@ QString DownloadItem::saveFileName(const QString &directory) const
 
         } while (QFile::exists(name));
     }
-    // 更新数据库
+ 
     if(isExist){
           Doc doc;
           doc.DOCUMENT_GUID = m_docuuid;
