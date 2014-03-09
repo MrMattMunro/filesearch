@@ -92,14 +92,16 @@ void ReqUtil::httpFinished()
 QVariantMap ReqUtil::getReply()
 {
 
-  QJson::Parser parser;
+  //QJson::Parser parser;
   bool ok;
-  QVariantMap result = parser.parse(rtnStr,&ok).toMap();
+  //QVariantMap result = parser.parse(rtnStr,&ok).toMap();
   QString rtnString = QString(rtnStr);
   // ≈–∂œ «∑Ò404“Ï≥£
   qDebug() << "rtnString::" << rtnString;
-//  delete file;
-//  file = 0;
-  return result;
+//  -delete file;
+//  -file = 0;
+
+
+ // return result;
 
 }

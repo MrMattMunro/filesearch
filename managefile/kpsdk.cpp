@@ -50,7 +50,7 @@ int KpSDK::openFile(QByteArray &buf, const QString &filePath)
 void KpSDK::reqReqTmpToken()
 {
     QString reqTokenUrl=buildReqTknUrl(mConsumerKey, mConsumerSecret);
-    inputUrl.setEncodedUrl(reqTokenUrl.toAscii());
+    inputUrl.setUrl(reqTokenUrl.toLatin1());
     request.setUrl(inputUrl);
     mReqTknReply = manager->get(request);
 
@@ -88,7 +88,7 @@ QString KpSDK::getReqTknSignature(QString &paraStr, const QString &consKeyStr, c
     //对参数进行升序排列 然后合并
     addTknNonceTimes(paraStr,consKeyStr);
     ReqTokenBaseUrl.append(QUrl::toPercentEncoding(paraStr));// 对参数进行编码 然后合并成源串
-    return  Utils::hmacSha1((consKeySecretStr+"&").toAscii(),ReqTokenBaseUrl.toAscii()); //返回签名
+    return  Utils::hmacSha1((consKeySecretStr+"&").toLatin1(),ReqTokenBaseUrl.toLatin1()); //返回签名
 }
 
 //收到临时oauth_token和secret反馈完成
@@ -120,7 +120,7 @@ void KpSDK::reqAcessToken()
 {
     QString acesTknUrl=buildAcesTknUrl(mConsumerKey,mConsumerSecret,\
                                        mTmpToken,mTmpTokenSecret);
-    inputUrl.setEncodedUrl(acesTknUrl.toAscii());
+    inputUrl.setUrl(acesTknUrl.toLatin1());
     request.setUrl(inputUrl);
     mAcesTknReply=manager->get(request);
     connect(mAcesTknReply, SIGNAL(finished()), eLoop, SLOT(quit()));
@@ -168,7 +168,7 @@ QString KpSDK::getAcesTknSignature(QString &paraStr, const QString &consKeyStr, 
 
     QString secret=consKeySecretStr+"&";
     secret=secret.append(tmpTknSercetStr);
-    return  Utils::hmacSha1(secret.toAscii(),acesTknBaseUrl.toAscii()); //返回签名
+    return  Utils::hmacSha1(secret.toLatin1(),acesTknBaseUrl.toLatin1()); //返回签名
 }
 
 //反馈完成 收到accessToken
@@ -203,7 +203,7 @@ void KpSDK::reqUsrInfo()
 {
     QString usrInfoUrl=buildUsrInfoUrl(mConsumerKey,mConsumerSecret,\
                                        mAuTokenInfo.auToken,mAuTokenInfo.auTokenSecret);
-    inputUrl.setEncodedUrl(usrInfoUrl.toAscii());
+    inputUrl.setUrl(usrInfoUrl.toLatin1());
     request.setUrl(inputUrl);
     mUsrInfoReply=manager->get(request);
     connect(mUsrInfoReply, SIGNAL(finished()), eLoop, SLOT(quit()));
@@ -251,7 +251,7 @@ QString KpSDK::getUsrInfoSignature(QString &paraStr, const QString &consKeyStr, 
 
     QString secret=consKeySecretStr+"&";//构建密钥
     secret=secret.append(oauTknSercetStr);
-    return  Utils::hmacSha1(secret.toAscii(),getUsrInfoBaseUrl.toAscii()); //返回签名
+    return  Utils::hmacSha1(secret.toLatin1(),getUsrInfoBaseUrl.toLatin1()); //返回签名
 }
 
 //收到 用户信息
@@ -295,7 +295,7 @@ void KpSDK::reqMetaData()
                                        mAuTokenInfo.auToken,mAuTokenInfo.auTokenSecret,\
                                          mIsAppPath,dataPath);
     //qDebug()<<metaDataUrl;
-    inputUrl.setEncodedUrl(metaDataUrl.toAscii());
+    inputUrl.setUrl(metaDataUrl.toLatin1());
     request.setUrl(inputUrl);
     mMetaDataReply=manager->get(request);
 
@@ -361,7 +361,7 @@ QString KpSDK::getMetaDataSignature(QString &paraStr, const QString &consKeyStr,
 
     QString secret=consKeySecretStr+"&";//构建密钥
     secret=secret.append(oauTknSercetStr);
-    return  Utils::hmacSha1(secret.toAscii(),getMetaDataBaseUrl.toAscii()); //返回签名
+    return  Utils::hmacSha1(secret.toLatin1(),getMetaDataBaseUrl.toLatin1()); //返回签名
 }
 
 //返回可读文件(夹)信息
@@ -396,7 +396,7 @@ void KpSDK::reqCreateFloder()
     QString createFolderUrl=buildCreateFolderUrl(mConsumerKey,mConsumerSecret,\
                                                  mAuTokenInfo.auToken,mAuTokenInfo.auTokenSecret,\
                                                  mIsAppPath,mCreateFolderPath);
-    inputUrl.setEncodedUrl(createFolderUrl.toAscii());
+    inputUrl.setUrl(createFolderUrl.toLatin1());
     request.setUrl(inputUrl);
     qDebug()<< "reqCreateFloder:" << inputUrl;
     mCreateFolderReply=manager->get(request);
@@ -465,7 +465,7 @@ QString KpSDK::getCreateFolderSignature(QString &paraStr, const QString &consKey
     createFolderBaseUrl.append(QUrl::toPercentEncoding(paraStr));// 对参数进行编码 然后合并成源串
     QString secret=consKeySecretStr+"&";//构建密钥
     secret=secret.append(oauTknSercetStr);
-    return  Utils::hmacSha1(secret.toAscii(),createFolderBaseUrl.toAscii()); //返回签名
+    return  Utils::hmacSha1(secret.toLatin1(),createFolderBaseUrl.toLatin1()); //返回签名
 }
 
 //创建文件夹 反馈完毕
@@ -490,7 +490,7 @@ void KpSDK::reqDelFile()
                                        mAuTokenInfo.auToken,mAuTokenInfo.auTokenSecret,\
                                        mIsAppPath,mDelFilePath,mIsToRecyle);
 
-    inputUrl.setEncodedUrl(delFileUrl.toAscii());
+    inputUrl.setUrl(delFileUrl.toLatin1());
     request.setUrl(inputUrl);
     mDelFileReply=manager->get(request);
     connect(mDelFileReply,SIGNAL(finished()),eLoop,SLOT(quit()));
@@ -562,7 +562,7 @@ QString KpSDK::getDelFileSignature(QString &paraStr, const QString &consKeyStr, 
     delFileBaseUrl.append(QUrl::toPercentEncoding(paraStr));// 对参数进行编码 然后合并成源串
     QString secret=consKeySecretStr+"&";//构建密钥
     secret=secret.append(oauTknSercetStr);
-    return  Utils::hmacSha1(secret.toAscii(),delFileBaseUrl.toAscii()); //返回签名
+    return  Utils::hmacSha1(secret.toLatin1(),delFileBaseUrl.toLatin1()); //返回签名
 }
 
 //删除文件反馈 完毕
@@ -583,7 +583,7 @@ void KpSDK::reqMoveFile()
     QString moveFileUrl=buildMoveFileUrl(mConsumerKey,mConsumerSecret,\
                                          mAuTokenInfo.auToken,mAuTokenInfo.auTokenSecret,\
                                          mIsAppPath,mFromPath,mToPath);
-    inputUrl.setEncodedUrl(moveFileUrl.toAscii());
+    inputUrl.setUrl(moveFileUrl.toLatin1());
     request.setUrl(inputUrl);
     mMvFileReply=manager->get(request);
     connect(mMvFileReply,SIGNAL(finished()),eLoop,SLOT(quit()));
@@ -652,7 +652,7 @@ QString KpSDK::getMoveFileSignature(QString &paraStr, const QString &consKeyStr,
     mvFileBaseUrl.append(QUrl::toPercentEncoding(paraStr));// 对参数进行编码 然后合并成源串
     QString secret=consKeySecretStr+"&";//构建密钥
     secret=secret.append(oauTknSercetStr);
-    return  Utils::hmacSha1(secret.toAscii(),mvFileBaseUrl.toAscii()); //返回签名
+    return  Utils::hmacSha1(secret.toLatin1(),mvFileBaseUrl.toLatin1()); //返回签名
 }
 
 //剪切文件后反馈完毕
@@ -674,7 +674,7 @@ void KpSDK::reqCopyFile()
     QString copyFileUrl=buildCopyFileUrl(mConsumerKey,mConsumerSecret,\
                                          mAuTokenInfo.auToken,mAuTokenInfo.auTokenSecret,\
                                          mIsAppPath,mFromPath,mToPath);
-    inputUrl.setEncodedUrl(copyFileUrl.toAscii());
+    inputUrl.setUrl(copyFileUrl.toLatin1());
     request.setUrl(inputUrl);
     mCpFileReply=manager->get(request);
 
@@ -745,7 +745,7 @@ QString KpSDK::getCopyFileSignature(QString &paraStr, const QString &consKeyStr,
     cpFileBaseUrl.append(QUrl::toPercentEncoding(paraStr));// 对参数进行编码 然后合并成源串
     QString secret=consKeySecretStr+"&";//构建密钥
     secret=secret.append(oauTknSercetStr);
-    return  Utils::hmacSha1(secret.toAscii(),cpFileBaseUrl.toAscii()); //返回签名
+    return  Utils::hmacSha1(secret.toLatin1(),cpFileBaseUrl.toLatin1()); //返回签名
 }
 
 //复制文件 反馈结束
@@ -765,7 +765,7 @@ void KpSDK::reqUploadLocate()
 {
     QString uploadLocUrl=buildUploadLocateUrl(mConsumerKey,mConsumerSecret,\
                                               mAuTokenInfo.auToken,mAuTokenInfo.auTokenSecret);
-    inputUrl.setEncodedUrl(uploadLocUrl.toAscii());
+    inputUrl.setUrl(uploadLocUrl.toLatin1());
     request.setUrl(inputUrl);
     mUploadLocateReply=manager->get(request);
     connect(mUploadLocateReply,SIGNAL(finished()),eLoop,SLOT(quit()));
@@ -808,7 +808,7 @@ QString KpSDK::getUploadLocateSignature(QString &paraStr, const QString &consKey
     upLocaBaseUrl.append(QUrl::toPercentEncoding(paraStr));// 对参数进行编码 然后合并成源串
     QString secret=consKeySecretStr+"&";//构建密钥
     secret=secret.append(oauTknSercetStr);
-    return  Utils::hmacSha1(secret.toAscii(),upLocaBaseUrl.toAscii()); //返回签名
+    return  Utils::hmacSha1(secret.toLatin1(),upLocaBaseUrl.toLatin1()); //返回签名
 }
 
 //获取到上传节点
@@ -840,7 +840,7 @@ void KpSDK::reqUploadFile()
                                              mAuTokenInfo.auToken,mAuTokenInfo.auTokenSecret,\
                                              mIsOverWrite,mIsAppPath,mToPath,mUploadNode);
 
-    inputUrl.setEncodedUrl(uploadFileUrl.toAscii());
+    inputUrl.setUrl(uploadFileUrl.toLatin1());
     uploadRequest.setUrl(inputUrl);
     buildMultiPart(data,mFromPath);//使用multipart方式上传 构造multipart包
     mUploadFileReply=manager->post(uploadRequest,data);//上传
@@ -910,7 +910,7 @@ QString KpSDK::getUploadFileSignature(QString &paraStr, const QString &consKeySt
     uploadFileBaseUrl.append(QUrl::toPercentEncoding(paraStr));// 对参数进行编码 然后合并成源串
     QString secret=consKeySecretStr+"&";//构建密钥
     secret=secret.append(oauTknSercetStr);
-    return  Utils::hmacSha1(secret.toAscii(),uploadFileBaseUrl.toAscii()); //返回签名
+    return  Utils::hmacSha1(secret.toLatin1(),uploadFileBaseUrl.toLatin1()); //返回签名
 }
 
 // 构造MultiPart 包
@@ -929,19 +929,19 @@ void KpSDK::buildMultiPart(QByteArray &data,const QString &fileName)
     QString endBoundary=crlf+"--"+boundary+"--"+crlf; //结束处
 
     boundary="--"+boundary+crlf; //每行数据开头
-    QByteArray bond=boundary.toAscii();
+    QByteArray bond=boundary.toLatin1();
 
     data.append(bond);
 
 
     data.append(QString("Content-Disposition: form-data; name=\"file\"; filename=\""\
-                        +fileName+"\""+crlf).toAscii());
-    data.append(QString("Content-Type: application/octet-stream"+crlf).toAscii());    
+                        +fileName+"\""+crlf).toLatin1());
+    data.append(QString("Content-Type: application/octet-stream"+crlf).toLatin1());
 
-    data.append(crlf.toAscii());
+    data.append(crlf.toLatin1());
     data.append(needToUploadFile);
-    data.append(endBoundary.toAscii());
-    uploadRequest.setHeader(QNetworkRequest::ContentTypeHeader, contentType.toAscii());
+    data.append(endBoundary.toLatin1());
+    uploadRequest.setHeader(QNetworkRequest::ContentTypeHeader, contentType.toLatin1());
     uploadRequest.setHeader(QNetworkRequest::ContentLengthHeader, QVariant(data.size()).toString());
 }
 
@@ -972,7 +972,7 @@ void KpSDK::reqDownLoadFile()
     QString downLoadFileUrl=buildDownFileUrl(mConsumerKey,mConsumerSecret,\
                                              mAuTokenInfo.auToken,mAuTokenInfo.auTokenSecret,\
                                              mIsAppPath,mFromPath);
-    inputUrl.setEncodedUrl(downLoadFileUrl.toAscii());
+    inputUrl.setUrl(downLoadFileUrl.toLatin1());
     request.setUrl(inputUrl);
     mDownloadFileReply=manager->get(request);
     connect(mDownloadFileReply,SIGNAL(finished()),eLoop,SLOT(quit()));
@@ -1041,7 +1041,7 @@ QString KpSDK::getDownFileSignature(QString &paraStr, const QString &consKeyStr,
     dwnFileBaseUrl.append(QUrl::toPercentEncoding(paraStr));// 对参数进行编码 然后合并成源串
     QString secret=consKeySecretStr+"&";//构建密钥
     secret=secret.append(oauTknSercetStr);
-    return  Utils::hmacSha1(secret.toAscii(),dwnFileBaseUrl.toAscii()); //返回签名
+    return  Utils::hmacSha1(secret.toLatin1(),dwnFileBaseUrl.toLatin1()); //返回签名
 }
 
 //反馈完毕 获取重定向地址
@@ -1096,7 +1096,7 @@ void KpSDK::reqShareFile()
     QString shareFileUrl=buildShareFileUrl(mConsumerKey,mConsumerSecret,\
                                            mAuTokenInfo.auToken,mAuTokenInfo.auTokenSecret,\
                                            mIsAppPath,shareFile);
-    inputUrl.setEncodedUrl(shareFileUrl.toAscii());
+    inputUrl.setUrl(shareFileUrl.toLatin1());
     request.setUrl(inputUrl);
     mShareFileReply=manager->get(request);
     connect(mShareFileReply,SIGNAL(finished()),eLoop,SLOT(quit()));
@@ -1159,7 +1159,7 @@ QString KpSDK::getShareFileSignature(QString &paraStr, const QString &consKeyStr
     shareFileBaseUrl.append(QUrl::toPercentEncoding(paraStr));// 对参数进行编码 然后合并成源串
     QString secret=consKeySecretStr+"&";//构建密钥
     secret=secret.append(oauTknSercetStr);
-    return  Utils::hmacSha1(secret.toAscii(),shareFileBaseUrl.toAscii()); //返回签名
+    return  Utils::hmacSha1(secret.toLatin1(),shareFileBaseUrl.toLatin1()); //返回签名
 }
 
 //反馈完毕 提取分享的url

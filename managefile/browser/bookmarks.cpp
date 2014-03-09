@@ -50,17 +50,19 @@
 #include <QtCore/QFile>
 #include <QtCore/QMimeData>
 
+
 #include <QtGui/QDesktopServices>
 #include <QtGui/QDragEnterEvent>
-#include <QtGui/QFileDialog>
-#include <QtGui/QHeaderView>
 #include <QtGui/QIcon>
-#include <QtGui/QMessageBox>
-#include <QtGui/QToolButton>
+#include <QtWidgets/QFileDialog>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QMessageBox>
+#include <QtWidgets/QToolButton>
 
-#include <QtWebKit/QWebSettings>
+#include <QWebSettings>
 
 #include <QtCore/QDebug>
+
 
 #define BOOKMARKBAR "Bookmarks Bar"
 #define BOOKMARKMENU "Bookmarks Menu"
@@ -96,7 +98,7 @@ void BookmarksManager::load()
         return;
     m_loaded = true;
 
-    QString dir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    QString dir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     QString bookmarkFile = dir + QLatin1String("/bookmarks.xbel");
     if (!QFile::exists(bookmarkFile))
         bookmarkFile = QLatin1String(":defaultbookmarks.xbel");
@@ -160,7 +162,7 @@ void BookmarksManager::save() const
         return;
 
     XbelWriter writer;
-    QString dir = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    QString dir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     QString bookmarkFile = dir + QLatin1String("/bookmarks.xbel");
     if (!writer.write(bookmarkFile, m_bookmarkRootNode))
         qWarning() << "BookmarkManager: error saving to" << bookmarkFile;

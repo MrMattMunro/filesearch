@@ -80,7 +80,7 @@ void MyTableDelegate::paintRow(QPainter *painter, const QStyleOptionViewItem &op
     QString icon = filename.right(filename.length() - dotpos - 1).toLower();
     icon = icon.append(".ico");
     QIcon qicon = Utils::getIcon(icon);
-    painter->drawPixmap(10, option.rect.y() + 10, qicon.pixmap(16,16, QIcon.Normal, QIcon.Off));
+    painter->drawPixmap(10, option.rect.y() + 10, qicon.pixmap(16,16, QIcon::Normal, QIcon::Off));
 
     // Ãû³Æ
     QRect nametextRect(option.rect.x() + 30, option.rect.y() - 20, option.rect.width()-10, option.rect.height());
@@ -329,8 +329,7 @@ void MyTableDelegate::paintResultHeadRow(QPainter *painter, const QStyleOptionVi
     QString icon = filename.right(filename.length() - dotpos - 1).toLower();
     icon = icon.append(".ico");
     QIcon qicon = Utils::getIcon(icon);
-    painter->drawPixmap(10, option.rect.y() + 10, qicon.pixmap(16,16, QIcon.Normal, QIcon.Off));
-
+    painter->drawPixmap(10, option.rect.y() + 10, qicon.pixmap(16,16, QIcon::Normal, QIcon::Off));
 
     QRect textRect(option.rect.x() + 30, option.rect.y(), option.rect.width()-10, option.rect.height());
     painter->setPen(QColor(39, 39, 39));

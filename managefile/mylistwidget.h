@@ -11,6 +11,8 @@
 #include <QDragEnterEvent>
 #include <QDebug>
 #include <QTextCodec>
+#include <QMimeData>
+#include <QDrag>
 #include "utils.h"
 
 class ListWidget : public QListWidget
@@ -47,6 +49,7 @@ public:
                 if (event->mimeData()->hasFormat("bla/x-something")) {
                         event->accept();
                         event->setDropAction(Qt::MoveAction);
+
                         QByteArray txt = event->mimeData()->data("bla/x-something");
                         QByteArray icon = event->mimeData()->data("bla/n-something");
                         QByteArray uuid = event->mimeData()->data("bla/o-something");

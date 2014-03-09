@@ -117,7 +117,7 @@ bool Utils::updateObjectTree(const QString & sql)
 
 QString Utils::getLocatePath()
 {
-    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    QString locpath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     locpath.append(QDir::separator()).append("slfile");
     QDir *dir=new QDir(locpath);
     if(!dir->exists()){
@@ -128,7 +128,7 @@ QString Utils::getLocatePath()
 
 QString Utils::getLocateDownloadPath()
 {
-    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    QString locpath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     locpath.append(QDir::separator()).append("slfile");
     locpath.append(QDir::separator()).append("download");
     QDir *dir=new QDir(locpath);
@@ -140,7 +140,7 @@ QString Utils::getLocateDownloadPath()
 
 QString Utils::getLocateNotesPath()
 {
-    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    QString locpath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     locpath.append(QDir::separator()).append("slfile");
     locpath.append(QDir::separator()).append("note");
     QDir *dir=new QDir(locpath);
@@ -152,7 +152,7 @@ QString Utils::getLocateNotesPath()
 
 QString Utils::getLocateIndexPath()
 {
-    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    QString locpath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     locpath.append(QDir::separator()).append("slfile");
     locpath.append(QDir::separator()).append("index");
     QDir *dir=new QDir(locpath);
@@ -164,7 +164,7 @@ QString Utils::getLocateIndexPath()
 
 QString Utils::getLocateDbPath()
 {
-    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    QString locpath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     locpath.append(QDir::separator()).append("slfile");
     locpath.append(QDir::separator()).append("db");
     QDir *dir=new QDir(locpath);
@@ -176,7 +176,7 @@ QString Utils::getLocateDbPath()
 
 QString Utils::getSavePagePath()
 {
-    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    QString locpath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     locpath.append(QDir::separator()).append("slfile");
     locpath.append(QDir::separator()).append("page");
     QDir *dir=new QDir(locpath);
@@ -188,7 +188,7 @@ QString Utils::getSavePagePath()
 
 QString Utils::getSaveDocPath()
 {
-    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    QString locpath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     locpath.append(QDir::separator()).append("slfile");
     locpath.append(QDir::separator()).append("doc");
     QDir *dir=new QDir(locpath);
@@ -200,7 +200,7 @@ QString Utils::getSaveDocPath()
 
 QString Utils::getSaveLogPath()
 {
-    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    QString locpath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     locpath.append(QDir::separator()).append("slfile");
     locpath.append(QDir::separator()).append("log");
     QDir *dir=new QDir(locpath);
@@ -212,7 +212,7 @@ QString Utils::getSaveLogPath()
 
 QString Utils::getBackUpPath()
 {
-    QString locpath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    QString locpath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     locpath.append(QDir::separator()).append("slfile");
     locpath.append(QDir::separator()).append("bakup");
     QDir *dir=new QDir(locpath);
@@ -258,7 +258,7 @@ QString Utils::getMD5Str(const QString & str)
 
     QString md5;
     QByteArray bb;
-    bb = QCryptographicHash::hash (str.toAscii(), QCryptographicHash::Md5 );
+    bb = QCryptographicHash::hash (str.toLatin1(), QCryptographicHash::Md5 );
     return md5.append(bb.toHex());
 }
 
@@ -433,7 +433,7 @@ QString Utils::getTimeStamp()
 QString Utils::removeUrlEncode(const QString &urlStr)
 {
     QUrl url;
-    url.setEncodedUrl(urlStr.toAscii());
+    url.setUrl(urlStr.toLatin1());
     return url.toString();
 }
 

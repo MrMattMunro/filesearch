@@ -50,7 +50,7 @@ void CreateSubDirDialog::confirmBtn_clicked(){
 
     // 新建文件夹
     Dir dir;
-    dir.DIR_GUID = QUuid::createUuid();
+    dir.DIR_GUID = QUuid::createUuid().toString();
     m_newUuid = dir.DIR_GUID ;
     dir.DIR_ICON = "folder.ico";
     dir.DIR_NAME = dirname;

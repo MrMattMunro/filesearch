@@ -32,7 +32,7 @@ void HttpClient::onReadyRead()
                 // если не дочитан
                 if( !readResponseHeader() )
                         break;
-                if( responseHeader.statusCode() == 100 ) {
+                if( responseHeader.header.statusCode() == 100 ) {
                         // Continue
                         // это нам говорят продолжай слать пост, игнорируем,
                         // опять будем читать хидер
